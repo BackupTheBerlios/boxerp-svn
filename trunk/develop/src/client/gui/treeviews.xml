@@ -1,0 +1,5 @@
+<groups>
+    <column field="id" name="" type="string" view="false" />
+    <column field="icon_path" name="" type="icon" view="true" />
+    <column field="group_name" name="Nombre" type="string" view="true" />
+</groups>

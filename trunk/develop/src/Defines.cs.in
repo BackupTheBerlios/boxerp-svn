@@ -1,0 +1,15 @@
+using System;
+
+namespace Boxerp
+{
+	public class Defines
+	{
+		public const string VERSION          = "@VERSION@";
+		public static string PACKAGE = "@PACKAGE@";
+		public const string LOCALE_DIR       =  "@prefix@/share/locale";
+		public const string CLIENT_DIR = "../client/";
+		public const string SERVER_DIR = "../server/";
+		public const string GUI_DIR = "../client/gui/";
+	}
+}
+

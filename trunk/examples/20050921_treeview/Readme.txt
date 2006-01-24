@@ -1,0 +1,1 @@
+Este código se encuentra bajo Licencia GPL

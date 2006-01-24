@@ -1,0 +1,11 @@
+../client/gui/glade/users.glade
+../client/gui/glade/groups.glade
+../client/gui/glade/enterprises.glade
+../client/gui/glade/main.glade
+../client/gui/glade/editUser.glade
+../client/gui/glade/editGroup.glade
+../client/gui/glade/editEnterprise.glade
+../client/gui/glade/login.glade
+../server/Server.cs
+../server/ServerExceptions.cs
+../server/ErrorManager.cs

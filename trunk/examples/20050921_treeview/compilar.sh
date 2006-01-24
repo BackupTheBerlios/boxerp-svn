@@ -1,0 +1,1 @@
+mcs -pkg:gtk-sharp -pkg:glade-sharp -resource:tree.glade tree.cs

@@ -1,0 +1,62 @@
+# Some important documentation urls:
+# http://sources.redhat.com/autobook
+# http://www.gnu.org/software/autoconf/manual/autoconf-2.57/html_node/autoconf_toc.html#SEC_Contents
+# http://www.gnu.org/software/automake/manual/
+				
+
+# Syntax: AC_INIT(package, version, [bug-report], [tar-name])
+# Doc: http://www.gnu.org/software/autoconf/manual/autoconf-2.57/html_node/autoconf_16.html
+AC_INIT(boxerp, 0.0.1)
+
+# Syntax: AM_INIT_AUTOMAKE(package, version [, no-define]) --> obsolete
+# Syntax: AM_INIT_AUTOMAKE([options])
+# Doc: http://www.adp-gmbh.ch/misc/tools/configure/configure_in.html#am_init_automake
+AM_INIT_AUTOMAKE
+
+# Syntax: AM_MAINTAINER_MODE
+# Doc: http://asis.web.cern.ch/asis/products/GNU.DVP/automake-1.8.4/automake_27.html
+AM_MAINTAINER_MODE
+
+# Syntax: AC_PROG_INTLTOOL([minimum required version], [no-xml])
+# Doc: http://freedesktop.org/wiki/Software_2fintltool
+AC_PROG_INTLTOOL([0.21])
+
+# Syntax: AC_PROG_CC 
+# Doc: http://www.delorie.com/gnu/docs/autoconf/autoconf_64.html
+#AC_PROG_CC
+#AC_ISC_POSIX
+#AC_HEADER_STDC
+
+# Syntax: AM_PROG_LIBTOOL
+# Doc: http://www.delorie.com/gnu/docs/libtool/libtool_27.html#IDX50
+AM_PROG_LIBTOOL
+
+
+dnl --- Check for mono and mcs
+AC_PATH_PROG(MONO, mono)
+AC_PATH_PROG(MCS, mcs)
+
+dnl -- Check for mono pc file
+GTKSHARP_REQUIRED=2.7.1
+MONO_REQUIRED=1.1.9.2
+
+PKG_CHECK_MODULES(mono, mono >= $MONO_REQUIRED)
+PKG_CHECK_MODULES(gtksharp, gtk-sharp-2.0 >= $GTKSHARP_REQUIRED)
+PKG_CHECK_MODULES(gladesharp, glade-sharp-2.0 >= $GTKSHARP_REQUIRED)
+
+# Gettext 
+# Add new linguas: ALL_LINGUAS="bg ca cs da de el en_CA en_GB es"
+ALL_LINGUAS="es"
+GETTEXT_PACKAGE=boxerp
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
+AM_GLIB_GNU_GETTEXT
+
+# Output files to generate:
+AC_OUTPUT([
+Makefile
+Defines.cs
+po/Makefile.in
+])
+
+

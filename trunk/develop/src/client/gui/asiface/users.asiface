@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?> 
+<!DOCTYPE actions-sections-interface SYSTEM "blablabla/actions-sections-interface-0.1.dtd">
+
+<actions-sections-interface>
+
+	<widget id="administration">
+		<show>
+				<action name="showui"/>
+				<section name="admin"/>
+		</show>
+		<signal name="clicked" handler="OnBtnClicked">
+				<action name="showui"/>
+				<section name="admin"/>
+		</signal>
+	</widget>
+
+</actions-sections-interface>
+

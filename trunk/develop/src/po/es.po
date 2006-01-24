@@ -1,0 +1,288 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-08 11:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Carlos Ble Jurado <carlosble@shidix.com>\n"
+"Language-Team: LANGUAGE <info@shidix.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../client/gui/glade/users.glade:8 ../client/gui/glade/users.glade:192
+msgid "Users"
+msgstr "Usuarios"
+
+#: ../client/gui/glade/users.glade:48
+msgid "Users Administration"
+msgstr "Administración de Usuarios"
+
+#: ../client/gui/glade/users.glade:122 ../client/gui/glade/groups.glade:8
+#: ../client/gui/glade/groups.glade:192
+msgid "Groups"
+msgstr "Grupos"
+
+#: ../client/gui/glade/users.glade:298 ../client/gui/glade/groups.glade:298
+#: ../client/gui/glade/enterprises.glade:203
+msgid "Add"
+msgstr "Añadir"
+
+#: ../client/gui/glade/users.glade:378 ../client/gui/glade/users.glade:981
+#: ../client/gui/glade/groups.glade:378 ../client/gui/glade/groups.glade:929
+#: ../client/gui/glade/enterprises.glade:283
+#: ../client/gui/glade/enterprises.glade:832
+msgid "Edit"
+msgstr "Editar"
+
+#: ../client/gui/glade/users.glade:458 ../client/gui/glade/users.glade:1061
+#: ../client/gui/glade/groups.glade:458 ../client/gui/glade/groups.glade:1009
+#: ../client/gui/glade/enterprises.glade:363
+#: ../client/gui/glade/enterprises.glade:911
+msgid "Delete"
+msgstr "Borrar"
+
+#: ../client/gui/glade/users.glade:519
+msgid "Enterprise:"
+msgstr "Empresa:"
+
+#: ../client/gui/glade/users.glade:577 ../client/gui/glade/groups.glade:526
+#: ../client/gui/glade/enterprises.glade:431
+msgid "Searchs"
+msgstr "Búsquedas"
+
+#: ../client/gui/glade/users.glade:651 ../client/gui/glade/groups.glade:600
+#: ../client/gui/glade/enterprises.glade:505
+msgid "Field:"
+msgstr "Campo:"
+
+#: ../client/gui/glade/users.glade:676
+#: ../client/gui/glade/enterprises.glade:530
+msgid ""
+"Nombre\n"
+"Apellidos\n"
+"Nick\n"
+msgstr ""
+
+#: ../client/gui/glade/users.glade:693 ../client/gui/glade/groups.glade:641
+#: ../client/gui/glade/enterprises.glade:547
+msgid "Keyword:"
+msgstr "Clave"
+
+#: ../client/gui/glade/users.glade:780 ../client/gui/glade/groups.glade:728
+#: ../client/gui/glade/enterprises.glade:633
+msgid "Search"
+msgstr "Buscar"
+
+#: ../client/gui/glade/users.glade:859 ../client/gui/glade/groups.glade:807
+#: ../client/gui/glade/enterprises.glade:711
+msgid "Clean"
+msgstr "Limpiar"
+
+#: ../client/gui/glade/groups.glade:48
+msgid "Groups Administration"
+msgstr "Administración de Grupos"
+
+#: ../client/gui/glade/groups.glade:122
+#: ../client/gui/glade/enterprises.glade:8
+msgid "Enterprises"
+msgstr "Empresas"
+
+#: ../client/gui/glade/groups.glade:625
+msgid ""
+"Nombre\n"
+"\n"
+msgstr ""
+
+#: ../client/gui/glade/enterprises.glade:48
+msgid "Enterprises Administration"
+msgstr "Administración de Empresas"
+
+#: ../client/gui/glade/main.glade:8
+msgid "BoxERP"
+msgstr "BoxERP"
+
+#: ../client/gui/glade/main.glade:35
+msgid "_Archivo"
+msgstr ""
+
+#: ../client/gui/glade/main.glade:94
+msgid "_Editar"
+msgstr ""
+
+#: ../client/gui/glade/main.glade:139
+msgid "_Ver"
+msgstr ""
+
+#: ../client/gui/glade/main.glade:152
+msgid "A_yuda"
+msgstr ""
+
+#: ../client/gui/glade/main.glade:161
+msgid "A_cerca de"
+msgstr ""
+
+#: ../client/gui/glade/main.glade:516
+msgid "Purchases"
+msgstr "Compras"
+
+#: ../client/gui/glade/main.glade:536
+msgid "Selling"
+msgstr "Ventas"
+
+#: ../client/gui/glade/main.glade:556
+msgid "Storage"
+msgstr "Almacen"
+
+#: ../client/gui/glade/main.glade:576
+msgid "Extra"
+msgstr "Extra"
+
+#: ../client/gui/glade/main.glade:596
+msgid "Accounting"
+msgstr "Contabilidad"
+
+#: ../client/gui/glade/main.glade:616
+msgid "Administration"
+msgstr "Administración"
+
+#: ../client/gui/glade/main.glade:636
+msgid "Office"
+msgstr "Oficina"
+
+#: ../client/gui/glade/main.glade:656
+msgid "Management"
+msgstr "Gestión"
+
+#: ../client/gui/glade/editUser.glade:8
+msgid "Edit User"
+msgstr "Editar Usuario"
+
+#: ../client/gui/glade/editUser.glade:59 ../client/gui/glade/login.glade:71
+msgid "Nick:"
+msgstr "Nick:"
+
+#: ../client/gui/glade/editUser.glade:116 ../client/gui/glade/login.glade:99
+msgid "Password:"
+msgstr "Contraseña:"
+
+#: ../client/gui/glade/editUser.glade:168
+#: ../client/gui/glade/editGroup.glade:123
+#: ../client/gui/glade/editEnterprise.glade:181
+msgid "Active"
+msgstr "Activo"
+
+#: ../client/gui/glade/editUser.glade:193
+msgid "User"
+msgstr "Usuario"
+
+#: ../client/gui/glade/editUser.glade:217
+msgid "button1"
+msgstr "button1"
+
+#: ../client/gui/glade/editUser.glade:231
+msgid "Personal Data"
+msgstr "Datos Personales"
+
+#: ../client/gui/glade/editUser.glade:313
+#: ../client/gui/glade/editGroup.glade:278
+#: ../client/gui/glade/editEnterprise.glade:336
+msgid "Save"
+msgstr "Guardar"
+
+#: ../client/gui/glade/editUser.glade:393
+#: ../client/gui/glade/editGroup.glade:358
+#: ../client/gui/glade/editEnterprise.glade:416
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../client/gui/glade/editGroup.glade:8
+msgid "Edit Group"
+msgstr "Editar Grupo"
+
+#: ../client/gui/glade/editGroup.glade:65
+#: ../client/gui/glade/editEnterprise.glade:66
+msgid "Name:"
+msgstr "Nombre:"
+
+#: ../client/gui/glade/editGroup.glade:161
+msgid "Group"
+msgstr "Grupo"
+
+#: ../client/gui/glade/editGroup.glade:199
+msgid "Permissions"
+msgstr "Permisos"
+
+#: ../client/gui/glade/editEnterprise.glade:8
+msgid "Edit Enterprise"
+msgstr "Editar Empresa"
+
+#: ../client/gui/glade/editEnterprise.glade:123
+msgid "Description:"
+msgstr "Descripción"
+
+#: ../client/gui/glade/editEnterprise.glade:219
+msgid "Enterprise"
+msgstr "Empresa"
+
+#: ../client/gui/glade/editEnterprise.glade:257
+msgid "Enterprise Data"
+msgstr "Datos de la Empresa"
+
+#: ../client/gui/glade/login.glade:8
+msgid "BoxERP Login"
+msgstr "BoxERP Login"
+
+#: ../client/gui/glade/login.glade:31
+msgid "BOXERP"
+msgstr "BOXERP"
+
+#: ../client/gui/glade/login.glade:131 ../client/gui/glade/login.glade:152
+msgid "demo"
+msgstr "demo"
+
+#: ../client/gui/glade/login.glade:169
+msgid "Server:"
+msgstr "Servidor:"
+
+#: ../client/gui/glade/login.glade:201
+msgid "192.168.1.100"
+msgstr ""
+
+#: ../client/gui/glade/login.glade:218
+msgid "Port:"
+msgstr "Puerto"
+
+#: ../client/gui/glade/login.glade:250
+msgid "9191"
+msgstr ""
+
+#: ../client/gui/glade/login.glade:323
+msgid "Connect"
+msgstr "Conectar"
+
+#: ../server/Server.cs:15
+msgid "Hooooola"
+msgstr ""
+
+#: ../server/ErrorManager.cs:12
+msgid "Login incorrect. Wrong username or password"
+msgstr "Login incorrecto. Usuario o contraseña erróneos"
+
+#: ../server/ErrorManager.cs:13
+msgid "The enterprise has no groups"
+msgstr "La empresa no tiene grupos"
+
+#: ../server/ErrorManager.cs:14
+msgid "The enterprise doesnt exist"
+msgstr "La empresa no existe"
+
+#: ../server/ErrorManager.cs:15
+msgid "The enterprise already exist"
+msgstr "La empresa ya existe"

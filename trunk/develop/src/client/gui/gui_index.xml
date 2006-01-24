@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<gui-index>
+	<window name="Login">
+		<glade container="loginWin">glade/login.glade</glade>
+	</window>
+
+	<window name="Users">
+		<glade container="modUsersHbox">glade/users.glade</glade>
+		<asiface>asiface/users.asiface</asiface>
+		<controller class="Boxerp.Client.UsersWindow"/>
+	</window>
+
+	<window name="Enterprises">
+		<glade container="modEnterprisesHbox">glade/enterprises.glade</glade>
+		<asiface>asiface/enterprises.asiface</asiface>
+		<controller class="Boxerp.Client.EnterprisesWindow" />
+	</window>
+
+  <window name="Groups">
+		<glade container="modGroupsHbox">glade/groups.glade</glade>
+		<asiface>asiface/groups.asiface</asiface>
+		<controller class="Boxerp.Client.GroupsWindow" />
+	</window>
+
+	<window name="EditUser">
+		<glade container="editUserWin">glade/editUser.glade</glade>
+		<asiface>asiface/editUser.asiface</asiface>
+		<controller class="Boxerp.Client.EditUserWindow" />
+	</window>
+
+  <window name="EditGroup">
+		<glade container="editGroupWin">glade/editGroup.glade</glade>
+		<asiface>asiface/editGroup.asiface</asiface>
+		<controller class="Boxerp.Client.EditGroupWindow" />
+	</window>
+
+  <window name="EditEnterprise">
+		<glade container="editEnterpriseWin">glade/editEnterprise.glade</glade>
+		<asiface>asiface/editEnterprise.asiface</asiface>
+		<controller class="Boxerp.Client.EditEnterpriseWindow" />
+	</window>
+
+	<window name="Main">
+		<glade container="mainWin">glade/main.glade</glade>
+		<asiface>asiface/main.asiface</asiface>
+		<treeview name="treevwModule" column_number="2">
+			<column name="Nombre" value="string" visible="false" />
+			<column name="Elemento" value="string" visible="true" />
+			<module name="buttonAdmin">
+				<node name="Users">
+				  <column value="Users" />
+					<column value="Usuarios" />
+				</node>	
+				<node name="Groups">
+				  <column value="Groups" />
+					<column value="Grupos" />
+				</node>	
+				<node name="Enterprises">
+					<column value="Enterprises" />
+					<column value="Empresas" />
+				</node>	
+			</module>
+		</treeview>
+	</window>
+</gui-index>

@@ -1,0 +1,94 @@
+<?xml version="1.0" standalone="no"?> 
+<!DOCTYPE actions-sections-interface SYSTEM "blablabla/actions-sections-interface-0.1.dtd">
+
+<actions-sections-interface>
+
+	<widget id="buttonAdmin" type="button">
+		<show>
+				<action name="showui"/>
+				<section name="admin"/>
+		</show>
+		<signal name="clicked" handler="OnButtonClicked">
+				<action name="showui"/>
+				<section name="admin"/>
+		</signal>
+	</widget>
+	
+	<widget id="buttonManagement" type="button">
+		<show>
+				<action name="showui"/>
+				<section name="management"/>
+		</show>
+		<signal name="clicked" handler="OnButtonClicked">
+				<action name="showui"/>
+				<section name="management"/>
+		</signal>
+	</widget>
+	
+	<widget id="buttonPurchases" type="button">
+		<show>
+				<action name="showui"/>
+				<section name="purchases"/>
+		</show>
+		<signal name="clicked" handler="OnButtonClicked">
+				<action name="showui"/>
+				<section name="purchases"/>
+		</signal>
+	</widget>
+	
+	<widget id="buttonSales" type="button">
+		<show>
+				<action name="showui"/>
+				<section name="sales"/>
+		</show>
+		<signal name="clicked" handler="OnButtonClicked">
+				<action name="showui"/>
+				<section name="sales"/>
+		</signal>
+	</widget>
+	
+	<widget id="buttonAccounting" type="button">
+		<show>
+				<action name="showui"/>
+				<section name="accounting"/>
+		</show>
+		<signal name="clicked" handler="OnButtonClicked">
+				<action name="showui"/>
+				<section name="accounting"/>
+		</signal>
+	</widget>
+	
+	<widget id="buttonStorehouse" type="button">
+		<show>
+				<action name="showui"/>
+				<section name="storehouse"/>
+		</show>
+		<signal name="clicked" handler="OnButtonClicked">
+				<action name="showui"/>
+				<section name="storehouse"/>
+		</signal>
+	</widget>
+	
+	<widget id="buttonOffice" type="button">
+		<show>
+				<action name="showui"/>
+				<section name="office"/>
+		</show>
+		<signal name="clicked" handler="OnButtonClicked">
+				<action name="showui"/>
+				<section name="office"/>
+		</signal>
+	</widget>
+	
+	<widget id="buttonPacking" type="button">
+		<show>
+				<action name="showui"/>
+				<section name="packing"/>
+		</show>
+		<signal name="clicked" handler="OnButtonClicked">
+				<action name="showui"/>
+				<section name="packing"/>
+		</signal>
+	</widget>
+
+</actions-sections-interface>

@@ -293,8 +293,8 @@ namespace Boxerp.Facade
 			}
 		}*/
 		////////////////////////////////////////////////////////////////////////
-		public void SetCacheData(object data, string key)
-        {
+		public bool SetCacheData(object data, string key)
+		{
 			CachePage page;
 			
 			if (dataIndex.ContainsKey(key))			// Update cache hits
@@ -304,9 +304,10 @@ namespace Boxerp.Facade
 				page.lastHit = DateTime.Now;
 				page.hitsNumber ++;
 				page.data = data;
+				return true;
 			}
 			else									// Add to cache
-		    {
+			{
 				page = new CachePage();
 				page.lastHit = DateTime.Now;
 				page.hitsNumber = 1;
@@ -314,9 +315,9 @@ namespace Boxerp.Facade
 				page.index = -1;
 				page.data = data;
 				Insert(page, key);
-                Console.WriteLine("a-{0}..{1}",this.Count,this.Capacity);
-            }
-        }
+				return false;
+			}
+		}
 		////////////////////////////////////////////////////////////////////////
 				///<summary>
 				///Gets data from cache page indexed by its key

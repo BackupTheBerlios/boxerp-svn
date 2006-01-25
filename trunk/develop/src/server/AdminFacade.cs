@@ -61,7 +61,7 @@ namespace Boxerp.Facade
 		private ConcurrencyControllerObject concurrencyObj;
 		private HistoryObject historyObj;
 		private SessionsObject sessionsObj;
-		private FacadeCache cacheMem;
+		private static FacadeCache cacheMem;
 		private Users users;
 		private Groups groups;
 		private Enterprises enterprises;
@@ -73,7 +73,8 @@ namespace Boxerp.Facade
 		{
 			try 
 			{
-				cacheMem = new FacadeCache(1000);
+				if (cacheMem == null)			
+					cacheMem = new FacadeCache(1000);
 			}
 			catch (Exception ex)
 			{
@@ -379,7 +380,8 @@ namespace Boxerp.Facade
 				es.desc       = DataTools.GetTextField(enterprise, AdminFields.EPRISEDESC);
 				t = db.BeginTransaction();
 				enterprises.ModifyEnterprise(es.id, es);
-				cacheMem.SetCacheData(es, DBTables.ENTERPRISES + es.name);
+				if (cacheMem.SetCacheData(es, DBTables.ENTERPRISES + es.name))
+						historyObj.Register("Enterprise is already in cache");
 			}
 			catch (NullEnterpriseException nee)
 			{

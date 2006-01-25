@@ -105,50 +105,50 @@ client: $(ALL_ASSEMBLIES) $(BINPATH)/Client.exe Defines.cs
 ### --- Server.exe
 SERVERFILES = $(SERVERPATH)/ObjectsServer.cs $(srcdir)/Defines.cs
 $(BINPATH)/ObjectsServer.exe: $(SERVERPATH)/ObjectsServer.cs $(SERVER_CSFILES)
-	$(CSC) $(NOWARN) $(SERVER_OBJECTS) -r:Mono.Posix -r:System.Runtime.Remoting -out:$@ -doc:../doc/Server.xml $(SERVERFILES)
+	$(CSC) $(NOWARN) $(SERVER_OBJECTS) -r:Mono.Posix -r:System.Runtime.Remoting -out:$@ -doc:doc/Server.xml $(SERVERFILES)
 
 ### --- Client.exe
 CLIENTFILES = $(CLIENT_CSFILES) $(srcdir)/Defines.cs $(SERVER_PROXYS)
 $(BINPATH)/Client.exe: $(CLIENT_CSFILES) 
-	$(CSC) $(NOWARN) $(GLADE) $(GTK) $(SERVER_OBJECTS) $(DEBUG_ASSEMBLIES) $(ERRORS_ASSEMBLIES) $(DATA_ASSEMBLIES) -r:Mono.Posix -r:System.Runtime.Remoting -r:System.Web.Services -out:$@ -doc:../doc/Client.xml -r:System.Data $(CLIENTFILES)
+	$(CSC) $(NOWARN) $(GLADE) $(GTK) $(SERVER_OBJECTS) $(DEBUG_ASSEMBLIES) $(ERRORS_ASSEMBLIES) $(DATA_ASSEMBLIES) -r:Mono.Posix -r:System.Runtime.Remoting -r:System.Web.Services -out:$@ -doc:doc/Client.xml -r:System.Data $(CLIENTFILES)
 
 ### --- Base ASSEMBLIES:
 $(BINPATH)/DebugTools.dll: $(SERVERPATH)/DebugTools.cs
-	$(CSC) $(NOWARN) -target:library -out:$@ -doc:../doc/DebugTools.xml $^
+	$(CSC) $(NOWARN) -target:library -out:$@ -doc:doc/DebugTools.xml $^
 
 $(BINPATH)/ErrorManager.dll: $(SERVERPATH)/ErrorManager.cs
-	$(CSC) $(NOWARN) -r:Mono.Posix -target:library -out:$@ -doc:../doc/ErrorManager.xml -r:System.Data $^
+	$(CSC) $(NOWARN) -r:Mono.Posix -target:library -out:$@ -doc:doc/ErrorManager.xml -r:System.Data $^
 
 $(BINPATH)/DataTools.dll: $(SERVERPATH)/DataTools.cs
-	$(CSC) $(NOWARN) -target:library -out:$@ -doc:../doc/DataTools.xml -r:System.Data $^
+	$(CSC) $(NOWARN) -target:library -out:$@ -doc:doc/DataTools.xml -r:System.Data $^
 	
 $(BINPATH)/ServerExceptions.dll: $(SERVERPATH)/ServerExceptions.cs
-	$(CSC) $(NOWARN) -r:Mono.Posix -target:library -out:$@ -doc:../doc/ServerExceptions.xml $^
+	$(CSC) $(NOWARN) -r:Mono.Posix -target:library -out:$@ -doc:doc/ServerExceptions.xml $^
 
 $(BINPATH)/FacadeCache.dll: $(SERVERPATH)/FacadeCache.cs
-	$(CSC) $(NOWARN) -target:library -out:$@ -doc:../doc/FacadeCache.xml $^
+	$(CSC) $(NOWARN) -target:library -out:$@ -doc:doc/FacadeCache.xml $^
 	
 ### --- Database ASSEMBLIES:
 
 $(BINPATH)/GenericDatabase.dll: $(DB_CSFILES) $(srcdir)/Defines.cs
-	$(CSC) $(ERRORS_ASSEMBLIES) $(DEBUG_ASSEMBLIES) $(SERVER_EXCEPTIONS_ASSEMBLIES) -target:library -out:$@ -doc:../doc/GenericDatabase.xml -r:System.Data -r:Npgsql $^
+	$(CSC) $(ERRORS_ASSEMBLIES) $(DEBUG_ASSEMBLIES) $(SERVER_EXCEPTIONS_ASSEMBLIES) -target:library -out:$@ -doc:doc/GenericDatabase.xml -r:System.Data -r:Npgsql $^
 
 ### --- Server side ASSEMBLIES:
 
 $(BINPATH)/ConcurrencyControllerObject.dll: $(SERVERPATH)/ConcurrencyControllerObject.cs  
-	$(CSC) $(NOWARN) $(DB_ASSEMBLIES) $(DEBUG_ASSEMBLIES) $(ERRORS_ASSEMBLIES) $(SERVER_EXCEPTIONS_ASSEMBLIES) -r:System.Runtime.Remoting -target:library -out:$@ -doc:../doc/ConcurrencyControllerObject.xml -r:System.Data $^
+	$(CSC) $(NOWARN) $(DB_ASSEMBLIES) $(DEBUG_ASSEMBLIES) $(ERRORS_ASSEMBLIES) $(SERVER_EXCEPTIONS_ASSEMBLIES) -r:System.Runtime.Remoting -target:library -out:$@ -doc:doc/ConcurrencyControllerObject.xml -r:System.Data $^
 
 $(BINPATH)/HistoryObject.dll: $(SERVERPATH)/HistoryObject.cs 
-	$(CSC) $(NOWARN) $(DB_ASSEMBLIES) $(DEBUG_ASSEMBLIES) $(ERRORS_ASSEMBLIES) $(SERVER_EXCEPTIONS_ASSEMBLIES) -r:System.Runtime.Remoting -target:library -out:$@ -doc:../doc/HistoryObject.xml -r:System.Data $^
+	$(CSC) $(NOWARN) $(DB_ASSEMBLIES) $(DEBUG_ASSEMBLIES) $(ERRORS_ASSEMBLIES) $(SERVER_EXCEPTIONS_ASSEMBLIES) -r:System.Runtime.Remoting -target:library -out:$@ -doc:doc/HistoryObject.xml -r:System.Data $^
 
 $(BINPATH)/SessionsObject.dll: $(SERVERPATH)/SessionsObject.cs 
-	$(CSC) $(NOWARN) $(DB_ASSEMBLIES) $(DEBUG_ASSEMBLIES) $(ERRORS_ASSEMBLIES) $(SERVER_EXCEPTIONS_ASSEMBLIES) -r:System.Runtime.Remoting -target:library -out:$@ -doc:../doc/SessionsObject.xml -r:System.Data $^
+	$(CSC) $(NOWARN) $(DB_ASSEMBLIES) $(DEBUG_ASSEMBLIES) $(ERRORS_ASSEMBLIES) $(SERVER_EXCEPTIONS_ASSEMBLIES) -r:System.Runtime.Remoting -target:library -out:$@ -doc:doc/SessionsObject.xml -r:System.Data $^
 
 $(BINPATH)/LoginService.dll: $(SERVERPATH)/LoginService.cs  $(SERVICES_TOOLS) $(srcdir)/Defines.cs
-	$(CSC) $(NOWARN) $(DB_ASSEMBLIES) $(SERVER_EXCEPTIONS_ASSEMBLIES) $(DATA_ASSEMBLIES) $(ERRORS_ASSEMBLIES) $(DEBUG_ASSEMBLIES) $(SERVER_OBJECTS) -r:System.Web.Services -target:library -out:$@ -doc:../doc/LoginService.xml -r:System.Data -r:System.Runtime.Remoting $^
+	$(CSC) $(NOWARN) $(DB_ASSEMBLIES) $(SERVER_EXCEPTIONS_ASSEMBLIES) $(DATA_ASSEMBLIES) $(ERRORS_ASSEMBLIES) $(DEBUG_ASSEMBLIES) $(SERVER_OBJECTS) -r:System.Web.Services -target:library -out:$@ -doc:doc/LoginService.xml -r:System.Data -r:System.Runtime.Remoting $^
 
 $(BINPATH)/AdminFacade.dll: $(ADMINMODULE_CSFILES) $(SERVICES_TOOLS) $(srcdir)/Defines.cs
-	$(CSC) $(NOWARN) $(DB_ASSEMBLIES) $(DATA_ASSEMBLIES) $(SERVER_EXCEPTIONS_ASSEMBLIES) $(ERRORS_ASSEMBLIES) $(DEBUG_ASSEMBLIES) $(FACADE_ASSEMBLIES) $(SERVER_OBJECTS) -r:System.Runtime.Remoting -r:System.Web.Services -target:library -out:$@ -doc:../doc/AdminFacade.xml -r:System.Data $^
+	$(CSC) $(NOWARN) $(DB_ASSEMBLIES) $(DATA_ASSEMBLIES) $(SERVER_EXCEPTIONS_ASSEMBLIES) $(ERRORS_ASSEMBLIES) $(DEBUG_ASSEMBLIES) $(FACADE_ASSEMBLIES) $(SERVER_OBJECTS) -r:System.Runtime.Remoting -r:System.Web.Services -target:library -out:$@ -doc:doc/AdminFacade.xml -r:System.Data $^
 
 #AdminTest.dll: $(TESTPREF)/AdminTest.cs 
 #	$(CSC) $(NOWARN) $(TOOLS_ASSEMBLIES) -r:AdminFacade.dll -target:library -r:System.Data -r:System.Runtime.Remoting -r:nunit.framework $^

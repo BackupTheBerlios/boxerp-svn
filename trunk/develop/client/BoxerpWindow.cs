@@ -222,7 +222,6 @@ namespace Boxerp.Client
 								if (widget != null)
 									widget.State = StateType.Insensitive;
 							}
-							//if (widgetName.LastIndexOf("button") > 0)
 						}
 					}
 				}

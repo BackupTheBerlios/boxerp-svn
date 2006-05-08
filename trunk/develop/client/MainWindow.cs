@@ -125,7 +125,7 @@ namespace Boxerp.Client
 		/////////////////////////////////////////////////////////////////////////////
 
 		void OnModuleTvwRowActivated (object o, EventArgs e)
-		/* Se dispara cuando se le da a enter en alguna fila */
+		/* On enter key over a treeview row */
 		{
 		} 
 		/////////////////////////////////////////////////////////////////////////////
@@ -166,7 +166,7 @@ namespace Boxerp.Client
 		/////////////////////////////////////////////////////////////////////////////
 		
 		///<summary>
-		/// Este evento se dispara cuando se pincha en algún boton del lado izquierdo
+		/// On button clicked from the main left-down panel
 		///</summary>
 		void OnBtnClicked(object o, EventArgs e)
 		{
@@ -174,12 +174,12 @@ namespace Boxerp.Client
 
 			labelModName.Text = ((Gtk.Button)o).Label ;
 
-			// Eliminamos el hijo anterior del contenedor de modulos (parte derecha)
+			// Empty module container (right)
 			if (modContainerHbox.Children.Length > 0)
 				modContainerHbox.Remove(modContainerHbox.Children[0]);
 			try
 			{
-			   	// Cogemos las columnas del treeview del fichero XML
+			   	// Get treeview columns from xml
                 ArrayList columns = new ArrayList();
                 Column col;
 
@@ -200,12 +200,12 @@ namespace Boxerp.Client
 								nodeSelectedTreevwModule = node;
 				}
 			
-				//Limpiamos el treeview antes de cargar los nuevos datos
+				// Clean treeview before load new data
 				GuiTreeview.RemoveColumns(treevwModule);
-				//Creamos el nuevo treeview
+				// Create a new treeview 
 				GuiTreeview gui_tvw = new GuiTreeview();
 				gui_tvw.NewTreeView (columns, ref treevwModule);
-				//Cargamos los datos
+				// Load data
 				if (nodeSelectedTreevwModule != null)
 					gui_tvw.BuildTree(nodeSelectedTreevwModule, TreeIter.Zero);
 			}

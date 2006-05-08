@@ -141,7 +141,6 @@ namespace Boxerp.Client
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine("Capturando excepcion");
 				if (ex.InnerException != null)
 					Console.WriteLine("Inner:" + ex.InnerException.Message);
 				ClientMessages.ShowException(ex);

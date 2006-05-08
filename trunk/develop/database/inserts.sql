@@ -55,5 +55,14 @@ insert into permissions values (0, 0 , 2);
 insert into permissions values (0, 1 , 2);
 insert into permissions values (0, 2 , 2);
 insert into permissions values (0, 3 , 2);
+insert into permissions values (0, 4, 0);
+insert into permissions values (0, 4, 1);
+insert into permissions values (0, 4, 2);
+insert into permissions values (0, 4, 3);
+insert into permissions values (0, 5, 0);
+insert into permissions values (0, 5, 1);
+insert into permissions values (0, 5, 2);
+insert into permissions values (0, 5, 3);
+
 
 

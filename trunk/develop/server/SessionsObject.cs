@@ -47,12 +47,10 @@ namespace Boxerp.Objects
 
  	public class SessionsObject : MarshalByRefObject
 	{
-		GenericDatabase db;
 		
 		// Constructor
 		public SessionsObject ()
 		{
-			//	db = new GenericDatabase();
 
 		}
 	}

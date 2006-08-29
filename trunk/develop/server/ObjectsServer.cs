@@ -3,7 +3,6 @@
 //
 // Authors:
 // 	Carlos Ble Jurado <carlosble@shidix.com>
-// 	Zebenzui Perez Ramos <zebenperez@shidix.com>
 //
 // Copyright (C) 2005,2006 Shidix Technologies (www.shidix.com)
 // 
@@ -37,16 +36,33 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using Mono.Unix;
+using System.Configuration;
+using Castle.ActiveRecord;
+using Castle.ActiveRecord.Framework;
+using Castle.ActiveRecord.Framework.Config;
+//using Castle.Model;
+//using NHibernate;
+using Boxerp.Models;
+
 
 namespace Boxerp.Objects
 {
-	public class ObjectsServer
+	public class Server
 	{
 		public static void Main(string [] args)
 		{
-				Catalog.Init("boxerp", Boxerp.Defines.LOCALE_DIR);
+				//Catalog.Init("boxerp", Boxerp.Defines.LOCALE_DIR);
 				RemotingConfiguration.Configure(
-						Path.Combine(Boxerp.Defines.SERVER_DIR , "serverRemoting.config"));
+						Path.Combine("/home/carlosble/svns/boxerp/develop/server" , "serverRemoting.config"));
+				ActiveRecordStarter.Initialize( new XmlConfigurationSource("activeRecord.xml"), 
+						typeof(CtrldAction),
+						typeof(CtrldSection),
+						typeof(Enterprise),
+						typeof(ErrorCode),
+						typeof(Group),
+						typeof(Permission),
+						typeof(Session),
+						typeof(User));
 				System.Console.WriteLine("Server started... (press key to exit)");
 				System.Console.ReadLine();
 		}

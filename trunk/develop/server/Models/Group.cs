@@ -33,7 +33,7 @@ using NHibernate.Expression;
 using System.Collections;
 using Castle.ActiveRecord;
 
-namespace Boxerp.Model
+namespace Boxerp.Models
 {
 	[ActiveRecord("sgroups")]
 	public class Group : ActiveRecordBase

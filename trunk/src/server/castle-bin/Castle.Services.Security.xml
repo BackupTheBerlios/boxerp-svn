@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.Services.Security</name>
+    </assembly>
+    <members>
+        <member name="T:Castle.Services.Security.AllowPolicy">
+            <summary>
+            Summary description for DenyPolicy.
+            </summary>
+        </member>
+        <member name="T:Castle.Services.Security.IPolicy">
+            <summary>
+            Summary description for IPolicy.
+            </summary>
+        </member>
+        <member name="T:Castle.Services.Security.Authorization">
+            <summary>
+            Summary description for Authorization.
+            </summary>
+        </member>
+        <member name="T:Castle.Services.Security.DenyPolicy">
+            <summary>
+            Summary description for DenyPolicy.
+            </summary>
+        </member>
+        <member name="T:Castle.Services.Security.GenericPolicy">
+            <summary>
+            Summary description for GenericPolicy.
+            </summary>
+        </member>
+        <member name="T:Castle.Services.Security.ICustomPermission">
+            <summary>
+            Summary description for ICustomPermission.
+            </summary>
+        </member>
+        <member name="T:Castle.Services.Security.ISecurityManager">
+            <summary>
+            Summary description for ISecurityManager.
+            </summary>
+        </member>
+        <member name="T:Castle.Services.Security.SecurityManager">
+            <summary>
+            Summary description for SecurityManager.
+            </summary>
+        </member>
+    </members>
+</doc>

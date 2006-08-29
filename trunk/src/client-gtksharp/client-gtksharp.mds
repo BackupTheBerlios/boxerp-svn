@@ -1,0 +1,17 @@
+<Combine name="client-gtksharp" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="client-gtksharp" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="client-gtksharp" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <DeployTargets />
+  <StartMode startupentry="client-gtksharp" single="True">
+    <Execute type="None" entry="client-gtksharp" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./client-gtksharp/client-gtksharp.mdp" />
+  </Entries>
+</Combine>

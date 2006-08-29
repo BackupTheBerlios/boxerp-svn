@@ -33,7 +33,7 @@ using NHibernate.Expression;
 using System.Collections;
 using Castle.ActiveRecord;
 
-namespace Boxerp.Model
+namespace Boxerp.Models
 {
 	[ActiveRecord("susers")]
 	public class User : ActiveRecordBase
@@ -43,6 +43,7 @@ namespace Boxerp.Model
 		private string _userName;
 		private string _password;
 		private bool _published;
+		static System.Security.Cryptography.MD5 hasher = System.Security.Cryptography.MD5.Create();
 
 		[PrimaryKey(PrimaryKeyType.Native)]
 		public int Id
@@ -67,7 +68,7 @@ namespace Boxerp.Model
 			set { _userName = value; }
    	}
 
-		[Property](Length=50)]
+		[Property(Length=50)]
 		public string Password
 		{
 			get { return _password; }
@@ -80,6 +81,40 @@ namespace Boxerp.Model
 			get { return _published; }
 			set { _published = value; }
 		}
+
+		public static User[] FindAll()
+		{
+			return (User[]) ActiveRecordBase.FindAll( 
+					typeof(User),
+					new Order[] { Order.Asc("Name") }
+				);
+		}
+
+		public static User Find(int id)
+		{
+			return (User) ActiveRecordBase.FindByPrimaryKey( typeof(User), id );
+		}
+		
+		public static User FindByUsernameAndPasswd(string username, string passwd)
+		{	
+			string hashedPassword = passwd; // Hash(passwd);
+			
+			return (User) ActiveRecordBase.FindOne(typeof(User), 
+					Expression.Eq("UserName", username), Expression.Eq("Password", hashedPassword));
+		}
+
+		private static string Hash(string value)
+		{
+			if (value.Length < 10)
+			{
+				byte[] valueBytes = System.Text.Encoding.UTF8.GetBytes(value);
+				byte[] hashedBytes = hasher.ComputeHash(valueBytes);
+				return System.Convert.ToBase64String(hashedBytes);
+			}
+			else
+				return value;
+		}
+
 	}
 }
 

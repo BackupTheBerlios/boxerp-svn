@@ -49,7 +49,6 @@ namespace Boxerp.Objects
 
  	public class LoginObject : MarshalByRefObject, ILogin
 	{
-		private static Hashtable sessions = Hashtable.Synchronized(new Hashtable());
 		private static Random rand = new Random( );
 		
 		// Constructor
@@ -65,9 +64,12 @@ namespace Boxerp.Objects
          User u = User.FindByUsernameAndPasswd(user, password);
 
 			if (u != null) {
-				string session = (u.GetHashCode() + (DateTime.Now).GetHashCode() + rand.Next()).ToString();
-				sessions[session] = System.DateTime.Now;
+				Console.WriteLine("0");
+				SessionsObject sessionsObj = SessionsObject.GetInstance();
+				Console.WriteLine("1");
+				string session = sessionsObj.GetSession(u);
 				Console.WriteLine("New login. Session = " + session);
+				Console.WriteLine("All sessions=" + sessionsObj.GetAllSessions());
 				return session;
 			}
 			else

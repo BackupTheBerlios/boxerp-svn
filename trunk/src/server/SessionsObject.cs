@@ -40,17 +40,47 @@ using System.Runtime.Remoting.Messaging;
 using Boxerp.Errors;
 using Boxerp.Debug;
 using Boxerp.Exceptions;
+using Boxerp.Models;
+using Castle.ActiveRecord;
+using NHibernate;
+
 
 namespace Boxerp.Objects
 {
 
- 	public class SessionsObject : MarshalByRefObject
+ 	public class SessionsObject //: MarshalByRefObject
 	{
-		
-		// Constructor
-		public SessionsObject ()
-		{
+		private static SessionsObject instance = null;
+		private static Hashtable sessions = Hashtable.Synchronized(new Hashtable());
+	
+		private SessionsObject(){}
 
+		public static SessionsObject GetInstance()
+		{
+			if (instance == null)
+			{
+				instance = new SessionsObject();
+		   }
+			return instance;
 		}
+
+		public string GetSession(User u)
+		{
+			string session = u.UserName + DateTime.Now.GetHashCode();
+			sessions[session] = true;
+			return session;
+		}
+
+		public string GetAllSessions()
+		{
+			string result = "";
+			foreach(Object i in sessions.Keys)
+			{
+				result += (string)i + ",";
+			}
+			return result;
+		}
+
+		
 	}
 }

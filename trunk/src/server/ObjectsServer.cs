@@ -54,12 +54,12 @@ namespace Boxerp.Objects
 				//Catalog.Init("boxerp", Boxerp.Defines.LOCALE_DIR);
 				RemotingConfiguration.Configure("./serverRemoting.config");
 				ActiveRecordStarter.Initialize( new XmlConfigurationSource("./activeRecord.xml"), 
-						typeof(CtrldAction),
-						typeof(CtrldSection),
+						typeof(Action),
+						typeof(Section),
+						typeof(SectionPermission),
 						typeof(Enterprise),
 						typeof(ErrorCode),
 						typeof(Group),
-						typeof(Permission),
 						typeof(Session),
 						typeof(User));
 				System.Console.WriteLine("Server started... (press key to exit)");

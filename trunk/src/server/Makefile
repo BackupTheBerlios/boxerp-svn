@@ -22,4 +22,4 @@ models:
 	mcs -target:library Models/*.cs $(CASTLE) $(MONO) -out:Models.dll
 
 dbgenerator:
-	mcs -r:./$(BIN)/Castle.ActiveRecord -r:./$(BIN)/NHibernate -r:./$(BIN)/Castle.Model SchemaGenerator.cs $(MODELS) $(CASTLE) -out:$(BIN)/dbgenerator.exe
+	mcs -r:./$(BIN)/Castle.ActiveRecord -r:./$(BIN)/NHibernate -r:./$(BIN)/Castle.Model SchemaGenerator.cs $(MODELS) $(CASTLE) -out:dbgenerator.exe

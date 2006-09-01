@@ -12,12 +12,12 @@ public class SchemaGenerator
 	public static void Main(){
 		
 		ActiveRecordStarter.Initialize( new XmlConfigurationSource("activeRecord.xml"), 
-						typeof(CtrldAction),
-						typeof(CtrldSection),
+						typeof(Action),
+						typeof(Section),
+						typeof(SectionPermission),
 						typeof(Enterprise),
 						typeof(ErrorCode),
 						typeof(Group),
-						typeof(Permission),
 						typeof(Session),
 						typeof(User));
 		ActiveRecordStarter.CreateSchema();

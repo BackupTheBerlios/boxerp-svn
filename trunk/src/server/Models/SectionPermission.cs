@@ -1,6 +1,5 @@
 //
 // Authors:
-//    Hector Rojas González <hecrogon@gmail.com>
 // 	Carlos Ble Jurado <carlosble@shidix.com>
 //
 // Copyright (C) 2005,2006 Shidix Technologies (www.shidix.com)
@@ -35,13 +34,14 @@ using Castle.ActiveRecord;
 
 namespace Boxerp.Models
 {
-	[ActiveRecord("permissions")]
-	public class Permission : ActiveRecordBase
+	[ActiveRecord("SectionPermissions")]
+	public class SectionPermission : ActiveRecordBase
 	{
 		private int _id;
 		private Group _group;
-		private CtrldAction _ctrldAction;
-		private CtrldSection _ctrldSection;
+		private User _user;
+		private Section _section;
+		private IDictionary _actions;
 
 		[PrimaryKey(PrimaryKeyType.Native)]
 		public int Id
@@ -50,26 +50,36 @@ namespace Boxerp.Models
 			set { _id = value; }
 		}
 
-		[BelongsTo("sgroups")]
+		[BelongsTo]
+		public Section Section 
+		{
+			get { return _section; }
+			set { _section = value; }
+   	}
+
+		[BelongsTo("sgroup")]
 		public Group Group
 		{
 			get { return _group; }
 			set { _group = value; }
+
 		}
 
-		[BelongsTo]
-		public CtrldAction CtrldAction
+		[BelongsTo("suser")]
+		public User User 
 		{
-			get { return _ctrldAction; }
-			set { _ctrldAction = value; }
+			get { return _user; }
+			set { _user = value; }
 		}
 
-		[BelongsTo]
-		public CtrldSection CtrldSection
+		[HasAndBelongsToMany(typeof(Action), Index="actions" ,IndexType="string", Table="sections_actions",
+				ColumnRef="actionId", ColumnKey="sectionId")]
+		public IDictionary Actions 
 		{
-			get { return _ctrldSection; }
-			set { _ctrldSection = value; }
+			get { return _actions; }
+			set { _actions = value; }
 		}
+		
 	}
 }
 

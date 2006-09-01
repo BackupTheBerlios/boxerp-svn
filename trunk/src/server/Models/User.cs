@@ -44,6 +44,7 @@ namespace Boxerp.Models
 		private string _userName;
 		private string _password;
 		private bool _published;
+		private IDictionary _permissions;
 		static System.Security.Cryptography.MD5 hasher = System.Security.Cryptography.MD5.Create();
 
 		[PrimaryKey(PrimaryKeyType.Native)]
@@ -62,6 +63,14 @@ namespace Boxerp.Models
 			set { _groups = value; }
 		}
 	
+		[HasMany(typeof(SectionPermission), Index="sectionpermission" ,IndexType="string",
+			Cascade=ManyRelationCascadeEnum.All)]
+		public IDictionary Permissions 
+		{
+			get { return _permissions; }
+			set { _permissions = value; }
+		}
+		
 		[Property(Length=20, Unique=true)]
 		public string UserName
 		{

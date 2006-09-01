@@ -35,12 +35,13 @@ using Castle.ActiveRecord;
 
 namespace Boxerp.Models
 {
-	[ActiveRecord("ctrldActions")]
-	public class CtrldAction : ActiveRecordBase
+	[ActiveRecord("Actions")]
+	public class Action : ActiveRecordBase
 	{
 		private int _id;
 		private string _name;
 		private string _description;
+		private IDictionary _sectionPermissions;
 
 		[PrimaryKey(PrimaryKeyType.Native)]
 		public int Id
@@ -62,6 +63,14 @@ namespace Boxerp.Models
 			get { return _description; }
 			set { _description = value; }
    	}
+
+		[HasAndBelongsToMany(typeof(SectionPermission), Index="sections" ,IndexType="string", 
+				Table="sections_actions",	ColumnRef="sectionId", ColumnKey="actionId")]
+		public IDictionary Sections 
+		{
+			get { return _sectionPermissions; }
+			set { _sectionPermissions = value; }
+		}
 	}
 }
 

@@ -35,16 +35,12 @@ using Castle.ActiveRecord;
 
 namespace Boxerp.Models
 {
-	[ActiveRecord("sgroups")]
-	[Serializable]
-	public class Group : ActiveRecordBase
+	[ActiveRecord("Sections")]
+	public class Section : ActiveRecordBase
 	{
 		private int _id;
-		private IList _enterprises;
-		private IList _users;
-		private string _groupName;
-		private bool _published;
-		private IDictionary _permissions;
+		private string _name;
+		private string _description;
 
 		[PrimaryKey(PrimaryKeyType.Native)]
 		public int Id
@@ -53,45 +49,19 @@ namespace Boxerp.Models
 			set { _id = value; }
 		}
 
-		[HasAndBelongsToMany( typeof(Enterprise),
-			Table="enterprises_groups",
-			ColumnRef="enterprise_id", ColumnKey="group_id")]
-		public IList Enterprises
+		[Property(Length=40)]
+		public string Name
 		{
-			get { return _enterprises; }
-			set { _enterprises = value; }
-		}
-
-		[HasAndBelongsToMany( typeof(User),
-			Table="users_groups",
-			ColumnRef="user_id", ColumnKey="group_id")]
-		public IList User
-		{
-			get { return _users; }
-			set { _users = value; }
-		}
-
-		[HasMany(typeof(SectionPermission), Index="sectionpermission" ,IndexType="string", 
-			Cascade=ManyRelationCascadeEnum.All)]
-		public IDictionary Permissions 
-		{
-			get { return _permissions; }
-			set { _permissions = value; }
-		}
-
-		[Property(Length=20)]
-		public string GroupName
-		{
-			get { return _groupName; }
-			set { _groupName = value; }
+			get { return _name; }
+			set { _name = value; }
    	}
 
-		[Property]
-		public bool Published
+		[Property(Length=60)]
+		public string Description
 		{
-			get { return _published; }
-			set { _published = value; }
-		}
+			get { return _description; }
+			set { _description = value; }
+   	}
 	}
 }
 

@@ -14,12 +14,12 @@ class Client
       (ILogin) RemotingHelper.GetObject(typeof(ILogin));
     IAdmin adminObj = 
       (IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
-    User u = adminObj.GetUser("demo", "pass");	 
-    Console.WriteLine(u.UserName);
-	 User nu = new User();
-	 nu.UserName = "prueba";
-	 nu.Password = "pass2";
-    adminObj.SaveUser(nu);
+    
+	 loginObj.Login("demo", "pass");	 
+	 /*User nu = new User();
+	 nu.UserName = "pruebaasdfsdf";
+	 nu.Password = "pass2sdfsdfsf";
+    adminObj.SaveUser(nu);*/
 	 Console.WriteLine("Done");
   }	
 }

@@ -1,6 +1,4 @@
 //
-// LoginObject.cs
-//
 // Authors:
 // 	Carlos Ble Jurado <carlosble@shidix.com>
 //
@@ -44,32 +42,94 @@ using Boxerp.Models;
 using Castle.ActiveRecord;
 using NHibernate;
 
+
 namespace Boxerp.Objects
 {
 
- 	public class LoginObject : MarshalByRefObject, ILogin
+	public enum Sections
 	{
-		private static Random rand = new Random( );
-		
-		// Constructor
-		public LoginObject ()
-		{
-		}
-		///////////////////////////////////////////////////////////////////////////	
-				/// <summary>
-				/// 
-				/// </summary>
-		public string Login(string user, string password)
- 		{
-         User u = User.FindByUsernameAndPasswd(user, password);
+		ADMIN
+	}
 
-			if (u != null) {
-				SessionsManager sessionsMgr = SessionsManager.GetInstance();
-				string session = sessionsMgr.GetSession(u);
-				return session;
+	public enum Actions
+	{
+		SHOW,
+		EDIT,
+		DELETE
+	}
+	
+	public struct ConcurrencyStruct
+	{
+		public Sections section;
+		public Actions action;
+		public User user;
+		public DateTime lastHit;
+	}
+	
+ 	public class ConcurrencyManager //: MarshalByRefManager
+	{
+		private static ConcurrencyManager instance = null;
+		private static Hashtable cHash = Hashtable.Synchronized(new Hashtable());
+		private static double EXPIRE = 10;
+		private ConcurrencyManager(){}
+
+		public static ConcurrencyManager GetInstance()
+		{
+			if (instance == null)
+			{
+				instance = new ConcurrencyManager();
+		   }
+			return instance;
+		}
+
+		public bool StartAction(User u, Sections s, Actions a)
+		{
+			if (u != null)
+			{
+				if (!cHash.ContainsKey(s.ToString()+a.ToString()))
+				{
+					ConcurrencyStruct cstruct = new ConcurrencyStruct();
+					cstruct.user = u;
+					cstruct.lastHit = DateTime.Now;
+					cstruct.section = s;
+					cstruct.action = a;
+					cHash[s.ToString()+a.ToString()] = cstruct;
+					return true;
+				}
+				else
+				{
+					if (s == Sections.ADMIN)
+					{
+						return false;	// another user is inside administrator
+					}
+					return true;
+				}
 			}
 			else
-				return null;
+			{
+				throw new NullReferenceException();
+			}
 		}
-	}	
+
+		public bool EndAction(User u, Sections s, Actions a)
+		{
+			if (u != null)
+			{
+				if (cHash.ContainsKey(s.ToString()+a.ToString()))
+				{
+					cHash.Remove(s.ToString()+a.ToString());
+					return true;
+				}
+				else
+				{
+					return false;	// something is wrong
+				}
+			}
+			else
+			{
+				throw new NullReferenceException();
+			}
+		}
+
+	}
 }

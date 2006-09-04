@@ -1,6 +1,4 @@
 //
-// SessionsObject.cs
-//
 // Authors:
 // 	Carlos Ble Jurado <carlosble@shidix.com>
 //
@@ -31,56 +29,45 @@
 // THE POSSIBILITY OF SUCH DAMAGE.
 
 using System;
+using System.IO;
 using System.Data;
 using System.Collections;
-using System.Runtime.Remoting;
+/*using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using System.Runtime.Remoting.Messaging;
+*/
 using Boxerp.Errors;
 using Boxerp.Debug;
 using Boxerp.Exceptions;
-using Boxerp.Models;
-using Castle.ActiveRecord;
-using NHibernate;
+//using Boxerp.Models;
+//using Castle.ActiveRecord;
+//using NHibernate;
 
 
 namespace Boxerp.Objects
 {
 
- 	public class SessionsObject //: MarshalByRefObject
+ 	public class LoggerManager 
 	{
-		private static SessionsObject instance = null;
-		private static Hashtable sessions = Hashtable.Synchronized(new Hashtable());
-	
-		private SessionsObject(){}
+		private static string logFile = "./server.log";
+		private static LoggerManager instance;
+		private static StreamWriter writer;
+		private LoggerManager(){}
 
-		public static SessionsObject GetInstance()
+		public static LoggerManager GetInstance()
 		{
 			if (instance == null)
 			{
-				instance = new SessionsObject();
+				instance = new LoggerManager();
+				writer = System.IO.File.AppendText(logFile) as StreamWriter;
 		   }
 			return instance;
 		}
 
-		public string GetSession(User u)
+		public void Print(string msg)
 		{
-			string session = u.UserName + DateTime.Now.GetHashCode();
-			sessions[session] = true;
-			return session;
+         writer.WriteLine(DateTime.Now.ToString() + " - " + msg); // Fixme: Lock this
 		}
-
-		public string GetAllSessions()
-		{
-			string result = "";
-			foreach(Object i in sessions.Keys)
-			{
-				result += (string)i + ",";
-			}
-			return result;
-		}
-
-		
 	}
 }

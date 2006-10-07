@@ -4,7 +4,7 @@
 // Authors:
 // 	Carlos Ble Jurado <carlosble@shidix.com>
 //
-// Copyright (C) 2005,2006 Shidix Technologies (www.shidix.com)
+// Copyright (C) 2005,2006 Carlos Ble 
 // 
 // Redistribution and use in source and binary forms, with or
 // without modification, are permitted provided that the following

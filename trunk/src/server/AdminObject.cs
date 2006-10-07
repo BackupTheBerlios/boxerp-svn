@@ -57,6 +57,7 @@ namespace Boxerp.Objects
 		
 		public User GetUser(string username, string password)
 		{
+			Console.WriteLine("User information=" + UserInformation.GetUser());
 			Console.WriteLine("Haciendo login= " + username +"," + password);
          User u = User.FindByUsernameAndPasswd(username, password);
 			return u;	

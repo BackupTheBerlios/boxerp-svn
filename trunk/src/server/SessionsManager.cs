@@ -2,8 +2,8 @@
 // Authors:
 // 	Carlos Ble Jurado <carlosble@shidix.com>
 //
-// Copyright (C) 2005,2006 Shidix Technologies (www.shidix.com)
-// 
+// Copyright (C) 2005,2006 Carlos Ble 
+//  
 // Redistribution and use in source and binary forms, with or
 // without modification, are permitted provided that the following
 // conditions are met:
@@ -52,7 +52,7 @@ namespace Boxerp.Objects
 		public DateTime lastHit;
 	}
 	
- 	public class SessionsManager //: MarshalByRefManager
+ 	public class SessionsManager 
 	{
 		private static SessionsManager instance = null;
 		private static Hashtable sHash = Hashtable.Synchronized(new Hashtable());
@@ -104,7 +104,7 @@ namespace Boxerp.Objects
 		}
 
 		// FIXME: Should I lock or Synchronized hashtable is enough?
-		public bool IsValidSession(string session, bool update)
+		/*public bool IsValidSession(string session, bool update)
 		{
 			if (sHash.ContainsKey(session))
 			{
@@ -118,6 +118,26 @@ namespace Boxerp.Objects
 						sstruct.lastHit = DateTime.Now;	// FIXME: may I destroy the previous DateTime first?
 						sHash[session] = sstruct;
 					}
+					return true;			
+				}
+				else
+					return false;		// expire
+			}
+			else
+				return false;
+		}*/
+
+		public bool IsValidThenUpdate(string session)
+		{
+			if (sHash.ContainsKey(session))
+			{
+				SessionStruct sstruct = (SessionStruct)sHash[session];
+				DateTime dt = sstruct.lastHit;
+				dt.AddMinutes(EXPIRE);			// 
+				if (DateTime.Compare(DateTime.Now, dt) < 0)
+				{
+					sstruct.lastHit = DateTime.Now;	// FIXME: may I destroy the previous DateTime first?
+					sHash[session] = sstruct;
 					return true;			
 				}
 				else

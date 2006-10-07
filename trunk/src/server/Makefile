@@ -15,9 +15,9 @@ server: objects
 #	mcs -target:library $(OBJECTS) $(MODELS) $(CASTLE) $(MONO) $(BOXERPBASE) -out:Objects.dll
 
 objects: interfaces
-	mcs -target:library LoginObject.cs AdminObject.cs SessionsManager.cs LoggerManager.cs ConcurrencyManager.cs -r:./Interfaces.dll $(MODELS) $(MONO) $(CASTLE) $(BOXERPBASE) -out:Objects.dll
+	mcs -target:library LoginObject.cs AdminObject.cs SessionsManager.cs ConcurrencyManager.cs -r:./Interfaces.dll $(MODELS) $(MONO) $(CASTLE) $(BOXERPBASE) -out:Objects.dll
 interfaces: models
-	mcs -target:library ILogin.cs IAdmin.cs $(MODELS) $(CASTLE) $(MONO) -out:Interfaces.dll
+	mcs -target:library ILogin.cs IAdmin.cs UserInfo.cs $(MODELS) $(CASTLE) $(MONO) -out:Interfaces.dll
 models:
 	mcs -target:library Models/*.cs $(CASTLE) $(MONO) -out:Models.dll
 

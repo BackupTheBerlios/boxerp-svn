@@ -7,28 +7,35 @@ using System.Threading;
 
 class Client
 {
-  static void Main(string[] args)
-  {
-    RemotingConfiguration.Configure("./clientRemoting.config");
+	static void Main(string[] args)
+	{
+		// USAGE: ./client.exe username login|nologin
+		RemotingConfiguration.Configure("./clientRemoting.config");
 
-    ILogin loginObj = 
-      (ILogin) RemotingHelper.GetObject(typeof(ILogin));
-    IAdmin adminObj = 
-      (IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
+		ILogin loginObj = 
+			(ILogin) RemotingHelper.GetObject(typeof(ILogin));
+		IAdmin adminObj = 
+			(IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
     
-	 loginObj.Login("demo", "pass");	 
-	 UserInformation.SetUser(args[0]);
-	 Console.WriteLine("get user");
-	 while (true)
-    {
-		 adminObj.GetUser("asdf", "asdfff");
-		 Console.WriteLine("admin obj");
-		 Thread.Sleep(3000);
-    }
-	 /*User nu = new User();
-	 nu.UserName = "pruebaasdfsdf";
-	 nu.Password = "pass2sdfsdfsf";
-    adminObj.SaveUser(nu);*/
-	 Console.WriteLine("Done");
-  }	
+		UserInformation.SetUserName(args[0]);
+		if (args[1] == "login")
+		{
+			if (loginObj.Login(args[0], "pass") == 0)
+			{
+				foreach (User u in adminObj.GetUsers())
+				{
+					Console.WriteLine("Ok!   user:" + u.UserName);
+				}
+			}
+			else
+				Console.WriteLine("Login incorrect");
+		}
+		else	// try use adminObj withou login
+		{
+			if (adminObj.GetUsers() == null)
+			{
+				Console.WriteLine("Permission denied");
+			}
+		}				  
+	}	
 }

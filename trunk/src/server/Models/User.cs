@@ -94,10 +94,7 @@ namespace Boxerp.Models
 
 		public static User[] FindAll()
 		{
-			return (User[]) ActiveRecordBase.FindAll( 
-					typeof(User),
-					new Order[] { Order.Asc("Name") }
-				);
+			return (User[]) ActiveRecordBase.FindAll(typeof(User));
 		}
 
 		public static User Find(int id)

@@ -77,6 +77,7 @@ namespace Boxerp.Objects
 				SessionStruct sstruct = new SessionStruct();
 				sstruct.user = u;
 				sstruct.lastHit = DateTime.Now;
+				Console.WriteLine("new session=" + session);
 				sHash[session] = sstruct;
 				return session;
 			}
@@ -93,8 +94,8 @@ namespace Boxerp.Objects
 			{
 				SessionStruct sstruct = (SessionStruct)sHash[session];
 				DateTime dt = sstruct.lastHit;
-				dt.AddMinutes(EXPIRE);			// 
-				if (DateTime.Compare(DateTime.Now, dt) < 0)
+				dt = dt.AddMinutes(EXPIRE);			
+				if (DateTime.Compare(DateTime.Now, dt) <= 0)
 					return true;			
 				else
 					return false;		// expire

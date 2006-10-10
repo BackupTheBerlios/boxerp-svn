@@ -49,6 +49,7 @@ namespace Boxerp.Objects
 
  	public class LoginObject : MarshalByRefObject, ILogin
 	{
+		private static SessionsManager sessionsMgr = SessionsManager.GetInstance();
 		private static Random rand = new Random( );
 		
 		// Constructor
@@ -59,17 +60,16 @@ namespace Boxerp.Objects
 				/// <summary>
 				/// 
 				/// </summary>
-		public string Login(string user, string password)
+		public int Login(string user, string password)
  		{
          User u = User.FindByUsernameAndPasswd(user, password);
-
 			if (u != null) {
-				SessionsManager sessionsMgr = SessionsManager.GetInstance();
 				string session = sessionsMgr.GetSession(u);
-				return session;
+				UserInformation.SetSessionToken(session); // put the session token in the CallContext
+				return 0;
 			}
 			else
-				return null;
+				return -1;
 		}
 	}	
 }

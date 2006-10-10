@@ -49,18 +49,43 @@ namespace Boxerp.Objects
 
  	public class AdminObject : MarshalByRefObject, IAdmin
 	{
+		private static SessionsManager sessionsMgr = SessionsManager.GetInstance();
 		
 		// Constructor
 		public AdminObject ()
 		{
 		}
+
+		public User[] GetUsers()
+		{
+			try
+			{
+				Console.WriteLine("user session=" + UserInformation.GetSessionToken());
+				if (sessionsMgr.IsValidSession(UserInformation.GetSessionToken()))
+				{
+					Console.WriteLine("valid user");
+					return User.FindAll();
+				}
+				else
+				{
+					Console.WriteLine("not valid user");
+					return null;
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("ERROR:" + ex.Message + ":" + ex.StackTrace);
+				return null;
+			}
+		}
 		
 		public User GetUser(string username, string password)
 		{
-			Console.WriteLine("User information=" + UserInformation.GetUser());
+			/*Console.WriteLine("User information=" + UserInformation.GetUser());
 			Console.WriteLine("Haciendo login= " + username +"," + password);
          User u = User.FindByUsernameAndPasswd(username, password);
-			return u;	
+			return u;	*/
+			return null;
 		}
 
 		public void SaveUser(User u)

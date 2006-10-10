@@ -46,6 +46,7 @@ namespace Boxerp.Objects
  	public interface IAdmin
 	{
 		User GetUser(string user, string password);
+		User[] GetUsers();
 		/*IList GetEnterprises(string session);
 		IList GetGroups(string session);
 		IList GetUsers(string session, 

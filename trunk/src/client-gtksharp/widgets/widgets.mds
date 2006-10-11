@@ -1,0 +1,17 @@
+<Combine name="widgets" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="widgets" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="widgets" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <DeployTargets />
+  <StartMode startupentry="widgets" single="True">
+    <Execute type="None" entry="widgets" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./widgets/widgets.mdp" />
+  </Entries>
+</Combine>

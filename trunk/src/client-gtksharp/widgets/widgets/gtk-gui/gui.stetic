@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<stetic-interface>
+  <widget class="Gtk.Dialog" id="widgets.WarningDialog" design-size="400 300">
+    <property name="Title" translatable="yes">WarningDialog</property>
+    <property name="Buttons">1</property>
+    <property name="HelpButton">False</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="HasSeparator">False</property>
+    <property name="Events">ButtonPressMask</property>
+    <property name="MemberName" />
+    <child internal-child="VBox">
+      <widget class="Gtk.VBox" id="dialog_VBox">
+        <property name="BorderWidth">2</property>
+        <property name="Events">ButtonPressMask</property>
+        <property name="MemberName" />
+        <child>
+          <placeholder />
+        </child>
+      </widget>
+    </child>
+    <child internal-child="ActionArea">
+      <widget class="Gtk.HButtonBox" id="widgets.WarningDialog_ActionArea">
+        <property name="Size">1</property>
+        <property name="LayoutStyle">End</property>
+        <property name="Spacing">10</property>
+        <property name="BorderWidth">5</property>
+        <property name="Events">ButtonPressMask</property>
+        <property name="MemberName" />
+        <child>
+          <widget class="Gtk.Button" id="button3">
+            <property name="Type">TextOnly</property>
+            <property name="Label">button3</property>
+            <property name="IsDialogButton">True</property>
+            <property name="ResponseId">0</property>
+            <property name="CanFocus">True</property>
+            <property name="Events">0</property>
+            <property name="MemberName" />
+            <property name="CanDefault">True</property>
+          </widget>
+          <packing>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Window" id="MainWindow" design-size="400 300">
+    <property name="Title" translatable="yes">MainWindow</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="Events">0</property>
+    <property name="MemberName" />
+    <signal name="DeleteEvent" handler="OnDeleteEvent" />
+    <child>
+      <placeholder />
+    </child>
+  </widget>
+  <widget class="Gtk.Dialog" id="widgets.InfoExtendedDialog" design-size="400 300">
+    <property name="Title" translatable="yes">InfoExtendedDialog</property>
+    <property name="Buttons">1</property>
+    <property name="HelpButton">False</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="HasSeparator">False</property>
+    <property name="Events">ButtonPressMask</property>
+    <property name="MemberName" />
+    <child internal-child="VBox">
+      <widget class="Gtk.VBox" id="dialog_VBox">
+        <property name="BorderWidth">2</property>
+        <property name="Events">ButtonPressMask</property>
+        <property name="MemberName" />
+        <child>
+          <placeholder />
+        </child>
+      </widget>
+    </child>
+    <child internal-child="ActionArea">
+      <widget class="Gtk.HButtonBox" id="widgets.InfoExtendedDialog_ActionArea">
+        <property name="Size">1</property>
+        <property name="LayoutStyle">End</property>
+        <property name="Events">ButtonPressMask</property>
+        <property name="MemberName" />
+        <child>
+          <widget class="Gtk.Button" id="button7">
+            <property name="Type">TextOnly</property>
+            <property name="Label">button7</property>
+            <property name="IsDialogButton">True</property>
+            <property name="ResponseId">0</property>
+            <property name="CanFocus">True</property>
+            <property name="Events">0</property>
+            <property name="MemberName" />
+            <property name="CanDefault">True</property>
+          </widget>
+          <packing>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Dialog" id="widgets.InfoDialog" design-size="400 300">
+    <property name="Title" translatable="yes">InfoDialog</property>
+    <property name="Buttons">1</property>
+    <property name="HelpButton">False</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="HasSeparator">False</property>
+    <property name="Events">ButtonPressMask</property>
+    <property name="MemberName" />
+    <child internal-child="VBox">
+      <widget class="Gtk.VBox" id="dialog_VBox">
+        <property name="BorderWidth">2</property>
+        <property name="Events">ButtonPressMask</property>
+        <property name="MemberName" />
+        <child>
+          <placeholder />
+        </child>
+      </widget>
+    </child>
+    <child internal-child="ActionArea">
+      <widget class="Gtk.HButtonBox" id="widgets.InfoDialog_ActionArea">
+        <property name="Size">1</property>
+        <property name="LayoutStyle">End</property>
+        <property name="Events">ButtonPressMask</property>
+        <property name="MemberName" />
+        <child>
+          <widget class="Gtk.Button" id="button5">
+            <property name="Type">TextOnly</property>
+            <property name="Label">button5</property>
+            <property name="IsDialogButton">True</property>
+            <property name="ResponseId">0</property>
+            <property name="CanFocus">True</property>
+            <property name="Events">0</property>
+            <property name="MemberName" />
+            <property name="CanDefault">True</property>
+          </widget>
+          <packing>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Dialog" id="widgets.WaitDialog" design-size="400 119">
+    <property name="Title" translatable="yes" context="yes" comments="">operationInProgress|Operation in progress...</property>
+    <property name="Buttons">1</property>
+    <property name="HelpButton">False</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="HasSeparator">False</property>
+    <property name="Resizable">False</property>
+    <property name="AllowGrow">False</property>
+    <property name="Events">ButtonPressMask</property>
+    <property name="MemberName" />
+    <child internal-child="VBox">
+      <widget class="Gtk.VBox" id="dialog_VBox">
+        <property name="Spacing">2</property>
+        <property name="BorderWidth">5</property>
+        <property name="Events">ButtonPressMask</property>
+        <property name="MemberName" />
+        <child>
+          <widget class="Gtk.Label" id="labelMsg">
+            <property name="LabelProp">label1</property>
+            <property name="Events">0</property>
+            <property name="MemberName">labelMsg</property>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.ProgressBar" id="progressbar">
+            <property name="Events">0</property>
+            <property name="MemberName">progressbar</property>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+    <child internal-child="ActionArea">
+      <widget class="Gtk.HButtonBox" id="actionArea">
+        <property name="Size">1</property>
+        <property name="LayoutStyle">End</property>
+        <property name="Spacing">10</property>
+        <property name="BorderWidth">5</property>
+        <property name="Events">ButtonPressMask</property>
+        <property name="MemberName">actionArea</property>
+        <child>
+          <widget class="Gtk.Button" id="button">
+            <property name="Type">TextOnly</property>
+            <property name="Label">button1</property>
+            <property name="IsDialogButton">True</property>
+            <property name="ResponseId">0</property>
+            <property name="CanFocus">True</property>
+            <property name="Visible">False</property>
+            <property name="Events">0</property>
+            <property name="MemberName">button</property>
+            <property name="CanDefault">True</property>
+          </widget>
+          <packing>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Window" id="widgets.WaitWindow" design-size="400 78">
+    <property name="Title" translatable="yes" context="yes" comments="">operationInProgress|Operation in progress...</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="Events">0</property>
+    <property name="MemberName" />
+    <child>
+      <widget class="Gtk.VBox" id="vbox">
+        <property name="Spacing">2</property>
+        <property name="BorderWidth">5</property>
+        <property name="Events">ButtonPressMask</property>
+        <property name="MemberName" />
+        <child>
+          <widget class="Gtk.Label" id="labelMsg">
+            <property name="LabelProp">label1</property>
+            <property name="Events">0</property>
+            <property name="MemberName">labelMsg</property>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.ProgressBar" id="progressbar">
+            <property name="Events">0</property>
+            <property name="MemberName">progressbar</property>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Window" id="widgets.LoginWindow" design-size="400 300">
+    <property name="Title" translatable="yes">LoginWindow</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="Events">0</property>
+    <property name="MemberName" />
+    <child>
+      <placeholder />
+    </child>
+  </widget>
+</stetic-interface>

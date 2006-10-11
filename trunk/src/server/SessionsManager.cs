@@ -104,37 +104,13 @@ namespace Boxerp.Objects
 				return false;
 		}
 
-		// FIXME: Should I lock or Synchronized hashtable is enough?
-		/*public bool IsValidSession(string session, bool update)
+		public bool IsValidSessionThenUpdate(string session)
 		{
 			if (sHash.ContainsKey(session))
 			{
 				SessionStruct sstruct = (SessionStruct)sHash[session];
 				DateTime dt = sstruct.lastHit;
-				dt.AddMinutes(EXPIRE);			// 
-				if (DateTime.Compare(DateTime.Now, dt) < 0)
-				{
-					if (update)
-					{
-						sstruct.lastHit = DateTime.Now;	// FIXME: may I destroy the previous DateTime first?
-						sHash[session] = sstruct;
-					}
-					return true;			
-				}
-				else
-					return false;		// expire
-			}
-			else
-				return false;
-		}*/
-
-		public bool IsValidThenUpdate(string session)
-		{
-			if (sHash.ContainsKey(session))
-			{
-				SessionStruct sstruct = (SessionStruct)sHash[session];
-				DateTime dt = sstruct.lastHit;
-				dt.AddMinutes(EXPIRE);			// 
+				dt = dt.AddMinutes(EXPIRE);			// 
 				if (DateTime.Compare(DateTime.Now, dt) < 0)
 				{
 					sstruct.lastHit = DateTime.Now;	// FIXME: may I destroy the previous DateTime first?

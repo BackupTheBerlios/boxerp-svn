@@ -47,6 +47,8 @@ namespace Boxerp.Objects
 	{
 		User GetUser(string user, string password);
 		User[] GetUsers();
+		Enterprise[] GetEnterprises();
+		Group[] GetGroups();
 		/*IList GetEnterprises(string session);
 		IList GetGroups(string session);
 		IList GetUsers(string session, 

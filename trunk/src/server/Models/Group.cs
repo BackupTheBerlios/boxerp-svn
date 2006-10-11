@@ -92,6 +92,11 @@ namespace Boxerp.Models
 			get { return _published; }
 			set { _published = value; }
 		}
+
+		public static Group[] FindAll()
+		{
+			return (Group[]) ActiveRecordBase.FindAll(typeof(Group));
+		}
 	}
 }
 

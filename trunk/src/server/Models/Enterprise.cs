@@ -81,6 +81,11 @@ namespace Boxerp.Models
 			get { return _published; }
 			set { _published = value; }
 		}
+
+		public static Enterprise[] FindAll()
+		{
+			return (Enterprise[]) ActiveRecordBase.FindAll(typeof(Enterprise));
+		}
 	}
 }
 

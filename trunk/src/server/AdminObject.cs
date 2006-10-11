@@ -61,7 +61,7 @@ namespace Boxerp.Objects
 			try
 			{
 				Console.WriteLine("user session=" + UserInformation.GetSessionToken());
-				if (sessionsMgr.IsValidSession(UserInformation.GetSessionToken()))
+				if (sessionsMgr.IsValidSessionThenUpdate(UserInformation.GetSessionToken()))
 				{
 					Console.WriteLine("valid user");
 					return User.FindAll();
@@ -69,6 +69,46 @@ namespace Boxerp.Objects
 				else
 				{
 					Console.WriteLine("not valid user");
+					return null;
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("ERROR:" + ex.Message + ":" + ex.StackTrace);
+				return null;
+			}
+		}
+
+		public Group[] GetGroups()
+		{
+			try
+			{
+				if (sessionsMgr.IsValidSessionThenUpdate(UserInformation.GetSessionToken()))
+				{
+					return Group.FindAll();
+				}
+				else
+				{
+					return null;
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("ERROR:" + ex.Message + ":" + ex.StackTrace);
+				return null;
+			}
+		}
+
+		public Enterprise[] GetEnterprises()
+		{
+			try
+			{
+				if (sessionsMgr.IsValidSessionThenUpdate(UserInformation.GetSessionToken()))
+				{
+					return Enterprise.FindAll();
+				}
+				else
+				{
 					return null;
 				}
 			}

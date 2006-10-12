@@ -26,6 +26,7 @@ namespace administrator
 		protected bool logon = false;
 		public bool connectionFailure = false;
 		protected ILogin loginObj;
+		protected string session;
 		
 		
 		public LoginWindow() : 
@@ -37,7 +38,10 @@ namespace administrator
 			notify = new ThreadNotify (new ReadyEvent (Logged));
 		}
 	
-	
+		public string Session
+		{
+			get { return session; }
+		}	
 		protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 		{
 			a.RetVal = true;
@@ -65,7 +69,7 @@ namespace administrator
 				int code = loginObj.Login(entryLogin.Text, entryPassword.Text);
 				if (code == 0)
 					logon = true;
-				
+				session = UserInformation.GetSessionToken();
 			}
 			catch (System.Net.WebException we)
 			{
@@ -96,12 +100,14 @@ namespace administrator
 				waitWindow.Stop();
 				waitWindow.Destroy();
 				WarningDialog wd = new WarningDialog();
-				if (!connectionFailure)
-				{
+				//if (!connectionFailure)
+				//{
 					Console.WriteLine("Login incorrect");
+					wd.Message = "Login incorrect";
+					wd.QuitOnOk = true;
 					//wd. a.textviewDesc.Buffer.Text = "Nombre de Usuario o Contraseña erróneos";
 					//a.labelMsg.Text = "Error: Acceso Denegado";
-				}
+				//}
 				wd.Present();
 			}
 		}

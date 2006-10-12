@@ -1,17 +1,19 @@
 <?xml version="1.0"?>
-<UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/administrator/administrator.mds">
+<UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/client-lib/client-lib.mds">
   <Files>
     <File filename="Bienvenido" />
-    <File filename="Documentación" />
-    <File filename="./administrator/Main.cs" />
+    <File filename="./client-lib/MyClass.cs" />
+    <File filename="./client-lib/IResponsiveClient.cs" />
+    <File filename="./client-lib/ResponsiveHelper.cs" />
+    <File filename="./client-lib/ResponsiveAttribute.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="administrator" expanded="True">
+          <Node name="client-lib" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="Main.cs" expanded="False" selected="True" />
+            <Node name="ResponsiveHelper.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -35,7 +37,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/administrator/administrator/Main.cs" />
+      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/client-lib/client-lib/ResponsiveHelper.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

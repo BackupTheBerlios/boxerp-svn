@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/widgets/widgets.mds">
   <Files>
+    <File filename="Bienvenido" />
     <File filename="Documentación" />
     <File filename="./widgets/WaitDialog.cs" />
     <File filename="./widgets/WaitWindow.cs" />
-    <File filename="./widgets/WarningDialog.cs" />
-    <File filename="./widgets/InfoExtendedDialog.cs" />
+    <File filename="./widgets/AdvancedTreeView.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">

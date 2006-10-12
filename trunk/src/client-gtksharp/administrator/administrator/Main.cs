@@ -13,14 +13,15 @@ namespace administrator
 	class MainClass
 	{
 		LoginWindow loginWindow;
+		MainWindow mainWindow;
 		public void LoginSuccess()
 		{
+			string session = loginWindow.Session;
 			loginWindow.Destroy();
 			Console.WriteLine("Login asuccess");
-			Application.Quit();
-			//sWindow = new SiniestrosWindow();
-			//         sWindow.Session = session;
-			//sWindow.StartLoad();
+			Console.WriteLine(session);
+			mainWindow = new MainWindow(session);
+			mainWindow.Present();
 		}
 
 		

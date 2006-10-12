@@ -44,11 +44,26 @@ public class UserInformation : ILogicalThreadAffinative
 	// SetSessionToken is called by the server
 	public static void SetSessionToken(string session)
 	{
-
-		UserInformation ui = (UserInformation)CallContext.GetData(CallContextKey);
-		ui.SessionToken = session;	
-		Console.WriteLine("ui=" + ui.UserName + ":" + ui.SessionToken);
-		CallContext.SetData(CallContextKey, ui);
+		try
+		{
+			UserInformation ui = (UserInformation)CallContext.GetData(CallContextKey);
+			if (ui != null)
+			{
+				ui.SessionToken = session;	
+				Console.WriteLine("ui=" + ui.UserName + ":" + ui.SessionToken);
+			}
+			else
+			{
+				ui = new UserInformation("");
+				ui.SessionToken = session;
+				Console.WriteLine("ui=" + ui.SessionToken);
+			}
+			CallContext.SetData(CallContextKey, ui);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine("Exception: " + ex.Message +":"+ ex.StackTrace);
+		}
 	}
 	
 	public static string GetUser()
@@ -58,6 +73,15 @@ public class UserInformation : ILogicalThreadAffinative
 
 	public static string GetSessionToken()
 	{
-		return ((UserInformation) CallContext.GetData(CallContextKey)).SessionToken;
+		try
+		{
+			Console.WriteLine("GetSessionToken");
+			return ((UserInformation) CallContext.GetData(CallContextKey)).SessionToken;
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine("Unable to retrieve session token:" + ex.Message +":"+ex.StackTrace);
+			return null;
+		}
 	}
 }

@@ -97,6 +97,11 @@ namespace Boxerp.Models
 		{
 			return (Group[]) ActiveRecordBase.FindAll(typeof(Group));
 		}
+
+		public string ToString()
+		{
+			return GroupName;
+		}
 	}
 }
 

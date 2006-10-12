@@ -122,6 +122,11 @@ namespace Boxerp.Models
 				return value;
 		}
 
+		public string ToString()
+		{
+			return UserName;
+		}
+
 	}
 }
 

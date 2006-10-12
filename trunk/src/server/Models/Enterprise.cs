@@ -86,6 +86,11 @@ namespace Boxerp.Models
 		{
 			return (Enterprise[]) ActiveRecordBase.FindAll(typeof(Enterprise));
 		}
+
+		public string ToString()
+		{
+			return Name;
+		}
 	}
 }
 

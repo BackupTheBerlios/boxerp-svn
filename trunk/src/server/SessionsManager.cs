@@ -106,6 +106,8 @@ namespace Boxerp.Objects
 
 		public bool IsValidSessionThenUpdate(string session)
 		{
+			if (session == null)
+				return false;
 			if (sHash.ContainsKey(session))
 			{
 				SessionStruct sstruct = (SessionStruct)sHash[session];

@@ -120,12 +120,13 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Entry" id="entry1">
+                  <widget class="Gtk.Entry" id="entryEnterprise">
                     <property name="IsEditable">True</property>
                     <property name="InvisibleChar">●</property>
                     <property name="CanFocus">True</property>
                     <property name="Events">0</property>
-                    <property name="MemberName" />
+                    <property name="MemberName">entryEnterprise</property>
+                    <signal name="Activated" handler="OnFindEnterprise" />
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -145,6 +146,7 @@
                     <property name="Events">0</property>
                     <property name="MemberName">buttonFindEnterprise</property>
                     <property name="HasDefault">True</property>
+                    <signal name="Clicked" handler="OnFindEnterprise" />
                   </widget>
                   <packing>
                     <property name="Position">2</property>
@@ -307,12 +309,13 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.Entry" id="entry2">
+                      <widget class="Gtk.Entry" id="entryUser">
                         <property name="IsEditable">True</property>
                         <property name="InvisibleChar">●</property>
                         <property name="CanFocus">True</property>
                         <property name="Events">0</property>
-                        <property name="MemberName" />
+                        <property name="MemberName">entryUser</property>
+                        <signal name="Activated" handler="OnFindUser" after="yes" />
                       </widget>
                       <packing>
                         <property name="Position">1</property>
@@ -332,6 +335,7 @@
                         <property name="Events">0</property>
                         <property name="MemberName">buttonFindUser</property>
                         <property name="HasDefault">True</property>
+                        <signal name="Clicked" handler="OnFindUser" />
                       </widget>
                       <packing>
                         <property name="Position">2</property>
@@ -475,12 +479,13 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.Entry" id="entry3">
+                      <widget class="Gtk.Entry" id="entryGroup">
                         <property name="IsEditable">True</property>
                         <property name="InvisibleChar">●</property>
                         <property name="CanFocus">True</property>
                         <property name="Events">0</property>
-                        <property name="MemberName" />
+                        <property name="MemberName">entryGroup</property>
+                        <signal name="Activated" handler="OnFindGroup" />
                       </widget>
                       <packing>
                         <property name="Position">1</property>
@@ -500,6 +505,7 @@
                         <property name="Events">0</property>
                         <property name="MemberName">buttonFindGroup</property>
                         <property name="HasDefault">True</property>
+                        <signal name="Clicked" handler="OnFindGroup" />
                       </widget>
                       <packing>
                         <property name="Position">2</property>

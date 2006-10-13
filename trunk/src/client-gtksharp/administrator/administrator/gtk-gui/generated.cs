@@ -289,8 +289,8 @@ namespace Stetic {
                     w20.InvisibleChar = '●';
                     w20.CanFocus = true;
                     w20.Events = ((Gdk.EventMask)(0));
-                    w20.Name = "entry1";
-                    bindings["entry1"] = w20;
+                    w20.Name = "entryEnterprise";
+                    bindings["entryEnterprise"] = w20;
                     w17.Add(w20);
                     Gtk.Box.BoxChild w21 = ((Gtk.Box.BoxChild)(w17[w20]));
                     w21.Position = 1;
@@ -547,8 +547,8 @@ namespace Stetic {
                     w80.InvisibleChar = '●';
                     w80.CanFocus = true;
                     w80.Events = ((Gdk.EventMask)(0));
-                    w80.Name = "entry2";
-                    bindings["entry2"] = w80;
+                    w80.Name = "entryUser";
+                    bindings["entryUser"] = w80;
                     w77.Add(w80);
                     Gtk.Box.BoxChild w81 = ((Gtk.Box.BoxChild)(w77[w80]));
                     w81.Position = 1;
@@ -787,8 +787,8 @@ namespace Stetic {
                     w136.InvisibleChar = '●';
                     w136.CanFocus = true;
                     w136.Events = ((Gdk.EventMask)(0));
-                    w136.Name = "entry3";
-                    bindings["entry3"] = w136;
+                    w136.Name = "entryGroup";
+                    bindings["entryGroup"] = w136;
                     w133.Add(w136);
                     Gtk.Box.BoxChild w137 = ((Gtk.Box.BoxChild)(w133[w136]));
                     w137.Position = 1;
@@ -1119,6 +1119,9 @@ namespace Stetic {
                     w11.Show();
                     cobj.Show();
                     cobj.DeleteEvent += ((Gtk.DeleteEventHandler)(System.Delegate.CreateDelegate(typeof(Gtk.DeleteEventHandler), cobj, "OnDeleteEvent")));
+                    w20.Activated += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnFindEnterprise")));
+                    w80.Activated += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnFindUser")));
+                    w136.Activated += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnFindGroup")));
                 }
             }
             System.Reflection.FieldInfo[] fields = obj.GetType().GetFields(((System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic) | System.Reflection.BindingFlags.Instance));

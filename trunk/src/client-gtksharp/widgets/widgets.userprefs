@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/widgets/widgets.mds">
   <Files>
+    <File filename="Bienvenido" />
     <File filename="./widgets/WaitWindow.cs" />
     <File filename="./widgets/SimpleTreeView.cs" />
   </Files>

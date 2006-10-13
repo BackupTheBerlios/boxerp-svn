@@ -13,9 +13,16 @@ namespace widgets
 	public class SimpleTreeView : Gtk.Bin
 	{
 		protected TreeStore store;
+		protected TreeModelFilter filter;
 		protected Gtk.TreeView treeview;
 		public event Gtk.RowActivatedHandler RowActivatedEvent;
 		public event System.EventHandler ColumnsChangedEvent;
+		public string filterRegex;
+		
+		public string FilterRegex
+		{
+			set { filterRegex = value; }
+		}
 		
 		public TreeView TreeView 
 		{
@@ -41,10 +48,10 @@ namespace widgets
         	    {
         	    	columnsTypes[i++] = column.Type;
         	    }
-        	    Console.WriteLine("create1");
         	    store = new TreeStore(columnsTypes);
-        	    Console.WriteLine("create2");
-        	    treeview.Model = store;
+        	    filter = new Gtk.TreeModelFilter (store, null);
+        	    filter.VisibleFunc = new Gtk.TreeModelFilterVisibleFunc (FilterTree);
+        	    treeview.Model = filter;
         	    Console.WriteLine("create3");
         	    i = 0;
         	    Console.WriteLine("create4");
@@ -109,6 +116,26 @@ namespace widgets
 			(cell as Gtk.CellRendererText).Text = obj.ToString();
 		}
 
+		private bool FilterTree (Gtk.TreeModel model, Gtk.TreeIter iter)
+		{
+			IBoxerpModel obj = (IBoxerpModel)model.GetValue (iter, 1);
+ 
+ 			if (filterRegex == null)
+ 				return true;
+			if (filterRegex == "")
+				return true;
+ 
+			if (obj.ToString().IndexOf(filterRegex) > -1)
+				return true;
+			else
+				return false;
+		}
+		
+		public void Refilter()
+		{
+			filter.Refilter();
+		}
+		
 		public void OnRowActivated (object o, Gtk.RowActivatedArgs args)
 		{
 			if (RowActivatedEvent != null)

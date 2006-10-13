@@ -37,7 +37,7 @@ namespace Boxerp.Models
 {
 	[ActiveRecord("susers")]
 	[Serializable]
-	public class User : ActiveRecordBase
+	public class User : ActiveRecordBase, IBoxerpModel
 	{
 		private int _id;
 		private IList _groups;
@@ -122,7 +122,7 @@ namespace Boxerp.Models
 				return value;
 		}
 
-		public string ToString()
+		public override string ToString()
 		{
 			return UserName;
 		}

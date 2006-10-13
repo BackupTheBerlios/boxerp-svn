@@ -37,7 +37,7 @@ namespace Boxerp.Models
 {
 	[ActiveRecord("sgroups")]
 	[Serializable]
-	public class Group : ActiveRecordBase
+	public class Group : ActiveRecordBase, IBoxerpModel
 	{
 		private int _id;
 		private IList _enterprises;
@@ -98,7 +98,7 @@ namespace Boxerp.Models
 			return (Group[]) ActiveRecordBase.FindAll(typeof(Group));
 		}
 
-		public string ToString()
+		public override string ToString()
 		{
 			return GroupName;
 		}

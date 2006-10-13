@@ -1,9 +1,8 @@
 //
 // Authors:
-//    Hector Rojas González <hecrogon@gmail.com>
 // 	Carlos Ble Jurado <carlosble@shidix.com>
 //
-// Copyright (C) 2005,2006 Shidix Technologies (www.shidix.com)
+// Copyright (C) 2005,2006 Carlos Ble 
 // 
 // Redistribution and use in source and binary forms, with or
 // without modification, are permitted provided that the following
@@ -28,69 +27,25 @@
 // LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
 // IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 // THE POSSIBILITY OF SUCH DAMAGE.
+
 using System;
-using NHibernate.Expression;
+using System.Data;
 using System.Collections;
+using System.Runtime.Remoting;
+using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Channels.Tcp;
+using System.Runtime.Remoting.Messaging;
+using Boxerp.Models;
 using Castle.ActiveRecord;
+using NHibernate;
 
 namespace Boxerp.Models
 {
-	[ActiveRecord("enterprises")]
-	public class Enterprise : ActiveRecordBase, IBoxerpModel
+
+ 	public interface IBoxerpModel
 	{
-		private int _id;
-		private string _name;
-		private string _description;
-		private bool _published;
-		private IList _groups;
-		
+		int Id { get; set; }
 
-		[PrimaryKey(PrimaryKeyType.Native)]
-		public int Id
-		{
-			get { return _id; }
-			set { _id = value; }
-		}
-
-		[HasAndBelongsToMany( typeof(Group),
-			Table="enterprises_groups",
-			ColumnRef="group_id", ColumnKey="enterprise_id")]
-		public IList Groups
-		{
-			get { return _groups; }
-			set { _groups = value; }
-		}
-			
-		[Property(Length=50)]
-		public string Name
-		{
-			get { return _name; }
-			set { _name = value; }
-   	}
-
-		[Property(Length=200)]
-		public string Description
-		{
-			get { return _description; }
-			set { _description = value; }
-   	}
-
-		[Property]
-		public bool Published
-		{
-			get { return _published; }
-			set { _published = value; }
-		}
-
-		public static Enterprise[] FindAll()
-		{
-			return (Enterprise[]) ActiveRecordBase.FindAll(typeof(Enterprise));
-		}
-
-		public override string ToString()
-		{
-			return Name;
-		}
-	}
+		string ToString();
+	}	
 }
-

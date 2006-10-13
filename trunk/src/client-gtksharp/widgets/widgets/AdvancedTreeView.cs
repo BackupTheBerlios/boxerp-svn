@@ -11,7 +11,8 @@ namespace widgets
 	{
 		protected TreeStore store;
 		protected Gtk.TreeView treeview;
-		
+		public event Gtk.RowActivatedHandler RowActivatedEvent;
+		public event System.EventHandler ColumnsChangedEvent;
 		public TreeView TreeView 
 		{
 			get { return treeview;}
@@ -20,6 +21,8 @@ namespace widgets
 		public AdvancedTreeView()
 		{
 			Stetic.Gui.Build(this, typeof(widgets.AdvancedTreeView));
+			treeview.RowActivated += new Gtk.RowActivatedHandler(OnRowActivated);
+			treeview.ColumnsChanged += new System.EventHandler(OnColumnsChanged);
 		}
 		
 		public void Create(ArrayList columns)
@@ -73,6 +76,18 @@ namespace widgets
 				store.SetValue (iter, i, row[i]);
 			return iter;
 		}
+		
+		public void OnRowActivated (object o, Gtk.RowActivatedArgs args)
+		{
+			RowActivatedEvent(o, args);
+		}
+		
+		public void OnColumnsChanged(object o, System.EventArgs args)
+		{
+			ColumnsChangedEvent(o, args);
+		}
+		
+		
 		
 	}
 }

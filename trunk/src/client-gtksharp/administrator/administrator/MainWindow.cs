@@ -24,5 +24,11 @@ public class MainWindow: Gtk.Window
 		Application.Quit ();
 		a.RetVal = true;
 	}
+
+	protected virtual void OnTreeviewUsersActivated(object o, Gtk.RowActivatedArgs args)
+	{
+		Console.WriteLine("ACTIVATED");
+		Console.WriteLine("Users activated:" + args.RetVal);
+	}
 }
 }

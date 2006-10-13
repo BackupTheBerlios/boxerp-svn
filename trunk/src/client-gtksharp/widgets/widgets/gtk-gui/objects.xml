@@ -5,6 +5,10 @@
     </itemgroups>
     <signals>
       <itemgroup ref="Gtk.Widget" />
+      <itemgroup label="AdvancedTreeView Signals">
+        <signal name="RowActivatedEvent" />
+        <signal name="ColumnsChangedEvent" />
+      </itemgroup>
     </signals>
   </object>
 </objects>

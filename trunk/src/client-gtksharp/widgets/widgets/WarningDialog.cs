@@ -17,7 +17,7 @@ namespace widgets
 		public string Message 
 		{
 			get { return label.Text; }
-			set { label.Text = value; }
+			set { label.Text = value; } 
 		}
 		
 		public bool QuitOnOk

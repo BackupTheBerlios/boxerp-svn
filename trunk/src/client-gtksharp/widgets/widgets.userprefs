@@ -1,11 +1,9 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/widgets/widgets.mds">
   <Files>
-    <File filename="Bienvenido" />
-    <File filename="Documentación" />
-    <File filename="./widgets/WaitDialog.cs" />
     <File filename="./widgets/WaitWindow.cs" />
     <File filename="./widgets/AdvancedTreeView.cs" />
+    <File filename="./widgets/WarningDialog.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
@@ -13,7 +11,7 @@
         <Node expanded="True">
           <Node name="widgets" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="WaitWindow.cs" expanded="False" selected="True" />
+            <Node name="WarningDialog.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -37,7 +35,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/widgets/widgets/WaitWindow.cs" />
+      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/widgets/widgets/WarningDialog.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

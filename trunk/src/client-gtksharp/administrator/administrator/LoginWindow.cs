@@ -6,6 +6,7 @@ using Boxerp.Models;
 using Boxerp.Objects;
 using System.Runtime.Remoting;
 using widgets;
+using clientlib;
 
 namespace administrator
 {
@@ -13,7 +14,6 @@ namespace administrator
 	public class LoginWindow : Gtk.Window
 	{
 		protected Gtk.Button buttonConnect;
-		//protected Gtk.Entry entryServer;
 		protected Gtk.Entry entryLogin;
 		protected Gtk.Entry entryPassword;
 		protected WaitWindow waitWindow;
@@ -38,10 +38,6 @@ namespace administrator
 			notify = new ThreadNotify (new ReadyEvent (Logged));
 		}
 	
-		public string Session
-		{
-			get { return session; }
-		}	
 		protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 		{
 			a.RetVal = true;
@@ -68,8 +64,10 @@ namespace administrator
 				loginObj = (ILogin) RemotingHelper.GetObject(typeof(ILogin));
 				int code = loginObj.Login(entryLogin.Text, entryPassword.Text);
 				if (code == 0)
+				{
 					logon = true;
-				session = UserInformation.GetSessionToken();
+					SessionSingleton.GetInstance().SetSession(UserInformation.GetSessionToken());
+				}
 			}
 			catch (System.Net.WebException we)
 			{
@@ -81,7 +79,6 @@ namespace administrator
 				logon = false;
 				Console.WriteLine("Exception: " + e.Message);
 			}
-		
 			notify.WakeupMain();
 		}
 	
@@ -100,14 +97,18 @@ namespace administrator
 				waitWindow.Stop();
 				waitWindow.Destroy();
 				WarningDialog wd = new WarningDialog();
-				//if (!connectionFailure)
-				//{
+				if (!connectionFailure)
+				{
 					Console.WriteLine("Login incorrect");
 					wd.Message = "Login incorrect";
 					wd.QuitOnOk = true;
-					//wd. a.textviewDesc.Buffer.Text = "Nombre de Usuario o Contraseña erróneos";
-					//a.labelMsg.Text = "Error: Acceso Denegado";
-				//}
+				}
+				else
+				{
+					Console.WriteLine("Connection failure");
+					wd.Message = "Server connection failure";
+					wd.QuitOnOk = true;
+				}
 				wd.Present();
 			}
 		}

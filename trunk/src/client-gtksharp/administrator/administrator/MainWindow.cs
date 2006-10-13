@@ -9,17 +9,13 @@ public class MainWindow: Gtk.Window
 	protected widgets.AdvancedTreeView atreeviewEnterprises;
 	protected widgets.AdvancedTreeView atreeviewUsers;
 	protected widgets.AdvancedTreeView atreeviewGroups;
-	protected string session;
 	
-	public MainWindow (string session): base ("")
+	public MainWindow (): base ("")
 	{
 		Stetic.Gui.Build (this, typeof(MainWindow));
-		this.session = session;
 		helper = new MainHelper(ref this.atreeviewEnterprises,
-								ref this.atreeviewUsers, ref this.atreeviewGroups,
-								session);
+								ref this.atreeviewUsers, ref this.atreeviewGroups);
 		helper.Init(this);
-		Console.WriteLine("sesssss=" + session);
 		helper.StartDownload();
 	}
 	

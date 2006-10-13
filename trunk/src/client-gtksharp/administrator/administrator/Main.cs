@@ -7,6 +7,7 @@ using Boxerp;
 using Boxerp.Models;
 using Boxerp.Objects;
 using System.Threading;
+using clientlib;
 
 namespace administrator
 {
@@ -16,11 +17,12 @@ namespace administrator
 		MainWindow mainWindow;
 		public void LoginSuccess()
 		{
-			string session = loginWindow.Session;
+			//string session = loginWindow.Session;
 			loginWindow.Destroy();
-			Console.WriteLine("Login asuccess");
+			Console.WriteLine("Login success");
+			string session = SessionSingleton.GetInstance().GetSession();
 			Console.WriteLine(session);
-			mainWindow = new MainWindow(session);
+			mainWindow = new MainWindow();
 			mainWindow.Present();
 		}
 

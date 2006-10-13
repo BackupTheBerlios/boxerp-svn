@@ -15,22 +15,19 @@ namespace administrator
 		widgets.AdvancedTreeView atreeviewEnterprises, 
 								atreeviewUsers, 
 								atreeviewGroups;
-		string session;
 		Enterprise[] enterprises;
 		User[] users;
 		Group[] groups;
 		IAdmin adminObj;
 		
 		public MainHelper(ref AdvancedTreeView e, 
-					ref AdvancedTreeView u, ref AdvancedTreeView g, string session)
+					ref AdvancedTreeView u, ref AdvancedTreeView g)
 		{
 			this.atreeviewEnterprises = e;
 			this.atreeviewUsers = u;
 			this.atreeviewGroups = g;
 			adminObj = (IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
-			this.session = session;
-			UserInformation.SetSessionToken(session);
-			Console.WriteLine("session=" + session);
+			UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
 		}
 		
 		[Responsive(ResponsiveEnum.Download)]
@@ -38,8 +35,7 @@ namespace administrator
 		{
 			try
 			{
-				UserInformation.SetSessionToken(session);
-				Console.WriteLine("SESSION=" + session);
+				UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
 				enterprises = adminObj.GetEnterprises();
 			}
 			catch (Exception ex)
@@ -54,7 +50,7 @@ namespace administrator
 		{
 			try
 			{
-				UserInformation.SetSessionToken(session);
+				UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
 				users = adminObj.GetUsers();
 			}
 			catch (Exception ex)
@@ -68,7 +64,7 @@ namespace administrator
 		{
 			try
 			{
-				UserInformation.SetSessionToken(session);
+				UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
 				groups = adminObj.GetGroups();
 			}
 			catch (Exception ex)
@@ -156,11 +152,7 @@ namespace administrator
 				columns.Add(i.Id);
 				columns.Add(i);
 				this.atreeviewGroups.InsertRow(TreeIter.Zero, columns);
-			}
-			
-			
-		}
-		
+			}	
+		}	
 	}
-	
 }

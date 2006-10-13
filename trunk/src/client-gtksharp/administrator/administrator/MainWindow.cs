@@ -6,15 +6,15 @@ namespace administrator
 public class MainWindow: Gtk.Window
 {
 	protected MainHelper helper;
-	protected widgets.AdvancedTreeView atreeviewEnterprises;
-	protected widgets.AdvancedTreeView atreeviewUsers;
-	protected widgets.AdvancedTreeView atreeviewGroups;
+	protected widgets.SimpleTreeView streeviewEnterprises;
+	protected widgets.SimpleTreeView streeviewUsers;
+	protected widgets.SimpleTreeView streeviewGroups;
 	
 	public MainWindow (): base ("")
 	{
 		Stetic.Gui.Build (this, typeof(MainWindow));
-		helper = new MainHelper(ref this.atreeviewEnterprises,
-								ref this.atreeviewUsers, ref this.atreeviewGroups);
+		helper = new MainHelper(ref this.streeviewEnterprises,
+								ref this.streeviewUsers, ref this.streeviewGroups);
 		helper.Init(this);
 		helper.StartDownload();
 	}

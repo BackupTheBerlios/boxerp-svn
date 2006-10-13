@@ -134,8 +134,8 @@ namespace Stetic {
                 Gtk.Image w20 = new Gtk.Image();
                 w20.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-connect", 16, 0);
                 w20.Events = ((Gdk.EventMask)(0));
-                w20.Name = "image1";
-                bindings["image1"] = w20;
+                w20.Name = "image13";
+                bindings["image13"] = w20;
                 w19.Add(w20);
                 // Container child GtkHBox.Gtk.Container+ContainerChild
                 Gtk.Label w22 = new Gtk.Label();
@@ -190,7 +190,7 @@ namespace Stetic {
                 if ((id == "administrator.MainWindow")) {
                     Gtk.Window cobj = ((Gtk.Window)(obj));
                     // Widget administrator.MainWindow
-                    cobj.Title = "Server Administrator";
+                    cobj.Title = "Boxerp Administrator";
                     Gtk.UIManager w1 = new Gtk.UIManager();
                     Gtk.ActionGroup w2 = new Gtk.ActionGroup("Default");
                     Gtk.Action w3 = new Gtk.Action("File", "File", null, null);
@@ -317,8 +317,8 @@ namespace Stetic {
                     Gtk.Image w26 = new Gtk.Image();
                     w26.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-find", 16, 0);
                     w26.Events = ((Gdk.EventMask)(0));
-                    w26.Name = "image2";
-                    bindings["image2"] = w26;
+                    w26.Name = "image1";
+                    bindings["image1"] = w26;
                     w25.Add(w26);
                     // Container child GtkHBox.Gtk.Container+ContainerChild
                     Gtk.Label w28 = new Gtk.Label();
@@ -356,10 +356,10 @@ namespace Stetic {
                     w35.Events = ((Gdk.EventMask)(0));
                     w35.Name = "GtkViewport";
                     // Container child GtkViewport.Gtk.Container+ContainerChild
-                    widgets.AdvancedTreeView w36 = new widgets.AdvancedTreeView();
+                    widgets.SimpleTreeView w36 = new widgets.SimpleTreeView();
                     w36.Events = ((Gdk.EventMask)(256));
-                    w36.Name = "atreeviewEnterprises";
-                    bindings["atreeviewEnterprises"] = w36;
+                    w36.Name = "streeviewEnterprises";
+                    bindings["streeviewEnterprises"] = w36;
                     w35.Add(w36);
                     bindings["GtkViewport"] = w35;
                     w34.Add(w35);
@@ -391,8 +391,8 @@ namespace Stetic {
                     Gtk.Image w44 = new Gtk.Image();
                     w44.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-new", 16, 0);
                     w44.Events = ((Gdk.EventMask)(0));
-                    w44.Name = "image3";
-                    bindings["image3"] = w44;
+                    w44.Name = "image2";
+                    bindings["image2"] = w44;
                     w43.Add(w44);
                     // Container child GtkHBox.Gtk.Container+ContainerChild
                     Gtk.Label w46 = new Gtk.Label();
@@ -431,8 +431,8 @@ namespace Stetic {
                     Gtk.Image w54 = new Gtk.Image();
                     w54.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-edit", 16, 0);
                     w54.Events = ((Gdk.EventMask)(0));
-                    w54.Name = "image4";
-                    bindings["image4"] = w54;
+                    w54.Name = "image3";
+                    bindings["image3"] = w54;
                     w53.Add(w54);
                     // Container child GtkHBox.Gtk.Container+ContainerChild
                     Gtk.Label w56 = new Gtk.Label();
@@ -471,8 +471,8 @@ namespace Stetic {
                     Gtk.Image w64 = new Gtk.Image();
                     w64.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-delete", 16, 0);
                     w64.Events = ((Gdk.EventMask)(0));
-                    w64.Name = "image5";
-                    bindings["image5"] = w64;
+                    w64.Name = "image4";
+                    bindings["image4"] = w64;
                     w63.Add(w64);
                     // Container child GtkHBox.Gtk.Container+ContainerChild
                     Gtk.Label w66 = new Gtk.Label();
@@ -574,8 +574,8 @@ namespace Stetic {
                     Gtk.Image w85 = new Gtk.Image();
                     w85.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-find", 16, 0);
                     w85.Events = ((Gdk.EventMask)(0));
-                    w85.Name = "image6";
-                    bindings["image6"] = w85;
+                    w85.Name = "image5";
+                    bindings["image5"] = w85;
                     w84.Add(w85);
                     // Container child GtkHBox.Gtk.Container+ContainerChild
                     Gtk.Label w87 = new Gtk.Label();
@@ -613,10 +613,10 @@ namespace Stetic {
                     w94.Events = ((Gdk.EventMask)(0));
                     w94.Name = "GtkViewport1";
                     // Container child GtkViewport1.Gtk.Container+ContainerChild
-                    widgets.AdvancedTreeView w95 = new widgets.AdvancedTreeView();
+                    widgets.SimpleTreeView w95 = new widgets.SimpleTreeView();
                     w95.Events = ((Gdk.EventMask)(256));
-                    w95.Name = "atreeviewUsers";
-                    bindings["atreeviewUsers"] = w95;
+                    w95.Name = "streeviewUsers";
+                    bindings["streeviewUsers"] = w95;
                     w94.Add(w95);
                     bindings["GtkViewport1"] = w94;
                     w93.Add(w94);
@@ -648,8 +648,8 @@ namespace Stetic {
                     Gtk.Image w103 = new Gtk.Image();
                     w103.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-new", 16, 0);
                     w103.Events = ((Gdk.EventMask)(0));
-                    w103.Name = "image7";
-                    bindings["image7"] = w103;
+                    w103.Name = "image6";
+                    bindings["image6"] = w103;
                     w102.Add(w103);
                     // Container child GtkHBox.Gtk.Container+ContainerChild
                     Gtk.Label w105 = new Gtk.Label();
@@ -688,8 +688,8 @@ namespace Stetic {
                     Gtk.Image w113 = new Gtk.Image();
                     w113.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-edit", 16, 0);
                     w113.Events = ((Gdk.EventMask)(0));
-                    w113.Name = "image8";
-                    bindings["image8"] = w113;
+                    w113.Name = "image7";
+                    bindings["image7"] = w113;
                     w112.Add(w113);
                     // Container child GtkHBox.Gtk.Container+ContainerChild
                     Gtk.Label w115 = new Gtk.Label();
@@ -728,8 +728,8 @@ namespace Stetic {
                     Gtk.Image w123 = new Gtk.Image();
                     w123.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-delete", 16, 0);
                     w123.Events = ((Gdk.EventMask)(0));
-                    w123.Name = "image9";
-                    bindings["image9"] = w123;
+                    w123.Name = "image8";
+                    bindings["image8"] = w123;
                     w122.Add(w123);
                     // Container child GtkHBox.Gtk.Container+ContainerChild
                     Gtk.Label w125 = new Gtk.Label();
@@ -814,8 +814,8 @@ namespace Stetic {
                     Gtk.Image w141 = new Gtk.Image();
                     w141.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-find", 16, 0);
                     w141.Events = ((Gdk.EventMask)(0));
-                    w141.Name = "image10";
-                    bindings["image10"] = w141;
+                    w141.Name = "image9";
+                    bindings["image9"] = w141;
                     w140.Add(w141);
                     // Container child GtkHBox.Gtk.Container+ContainerChild
                     Gtk.Label w143 = new Gtk.Label();
@@ -853,10 +853,10 @@ namespace Stetic {
                     w150.Events = ((Gdk.EventMask)(0));
                     w150.Name = "GtkViewport2";
                     // Container child GtkViewport2.Gtk.Container+ContainerChild
-                    widgets.AdvancedTreeView w151 = new widgets.AdvancedTreeView();
+                    widgets.SimpleTreeView w151 = new widgets.SimpleTreeView();
                     w151.Events = ((Gdk.EventMask)(256));
-                    w151.Name = "atreeviewGroups";
-                    bindings["atreeviewGroups"] = w151;
+                    w151.Name = "streeviewGroups";
+                    bindings["streeviewGroups"] = w151;
                     w150.Add(w151);
                     bindings["GtkViewport2"] = w150;
                     w149.Add(w150);
@@ -888,8 +888,8 @@ namespace Stetic {
                     Gtk.Image w159 = new Gtk.Image();
                     w159.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-new", 16, 0);
                     w159.Events = ((Gdk.EventMask)(0));
-                    w159.Name = "image11";
-                    bindings["image11"] = w159;
+                    w159.Name = "image10";
+                    bindings["image10"] = w159;
                     w158.Add(w159);
                     // Container child GtkHBox.Gtk.Container+ContainerChild
                     Gtk.Label w161 = new Gtk.Label();
@@ -928,8 +928,8 @@ namespace Stetic {
                     Gtk.Image w169 = new Gtk.Image();
                     w169.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-edit", 16, 0);
                     w169.Events = ((Gdk.EventMask)(0));
-                    w169.Name = "image12";
-                    bindings["image12"] = w169;
+                    w169.Name = "image11";
+                    bindings["image11"] = w169;
                     w168.Add(w169);
                     // Container child GtkHBox.Gtk.Container+ContainerChild
                     Gtk.Label w171 = new Gtk.Label();
@@ -968,8 +968,8 @@ namespace Stetic {
                     Gtk.Image w179 = new Gtk.Image();
                     w179.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-delete", 16, 0);
                     w179.Events = ((Gdk.EventMask)(0));
-                    w179.Name = "image13";
-                    bindings["image13"] = w179;
+                    w179.Name = "image12";
+                    bindings["image12"] = w179;
                     w178.Add(w179);
                     // Container child GtkHBox.Gtk.Container+ContainerChild
                     Gtk.Label w181 = new Gtk.Label();
@@ -1119,7 +1119,6 @@ namespace Stetic {
                     w11.Show();
                     cobj.Show();
                     cobj.DeleteEvent += ((Gtk.DeleteEventHandler)(System.Delegate.CreateDelegate(typeof(Gtk.DeleteEventHandler), cobj, "OnDeleteEvent")));
-                    w95.RowActivatedEvent += ((Gtk.RowActivatedHandler)(System.Delegate.CreateDelegate(typeof(Gtk.RowActivatedHandler), cobj, "OnTreeviewUsersActivated")));
                 }
             }
             System.Reflection.FieldInfo[] fields = obj.GetType().GetFields(((System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic) | System.Reflection.BindingFlags.Instance));

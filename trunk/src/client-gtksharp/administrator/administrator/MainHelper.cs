@@ -12,22 +12,21 @@ namespace administrator
 	
 	public class MainHelper : ResponsiveHelper
 	{
-		widgets.AdvancedTreeView atreeviewEnterprises, 
-								atreeviewUsers, 
-								atreeviewGroups;
+		widgets.SimpleTreeView streeviewEnterprises, 
+								streeviewUsers, 
+								streeviewGroups;
 		Enterprise[] enterprises;
 		User[] users;
 		Group[] groups;
 		IAdmin adminObj;
 		
-		public MainHelper(ref AdvancedTreeView e, 
-					ref AdvancedTreeView u, ref AdvancedTreeView g)
+		public MainHelper(ref SimpleTreeView e, 
+					ref SimpleTreeView u, ref SimpleTreeView g)
 		{
-			this.atreeviewEnterprises = e;
-			this.atreeviewUsers = u;
-			this.atreeviewGroups = g;
+			this.streeviewEnterprises = e;
+			this.streeviewUsers = u;
+			this.streeviewGroups = g;
 			adminObj = (IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
-			UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
 		}
 		
 		[Responsive(ResponsiveEnum.Download)]
@@ -35,7 +34,6 @@ namespace administrator
 		{
 			try
 			{
-				UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
 				enterprises = adminObj.GetEnterprises();
 			}
 			catch (Exception ex)
@@ -50,7 +48,6 @@ namespace administrator
 		{
 			try
 			{
-				UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
 				users = adminObj.GetUsers();
 			}
 			catch (Exception ex)
@@ -64,7 +61,6 @@ namespace administrator
 		{
 			try
 			{
-				UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
 				groups = adminObj.GetGroups();
 			}
 			catch (Exception ex)
@@ -81,7 +77,7 @@ namespace administrator
 			ArrayList columns = new ArrayList();
 			SimpleColumn column = new SimpleColumn();
 			column.Name = "Code";
-			column.Type = typeof(int);
+			column.Type = typeof(string);
 			column.Visible = true;
 			columns.Add(column);
 			
@@ -94,12 +90,12 @@ namespace administrator
 			column.Type = typeof(string);
 			column.Visible = true;
 			columns.Add(column);
-			this.atreeviewEnterprises.Create(columns);
+			this.streeviewEnterprises.Create(columns);
 
 			// Users treeview:
 			columns.Clear();
 			column.Name = "Code";
-			column.Type = typeof(int);
+			column.Type = typeof(string);
 			column.Visible = true;
 			columns.Add(column);
 			
@@ -107,12 +103,12 @@ namespace administrator
 			column.Type = typeof(object);
 			column.Visible = true;
 			columns.Add(column);			
-			this.atreeviewUsers.Create(columns);			
+			this.streeviewUsers.Create(columns);			
 
 			// Groups treeview:
 			columns.Clear();
 			column.Name = "Code";
-			column.Type = typeof(int);
+			column.Type = typeof(string);
 			column.Visible = true;
 			columns.Add(column);
 			
@@ -120,7 +116,7 @@ namespace administrator
 			column.Type = typeof(object);
 			column.Visible = true;
 			columns.Add(column);			
-			this.atreeviewGroups.Create(columns);									
+			this.streeviewGroups.Create(columns);									
 		}
 		
 		public override void PopulateGUI()
@@ -130,28 +126,28 @@ namespace administrator
 			foreach (Enterprise i in enterprises)
 			{
 				ArrayList columns = new ArrayList();
-				columns.Add(i.Id);
+				columns.Add(i.Id.ToString());
 				columns.Add(i);
 				columns.Add(i.Description);
-				this.atreeviewEnterprises.InsertRow(TreeIter.Zero, columns);
+				this.streeviewEnterprises.InsertRow(TreeIter.Zero, columns);
 			}
 			
 			if (users != null)
 			foreach (User i in users)
 			{
 				ArrayList columns = new ArrayList();
-				columns.Add(i.Id);
+				columns.Add(i.Id.ToString());
 				columns.Add(i);
-				this.atreeviewUsers.InsertRow(TreeIter.Zero, columns);
+				this.streeviewUsers.InsertRow(TreeIter.Zero, columns);
 			}
 			
 			if (groups != null)
 			foreach (Group i in groups)
 			{
 				ArrayList columns = new ArrayList();
-				columns.Add(i.Id);
+				columns.Add(i.Id.ToString());
 				columns.Add(i);
-				this.atreeviewGroups.InsertRow(TreeIter.Zero, columns);
+				this.streeviewGroups.InsertRow(TreeIter.Zero, columns);
 			}	
 		}	
 	}

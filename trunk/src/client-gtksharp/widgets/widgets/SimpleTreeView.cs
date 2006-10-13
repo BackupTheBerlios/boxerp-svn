@@ -2,25 +2,29 @@
 using System;
 using Gtk;
 using System.Collections;
+using Boxerp.Models;
+
 namespace widgets
+
 {
 	// TODO: Thinking about write a complete treeview wrapper instead
 	// of access the TreeView property.
 	
-	public class AdvancedTreeView : Gtk.Bin
+	public class SimpleTreeView : Gtk.Bin
 	{
 		protected TreeStore store;
 		protected Gtk.TreeView treeview;
 		public event Gtk.RowActivatedHandler RowActivatedEvent;
 		public event System.EventHandler ColumnsChangedEvent;
+		
 		public TreeView TreeView 
 		{
 			get { return treeview;}
 		}
 		
-		public AdvancedTreeView()
+		public SimpleTreeView()
 		{
-			Stetic.Gui.Build(this, typeof(widgets.AdvancedTreeView));
+			Stetic.Gui.Build(this, typeof(widgets.SimpleTreeView));
 			treeview.RowActivated += new Gtk.RowActivatedHandler(OnRowActivated);
 			treeview.ColumnsChanged += new System.EventHandler(OnColumnsChanged);
 		}
@@ -29,6 +33,7 @@ namespace widgets
 		{
 			try
 			{
+				
 				System.Type[] columnsTypes = new Type[columns.Count];
 				int i = 0;
 
@@ -36,31 +41,52 @@ namespace widgets
         	    {
         	    	columnsTypes[i++] = column.Type;
         	    }
+        	    Console.WriteLine("create1");
         	    store = new TreeStore(columnsTypes);
+        	    Console.WriteLine("create2");
         	    treeview.Model = store;
+        	    Console.WriteLine("create3");
         	    i = 0;
+        	    Console.WriteLine("create4");
 				foreach (SimpleColumn column in columns)
 				{
+					Console.WriteLine("COLUMN TYPE=" + column.Type.ToString());
                 	if (column.Type == typeof(Gdk.Pixbuf))
                 	{
+                		Console.WriteLine("create5 loop");
 			        	TreeViewColumn tc = treeview.AppendColumn ("", new CellRendererPixbuf (), "pixbuf", i++);
-				    	tc.Visible = column.Visible;
+			        	Console.WriteLine("create6 loop");
+				    	if (tc != null)
+					    	tc.Visible = column.Visible;
 					}
-					/*else if (column.Type == typeof(System.Object)) // NOT VALID
+					else if (column.Type == typeof(System.Object)) 
 					{
-			        	TreeViewColumn tc = treeview.AppendColumn ("", new CellRendererPixbuf (), "object", i++);
-				    	tc.Visible = column.Visible;
-					}*/
+						Gtk.TreeViewColumn objColumn = new Gtk.TreeViewColumn ();
+						objColumn.Title = column.Name;
+						Gtk.CellRendererText objCell = new Gtk.CellRendererText ();
+						objColumn.PackStart (objCell, true);
+						objColumn.SetCellDataFunc (objCell, new Gtk.TreeCellDataFunc (RenderObject));
+				
+						treeview.AppendColumn(objColumn);
+			        	//TreeViewColumn tc = treeview.AppendColumn ("", new CellRendererPixbuf (), "object", i++);
+				    	//tc.Visible = column.Visible;
+					}
                 	else
                 	{
+                		
+                		Console.WriteLine("create 7 loop:" + column.Name);
+                		if (treeview == null)
+                			treeview = new Gtk.TreeView();
 				    	TreeViewColumn tc = treeview.AppendColumn (column.Name, new CellRendererText (), "text", i++);
-				    	tc.Visible = column.Visible;
+				    	Console.WriteLine("create8 loop");
+				    	if (tc != null)
+				    		tc.Visible = column.Visible;
                 	}
 				}
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine("Create exception:" + ex.Message);
+				Console.WriteLine("Create exception:" + ex.Message + ex.StackTrace);
 			}
 		}
 		
@@ -77,14 +103,22 @@ namespace widgets
 			return iter;
 		}
 		
+		private void RenderObject (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+		{
+			IBoxerpModel obj = (IBoxerpModel) model.GetValue (iter, 1);
+			(cell as Gtk.CellRendererText).Text = obj.ToString();
+		}
+
 		public void OnRowActivated (object o, Gtk.RowActivatedArgs args)
 		{
-			RowActivatedEvent(o, args);
+			if (RowActivatedEvent != null)
+				RowActivatedEvent(o, args);
 		}
 		
 		public void OnColumnsChanged(object o, System.EventArgs args)
 		{
-			ColumnsChangedEvent(o, args);
+			if (ColumnsChangedEvent != null)
+				ColumnsChangedEvent(o, args);
 		}
 		
 		

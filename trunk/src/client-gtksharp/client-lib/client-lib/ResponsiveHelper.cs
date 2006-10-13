@@ -18,7 +18,6 @@ namespace clientlib
 		protected Thread threadUpload;
 		protected Thread threadDownload;
 		static ThreadNotify threadNotify;
-		//protected System.Type instanceType;
 		protected Gtk.Window parentWindow;
 		protected bool uploadSuccess = false;
 		protected bool downloadSuccess = true;
@@ -27,13 +26,12 @@ namespace clientlib
 		{
 			threadStartUpload   = new ThreadStart(Upload);
 			threadStartDownload = new ThreadStart(Download); 
-			threadNotify = new ThreadNotify (new ReadyEvent (DownloadComplete));
+			
 		}
 		
 		public void Init(Gtk.Window win)
 		{
 			parentWindow = win;
-			//instanceType = type;
 			InitThreads();
 		}
 	
@@ -41,6 +39,7 @@ namespace clientlib
 		{
 			waitDialog = new WaitDialog(parentWindow); 
 			threadUpload = new Thread(threadStartUpload);
+			threadNotify = new ThreadNotify (new ReadyEvent (UploadComplete));
 			threadUpload.Start();
 		}
 	
@@ -48,6 +47,7 @@ namespace clientlib
 		{
 			try
 			{
+				UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
 				ArrayList methods = this.GetResponsiveMethods(ResponsiveEnum.Upload);
 				foreach (MethodInfo method in methods)
 				{
@@ -70,6 +70,7 @@ namespace clientlib
 		{
 			waitDialog = new WaitDialog(parentWindow); 
 			threadDownload = new Thread(threadStartDownload);
+			threadNotify = new ThreadNotify (new ReadyEvent (DownloadComplete));
 			threadDownload.Start();		
 		}
 	
@@ -77,6 +78,7 @@ namespace clientlib
 		{
 			try
 			{
+				UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
 				ArrayList methods = this.GetResponsiveMethods(ResponsiveEnum.Download);
 				foreach (MethodInfo method in methods)
 				{

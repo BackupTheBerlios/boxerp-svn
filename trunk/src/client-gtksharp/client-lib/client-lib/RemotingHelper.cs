@@ -6,7 +6,8 @@ using System;
 using System.Collections;
 using System.Runtime.Remoting;
 
-class RemotingHelper {
+namespace clientlib {
+public class RemotingHelper {
   private static bool _isInit;
   private static IDictionary _wellKnownTypes;
 
@@ -34,4 +35,5 @@ class RemotingHelper {
       _wellKnownTypes.Add (entr.ObjectType,entr);
     }
   }
+}
 }

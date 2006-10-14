@@ -12,6 +12,7 @@ public class MainWindow: Gtk.Window
 	protected Gtk.Entry entryUser;
 	protected Gtk.Entry entryGroup;
 	protected Gtk.Entry entryEnterprise;
+	protected EditUserWindow editUserWindow;
 	
 	public MainWindow (): base ("")
 	{
@@ -50,6 +51,44 @@ public class MainWindow: Gtk.Window
 	{
 		streeviewEnterprises.FilterRegex = entryGroup.Text;
 		streeviewEnterprises.Refilter();
+	}
+
+	protected virtual void OnNewUserClicked(object sender, System.EventArgs e)
+	{
+		if (editUserWindow == null)
+			editUserWindow = new EditUserWindow();
+	}
+
+	protected virtual void OnEditUserClicked(object sender, System.EventArgs e)
+	{
+	}
+
+	protected virtual void OnDelUserClicked(object sender, System.EventArgs e)
+	{
+	}
+
+	protected virtual void OnDelGroupClicked(object sender, System.EventArgs e)
+	{
+	}
+
+	protected virtual void OnEditGroupClicked(object sender, System.EventArgs e)
+	{
+	}
+
+	protected virtual void OnNewGroupClicked(object sender, System.EventArgs e)
+	{
+	}
+
+	protected virtual void OnNewEnterpriseClicked(object sender, System.EventArgs e)
+	{
+	}
+
+	protected virtual void OnEditEnterpriseClicked(object sender, System.EventArgs e)
+	{
+	}
+
+	protected virtual void OnDelEnterpriseClicked(object sender, System.EventArgs e)
+	{
 	}
 }
 }

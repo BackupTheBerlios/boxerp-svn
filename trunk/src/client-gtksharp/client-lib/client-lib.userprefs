@@ -5,6 +5,7 @@
     <File filename="./client-lib/ResponsiveAttribute.cs" />
     <File filename="./client-lib/SessionSingleton.cs" />
     <File filename="./client-lib/ResponsiveHelper.cs" />
+    <File filename="./client-lib/RemotingHelper.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
@@ -12,7 +13,7 @@
         <Node expanded="True">
           <Node name="client-lib" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="ResponsiveHelper.cs" expanded="False" selected="True" />
+            <Node name="RemotingHelper.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -36,7 +37,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/client-lib/client-lib/ResponsiveHelper.cs" />
+      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/client-lib/client-lib/RemotingHelper.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

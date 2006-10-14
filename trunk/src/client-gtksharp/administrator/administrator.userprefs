@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/administrator/administrator.mds">
   <Files>
-    <File filename="Bienvenido" />
     <File filename="./administrator/MainHelper.cs" />
     <File filename="./administrator/MainWindow.cs" />
+    <File filename="./administrator/EditUserWindow.cs" />
+    <File filename="./administrator/EditUserHelper.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
           <Node name="administrator" expanded="True">
-            <Node name="References" expanded="True">
-              <Node name="/home/carlosble/svns/boxerp/trunk/src/server/Objects.dll" expanded="False" selected="True" />
-            </Node>
+            <Node name="References" expanded="True" />
+            <Node name="EditUserHelper.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -36,7 +36,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/administrator/administrator/MainHelper.cs" />
+      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/administrator/administrator/EditUserHelper.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

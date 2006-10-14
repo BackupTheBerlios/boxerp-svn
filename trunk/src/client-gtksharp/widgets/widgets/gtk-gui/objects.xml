@@ -11,4 +11,12 @@
       </itemgroup>
     </signals>
   </object>
+  <object type="widgets.DoubleTreeView" palette-category="widget" allow-children="false">
+    <itemgroups>
+      <itemgroup ref="Gtk.Widget" />
+    </itemgroups>
+    <signals>
+      <itemgroup ref="Gtk.Widget" />
+    </signals>
+  </object>
 </objects>

@@ -42,6 +42,8 @@ namespace Boxerp.Models
 		private int _id;
 		private IList _groups;
 		private string _userName;
+		private string _realName;
+		private string _email;
 		private string _password;
 		private bool _published;
 		private IDictionary _permissions;
@@ -76,6 +78,20 @@ namespace Boxerp.Models
 		{
 			get { return _userName; }
 			set { _userName = value; }
+   	}
+
+		[Property(Length=50, Unique=true)]
+		public string RealName
+		{
+			get { return _realName; }
+			set { _realName = value; }
+   	}
+
+		[Property(Length=40, Unique=true)]
+		public string Email
+		{
+			get { return _email; }
+			set { _email = value; }
    	}
 
 		[Property(Length=50)]

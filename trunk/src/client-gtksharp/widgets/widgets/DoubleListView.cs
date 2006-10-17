@@ -1,0 +1,89 @@
+
+using System;
+using Gtk;
+using Boxerp.Models;
+using System.Collections;
+
+namespace widgets
+{
+	
+	// TODO: Implement drag&drop between treeviews
+	public class DoubleListView : Gtk.Bin
+	{
+		protected Gtk.Label labelLeft;
+		protected Gtk.Label labelRight;
+		protected widgets.SimpleListView slistviewRight;
+		protected widgets.SimpleListView slistviewLeft;
+		
+
+		public string LeftLabel 
+		{
+			set { labelLeft.Text = value; }
+		}
+		
+		public string RightLabel
+		{
+			set { labelRight.Text = value; }
+		}
+		
+		public DoubleListView()
+		{
+			Stetic.Gui.Build(this, typeof(widgets.DoubleListView));
+		}
+		
+		public void CreateLeftList(ArrayList columns)
+		{
+			this.slistviewLeft.Create(columns);
+		}
+		
+		public void CreateRightList(ArrayList columns)
+		{
+			this.slistviewRight.Create(columns);
+		}
+		
+		public TreeIter InsertRowLeft(ArrayList row)
+		{
+			return (this.slistviewLeft.InsertRow(row));
+		}
+		
+		public TreeIter InsertRowRight(ArrayList row)
+		{
+			return (this.slistviewRight.InsertRow(row));
+		}
+		
+		protected virtual void OnLeftClicked(object sender, System.EventArgs e)
+		{
+			TreeModel leftModel = slistviewLeft.TreeView.Model;
+			TreeModel model;
+			TreeIter iter;
+			Console.WriteLine("get selected:");
+			if (slistviewRight.TreeView.Selection.GetSelected(out model, out iter))
+			{
+				int id = (int) model.GetValue(iter, 0);
+				IBoxerpModel obj = (IBoxerpModel) model.GetValue(iter, 1);
+				((ListStore)model).Remove(ref iter);
+				iter = ((ListStore)leftModel).Append();
+				leftModel.SetValue(iter, 0, id);
+				leftModel.SetValue(iter, 0, obj);
+				
+           	}
+        }
+
+		protected virtual void OnRightClicked(object sender, System.EventArgs e)
+		{
+			TreeModel rightModel = slistviewRight.TreeView.Model;
+			TreeModel model;
+			TreeIter iter;
+			if (slistviewLeft.TreeView.Selection.GetSelected(out model, out iter))
+			{
+				int id = (int) model.GetValue(iter, 0);
+				IBoxerpModel obj = (IBoxerpModel) model.GetValue(iter, 1);
+				((ListStore)model).Remove(ref iter);
+				iter = ((ListStore)rightModel).Append();
+				rightModel.SetValue(iter, 0, id);
+				rightModel.SetValue(iter, 0, obj);
+           	}
+		}
+	}
+	
+}

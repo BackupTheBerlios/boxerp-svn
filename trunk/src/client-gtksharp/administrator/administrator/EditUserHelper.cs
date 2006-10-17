@@ -11,20 +11,18 @@ namespace administrator
 	
 	public class EditUserHelper : ResponsiveHelper
 	{
-		widgets.SimpleTreeView 	streeviewUsers, 
-								streeviewGroups;
+		widgets.DoubleListView doubleListView;
 		User[] users;
 		Group[] groups;
 		IAdmin adminObj;
 		
-		public EditUserHelper(ref SimpleTreeView u, ref SimpleTreeView g)
+		public EditUserHelper(ref DoubleListView dlv)
 		{
-			this.streeviewUsers = u;
-			this.streeviewGroups = g;
+			this.doubleListView = dlv;
 			adminObj = (IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
 		}
 		
-		[Responsive(ResponsiveEnum.Download)]
+		/*[Responsive(ResponsiveEnum.Download)]
 		public void LoadUsers()
 		{
 			try
@@ -35,7 +33,7 @@ namespace administrator
 			{
 				users = null;
 			}		
-		}
+		}*/
 		
 		[Responsive(ResponsiveEnum.Download)]
 		public void LoadGroups()
@@ -62,12 +60,12 @@ namespace administrator
 			column.Visible = true;
 			columns.Add(column);
 			
-			column.Name = "Username";
+			column.Name = "GroupName";
 			column.Type = typeof(object);
 			column.Visible = true;
-			columns.Add(column);			
-			this.streeviewUsers.Create(columns);			
-
+			columns.Add(column);
+			this.doubleListView.CreateLeftList(columns);
+			
 			// Groups treeview:
 			columns.Clear();
 			column.Name = "Code";
@@ -78,30 +76,30 @@ namespace administrator
 			column.Name = "Groupname";
 			column.Type = typeof(object);
 			column.Visible = true;
-			columns.Add(column);			
-			this.streeviewGroups.Create(columns);									
+			columns.Add(column);
+			this.doubleListView.CreateRightList(columns);							
 		}
 		
 		public override void PopulateGUI()
 		{
 			InitTreeViews();
 			
-			if (users != null)
+			/*if (users != null)
 			foreach (User i in users)
 			{
 				ArrayList columns = new ArrayList();
 				columns.Add(i.Id.ToString());
 				columns.Add(i);
 				this.streeviewUsers.InsertRow(TreeIter.Zero, columns);
-			}
+			}*/
 			
 			if (groups != null)
 			foreach (Group i in groups)
 			{
 				ArrayList columns = new ArrayList();
 				columns.Add(i.Id.ToString());
-				columns.Add(i);
-				this.streeviewGroups.InsertRow(TreeIter.Zero, columns);
+				columns.Add((IBoxerpModel)i);
+				this.doubleListView.InsertRowRight(columns);
 			}	
 		}	
 	}

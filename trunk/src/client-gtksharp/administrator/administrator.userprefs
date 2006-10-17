@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/administrator/administrator.mds">
   <Files>
-    <File filename="./administrator/MainHelper.cs" />
-    <File filename="./administrator/MainWindow.cs" />
     <File filename="./administrator/EditUserWindow.cs" />
+    <File filename="./administrator/MainHelper.cs" />
     <File filename="./administrator/EditUserHelper.cs" />
   </Files>
   <Views>

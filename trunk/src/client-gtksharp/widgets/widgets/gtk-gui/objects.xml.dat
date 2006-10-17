@@ -1,4 +1,24 @@
 <objects>
+  <object type="widgets.DoubleListView" palette-category="widget" allow-children="false">
+    <itemgroups>
+      <itemgroup ref="Gtk.Widget" />
+    </itemgroups>
+    <signals>
+      <itemgroup ref="Gtk.Widget" />
+    </signals>
+  </object>
+  <object type="widgets.FilteredListView" palette-category="widget" allow-children="false">
+    <itemgroups>
+      <itemgroup ref="Gtk.Widget" />
+    </itemgroups>
+    <signals>
+      <itemgroup ref="Gtk.Widget" />
+      <itemgroup label="FilteredListView Signals">
+        <signal name="RowActivatedEvent" />
+        <signal name="ColumnsChangedEvent" />
+      </itemgroup>
+    </signals>
+  </object>
   <object type="widgets.SimpleTreeView" palette-category="widget" allow-children="false">
     <itemgroups>
       <itemgroup ref="Gtk.Widget" />
@@ -9,14 +29,6 @@
         <signal name="RowActivatedEvent" />
         <signal name="ColumnsChangedEvent" />
       </itemgroup>
-    </signals>
-  </object>
-  <object type="widgets.DoubleTreeView" palette-category="widget" allow-children="false">
-    <itemgroups>
-      <itemgroup ref="Gtk.Widget" />
-    </itemgroups>
-    <signals>
-      <itemgroup ref="Gtk.Widget" />
     </signals>
   </object>
 </objects>

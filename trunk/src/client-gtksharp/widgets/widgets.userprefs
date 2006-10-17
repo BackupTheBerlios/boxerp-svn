@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/widgets/widgets.mds">
   <Files>
-    <File filename="./widgets/WaitWindow.cs" />
-    <File filename="./widgets/SimpleTreeView.cs" />
-    <File filename="./widgets/DoubleTreeView.cs" />
+    <File filename="./widgets/FilteredListView.cs" />
+    <File filename="./widgets/DoubleListView.cs" />
+    <File filename="./widgets/SimpleListView.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
@@ -11,7 +11,7 @@
         <Node expanded="True">
           <Node name="widgets" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="DoubleTreeView.cs" expanded="False" selected="True" />
+            <Node name="DoubleListView.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -35,7 +35,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/widgets/widgets/DoubleTreeView.cs" />
+      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/widgets/widgets/DoubleListView.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

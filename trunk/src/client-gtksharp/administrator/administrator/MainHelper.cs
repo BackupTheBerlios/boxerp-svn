@@ -12,7 +12,7 @@ namespace administrator
 	
 	public class MainHelper : ResponsiveHelper
 	{
-		widgets.SimpleTreeView streeviewEnterprises, 
+		widgets.FilteredListView streeviewEnterprises, 
 								streeviewUsers, 
 								streeviewGroups;
 		Enterprise[] enterprises;
@@ -20,8 +20,8 @@ namespace administrator
 		Group[] groups;
 		IAdmin adminObj;
 		
-		public MainHelper(ref SimpleTreeView e, 
-					ref SimpleTreeView u, ref SimpleTreeView g)
+		public MainHelper(ref FilteredListView e, 
+					ref FilteredListView u, ref FilteredListView g)
 		{
 			this.streeviewEnterprises = e;
 			this.streeviewUsers = u;
@@ -129,7 +129,7 @@ namespace administrator
 				columns.Add(i.Id.ToString());
 				columns.Add(i);
 				columns.Add(i.Description);
-				this.streeviewEnterprises.InsertRow(TreeIter.Zero, columns);
+				this.streeviewEnterprises.InsertRow(columns);
 			}
 			
 			if (users != null)
@@ -138,7 +138,7 @@ namespace administrator
 				ArrayList columns = new ArrayList();
 				columns.Add(i.Id.ToString());
 				columns.Add(i);
-				this.streeviewUsers.InsertRow(TreeIter.Zero, columns);
+				this.streeviewUsers.InsertRow(columns);
 			}
 			
 			if (groups != null)
@@ -147,7 +147,7 @@ namespace administrator
 				ArrayList columns = new ArrayList();
 				columns.Add(i.Id.ToString());
 				columns.Add(i);
-				this.streeviewGroups.InsertRow(TreeIter.Zero, columns);
+				this.streeviewGroups.InsertRow(columns);
 			}	
 		}	
 	}

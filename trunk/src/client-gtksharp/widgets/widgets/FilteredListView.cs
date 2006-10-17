@@ -1,3 +1,4 @@
+
 using System;
 using Gtk;
 using System.Collections;
@@ -9,21 +10,28 @@ namespace widgets
 	// TODO: Thinking about write a complete treeview wrapper instead
 	// of access the TreeView property.
 	
-	public class SimpleTreeView : Gtk.Bin
+	public class FilteredListView : Gtk.Bin
 	{
-		protected TreeStore store;
+		protected ListStore store;
+		protected TreeModelFilter filter;
 		protected Gtk.TreeView treeview;
 		public event Gtk.RowActivatedHandler RowActivatedEvent;
 		public event System.EventHandler ColumnsChangedEvent;
+		public string filterRegex;
+		
+		public string FilterRegex
+		{
+			set { filterRegex = value; }
+		}
 		
 		public TreeView TreeView 
 		{
 			get { return treeview;}
 		}
 		
-		public SimpleTreeView()
+		public FilteredListView()
 		{
-			Stetic.Gui.Build(this, typeof(widgets.SimpleTreeView));
+			Stetic.Gui.Build(this, typeof(widgets.FilteredListView));
 			treeview.RowActivated += new Gtk.RowActivatedHandler(OnRowActivated);
 			treeview.ColumnsChanged += new System.EventHandler(OnColumnsChanged);
 		}
@@ -40,8 +48,10 @@ namespace widgets
         	    {
         	    	columnsTypes[i++] = column.Type;
         	    }
-        	    store = new TreeStore(columnsTypes);
-        	    treeview.Model = store;
+        	    store = new ListStore(columnsTypes);
+        	    filter = new Gtk.TreeModelFilter (store, null);
+        	    filter.VisibleFunc = new Gtk.TreeModelFilterVisibleFunc (FilterTree);
+        	    treeview.Model = filter;
         	    Console.WriteLine("create3");
         	    i = 0;
         	    Console.WriteLine("create4");
@@ -87,17 +97,20 @@ namespace widgets
 			}
 		}
 		
-		public TreeIter InsertRow (TreeIter parent, ArrayList row)
+		public TreeIter InsertRow (/*TreeIter parent,*/ ArrayList row)
 		{
-			TreeIter iter;
+			TreeIter iter = store.Append();
+			// if store is a TreeStore:
+			/*TreeIter iter;
 			if (!parent.Equals(TreeIter.Zero))
-				iter = store.AppendNode(parent);
+				iter = ((TreeStore)filter.Model).AppendNode(parent);
 			else
-				iter = store.AppendNode();
-			for (int i = 0; i < row.Count; i++)
+				iter = ((TreeStore)filter.Model).AppendNode();
+			*/
+            for (int i = 0; i < row.Count; i++)
             {
-				store.SetValue (iter, i, row[i]);
-				Console.WriteLine("Inserting oclumn=" + row[i].GetType().ToString());	
+            	store.SetValue (iter, i, row[i]);
+				Console.WriteLine("INserting oclumn=" + row[i].GetType().ToString());	
 			}
 			return iter;
 		}
@@ -108,6 +121,26 @@ namespace widgets
 			(cell as Gtk.CellRendererText).Text = obj.ToString();
 		}
 
+		private bool FilterTree (Gtk.TreeModel model, Gtk.TreeIter iter)
+		{
+			IBoxerpModel obj = (IBoxerpModel)model.GetValue (iter, 1);
+ 
+ 			if (filterRegex == null)
+ 				return true;
+			if (filterRegex == "")
+				return true;
+ 
+			if (obj.ToString().IndexOf(filterRegex) > -1)
+				return true;
+			else
+				return false;
+		}
+		
+		public void Refilter()
+		{
+			filter.Refilter();
+		}
+		
 		public void OnRowActivated (object o, Gtk.RowActivatedArgs args)
 		{
 			if (RowActivatedEvent != null)
@@ -118,6 +151,9 @@ namespace widgets
 		{
 			if (ColumnsChangedEvent != null)
 				ColumnsChangedEvent(o, args);
-		}	
+		}
+		
+		
+		
 	}
 }

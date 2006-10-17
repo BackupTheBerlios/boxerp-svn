@@ -6,9 +6,9 @@ namespace administrator
 public class MainWindow: Gtk.Window
 {
 	protected MainHelper helper;
-	protected widgets.SimpleTreeView streeviewEnterprises;
-	protected widgets.SimpleTreeView streeviewUsers;
-	protected widgets.SimpleTreeView streeviewGroups;
+	protected widgets.FilteredListView streeviewEnterprises;
+	protected widgets.FilteredListView streeviewUsers;
+	protected widgets.FilteredListView streeviewGroups;
 	protected Gtk.Entry entryUser;
 	protected Gtk.Entry entryGroup;
 	protected Gtk.Entry entryEnterprise;

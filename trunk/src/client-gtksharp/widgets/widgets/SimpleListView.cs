@@ -1,3 +1,4 @@
+
 using System;
 using Gtk;
 using System.Collections;
@@ -9,9 +10,9 @@ namespace widgets
 	// TODO: Thinking about write a complete treeview wrapper instead
 	// of access the TreeView property.
 	
-	public class SimpleTreeView : Gtk.Bin
+	public class SimpleListView : Gtk.Bin
 	{
-		protected TreeStore store;
+		protected ListStore store;
 		protected Gtk.TreeView treeview;
 		public event Gtk.RowActivatedHandler RowActivatedEvent;
 		public event System.EventHandler ColumnsChangedEvent;
@@ -21,9 +22,9 @@ namespace widgets
 			get { return treeview;}
 		}
 		
-		public SimpleTreeView()
+		public SimpleListView()
 		{
-			Stetic.Gui.Build(this, typeof(widgets.SimpleTreeView));
+			Stetic.Gui.Build(this, typeof(widgets.SimpleListView));
 			treeview.RowActivated += new Gtk.RowActivatedHandler(OnRowActivated);
 			treeview.ColumnsChanged += new System.EventHandler(OnColumnsChanged);
 		}
@@ -40,7 +41,7 @@ namespace widgets
         	    {
         	    	columnsTypes[i++] = column.Type;
         	    }
-        	    store = new TreeStore(columnsTypes);
+        	    store = new ListStore(columnsTypes);
         	    treeview.Model = store;
         	    Console.WriteLine("create3");
         	    i = 0;
@@ -87,14 +88,10 @@ namespace widgets
 			}
 		}
 		
-		public TreeIter InsertRow (TreeIter parent, ArrayList row)
+		public TreeIter InsertRow (ArrayList row)
 		{
-			TreeIter iter;
-			if (!parent.Equals(TreeIter.Zero))
-				iter = store.AppendNode(parent);
-			else
-				iter = store.AppendNode();
-			for (int i = 0; i < row.Count; i++)
+			TreeIter iter = store.Append();
+            for (int i = 0; i < row.Count; i++)
             {
 				store.SetValue (iter, i, row[i]);
 				Console.WriteLine("Inserting oclumn=" + row[i].GetType().ToString());	

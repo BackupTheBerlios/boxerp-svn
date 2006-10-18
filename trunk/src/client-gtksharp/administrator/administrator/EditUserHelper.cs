@@ -98,7 +98,7 @@ namespace administrator
 			{
 				ArrayList columns = new ArrayList();
 				columns.Add(i.Id.ToString());
-				columns.Add((IBoxerpModel)i);
+				columns.Add(i);
 				this.doubleListView.InsertRowRight(columns);
 			}	
 		}	

@@ -11,6 +11,7 @@
         <Node expanded="True">
           <Node name="widgets" expanded="True">
             <Node name="References" expanded="True" />
+            <Node name="UserInterface" expanded="True" />
             <Node name="DoubleListView.cs" expanded="False" selected="True" />
           </Node>
         </Node>

@@ -13,7 +13,7 @@ namespace widgets
 	public class SimpleListView : Gtk.Bin
 	{
 		protected ListStore store;
-		protected Gtk.TreeView treeview;
+		public Gtk.TreeView treeview;
 		public event Gtk.RowActivatedHandler RowActivatedEvent;
 		public event System.EventHandler ColumnsChangedEvent;
 		

@@ -57,14 +57,21 @@ namespace widgets
 			TreeModel model;
 			TreeIter iter;
 			Console.WriteLine("get selected:");
-			if (slistviewRight.TreeView.Selection.GetSelected(out model, out iter))
+			TreeViewColumn[] cols = slistviewRight.treeview.Columns;
+			foreach(TreeViewColumn c in cols)
 			{
-				int id = (int) model.GetValue(iter, 0);
+				Console.WriteLine("title:  " + c.Title);
+			}
+			Console.WriteLine(slistviewRight.treeview.Model.GetColumnType(0).ToString());
+			Console.WriteLine(slistviewRight.treeview.Model.GetColumnType(1).ToString());
+			if (slistviewRight.treeview.Selection.GetSelected(out model, out iter))
+			{
+				string code = (string) model.GetValue(iter, 0);
 				IBoxerpModel obj = (IBoxerpModel) model.GetValue(iter, 1);
 				((ListStore)model).Remove(ref iter);
 				iter = ((ListStore)leftModel).Append();
-				leftModel.SetValue(iter, 0, id);
-				leftModel.SetValue(iter, 0, obj);
+				leftModel.SetValue(iter, 0, code);
+				leftModel.SetValue(iter, 1, obj);
 				
            	}
         }
@@ -76,12 +83,12 @@ namespace widgets
 			TreeIter iter;
 			if (slistviewLeft.TreeView.Selection.GetSelected(out model, out iter))
 			{
-				int id = (int) model.GetValue(iter, 0);
+				string code = (string) model.GetValue(iter, 0);
 				IBoxerpModel obj = (IBoxerpModel) model.GetValue(iter, 1);
 				((ListStore)model).Remove(ref iter);
 				iter = ((ListStore)rightModel).Append();
-				rightModel.SetValue(iter, 0, id);
-				rightModel.SetValue(iter, 0, obj);
+				rightModel.SetValue(iter, 0, code);
+				rightModel.SetValue(iter, 1, obj);
            	}
 		}
 	}

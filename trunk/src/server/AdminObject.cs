@@ -99,6 +99,38 @@ namespace Boxerp.Objects
 			}
 		}
 
+		public Group[] GetDistinctGroups(User u)
+		{
+			try
+			{
+				if (sessionsMgr.IsValidSessionThenUpdate(UserInformation.GetSessionToken()))
+				{
+					if (u != null)
+					{
+						Group[] allGroups = Group.FindAll();
+						ArrayList groups = new ArrayList();
+						foreach(Group i in allGroups)
+						{
+							// FIXME write a compare function for objects. Contains doesnt work
+							if (!u.Groups.Contains(i))
+								groups.Add(i);		
+						}
+						return (Group[])groups.ToArray();
+					}
+					return null;
+				}
+				else
+				{
+					return null;
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("ERROR:" + ex.Message + ":" + ex.StackTrace);
+				return null;
+			}
+		}
+
 		public Enterprise[] GetEnterprises()
 		{
 			try
@@ -128,11 +160,34 @@ namespace Boxerp.Objects
 			return null;
 		}
 
-		public void SaveUser(User u)
+		public int SaveUser(User u)
 		{
-			if (u.UserName.Length > 0)
-				u.Save();
-			Console.WriteLine("User:"+ u.UserName+" saved");
+			try
+			{
+				if (sessionsMgr.IsValidSessionThenUpdate(UserInformation.GetSessionToken()))
+				{
+					Console.WriteLine(u.Id +","+u.UserName+","+u.RealName+","+
+								u.Email +","+u.Published);
+					Console.WriteLine(u.Groups.Count);
+					u.Save(); 
+					// FIXME: Save the reverse relation
+					return 0;
+				}
+				else
+				{
+					Console.WriteLine("not valid user");
+					return -1 ;
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("ERROR:" + ex.Message + ":" + ex.StackTrace);
+				if (ex.InnerException != null)
+					Console.WriteLine("ERROR:" + ex.InnerException.Message + 
+										 ":" + ex.InnerException.StackTrace);
+				return -1;
+			}
 		}
+
 	}	
 }

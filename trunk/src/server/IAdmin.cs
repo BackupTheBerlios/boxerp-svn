@@ -49,6 +49,8 @@ namespace Boxerp.Objects
 		User[] GetUsers();
 		Enterprise[] GetEnterprises();
 		Group[] GetGroups();
+		Group[] GetDistinctGroups(User user);
+		int SaveUser(User user);
 		/*IList GetEnterprises(string session);
 		IList GetGroups(string session);
 		IList GetUsers(string session, 
@@ -85,6 +87,5 @@ namespace Boxerp.Objects
 				  18. Search User
 
 		*/		  
-		void SaveUser(User u);	
 	}	
 }

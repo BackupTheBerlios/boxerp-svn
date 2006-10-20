@@ -18,6 +18,7 @@ namespace widgets
 		public event Gtk.RowActivatedHandler RowActivatedEvent;
 		public event System.EventHandler ColumnsChangedEvent;
 		public string filterRegex;
+		private IBoxerpModel selectedObject;
 		
 		public string FilterRegex
 		{
@@ -153,6 +154,32 @@ namespace widgets
 				ColumnsChangedEvent(o, args);
 		}
 		
+		public bool IsSelected()
+		{
+			TreeIter iter;
+			TreeModel model;
+			
+			try
+			{
+				if (treeview.Selection.GetSelected(out model, out iter))
+				{
+					selectedObject = (IBoxerpModel) model.GetValue(iter, 1);
+					return true;
+				}
+				else
+					return false;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("IsSelected:" + ex.Message + ","+ex.StackTrace);
+				return false;
+			}
+		}
+		
+		public IBoxerpModel SelectedObject
+		{
+			get {return selectedObject; }
+		}
 		
 		
 	}

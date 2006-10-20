@@ -51,6 +51,15 @@ namespace widgets
 			return (this.slistviewRight.InsertRow(row));
 		}
 		
+		public ArrayList GetLeftObjectList()
+		{
+			return slistviewLeft.GetObjectsList();
+		}
+		
+		public ArrayList GetRightObjectList()
+		{
+			return slistviewRight.GetObjectsList();
+		}
 		protected virtual void OnLeftClicked(object sender, System.EventArgs e)
 		{
 			TreeModel leftModel = slistviewLeft.TreeView.Model;

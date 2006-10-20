@@ -1,4 +1,5 @@
 using System;
+using Boxerp.Models;
 using Gtk;
 
 namespace administrator 
@@ -6,9 +7,9 @@ namespace administrator
 public class MainWindow: Gtk.Window
 {
 	protected MainHelper helper;
-	protected widgets.FilteredListView streeviewEnterprises;
-	protected widgets.FilteredListView streeviewUsers;
-	protected widgets.FilteredListView streeviewGroups;
+	protected widgets.FilteredListView ftreeviewEnterprises;
+	protected widgets.FilteredListView ftreeviewUsers;
+	protected widgets.FilteredListView ftreeviewGroups;
 	protected Gtk.Entry entryUser;
 	protected Gtk.Entry entryGroup;
 	protected Gtk.Entry entryEnterprise;
@@ -17,8 +18,8 @@ public class MainWindow: Gtk.Window
 	public MainWindow (): base ("")
 	{
 		Stetic.Gui.Build (this, typeof(MainWindow));
-		helper = new MainHelper(ref this.streeviewEnterprises,
-								ref this.streeviewUsers, ref this.streeviewGroups);
+		helper = new MainHelper(ref ftreeviewEnterprises,
+								ref ftreeviewUsers, ref ftreeviewGroups);
 		helper.Init(this);
 		helper.StartDownload();
 	}
@@ -37,20 +38,20 @@ public class MainWindow: Gtk.Window
 
 	protected virtual void OnFindUser(object sender, System.EventArgs e)
 	{
-		streeviewUsers.FilterRegex = entryUser.Text;
-		streeviewUsers.Refilter();
+		ftreeviewUsers.FilterRegex = entryUser.Text;
+		ftreeviewUsers.Refilter();
 	}
 
 	protected virtual void OnFindGroup(object sender, System.EventArgs e)
 	{
-		streeviewGroups.FilterRegex = entryUser.Text;
-		streeviewGroups.Refilter();
+		ftreeviewGroups.FilterRegex = entryUser.Text;
+		ftreeviewGroups.Refilter();
 	}
 
 	protected virtual void OnFindEnterprise(object sender, System.EventArgs e)
 	{
-		streeviewEnterprises.FilterRegex = entryGroup.Text;
-		streeviewEnterprises.Refilter();
+		ftreeviewEnterprises.FilterRegex = entryGroup.Text;
+		ftreeviewEnterprises.Refilter();
 	}
 
 	protected virtual void OnNewUserClicked(object sender, System.EventArgs e)
@@ -61,6 +62,12 @@ public class MainWindow: Gtk.Window
 
 	protected virtual void OnEditUserClicked(object sender, System.EventArgs e)
 	{
+		if (editUserWindow == null)
+			editUserWindow = new EditUserWindow();
+		if (ftreeviewUsers.IsSelected())
+		{
+			editUserWindow.User = (User) ftreeviewUsers.SelectedObject;	
+		} 
 	}
 
 	protected virtual void OnDelUserClicked(object sender, System.EventArgs e)

@@ -115,6 +115,27 @@ namespace widgets
 		{
 			if (ColumnsChangedEvent != null)
 				ColumnsChangedEvent(o, args);
-		}	
+		}
+		
+		public ArrayList GetObjectsList()
+		{
+			TreeIter iter;
+			ArrayList objects = new ArrayList();
+			try 
+			{
+				store.GetIterFirst(out iter);
+				do 
+				{
+					objects.Add(store.GetValue(iter, 1));		
+				} while (store.IterNext(ref iter));
+				if (objects.Count == 0)
+					return null;
+				return objects;
+			}
+			catch (Exception ex)
+			{
+				return null;
+			}
+		}
 	}
 }

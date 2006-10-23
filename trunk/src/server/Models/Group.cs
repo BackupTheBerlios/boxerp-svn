@@ -43,7 +43,7 @@ namespace Boxerp.Models
 		private IList _enterprises;
 		private IList _users;
 		private string _groupName;
-		private bool _published;
+		private bool _active;
 		private IDictionary _permissions;
 
 		[PrimaryKey(PrimaryKeyType.Native)]
@@ -87,10 +87,10 @@ namespace Boxerp.Models
    	}
 
 		[Property]
-		public bool Published
+		public bool Active
 		{
-			get { return _published; }
-			set { _published = value; }
+			get { return _active; }
+			set { _active = value; }
 		}
 
 		public static Group[] FindAll()

@@ -115,7 +115,8 @@ namespace Boxerp.Objects
 							if (!u.Groups.Contains(i))
 								groups.Add(i);		
 						}
-						return (Group[])groups.ToArray();
+						Console.WriteLine("ok, ok");
+						return (Group[])groups.ToArray(groups[0].GetType());
 					}
 					return null;
 				}
@@ -166,10 +167,22 @@ namespace Boxerp.Objects
 			{
 				if (sessionsMgr.IsValidSessionThenUpdate(UserInformation.GetSessionToken()))
 				{
+					/*User oldUser = User.Find(u.Id);
+					oldUser.UserName = u.UserName;
+					oldUser.RealName = u.RealName;
+					oldUser.Email = u.Email;
+					oldUser.Active = u.Active;
+					oldUser.Save();*/
+						
 					Console.WriteLine(u.Id +","+u.UserName+","+u.RealName+","+
-								u.Email +","+u.Published);
-					Console.WriteLine(u.Groups.Count);
-					u.Save(); 
+								u.Email +","+u.Active);
+					foreach (Group i in u.Groups)
+					{
+						Console.WriteLine("Group id=" + i.Id);
+						i.Update(); // Save();
+					}
+					//Console.WriteLine(u.Groups.Count);
+					u.Update(); //Save(); */
 					// FIXME: Save the reverse relation
 					return 0;
 				}

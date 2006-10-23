@@ -45,7 +45,7 @@ namespace Boxerp.Models
 		private string _realName;
 		private string _email;
 		private string _password;
-		private bool _published;
+		private bool _active;
 		private IDictionary _permissions;
 		static System.Security.Cryptography.MD5 hasher = System.Security.Cryptography.MD5.Create();
 
@@ -102,10 +102,10 @@ namespace Boxerp.Models
    	}
 
 		[Property]
-		public bool Published
+		public bool Active
 		{
-			get { return _published; }
-			set { _published = value; }
+			get { return _active; }
+			set { _active = value; }
 		}
 
 		public static User[] FindAll()

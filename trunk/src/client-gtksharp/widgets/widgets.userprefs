@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/widgets/widgets.mds">
   <Files>
+    <File filename="Bienvenido" />
     <File filename="./widgets/FilteredListView.cs" />
     <File filename="./widgets/DoubleListView.cs" />
     <File filename="./widgets/SimpleListView.cs" />

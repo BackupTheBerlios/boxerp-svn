@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 using Gtk;
 using System.Collections;
 using Boxerp.Models;
@@ -37,7 +38,7 @@ namespace widgets
 			treeview.ColumnsChanged += new System.EventHandler(OnColumnsChanged);
 		}
 		
-		public void Create(ArrayList columns)
+		public void Create(List<SimpleColumn> columns)
 		{
 			try
 			{

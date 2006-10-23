@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 using System.Collections;
 using clientlib;
 using widgets;
@@ -20,13 +21,14 @@ namespace administrator
 		Group[] groups;
 		IAdmin adminObj;
 		
-		public MainHelper(ref FilteredListView e, 
+		public MainHelper(Gtk.Window win, ref FilteredListView e, 
 					ref FilteredListView u, ref FilteredListView g)
 		{
 			this.streeviewEnterprises = e;
 			this.streeviewUsers = u;
 			this.streeviewGroups = g;
 			adminObj = (IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
+			base.Init(win);
 		}
 		
 		[Responsive(ResponsiveEnum.Download)]
@@ -74,7 +76,7 @@ namespace administrator
 		private void InitTreeViews()
 		{
 			// Enterprises treeview:
-			ArrayList columns = new ArrayList();
+			List<SimpleColumn> columns = new List<SimpleColumn>();
 			SimpleColumn column = new SimpleColumn();
 			column.Name = "Code";
 			column.Type = typeof(string);

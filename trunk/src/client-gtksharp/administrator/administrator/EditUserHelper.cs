@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using clientlib;
 using widgets;
 using Boxerp.Models;
@@ -17,18 +18,20 @@ namespace administrator
 		IAdmin adminObj;
 		bool isNewUser = true;
 		
-		public EditUserHelper(ref DoubleListView dlv)
+		public EditUserHelper(Gtk.Window win, ref DoubleListView dlv)
 		{
 			this.doubleListView = dlv;
 			adminObj = (IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
+			base.Init(win);
 		}
 		
-		public EditUserHelper(ref DoubleListView dlv, User u)
+		public EditUserHelper(Gtk.Window win, ref DoubleListView dlv, User u)
 		{
 			this.doubleListView = dlv;
 			adminObj = (IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
 			user = u;
 			isNewUser = false;
+			base.Init(win);
 		}
 		
 		[Responsive(ResponsiveEnum.Download)]
@@ -66,7 +69,8 @@ namespace administrator
 		// TODO: load the trees from xml, not hardcoded
 		private void InitTreeViews()
 		{
-			ArrayList columns = new ArrayList();
+			List<SimpleColumn> columns = new List<SimpleColumn>();
+			
 			// Users treeview:
 			SimpleColumn column = new SimpleColumn();
 			column.Name = "Code";
@@ -97,7 +101,7 @@ namespace administrator
 		public override void PopulateGUI()
 		{
 			InitTreeViews();
-						
+			PopulateUserTreeView();			
 			if (groups != null)
 			foreach (Group i in groups)
 			{
@@ -108,17 +112,18 @@ namespace administrator
 			}	
 		}
 		
-		public void PopulateUserTreeView(User u)
+		private void PopulateUserTreeView()
 		{
-			user = u;
+			//Console.WriteLine("total user groups:" + user.Groups.Count);
 			if (user != null)
-			Console.WriteLine("total user groups:" + user.Groups.Count);
 			foreach (Group i in user.Groups)
 			{	
 				Console.WriteLine("group name=" + i.GroupName);
 				ArrayList columns = new ArrayList();
 				columns.Add(i.Id.ToString());
 				columns.Add(i);
+				if (columns == null)
+					Console.WriteLine("nullll!!!!");
 				this.doubleListView.InsertRowLeft(columns);
 			}
 		}
@@ -128,15 +133,20 @@ namespace administrator
 			user = null;
 		}
 		
-		public void PopulateUserWithGroups(ref User u)
+		public void PopulateUser(string userName, string realName, string password, 
+						string email, bool active)
 		{
-			//u.Groups = null;
-			u.Groups.Clear();
-			ArrayList groups = doubleListView.GetLeftObjectList();
+			user.UserName = userName;
+			user.RealName = realName;
+			user.Password = password;
+			user.Email = email;
+			user.Active = active;
+			user.Groups.Clear();
+			List<IBoxerpModel> groups = doubleListView.GetLeftObjectList();
 			if (groups != null)
 			foreach(Group g in groups)
 			{
-				u.Groups.Add(g);
+				user.Groups.Add(g);
 			}
 		}
 	}

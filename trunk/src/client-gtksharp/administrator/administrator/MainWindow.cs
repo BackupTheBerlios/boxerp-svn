@@ -18,9 +18,8 @@ public class MainWindow: Gtk.Window
 	public MainWindow (): base ("")
 	{
 		Stetic.Gui.Build (this, typeof(MainWindow));
-		helper = new MainHelper(ref ftreeviewEnterprises,
+		helper = new MainHelper(this, ref ftreeviewEnterprises,
 								ref ftreeviewUsers, ref ftreeviewGroups);
-		helper.Init(this);
 		helper.StartDownload();
 	}
 	
@@ -62,12 +61,10 @@ public class MainWindow: Gtk.Window
 
 	protected virtual void OnEditUserClicked(object sender, System.EventArgs e)
 	{
-		if (editUserWindow == null)
-			editUserWindow = new EditUserWindow();
 		if (ftreeviewUsers.IsSelected())
-		{
-			editUserWindow.User = (User) ftreeviewUsers.SelectedObject;	
-		} 
+			editUserWindow = new EditUserWindow((User)ftreeviewUsers.SelectedObject);
+		else
+			editUserWindow = new EditUserWindow();
 	}
 
 	protected virtual void OnDelUserClicked(object sender, System.EventArgs e)

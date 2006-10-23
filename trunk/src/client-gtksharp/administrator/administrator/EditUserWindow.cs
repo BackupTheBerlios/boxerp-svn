@@ -16,38 +16,28 @@ namespace administrator
 		protected User user;
 		protected Gtk.CheckButton checkActive;
 		
+		// Constructor: To create a new user
 		public EditUserWindow() : 
 				base("")
 		{
 			Stetic.Gui.Build(this, typeof(administrator.EditUserWindow));
-			helper = new EditUserHelper(ref dtreeview);
+			helper = new EditUserHelper(this, ref dtreeview);
 			dtreeview.LeftLabel = "User groups:";
 			dtreeview.RightLabel = "Rest of groups:";
-			helper.Init(this);
 			helper.StartDownload();
 		}
 		
+		// Constructor: To edit an existing user
 		public EditUserWindow(User u) :
 				base("")
 		{
 			Stetic.Gui.Build(this, typeof(administrator.EditUserWindow));
 			user = u;
 			this.PopulateUserFields();
-			helper = new EditUserHelper(ref dtreeview);
+			helper = new EditUserHelper(this, ref dtreeview, user);
 			dtreeview.LeftLabel = "User groups:";
 			dtreeview.RightLabel = "Rest of groups:";
-			helper.Init(this);
 			helper.StartDownload();
-		}
-		
-		public User User
-		{
-			get { return user;}
-			set 
-			{ 
-				user = value;
-				this.PopulateUserFields();
-			}
 		}
 		
 		private void PopulateUserFields()
@@ -55,27 +45,21 @@ namespace administrator
 			entryUserName.Text = user.UserName;
 			entryRealName.Text = user.RealName;
 			entryEmail.Text = user.Email;
-			checkActive.Active = user.Published;
-			helper.PopulateUserTreeView(user);
+			checkActive.Active = user.Active;
 		}
 
 		protected virtual void OnOkClicked(object sender, System.EventArgs e)
 		{
-			user.UserName = entryUserName.Text;
-			user.RealName = entryRealName.Text;
-			user.Password = entryPassword.Text;
-			user.Email = entryEmail.Text;
-			user.Published = checkActive.Active;
-			helper.PopulateUserWithGroups(ref user);
+			helper.PopulateUser(entryUserName.Text, entryRealName.Text,
+							entryPassword.Text, entryEmail.Text, checkActive.Active);
 			helper.StartUpload();
-			
 		}
 
 		protected virtual void OnCancelClicked(object sender, System.EventArgs e)
 		{
 			helper.ClearUser();
 			user = null;
-			this.Hide();
+			this.Destroy();
 		}
 	}
 	

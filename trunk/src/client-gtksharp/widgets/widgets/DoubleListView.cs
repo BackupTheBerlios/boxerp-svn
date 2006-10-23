@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 using Gtk;
 using Boxerp.Models;
 using System.Collections;
@@ -31,18 +32,20 @@ namespace widgets
 			Stetic.Gui.Build(this, typeof(widgets.DoubleListView));
 		}
 		
-		public void CreateLeftList(ArrayList columns)
+		public void CreateLeftList(List<SimpleColumn> columns)
 		{
 			this.slistviewLeft.Create(columns);
 		}
 		
-		public void CreateRightList(ArrayList columns)
+		public void CreateRightList(List<SimpleColumn> columns)
 		{
 			this.slistviewRight.Create(columns);
 		}
 		
 		public TreeIter InsertRowLeft(ArrayList row)
 		{
+			if (row == null)
+				Console.WriteLine("double list null");
 			return (this.slistviewLeft.InsertRow(row));
 		}
 		
@@ -51,12 +54,12 @@ namespace widgets
 			return (this.slistviewRight.InsertRow(row));
 		}
 		
-		public ArrayList GetLeftObjectList()
+		public List<IBoxerpModel> GetLeftObjectList()
 		{
 			return slistviewLeft.GetObjectsList();
 		}
 		
-		public ArrayList GetRightObjectList()
+		public List<IBoxerpModel> GetRightObjectList()
 		{
 			return slistviewRight.GetObjectsList();
 		}

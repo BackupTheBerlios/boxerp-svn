@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 using Gtk;
 using System.Collections;
 using Boxerp.Models;
@@ -29,7 +30,7 @@ namespace widgets
 			treeview.ColumnsChanged += new System.EventHandler(OnColumnsChanged);
 		}
 		
-		public void Create(ArrayList columns)
+		public void Create(List<SimpleColumn> columns)
 		{
 			try
 			{
@@ -91,8 +92,14 @@ namespace widgets
 		public TreeIter InsertRow (ArrayList row)
 		{
 			TreeIter iter = store.Append();
+			if (row == null)
+			{
+				Console.WriteLine("simple list row null");
+				return Gtk.TreeIter.Zero;
+			}
             for (int i = 0; i < row.Count; i++)
             {
+            	Console.WriteLine("insertRow:" + i);
 				store.SetValue (iter, i, row[i]);
 				Console.WriteLine("Inserting oclumn=" + row[i].GetType().ToString());	
 			}
@@ -117,16 +124,16 @@ namespace widgets
 				ColumnsChangedEvent(o, args);
 		}
 		
-		public ArrayList GetObjectsList()
+		public List<IBoxerpModel> GetObjectsList()
 		{
 			TreeIter iter;
-			ArrayList objects = new ArrayList();
+			List<IBoxerpModel> objects = new List<IBoxerpModel>();
 			try 
 			{
 				store.GetIterFirst(out iter);
 				do 
 				{
-					objects.Add(store.GetValue(iter, 1));		
+					objects.Add((IBoxerpModel)store.GetValue(iter, 1));		
 				} while (store.IterNext(ref iter));
 				if (objects.Count == 0)
 					return null;

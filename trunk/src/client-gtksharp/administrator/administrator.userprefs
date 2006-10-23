@@ -1,9 +1,12 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/administrator/administrator.mds">
   <Files>
+    <File filename="Bienvenido" />
     <File filename="./administrator/EditUserWindow.cs" />
     <File filename="./administrator/EditUserHelper.cs" />
     <File filename="./administrator/MainWindow.cs" />
+    <File filename="./administrator/MainHelper.cs" />
+    <File filename="./administrator/Main.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">

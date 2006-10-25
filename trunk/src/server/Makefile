@@ -2,7 +2,8 @@ BIN= castle-bin
 MODELS=  -r:./Models.dll  
 CASTLE= -r:./$(BIN)/Castle.ActiveRecord \
         -r:./$(BIN)/Iesi.Collections \
-		  -r:./$(BIN)/NHibernate
+		  -r:./$(BIN)/NHibernate \
+        -r:./$(BIN)/log4net
 OBJECTS= *Object.cs 
 
 MONO= -r:Mono.Posix -r:System.Runtime.Remoting -r:System.Data

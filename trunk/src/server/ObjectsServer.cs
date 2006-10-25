@@ -43,7 +43,8 @@ using Castle.ActiveRecord.Framework.Config;
 //using Castle.Model;
 //using NHibernate;
 using Boxerp.Models;
-
+using log4net;
+using log4net.Config;
 
 namespace Boxerp.Objects
 {
@@ -52,6 +53,7 @@ namespace Boxerp.Objects
 		public static void Main(string [] args)
 		{
 				//Catalog.Init("boxerp", Boxerp.Defines.LOCALE_DIR);
+				XmlConfigurator.Configure(new System.IO.FileInfo("./server.config"));
 				RemotingConfiguration.Configure("./serverRemoting.config");
 				ActiveRecordStarter.Initialize( new XmlConfigurationSource("./activeRecord.xml"), 
 						typeof(Action),
@@ -62,7 +64,8 @@ namespace Boxerp.Objects
 						typeof(Group),
 						typeof(Session),
 						typeof(User));
-				System.Console.WriteLine("Server started... (press key to exit)");
+				System.Console.WriteLine("----------");
+				System.Console.WriteLine("     Server started and running... (press key to exit)");
 				System.Console.ReadLine();
 		}
 	}

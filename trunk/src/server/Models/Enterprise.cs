@@ -91,6 +91,11 @@ namespace Boxerp.Models
 		{
 			return Name;
 		}
+
+		public bool Equals(Enterprise e)
+		{
+			return (e.Id == Id);
+		}
 	}
 }
 

@@ -64,8 +64,8 @@ namespace Boxerp.Models
 
 		[HasAndBelongsToMany( typeof(User),
 			Table="users_groups",
-			ColumnRef="user_id", ColumnKey="group_id")]
-		public IList User
+			ColumnRef="user_id", ColumnKey="group_id", Cascade=ManyRelationCascadeEnum.SaveUpdate)]
+		public IList Users
 		{
 			get { return _users; }
 			set { _users = value; }
@@ -79,7 +79,7 @@ namespace Boxerp.Models
 			set { _permissions = value; }
 		}
 
-		[Property(Length=20)]
+		[Property(Length=20, Unique=true)]
 		public string GroupName
 		{
 			get { return _groupName; }
@@ -98,9 +98,19 @@ namespace Boxerp.Models
 			return (Group[]) ActiveRecordBase.FindAll(typeof(Group));
 		}
 
+		public static Group Find(int id)
+		{
+			return (Group) ActiveRecordBase.FindByPrimaryKey( typeof(Group), id );
+		}
+
 		public override string ToString()
 		{
 			return GroupName;
+		}
+
+		public bool Equals(Group g)
+		{
+			return (g.Id == Id);
 		}
 	}
 }

@@ -111,7 +111,6 @@ namespace Boxerp.Objects
 						ArrayList groups = new ArrayList();
 						foreach(Group i in allGroups)
 						{
-							// FIXME write a compare function for objects. Contains doesnt work
 							if (!u.Groups.Contains(i))
 								groups.Add(i);		
 						}
@@ -167,23 +166,39 @@ namespace Boxerp.Objects
 			{
 				if (sessionsMgr.IsValidSessionThenUpdate(UserInformation.GetSessionToken()))
 				{
-					/*User oldUser = User.Find(u.Id);
+					Console.WriteLine(u.Id +","+u.UserName+","+u.RealName+","+
+								u.Email +","+u.Active);
+					User oldUser = User.Find(u.Id);
 					oldUser.UserName = u.UserName;
 					oldUser.RealName = u.RealName;
 					oldUser.Email = u.Email;
 					oldUser.Active = u.Active;
-					oldUser.Save();*/
-						
+					if (oldUser.Groups == null)
+						oldUser.Groups = new ArrayList();
+					else
+						oldUser.Groups.Clear();
+					oldUser.Update();
 					Console.WriteLine(u.Id +","+u.UserName+","+u.RealName+","+
 								u.Email +","+u.Active);
 					foreach (Group i in u.Groups)
 					{
+						Group g = Group.Find(i.Id);
+						g.Update();
+						if (g != null)
+						{
+							if (!g.Users.Contains(oldUser))
+							{
+								
+								Console.WriteLine(oldUser.Id +","+ oldUser.UserName+","+ oldUser.RealName);
+								g.Users.Add(oldUser);
+								oldUser.Groups.Add(g);
+								//g.Update();
+							}
+							//g.Update();
+						}
 						Console.WriteLine("Group id=" + i.Id);
-						i.Update(); // Save();
 					}
-					//Console.WriteLine(u.Groups.Count);
-					u.Update(); //Save(); */
-					// FIXME: Save the reverse relation
+					oldUser.Update();
 					return 0;
 				}
 				else

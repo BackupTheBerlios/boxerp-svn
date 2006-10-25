@@ -40,7 +40,7 @@ namespace Boxerp.Models
 	public class User : ActiveRecordBase, IBoxerpModel
 	{
 		private int _id;
-		private IList _groups;
+		private IList _groups; 
 		private string _userName;
 		private string _realName;
 		private string _email;
@@ -58,7 +58,7 @@ namespace Boxerp.Models
 
 		[HasAndBelongsToMany( typeof(Group),
 			Table="users_groups",
-			ColumnRef="group_id", ColumnKey="user_id")]
+			ColumnRef="group_id", ColumnKey="user_id", Cascade=ManyRelationCascadeEnum.All)]
 		public IList Groups
 		{
 			get { return _groups; }
@@ -80,14 +80,14 @@ namespace Boxerp.Models
 			set { _userName = value; }
    	}
 
-		[Property(Length=50, Unique=true)]
+		[Property(Length=50)]
 		public string RealName
 		{
 			get { return _realName; }
 			set { _realName = value; }
    	}
 
-		[Property(Length=40, Unique=true)]
+		[Property(Length=40)]
 		public string Email
 		{
 			get { return _email; }
@@ -141,6 +141,11 @@ namespace Boxerp.Models
 		public override string ToString()
 		{
 			return UserName;
+		}
+
+		public bool Equals(User u)
+		{
+			return (u.Id == Id);
 		}
 
 	}

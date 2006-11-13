@@ -1,13 +1,5 @@
 <objects>
-  <object type="lib.DoubleListView" palette-category="widget" allow-children="false">
-    <itemgroups>
-      <itemgroup ref="Gtk.Widget" />
-    </itemgroups>
-    <signals>
-      <itemgroup ref="Gtk.Widget" />
-    </signals>
-  </object>
-  <object type="lib.FilteredListView" palette-category="widget" allow-children="false">
+  <object type="Boxerp.Client.Gtk.Lib.FilteredListView" palette-category="widget" allow-children="false">
     <itemgroups>
       <itemgroup ref="Gtk.Widget" />
     </itemgroups>
@@ -19,25 +11,33 @@
       </itemgroup>
     </signals>
   </object>
-  <object type="lib.SimpleTreeView" palette-category="widget" allow-children="false">
+  <object type="Boxerp.Client.Gtk.Lib.DoubleListView" palette-category="widget" allow-children="false">
     <itemgroups>
       <itemgroup ref="Gtk.Widget" />
     </itemgroups>
     <signals>
       <itemgroup ref="Gtk.Widget" />
-      <itemgroup label="SimpleTreeView Signals">
-        <signal name="RowActivatedEvent" />
-        <signal name="ColumnsChangedEvent" />
-      </itemgroup>
     </signals>
   </object>
-  <object type="lib.SimpleListView" palette-category="widget" allow-children="false">
+  <object type="Boxerp.Client.Gtk.Lib.SimpleListView" palette-category="widget" allow-children="false">
     <itemgroups>
       <itemgroup ref="Gtk.Widget" />
     </itemgroups>
     <signals>
       <itemgroup ref="Gtk.Widget" />
       <itemgroup label="SimpleListView Signals">
+        <signal name="RowActivatedEvent" />
+        <signal name="ColumnsChangedEvent" />
+      </itemgroup>
+    </signals>
+  </object>
+  <object type="Boxerp.Client.Gtk.Lib.SimpleTreeView" palette-category="widget" allow-children="false">
+    <itemgroups>
+      <itemgroup ref="Gtk.Widget" />
+    </itemgroups>
+    <signals>
+      <itemgroup ref="Gtk.Widget" />
+      <itemgroup label="SimpleTreeView Signals">
         <signal name="RowActivatedEvent" />
         <signal name="ColumnsChangedEvent" />
       </itemgroup>

@@ -18,31 +18,31 @@ namespace Stetic {
         
         public static void Build(object obj, string id) {
             System.Collections.Hashtable bindings = new System.Collections.Hashtable();
-            if ((id == "lib.SimpleListView")) {
+            if ((id == "Boxerp.Client.Gtk.Lib.SimpleListView")) {
                 Gtk.Bin cobj = ((Gtk.Bin)(obj));
-                // Widget lib.SimpleListView
+                // Widget Boxerp.Client.Gtk.Lib.SimpleListView
                 BinContainer.Attach(cobj);
                 cobj.Events = ((Gdk.EventMask)(256));
-                cobj.Name = "lib.SimpleListView";
-                // Container child lib.SimpleListView.Gtk.Container+ContainerChild
+                cobj.Name = "Boxerp.Client.Gtk.Lib.SimpleListView";
+                // Container child Boxerp.Client.Gtk.Lib.SimpleListView.Gtk.Container+ContainerChild
                 Gtk.TreeView w1 = new Gtk.TreeView();
                 w1.CanFocus = true;
                 w1.Events = ((Gdk.EventMask)(0));
                 w1.Name = "treeview";
                 bindings["treeview"] = w1;
                 cobj.Add(w1);
-                bindings["lib.SimpleListView"] = cobj;
+                bindings["Boxerp.Client.Gtk.Lib.SimpleListView"] = cobj;
                 w1.Show();
                 cobj.Show();
             }
             else {
-                if ((id == "lib.DoubleListView")) {
+                if ((id == "Boxerp.Client.Gtk.Lib.DoubleListView")) {
                     Gtk.Bin cobj = ((Gtk.Bin)(obj));
-                    // Widget lib.DoubleListView
+                    // Widget Boxerp.Client.Gtk.Lib.DoubleListView
                     BinContainer.Attach(cobj);
                     cobj.Events = ((Gdk.EventMask)(256));
-                    cobj.Name = "lib.DoubleListView";
-                    // Container child lib.DoubleListView.Gtk.Container+ContainerChild
+                    cobj.Name = "Boxerp.Client.Gtk.Lib.DoubleListView";
+                    // Container child Boxerp.Client.Gtk.Lib.DoubleListView.Gtk.Container+ContainerChild
                     Gtk.VBox w1 = new Gtk.VBox();
                     w1.Events = ((Gdk.EventMask)(0));
                     w1.Name = "vbox2";
@@ -104,7 +104,7 @@ namespace Stetic {
                     w12.Events = ((Gdk.EventMask)(0));
                     w12.Name = "GtkViewport";
                     // Container child GtkViewport.Gtk.Container+ContainerChild
-                    lib.SimpleListView w13 = new lib.SimpleListView();
+                    Boxerp.Client.Gtk.Lib.SimpleListView w13 = new Boxerp.Client.Gtk.Lib.SimpleListView();
                     w13.Events = ((Gdk.EventMask)(256));
                     w13.Name = "slistviewLeft";
                     bindings["slistviewLeft"] = w13;
@@ -215,7 +215,7 @@ namespace Stetic {
                     w40.Events = ((Gdk.EventMask)(0));
                     w40.Name = "GtkViewport1";
                     // Container child GtkViewport1.Gtk.Container+ContainerChild
-                    lib.SimpleListView w41 = new lib.SimpleListView();
+                    Boxerp.Client.Gtk.Lib.SimpleListView w41 = new Boxerp.Client.Gtk.Lib.SimpleListView();
                     w41.Events = ((Gdk.EventMask)(256));
                     w41.Name = "slistviewRight";
                     bindings["slistviewRight"] = w41;
@@ -233,7 +233,7 @@ namespace Stetic {
                     w45.Position = 1;
                     bindings["vbox2"] = w1;
                     cobj.Add(w1);
-                    bindings["lib.DoubleListView"] = cobj;
+                    bindings["Boxerp.Client.Gtk.Lib.DoubleListView"] = cobj;
                     w3.Show();
                     w5.Show();
                     w7.Show();
@@ -262,9 +262,9 @@ namespace Stetic {
                     w28.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnRightClicked")));
                 }
                 else {
-                    if ((id == "lib.WarningDialog")) {
+                    if ((id == "Boxerp.Client.Gtk.Lib.WarningDialog")) {
                         Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
-                        // Widget lib.WarningDialog
+                        // Widget Boxerp.Client.Gtk.Lib.WarningDialog
                         cobj.Title = "Warning";
                         cobj.Icon = Gtk.IconTheme.Default.LoadIcon("gtk-dialog-warning", 16, 0);
                         cobj.WindowPosition = ((Gtk.WindowPosition)(4));
@@ -273,8 +273,8 @@ namespace Stetic {
                         cobj.AllowGrow = false;
                         cobj.DefaultWidth = 500;
                         cobj.Events = ((Gdk.EventMask)(256));
-                        cobj.Name = "lib.WarningDialog";
-                        // Internal child lib.WarningDialog.VBox
+                        cobj.Name = "Boxerp.Client.Gtk.Lib.WarningDialog";
+                        // Internal child Boxerp.Client.Gtk.Lib.WarningDialog.VBox
                         Gtk.VBox w1 = cobj.VBox;
                         w1.BorderWidth = ((uint)(2));
                         w1.Events = ((Gdk.EventMask)(256));
@@ -312,14 +312,14 @@ namespace Stetic {
                         w7.Expand = false;
                         w7.Fill = false;
                         bindings["dialog_VBox"] = w1;
-                        // Internal child lib.WarningDialog.ActionArea
+                        // Internal child Boxerp.Client.Gtk.Lib.WarningDialog.ActionArea
                         Gtk.HButtonBox w8 = cobj.ActionArea;
                         w8.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
                         w8.Spacing = 10;
                         w8.BorderWidth = ((uint)(5));
                         w8.Events = ((Gdk.EventMask)(256));
-                        w8.Name = "lib.WarningDialog_ActionArea";
-                        // Container child lib.WarningDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+                        w8.Name = "Boxerp.Client.Gtk.Lib.WarningDialog_ActionArea";
+                        // Container child Boxerp.Client.Gtk.Lib.WarningDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
                         Gtk.Button w9 = new Gtk.Button();
                         w9.CanFocus = true;
                         w9.Events = ((Gdk.EventMask)(0));
@@ -357,9 +357,9 @@ namespace Stetic {
                         Gtk.ButtonBox.ButtonBoxChild w18 = ((Gtk.ButtonBox.ButtonBoxChild)(w8[w9]));
                         w18.Expand = false;
                         w18.Fill = false;
-                        bindings["lib.WarningDialog_ActionArea"] = w8;
+                        bindings["Boxerp.Client.Gtk.Lib.WarningDialog_ActionArea"] = w8;
                         cobj.DefaultHeight = 104;
-                        bindings["lib.WarningDialog"] = cobj;
+                        bindings["Boxerp.Client.Gtk.Lib.WarningDialog"] = cobj;
                         w3.Show();
                         w5.Show();
                         w2.Show();
@@ -388,35 +388,35 @@ namespace Stetic {
                             cobj.DeleteEvent += ((Gtk.DeleteEventHandler)(System.Delegate.CreateDelegate(typeof(Gtk.DeleteEventHandler), cobj, "OnDeleteEvent")));
                         }
                         else {
-                            if ((id == "lib.SimpleTreeView")) {
+                            if ((id == "Boxerp.Client.Gtk.Lib.SimpleTreeView")) {
                                 Gtk.Bin cobj = ((Gtk.Bin)(obj));
-                                // Widget lib.SimpleTreeView
+                                // Widget Boxerp.Client.Gtk.Lib.SimpleTreeView
                                 BinContainer.Attach(cobj);
                                 cobj.Events = ((Gdk.EventMask)(256));
-                                cobj.Name = "lib.SimpleTreeView";
-                                // Container child lib.SimpleTreeView.Gtk.Container+ContainerChild
+                                cobj.Name = "Boxerp.Client.Gtk.Lib.SimpleTreeView";
+                                // Container child Boxerp.Client.Gtk.Lib.SimpleTreeView.Gtk.Container+ContainerChild
                                 Gtk.TreeView w1 = new Gtk.TreeView();
                                 w1.CanFocus = true;
                                 w1.Events = ((Gdk.EventMask)(0));
                                 w1.Name = "treeview";
                                 bindings["treeview"] = w1;
                                 cobj.Add(w1);
-                                bindings["lib.SimpleTreeView"] = cobj;
+                                bindings["Boxerp.Client.Gtk.Lib.SimpleTreeView"] = cobj;
                                 w1.Show();
                                 cobj.Show();
                             }
                             else {
-                                if ((id == "lib.WaitDialog")) {
+                                if ((id == "Boxerp.Client.Gtk.Lib.WaitDialog")) {
                                     Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
-                                    // Widget lib.WaitDialog
+                                    // Widget Boxerp.Client.Gtk.Lib.WaitDialog
                                     cobj.Title = "Operation in progress...";
                                     cobj.WindowPosition = ((Gtk.WindowPosition)(1));
                                     cobj.HasSeparator = false;
                                     cobj.Resizable = false;
                                     cobj.AllowGrow = false;
                                     cobj.Events = ((Gdk.EventMask)(256));
-                                    cobj.Name = "lib.WaitDialog";
-                                    // Internal child lib.WaitDialog.VBox
+                                    cobj.Name = "Boxerp.Client.Gtk.Lib.WaitDialog";
+                                    // Internal child Boxerp.Client.Gtk.Lib.WaitDialog.VBox
                                     Gtk.VBox w1 = cobj.VBox;
                                     w1.Spacing = 2;
                                     w1.BorderWidth = ((uint)(2));
@@ -444,7 +444,7 @@ namespace Stetic {
                                     w5.Expand = false;
                                     w5.Fill = false;
                                     bindings["dialog_VBox"] = w1;
-                                    // Internal child lib.WaitDialog.ActionArea
+                                    // Internal child Boxerp.Client.Gtk.Lib.WaitDialog.ActionArea
                                     Gtk.HButtonBox w6 = cobj.ActionArea;
                                     w6.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
                                     w6.Spacing = 10;
@@ -466,7 +466,7 @@ namespace Stetic {
                                     bindings["actionArea"] = w6;
                                     cobj.DefaultWidth = 400;
                                     cobj.DefaultHeight = 119;
-                                    bindings["lib.WaitDialog"] = cobj;
+                                    bindings["Boxerp.Client.Gtk.Lib.WaitDialog"] = cobj;
                                     w2.Show();
                                     w4.Show();
                                     w1.Show();
@@ -474,26 +474,26 @@ namespace Stetic {
                                     cobj.Show();
                                 }
                                 else {
-                                    if ((id == "lib.InfoDialog")) {
+                                    if ((id == "Boxerp.Client.Gtk.Lib.InfoDialog")) {
                                         Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
-                                        // Widget lib.InfoDialog
+                                        // Widget Boxerp.Client.Gtk.Lib.InfoDialog
                                         cobj.Title = "InfoDialog";
                                         cobj.WindowPosition = ((Gtk.WindowPosition)(4));
                                         cobj.HasSeparator = false;
                                         cobj.Events = ((Gdk.EventMask)(256));
-                                        cobj.Name = "lib.InfoDialog";
-                                        // Internal child lib.InfoDialog.VBox
+                                        cobj.Name = "Boxerp.Client.Gtk.Lib.InfoDialog";
+                                        // Internal child Boxerp.Client.Gtk.Lib.InfoDialog.VBox
                                         Gtk.VBox w1 = cobj.VBox;
                                         w1.BorderWidth = ((uint)(2));
                                         w1.Events = ((Gdk.EventMask)(256));
                                         w1.Name = "dialog_VBox";
                                         bindings["dialog_VBox"] = w1;
-                                        // Internal child lib.InfoDialog.ActionArea
+                                        // Internal child Boxerp.Client.Gtk.Lib.InfoDialog.ActionArea
                                         Gtk.HButtonBox w2 = cobj.ActionArea;
                                         w2.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
                                         w2.Events = ((Gdk.EventMask)(256));
-                                        w2.Name = "lib.InfoDialog_ActionArea";
-                                        // Container child lib.InfoDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+                                        w2.Name = "Boxerp.Client.Gtk.Lib.InfoDialog_ActionArea";
+                                        // Container child Boxerp.Client.Gtk.Lib.InfoDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
                                         Gtk.Button w3 = new Gtk.Button();
                                         w3.CanFocus = true;
                                         w3.Events = ((Gdk.EventMask)(0));
@@ -505,36 +505,36 @@ namespace Stetic {
                                         Gtk.ButtonBox.ButtonBoxChild w4 = ((Gtk.ButtonBox.ButtonBoxChild)(w2[w3]));
                                         w4.Expand = false;
                                         w4.Fill = false;
-                                        bindings["lib.InfoDialog_ActionArea"] = w2;
+                                        bindings["Boxerp.Client.Gtk.Lib.InfoDialog_ActionArea"] = w2;
                                         cobj.DefaultWidth = 400;
                                         cobj.DefaultHeight = 300;
-                                        bindings["lib.InfoDialog"] = cobj;
+                                        bindings["Boxerp.Client.Gtk.Lib.InfoDialog"] = cobj;
                                         w1.Show();
                                         w3.Show();
                                         w2.Show();
                                         cobj.Show();
                                     }
                                     else {
-                                        if ((id == "lib.InfoExtendedDialog")) {
+                                        if ((id == "Boxerp.Client.Gtk.Lib.InfoExtendedDialog")) {
                                             Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
-                                            // Widget lib.InfoExtendedDialog
+                                            // Widget Boxerp.Client.Gtk.Lib.InfoExtendedDialog
                                             cobj.Title = "InfoExtendedDialog";
                                             cobj.WindowPosition = ((Gtk.WindowPosition)(4));
                                             cobj.HasSeparator = false;
                                             cobj.Events = ((Gdk.EventMask)(256));
-                                            cobj.Name = "lib.InfoExtendedDialog";
-                                            // Internal child lib.InfoExtendedDialog.VBox
+                                            cobj.Name = "Boxerp.Client.Gtk.Lib.InfoExtendedDialog";
+                                            // Internal child Boxerp.Client.Gtk.Lib.InfoExtendedDialog.VBox
                                             Gtk.VBox w1 = cobj.VBox;
                                             w1.BorderWidth = ((uint)(2));
                                             w1.Events = ((Gdk.EventMask)(256));
                                             w1.Name = "dialog_VBox";
                                             bindings["dialog_VBox"] = w1;
-                                            // Internal child lib.InfoExtendedDialog.ActionArea
+                                            // Internal child Boxerp.Client.Gtk.Lib.InfoExtendedDialog.ActionArea
                                             Gtk.HButtonBox w2 = cobj.ActionArea;
                                             w2.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
                                             w2.Events = ((Gdk.EventMask)(256));
-                                            w2.Name = "lib.InfoExtendedDialog_ActionArea";
-                                            // Container child lib.InfoExtendedDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+                                            w2.Name = "Boxerp.Client.Gtk.Lib.InfoExtendedDialog_ActionArea";
+                                            // Container child Boxerp.Client.Gtk.Lib.InfoExtendedDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
                                             Gtk.Button w3 = new Gtk.Button();
                                             w3.CanFocus = true;
                                             w3.Events = ((Gdk.EventMask)(0));
@@ -546,37 +546,37 @@ namespace Stetic {
                                             Gtk.ButtonBox.ButtonBoxChild w4 = ((Gtk.ButtonBox.ButtonBoxChild)(w2[w3]));
                                             w4.Expand = false;
                                             w4.Fill = false;
-                                            bindings["lib.InfoExtendedDialog_ActionArea"] = w2;
+                                            bindings["Boxerp.Client.Gtk.Lib.InfoExtendedDialog_ActionArea"] = w2;
                                             cobj.DefaultWidth = 400;
                                             cobj.DefaultHeight = 300;
-                                            bindings["lib.InfoExtendedDialog"] = cobj;
+                                            bindings["Boxerp.Client.Gtk.Lib.InfoExtendedDialog"] = cobj;
                                             w1.Show();
                                             w3.Show();
                                             w2.Show();
                                             cobj.Show();
                                         }
                                         else {
-                                            if ((id == "lib.LoginWindow")) {
+                                            if ((id == "Boxerp.Client.Gtk.Lib.LoginWindow")) {
                                                 Gtk.Window cobj = ((Gtk.Window)(obj));
-                                                // Widget lib.LoginWindow
+                                                // Widget Boxerp.Client.Gtk.Lib.LoginWindow
                                                 cobj.Title = "LoginWindow";
                                                 cobj.WindowPosition = ((Gtk.WindowPosition)(4));
                                                 cobj.Events = ((Gdk.EventMask)(0));
-                                                cobj.Name = "lib.LoginWindow";
+                                                cobj.Name = "Boxerp.Client.Gtk.Lib.LoginWindow";
                                                 cobj.DefaultWidth = 400;
                                                 cobj.DefaultHeight = 300;
-                                                bindings["lib.LoginWindow"] = cobj;
+                                                bindings["Boxerp.Client.Gtk.Lib.LoginWindow"] = cobj;
                                                 cobj.Show();
                                             }
                                             else {
-                                                if ((id == "lib.WaitWindow")) {
+                                                if ((id == "Boxerp.Client.Gtk.Lib.WaitWindow")) {
                                                     Gtk.Window cobj = ((Gtk.Window)(obj));
-                                                    // Widget lib.WaitWindow
+                                                    // Widget Boxerp.Client.Gtk.Lib.WaitWindow
                                                     cobj.Title = "Operation in progress...";
                                                     cobj.WindowPosition = ((Gtk.WindowPosition)(1));
                                                     cobj.Events = ((Gdk.EventMask)(0));
-                                                    cobj.Name = "lib.WaitWindow";
-                                                    // Container child lib.WaitWindow.Gtk.Container+ContainerChild
+                                                    cobj.Name = "Boxerp.Client.Gtk.Lib.WaitWindow";
+                                                    // Container child Boxerp.Client.Gtk.Lib.WaitWindow.Gtk.Container+ContainerChild
                                                     Gtk.VBox w1 = new Gtk.VBox();
                                                     w1.Spacing = 2;
                                                     w1.BorderWidth = ((uint)(5));
@@ -607,7 +607,7 @@ namespace Stetic {
                                                     cobj.Add(w1);
                                                     cobj.DefaultWidth = 400;
                                                     cobj.DefaultHeight = 78;
-                                                    bindings["lib.WaitWindow"] = cobj;
+                                                    bindings["Boxerp.Client.Gtk.Lib.WaitWindow"] = cobj;
                                                     w2.Show();
                                                     w4.Show();
                                                     w1.Show();
@@ -626,20 +626,20 @@ namespace Stetic {
                                                         cobj.Show();
                                                     }
                                                     else {
-                                                        if ((id == "lib.FilteredListView")) {
+                                                        if ((id == "Boxerp.Client.Gtk.Lib.FilteredListView")) {
                                                             Gtk.Bin cobj = ((Gtk.Bin)(obj));
-                                                            // Widget lib.FilteredListView
+                                                            // Widget Boxerp.Client.Gtk.Lib.FilteredListView
                                                             BinContainer.Attach(cobj);
                                                             cobj.Events = ((Gdk.EventMask)(256));
-                                                            cobj.Name = "lib.FilteredListView";
-                                                            // Container child lib.FilteredListView.Gtk.Container+ContainerChild
+                                                            cobj.Name = "Boxerp.Client.Gtk.Lib.FilteredListView";
+                                                            // Container child Boxerp.Client.Gtk.Lib.FilteredListView.Gtk.Container+ContainerChild
                                                             Gtk.TreeView w1 = new Gtk.TreeView();
                                                             w1.CanFocus = true;
                                                             w1.Events = ((Gdk.EventMask)(0));
                                                             w1.Name = "treeview";
                                                             bindings["treeview"] = w1;
                                                             cobj.Add(w1);
-                                                            bindings["lib.FilteredListView"] = cobj;
+                                                            bindings["Boxerp.Client.Gtk.Lib.FilteredListView"] = cobj;
                                                             w1.Show();
                                                             cobj.Show();
                                                         }

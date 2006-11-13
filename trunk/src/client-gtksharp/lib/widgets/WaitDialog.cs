@@ -2,7 +2,7 @@
 using System;
 using Gtk;
 
-namespace widgets
+namespace lib
 {
 	
 	public class WaitDialog : Gtk.Dialog
@@ -22,7 +22,7 @@ namespace widgets
 
 		public WaitDialog(Gtk.Window parent)
 		{
-			Stetic.Gui.Build(this, typeof(widgets.WaitDialog));
+			Stetic.Gui.Build(this, typeof(lib.WaitDialog));
 			this.Modal = true;
 			this.TransientFor = parent;
 			this.Hide();

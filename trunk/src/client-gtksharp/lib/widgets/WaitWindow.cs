@@ -1,7 +1,7 @@
 
 using System;
 
-namespace widgets
+namespace lib
 {
 	
 	public class WaitWindow : Gtk.Window
@@ -22,7 +22,7 @@ namespace widgets
 		public WaitWindow() : 
 				base("")
 		{
-			Stetic.Gui.Build(this, typeof(widgets.WaitWindow));
+			Stetic.Gui.Build(this, typeof(lib.WaitWindow));
 			this.Modal = true;
 			this.Hide();
 			progressbar.BarStyle = Gtk.ProgressBarStyle.Continuous;

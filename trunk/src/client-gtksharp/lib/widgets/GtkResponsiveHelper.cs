@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Threading;
-using widgets;
+using lib;
 using System.Reflection;
 using Gtk;
 
@@ -11,8 +11,8 @@ namespace clientlib
 	// TODO: llamar a upload/download pasandole el metodo que sea	
 	public abstract class ResponsiveHelper : IResponsiveClient
 	{
-		widgets.WaitDialog waitDialog;
-		widgets.WarningDialog warningDialog;
+		lib.WaitDialog waitDialog;
+		lib.WarningDialog warningDialog;
 		protected ThreadStart threadStartUpload;
 		protected ThreadStart threadStartDownload;		
 		protected Thread threadUpload;

@@ -1,7 +1,7 @@
 
 using System;
 
-namespace widgets
+namespace lib
 {
 	
 	public struct SimpleColumn

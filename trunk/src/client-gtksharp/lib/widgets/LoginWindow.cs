@@ -5,7 +5,7 @@ using System.Threading;
 using Boxerp.Models;
 using Boxerp.Objects;
 
-namespace widgets
+namespace lib
 {
 	
 	public class LoginWindow : Gtk.Window
@@ -29,7 +29,7 @@ namespace widgets
 		public LoginWindow() : 
 				base("")
 		{
-			Stetic.Gui.Build(this, typeof(widgets.LoginWindow));
+			Stetic.Gui.Build(this, typeof(lib.LoginWindow));
 			delegateLogin = new ThreadStart (Login);
 			threadLogin  = new Thread(delegateLogin);
 			notify = new ThreadNotify (new ReadyEvent (Logged));

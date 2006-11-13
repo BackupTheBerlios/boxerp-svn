@@ -3,7 +3,7 @@ using Gtk;
 using System.Collections;
 using Boxerp.Models;
 
-namespace widgets
+namespace lib
 
 {
 	// TODO: Thinking about write a complete treeview wrapper instead
@@ -23,7 +23,7 @@ namespace widgets
 		
 		public SimpleTreeView()
 		{
-			Stetic.Gui.Build(this, typeof(widgets.SimpleTreeView));
+			Stetic.Gui.Build(this, typeof(lib.SimpleTreeView));
 			treeview.RowActivated += new Gtk.RowActivatedHandler(OnRowActivated);
 			treeview.ColumnsChanged += new System.EventHandler(OnColumnsChanged);
 		}

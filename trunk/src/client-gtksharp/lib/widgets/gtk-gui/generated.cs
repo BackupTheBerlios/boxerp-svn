@@ -18,31 +18,31 @@ namespace Stetic {
         
         public static void Build(object obj, string id) {
             System.Collections.Hashtable bindings = new System.Collections.Hashtable();
-            if ((id == "widgets.SimpleListView")) {
+            if ((id == "lib.SimpleListView")) {
                 Gtk.Bin cobj = ((Gtk.Bin)(obj));
-                // Widget widgets.SimpleListView
+                // Widget lib.SimpleListView
                 BinContainer.Attach(cobj);
                 cobj.Events = ((Gdk.EventMask)(256));
-                cobj.Name = "widgets.SimpleListView";
-                // Container child widgets.SimpleListView.Gtk.Container+ContainerChild
+                cobj.Name = "lib.SimpleListView";
+                // Container child lib.SimpleListView.Gtk.Container+ContainerChild
                 Gtk.TreeView w1 = new Gtk.TreeView();
                 w1.CanFocus = true;
                 w1.Events = ((Gdk.EventMask)(0));
                 w1.Name = "treeview";
                 bindings["treeview"] = w1;
                 cobj.Add(w1);
-                bindings["widgets.SimpleListView"] = cobj;
+                bindings["lib.SimpleListView"] = cobj;
                 w1.Show();
                 cobj.Show();
             }
             else {
-                if ((id == "widgets.DoubleListView")) {
+                if ((id == "lib.DoubleListView")) {
                     Gtk.Bin cobj = ((Gtk.Bin)(obj));
-                    // Widget widgets.DoubleListView
+                    // Widget lib.DoubleListView
                     BinContainer.Attach(cobj);
                     cobj.Events = ((Gdk.EventMask)(256));
-                    cobj.Name = "widgets.DoubleListView";
-                    // Container child widgets.DoubleListView.Gtk.Container+ContainerChild
+                    cobj.Name = "lib.DoubleListView";
+                    // Container child lib.DoubleListView.Gtk.Container+ContainerChild
                     Gtk.VBox w1 = new Gtk.VBox();
                     w1.Events = ((Gdk.EventMask)(0));
                     w1.Name = "vbox2";
@@ -104,7 +104,7 @@ namespace Stetic {
                     w12.Events = ((Gdk.EventMask)(0));
                     w12.Name = "GtkViewport";
                     // Container child GtkViewport.Gtk.Container+ContainerChild
-                    widgets.SimpleListView w13 = new widgets.SimpleListView();
+                    lib.SimpleListView w13 = new lib.SimpleListView();
                     w13.Events = ((Gdk.EventMask)(256));
                     w13.Name = "slistviewLeft";
                     bindings["slistviewLeft"] = w13;
@@ -215,7 +215,7 @@ namespace Stetic {
                     w40.Events = ((Gdk.EventMask)(0));
                     w40.Name = "GtkViewport1";
                     // Container child GtkViewport1.Gtk.Container+ContainerChild
-                    widgets.SimpleListView w41 = new widgets.SimpleListView();
+                    lib.SimpleListView w41 = new lib.SimpleListView();
                     w41.Events = ((Gdk.EventMask)(256));
                     w41.Name = "slistviewRight";
                     bindings["slistviewRight"] = w41;
@@ -233,7 +233,7 @@ namespace Stetic {
                     w45.Position = 1;
                     bindings["vbox2"] = w1;
                     cobj.Add(w1);
-                    bindings["widgets.DoubleListView"] = cobj;
+                    bindings["lib.DoubleListView"] = cobj;
                     w3.Show();
                     w5.Show();
                     w7.Show();
@@ -262,9 +262,9 @@ namespace Stetic {
                     w28.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnRightClicked")));
                 }
                 else {
-                    if ((id == "widgets.WarningDialog")) {
+                    if ((id == "lib.WarningDialog")) {
                         Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
-                        // Widget widgets.WarningDialog
+                        // Widget lib.WarningDialog
                         cobj.Title = "Warning";
                         cobj.Icon = Gtk.IconTheme.Default.LoadIcon("gtk-dialog-warning", 16, 0);
                         cobj.WindowPosition = ((Gtk.WindowPosition)(4));
@@ -273,8 +273,8 @@ namespace Stetic {
                         cobj.AllowGrow = false;
                         cobj.DefaultWidth = 500;
                         cobj.Events = ((Gdk.EventMask)(256));
-                        cobj.Name = "widgets.WarningDialog";
-                        // Internal child widgets.WarningDialog.VBox
+                        cobj.Name = "lib.WarningDialog";
+                        // Internal child lib.WarningDialog.VBox
                         Gtk.VBox w1 = cobj.VBox;
                         w1.BorderWidth = ((uint)(2));
                         w1.Events = ((Gdk.EventMask)(256));
@@ -312,14 +312,14 @@ namespace Stetic {
                         w7.Expand = false;
                         w7.Fill = false;
                         bindings["dialog_VBox"] = w1;
-                        // Internal child widgets.WarningDialog.ActionArea
+                        // Internal child lib.WarningDialog.ActionArea
                         Gtk.HButtonBox w8 = cobj.ActionArea;
                         w8.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
                         w8.Spacing = 10;
                         w8.BorderWidth = ((uint)(5));
                         w8.Events = ((Gdk.EventMask)(256));
-                        w8.Name = "widgets.WarningDialog_ActionArea";
-                        // Container child widgets.WarningDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+                        w8.Name = "lib.WarningDialog_ActionArea";
+                        // Container child lib.WarningDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
                         Gtk.Button w9 = new Gtk.Button();
                         w9.CanFocus = true;
                         w9.Events = ((Gdk.EventMask)(0));
@@ -357,9 +357,9 @@ namespace Stetic {
                         Gtk.ButtonBox.ButtonBoxChild w18 = ((Gtk.ButtonBox.ButtonBoxChild)(w8[w9]));
                         w18.Expand = false;
                         w18.Fill = false;
-                        bindings["widgets.WarningDialog_ActionArea"] = w8;
+                        bindings["lib.WarningDialog_ActionArea"] = w8;
                         cobj.DefaultHeight = 104;
-                        bindings["widgets.WarningDialog"] = cobj;
+                        bindings["lib.WarningDialog"] = cobj;
                         w3.Show();
                         w5.Show();
                         w2.Show();
@@ -388,35 +388,35 @@ namespace Stetic {
                             cobj.DeleteEvent += ((Gtk.DeleteEventHandler)(System.Delegate.CreateDelegate(typeof(Gtk.DeleteEventHandler), cobj, "OnDeleteEvent")));
                         }
                         else {
-                            if ((id == "widgets.SimpleTreeView")) {
+                            if ((id == "lib.SimpleTreeView")) {
                                 Gtk.Bin cobj = ((Gtk.Bin)(obj));
-                                // Widget widgets.SimpleTreeView
+                                // Widget lib.SimpleTreeView
                                 BinContainer.Attach(cobj);
                                 cobj.Events = ((Gdk.EventMask)(256));
-                                cobj.Name = "widgets.SimpleTreeView";
-                                // Container child widgets.SimpleTreeView.Gtk.Container+ContainerChild
+                                cobj.Name = "lib.SimpleTreeView";
+                                // Container child lib.SimpleTreeView.Gtk.Container+ContainerChild
                                 Gtk.TreeView w1 = new Gtk.TreeView();
                                 w1.CanFocus = true;
                                 w1.Events = ((Gdk.EventMask)(0));
                                 w1.Name = "treeview";
                                 bindings["treeview"] = w1;
                                 cobj.Add(w1);
-                                bindings["widgets.SimpleTreeView"] = cobj;
+                                bindings["lib.SimpleTreeView"] = cobj;
                                 w1.Show();
                                 cobj.Show();
                             }
                             else {
-                                if ((id == "widgets.WaitDialog")) {
+                                if ((id == "lib.WaitDialog")) {
                                     Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
-                                    // Widget widgets.WaitDialog
+                                    // Widget lib.WaitDialog
                                     cobj.Title = "Operation in progress...";
                                     cobj.WindowPosition = ((Gtk.WindowPosition)(1));
                                     cobj.HasSeparator = false;
                                     cobj.Resizable = false;
                                     cobj.AllowGrow = false;
                                     cobj.Events = ((Gdk.EventMask)(256));
-                                    cobj.Name = "widgets.WaitDialog";
-                                    // Internal child widgets.WaitDialog.VBox
+                                    cobj.Name = "lib.WaitDialog";
+                                    // Internal child lib.WaitDialog.VBox
                                     Gtk.VBox w1 = cobj.VBox;
                                     w1.Spacing = 2;
                                     w1.BorderWidth = ((uint)(2));
@@ -444,7 +444,7 @@ namespace Stetic {
                                     w5.Expand = false;
                                     w5.Fill = false;
                                     bindings["dialog_VBox"] = w1;
-                                    // Internal child widgets.WaitDialog.ActionArea
+                                    // Internal child lib.WaitDialog.ActionArea
                                     Gtk.HButtonBox w6 = cobj.ActionArea;
                                     w6.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
                                     w6.Spacing = 10;
@@ -466,7 +466,7 @@ namespace Stetic {
                                     bindings["actionArea"] = w6;
                                     cobj.DefaultWidth = 400;
                                     cobj.DefaultHeight = 119;
-                                    bindings["widgets.WaitDialog"] = cobj;
+                                    bindings["lib.WaitDialog"] = cobj;
                                     w2.Show();
                                     w4.Show();
                                     w1.Show();
@@ -474,26 +474,26 @@ namespace Stetic {
                                     cobj.Show();
                                 }
                                 else {
-                                    if ((id == "widgets.InfoDialog")) {
+                                    if ((id == "lib.InfoDialog")) {
                                         Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
-                                        // Widget widgets.InfoDialog
+                                        // Widget lib.InfoDialog
                                         cobj.Title = "InfoDialog";
                                         cobj.WindowPosition = ((Gtk.WindowPosition)(4));
                                         cobj.HasSeparator = false;
                                         cobj.Events = ((Gdk.EventMask)(256));
-                                        cobj.Name = "widgets.InfoDialog";
-                                        // Internal child widgets.InfoDialog.VBox
+                                        cobj.Name = "lib.InfoDialog";
+                                        // Internal child lib.InfoDialog.VBox
                                         Gtk.VBox w1 = cobj.VBox;
                                         w1.BorderWidth = ((uint)(2));
                                         w1.Events = ((Gdk.EventMask)(256));
                                         w1.Name = "dialog_VBox";
                                         bindings["dialog_VBox"] = w1;
-                                        // Internal child widgets.InfoDialog.ActionArea
+                                        // Internal child lib.InfoDialog.ActionArea
                                         Gtk.HButtonBox w2 = cobj.ActionArea;
                                         w2.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
                                         w2.Events = ((Gdk.EventMask)(256));
-                                        w2.Name = "widgets.InfoDialog_ActionArea";
-                                        // Container child widgets.InfoDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+                                        w2.Name = "lib.InfoDialog_ActionArea";
+                                        // Container child lib.InfoDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
                                         Gtk.Button w3 = new Gtk.Button();
                                         w3.CanFocus = true;
                                         w3.Events = ((Gdk.EventMask)(0));
@@ -505,36 +505,36 @@ namespace Stetic {
                                         Gtk.ButtonBox.ButtonBoxChild w4 = ((Gtk.ButtonBox.ButtonBoxChild)(w2[w3]));
                                         w4.Expand = false;
                                         w4.Fill = false;
-                                        bindings["widgets.InfoDialog_ActionArea"] = w2;
+                                        bindings["lib.InfoDialog_ActionArea"] = w2;
                                         cobj.DefaultWidth = 400;
                                         cobj.DefaultHeight = 300;
-                                        bindings["widgets.InfoDialog"] = cobj;
+                                        bindings["lib.InfoDialog"] = cobj;
                                         w1.Show();
                                         w3.Show();
                                         w2.Show();
                                         cobj.Show();
                                     }
                                     else {
-                                        if ((id == "widgets.InfoExtendedDialog")) {
+                                        if ((id == "lib.InfoExtendedDialog")) {
                                             Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
-                                            // Widget widgets.InfoExtendedDialog
+                                            // Widget lib.InfoExtendedDialog
                                             cobj.Title = "InfoExtendedDialog";
                                             cobj.WindowPosition = ((Gtk.WindowPosition)(4));
                                             cobj.HasSeparator = false;
                                             cobj.Events = ((Gdk.EventMask)(256));
-                                            cobj.Name = "widgets.InfoExtendedDialog";
-                                            // Internal child widgets.InfoExtendedDialog.VBox
+                                            cobj.Name = "lib.InfoExtendedDialog";
+                                            // Internal child lib.InfoExtendedDialog.VBox
                                             Gtk.VBox w1 = cobj.VBox;
                                             w1.BorderWidth = ((uint)(2));
                                             w1.Events = ((Gdk.EventMask)(256));
                                             w1.Name = "dialog_VBox";
                                             bindings["dialog_VBox"] = w1;
-                                            // Internal child widgets.InfoExtendedDialog.ActionArea
+                                            // Internal child lib.InfoExtendedDialog.ActionArea
                                             Gtk.HButtonBox w2 = cobj.ActionArea;
                                             w2.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
                                             w2.Events = ((Gdk.EventMask)(256));
-                                            w2.Name = "widgets.InfoExtendedDialog_ActionArea";
-                                            // Container child widgets.InfoExtendedDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+                                            w2.Name = "lib.InfoExtendedDialog_ActionArea";
+                                            // Container child lib.InfoExtendedDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
                                             Gtk.Button w3 = new Gtk.Button();
                                             w3.CanFocus = true;
                                             w3.Events = ((Gdk.EventMask)(0));
@@ -546,37 +546,37 @@ namespace Stetic {
                                             Gtk.ButtonBox.ButtonBoxChild w4 = ((Gtk.ButtonBox.ButtonBoxChild)(w2[w3]));
                                             w4.Expand = false;
                                             w4.Fill = false;
-                                            bindings["widgets.InfoExtendedDialog_ActionArea"] = w2;
+                                            bindings["lib.InfoExtendedDialog_ActionArea"] = w2;
                                             cobj.DefaultWidth = 400;
                                             cobj.DefaultHeight = 300;
-                                            bindings["widgets.InfoExtendedDialog"] = cobj;
+                                            bindings["lib.InfoExtendedDialog"] = cobj;
                                             w1.Show();
                                             w3.Show();
                                             w2.Show();
                                             cobj.Show();
                                         }
                                         else {
-                                            if ((id == "widgets.LoginWindow")) {
+                                            if ((id == "lib.LoginWindow")) {
                                                 Gtk.Window cobj = ((Gtk.Window)(obj));
-                                                // Widget widgets.LoginWindow
+                                                // Widget lib.LoginWindow
                                                 cobj.Title = "LoginWindow";
                                                 cobj.WindowPosition = ((Gtk.WindowPosition)(4));
                                                 cobj.Events = ((Gdk.EventMask)(0));
-                                                cobj.Name = "widgets.LoginWindow";
+                                                cobj.Name = "lib.LoginWindow";
                                                 cobj.DefaultWidth = 400;
                                                 cobj.DefaultHeight = 300;
-                                                bindings["widgets.LoginWindow"] = cobj;
+                                                bindings["lib.LoginWindow"] = cobj;
                                                 cobj.Show();
                                             }
                                             else {
-                                                if ((id == "widgets.WaitWindow")) {
+                                                if ((id == "lib.WaitWindow")) {
                                                     Gtk.Window cobj = ((Gtk.Window)(obj));
-                                                    // Widget widgets.WaitWindow
+                                                    // Widget lib.WaitWindow
                                                     cobj.Title = "Operation in progress...";
                                                     cobj.WindowPosition = ((Gtk.WindowPosition)(1));
                                                     cobj.Events = ((Gdk.EventMask)(0));
-                                                    cobj.Name = "widgets.WaitWindow";
-                                                    // Container child widgets.WaitWindow.Gtk.Container+ContainerChild
+                                                    cobj.Name = "lib.WaitWindow";
+                                                    // Container child lib.WaitWindow.Gtk.Container+ContainerChild
                                                     Gtk.VBox w1 = new Gtk.VBox();
                                                     w1.Spacing = 2;
                                                     w1.BorderWidth = ((uint)(5));
@@ -607,7 +607,7 @@ namespace Stetic {
                                                     cobj.Add(w1);
                                                     cobj.DefaultWidth = 400;
                                                     cobj.DefaultHeight = 78;
-                                                    bindings["widgets.WaitWindow"] = cobj;
+                                                    bindings["lib.WaitWindow"] = cobj;
                                                     w2.Show();
                                                     w4.Show();
                                                     w1.Show();
@@ -626,20 +626,20 @@ namespace Stetic {
                                                         cobj.Show();
                                                     }
                                                     else {
-                                                        if ((id == "widgets.FilteredListView")) {
+                                                        if ((id == "lib.FilteredListView")) {
                                                             Gtk.Bin cobj = ((Gtk.Bin)(obj));
-                                                            // Widget widgets.FilteredListView
+                                                            // Widget lib.FilteredListView
                                                             BinContainer.Attach(cobj);
                                                             cobj.Events = ((Gdk.EventMask)(256));
-                                                            cobj.Name = "widgets.FilteredListView";
-                                                            // Container child widgets.FilteredListView.Gtk.Container+ContainerChild
+                                                            cobj.Name = "lib.FilteredListView";
+                                                            // Container child lib.FilteredListView.Gtk.Container+ContainerChild
                                                             Gtk.TreeView w1 = new Gtk.TreeView();
                                                             w1.CanFocus = true;
                                                             w1.Events = ((Gdk.EventMask)(0));
                                                             w1.Name = "treeview";
                                                             bindings["treeview"] = w1;
                                                             cobj.Add(w1);
-                                                            bindings["widgets.FilteredListView"] = cobj;
+                                                            bindings["lib.FilteredListView"] = cobj;
                                                             w1.Show();
                                                             cobj.Show();
                                                         }

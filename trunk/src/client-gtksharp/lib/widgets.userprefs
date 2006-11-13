@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
-<UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/widgets/widgets.mds">
+<UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/lib/lib.mds">
   <Files>
     <File filename="Bienvenido" />
-    <File filename="./widgets/FilteredListView.cs" />
-    <File filename="./widgets/DoubleListView.cs" />
-    <File filename="./widgets/SimpleListView.cs" />
+    <File filename="./lib/FilteredListView.cs" />
+    <File filename="./lib/DoubleListView.cs" />
+    <File filename="./lib/SimpleListView.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="widgets" expanded="True">
+          <Node name="lib" expanded="True">
             <Node name="References" expanded="True" />
             <Node name="UserInterface" expanded="True" />
             <Node name="DoubleListView.cs" expanded="False" selected="True" />
@@ -37,7 +37,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/widgets/widgets/DoubleListView.cs" />
+      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/lib/lib/DoubleListView.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

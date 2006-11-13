@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <stetic-interface>
-  <widget class="Gtk.Bin" id="widgets.FilteredListView" design-size="300 300">
+  <widget class="Gtk.Bin" id="lib.FilteredListView" design-size="300 300">
     <property name="Events">ButtonPressMask</property>
     <property name="MemberName" />
     <child>
@@ -11,7 +11,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="widgets.WaitWindow" design-size="400 78">
+  <widget class="Gtk.Window" id="lib.WaitWindow" design-size="400 78">
     <property name="Title" translatable="yes" context="yes" comments="">operationInProgress|Operation in progress...</property>
     <property name="WindowPosition">Center</property>
     <property name="Events">0</property>
@@ -60,7 +60,7 @@
       <placeholder />
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="widgets.InfoDialog" design-size="400 300">
+  <widget class="Gtk.Dialog" id="lib.InfoDialog" design-size="400 300">
     <property name="Title" translatable="yes">InfoDialog</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
@@ -79,7 +79,7 @@
       </widget>
     </child>
     <child internal-child="ActionArea">
-      <widget class="Gtk.HButtonBox" id="widgets.InfoDialog_ActionArea">
+      <widget class="Gtk.HButtonBox" id="lib.InfoDialog_ActionArea">
         <property name="Size">1</property>
         <property name="LayoutStyle">End</property>
         <property name="Events">ButtonPressMask</property>
@@ -103,7 +103,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="widgets.WarningDialog" design-size="492 104">
+  <widget class="Gtk.Dialog" id="lib.WarningDialog" design-size="492 104">
     <property name="Title" translatable="yes">Warning</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
@@ -161,7 +161,7 @@
       </widget>
     </child>
     <child internal-child="ActionArea">
-      <widget class="Gtk.HButtonBox" id="widgets.WarningDialog_ActionArea">
+      <widget class="Gtk.HButtonBox" id="lib.WarningDialog_ActionArea">
         <property name="Size">1</property>
         <property name="LayoutStyle">End</property>
         <property name="Spacing">10</property>
@@ -199,7 +199,7 @@
     <property name="MemberName" />
     <property name="CanDefault">True</property>
   </widget>
-  <widget class="Gtk.Window" id="widgets.LoginWindow" design-size="400 300">
+  <widget class="Gtk.Window" id="lib.LoginWindow" design-size="400 300">
     <property name="Title" translatable="yes">LoginWindow</property>
     <property name="WindowPosition">CenterOnParent</property>
     <property name="Events">0</property>
@@ -208,7 +208,7 @@
       <placeholder />
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="widgets.DoubleListView" design-size="300 114">
+  <widget class="Gtk.Bin" id="lib.DoubleListView" design-size="300 114">
     <property name="Events">ButtonPressMask</property>
     <property name="MemberName" />
     <child>
@@ -281,7 +281,7 @@
                     <property name="Events">0</property>
                     <property name="MemberName" />
                     <child>
-                      <widget class="widgets.SimpleListView" id="slistviewLeft">
+                      <widget class="lib.SimpleListView" id="slistviewLeft">
                         <property name="Events">ButtonPressMask</property>
                         <property name="MemberName" />
                       </widget>
@@ -359,7 +359,7 @@
                     <property name="Events">0</property>
                     <property name="MemberName" />
                     <child>
-                      <widget class="widgets.SimpleListView" id="slistviewRight">
+                      <widget class="lib.SimpleListView" id="slistviewRight">
                         <property name="Events">ButtonPressMask</property>
                         <property name="MemberName" />
                       </widget>
@@ -382,7 +382,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="widgets.InfoExtendedDialog" design-size="400 300">
+  <widget class="Gtk.Dialog" id="lib.InfoExtendedDialog" design-size="400 300">
     <property name="Title" translatable="yes">InfoExtendedDialog</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
@@ -401,7 +401,7 @@
       </widget>
     </child>
     <child internal-child="ActionArea">
-      <widget class="Gtk.HButtonBox" id="widgets.InfoExtendedDialog_ActionArea">
+      <widget class="Gtk.HButtonBox" id="lib.InfoExtendedDialog_ActionArea">
         <property name="Size">1</property>
         <property name="LayoutStyle">End</property>
         <property name="Events">ButtonPressMask</property>
@@ -425,7 +425,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="widgets.SimpleTreeView" design-size="300 300">
+  <widget class="Gtk.Bin" id="lib.SimpleTreeView" design-size="300 300">
     <property name="Events">ButtonPressMask</property>
     <property name="MemberName" />
     <child>
@@ -436,7 +436,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="widgets.WaitDialog" design-size="400 119">
+  <widget class="Gtk.Dialog" id="lib.WaitDialog" design-size="400 119">
     <property name="Title" translatable="yes" context="yes" comments="">operationInProgress|Operation in progress...</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
@@ -507,7 +507,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="widgets.SimpleListView" design-size="300 300">
+  <widget class="Gtk.Bin" id="lib.SimpleListView" design-size="300 300">
     <property name="Events">ButtonPressMask</property>
     <property name="MemberName" />
     <child>

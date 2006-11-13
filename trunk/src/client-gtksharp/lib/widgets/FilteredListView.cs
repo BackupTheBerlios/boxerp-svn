@@ -5,7 +5,7 @@ using Gtk;
 using System.Collections;
 using Boxerp.Models;
 
-namespace widgets
+namespace lib
 
 {
 	// TODO: Thinking about write a complete treeview wrapper instead
@@ -33,7 +33,7 @@ namespace widgets
 		
 		public FilteredListView()
 		{
-			Stetic.Gui.Build(this, typeof(widgets.FilteredListView));
+			Stetic.Gui.Build(this, typeof(lib.FilteredListView));
 			treeview.RowActivated += new Gtk.RowActivatedHandler(OnRowActivated);
 			treeview.ColumnsChanged += new System.EventHandler(OnColumnsChanged);
 		}

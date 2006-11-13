@@ -1,7 +1,7 @@
 
 using System;
 
-namespace widgets
+namespace lib
 {
 	
 	public class WarningDialog : Gtk.Dialog
@@ -11,7 +11,7 @@ namespace widgets
 		
 		public WarningDialog()
 		{
-			Stetic.Gui.Build(this, typeof(widgets.WarningDialog));
+			Stetic.Gui.Build(this, typeof(lib.WarningDialog));
 		}
 
 		public string Message 

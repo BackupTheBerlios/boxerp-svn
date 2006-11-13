@@ -1,7 +1,7 @@
 
 using System;
 
-namespace widgets
+namespace lib
 {
 	
 	public class InfoExtendedDialog : Gtk.Dialog
@@ -9,7 +9,7 @@ namespace widgets
 		
 		public InfoExtendedDialog()
 		{
-			Stetic.Gui.Build(this, typeof(widgets.InfoExtendedDialog));
+			Stetic.Gui.Build(this, typeof(lib.InfoExtendedDialog));
 		}
 	}
 	

@@ -1,17 +1,17 @@
-<Combine name="widgets" fileversion="2.0">
+<Combine name="lib" fileversion="2.0">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
-      <Entry build="True" name="widgets" configuration="Debug" />
+      <Entry build="True" name="lib" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
-      <Entry build="True" name="widgets" configuration="Release" />
+      <Entry build="True" name="lib" configuration="Release" />
     </Configuration>
   </Configurations>
   <DeployTargets />
-  <StartMode startupentry="widgets" single="True">
-    <Execute type="None" entry="widgets" />
+  <StartMode startupentry="lib" single="True">
+    <Execute type="None" entry="lib" />
   </StartMode>
   <Entries>
-    <Entry filename="./widgets/widgets.mdp" />
+    <Entry filename="./lib/lib.mdp" />
   </Entries>
 </Combine>

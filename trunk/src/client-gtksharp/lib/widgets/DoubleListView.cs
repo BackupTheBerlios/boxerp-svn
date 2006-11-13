@@ -5,7 +5,7 @@ using Gtk;
 using Boxerp.Models;
 using System.Collections;
 
-namespace widgets
+namespace lib
 {
 	
 	// TODO: Implement drag&drop between treeviews
@@ -13,8 +13,8 @@ namespace widgets
 	{
 		protected Gtk.Label labelLeft;
 		protected Gtk.Label labelRight;
-		protected widgets.SimpleListView slistviewRight;
-		protected widgets.SimpleListView slistviewLeft;
+		protected lib.SimpleListView slistviewRight;
+		protected lib.SimpleListView slistviewLeft;
 		
 
 		public string LeftLabel 
@@ -29,7 +29,7 @@ namespace widgets
 		
 		public DoubleListView()
 		{
-			Stetic.Gui.Build(this, typeof(widgets.DoubleListView));
+			Stetic.Gui.Build(this, typeof(lib.DoubleListView));
 		}
 		
 		public void CreateLeftList(List<SimpleColumn> columns)

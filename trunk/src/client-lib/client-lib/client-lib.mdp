@@ -1,0 +1,34 @@
+<Project name="client-lib" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Debug" assembly="Boxerp.Client" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Release" assembly="client-lib" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <DeployTargets />
+  <Contents>
+    <File name="./MyClass.cs" subtype="Code" buildaction="Compile" />
+    <File name="./AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="./IResponsiveClient.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ResponsiveAttribute.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ResponsiveEnum.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SessionSingleton.cs" subtype="Code" buildaction="Compile" />
+    <File name="./RemotingHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="./AbstractResponsiveHelper.cs" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../server/Interfaces.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../server/Models.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../server/Objects.dll" />
+  </References>
+</Project>

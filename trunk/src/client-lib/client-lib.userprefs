@@ -1,11 +1,8 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib.mds">
   <Files>
-    <File filename="./client-lib/ResponsiveAttribute.cs" />
-    <File filename="./client-lib/SessionSingleton.cs" />
-    <File filename="./client-lib/RemotingHelper.cs" />
-    <File filename="./client-lib/ResponsiveEnum.cs" />
     <File filename="./client-lib/AbstractResponsiveHelper.cs" />
+    <File filename="./client-lib/IResponsiveClient.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
@@ -13,7 +10,7 @@
         <Node expanded="True">
           <Node name="client-lib" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="ResponsiveAttribute.cs" expanded="False" selected="True" />
+            <Node name="AbstractResponsiveHelper.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -37,7 +34,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib/ResponsiveAttribute.cs" />
+      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib/AbstractResponsiveHelper.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

@@ -1,7 +1,7 @@
 
 using System;
 
-namespace lib
+namespace Boxerp.Client.GtkSharp.Lib
 {
 	
 	public class WarningDialog : Gtk.Dialog
@@ -11,7 +11,7 @@ namespace lib
 		
 		public WarningDialog()
 		{
-			Stetic.Gui.Build(this, typeof(lib.WarningDialog));
+			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.Lib.WarningDialog));
 		}
 
 		public string Message 

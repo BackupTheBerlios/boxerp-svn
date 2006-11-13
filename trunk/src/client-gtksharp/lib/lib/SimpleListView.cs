@@ -5,13 +5,13 @@ using Gtk;
 using System.Collections;
 using Boxerp.Models;
 
-namespace lib
+namespace Boxerp.Client.GtkSharp.Lib
 
 {
 	// TODO: Thinking about write a complete treeview wrapper instead
 	// of access the TreeView property.
 	
-	public class SimpleListView : Gtk.Bin
+	public class SimpleListView : global::Gtk.Bin
 	{
 		protected ListStore store;
 		public Gtk.TreeView treeview;
@@ -25,7 +25,7 @@ namespace lib
 		
 		public SimpleListView()
 		{
-			Stetic.Gui.Build(this, typeof(lib.SimpleListView));
+			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.Lib.SimpleListView));
 			treeview.RowActivated += new Gtk.RowActivatedHandler(OnRowActivated);
 			treeview.ColumnsChanged += new System.EventHandler(OnColumnsChanged);
 		}

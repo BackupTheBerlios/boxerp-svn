@@ -1,15 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <stetic-interface>
-  <widget class="Gtk.Dialog" id="Boxerp.Client.Gtk.Lib.WarningDialog" design-size="492 104">
-    <property name="Title" translatable="yes">Warning</property>
+  <widget class="Gtk.Dialog" id="Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog" design-size="400 300">
+    <property name="Title" translatable="yes">InfoExtendedDialog</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
-    <property name="Icon">stock:gtk-dialog-warning Menu</property>
     <property name="WindowPosition">CenterOnParent</property>
     <property name="HasSeparator">False</property>
-    <property name="Resizable">False</property>
-    <property name="AllowGrow">False</property>
-    <property name="DefaultWidth">500</property>
     <property name="Events">ButtonPressMask</property>
     <property name="MemberName" />
     <child internal-child="VBox">
@@ -18,65 +14,26 @@
         <property name="Events">ButtonPressMask</property>
         <property name="MemberName" />
         <child>
-          <widget class="Gtk.HBox" id="hbox1">
-            <property name="Spacing">5</property>
-            <property name="BorderWidth">5</property>
-            <property name="Events">0</property>
-            <property name="MemberName" />
-            <child>
-              <widget class="Gtk.Image" id="image">
-                <property name="Pixbuf">stock:stock_dialog-warning Menu</property>
-                <property name="Events">0</property>
-                <property name="MemberName" />
-              </widget>
-              <packing>
-                <property name="Position">0</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.Label" id="label">
-                <property name="LabelProp">Warning</property>
-                <property name="Events">0</property>
-                <property name="MemberName">label</property>
-              </widget>
-              <packing>
-                <property name="Position">1</property>
-                <property name="AutoSize">False</property>
-              </packing>
-            </child>
-          </widget>
-          <packing>
-            <property name="Position">0</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
+          <placeholder />
         </child>
       </widget>
     </child>
     <child internal-child="ActionArea">
-      <widget class="Gtk.HButtonBox" id="Boxerp.Client.Gtk.Lib.WarningDialog_ActionArea">
+      <widget class="Gtk.HButtonBox" id="Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog_ActionArea">
         <property name="Size">1</property>
         <property name="LayoutStyle">End</property>
-        <property name="Spacing">10</property>
-        <property name="BorderWidth">5</property>
         <property name="Events">ButtonPressMask</property>
         <property name="MemberName" />
         <child>
-          <widget class="Gtk.Button" id="buttonOk">
-            <property name="Type">TextAndIcon</property>
-            <property name="Icon">stock:gtk-ok Menu</property>
-            <property name="Label">Ok</property>
+          <widget class="Gtk.Button" id="button6">
+            <property name="Type">TextOnly</property>
+            <property name="Label">button6</property>
             <property name="IsDialogButton">True</property>
             <property name="ResponseId">0</property>
             <property name="CanFocus">True</property>
             <property name="Events">0</property>
             <property name="MemberName" />
             <property name="CanDefault">True</property>
-            <signal name="Clicked" handler="OnOk" />
           </widget>
           <packing>
             <property name="Expand">False</property>
@@ -86,134 +43,34 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="Boxerp.Client.Gtk.Lib.LoginWindow" design-size="400 300">
-    <property name="Title" translatable="yes">LoginWindow</property>
+  <widget class="Gtk.Window" id="MainWindow" design-size="400 300">
+    <property name="Title" translatable="yes">MainWindow</property>
     <property name="WindowPosition">CenterOnParent</property>
     <property name="Events">0</property>
     <property name="MemberName" />
+    <signal name="DeleteEvent" handler="OnDeleteEvent" />
     <child>
       <placeholder />
     </child>
   </widget>
-  <widget class="Gtk.Window" id="Boxerp.Client.Gtk.Lib.WaitWindow" design-size="400 78">
-    <property name="Title" translatable="yes" context="yes" comments="">operationInProgress|Operation in progress...</property>
-    <property name="WindowPosition">Center</property>
-    <property name="Events">0</property>
-    <property name="MemberName" />
-    <child>
-      <widget class="Gtk.VBox" id="vbox">
-        <property name="Spacing">2</property>
-        <property name="BorderWidth">5</property>
-        <property name="Events">ButtonPressMask</property>
-        <property name="MemberName" />
-        <child>
-          <widget class="Gtk.Label" id="labelMsg">
-            <property name="LabelProp">label1</property>
-            <property name="Events">0</property>
-            <property name="MemberName">labelMsg</property>
-          </widget>
-          <packing>
-            <property name="Position">0</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
-        <child>
-          <widget class="Gtk.ProgressBar" id="progressbar">
-            <property name="Events">0</property>
-            <property name="MemberName">progressbar</property>
-          </widget>
-          <packing>
-            <property name="Position">1</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
-      </widget>
-    </child>
-  </widget>
-  <widget class="Gtk.Bin" id="Boxerp.Client.Gtk.Lib.SimpleTreeView" design-size="300 300">
+  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Lib.SimpleListView" design-size="300 300">
     <property name="Events">ButtonPressMask</property>
     <property name="MemberName" />
     <child>
       <widget class="Gtk.TreeView" id="treeview">
         <property name="CanFocus">True</property>
         <property name="Events">0</property>
-        <property name="MemberName">treeview</property>
+        <property name="MemberName" />
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="Boxerp.Client.Gtk.Lib.WaitDialog" design-size="400 119">
-    <property name="Title" translatable="yes" context="yes" comments="">operationInProgress|Operation in progress...</property>
-    <property name="Buttons">1</property>
-    <property name="HelpButton">False</property>
-    <property name="WindowPosition">Center</property>
-    <property name="HasSeparator">False</property>
-    <property name="Resizable">False</property>
-    <property name="AllowGrow">False</property>
-    <property name="Events">ButtonPressMask</property>
+  <widget class="Gtk.Window" id="Boxerp.Client.GtkSharp.Lib.LoginWindow" design-size="400 300">
+    <property name="Title" translatable="yes">LoginWindow</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="Events">0</property>
     <property name="MemberName" />
-    <child internal-child="VBox">
-      <widget class="Gtk.VBox" id="dialog_VBox">
-        <property name="Spacing">2</property>
-        <property name="BorderWidth">2</property>
-        <property name="Events">ButtonPressMask</property>
-        <property name="MemberName" />
-        <child>
-          <widget class="Gtk.Label" id="labelMsg">
-            <property name="LabelProp">label1</property>
-            <property name="Events">0</property>
-            <property name="MemberName">labelMsg</property>
-          </widget>
-          <packing>
-            <property name="Position">0</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
-        <child>
-          <widget class="Gtk.ProgressBar" id="progressbar">
-            <property name="Events">0</property>
-            <property name="MemberName">progressbar</property>
-          </widget>
-          <packing>
-            <property name="Position">1</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
-      </widget>
-    </child>
-    <child internal-child="ActionArea">
-      <widget class="Gtk.HButtonBox" id="actionArea">
-        <property name="Size">1</property>
-        <property name="LayoutStyle">End</property>
-        <property name="Spacing">10</property>
-        <property name="BorderWidth">5</property>
-        <property name="Events">ButtonPressMask</property>
-        <property name="MemberName">actionArea</property>
-        <child>
-          <widget class="Gtk.Button" id="button">
-            <property name="Type">TextOnly</property>
-            <property name="Label">button1</property>
-            <property name="IsDialogButton">True</property>
-            <property name="ResponseId">0</property>
-            <property name="CanFocus">True</property>
-            <property name="Visible">False</property>
-            <property name="Events">0</property>
-            <property name="MemberName">button</property>
-            <property name="CanDefault">True</property>
-          </widget>
-          <packing>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
-      </widget>
+    <child>
+      <placeholder />
     </child>
   </widget>
   <widget class="Gtk.Button" id="button7">
@@ -226,7 +83,7 @@
     <property name="MemberName" />
     <property name="CanDefault">True</property>
   </widget>
-  <widget class="Gtk.Bin" id="Boxerp.Client.Gtk.Lib.DoubleListView" design-size="300 114">
+  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Lib.DoubleListView" design-size="300 114">
     <property name="Events">ButtonPressMask</property>
     <property name="MemberName" />
     <child>
@@ -299,7 +156,7 @@
                     <property name="Events">0</property>
                     <property name="MemberName" />
                     <child>
-                      <widget class="Boxerp.Client.Gtk.Lib.SimpleListView" id="slistviewLeft">
+                      <widget class="Boxerp.Client.GtkSharp.Lib.SimpleListView" id="slistviewLeft">
                         <property name="Events">ButtonPressMask</property>
                         <property name="MemberName" />
                       </widget>
@@ -377,7 +234,7 @@
                     <property name="Events">0</property>
                     <property name="MemberName" />
                     <child>
-                      <widget class="Boxerp.Client.Gtk.Lib.SimpleListView" id="slistviewRight">
+                      <widget class="Boxerp.Client.GtkSharp.Lib.SimpleListView" id="slistviewRight">
                         <property name="Events">ButtonPressMask</property>
                         <property name="MemberName" />
                       </widget>
@@ -400,23 +257,16 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="Boxerp.Client.Gtk.Lib.FilteredListView" design-size="300 300">
-    <property name="Events">ButtonPressMask</property>
-    <property name="MemberName" />
-    <child>
-      <widget class="Gtk.TreeView" id="treeview">
-        <property name="CanFocus">True</property>
-        <property name="Events">0</property>
-        <property name="MemberName">treeview</property>
-      </widget>
-    </child>
-  </widget>
-  <widget class="Gtk.Dialog" id="Boxerp.Client.Gtk.Lib.InfoExtendedDialog" design-size="400 300">
-    <property name="Title" translatable="yes">InfoExtendedDialog</property>
+  <widget class="Gtk.Dialog" id="Boxerp.Client.GtkSharp.Lib.WarningDialog" design-size="492 104">
+    <property name="Title" translatable="yes">Warning</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
+    <property name="Icon">stock:gtk-dialog-warning Menu</property>
     <property name="WindowPosition">CenterOnParent</property>
     <property name="HasSeparator">False</property>
+    <property name="Resizable">False</property>
+    <property name="AllowGrow">False</property>
+    <property name="DefaultWidth">500</property>
     <property name="Events">ButtonPressMask</property>
     <property name="MemberName" />
     <child internal-child="VBox">
@@ -425,25 +275,135 @@
         <property name="Events">ButtonPressMask</property>
         <property name="MemberName" />
         <child>
-          <placeholder />
+          <widget class="Gtk.HBox" id="hbox1">
+            <property name="Spacing">5</property>
+            <property name="BorderWidth">5</property>
+            <property name="Events">0</property>
+            <property name="MemberName" />
+            <child>
+              <widget class="Gtk.Image" id="image">
+                <property name="Pixbuf">stock:stock_dialog-warning Menu</property>
+                <property name="Events">0</property>
+                <property name="MemberName" />
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="label">
+                <property name="LabelProp">Warning</property>
+                <property name="Events">0</property>
+                <property name="MemberName">label</property>
+              </widget>
+              <packing>
+                <property name="Position">1</property>
+                <property name="AutoSize">False</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
         </child>
       </widget>
     </child>
     <child internal-child="ActionArea">
-      <widget class="Gtk.HButtonBox" id="Boxerp.Client.Gtk.Lib.InfoExtendedDialog_ActionArea">
+      <widget class="Gtk.HButtonBox" id="Boxerp.Client.GtkSharp.Lib.WarningDialog_ActionArea">
         <property name="Size">1</property>
         <property name="LayoutStyle">End</property>
+        <property name="Spacing">10</property>
+        <property name="BorderWidth">5</property>
         <property name="Events">ButtonPressMask</property>
         <property name="MemberName" />
         <child>
-          <widget class="Gtk.Button" id="button6">
-            <property name="Type">TextOnly</property>
-            <property name="Label">button6</property>
+          <widget class="Gtk.Button" id="buttonOk">
+            <property name="Type">TextAndIcon</property>
+            <property name="Icon">stock:gtk-ok Menu</property>
+            <property name="Label">Ok</property>
             <property name="IsDialogButton">True</property>
             <property name="ResponseId">0</property>
             <property name="CanFocus">True</property>
             <property name="Events">0</property>
             <property name="MemberName" />
+            <property name="CanDefault">True</property>
+            <signal name="Clicked" handler="OnOk" />
+          </widget>
+          <packing>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Dialog" id="Boxerp.Client.GtkSharp.Lib.WaitDialog" design-size="400 119">
+    <property name="Title" translatable="yes" context="yes" comments="">operationInProgress|Operation in progress...</property>
+    <property name="Buttons">1</property>
+    <property name="HelpButton">False</property>
+    <property name="WindowPosition">Center</property>
+    <property name="HasSeparator">False</property>
+    <property name="Resizable">False</property>
+    <property name="AllowGrow">False</property>
+    <property name="Events">ButtonPressMask</property>
+    <property name="MemberName" />
+    <child internal-child="VBox">
+      <widget class="Gtk.VBox" id="dialog_VBox">
+        <property name="Spacing">2</property>
+        <property name="BorderWidth">2</property>
+        <property name="Events">ButtonPressMask</property>
+        <property name="MemberName" />
+        <child>
+          <widget class="Gtk.Label" id="labelMsg">
+            <property name="LabelProp">label1</property>
+            <property name="Events">0</property>
+            <property name="MemberName">labelMsg</property>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.ProgressBar" id="progressbar">
+            <property name="Events">0</property>
+            <property name="MemberName">progressbar</property>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+    <child internal-child="ActionArea">
+      <widget class="Gtk.HButtonBox" id="actionArea">
+        <property name="Size">1</property>
+        <property name="LayoutStyle">End</property>
+        <property name="Spacing">10</property>
+        <property name="BorderWidth">5</property>
+        <property name="Events">ButtonPressMask</property>
+        <property name="MemberName">actionArea</property>
+        <child>
+          <widget class="Gtk.Button" id="button">
+            <property name="Type">TextOnly</property>
+            <property name="Label">button1</property>
+            <property name="IsDialogButton">True</property>
+            <property name="ResponseId">0</property>
+            <property name="CanFocus">True</property>
+            <property name="Visible">False</property>
+            <property name="Events">0</property>
+            <property name="MemberName">button</property>
             <property name="CanDefault">True</property>
           </widget>
           <packing>
@@ -454,28 +414,68 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="Boxerp.Client.Gtk.Lib.SimpleListView" design-size="300 300">
+  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Lib.FilteredListView" design-size="300 300">
     <property name="Events">ButtonPressMask</property>
     <property name="MemberName" />
     <child>
       <widget class="Gtk.TreeView" id="treeview">
         <property name="CanFocus">True</property>
         <property name="Events">0</property>
-        <property name="MemberName" />
+        <property name="MemberName">treeview</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="MainWindow" design-size="400 300">
-    <property name="Title" translatable="yes">MainWindow</property>
-    <property name="WindowPosition">CenterOnParent</property>
+  <widget class="Gtk.Window" id="Boxerp.Client.GtkSharp.Lib.WaitWindow" design-size="400 78">
+    <property name="Title" translatable="yes" context="yes" comments="">operationInProgress|Operation in progress...</property>
+    <property name="WindowPosition">Center</property>
     <property name="Events">0</property>
     <property name="MemberName" />
-    <signal name="DeleteEvent" handler="OnDeleteEvent" />
     <child>
-      <placeholder />
+      <widget class="Gtk.VBox" id="vbox">
+        <property name="Spacing">2</property>
+        <property name="BorderWidth">5</property>
+        <property name="Events">ButtonPressMask</property>
+        <property name="MemberName" />
+        <child>
+          <widget class="Gtk.Label" id="labelMsg">
+            <property name="LabelProp">label1</property>
+            <property name="Events">0</property>
+            <property name="MemberName">labelMsg</property>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.ProgressBar" id="progressbar">
+            <property name="Events">0</property>
+            <property name="MemberName">progressbar</property>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="Boxerp.Client.Gtk.Lib.InfoDialog" design-size="400 300">
+  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Lib.SimpleTreeView" design-size="300 300">
+    <property name="Events">ButtonPressMask</property>
+    <property name="MemberName" />
+    <child>
+      <widget class="Gtk.TreeView" id="treeview">
+        <property name="CanFocus">True</property>
+        <property name="Events">0</property>
+        <property name="MemberName">treeview</property>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Dialog" id="Boxerp.Client.GtkSharp.Lib.InfoDialog" design-size="400 300">
     <property name="Title" translatable="yes">InfoDialog</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
@@ -494,7 +494,7 @@
       </widget>
     </child>
     <child internal-child="ActionArea">
-      <widget class="Gtk.HButtonBox" id="Boxerp.Client.Gtk.Lib.InfoDialog_ActionArea">
+      <widget class="Gtk.HButtonBox" id="Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea">
         <property name="Size">1</property>
         <property name="LayoutStyle">End</property>
         <property name="Events">ButtonPressMask</property>

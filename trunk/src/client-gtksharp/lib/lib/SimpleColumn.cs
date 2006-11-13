@@ -1,7 +1,7 @@
 
 using System;
 
-namespace lib
+namespace Boxerp.Client.GtkSharp.Lib
 {
 	
 	public struct SimpleColumn

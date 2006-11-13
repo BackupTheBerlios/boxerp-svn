@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/lib/lib.mds">
   <Files>
-    <File filename="Bienvenido" />
-    <File filename="./lib/FilteredListView.cs" />
     <File filename="./lib/DoubleListView.cs" />
     <File filename="./lib/SimpleListView.cs" />
+    <File filename="./lib/SimpleTreeView.cs" />
+    <File filename="./lib/WaitDialog.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
@@ -13,7 +13,7 @@
           <Node name="lib" expanded="True">
             <Node name="References" expanded="True" />
             <Node name="UserInterface" expanded="True" />
-            <Node name="DoubleListView.cs" expanded="False" selected="True" />
+            <Node name="WaitDialog.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -37,7 +37,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/lib/lib/DoubleListView.cs" />
+      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/lib/lib/WaitDialog.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

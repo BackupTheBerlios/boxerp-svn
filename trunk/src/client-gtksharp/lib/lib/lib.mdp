@@ -42,10 +42,10 @@
   </References>
   <GtkDesignInfo>
     <ExportedWidgets>
-      <Widget>lib.FilteredListView</Widget>
-      <Widget>lib.DoubleListView</Widget>
-      <Widget>lib.SimpleTreeView</Widget>
-      <Widget>lib.SimpleListView</Widget>
+      <Widget>Boxerp.Client.GtkSharp.Lib.SimpleTreeView</Widget>
+      <Widget>Boxerp.Client.GtkSharp.Lib.FilteredListView</Widget>
+      <Widget>Boxerp.Client.GtkSharp.Lib.DoubleListView</Widget>
+      <Widget>Boxerp.Client.GtkSharp.Lib.SimpleListView</Widget>
     </ExportedWidgets>
   </GtkDesignInfo>
 </Project>

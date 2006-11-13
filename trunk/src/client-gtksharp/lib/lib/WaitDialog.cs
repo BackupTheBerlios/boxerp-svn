@@ -2,10 +2,10 @@
 using System;
 using Gtk;
 
-namespace lib
+namespace Boxerp.Client.GtkSharp.Lib
 {
 	
-	public class WaitDialog : Gtk.Dialog
+	public class WaitDialog : global::Gtk.Dialog
 	{
 		protected Gtk.ProgressBar progressbar;
 		protected bool nonstop = true;
@@ -22,7 +22,7 @@ namespace lib
 
 		public WaitDialog(Gtk.Window parent)
 		{
-			Stetic.Gui.Build(this, typeof(lib.WaitDialog));
+			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.Lib.WaitDialog));
 			this.Modal = true;
 			this.TransientFor = parent;
 			this.Hide();

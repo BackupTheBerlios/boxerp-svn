@@ -13,7 +13,7 @@
           <Node name="lib" expanded="True">
             <Node name="References" expanded="True" />
             <Node name="UserInterface" expanded="True" />
-            <Node name="WaitDialog.cs" expanded="False" selected="True" />
+            <Node name="DoubleListView.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -37,7 +37,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/lib/lib/WaitDialog.cs" />
+      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/lib/lib/DoubleListView.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

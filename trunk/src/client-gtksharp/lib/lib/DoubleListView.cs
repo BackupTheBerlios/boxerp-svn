@@ -15,6 +15,8 @@ namespace Boxerp.Client.GtkSharp.Lib
 		protected Gtk.Label labelRight;
 		protected Boxerp.Client.GtkSharp.Lib.SimpleListView slistviewRight;
 		protected Boxerp.Client.GtkSharp.Lib.SimpleListView slistviewLeft;
+		//protected Gtk.ScrolledWindow scrolledwindow2;
+		//protected Gtk.ScrolledWindow scrolledwindow1;
 		
 
 		public string LeftLabel 

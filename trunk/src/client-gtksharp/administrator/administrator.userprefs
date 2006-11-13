@@ -7,6 +7,7 @@
     <File filename="./administrator/MainWindow.cs" />
     <File filename="./administrator/MainHelper.cs" />
     <File filename="./administrator/Main.cs" />
+    <File filename="./administrator/LoginWindow.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
@@ -14,7 +15,7 @@
         <Node expanded="True">
           <Node name="administrator" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="EditUserHelper.cs" expanded="False" selected="True" />
+            <Node name="LoginWindow.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -38,7 +39,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/administrator/administrator/EditUserHelper.cs" />
+      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/administrator/administrator/LoginWindow.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

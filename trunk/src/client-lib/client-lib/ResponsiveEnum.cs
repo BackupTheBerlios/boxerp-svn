@@ -1,7 +1,7 @@
 
 using System;
 
-namespace clientlib
+namespace Boxerp.Client
 {
 	
 	public enum ResponsiveEnum

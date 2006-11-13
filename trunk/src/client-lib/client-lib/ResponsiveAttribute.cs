@@ -1,5 +1,5 @@
 // created on 12/10/2006 at 13:57
-using clientlib;
+using Boxerp.Client;
 using System;
 
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple=false)]

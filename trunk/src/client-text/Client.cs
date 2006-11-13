@@ -16,15 +16,27 @@ class Client
 			(ILogin) RemotingHelper.GetObject(typeof(ILogin));
 		IAdmin adminObj = 
 			(IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
-    
+   
+	  	User[] users;
+	
+		if (args.Length != 2)
+		{
+			Console.WriteLine("Usage: ./cliente.exe username password");
+			return;
+		}
+		Console.WriteLine(args[0]+","+args[1]);
+
 		UserInformation.SetUserName(args[0]);
 		if (args[1] == "login")
 		{
-			if (loginObj.Login(args[0], "pass") == 0)
+			if (loginObj.Login(args[0], args[1]) == 0)
 			{
-				foreach (User u in adminObj.GetUsers())
+				users = adminObj.GetUsers();
+				foreach (User u in users)
 				{
 					Console.WriteLine("Ok!   user:" + u.UserName);
+					u.RealName = "test";
+					adminObj.SaveUser(u);
 				}
 			}
 			else

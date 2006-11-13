@@ -4,7 +4,7 @@ using System.Runtime.Remoting;
 //using System.Runtime.Remoting.Channels.Tcp;
 using System.Runtime.Remoting.Messaging;
 
-namespace clientlib
+namespace Boxerp.Client
 {
 	
 	public class SessionSingleton

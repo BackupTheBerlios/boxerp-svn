@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Runtime.Remoting;
 
-namespace clientlib {
+namespace Boxerp.Client {
 public class RemotingHelper {
   private static bool _isInit;
   private static IDictionary _wellKnownTypes;

@@ -12,17 +12,53 @@ namespace Boxerp.Client
 	public abstract class AbstractResponsiveHelper: IResponsiveClient
 	{
 		/*protected abstract void Init();*/
-		public abstract void StartUpload();
-		public abstract void StartDownload();
-		protected abstract void PopulateGUI();
-        private ThreadStart threadStartDownload;
+		private ThreadStart threadStartDownload;
         private ThreadStart threadStartUpload; 
         public Thread uploadThread; 
         public Thread downloadThread; 
-
-		/*protected abstract void UploadComplete();
-		protected abstract void DownloadComplete();*/
-
+		private EventHandler threadDownloadStopHandler;
+		private EventHandler threadUploadStopHandler;
+		
+		public event EventHandler ThreadDownloadStopEvent
+      	{
+        	add
+         	{
+            	threadDownloadStopHandler += value;
+         	}
+         	remove
+        	{
+            	threadDownloadStopHandler -= value;
+         	}
+      	}
+      	
+      	public event EventHandler ThreadUploadStopEvent
+      	{
+        	add
+         	{
+            	threadUploadStopHandler += value;
+         	}
+         	remove
+        	{
+            	threadUploadStopHandler -= value;
+         	}
+      	}
+		
+        	
+		public virtual void StartUpload()
+		{
+		
+		}
+		
+		public virtual void StartDownload()
+		{
+		
+		}
+		
+		public virtual void PopulateGUI()
+		{
+		
+		}
+		
         public void Init()
         {
             threadStartDownload = new ThreadStart(Download);
@@ -49,6 +85,11 @@ namespace Boxerp.Client
                 Console.WriteLine("On responsive method raises exception:" + ex.Message+ ex.StackTrace);
                 //throw ex; // FIXME: How to catch an exception inside a thread?
             }
+            finally
+            {
+            	if (threadUploadStopHandler != null)
+            		threadUploadStopHandler(this, null);
+            }
 		}
 		
 		protected void Download()
@@ -66,6 +107,11 @@ namespace Boxerp.Client
             {
                 Console.WriteLine("On responsive method raises exception:" + ex.Message+ ex.StackTrace);
                 //throw ex; // FIXME: How to catch an exception inside a thread?
+            }
+            finally
+            {
+            	if (threadDownloadStopHandler != null)
+            		threadDownloadStopHandler(this , null);
             }
 
 		}

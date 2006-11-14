@@ -2,30 +2,43 @@
 using System;
 using System.Collections;
 using System.Threading;
-using lib;
 using System.Reflection;
 using Gtk;
 
-namespace clientlib
+namespace Boxerp.Client.GtkSharp.Lib
 {
 	// TODO: llamar a upload/download pasandole el metodo que sea	
-	public abstract class ResponsiveHelper : IResponsiveClient
+	public abstract class GtkResponsiveHelper : AbstractResponsiveHelper
 	{
-		lib.WaitDialog waitDialog;
-		lib.WarningDialog warningDialog;
-		protected ThreadStart threadStartUpload;
-		protected ThreadStart threadStartDownload;		
-		protected Thread threadUpload;
-		protected Thread threadDownload;
+		WaitDialog waitDialog;
+		WarningDialog warningDialog;
+		//protected ThreadStart threadStartUpload;
+		//protected ThreadStart threadStartDownload;		
+		//protected Thread threadUpload;
+		//protected Thread threadDownload;
 		static ThreadNotify threadNotify;
 		protected Gtk.Window parentWindow;
 		protected bool uploadSuccess = false;
 		protected bool downloadSuccess = true;
+		private EventHandler downloadCompleteEventHandler;
+		
+		public event EventHandler DownloadCompleteEvent
+      	{
+        	add
+         	{
+            	downloadCompleteEventHandler += value;
+         	}
+         	remove
+        	{
+            	downloadCompleteEventHandler -= value;
+         	}
+      	}
+
 		
 		protected void InitThreads()
 		{
-			threadStartUpload   = new ThreadStart(Upload);
-			threadStartDownload = new ThreadStart(Download); 
+			//threadStartUpload   = new ThreadStart(Upload);
+			//threadStartDownload = new ThreadStart(Download); 
 			
 		}
 		
@@ -33,17 +46,41 @@ namespace clientlib
 		{
 			parentWindow = win;
 			InitThreads();
+			ThreadDownloadStopEvent += OnDownloadStop;
+			ThreadUploadStopEvent += OnUploadStop;
 		}
 	
-		public void StartUpload()
+		public override void StartUpload()
 		{
 			waitDialog = new WaitDialog(parentWindow); 
-			threadUpload = new Thread(threadStartUpload);
-			threadNotify = new ThreadNotify (new ReadyEvent (UploadComplete));
-			threadUpload.Start();
+			waitDialog.CancelEvent += OnCancel;
+			if (uploadThread.ThreadState != ThreadState.Unstarted)
+            {
+                //Console.WriteLine("thread is aborted:" + downloadThread.ThreadState.ToString());
+                uploadThread = new Thread(base.Upload);
+            }
+            uploadThread.Start();
+        }
+		
+		public void OnCancel(object sender, EventArgs e)
+		{
+		
 		}
+		
+		public void OnUploadStop(object sender, EventArgs e)
+		{
+			threadNotify = new ThreadNotify (new ReadyEvent (UploadComplete));
+			threadNotify.WakeupMain();
+		}
+		
+		public void OnDownloadStop(object sender, EventArgs e)
+		{
+			threadNotify = new ThreadNotify (new ReadyEvent (DownloadComplete));
+			threadNotify.WakeupMain();
+		}
+		
 	
-		public void Upload()
+/*		protected override void Upload()
 		{
 			try
 			{
@@ -65,16 +102,23 @@ namespace clientlib
 				threadNotify.WakeupMain();
 			}			
 		}
-	
-		public void StartDownload()
+	*/
+		public override void StartDownload()
 		{
 			waitDialog = new WaitDialog(parentWindow); 
-			threadDownload = new Thread(threadStartDownload);
-			threadNotify = new ThreadNotify (new ReadyEvent (DownloadComplete));
-			threadDownload.Start();		
+			waitDialog.CancelEvent += OnCancel;
+			if (downloadThread.ThreadState != ThreadState.Unstarted)
+            {
+                //Console.WriteLine("thread is aborted:" + downloadThread.ThreadState.ToString());
+                downloadThread = new Thread(base.Download);
+            }
+            downloadThread.Start();
+			//threadDownload = new Thread(threadStartDownload);
+			//threadNotify = new ThreadNotify (new ReadyEvent (DownloadComplete));
+			//threadDownload.Start();		
 		}
 	
-		public void Download()
+/*		public override void Download()
 		{
 			try
 			{
@@ -96,7 +140,7 @@ namespace clientlib
 				threadNotify.WakeupMain();
 			}
 		}
-	
+	*/
 		public void UploadComplete()
 		{
 			if (uploadSuccess)
@@ -132,28 +176,10 @@ namespace clientlib
          	}		
 		}
 		
-		public virtual void PopulateGUI()
+		public override void PopulateGUI()
 		{
 		
-		}
-		
-		public ArrayList GetResponsiveMethods(ResponsiveEnum rType)
-		{
-			ArrayList responsiveMethods = new ArrayList();
-			MethodInfo[] methods = this.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
-			foreach(MethodInfo method in methods)
-			{
-				object[] attributes = method.GetCustomAttributes(typeof(ResponsiveAttribute), true);
-				if (attributes.Length != 0)
-				{
-					ResponsiveAttribute att = (ResponsiveAttribute)attributes[0];
-					if (att.RespType == rType)
-						responsiveMethods.Add(method);
-				}
-			}
-			return responsiveMethods;
-		}
-		
+		}		
 	}
 	
 }

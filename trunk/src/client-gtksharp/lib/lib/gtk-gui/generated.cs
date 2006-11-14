@@ -18,217 +18,422 @@ namespace Stetic {
         
         public static void Build(object obj, string id) {
             System.Collections.Hashtable bindings = new System.Collections.Hashtable();
-            if ((id == "Boxerp.Client.GtkSharp.Lib.WarningDialog")) {
-                Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
-                // Widget Boxerp.Client.GtkSharp.Lib.WarningDialog
-                cobj.Title = "Warning";
-                cobj.Icon = Gtk.IconTheme.Default.LoadIcon("gtk-dialog-warning", 16, 0);
-                cobj.WindowPosition = ((Gtk.WindowPosition)(4));
-                cobj.HasSeparator = false;
-                cobj.Resizable = false;
-                cobj.AllowGrow = false;
-                cobj.DefaultWidth = 500;
+            if ((id == "Boxerp.Client.GtkSharp.Lib.SimpleTreeView")) {
+                Gtk.Bin cobj = ((Gtk.Bin)(obj));
+                // Widget Boxerp.Client.GtkSharp.Lib.SimpleTreeView
+                BinContainer.Attach(cobj);
                 cobj.Events = ((Gdk.EventMask)(256));
-                cobj.Name = "Boxerp.Client.GtkSharp.Lib.WarningDialog";
-                // Internal child Boxerp.Client.GtkSharp.Lib.WarningDialog.VBox
-                Gtk.VBox w1 = cobj.VBox;
-                w1.BorderWidth = ((uint)(2));
-                w1.Events = ((Gdk.EventMask)(256));
-                w1.Name = "dialog_VBox";
-                // Container child dialog_VBox.Gtk.Box+BoxChild
-                Gtk.HBox w2 = new Gtk.HBox();
-                w2.Spacing = 5;
-                w2.BorderWidth = ((uint)(5));
-                w2.Events = ((Gdk.EventMask)(0));
-                w2.Name = "hbox1";
-                // Container child hbox1.Gtk.Box+BoxChild
-                Gtk.Image w3 = new Gtk.Image();
-                w3.Pixbuf = Gtk.IconTheme.Default.LoadIcon("stock_dialog-warning", 16, 0);
-                w3.Events = ((Gdk.EventMask)(0));
-                w3.Name = "image";
-                bindings["image"] = w3;
-                w2.Add(w3);
-                Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(w2[w3]));
-                w4.Position = 0;
-                w4.Expand = false;
-                w4.Fill = false;
-                // Container child hbox1.Gtk.Box+BoxChild
-                Gtk.Label w5 = new Gtk.Label();
-                w5.LabelProp = "Warning";
-                w5.Events = ((Gdk.EventMask)(0));
-                w5.Name = "label";
-                bindings["label"] = w5;
-                w2.Add(w5);
-                Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(w2[w5]));
-                w6.Position = 1;
-                bindings["hbox1"] = w2;
-                w1.Add(w2);
-                Gtk.Box.BoxChild w7 = ((Gtk.Box.BoxChild)(w1[w2]));
-                w7.Position = 0;
-                w7.Expand = false;
-                w7.Fill = false;
-                bindings["dialog_VBox"] = w1;
-                // Internal child Boxerp.Client.GtkSharp.Lib.WarningDialog.ActionArea
-                Gtk.HButtonBox w8 = cobj.ActionArea;
-                w8.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
-                w8.Spacing = 10;
-                w8.BorderWidth = ((uint)(5));
-                w8.Events = ((Gdk.EventMask)(256));
-                w8.Name = "Boxerp.Client.GtkSharp.Lib.WarningDialog_ActionArea";
-                // Container child Boxerp.Client.GtkSharp.Lib.WarningDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
-                Gtk.Button w9 = new Gtk.Button();
-                w9.CanFocus = true;
-                w9.Events = ((Gdk.EventMask)(0));
-                w9.Name = "buttonOk";
-                w9.CanDefault = true;
-                // Container child buttonOk.Gtk.Container+ContainerChild
-                Gtk.Alignment w10 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-                w10.Events = ((Gdk.EventMask)(0));
-                w10.Name = "GtkAlignment";
-                // Container child GtkAlignment.Gtk.Container+ContainerChild
-                Gtk.HBox w11 = new Gtk.HBox();
-                w11.Spacing = 2;
-                w11.Events = ((Gdk.EventMask)(0));
-                w11.Name = "GtkHBox";
-                // Container child GtkHBox.Gtk.Container+ContainerChild
-                Gtk.Image w12 = new Gtk.Image();
-                w12.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-ok", 16, 0);
-                w12.Events = ((Gdk.EventMask)(0));
-                w12.Name = "image1";
-                bindings["image1"] = w12;
-                w11.Add(w12);
-                // Container child GtkHBox.Gtk.Container+ContainerChild
-                Gtk.Label w14 = new Gtk.Label();
-                w14.LabelProp = "Ok";
-                w14.Events = ((Gdk.EventMask)(0));
-                w14.Name = "GtkLabel";
-                bindings["GtkLabel"] = w14;
-                w11.Add(w14);
-                bindings["GtkHBox"] = w11;
-                w10.Add(w11);
-                bindings["GtkAlignment"] = w10;
-                w9.Add(w10);
-                bindings["buttonOk"] = w9;
-                cobj.AddActionWidget(w9, 0);
-                Gtk.ButtonBox.ButtonBoxChild w18 = ((Gtk.ButtonBox.ButtonBoxChild)(w8[w9]));
-                w18.Expand = false;
-                w18.Fill = false;
-                bindings["Boxerp.Client.GtkSharp.Lib.WarningDialog_ActionArea"] = w8;
-                cobj.DefaultHeight = 104;
-                bindings["Boxerp.Client.GtkSharp.Lib.WarningDialog"] = cobj;
-                w3.Show();
-                w5.Show();
-                w2.Show();
+                cobj.Name = "Boxerp.Client.GtkSharp.Lib.SimpleTreeView";
+                // Container child Boxerp.Client.GtkSharp.Lib.SimpleTreeView.Gtk.Container+ContainerChild
+                Gtk.TreeView w1 = new Gtk.TreeView();
+                w1.CanFocus = true;
+                w1.Events = ((Gdk.EventMask)(0));
+                w1.Name = "treeview";
+                bindings["treeview"] = w1;
+                cobj.Add(w1);
+                bindings["Boxerp.Client.GtkSharp.Lib.SimpleTreeView"] = cobj;
                 w1.Show();
-                w12.Show();
-                w14.Show();
-                w11.Show();
-                w10.Show();
-                w9.Show();
-                w8.Show();
                 cobj.Show();
-                w9.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnOk")));
             }
             else {
-                if ((id == "Boxerp.Client.GtkSharp.Lib.SimpleListView")) {
+                if ((id == "Boxerp.Client.GtkSharp.Lib.DoubleListView")) {
                     Gtk.Bin cobj = ((Gtk.Bin)(obj));
-                    // Widget Boxerp.Client.GtkSharp.Lib.SimpleListView
+                    // Widget Boxerp.Client.GtkSharp.Lib.DoubleListView
                     BinContainer.Attach(cobj);
                     cobj.Events = ((Gdk.EventMask)(256));
-                    cobj.Name = "Boxerp.Client.GtkSharp.Lib.SimpleListView";
-                    // Container child Boxerp.Client.GtkSharp.Lib.SimpleListView.Gtk.Container+ContainerChild
-                    Gtk.TreeView w1 = new Gtk.TreeView();
-                    w1.CanFocus = true;
+                    cobj.Name = "Boxerp.Client.GtkSharp.Lib.DoubleListView";
+                    // Container child Boxerp.Client.GtkSharp.Lib.DoubleListView.Gtk.Container+ContainerChild
+                    Gtk.VBox w1 = new Gtk.VBox();
                     w1.Events = ((Gdk.EventMask)(0));
-                    w1.Name = "treeview";
-                    bindings["treeview"] = w1;
+                    w1.Name = "vbox2";
+                    // Container child vbox2.Gtk.Box+BoxChild
+                    Gtk.HBox w2 = new Gtk.HBox();
+                    w2.Events = ((Gdk.EventMask)(0));
+                    w2.Name = "hbox2";
+                    // Container child hbox2.Gtk.Box+BoxChild
+                    Gtk.Label w3 = new Gtk.Label();
+                    w3.LabelProp = "label1";
+                    w3.Events = ((Gdk.EventMask)(0));
+                    w3.Name = "labelLeft";
+                    bindings["labelLeft"] = w3;
+                    w2.Add(w3);
+                    Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(w2[w3]));
+                    w4.Position = 0;
+                    w4.Fill = false;
+                    // Container child hbox2.Gtk.Box+BoxChild
+                    Gtk.VSeparator w5 = new Gtk.VSeparator();
+                    w5.Events = ((Gdk.EventMask)(0));
+                    w5.Name = "vseparator1";
+                    bindings["vseparator1"] = w5;
+                    w2.Add(w5);
+                    Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(w2[w5]));
+                    w6.Position = 1;
+                    w6.Expand = false;
+                    w6.Fill = false;
+                    // Container child hbox2.Gtk.Box+BoxChild
+                    Gtk.Label w7 = new Gtk.Label();
+                    w7.LabelProp = "label2";
+                    w7.Events = ((Gdk.EventMask)(0));
+                    w7.Name = "labelRight";
+                    bindings["labelRight"] = w7;
+                    w2.Add(w7);
+                    Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(w2[w7]));
+                    w8.Position = 2;
+                    w8.Fill = false;
+                    bindings["hbox2"] = w2;
+                    w1.Add(w2);
+                    Gtk.Box.BoxChild w9 = ((Gtk.Box.BoxChild)(w1[w2]));
+                    w9.Position = 0;
+                    w9.Expand = false;
+                    // Container child vbox2.Gtk.Box+BoxChild
+                    Gtk.HBox w10 = new Gtk.HBox();
+                    w10.Spacing = 5;
+                    w10.BorderWidth = ((uint)(5));
+                    w10.Events = ((Gdk.EventMask)(0));
+                    w10.Name = "hbox1";
+                    // Container child hbox1.Gtk.Box+BoxChild
+                    Gtk.ScrolledWindow w11 = new Gtk.ScrolledWindow();
+                    w11.VscrollbarPolicy = ((Gtk.PolicyType)(1));
+                    w11.HscrollbarPolicy = ((Gtk.PolicyType)(1));
+                    w11.CanFocus = true;
+                    w11.Events = ((Gdk.EventMask)(0));
+                    w11.Name = "scrolledwindow1";
+                    // Container child scrolledwindow1.Gtk.Container+ContainerChild
+                    Gtk.Viewport w12 = new Gtk.Viewport();
+                    w12.ShadowType = ((Gtk.ShadowType)(0));
+                    w12.Events = ((Gdk.EventMask)(0));
+                    w12.Name = "GtkViewport";
+                    // Container child GtkViewport.Gtk.Container+ContainerChild
+                    Boxerp.Client.GtkSharp.Lib.SimpleListView w13 = new Boxerp.Client.GtkSharp.Lib.SimpleListView();
+                    w13.Events = ((Gdk.EventMask)(256));
+                    w13.Name = "slistviewLeft";
+                    bindings["slistviewLeft"] = w13;
+                    w12.Add(w13);
+                    bindings["GtkViewport"] = w12;
+                    w11.Add(w12);
+                    bindings["scrolledwindow1"] = w11;
+                    w10.Add(w11);
+                    Gtk.Box.BoxChild w16 = ((Gtk.Box.BoxChild)(w10[w11]));
+                    w16.Position = 0;
+                    // Container child hbox1.Gtk.Box+BoxChild
+                    Gtk.VBox w17 = new Gtk.VBox();
+                    w17.Homogeneous = true;
+                    w17.Events = ((Gdk.EventMask)(0));
+                    w17.Name = "vbox1";
+                    // Container child vbox1.Gtk.Box+BoxChild
+                    Gtk.Button w18 = new Gtk.Button();
+                    w18.CanFocus = true;
+                    w18.Events = ((Gdk.EventMask)(0));
+                    w18.Name = "button5";
+                    // Container child button5.Gtk.Container+ContainerChild
+                    Gtk.Alignment w19 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+                    w19.Events = ((Gdk.EventMask)(0));
+                    w19.Name = "GtkAlignment";
+                    // Container child GtkAlignment.Gtk.Container+ContainerChild
+                    Gtk.HBox w20 = new Gtk.HBox();
+                    w20.Spacing = 2;
+                    w20.Events = ((Gdk.EventMask)(0));
+                    w20.Name = "GtkHBox";
+                    // Container child GtkHBox.Gtk.Container+ContainerChild
+                    Gtk.Image w21 = new Gtk.Image();
+                    w21.Pixbuf = Gtk.IconTheme.Default.LoadIcon("stock_left", 16, 0);
+                    w21.Events = ((Gdk.EventMask)(0));
+                    w21.Name = "image4";
+                    bindings["image4"] = w21;
+                    w20.Add(w21);
+                    // Container child GtkHBox.Gtk.Container+ContainerChild
+                    Gtk.Label w23 = new Gtk.Label();
+                    w23.LabelProp = "";
+                    w23.Events = ((Gdk.EventMask)(0));
+                    w23.Name = "GtkLabel";
+                    bindings["GtkLabel"] = w23;
+                    w20.Add(w23);
+                    bindings["GtkHBox"] = w20;
+                    w19.Add(w20);
+                    bindings["GtkAlignment"] = w19;
+                    w18.Add(w19);
+                    bindings["button5"] = w18;
+                    w17.Add(w18);
+                    Gtk.Box.BoxChild w27 = ((Gtk.Box.BoxChild)(w17[w18]));
+                    w27.Position = 1;
+                    w27.Expand = false;
+                    w27.Fill = false;
+                    // Container child vbox1.Gtk.Box+BoxChild
+                    Gtk.Button w28 = new Gtk.Button();
+                    w28.CanFocus = true;
+                    w28.Events = ((Gdk.EventMask)(0));
+                    w28.Name = "button6";
+                    // Container child button6.Gtk.Container+ContainerChild
+                    Gtk.Alignment w29 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+                    w29.Events = ((Gdk.EventMask)(0));
+                    w29.Name = "GtkAlignment";
+                    // Container child GtkAlignment.Gtk.Container+ContainerChild
+                    Gtk.HBox w30 = new Gtk.HBox();
+                    w30.Spacing = 2;
+                    w30.Events = ((Gdk.EventMask)(0));
+                    w30.Name = "GtkHBox";
+                    // Container child GtkHBox.Gtk.Container+ContainerChild
+                    Gtk.Image w31 = new Gtk.Image();
+                    w31.Pixbuf = Gtk.IconTheme.Default.LoadIcon("stock_right", 16, 0);
+                    w31.Events = ((Gdk.EventMask)(0));
+                    w31.Name = "image5";
+                    bindings["image5"] = w31;
+                    w30.Add(w31);
+                    // Container child GtkHBox.Gtk.Container+ContainerChild
+                    Gtk.Label w33 = new Gtk.Label();
+                    w33.LabelProp = "";
+                    w33.Events = ((Gdk.EventMask)(0));
+                    w33.Name = "GtkLabel";
+                    bindings["GtkLabel"] = w33;
+                    w30.Add(w33);
+                    bindings["GtkHBox"] = w30;
+                    w29.Add(w30);
+                    bindings["GtkAlignment"] = w29;
+                    w28.Add(w29);
+                    bindings["button6"] = w28;
+                    w17.Add(w28);
+                    Gtk.Box.BoxChild w37 = ((Gtk.Box.BoxChild)(w17[w28]));
+                    w37.Position = 2;
+                    w37.Expand = false;
+                    w37.Fill = false;
+                    bindings["vbox1"] = w17;
+                    w10.Add(w17);
+                    Gtk.Box.BoxChild w38 = ((Gtk.Box.BoxChild)(w10[w17]));
+                    w38.Position = 1;
+                    w38.Expand = false;
+                    w38.Fill = false;
+                    // Container child hbox1.Gtk.Box+BoxChild
+                    Gtk.ScrolledWindow w39 = new Gtk.ScrolledWindow();
+                    w39.VscrollbarPolicy = ((Gtk.PolicyType)(1));
+                    w39.HscrollbarPolicy = ((Gtk.PolicyType)(1));
+                    w39.CanFocus = true;
+                    w39.Events = ((Gdk.EventMask)(0));
+                    w39.Name = "scrolledwindow2";
+                    // Container child scrolledwindow2.Gtk.Container+ContainerChild
+                    Gtk.Viewport w40 = new Gtk.Viewport();
+                    w40.ShadowType = ((Gtk.ShadowType)(0));
+                    w40.Events = ((Gdk.EventMask)(0));
+                    w40.Name = "GtkViewport1";
+                    // Container child GtkViewport1.Gtk.Container+ContainerChild
+                    Boxerp.Client.GtkSharp.Lib.SimpleListView w41 = new Boxerp.Client.GtkSharp.Lib.SimpleListView();
+                    w41.Events = ((Gdk.EventMask)(256));
+                    w41.Name = "slistviewRight";
+                    bindings["slistviewRight"] = w41;
+                    w40.Add(w41);
+                    bindings["GtkViewport1"] = w40;
+                    w39.Add(w40);
+                    bindings["scrolledwindow2"] = w39;
+                    w10.Add(w39);
+                    Gtk.Box.BoxChild w44 = ((Gtk.Box.BoxChild)(w10[w39]));
+                    w44.PackType = ((Gtk.PackType)(1));
+                    w44.Position = 2;
+                    bindings["hbox1"] = w10;
+                    w1.Add(w10);
+                    Gtk.Box.BoxChild w45 = ((Gtk.Box.BoxChild)(w1[w10]));
+                    w45.Position = 1;
+                    bindings["vbox2"] = w1;
                     cobj.Add(w1);
-                    bindings["Boxerp.Client.GtkSharp.Lib.SimpleListView"] = cobj;
+                    bindings["Boxerp.Client.GtkSharp.Lib.DoubleListView"] = cobj;
+                    w3.Show();
+                    w5.Show();
+                    w7.Show();
+                    w2.Show();
+                    w13.Show();
+                    w12.Show();
+                    w11.Show();
+                    w21.Show();
+                    w23.Show();
+                    w20.Show();
+                    w19.Show();
+                    w18.Show();
+                    w31.Show();
+                    w33.Show();
+                    w30.Show();
+                    w29.Show();
+                    w28.Show();
+                    w17.Show();
+                    w41.Show();
+                    w40.Show();
+                    w39.Show();
+                    w10.Show();
                     w1.Show();
                     cobj.Show();
+                    w18.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnLeftClicked")));
+                    w28.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnRightClicked")));
                 }
                 else {
-                    if ((id == "Boxerp.Client.GtkSharp.Lib.LoginWindow")) {
+                    if ((id == "MainWindow")) {
                         Gtk.Window cobj = ((Gtk.Window)(obj));
-                        // Widget Boxerp.Client.GtkSharp.Lib.LoginWindow
-                        cobj.Title = "LoginWindow";
+                        // Widget MainWindow
+                        cobj.Title = "MainWindow";
                         cobj.WindowPosition = ((Gtk.WindowPosition)(4));
                         cobj.Events = ((Gdk.EventMask)(0));
-                        cobj.Name = "Boxerp.Client.GtkSharp.Lib.LoginWindow";
+                        cobj.Name = "MainWindow";
                         cobj.DefaultWidth = 400;
                         cobj.DefaultHeight = 300;
-                        bindings["Boxerp.Client.GtkSharp.Lib.LoginWindow"] = cobj;
+                        bindings["MainWindow"] = cobj;
                         cobj.Show();
+                        cobj.DeleteEvent += ((Gtk.DeleteEventHandler)(System.Delegate.CreateDelegate(typeof(Gtk.DeleteEventHandler), cobj, "OnDeleteEvent")));
                     }
                     else {
-                        if ((id == "Boxerp.Client.GtkSharp.Lib.InfoDialog")) {
-                            Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
-                            // Widget Boxerp.Client.GtkSharp.Lib.InfoDialog
-                            cobj.Title = "InfoDialog";
-                            cobj.WindowPosition = ((Gtk.WindowPosition)(4));
-                            cobj.HasSeparator = false;
-                            cobj.Events = ((Gdk.EventMask)(256));
-                            cobj.Name = "Boxerp.Client.GtkSharp.Lib.InfoDialog";
-                            // Internal child Boxerp.Client.GtkSharp.Lib.InfoDialog.VBox
-                            Gtk.VBox w1 = cobj.VBox;
-                            w1.BorderWidth = ((uint)(2));
+                        if ((id == "Boxerp.Client.GtkSharp.Lib.WaitWindow")) {
+                            Gtk.Window cobj = ((Gtk.Window)(obj));
+                            // Widget Boxerp.Client.GtkSharp.Lib.WaitWindow
+                            cobj.Title = "Operation in progress...";
+                            cobj.WindowPosition = ((Gtk.WindowPosition)(1));
+                            cobj.Events = ((Gdk.EventMask)(0));
+                            cobj.Name = "Boxerp.Client.GtkSharp.Lib.WaitWindow";
+                            // Container child Boxerp.Client.GtkSharp.Lib.WaitWindow.Gtk.Container+ContainerChild
+                            Gtk.VBox w1 = new Gtk.VBox();
+                            w1.Spacing = 2;
+                            w1.BorderWidth = ((uint)(5));
                             w1.Events = ((Gdk.EventMask)(256));
-                            w1.Name = "dialog_VBox";
-                            bindings["dialog_VBox"] = w1;
-                            // Internal child Boxerp.Client.GtkSharp.Lib.InfoDialog.ActionArea
-                            Gtk.HButtonBox w2 = cobj.ActionArea;
-                            w2.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
-                            w2.Events = ((Gdk.EventMask)(256));
-                            w2.Name = "Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea";
-                            // Container child Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
-                            Gtk.Button w3 = new Gtk.Button();
-                            w3.CanFocus = true;
-                            w3.Events = ((Gdk.EventMask)(0));
-                            w3.Name = "button5";
-                            w3.CanDefault = true;
-                            w3.Label = "button5";
-                            bindings["button5"] = w3;
-                            cobj.AddActionWidget(w3, 0);
-                            Gtk.ButtonBox.ButtonBoxChild w4 = ((Gtk.ButtonBox.ButtonBoxChild)(w2[w3]));
-                            w4.Expand = false;
-                            w4.Fill = false;
-                            bindings["Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea"] = w2;
+                            w1.Name = "vbox";
+                            // Container child vbox.Gtk.Box+BoxChild
+                            Gtk.Label w2 = new Gtk.Label();
+                            w2.LabelProp = "label1";
+                            w2.Events = ((Gdk.EventMask)(0));
+                            w2.Name = "labelMsg";
+                            bindings["labelMsg"] = w2;
+                            w1.Add(w2);
+                            Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(w1[w2]));
+                            w3.Position = 0;
+                            w3.Expand = false;
+                            w3.Fill = false;
+                            // Container child vbox.Gtk.Box+BoxChild
+                            Gtk.ProgressBar w4 = new Gtk.ProgressBar();
+                            w4.Events = ((Gdk.EventMask)(0));
+                            w4.Name = "progressbar";
+                            bindings["progressbar"] = w4;
+                            w1.Add(w4);
+                            Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(w1[w4]));
+                            w5.Position = 1;
+                            w5.Expand = false;
+                            w5.Fill = false;
+                            // Container child vbox.Gtk.Box+BoxChild
+                            Gtk.HButtonBox w6 = new Gtk.HButtonBox();
+                            w6.LayoutStyle = ((Gtk.ButtonBoxStyle)(2));
+                            w6.Spacing = 10;
+                            w6.BorderWidth = ((uint)(5));
+                            w6.Events = ((Gdk.EventMask)(256));
+                            w6.Name = "actionArea";
+                            // Container child actionArea.Gtk.ButtonBox+ButtonBoxChild
+                            Gtk.Button w7 = new Gtk.Button();
+                            w7.CanFocus = true;
+                            w7.Events = ((Gdk.EventMask)(0));
+                            w7.Name = "button";
+                            w7.CanDefault = true;
+                            // Container child button.Gtk.Container+ContainerChild
+                            Gtk.Alignment w8 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+                            w8.Events = ((Gdk.EventMask)(0));
+                            w8.Name = "GtkAlignment";
+                            // Container child GtkAlignment.Gtk.Container+ContainerChild
+                            Gtk.HBox w9 = new Gtk.HBox();
+                            w9.Spacing = 2;
+                            w9.Events = ((Gdk.EventMask)(0));
+                            w9.Name = "GtkHBox";
+                            // Container child GtkHBox.Gtk.Container+ContainerChild
+                            Gtk.Image w10 = new Gtk.Image();
+                            w10.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-cancel", 16, 0);
+                            w10.Events = ((Gdk.EventMask)(0));
+                            w10.Name = "image1";
+                            bindings["image1"] = w10;
+                            w9.Add(w10);
+                            // Container child GtkHBox.Gtk.Container+ContainerChild
+                            Gtk.Label w12 = new Gtk.Label();
+                            w12.LabelProp = "Cancel";
+                            w12.Events = ((Gdk.EventMask)(0));
+                            w12.Name = "GtkLabel";
+                            bindings["GtkLabel"] = w12;
+                            w9.Add(w12);
+                            bindings["GtkHBox"] = w9;
+                            w8.Add(w9);
+                            bindings["GtkAlignment"] = w8;
+                            w7.Add(w8);
+                            bindings["button"] = w7;
+                            w6.Add(w7);
+                            Gtk.ButtonBox.ButtonBoxChild w16 = ((Gtk.ButtonBox.ButtonBoxChild)(w6[w7]));
+                            w16.Expand = false;
+                            w16.Fill = false;
+                            bindings["actionArea"] = w6;
+                            w1.Add(w6);
+                            Gtk.Box.BoxChild w17 = ((Gtk.Box.BoxChild)(w1[w6]));
+                            w17.Position = 2;
+                            w17.Expand = false;
+                            w17.Fill = false;
+                            bindings["vbox"] = w1;
+                            cobj.Add(w1);
                             cobj.DefaultWidth = 400;
-                            cobj.DefaultHeight = 300;
-                            bindings["Boxerp.Client.GtkSharp.Lib.InfoDialog"] = cobj;
-                            w1.Show();
-                            w3.Show();
+                            cobj.DefaultHeight = 119;
+                            bindings["Boxerp.Client.GtkSharp.Lib.WaitWindow"] = cobj;
                             w2.Show();
+                            w4.Show();
+                            w10.Show();
+                            w12.Show();
+                            w9.Show();
+                            w8.Show();
+                            w6.Show();
+                            w1.Show();
                             cobj.Show();
+                            w7.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnCancel")));
                         }
                         else {
-                            if ((id == "Boxerp.Client.GtkSharp.Lib.FilteredListView")) {
-                                Gtk.Bin cobj = ((Gtk.Bin)(obj));
-                                // Widget Boxerp.Client.GtkSharp.Lib.FilteredListView
-                                BinContainer.Attach(cobj);
+                            if ((id == "Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog")) {
+                                Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
+                                // Widget Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog
+                                cobj.Title = "InfoExtendedDialog";
+                                cobj.WindowPosition = ((Gtk.WindowPosition)(4));
+                                cobj.HasSeparator = false;
                                 cobj.Events = ((Gdk.EventMask)(256));
-                                cobj.Name = "Boxerp.Client.GtkSharp.Lib.FilteredListView";
-                                // Container child Boxerp.Client.GtkSharp.Lib.FilteredListView.Gtk.Container+ContainerChild
-                                Gtk.TreeView w1 = new Gtk.TreeView();
-                                w1.CanFocus = true;
-                                w1.Events = ((Gdk.EventMask)(0));
-                                w1.Name = "treeview";
-                                bindings["treeview"] = w1;
-                                cobj.Add(w1);
-                                bindings["Boxerp.Client.GtkSharp.Lib.FilteredListView"] = cobj;
+                                cobj.Name = "Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog";
+                                // Internal child Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog.VBox
+                                Gtk.VBox w1 = cobj.VBox;
+                                w1.BorderWidth = ((uint)(2));
+                                w1.Events = ((Gdk.EventMask)(256));
+                                w1.Name = "dialog_VBox";
+                                bindings["dialog_VBox"] = w1;
+                                // Internal child Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog.ActionArea
+                                Gtk.HButtonBox w2 = cobj.ActionArea;
+                                w2.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
+                                w2.Events = ((Gdk.EventMask)(256));
+                                w2.Name = "Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog_ActionArea";
+                                // Container child Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+                                Gtk.Button w3 = new Gtk.Button();
+                                w3.CanFocus = true;
+                                w3.Events = ((Gdk.EventMask)(0));
+                                w3.Name = "button6";
+                                w3.CanDefault = true;
+                                w3.Label = "button6";
+                                bindings["button6"] = w3;
+                                cobj.AddActionWidget(w3, 0);
+                                Gtk.ButtonBox.ButtonBoxChild w4 = ((Gtk.ButtonBox.ButtonBoxChild)(w2[w3]));
+                                w4.Expand = false;
+                                w4.Fill = false;
+                                bindings["Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog_ActionArea"] = w2;
+                                cobj.DefaultWidth = 400;
+                                cobj.DefaultHeight = 300;
+                                bindings["Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog"] = cobj;
                                 w1.Show();
+                                w3.Show();
+                                w2.Show();
                                 cobj.Show();
                             }
                             else {
-                                if ((id == "button7")) {
-                                    Gtk.Button cobj = ((Gtk.Button)(obj));
-                                    // Widget button7
-                                    cobj.CanFocus = true;
-                                    cobj.Events = ((Gdk.EventMask)(0));
-                                    cobj.Name = "button7";
-                                    cobj.CanDefault = true;
-                                    cobj.Label = "button7";
-                                    bindings["button7"] = cobj;
+                                if ((id == "Boxerp.Client.GtkSharp.Lib.SimpleListView")) {
+                                    Gtk.Bin cobj = ((Gtk.Bin)(obj));
+                                    // Widget Boxerp.Client.GtkSharp.Lib.SimpleListView
+                                    BinContainer.Attach(cobj);
+                                    cobj.Events = ((Gdk.EventMask)(256));
+                                    cobj.Name = "Boxerp.Client.GtkSharp.Lib.SimpleListView";
+                                    // Container child Boxerp.Client.GtkSharp.Lib.SimpleListView.Gtk.Container+ContainerChild
+                                    Gtk.TreeView w1 = new Gtk.TreeView();
+                                    w1.CanFocus = true;
+                                    w1.Events = ((Gdk.EventMask)(0));
+                                    w1.Name = "treeview";
+                                    bindings["treeview"] = w1;
+                                    cobj.Add(w1);
+                                    bindings["Boxerp.Client.GtkSharp.Lib.SimpleListView"] = cobj;
+                                    w1.Show();
                                     cobj.Show();
                                 }
                                 else {
@@ -272,7 +477,7 @@ namespace Stetic {
                                         bindings["dialog_VBox"] = w1;
                                         // Internal child Boxerp.Client.GtkSharp.Lib.WaitDialog.ActionArea
                                         Gtk.HButtonBox w6 = cobj.ActionArea;
-                                        w6.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
+                                        w6.LayoutStyle = ((Gtk.ButtonBoxStyle)(2));
                                         w6.Spacing = 10;
                                         w6.BorderWidth = ((uint)(5));
                                         w6.Events = ((Gdk.EventMask)(256));
@@ -283,12 +488,38 @@ namespace Stetic {
                                         w7.Events = ((Gdk.EventMask)(0));
                                         w7.Name = "button";
                                         w7.CanDefault = true;
-                                        w7.Label = "button1";
+                                        // Container child button.Gtk.Container+ContainerChild
+                                        Gtk.Alignment w8 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+                                        w8.Events = ((Gdk.EventMask)(0));
+                                        w8.Name = "GtkAlignment";
+                                        // Container child GtkAlignment.Gtk.Container+ContainerChild
+                                        Gtk.HBox w9 = new Gtk.HBox();
+                                        w9.Spacing = 2;
+                                        w9.Events = ((Gdk.EventMask)(0));
+                                        w9.Name = "GtkHBox";
+                                        // Container child GtkHBox.Gtk.Container+ContainerChild
+                                        Gtk.Image w10 = new Gtk.Image();
+                                        w10.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-cancel", 16, 0);
+                                        w10.Events = ((Gdk.EventMask)(0));
+                                        w10.Name = "image3";
+                                        bindings["image3"] = w10;
+                                        w9.Add(w10);
+                                        // Container child GtkHBox.Gtk.Container+ContainerChild
+                                        Gtk.Label w12 = new Gtk.Label();
+                                        w12.LabelProp = "Cancel";
+                                        w12.Events = ((Gdk.EventMask)(0));
+                                        w12.Name = "GtkLabel";
+                                        bindings["GtkLabel"] = w12;
+                                        w9.Add(w12);
+                                        bindings["GtkHBox"] = w9;
+                                        w8.Add(w9);
+                                        bindings["GtkAlignment"] = w8;
+                                        w7.Add(w8);
                                         bindings["button"] = w7;
                                         cobj.AddActionWidget(w7, 0);
-                                        Gtk.ButtonBox.ButtonBoxChild w8 = ((Gtk.ButtonBox.ButtonBoxChild)(w6[w7]));
-                                        w8.Expand = false;
-                                        w8.Fill = false;
+                                        Gtk.ButtonBox.ButtonBoxChild w16 = ((Gtk.ButtonBox.ButtonBoxChild)(w6[w7]));
+                                        w16.Expand = false;
+                                        w16.Fill = false;
                                         bindings["actionArea"] = w6;
                                         cobj.DefaultWidth = 400;
                                         cobj.DefaultHeight = 119;
@@ -296,352 +527,209 @@ namespace Stetic {
                                         w2.Show();
                                         w4.Show();
                                         w1.Show();
+                                        w10.Show();
+                                        w12.Show();
+                                        w9.Show();
+                                        w8.Show();
                                         w6.Show();
                                         cobj.Show();
+                                        w7.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnCancel")));
                                     }
                                     else {
-                                        if ((id == "Boxerp.Client.GtkSharp.Lib.SimpleTreeView")) {
-                                            Gtk.Bin cobj = ((Gtk.Bin)(obj));
-                                            // Widget Boxerp.Client.GtkSharp.Lib.SimpleTreeView
-                                            BinContainer.Attach(cobj);
-                                            cobj.Events = ((Gdk.EventMask)(256));
-                                            cobj.Name = "Boxerp.Client.GtkSharp.Lib.SimpleTreeView";
-                                            // Container child Boxerp.Client.GtkSharp.Lib.SimpleTreeView.Gtk.Container+ContainerChild
-                                            Gtk.TreeView w1 = new Gtk.TreeView();
-                                            w1.CanFocus = true;
-                                            w1.Events = ((Gdk.EventMask)(0));
-                                            w1.Name = "treeview";
-                                            bindings["treeview"] = w1;
-                                            cobj.Add(w1);
-                                            bindings["Boxerp.Client.GtkSharp.Lib.SimpleTreeView"] = cobj;
-                                            w1.Show();
+                                        if ((id == "button7")) {
+                                            Gtk.Button cobj = ((Gtk.Button)(obj));
+                                            // Widget button7
+                                            cobj.CanFocus = true;
+                                            cobj.Events = ((Gdk.EventMask)(0));
+                                            cobj.Name = "button7";
+                                            cobj.CanDefault = true;
+                                            cobj.Label = "button7";
+                                            bindings["button7"] = cobj;
                                             cobj.Show();
                                         }
                                         else {
-                                            if ((id == "Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog")) {
-                                                Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
-                                                // Widget Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog
-                                                cobj.Title = "InfoExtendedDialog";
+                                            if ((id == "Boxerp.Client.GtkSharp.Lib.LoginWindow")) {
+                                                Gtk.Window cobj = ((Gtk.Window)(obj));
+                                                // Widget Boxerp.Client.GtkSharp.Lib.LoginWindow
+                                                cobj.Title = "LoginWindow";
                                                 cobj.WindowPosition = ((Gtk.WindowPosition)(4));
-                                                cobj.HasSeparator = false;
-                                                cobj.Events = ((Gdk.EventMask)(256));
-                                                cobj.Name = "Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog";
-                                                // Internal child Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog.VBox
-                                                Gtk.VBox w1 = cobj.VBox;
-                                                w1.BorderWidth = ((uint)(2));
-                                                w1.Events = ((Gdk.EventMask)(256));
-                                                w1.Name = "dialog_VBox";
-                                                bindings["dialog_VBox"] = w1;
-                                                // Internal child Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog.ActionArea
-                                                Gtk.HButtonBox w2 = cobj.ActionArea;
-                                                w2.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
-                                                w2.Events = ((Gdk.EventMask)(256));
-                                                w2.Name = "Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog_ActionArea";
-                                                // Container child Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
-                                                Gtk.Button w3 = new Gtk.Button();
-                                                w3.CanFocus = true;
-                                                w3.Events = ((Gdk.EventMask)(0));
-                                                w3.Name = "button6";
-                                                w3.CanDefault = true;
-                                                w3.Label = "button6";
-                                                bindings["button6"] = w3;
-                                                cobj.AddActionWidget(w3, 0);
-                                                Gtk.ButtonBox.ButtonBoxChild w4 = ((Gtk.ButtonBox.ButtonBoxChild)(w2[w3]));
-                                                w4.Expand = false;
-                                                w4.Fill = false;
-                                                bindings["Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog_ActionArea"] = w2;
+                                                cobj.Events = ((Gdk.EventMask)(0));
+                                                cobj.Name = "Boxerp.Client.GtkSharp.Lib.LoginWindow";
                                                 cobj.DefaultWidth = 400;
                                                 cobj.DefaultHeight = 300;
-                                                bindings["Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog"] = cobj;
-                                                w1.Show();
-                                                w3.Show();
-                                                w2.Show();
+                                                bindings["Boxerp.Client.GtkSharp.Lib.LoginWindow"] = cobj;
                                                 cobj.Show();
                                             }
                                             else {
-                                                if ((id == "MainWindow")) {
-                                                    Gtk.Window cobj = ((Gtk.Window)(obj));
-                                                    // Widget MainWindow
-                                                    cobj.Title = "MainWindow";
+                                                if ((id == "Boxerp.Client.GtkSharp.Lib.InfoDialog")) {
+                                                    Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
+                                                    // Widget Boxerp.Client.GtkSharp.Lib.InfoDialog
+                                                    cobj.Title = "InfoDialog";
                                                     cobj.WindowPosition = ((Gtk.WindowPosition)(4));
-                                                    cobj.Events = ((Gdk.EventMask)(0));
-                                                    cobj.Name = "MainWindow";
+                                                    cobj.HasSeparator = false;
+                                                    cobj.Events = ((Gdk.EventMask)(256));
+                                                    cobj.Name = "Boxerp.Client.GtkSharp.Lib.InfoDialog";
+                                                    // Internal child Boxerp.Client.GtkSharp.Lib.InfoDialog.VBox
+                                                    Gtk.VBox w1 = cobj.VBox;
+                                                    w1.BorderWidth = ((uint)(2));
+                                                    w1.Events = ((Gdk.EventMask)(256));
+                                                    w1.Name = "dialog_VBox";
+                                                    bindings["dialog_VBox"] = w1;
+                                                    // Internal child Boxerp.Client.GtkSharp.Lib.InfoDialog.ActionArea
+                                                    Gtk.HButtonBox w2 = cobj.ActionArea;
+                                                    w2.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
+                                                    w2.Events = ((Gdk.EventMask)(256));
+                                                    w2.Name = "Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea";
+                                                    // Container child Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+                                                    Gtk.Button w3 = new Gtk.Button();
+                                                    w3.CanFocus = true;
+                                                    w3.Events = ((Gdk.EventMask)(0));
+                                                    w3.Name = "button5";
+                                                    w3.CanDefault = true;
+                                                    w3.Label = "button5";
+                                                    bindings["button5"] = w3;
+                                                    cobj.AddActionWidget(w3, 0);
+                                                    Gtk.ButtonBox.ButtonBoxChild w4 = ((Gtk.ButtonBox.ButtonBoxChild)(w2[w3]));
+                                                    w4.Expand = false;
+                                                    w4.Fill = false;
+                                                    bindings["Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea"] = w2;
                                                     cobj.DefaultWidth = 400;
                                                     cobj.DefaultHeight = 300;
-                                                    bindings["MainWindow"] = cobj;
+                                                    bindings["Boxerp.Client.GtkSharp.Lib.InfoDialog"] = cobj;
+                                                    w1.Show();
+                                                    w3.Show();
+                                                    w2.Show();
                                                     cobj.Show();
-                                                    cobj.DeleteEvent += ((Gtk.DeleteEventHandler)(System.Delegate.CreateDelegate(typeof(Gtk.DeleteEventHandler), cobj, "OnDeleteEvent")));
                                                 }
                                                 else {
-                                                    if ((id == "Boxerp.Client.GtkSharp.Lib.WaitWindow")) {
-                                                        Gtk.Window cobj = ((Gtk.Window)(obj));
-                                                        // Widget Boxerp.Client.GtkSharp.Lib.WaitWindow
-                                                        cobj.Title = "Operation in progress...";
-                                                        cobj.WindowPosition = ((Gtk.WindowPosition)(1));
-                                                        cobj.Events = ((Gdk.EventMask)(0));
-                                                        cobj.Name = "Boxerp.Client.GtkSharp.Lib.WaitWindow";
-                                                        // Container child Boxerp.Client.GtkSharp.Lib.WaitWindow.Gtk.Container+ContainerChild
-                                                        Gtk.VBox w1 = new Gtk.VBox();
-                                                        w1.Spacing = 2;
-                                                        w1.BorderWidth = ((uint)(5));
-                                                        w1.Events = ((Gdk.EventMask)(256));
-                                                        w1.Name = "vbox";
-                                                        // Container child vbox.Gtk.Box+BoxChild
-                                                        Gtk.Label w2 = new Gtk.Label();
-                                                        w2.LabelProp = "label1";
-                                                        w2.Events = ((Gdk.EventMask)(0));
-                                                        w2.Name = "labelMsg";
-                                                        bindings["labelMsg"] = w2;
-                                                        w1.Add(w2);
-                                                        Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(w1[w2]));
-                                                        w3.Position = 0;
-                                                        w3.Expand = false;
-                                                        w3.Fill = false;
-                                                        // Container child vbox.Gtk.Box+BoxChild
-                                                        Gtk.ProgressBar w4 = new Gtk.ProgressBar();
-                                                        w4.Events = ((Gdk.EventMask)(0));
-                                                        w4.Name = "progressbar";
-                                                        bindings["progressbar"] = w4;
-                                                        w1.Add(w4);
-                                                        Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(w1[w4]));
-                                                        w5.Position = 1;
-                                                        w5.Expand = false;
-                                                        w5.Fill = false;
-                                                        bindings["vbox"] = w1;
+                                                    if ((id == "Boxerp.Client.GtkSharp.Lib.FilteredListView")) {
+                                                        Gtk.Bin cobj = ((Gtk.Bin)(obj));
+                                                        // Widget Boxerp.Client.GtkSharp.Lib.FilteredListView
+                                                        BinContainer.Attach(cobj);
+                                                        cobj.Events = ((Gdk.EventMask)(256));
+                                                        cobj.Name = "Boxerp.Client.GtkSharp.Lib.FilteredListView";
+                                                        // Container child Boxerp.Client.GtkSharp.Lib.FilteredListView.Gtk.Container+ContainerChild
+                                                        Gtk.TreeView w1 = new Gtk.TreeView();
+                                                        w1.CanFocus = true;
+                                                        w1.Events = ((Gdk.EventMask)(0));
+                                                        w1.Name = "treeview";
+                                                        bindings["treeview"] = w1;
                                                         cobj.Add(w1);
-                                                        cobj.DefaultWidth = 400;
-                                                        cobj.DefaultHeight = 78;
-                                                        bindings["Boxerp.Client.GtkSharp.Lib.WaitWindow"] = cobj;
-                                                        w2.Show();
-                                                        w4.Show();
+                                                        bindings["Boxerp.Client.GtkSharp.Lib.FilteredListView"] = cobj;
                                                         w1.Show();
                                                         cobj.Show();
                                                     }
                                                     else {
-                                                        if ((id == "Boxerp.Client.GtkSharp.Lib.DoubleListView")) {
-                                                            Gtk.Bin cobj = ((Gtk.Bin)(obj));
-                                                            // Widget Boxerp.Client.GtkSharp.Lib.DoubleListView
-                                                            BinContainer.Attach(cobj);
+                                                        if ((id == "Boxerp.Client.GtkSharp.Lib.WarningDialog")) {
+                                                            Gtk.Dialog cobj = ((Gtk.Dialog)(obj));
+                                                            // Widget Boxerp.Client.GtkSharp.Lib.WarningDialog
+                                                            cobj.Title = "Warning";
+                                                            cobj.Icon = Gtk.IconTheme.Default.LoadIcon("gtk-dialog-warning", 16, 0);
+                                                            cobj.WindowPosition = ((Gtk.WindowPosition)(4));
+                                                            cobj.HasSeparator = false;
+                                                            cobj.Resizable = false;
+                                                            cobj.AllowGrow = false;
+                                                            cobj.DefaultWidth = 500;
                                                             cobj.Events = ((Gdk.EventMask)(256));
-                                                            cobj.Name = "Boxerp.Client.GtkSharp.Lib.DoubleListView";
-                                                            // Container child Boxerp.Client.GtkSharp.Lib.DoubleListView.Gtk.Container+ContainerChild
-                                                            Gtk.VBox w1 = new Gtk.VBox();
-                                                            w1.Events = ((Gdk.EventMask)(0));
-                                                            w1.Name = "vbox2";
-                                                            // Container child vbox2.Gtk.Box+BoxChild
+                                                            cobj.Name = "Boxerp.Client.GtkSharp.Lib.WarningDialog";
+                                                            // Internal child Boxerp.Client.GtkSharp.Lib.WarningDialog.VBox
+                                                            Gtk.VBox w1 = cobj.VBox;
+                                                            w1.BorderWidth = ((uint)(2));
+                                                            w1.Events = ((Gdk.EventMask)(256));
+                                                            w1.Name = "dialog_VBox";
+                                                            // Container child dialog_VBox.Gtk.Box+BoxChild
                                                             Gtk.HBox w2 = new Gtk.HBox();
+                                                            w2.Spacing = 5;
+                                                            w2.BorderWidth = ((uint)(5));
                                                             w2.Events = ((Gdk.EventMask)(0));
-                                                            w2.Name = "hbox2";
-                                                            // Container child hbox2.Gtk.Box+BoxChild
-                                                            Gtk.Label w3 = new Gtk.Label();
-                                                            w3.LabelProp = "label1";
+                                                            w2.Name = "hbox1";
+                                                            // Container child hbox1.Gtk.Box+BoxChild
+                                                            Gtk.Image w3 = new Gtk.Image();
+                                                            w3.Pixbuf = Gtk.IconTheme.Default.LoadIcon("stock_dialog-warning", 16, 0);
                                                             w3.Events = ((Gdk.EventMask)(0));
-                                                            w3.Name = "labelLeft";
-                                                            bindings["labelLeft"] = w3;
+                                                            w3.Name = "image";
+                                                            bindings["image"] = w3;
                                                             w2.Add(w3);
                                                             Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(w2[w3]));
                                                             w4.Position = 0;
+                                                            w4.Expand = false;
                                                             w4.Fill = false;
-                                                            // Container child hbox2.Gtk.Box+BoxChild
-                                                            Gtk.VSeparator w5 = new Gtk.VSeparator();
+                                                            // Container child hbox1.Gtk.Box+BoxChild
+                                                            Gtk.Label w5 = new Gtk.Label();
+                                                            w5.LabelProp = "Warning";
                                                             w5.Events = ((Gdk.EventMask)(0));
-                                                            w5.Name = "vseparator1";
-                                                            bindings["vseparator1"] = w5;
+                                                            w5.Name = "label";
+                                                            bindings["label"] = w5;
                                                             w2.Add(w5);
                                                             Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(w2[w5]));
                                                             w6.Position = 1;
-                                                            w6.Expand = false;
-                                                            w6.Fill = false;
-                                                            // Container child hbox2.Gtk.Box+BoxChild
-                                                            Gtk.Label w7 = new Gtk.Label();
-                                                            w7.LabelProp = "label2";
-                                                            w7.Events = ((Gdk.EventMask)(0));
-                                                            w7.Name = "labelRight";
-                                                            bindings["labelRight"] = w7;
-                                                            w2.Add(w7);
-                                                            Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(w2[w7]));
-                                                            w8.Position = 2;
-                                                            w8.Fill = false;
-                                                            bindings["hbox2"] = w2;
+                                                            bindings["hbox1"] = w2;
                                                             w1.Add(w2);
-                                                            Gtk.Box.BoxChild w9 = ((Gtk.Box.BoxChild)(w1[w2]));
-                                                            w9.Position = 0;
-                                                            w9.Expand = false;
-                                                            // Container child vbox2.Gtk.Box+BoxChild
-                                                            Gtk.HBox w10 = new Gtk.HBox();
-                                                            w10.Spacing = 5;
-                                                            w10.BorderWidth = ((uint)(5));
+                                                            Gtk.Box.BoxChild w7 = ((Gtk.Box.BoxChild)(w1[w2]));
+                                                            w7.Position = 0;
+                                                            w7.Expand = false;
+                                                            w7.Fill = false;
+                                                            bindings["dialog_VBox"] = w1;
+                                                            // Internal child Boxerp.Client.GtkSharp.Lib.WarningDialog.ActionArea
+                                                            Gtk.HButtonBox w8 = cobj.ActionArea;
+                                                            w8.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
+                                                            w8.Spacing = 10;
+                                                            w8.BorderWidth = ((uint)(5));
+                                                            w8.Events = ((Gdk.EventMask)(256));
+                                                            w8.Name = "Boxerp.Client.GtkSharp.Lib.WarningDialog_ActionArea";
+                                                            // Container child Boxerp.Client.GtkSharp.Lib.WarningDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+                                                            Gtk.Button w9 = new Gtk.Button();
+                                                            w9.CanFocus = true;
+                                                            w9.Events = ((Gdk.EventMask)(0));
+                                                            w9.Name = "buttonOk";
+                                                            w9.CanDefault = true;
+                                                            // Container child buttonOk.Gtk.Container+ContainerChild
+                                                            Gtk.Alignment w10 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
                                                             w10.Events = ((Gdk.EventMask)(0));
-                                                            w10.Name = "hbox1";
-                                                            // Container child hbox1.Gtk.Box+BoxChild
-                                                            Gtk.ScrolledWindow w11 = new Gtk.ScrolledWindow();
-                                                            w11.VscrollbarPolicy = ((Gtk.PolicyType)(1));
-                                                            w11.HscrollbarPolicy = ((Gtk.PolicyType)(1));
-                                                            w11.CanFocus = true;
+                                                            w10.Name = "GtkAlignment";
+                                                            // Container child GtkAlignment.Gtk.Container+ContainerChild
+                                                            Gtk.HBox w11 = new Gtk.HBox();
+                                                            w11.Spacing = 2;
                                                             w11.Events = ((Gdk.EventMask)(0));
-                                                            w11.Name = "scrolledwindow1";
-                                                            // Container child scrolledwindow1.Gtk.Container+ContainerChild
-                                                            Gtk.Viewport w12 = new Gtk.Viewport();
-                                                            w12.ShadowType = ((Gtk.ShadowType)(0));
+                                                            w11.Name = "GtkHBox";
+                                                            // Container child GtkHBox.Gtk.Container+ContainerChild
+                                                            Gtk.Image w12 = new Gtk.Image();
+                                                            w12.Pixbuf = Gtk.IconTheme.Default.LoadIcon("gtk-ok", 16, 0);
                                                             w12.Events = ((Gdk.EventMask)(0));
-                                                            w12.Name = "GtkViewport";
-                                                            // Container child GtkViewport.Gtk.Container+ContainerChild
-                                                            Boxerp.Client.GtkSharp.Lib.SimpleListView w13 = new Boxerp.Client.GtkSharp.Lib.SimpleListView();
-                                                            w13.Events = ((Gdk.EventMask)(256));
-                                                            w13.Name = "slistviewLeft";
-                                                            bindings["slistviewLeft"] = w13;
-                                                            w12.Add(w13);
-                                                            bindings["GtkViewport"] = w12;
+                                                            w12.Name = "image2";
+                                                            bindings["image2"] = w12;
                                                             w11.Add(w12);
-                                                            bindings["scrolledwindow1"] = w11;
+                                                            // Container child GtkHBox.Gtk.Container+ContainerChild
+                                                            Gtk.Label w14 = new Gtk.Label();
+                                                            w14.LabelProp = "Ok";
+                                                            w14.Events = ((Gdk.EventMask)(0));
+                                                            w14.Name = "GtkLabel";
+                                                            bindings["GtkLabel"] = w14;
+                                                            w11.Add(w14);
+                                                            bindings["GtkHBox"] = w11;
                                                             w10.Add(w11);
-                                                            Gtk.Box.BoxChild w16 = ((Gtk.Box.BoxChild)(w10[w11]));
-                                                            w16.Position = 0;
-                                                            // Container child hbox1.Gtk.Box+BoxChild
-                                                            Gtk.VBox w17 = new Gtk.VBox();
-                                                            w17.Homogeneous = true;
-                                                            w17.Events = ((Gdk.EventMask)(0));
-                                                            w17.Name = "vbox1";
-                                                            // Container child vbox1.Gtk.Box+BoxChild
-                                                            Gtk.Button w18 = new Gtk.Button();
-                                                            w18.CanFocus = true;
-                                                            w18.Events = ((Gdk.EventMask)(0));
-                                                            w18.Name = "button5";
-                                                            // Container child button5.Gtk.Container+ContainerChild
-                                                            Gtk.Alignment w19 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-                                                            w19.Events = ((Gdk.EventMask)(0));
-                                                            w19.Name = "GtkAlignment";
-                                                            // Container child GtkAlignment.Gtk.Container+ContainerChild
-                                                            Gtk.HBox w20 = new Gtk.HBox();
-                                                            w20.Spacing = 2;
-                                                            w20.Events = ((Gdk.EventMask)(0));
-                                                            w20.Name = "GtkHBox";
-                                                            // Container child GtkHBox.Gtk.Container+ContainerChild
-                                                            Gtk.Image w21 = new Gtk.Image();
-                                                            w21.Pixbuf = Gtk.IconTheme.Default.LoadIcon("stock_left", 16, 0);
-                                                            w21.Events = ((Gdk.EventMask)(0));
-                                                            w21.Name = "image2";
-                                                            bindings["image2"] = w21;
-                                                            w20.Add(w21);
-                                                            // Container child GtkHBox.Gtk.Container+ContainerChild
-                                                            Gtk.Label w23 = new Gtk.Label();
-                                                            w23.LabelProp = "";
-                                                            w23.Events = ((Gdk.EventMask)(0));
-                                                            w23.Name = "GtkLabel";
-                                                            bindings["GtkLabel"] = w23;
-                                                            w20.Add(w23);
-                                                            bindings["GtkHBox"] = w20;
-                                                            w19.Add(w20);
-                                                            bindings["GtkAlignment"] = w19;
-                                                            w18.Add(w19);
-                                                            bindings["button5"] = w18;
-                                                            w17.Add(w18);
-                                                            Gtk.Box.BoxChild w27 = ((Gtk.Box.BoxChild)(w17[w18]));
-                                                            w27.Position = 1;
-                                                            w27.Expand = false;
-                                                            w27.Fill = false;
-                                                            // Container child vbox1.Gtk.Box+BoxChild
-                                                            Gtk.Button w28 = new Gtk.Button();
-                                                            w28.CanFocus = true;
-                                                            w28.Events = ((Gdk.EventMask)(0));
-                                                            w28.Name = "button6";
-                                                            // Container child button6.Gtk.Container+ContainerChild
-                                                            Gtk.Alignment w29 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-                                                            w29.Events = ((Gdk.EventMask)(0));
-                                                            w29.Name = "GtkAlignment";
-                                                            // Container child GtkAlignment.Gtk.Container+ContainerChild
-                                                            Gtk.HBox w30 = new Gtk.HBox();
-                                                            w30.Spacing = 2;
-                                                            w30.Events = ((Gdk.EventMask)(0));
-                                                            w30.Name = "GtkHBox";
-                                                            // Container child GtkHBox.Gtk.Container+ContainerChild
-                                                            Gtk.Image w31 = new Gtk.Image();
-                                                            w31.Pixbuf = Gtk.IconTheme.Default.LoadIcon("stock_right", 16, 0);
-                                                            w31.Events = ((Gdk.EventMask)(0));
-                                                            w31.Name = "image3";
-                                                            bindings["image3"] = w31;
-                                                            w30.Add(w31);
-                                                            // Container child GtkHBox.Gtk.Container+ContainerChild
-                                                            Gtk.Label w33 = new Gtk.Label();
-                                                            w33.LabelProp = "";
-                                                            w33.Events = ((Gdk.EventMask)(0));
-                                                            w33.Name = "GtkLabel";
-                                                            bindings["GtkLabel"] = w33;
-                                                            w30.Add(w33);
-                                                            bindings["GtkHBox"] = w30;
-                                                            w29.Add(w30);
-                                                            bindings["GtkAlignment"] = w29;
-                                                            w28.Add(w29);
-                                                            bindings["button6"] = w28;
-                                                            w17.Add(w28);
-                                                            Gtk.Box.BoxChild w37 = ((Gtk.Box.BoxChild)(w17[w28]));
-                                                            w37.Position = 2;
-                                                            w37.Expand = false;
-                                                            w37.Fill = false;
-                                                            bindings["vbox1"] = w17;
-                                                            w10.Add(w17);
-                                                            Gtk.Box.BoxChild w38 = ((Gtk.Box.BoxChild)(w10[w17]));
-                                                            w38.Position = 1;
-                                                            w38.Expand = false;
-                                                            w38.Fill = false;
-                                                            // Container child hbox1.Gtk.Box+BoxChild
-                                                            Gtk.ScrolledWindow w39 = new Gtk.ScrolledWindow();
-                                                            w39.VscrollbarPolicy = ((Gtk.PolicyType)(1));
-                                                            w39.HscrollbarPolicy = ((Gtk.PolicyType)(1));
-                                                            w39.CanFocus = true;
-                                                            w39.Events = ((Gdk.EventMask)(0));
-                                                            w39.Name = "scrolledwindow2";
-                                                            // Container child scrolledwindow2.Gtk.Container+ContainerChild
-                                                            Gtk.Viewport w40 = new Gtk.Viewport();
-                                                            w40.ShadowType = ((Gtk.ShadowType)(0));
-                                                            w40.Events = ((Gdk.EventMask)(0));
-                                                            w40.Name = "GtkViewport1";
-                                                            // Container child GtkViewport1.Gtk.Container+ContainerChild
-                                                            Boxerp.Client.GtkSharp.Lib.SimpleListView w41 = new Boxerp.Client.GtkSharp.Lib.SimpleListView();
-                                                            w41.Events = ((Gdk.EventMask)(256));
-                                                            w41.Name = "slistviewRight";
-                                                            bindings["slistviewRight"] = w41;
-                                                            w40.Add(w41);
-                                                            bindings["GtkViewport1"] = w40;
-                                                            w39.Add(w40);
-                                                            bindings["scrolledwindow2"] = w39;
-                                                            w10.Add(w39);
-                                                            Gtk.Box.BoxChild w44 = ((Gtk.Box.BoxChild)(w10[w39]));
-                                                            w44.PackType = ((Gtk.PackType)(1));
-                                                            w44.Position = 2;
-                                                            bindings["hbox1"] = w10;
-                                                            w1.Add(w10);
-                                                            Gtk.Box.BoxChild w45 = ((Gtk.Box.BoxChild)(w1[w10]));
-                                                            w45.Position = 1;
-                                                            bindings["vbox2"] = w1;
-                                                            cobj.Add(w1);
-                                                            bindings["Boxerp.Client.GtkSharp.Lib.DoubleListView"] = cobj;
+                                                            bindings["GtkAlignment"] = w10;
+                                                            w9.Add(w10);
+                                                            bindings["buttonOk"] = w9;
+                                                            cobj.AddActionWidget(w9, 0);
+                                                            Gtk.ButtonBox.ButtonBoxChild w18 = ((Gtk.ButtonBox.ButtonBoxChild)(w8[w9]));
+                                                            w18.Expand = false;
+                                                            w18.Fill = false;
+                                                            bindings["Boxerp.Client.GtkSharp.Lib.WarningDialog_ActionArea"] = w8;
+                                                            cobj.DefaultHeight = 104;
+                                                            bindings["Boxerp.Client.GtkSharp.Lib.WarningDialog"] = cobj;
                                                             w3.Show();
                                                             w5.Show();
-                                                            w7.Show();
                                                             w2.Show();
-                                                            w13.Show();
-                                                            w12.Show();
-                                                            w11.Show();
-                                                            w21.Show();
-                                                            w23.Show();
-                                                            w20.Show();
-                                                            w19.Show();
-                                                            w18.Show();
-                                                            w31.Show();
-                                                            w33.Show();
-                                                            w30.Show();
-                                                            w29.Show();
-                                                            w28.Show();
-                                                            w17.Show();
-                                                            w41.Show();
-                                                            w40.Show();
-                                                            w39.Show();
-                                                            w10.Show();
                                                             w1.Show();
+                                                            w12.Show();
+                                                            w14.Show();
+                                                            w11.Show();
+                                                            w10.Show();
+                                                            w9.Show();
+                                                            w8.Show();
                                                             cobj.Show();
-                                                            w18.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnLeftClicked")));
-                                                            w28.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnRightClicked")));
+                                                            w9.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnOk")));
                                                         }
                                                     }
                                                 }

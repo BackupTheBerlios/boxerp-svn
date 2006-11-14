@@ -13,7 +13,20 @@ namespace Boxerp.Client.GtkSharp.Lib
 		protected Gtk.Label labelMsg;
 		protected Gtk.Button button;
 		protected Gtk.HButtonBox actionArea;
-		
+		private EventHandler cancelEventHandler;
+
+        public event EventHandler CancelEvent
+        {
+            add
+            {
+                cancelEventHandler += value;
+            }
+            remove
+            {
+                cancelEventHandler -= value;
+            }
+        }
+
 		public string Message
 		{
 			get { return labelMsg.Text;}
@@ -55,6 +68,13 @@ namespace Boxerp.Client.GtkSharp.Lib
 			if (!firstInstant)
 				progressbar.Pulse();
 			return nonstop;
+		}
+
+		protected virtual void OnCancel(object sender, System.EventArgs e)
+		{
+			if (cancelEventHandler != null)
+				cancelEventHandler(this, null);
+                //cancelEventHandler.Invoke(this, null);
 		}
 		
 

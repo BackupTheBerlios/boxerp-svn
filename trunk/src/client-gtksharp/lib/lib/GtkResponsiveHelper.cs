@@ -12,72 +12,100 @@ namespace Boxerp.Client.GtkSharp.Lib
 	{
 		WaitDialog waitDialog;
 		WarningDialog warningDialog;
-		//protected ThreadStart threadStartUpload;
-		//protected ThreadStart threadStartDownload;		
-		//protected Thread threadUpload;
-		//protected Thread threadDownload;
-		static ThreadNotify threadNotify;
+		//static ThreadNotify threadNotify; // static ?, error prune code
+		protected bool transferSuccess;
 		protected Gtk.Window parentWindow;
-		protected bool uploadSuccess = false;
-		protected bool downloadSuccess = true;
-		private EventHandler downloadCompleteEventHandler;
 		
-		public event EventHandler DownloadCompleteEvent
+		// Just to notify clients when the transfer is completed
+		private EventHandler transferCompleteEventHandler;
+		public event EventHandler TransferCompleteEvent
       	{
         	add
          	{
-            	downloadCompleteEventHandler += value;
+            	transferCompleteEventHandler += value;
          	}
          	remove
         	{
-            	downloadCompleteEventHandler -= value;
+            	transferCompleteEventHandler -= value;
          	}
       	}
 
 		
-		protected void InitThreads()
+		/*protected void InitThreads()
 		{
 			//threadStartUpload   = new ThreadStart(Upload);
 			//threadStartDownload = new ThreadStart(Download); 
 			
-		}
+		}*/
 		
 		public void Init(Gtk.Window win)
 		{
 			parentWindow = win;
-			InitThreads();
-			ThreadDownloadStopEvent += OnDownloadStop;
-			ThreadUploadStopEvent += OnUploadStop;
+			//InitThreads();
+			base.BaseTransferCompleteEvent += this.OnTransferCompleted;
+			//ThreadDownloadStopEvent += OnDownloadStop;
+			//ThreadUploadStopEvent += OnUploadStop;
 		}
 	
-		public override void StartUpload()
+		public void StartTransfer(ResponsiveEnum transferType)
 		{
 			waitDialog = new WaitDialog(parentWindow); 
 			waitDialog.CancelEvent += OnCancel;
-			if (uploadThread.ThreadState != ThreadState.Unstarted)
+			transferSuccess = true;
+			base.Transfer(transferType);
+			/*if (uploadThread.ThreadState != ThreadState.Unstarted)
             {
                 //Console.WriteLine("thread is aborted:" + downloadThread.ThreadState.ToString());
                 uploadThread = new Thread(base.Upload);
             }
-            uploadThread.Start();
+            uploadThread.Start();*/
         }
 		
 		public void OnCancel(object sender, EventArgs e)
 		{
-		
+        	CancelRequest = true;	
+        	//TODO: Show a dialog :" Please wait while cancelling" with
+        	//a button to force cancelation by aborting threads
 		}
 		
-		public void OnUploadStop(object sender, EventArgs e)
+		public void OnTransferCompleted(object sender, EventArgs e)
 		{
-			threadNotify = new ThreadNotify (new ReadyEvent (UploadComplete));
-			threadNotify.WakeupMain();
+			ResponsiveEnum transferType = (ResponsiveEnum)sender;
+			
+			if (transferSuccess) // FIXME: transferSuccess must be syncrhonized
+         	{
+				waitDialog.Stop();
+				waitDialog.Destroy();
+				if (transferType == ResponsiveEnum.Read)
+				{
+					this.PopulateGUI(); // FIXME: this could freeze, it is not resonsible
+				}
+				parentWindow.Present();
+			}
+			else
+			{
+				warningDialog = new WarningDialog();
+         		warningDialog.Message = "Connection error";
+         		warningDialog.QuitOnOk = false;
+            	warningDialog.Present();
+         	}		
+         	if (this.transferCompleteEventHandler != null)
+         	{
+         		transferCompleteEventHandler(this, null);
+         	}
 		}
 		
-		public void OnDownloadStop(object sender, EventArgs e)
+		/*public void OnTransferStop(object sender, EventArgs e)
+		{
+			threadNotify = new ThreadNotify (new ReadyEvent (TransferCompleted));
+			threadNotify.WakeupMain();
+		}*/
+		
+		/*public void OnDownloadStop(object sender, EventArgs e)
 		{
 			threadNotify = new ThreadNotify (new ReadyEvent (DownloadComplete));
 			threadNotify.WakeupMain();
-		}
+		}*/
 		
 	
 /*		protected override void Upload()
@@ -103,7 +131,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 			}			
 		}
 	*/
-		public override void StartDownload()
+		/*public override void StartDownload()
 		{
 			waitDialog = new WaitDialog(parentWindow); 
 			waitDialog.CancelEvent += OnCancel;
@@ -116,7 +144,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 			//threadDownload = new Thread(threadStartDownload);
 			//threadNotify = new ThreadNotify (new ReadyEvent (DownloadComplete));
 			//threadDownload.Start();		
-		}
+		}*/
 	
 /*		public override void Download()
 		{
@@ -141,7 +169,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 			}
 		}
 	*/
-		public void UploadComplete()
+		/*public void UploadComplete()
 		{
 			if (uploadSuccess)
          	{
@@ -156,25 +184,18 @@ namespace Boxerp.Client.GtkSharp.Lib
          		warningDialog.QuitOnOk = false;
             	warningDialog.Present();
          	}
-		}
+		}*/
 	
-		public void DownloadComplete()
+		/*public void OnTransferCompleted(object sender, EventArgs e)
 		{
-			if (downloadSuccess)
-         	{
-				waitDialog.Stop();
-				waitDialog.Destroy();
-				this.PopulateGUI(); // FIXME: this could freeze, it is not resonsible
-				parentWindow.Present();
-			}
-			else
-			{
-				warningDialog = new WarningDialog();
-         		warningDialog.Message = "Connection error";
-         		warningDialog.QuitOnOk = false;
-            	warningDialog.Present();
-         	}		
-		}
+			ResponsiveEnum transferType = sender as ResponsiveEnum;
+			// fixme: how to notify without jump to another method
+			threadNotify = new ThreadNotify (new ReadyEvent (TransferCompleted));
+			threadNotify.WakeupMain();
+			
+		}*/
+		
+
 		
 		public override void PopulateGUI()
 		{

@@ -1,13 +1,15 @@
 
 using System;
 using Boxerp.Models;
+using Boxerp.Client.GtkSharp.Lib;
+using Boxerp.Client;
 
 namespace administrator
 {
 	
 	public class EditUserWindow : Gtk.Window
 	{
-		protected widgets.DoubleListView dtreeview;
+		protected DoubleListView dtreeview;
 		protected Gtk.Entry entryPassword;
 		protected Gtk.Entry entryEmail;
 		protected Gtk.Entry entryRealName;
@@ -24,7 +26,7 @@ namespace administrator
 			helper = new EditUserHelper(this, ref dtreeview);
 			dtreeview.LeftLabel = "User groups:";
 			dtreeview.RightLabel = "Rest of groups:";
-			helper.StartDownload();
+			helper.StartTransfer(ResponsiveEnum.Read);
 		}
 		
 		// Constructor: To edit an existing user
@@ -37,7 +39,7 @@ namespace administrator
 			helper = new EditUserHelper(this, ref dtreeview, user);
 			dtreeview.LeftLabel = "User groups:";
 			dtreeview.RightLabel = "Rest of groups:";
-			helper.StartDownload();
+			helper.StartTransfer(ResponsiveEnum.Read); 
 		}
 		
 		private void PopulateUserFields()
@@ -52,7 +54,7 @@ namespace administrator
 		{
 			helper.PopulateUser(entryUserName.Text, entryRealName.Text,
 							entryPassword.Text, entryEmail.Text, checkActive.Active);
-			helper.StartUpload();
+			helper.StartTransfer(ResponsiveEnum.Write); 
 		}
 
 		protected virtual void OnCancelClicked(object sender, System.EventArgs e)

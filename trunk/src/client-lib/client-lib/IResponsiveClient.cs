@@ -6,8 +6,7 @@ namespace Boxerp.Client
 	
 	public interface IResponsiveClient
 	{
-		void StartUpload();
+		void StartTransfer();
 		void PopulateGUI();
-		void StartDownload();
 	}
 }

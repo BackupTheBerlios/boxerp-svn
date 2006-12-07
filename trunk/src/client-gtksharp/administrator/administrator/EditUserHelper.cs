@@ -1,18 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using clientlib;
-using widgets;
 using Boxerp.Models;
 using Boxerp.Objects;
 using Gtk;
+using Boxerp.Client.GtkSharp.Lib;
+using Boxerp.Client;
 
 namespace administrator
 {
 	
-	public class EditUserHelper : ResponsiveHelper
+	public class EditUserHelper : GtkResponsiveHelper
 	{
-		widgets.DoubleListView doubleListView;
+		DoubleListView doubleListView;
 		User user;
 		Group[] groups;
 		IAdmin adminObj;
@@ -34,7 +34,7 @@ namespace administrator
 			base.Init(win);
 		}
 		
-		[Responsive(ResponsiveEnum.Download)]
+		[Responsive(ResponsiveEnum.Read)]
 		public void LoadGroups()
 		{
 			try
@@ -51,7 +51,7 @@ namespace administrator
 			}		
 		}
 
-		[Responsive(ResponsiveEnum.Upload)]
+		[Responsive(ResponsiveEnum.Write)]
 		public void SaveUser()
 		{
 			try

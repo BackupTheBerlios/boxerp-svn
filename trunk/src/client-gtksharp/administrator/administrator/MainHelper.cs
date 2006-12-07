@@ -2,18 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
-using clientlib;
-using widgets;
 using Boxerp.Models;
 using Boxerp.Objects;
 using Gtk;
+using Boxerp.Client.GtkSharp.Lib;
+using Boxerp.Client;
 
 namespace administrator
 {
 	
-	public class MainHelper : ResponsiveHelper
+	public class MainHelper : GtkResponsiveHelper
 	{
-		widgets.FilteredListView streeviewEnterprises, 
+		FilteredListView streeviewEnterprises, 
 								streeviewUsers, 
 								streeviewGroups;
 		Enterprise[] enterprises;
@@ -31,11 +31,12 @@ namespace administrator
 			base.Init(win);
 		}
 		
-		[Responsive(ResponsiveEnum.Download)]
+		[Responsive(ResponsiveEnum.Read)]
 		public void LoadEnterprises()
 		{
 			try
 			{
+				// do this asyn
 				enterprises = adminObj.GetEnterprises();
 			}
 			catch (Exception ex)
@@ -45,20 +46,21 @@ namespace administrator
 			}
 		}
 		
-		[Responsive(ResponsiveEnum.Download)]
+		[Responsive(ResponsiveEnum.Read)]
 		public void LoadUsers()
 		{
 			try
 			{
+				// do async
 				users = adminObj.GetUsers();
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				users = null;
 			}		
 		}
 		
-		[Responsive(ResponsiveEnum.Download)]
+		[Responsive(ResponsiveEnum.Read)]
 		public void LoadGroups()
 		{
 			try

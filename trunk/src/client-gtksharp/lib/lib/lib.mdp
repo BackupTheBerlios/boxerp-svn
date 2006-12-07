@@ -40,7 +40,7 @@
     <ProjectReference type="Assembly" localcopy="True" refto="./bin/Debug/Interfaces.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="./bin/Debug/Models.dll" />
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Assembly" localcopy="True" refto="../../../client-lib/client-lib/bin/Debug/Boxerp.Client.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../client-lib/client-lib/bin/Release/client-lib.dll" />
   </References>
   <GtkDesignInfo>
     <ExportedWidgets>

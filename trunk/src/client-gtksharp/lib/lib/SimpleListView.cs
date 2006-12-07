@@ -139,7 +139,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 					return null;
 				return objects;
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				return null;
 			}

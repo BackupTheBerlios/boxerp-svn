@@ -7,7 +7,7 @@ using Boxerp;
 using Boxerp.Models;
 using Boxerp.Objects;
 using System.Threading;
-using clientlib;
+using Boxerp.Client;
 
 namespace administrator
 {

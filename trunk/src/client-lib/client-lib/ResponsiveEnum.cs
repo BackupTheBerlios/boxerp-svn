@@ -6,8 +6,9 @@ namespace Boxerp.Client
 	
 	public enum ResponsiveEnum
 	{
-		Upload,
-		Download
+		Read,
+		Write,
+		Other
 	}
 	
 }

@@ -1,314 +1,46 @@
-﻿2006-10-25 12:14:20,642 [-1212671680] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - NHibernate 1.0.2
-2006-10-25 12:14:20,670 [-1212671680] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - nhibernate section not found in application configuration file
-2006-10-25 12:14:20,670 [-1212671680] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - Using reflection optimizer
-2006-10-25 12:14:20,951 [-1212671680] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:14:20,988 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Action -> Actions
-2006-10-25 12:14:21,009 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Action.Sections -> sections_actions
-2006-10-25 12:14:21,015 [-1212671680] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:14:21,015 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Enterprise -> enterprises
-2006-10-25 12:14:21,016 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Enterprise.Groups -> enterprises_groups
-2006-10-25 12:14:21,020 [-1212671680] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:14:21,021 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.SectionPermission -> SectionPermissions
-2006-10-25 12:14:21,026 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.SectionPermission.Actions -> sections_actions
-2006-10-25 12:14:21,028 [-1212671680] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:14:21,028 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.ErrorCode -> errorCodes
-2006-10-25 12:14:21,032 [-1212671680] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:14:21,033 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Session -> sessions
-2006-10-25 12:14:21,037 [-1212671680] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:14:21,038 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Group -> sgroups
-2006-10-25 12:14:21,039 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Group.Enterprises -> enterprises_groups
-2006-10-25 12:14:21,039 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Group.Users -> users_groups
-2006-10-25 12:14:21,045 [-1212671680] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:14:21,046 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.User -> susers
-2006-10-25 12:14:21,046 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.User.Groups -> users_groups
-2006-10-25 12:14:21,047 [-1212671680] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:14:21,048 [-1212671680] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Section -> Sections
-2006-10-25 12:14:26,164 [-1228338256] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - processing one-to-many association mappings
-2006-10-25 12:14:26,169 [-1228338256] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - mapping collection: Boxerp.Models.Group.Permissions -> SectionPermissions
-2006-10-25 12:14:26,169 [-1228338256] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - mapping collection: Boxerp.Models.User.Permissions -> SectionPermissions
-2006-10-25 12:14:26,169 [-1228338256] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - processing one-to-one association property references
-2006-10-25 12:14:26,169 [-1228338256] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - processing foreign key constraints
-2006-10-25 12:14:26,176 [-1228338256] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:14:26,180 [-1228338256] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - use outer join fetching: True
-2006-10-25 12:14:26,181 [-1228338256] INFO  NHibernate.Connection.ConnectionProviderFactory [(null)] &lt;(null)&gt; - Intitializing connection provider: NHibernate.Connection.DriverConnectionProvider
-2006-10-25 12:14:26,181 [-1228338256] INFO  NHibernate.Connection.ConnectionProvider [(null)] &lt;(null)&gt; - Configuring ConnectionProvider
-2006-10-25 12:14:26,185 [-1228338256] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - Optimize cache for minimal puts: False
-2006-10-25 12:14:26,186 [-1228338256] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - Query language substitutions: {}
-2006-10-25 12:14:26,186 [-1228338256] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - cache provider: NHibernate.Cache.HashtableCacheProvider
-2006-10-25 12:14:26,187 [-1228338256] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - instantiating and configuring caches
-2006-10-25 12:14:26,191 [-1228338256] INFO  NHibernate.Impl.SessionFactoryImpl [(null)] &lt;(null)&gt; - building session factory
-2006-10-25 12:14:26,270 [-1228338256] INFO  NHibernate.Impl.SessionFactoryObjectFactory [(null)] &lt;(null)&gt; - no name configured
-2006-10-25 12:14:26,309 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT this.Id as Id0_, this.Password as Password0_, this.Email as Email0_, this.UserName as UserName0_, this.Active as Active0_, this.RealName as RealName0_ FROM susers this WHERE this.UserName = :p0 and this.Password = :p1 limit :p2
-2006-10-25 12:14:26,430 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT groups0_.user_id as user_id__, groups0_.group_id as group_id__, group1_.Id as Id0_, group1_.GroupName as GroupName0_, group1_.Active as Active0_ FROM users_groups groups0_ inner join sgroups group1_ on groups0_.group_id=group1_.Id WHERE groups0_.user_id=:p0
-2006-10-25 12:14:26,439 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.suser as suser__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, section1_.Id as Id0_, section1_.Description as Descript3_0_, section1_.Name as Name0_, group2_.Id as Id1_, group2_.GroupName as GroupName1_, group2_.Active as Active1_ FROM SectionPermissions permission0_ left outer join Sections section1_ on permission0_.Section=section1_.Id left outer join sgroups group2_ on permission0_.sgroup=group2_.Id WHERE permission0_.suser=:p0
-2006-10-25 12:14:26,479 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT this.Id as Id0_, this.Password as Password0_, this.Email as Email0_, this.UserName as UserName0_, this.Active as Active0_, this.RealName as RealName0_ FROM susers this WHERE 1=1
-2006-10-25 12:14:26,480 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT groups0_.user_id as user_id__, groups0_.group_id as group_id__, group1_.Id as Id0_, group1_.GroupName as GroupName0_, group1_.Active as Active0_ FROM users_groups groups0_ inner join sgroups group1_ on groups0_.group_id=group1_.Id WHERE groups0_.user_id=:p0
-2006-10-25 12:14:26,482 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.suser as suser__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, section1_.Id as Id0_, section1_.Description as Descript3_0_, section1_.Name as Name0_, group2_.Id as Id1_, group2_.GroupName as GroupName1_, group2_.Active as Active1_ FROM SectionPermissions permission0_ left outer join Sections section1_ on permission0_.Section=section1_.Id left outer join sgroups group2_ on permission0_.sgroup=group2_.Id WHERE permission0_.suser=:p0
-2006-10-25 12:14:26,522 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT this.Id as Id0_, this.GroupName as GroupName0_, this.Active as Active0_ FROM sgroups this WHERE 1=1
-2006-10-25 12:14:26,524 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT users0_.group_id as group_id__, users0_.user_id as user_id__, user1_.Id as Id0_, user1_.Password as Password0_, user1_.Email as Email0_, user1_.UserName as UserName0_, user1_.Active as Active0_, user1_.RealName as RealName0_ FROM users_groups users0_ inner join susers user1_ on users0_.user_id=user1_.Id WHERE users0_.group_id=:p0
-2006-10-25 12:14:26,526 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT enterprise0_.group_id as group_id__, enterprise0_.enterprise_id as enterpri1___, enterprise1_.Id as Id0_, enterprise1_.Published as Published0_, enterprise1_.Description as Descript3_0_, enterprise1_.Name as Name0_ FROM enterprises_groups enterprise0_ inner join enterprises enterprise1_ on enterprise0_.enterprise_id=enterprise1_.Id WHERE enterprise0_.group_id=:p0
-2006-10-25 12:14:26,528 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.sgroup as sgroup__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, user1_.Id as Id0_, user1_.Password as Password0_, user1_.Email as Email0_, user1_.UserName as UserName0_, user1_.Active as Active0_, user1_.RealName as RealName0_, section2_.Id as Id1_, section2_.Description as Descript3_1_, section2_.Name as Name1_ FROM SectionPermissions permission0_ left outer join susers user1_ on permission0_.suser=user1_.Id left outer join Sections section2_ on permission0_.Section=section2_.Id WHERE permission0_.sgroup=:p0
-2006-10-25 12:14:26,598 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT user0_.Id as Id0_, user0_.Password as Password0_, user0_.Email as Email0_, user0_.UserName as UserName0_, user0_.Active as Active0_, user0_.RealName as RealName0_ FROM susers user0_ WHERE user0_.Id=:p0
-2006-10-25 12:14:26,601 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT groups0_.user_id as user_id__, groups0_.group_id as group_id__, group1_.Id as Id0_, group1_.GroupName as GroupName0_, group1_.Active as Active0_ FROM users_groups groups0_ inner join sgroups group1_ on groups0_.group_id=group1_.Id WHERE groups0_.user_id=:p0
-2006-10-25 12:14:26,602 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.suser as suser__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, section1_.Id as Id0_, section1_.Description as Descript3_0_, section1_.Name as Name0_, group2_.Id as Id1_, group2_.GroupName as GroupName1_, group2_.Active as Active1_ FROM SectionPermissions permission0_ left outer join Sections section1_ on permission0_.Section=section1_.Id left outer join sgroups group2_ on permission0_.sgroup=group2_.Id WHERE permission0_.suser=:p0
-2006-10-25 12:14:26,650 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT group0_.Id as Id0_, group0_.GroupName as GroupName0_, group0_.Active as Active0_ FROM sgroups group0_ WHERE group0_.Id=:p0
-2006-10-25 12:14:26,652 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT users0_.group_id as group_id__, users0_.user_id as user_id__, user1_.Id as Id0_, user1_.Password as Password0_, user1_.Email as Email0_, user1_.UserName as UserName0_, user1_.Active as Active0_, user1_.RealName as RealName0_ FROM users_groups users0_ inner join susers user1_ on users0_.user_id=user1_.Id WHERE users0_.group_id=:p0
-2006-10-25 12:14:26,654 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT enterprise0_.group_id as group_id__, enterprise0_.enterprise_id as enterpri1___, enterprise1_.Id as Id0_, enterprise1_.Published as Published0_, enterprise1_.Description as Descript3_0_, enterprise1_.Name as Name0_ FROM enterprises_groups enterprise0_ inner join enterprises enterprise1_ on enterprise0_.enterprise_id=enterprise1_.Id WHERE enterprise0_.group_id=:p0
-2006-10-25 12:14:26,656 [-1228338256] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.sgroup as sgroup__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, user1_.Id as Id0_, user1_.Password as Password0_, user1_.Email as Email0_, user1_.UserName as UserName0_, user1_.Active as Active0_, user1_.RealName as RealName0_, section2_.Id as Id1_, section2_.Description as Descript3_1_, section2_.Name as Name1_ FROM SectionPermissions permission0_ left outer join susers user1_ on permission0_.suser=user1_.Id left outer join Sections section2_ on permission0_.Section=section2_.Id WHERE permission0_.sgroup=:p0
-2006-10-25 12:14:26,680 [-1228338256] WARN  NHibernate.Util.ADOExceptionReporter [(null)] &lt;(null)&gt; - Npgsql.NpgsqlException:
-llave duplicada viola restricciÃ³n unique Â«sgroups_groupname_keyÂ»
-Severity: ERROR
-Code: 23505
-in <0x00054> Npgsql.NpgsqlConnector:CheckErrors ()
-in <0x0001c> Npgsql.NpgsqlConnector:CheckErrorsAndNotifications ()
-in <0x0005f> Npgsql.NpgsqlCommand:ExecuteCommand ()
-in <0x00029> Npgsql.NpgsqlCommand:ExecuteNonQuery ()
-in <0x0003a> NHibernate.Impl.BatcherImpl:ExecuteNonQuery (IDbCommand cmd)
-in <0x00025> NHibernate.Impl.NonBatchingBatcher:AddToBatch (Int32 expectedRowCount)
-in <0x00143> NHibernate.Persister.EntityPersister:Insert (System.Object id, System.Object[] fields, System.Boolean[] notNull, NHibernate.SqlCommand.SqlString sql, System.Object obj, ISessionImplementor session)
-2006-10-25 12:14:26,683 [-1228338256] ERROR NHibernate.Util.ADOExceptionReporter [(null)] &lt;(null)&gt; - ERROR: 23505: llave duplicada viola restricciÃ³n unique Â«sgroups_groupname_keyÂ»
-2006-10-25 12:14:26,683 [-1228338256] ERROR NHibernate.Impl.SessionImpl [(null)] &lt;(null)&gt; - could not synchronize database state with session
-NHibernate.ADOException: could not insert: [Boxerp.Models.Group#3] ---> Npgsql.NpgsqlException:
-llave duplicada viola restricciÃ³n unique Â«sgroups_groupname_keyÂ»
-Severity: ERROR
-Code: 23505
-in <0x00054> Npgsql.NpgsqlConnector:CheckErrors ()
-in <0x0001c> Npgsql.NpgsqlConnector:CheckErrorsAndNotifications ()
-in <0x0005f> Npgsql.NpgsqlCommand:ExecuteCommand ()
-in <0x00029> Npgsql.NpgsqlCommand:ExecuteNonQuery ()
-in <0x0003a> NHibernate.Impl.BatcherImpl:ExecuteNonQuery (IDbCommand cmd)
-in <0x00025> NHibernate.Impl.NonBatchingBatcher:AddToBatch (Int32 expectedRowCount)
-in <0x00143> NHibernate.Persister.EntityPersister:Insert (System.Object id, System.Object[] fields, System.Boolean[] notNull, NHibernate.SqlCommand.SqlString sql, System.Object obj, ISessionImplementor session)--- End of inner exception stack trace ---
-
-in <0x001f5> NHibernate.Persister.EntityPersister:Insert (System.Object id, System.Object[] fields, System.Boolean[] notNull, NHibernate.SqlCommand.SqlString sql, System.Object obj, ISessionImplementor session)
-in <0x000b1> NHibernate.Persister.EntityPersister:Insert (System.Object id, System.Object[] fields, System.Object obj, ISessionImplementor session)
-in <0x00051> NHibernate.Impl.ScheduledInsertion:Execute ()
-in <0x000a6> NHibernate.Impl.SessionImpl:Execute (IExecutable executable)
-in <0x000db> NHibernate.Impl.SessionImpl:ExecuteAll (IList list)
-in <0x00058> NHibernate.Impl.SessionImpl:Execute ()
-2006-10-25 12:16:40,360 [-1212458688] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - NHibernate 1.0.2
-2006-10-25 12:16:40,388 [-1212458688] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - nhibernate section not found in application configuration file
-2006-10-25 12:16:40,388 [-1212458688] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - Using reflection optimizer
-2006-10-25 12:16:40,673 [-1212458688] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:16:40,711 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Action -> Actions
-2006-10-25 12:16:40,744 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Action.Sections -> sections_actions
-2006-10-25 12:16:40,749 [-1212458688] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:16:40,750 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Enterprise -> enterprises
-2006-10-25 12:16:40,754 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Enterprise.Groups -> enterprises_groups
-2006-10-25 12:16:40,761 [-1212458688] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:16:40,761 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.SectionPermission -> SectionPermissions
-2006-10-25 12:16:40,768 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.SectionPermission.Actions -> sections_actions
-2006-10-25 12:16:40,770 [-1212458688] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:16:40,771 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.ErrorCode -> errorCodes
-2006-10-25 12:16:40,774 [-1212458688] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:16:40,774 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Session -> sessions
-2006-10-25 12:16:40,779 [-1212458688] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:16:40,779 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Group -> sgroups
-2006-10-25 12:16:40,781 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Group.Enterprises -> enterprises_groups
-2006-10-25 12:16:40,781 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Group.Users -> users_groups
-2006-10-25 12:16:40,785 [-1212458688] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:16:40,785 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.User -> susers
-2006-10-25 12:16:40,790 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.User.Groups -> users_groups
-2006-10-25 12:16:40,793 [-1212458688] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:16:40,793 [-1212458688] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Section -> Sections
-2006-10-25 12:17:58,020 [-1212483264] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - NHibernate 1.0.2
-2006-10-25 12:17:58,047 [-1212483264] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - nhibernate section not found in application configuration file
-2006-10-25 12:17:58,048 [-1212483264] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - Using reflection optimizer
-2006-10-25 12:17:58,328 [-1212483264] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:17:58,365 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Action -> Actions
-2006-10-25 12:17:58,397 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Action.Sections -> sections_actions
-2006-10-25 12:17:58,403 [-1212483264] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:17:58,403 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Enterprise -> enterprises
-2006-10-25 12:17:58,404 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Enterprise.Groups -> enterprises_groups
-2006-10-25 12:17:58,414 [-1212483264] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:17:58,414 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.SectionPermission -> SectionPermissions
-2006-10-25 12:17:58,421 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.SectionPermission.Actions -> sections_actions
-2006-10-25 12:17:58,423 [-1212483264] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:17:58,423 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.ErrorCode -> errorCodes
-2006-10-25 12:17:58,426 [-1212483264] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:17:58,426 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Session -> sessions
-2006-10-25 12:17:58,431 [-1212483264] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:17:58,432 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Group -> sgroups
-2006-10-25 12:17:58,433 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Group.Enterprises -> enterprises_groups
-2006-10-25 12:17:58,433 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Group.Users -> users_groups
-2006-10-25 12:17:58,437 [-1212483264] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:17:58,437 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.User -> susers
-2006-10-25 12:17:58,442 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.User.Groups -> users_groups
-2006-10-25 12:17:58,445 [-1212483264] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:17:58,445 [-1212483264] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Section -> Sections
-2006-10-25 12:18:09,895 [-1213044416] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - NHibernate 1.0.2
-2006-10-25 12:18:09,922 [-1213044416] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - nhibernate section not found in application configuration file
-2006-10-25 12:18:09,923 [-1213044416] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - Using reflection optimizer
-2006-10-25 12:18:10,212 [-1213044416] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:18:10,250 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Action -> Actions
-2006-10-25 12:18:10,282 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Action.Sections -> sections_actions
-2006-10-25 12:18:10,287 [-1213044416] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:18:10,288 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Enterprise -> enterprises
-2006-10-25 12:18:10,292 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Enterprise.Groups -> enterprises_groups
-2006-10-25 12:18:10,298 [-1213044416] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:18:10,299 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.SectionPermission -> SectionPermissions
-2006-10-25 12:18:10,306 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.SectionPermission.Actions -> sections_actions
-2006-10-25 12:18:10,307 [-1213044416] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:18:10,308 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.ErrorCode -> errorCodes
-2006-10-25 12:18:10,310 [-1213044416] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:18:10,311 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Session -> sessions
-2006-10-25 12:18:10,316 [-1213044416] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:18:10,316 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Group -> sgroups
-2006-10-25 12:18:10,317 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Group.Enterprises -> enterprises_groups
-2006-10-25 12:18:10,318 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Group.Users -> users_groups
-2006-10-25 12:18:10,321 [-1213044416] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:18:10,322 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.User -> susers
-2006-10-25 12:18:10,327 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.User.Groups -> users_groups
-2006-10-25 12:18:10,329 [-1213044416] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:18:10,329 [-1213044416] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Section -> Sections
-2006-10-25 12:19:11,696 [-1228710992] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - processing one-to-many association mappings
-2006-10-25 12:19:11,701 [-1228710992] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - mapping collection: Boxerp.Models.Group.Permissions -> SectionPermissions
-2006-10-25 12:19:11,701 [-1228710992] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - mapping collection: Boxerp.Models.User.Permissions -> SectionPermissions
-2006-10-25 12:19:11,701 [-1228710992] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - processing one-to-one association property references
-2006-10-25 12:19:11,701 [-1228710992] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - processing foreign key constraints
-2006-10-25 12:19:11,708 [-1228710992] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:19:11,708 [-1228710992] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - use outer join fetching: True
-2006-10-25 12:19:11,709 [-1228710992] INFO  NHibernate.Connection.ConnectionProviderFactory [(null)] &lt;(null)&gt; - Intitializing connection provider: NHibernate.Connection.DriverConnectionProvider
-2006-10-25 12:19:11,710 [-1228710992] INFO  NHibernate.Connection.ConnectionProvider [(null)] &lt;(null)&gt; - Configuring ConnectionProvider
-2006-10-25 12:19:11,713 [-1228710992] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - Optimize cache for minimal puts: False
-2006-10-25 12:19:11,714 [-1228710992] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - Query language substitutions: {}
-2006-10-25 12:19:11,714 [-1228710992] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - cache provider: NHibernate.Cache.HashtableCacheProvider
-2006-10-25 12:19:11,716 [-1228710992] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - instantiating and configuring caches
-2006-10-25 12:19:11,719 [-1228710992] INFO  NHibernate.Impl.SessionFactoryImpl [(null)] &lt;(null)&gt; - building session factory
-2006-10-25 12:19:11,802 [-1228710992] INFO  NHibernate.Impl.SessionFactoryObjectFactory [(null)] &lt;(null)&gt; - no name configured
-2006-10-25 12:19:11,839 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT this.Id as Id0_, this.Password as Password0_, this.Email as Email0_, this.UserName as UserName0_, this.Active as Active0_, this.RealName as RealName0_ FROM susers this WHERE this.UserName = :p0 and this.Password = :p1 limit :p2
-2006-10-25 12:19:11,956 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT groups0_.user_id as user_id__, groups0_.group_id as group_id__, group1_.Id as Id0_, group1_.GroupName as GroupName0_, group1_.Active as Active0_ FROM users_groups groups0_ inner join sgroups group1_ on groups0_.group_id=group1_.Id WHERE groups0_.user_id=:p0
-2006-10-25 12:19:11,961 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.suser as suser__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, section1_.Id as Id0_, section1_.Description as Descript3_0_, section1_.Name as Name0_, group2_.Id as Id1_, group2_.GroupName as GroupName1_, group2_.Active as Active1_ FROM SectionPermissions permission0_ left outer join Sections section1_ on permission0_.Section=section1_.Id left outer join sgroups group2_ on permission0_.sgroup=group2_.Id WHERE permission0_.suser=:p0
-2006-10-25 12:19:12,005 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT this.Id as Id0_, this.Password as Password0_, this.Email as Email0_, this.UserName as UserName0_, this.Active as Active0_, this.RealName as RealName0_ FROM susers this WHERE 1=1
-2006-10-25 12:19:12,006 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT groups0_.user_id as user_id__, groups0_.group_id as group_id__, group1_.Id as Id0_, group1_.GroupName as GroupName0_, group1_.Active as Active0_ FROM users_groups groups0_ inner join sgroups group1_ on groups0_.group_id=group1_.Id WHERE groups0_.user_id=:p0
-2006-10-25 12:19:12,007 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.suser as suser__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, section1_.Id as Id0_, section1_.Description as Descript3_0_, section1_.Name as Name0_, group2_.Id as Id1_, group2_.GroupName as GroupName1_, group2_.Active as Active1_ FROM SectionPermissions permission0_ left outer join Sections section1_ on permission0_.Section=section1_.Id left outer join sgroups group2_ on permission0_.sgroup=group2_.Id WHERE permission0_.suser=:p0
-2006-10-25 12:19:12,047 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT this.Id as Id0_, this.GroupName as GroupName0_, this.Active as Active0_ FROM sgroups this WHERE 1=1
-2006-10-25 12:19:12,049 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT users0_.group_id as group_id__, users0_.user_id as user_id__, user1_.Id as Id0_, user1_.Password as Password0_, user1_.Email as Email0_, user1_.UserName as UserName0_, user1_.Active as Active0_, user1_.RealName as RealName0_ FROM users_groups users0_ inner join susers user1_ on users0_.user_id=user1_.Id WHERE users0_.group_id=:p0
-2006-10-25 12:19:12,051 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT enterprise0_.group_id as group_id__, enterprise0_.enterprise_id as enterpri1___, enterprise1_.Id as Id0_, enterprise1_.Published as Published0_, enterprise1_.Description as Descript3_0_, enterprise1_.Name as Name0_ FROM enterprises_groups enterprise0_ inner join enterprises enterprise1_ on enterprise0_.enterprise_id=enterprise1_.Id WHERE enterprise0_.group_id=:p0
-2006-10-25 12:19:12,053 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.sgroup as sgroup__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, user1_.Id as Id0_, user1_.Password as Password0_, user1_.Email as Email0_, user1_.UserName as UserName0_, user1_.Active as Active0_, user1_.RealName as RealName0_, section2_.Id as Id1_, section2_.Description as Descript3_1_, section2_.Name as Name1_ FROM SectionPermissions permission0_ left outer join susers user1_ on permission0_.suser=user1_.Id left outer join Sections section2_ on permission0_.Section=section2_.Id WHERE permission0_.sgroup=:p0
-2006-10-25 12:19:12,120 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT user0_.Id as Id0_, user0_.Password as Password0_, user0_.Email as Email0_, user0_.UserName as UserName0_, user0_.Active as Active0_, user0_.RealName as RealName0_ FROM susers user0_ WHERE user0_.Id=:p0
-2006-10-25 12:19:12,123 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT groups0_.user_id as user_id__, groups0_.group_id as group_id__, group1_.Id as Id0_, group1_.GroupName as GroupName0_, group1_.Active as Active0_ FROM users_groups groups0_ inner join sgroups group1_ on groups0_.group_id=group1_.Id WHERE groups0_.user_id=:p0
-2006-10-25 12:19:12,124 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.suser as suser__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, section1_.Id as Id0_, section1_.Description as Descript3_0_, section1_.Name as Name0_, group2_.Id as Id1_, group2_.GroupName as GroupName1_, group2_.Active as Active1_ FROM SectionPermissions permission0_ left outer join Sections section1_ on permission0_.Section=section1_.Id left outer join sgroups group2_ on permission0_.sgroup=group2_.Id WHERE permission0_.suser=:p0
-2006-10-25 12:19:12,167 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT group0_.Id as Id0_, group0_.GroupName as GroupName0_, group0_.Active as Active0_ FROM sgroups group0_ WHERE group0_.Id=:p0
-2006-10-25 12:19:12,168 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT users0_.group_id as group_id__, users0_.user_id as user_id__, user1_.Id as Id0_, user1_.Password as Password0_, user1_.Email as Email0_, user1_.UserName as UserName0_, user1_.Active as Active0_, user1_.RealName as RealName0_ FROM users_groups users0_ inner join susers user1_ on users0_.user_id=user1_.Id WHERE users0_.group_id=:p0
-2006-10-25 12:19:12,170 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT enterprise0_.group_id as group_id__, enterprise0_.enterprise_id as enterpri1___, enterprise1_.Id as Id0_, enterprise1_.Published as Published0_, enterprise1_.Description as Descript3_0_, enterprise1_.Name as Name0_ FROM enterprises_groups enterprise0_ inner join enterprises enterprise1_ on enterprise0_.enterprise_id=enterprise1_.Id WHERE enterprise0_.group_id=:p0
-2006-10-25 12:19:12,175 [-1228710992] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.sgroup as sgroup__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, user1_.Id as Id0_, user1_.Password as Password0_, user1_.Email as Email0_, user1_.UserName as UserName0_, user1_.Active as Active0_, user1_.RealName as RealName0_, section2_.Id as Id1_, section2_.Description as Descript3_1_, section2_.Name as Name1_ FROM SectionPermissions permission0_ left outer join susers user1_ on permission0_.suser=user1_.Id left outer join Sections section2_ on permission0_.Section=section2_.Id WHERE permission0_.sgroup=:p0
-2006-10-25 12:19:12,198 [-1228710992] WARN  NHibernate.Util.ADOExceptionReporter [(null)] &lt;(null)&gt; - Npgsql.NpgsqlException:
-llave duplicada viola restricciÃ³n unique Â«sgroups_groupname_keyÂ»
-Severity: ERROR
-Code: 23505
-in <0x00054> Npgsql.NpgsqlConnector:CheckErrors ()
-in <0x0001c> Npgsql.NpgsqlConnector:CheckErrorsAndNotifications ()
-in <0x0005f> Npgsql.NpgsqlCommand:ExecuteCommand ()
-in <0x00029> Npgsql.NpgsqlCommand:ExecuteNonQuery ()
-in <0x0003a> NHibernate.Impl.BatcherImpl:ExecuteNonQuery (IDbCommand cmd)
-in <0x00025> NHibernate.Impl.NonBatchingBatcher:AddToBatch (Int32 expectedRowCount)
-in <0x00143> NHibernate.Persister.EntityPersister:Insert (System.Object id, System.Object[] fields, System.Boolean[] notNull, NHibernate.SqlCommand.SqlString sql, System.Object obj, ISessionImplementor session)
-2006-10-25 12:19:12,201 [-1228710992] ERROR NHibernate.Util.ADOExceptionReporter [(null)] &lt;(null)&gt; - ERROR: 23505: llave duplicada viola restricciÃ³n unique Â«sgroups_groupname_keyÂ»
-2006-10-25 12:19:12,201 [-1228710992] ERROR NHibernate.Impl.SessionImpl [(null)] &lt;(null)&gt; - could not synchronize database state with session
-NHibernate.ADOException: could not insert: [Boxerp.Models.Group#4] ---> Npgsql.NpgsqlException:
-llave duplicada viola restricciÃ³n unique Â«sgroups_groupname_keyÂ»
-Severity: ERROR
-Code: 23505
-in <0x00054> Npgsql.NpgsqlConnector:CheckErrors ()
-in <0x0001c> Npgsql.NpgsqlConnector:CheckErrorsAndNotifications ()
-in <0x0005f> Npgsql.NpgsqlCommand:ExecuteCommand ()
-in <0x00029> Npgsql.NpgsqlCommand:ExecuteNonQuery ()
-in <0x0003a> NHibernate.Impl.BatcherImpl:ExecuteNonQuery (IDbCommand cmd)
-in <0x00025> NHibernate.Impl.NonBatchingBatcher:AddToBatch (Int32 expectedRowCount)
-in <0x00143> NHibernate.Persister.EntityPersister:Insert (System.Object id, System.Object[] fields, System.Boolean[] notNull, NHibernate.SqlCommand.SqlString sql, System.Object obj, ISessionImplementor session)--- End of inner exception stack trace ---
-
-in <0x001f5> NHibernate.Persister.EntityPersister:Insert (System.Object id, System.Object[] fields, System.Boolean[] notNull, NHibernate.SqlCommand.SqlString sql, System.Object obj, ISessionImplementor session)
-in <0x000b1> NHibernate.Persister.EntityPersister:Insert (System.Object id, System.Object[] fields, System.Object obj, ISessionImplementor session)
-in <0x00051> NHibernate.Impl.ScheduledInsertion:Execute ()
-in <0x000a6> NHibernate.Impl.SessionImpl:Execute (IExecutable executable)
-in <0x000db> NHibernate.Impl.SessionImpl:ExecuteAll (IList list)
-in <0x00058> NHibernate.Impl.SessionImpl:Execute ()
-2006-10-25 12:21:55,226 [-1212921536] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - NHibernate 1.0.2
-2006-10-25 12:21:55,250 [-1212921536] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - nhibernate section not found in application configuration file
-2006-10-25 12:21:55,250 [-1212921536] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - Using reflection optimizer
-2006-10-25 12:21:55,531 [-1212921536] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:21:55,569 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Action -> Actions
-2006-10-25 12:21:55,601 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Action.Sections -> sections_actions
-2006-10-25 12:21:55,607 [-1212921536] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:21:55,607 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Enterprise -> enterprises
-2006-10-25 12:21:55,612 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Enterprise.Groups -> enterprises_groups
-2006-10-25 12:21:55,618 [-1212921536] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:21:55,618 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.SectionPermission -> SectionPermissions
-2006-10-25 12:21:55,625 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.SectionPermission.Actions -> sections_actions
-2006-10-25 12:21:55,627 [-1212921536] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:21:55,627 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.ErrorCode -> errorCodes
-2006-10-25 12:21:55,630 [-1212921536] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:21:55,631 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Session -> sessions
-2006-10-25 12:21:55,635 [-1212921536] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:21:55,636 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Group -> sgroups
-2006-10-25 12:21:55,637 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Group.Enterprises -> enterprises_groups
-2006-10-25 12:21:55,637 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Group.Users -> users_groups
-2006-10-25 12:21:55,641 [-1212921536] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:21:55,641 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.User -> susers
-2006-10-25 12:21:55,647 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.User.Groups -> users_groups
-2006-10-25 12:21:55,649 [-1212921536] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:21:55,649 [-1212921536] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Section -> Sections
-2006-10-25 12:22:03,182 [-1228588112] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - processing one-to-many association mappings
-2006-10-25 12:22:03,189 [-1228588112] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - mapping collection: Boxerp.Models.Group.Permissions -> SectionPermissions
-2006-10-25 12:22:03,190 [-1228588112] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - mapping collection: Boxerp.Models.User.Permissions -> SectionPermissions
-2006-10-25 12:22:03,190 [-1228588112] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - processing one-to-one association property references
-2006-10-25 12:22:03,190 [-1228588112] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - processing foreign key constraints
-2006-10-25 12:22:03,201 [-1228588112] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
-2006-10-25 12:22:03,202 [-1228588112] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - use outer join fetching: True
-2006-10-25 12:22:03,203 [-1228588112] INFO  NHibernate.Connection.ConnectionProviderFactory [(null)] &lt;(null)&gt; - Intitializing connection provider: NHibernate.Connection.DriverConnectionProvider
-2006-10-25 12:22:03,204 [-1228588112] INFO  NHibernate.Connection.ConnectionProvider [(null)] &lt;(null)&gt; - Configuring ConnectionProvider
-2006-10-25 12:22:03,210 [-1228588112] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - Optimize cache for minimal puts: False
-2006-10-25 12:22:03,211 [-1228588112] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - Query language substitutions: {}
-2006-10-25 12:22:03,211 [-1228588112] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - cache provider: NHibernate.Cache.HashtableCacheProvider
-2006-10-25 12:22:03,214 [-1228588112] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - instantiating and configuring caches
-2006-10-25 12:22:03,219 [-1228588112] INFO  NHibernate.Impl.SessionFactoryImpl [(null)] &lt;(null)&gt; - building session factory
-2006-10-25 12:22:03,311 [-1228588112] INFO  NHibernate.Impl.SessionFactoryObjectFactory [(null)] &lt;(null)&gt; - no name configured
-2006-10-25 12:22:03,348 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT this.Id as Id0_, this.Password as Password0_, this.Email as Email0_, this.UserName as UserName0_, this.Active as Active0_, this.RealName as RealName0_ FROM susers this WHERE this.UserName = :p0 and this.Password = :p1 limit :p2
-2006-10-25 12:22:03,465 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT groups0_.user_id as user_id__, groups0_.group_id as group_id__, group1_.Id as Id0_, group1_.GroupName as GroupName0_, group1_.Active as Active0_ FROM users_groups groups0_ inner join sgroups group1_ on groups0_.group_id=group1_.Id WHERE groups0_.user_id=:p0
-2006-10-25 12:22:03,474 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.suser as suser__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, section1_.Id as Id0_, section1_.Description as Descript3_0_, section1_.Name as Name0_, group2_.Id as Id1_, group2_.GroupName as GroupName1_, group2_.Active as Active1_ FROM SectionPermissions permission0_ left outer join Sections section1_ on permission0_.Section=section1_.Id left outer join sgroups group2_ on permission0_.sgroup=group2_.Id WHERE permission0_.suser=:p0
-2006-10-25 12:22:03,514 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT this.Id as Id0_, this.Password as Password0_, this.Email as Email0_, this.UserName as UserName0_, this.Active as Active0_, this.RealName as RealName0_ FROM susers this WHERE 1=1
-2006-10-25 12:22:03,515 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT groups0_.user_id as user_id__, groups0_.group_id as group_id__, group1_.Id as Id0_, group1_.GroupName as GroupName0_, group1_.Active as Active0_ FROM users_groups groups0_ inner join sgroups group1_ on groups0_.group_id=group1_.Id WHERE groups0_.user_id=:p0
-2006-10-25 12:22:03,517 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.suser as suser__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, section1_.Id as Id0_, section1_.Description as Descript3_0_, section1_.Name as Name0_, group2_.Id as Id1_, group2_.GroupName as GroupName1_, group2_.Active as Active1_ FROM SectionPermissions permission0_ left outer join Sections section1_ on permission0_.Section=section1_.Id left outer join sgroups group2_ on permission0_.sgroup=group2_.Id WHERE permission0_.suser=:p0
-2006-10-25 12:22:03,555 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT this.Id as Id0_, this.GroupName as GroupName0_, this.Active as Active0_ FROM sgroups this WHERE 1=1
-2006-10-25 12:22:03,556 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT users0_.group_id as group_id__, users0_.user_id as user_id__, user1_.Id as Id0_, user1_.Password as Password0_, user1_.Email as Email0_, user1_.UserName as UserName0_, user1_.Active as Active0_, user1_.RealName as RealName0_ FROM users_groups users0_ inner join susers user1_ on users0_.user_id=user1_.Id WHERE users0_.group_id=:p0
-2006-10-25 12:22:03,558 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT enterprise0_.group_id as group_id__, enterprise0_.enterprise_id as enterpri1___, enterprise1_.Id as Id0_, enterprise1_.Published as Published0_, enterprise1_.Description as Descript3_0_, enterprise1_.Name as Name0_ FROM enterprises_groups enterprise0_ inner join enterprises enterprise1_ on enterprise0_.enterprise_id=enterprise1_.Id WHERE enterprise0_.group_id=:p0
-2006-10-25 12:22:03,561 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.sgroup as sgroup__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, user1_.Id as Id0_, user1_.Password as Password0_, user1_.Email as Email0_, user1_.UserName as UserName0_, user1_.Active as Active0_, user1_.RealName as RealName0_, section2_.Id as Id1_, section2_.Description as Descript3_1_, section2_.Name as Name1_ FROM SectionPermissions permission0_ left outer join susers user1_ on permission0_.suser=user1_.Id left outer join Sections section2_ on permission0_.Section=section2_.Id WHERE permission0_.sgroup=:p0
-2006-10-25 12:22:03,628 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT user0_.Id as Id0_, user0_.Password as Password0_, user0_.Email as Email0_, user0_.UserName as UserName0_, user0_.Active as Active0_, user0_.RealName as RealName0_ FROM susers user0_ WHERE user0_.Id=:p0
-2006-10-25 12:22:03,631 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT groups0_.user_id as user_id__, groups0_.group_id as group_id__, group1_.Id as Id0_, group1_.GroupName as GroupName0_, group1_.Active as Active0_ FROM users_groups groups0_ inner join sgroups group1_ on groups0_.group_id=group1_.Id WHERE groups0_.user_id=:p0
-2006-10-25 12:22:03,632 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.suser as suser__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, section1_.Id as Id0_, section1_.Description as Descript3_0_, section1_.Name as Name0_, group2_.Id as Id1_, group2_.GroupName as GroupName1_, group2_.Active as Active1_ FROM SectionPermissions permission0_ left outer join Sections section1_ on permission0_.Section=section1_.Id left outer join sgroups group2_ on permission0_.sgroup=group2_.Id WHERE permission0_.suser=:p0
-2006-10-25 12:22:03,739 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT group0_.Id as Id0_, group0_.GroupName as GroupName0_, group0_.Active as Active0_ FROM sgroups group0_ WHERE group0_.Id=:p0
-2006-10-25 12:22:03,740 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT users0_.group_id as group_id__, users0_.user_id as user_id__, user1_.Id as Id0_, user1_.Password as Password0_, user1_.Email as Email0_, user1_.UserName as UserName0_, user1_.Active as Active0_, user1_.RealName as RealName0_ FROM users_groups users0_ inner join susers user1_ on users0_.user_id=user1_.Id WHERE users0_.group_id=:p0
-2006-10-25 12:22:03,742 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT enterprise0_.group_id as group_id__, enterprise0_.enterprise_id as enterpri1___, enterprise1_.Id as Id0_, enterprise1_.Published as Published0_, enterprise1_.Description as Descript3_0_, enterprise1_.Name as Name0_ FROM enterprises_groups enterprise0_ inner join enterprises enterprise1_ on enterprise0_.enterprise_id=enterprise1_.Id WHERE enterprise0_.group_id=:p0
-2006-10-25 12:22:03,747 [-1228588112] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.sgroup as sgroup__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, user1_.Id as Id0_, user1_.Password as Password0_, user1_.Email as Email0_, user1_.UserName as UserName0_, user1_.Active as Active0_, user1_.RealName as RealName0_, section2_.Id as Id1_, section2_.Description as Descript3_1_, section2_.Name as Name1_ FROM SectionPermissions permission0_ left outer join susers user1_ on permission0_.suser=user1_.Id left outer join Sections section2_ on permission0_.Section=section2_.Id WHERE permission0_.sgroup=:p0
-2006-10-25 12:22:03,770 [-1228588112] WARN  NHibernate.Util.ADOExceptionReporter [(null)] &lt;(null)&gt; - Npgsql.NpgsqlException:
-llave duplicada viola restricciÃ³n unique Â«sgroups_groupname_keyÂ»
-Severity: ERROR
-Code: 23505
-in <0x00054> Npgsql.NpgsqlConnector:CheckErrors ()
-in <0x0001c> Npgsql.NpgsqlConnector:CheckErrorsAndNotifications ()
-in <0x0005f> Npgsql.NpgsqlCommand:ExecuteCommand ()
-in <0x00029> Npgsql.NpgsqlCommand:ExecuteNonQuery ()
-in <0x0003a> NHibernate.Impl.BatcherImpl:ExecuteNonQuery (IDbCommand cmd)
-in <0x00025> NHibernate.Impl.NonBatchingBatcher:AddToBatch (Int32 expectedRowCount)
-in <0x00143> NHibernate.Persister.EntityPersister:Insert (System.Object id, System.Object[] fields, System.Boolean[] notNull, NHibernate.SqlCommand.SqlString sql, System.Object obj, ISessionImplementor session)
-2006-10-25 12:22:03,772 [-1228588112] ERROR NHibernate.Util.ADOExceptionReporter [(null)] &lt;(null)&gt; - ERROR: 23505: llave duplicada viola restricciÃ³n unique Â«sgroups_groupname_keyÂ»
-2006-10-25 12:22:03,773 [-1228588112] ERROR NHibernate.Impl.SessionImpl [(null)] &lt;(null)&gt; - could not synchronize database state with session
-NHibernate.ADOException: could not insert: [Boxerp.Models.Group#5] ---> Npgsql.NpgsqlException:
-llave duplicada viola restricciÃ³n unique Â«sgroups_groupname_keyÂ»
-Severity: ERROR
-Code: 23505
-in <0x00054> Npgsql.NpgsqlConnector:CheckErrors ()
-in <0x0001c> Npgsql.NpgsqlConnector:CheckErrorsAndNotifications ()
-in <0x0005f> Npgsql.NpgsqlCommand:ExecuteCommand ()
-in <0x00029> Npgsql.NpgsqlCommand:ExecuteNonQuery ()
-in <0x0003a> NHibernate.Impl.BatcherImpl:ExecuteNonQuery (IDbCommand cmd)
-in <0x00025> NHibernate.Impl.NonBatchingBatcher:AddToBatch (Int32 expectedRowCount)
-in <0x00143> NHibernate.Persister.EntityPersister:Insert (System.Object id, System.Object[] fields, System.Boolean[] notNull, NHibernate.SqlCommand.SqlString sql, System.Object obj, ISessionImplementor session)--- End of inner exception stack trace ---
-
-in <0x001f5> NHibernate.Persister.EntityPersister:Insert (System.Object id, System.Object[] fields, System.Boolean[] notNull, NHibernate.SqlCommand.SqlString sql, System.Object obj, ISessionImplementor session)
-in <0x000b1> NHibernate.Persister.EntityPersister:Insert (System.Object id, System.Object[] fields, System.Object obj, ISessionImplementor session)
-in <0x00051> NHibernate.Impl.ScheduledInsertion:Execute ()
-in <0x000a6> NHibernate.Impl.SessionImpl:Execute (IExecutable executable)
-in <0x000db> NHibernate.Impl.SessionImpl:ExecuteAll (IList list)
-in <0x00058> NHibernate.Impl.SessionImpl:Execute ()
+﻿2006-12-07 00:50:49,171 [-1210894656] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - NHibernate 1.0.2
+2006-12-07 00:50:49,195 [-1210894656] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - nhibernate section not found in application configuration file
+2006-12-07 00:50:49,195 [-1210894656] INFO  NHibernate.Cfg.Environment [(null)] &lt;(null)&gt; - Using reflection optimizer
+2006-12-07 00:50:49,512 [-1210894656] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
+2006-12-07 00:50:49,536 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.ErrorCode -> errorCodes
+2006-12-07 00:50:49,563 [-1210894656] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
+2006-12-07 00:50:49,563 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.SectionPermission -> SectionPermissions
+2006-12-07 00:50:49,570 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.SectionPermission.Actions -> sections_actions
+2006-12-07 00:50:49,578 [-1210894656] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
+2006-12-07 00:50:49,579 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.User -> susers
+2006-12-07 00:50:49,580 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.User.Groups -> users_groups
+2006-12-07 00:50:49,581 [-1210894656] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
+2006-12-07 00:50:49,581 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Session -> sessions
+2006-12-07 00:50:49,585 [-1210894656] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
+2006-12-07 00:50:49,586 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Enterprise -> enterprises
+2006-12-07 00:50:49,586 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Enterprise.Groups -> enterprises_groups
+2006-12-07 00:50:49,587 [-1210894656] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
+2006-12-07 00:50:49,587 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Section -> Sections
+2006-12-07 00:50:49,588 [-1210894656] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
+2006-12-07 00:50:49,589 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Group -> sgroups
+2006-12-07 00:50:49,589 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Group.Enterprises -> enterprises_groups
+2006-12-07 00:50:49,589 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Group.Users -> users_groups
+2006-12-07 00:50:49,590 [-1210894656] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
+2006-12-07 00:50:49,590 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping class: Boxerp.Models.Action -> Actions
+2006-12-07 00:50:49,590 [-1210894656] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - Mapping collection: Boxerp.Models.Action.Sections -> sections_actions
+2006-12-07 00:51:00,454 [-1226863696] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - processing one-to-many association mappings
+2006-12-07 00:51:00,462 [-1226863696] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - mapping collection: Boxerp.Models.User.Permissions -> SectionPermissions
+2006-12-07 00:51:00,468 [-1226863696] INFO  NHibernate.Cfg.Binder [(null)] &lt;(null)&gt; - mapping collection: Boxerp.Models.Group.Permissions -> SectionPermissions
+2006-12-07 00:51:00,469 [-1226863696] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - processing one-to-one association property references
+2006-12-07 00:51:00,469 [-1226863696] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - processing foreign key constraints
+2006-12-07 00:51:00,481 [-1226863696] INFO  NHibernate.Dialect.Dialect [(null)] &lt;(null)&gt; - Using dialect: NHibernate.Dialect.PostgreSQLDialect
+2006-12-07 00:51:00,481 [-1226863696] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - use outer join fetching: True
+2006-12-07 00:51:00,482 [-1226863696] INFO  NHibernate.Connection.ConnectionProviderFactory [(null)] &lt;(null)&gt; - Intitializing connection provider: NHibernate.Connection.DriverConnectionProvider
+2006-12-07 00:51:00,483 [-1226863696] INFO  NHibernate.Connection.ConnectionProvider [(null)] &lt;(null)&gt; - Configuring ConnectionProvider
+2006-12-07 00:51:00,525 [-1226863696] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - Optimize cache for minimal puts: False
+2006-12-07 00:51:00,526 [-1226863696] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - Query language substitutions: {}
+2006-12-07 00:51:00,527 [-1226863696] INFO  NHibernate.Cfg.SettingsFactory [(null)] &lt;(null)&gt; - cache provider: NHibernate.Cache.HashtableCacheProvider
+2006-12-07 00:51:00,529 [-1226863696] INFO  NHibernate.Cfg.Configuration [(null)] &lt;(null)&gt; - instantiating and configuring caches
+2006-12-07 00:51:00,535 [-1226863696] INFO  NHibernate.Impl.SessionFactoryImpl [(null)] &lt;(null)&gt; - building session factory
+2006-12-07 00:51:00,677 [-1226863696] INFO  NHibernate.Impl.SessionFactoryObjectFactory [(null)] &lt;(null)&gt; - no name configured
+2006-12-07 00:51:00,785 [-1226863696] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT this.Id as Id0_, this.Password as Password0_, this.Email as Email0_, this.UserName as UserName0_, this.Active as Active0_, this.RealName as RealName0_ FROM susers this WHERE this.UserName = :p0 and this.Password = :p1 limit :p2
+2006-12-07 00:51:01,718 [-1226863696] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT groups0_.user_id as user_id__, groups0_.group_id as group_id__, group1_.Id as Id0_, group1_.GroupName as GroupName0_, group1_.Active as Active0_ FROM users_groups groups0_ inner join sgroups group1_ on groups0_.group_id=group1_.Id WHERE groups0_.user_id=:p0
+2006-12-07 00:51:01,840 [-1226863696] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.suser as suser__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, section1_.Id as Id0_, section1_.Description as Descript3_0_, section1_.Name as Name0_, group2_.Id as Id1_, group2_.GroupName as GroupName1_, group2_.Active as Active1_ FROM SectionPermissions permission0_ left outer join Sections section1_ on permission0_.Section=section1_.Id left outer join sgroups group2_ on permission0_.sgroup=group2_.Id WHERE permission0_.suser=:p0
+2006-12-07 00:52:56,467 [-1226863696] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT this.Id as Id0_, this.Password as Password0_, this.Email as Email0_, this.UserName as UserName0_, this.Active as Active0_, this.RealName as RealName0_ FROM susers this WHERE this.UserName = :p0 and this.Password = :p1 limit :p2
+2006-12-07 00:52:56,469 [-1226863696] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT groups0_.user_id as user_id__, groups0_.group_id as group_id__, group1_.Id as Id0_, group1_.GroupName as GroupName0_, group1_.Active as Active0_ FROM users_groups groups0_ inner join sgroups group1_ on groups0_.group_id=group1_.Id WHERE groups0_.user_id=:p0
+2006-12-07 00:52:56,470 [-1226863696] INFO  NHibernate.Loader.Loader [(null)] &lt;(null)&gt; - SELECT permission0_.suser as suser__, permission0_.Id as Id__, permission0_.sectionpermission as sectionp5___, permission0_.Id as Id2_, permission0_.suser as suser2_, permission0_.Section as Section2_, permission0_.sgroup as sgroup2_, section1_.Id as Id0_, section1_.Description as Descript3_0_, section1_.Name as Name0_, group2_.Id as Id1_, group2_.GroupName as GroupName1_, group2_.Active as Active1_ FROM SectionPermissions permission0_ left outer join Sections section1_ on permission0_.Section=section1_.Id left outer join sgroups group2_ on permission0_.sgroup=group2_.Id WHERE permission0_.suser=:p0

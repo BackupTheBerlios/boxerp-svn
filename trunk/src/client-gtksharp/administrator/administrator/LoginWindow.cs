@@ -5,8 +5,8 @@ using System.Threading;
 using Boxerp.Models;
 using Boxerp.Objects;
 using System.Runtime.Remoting;
-using widgets;
-using clientlib;
+using Boxerp.Client.GtkSharp.Lib;
+using Boxerp.Client;
 
 namespace administrator
 {

@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib.mds">
   <Files>
+    <File filename="Bienvenido" />
     <File filename="./client-lib/AbstractResponsiveHelper.cs" />
     <File filename="./client-lib/IResponsiveClient.cs" />
+    <File filename="./client-lib/ResponsiveEnum.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
@@ -33,7 +35,7 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveConfiguration" value="Debug" />
+      <Property key="ActiveConfiguration" value="Release" />
       <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib/AbstractResponsiveHelper.cs" />
     </Properties>
   </Properties>

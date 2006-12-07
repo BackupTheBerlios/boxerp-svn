@@ -1,15 +1,17 @@
 using System;
 using Boxerp.Models;
 using Gtk;
+using Boxerp.Client.GtkSharp.Lib;
+using Boxerp.Client;
 
 namespace administrator 
 {
 public class MainWindow: Gtk.Window
 {
 	protected MainHelper helper;
-	protected widgets.FilteredListView ftreeviewEnterprises;
-	protected widgets.FilteredListView ftreeviewUsers;
-	protected widgets.FilteredListView ftreeviewGroups;
+	protected FilteredListView ftreeviewEnterprises;
+	protected FilteredListView ftreeviewUsers;
+	protected FilteredListView ftreeviewGroups;
 	protected Gtk.Entry entryUser;
 	protected Gtk.Entry entryGroup;
 	protected Gtk.Entry entryEnterprise;
@@ -20,7 +22,7 @@ public class MainWindow: Gtk.Window
 		Stetic.Gui.Build (this, typeof(MainWindow));
 		helper = new MainHelper(this, ref ftreeviewEnterprises,
 								ref ftreeviewUsers, ref ftreeviewGroups);
-		helper.StartDownload();
+		helper.StartTransfer(ResponsiveEnum.Read);
 	}
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)

@@ -6,7 +6,9 @@ namespace Boxerp.Client
 	
 	public interface IResponsiveClient
 	{
-		void StartTransfer();
-		void PopulateGUI();
+		bool CancelRequest { get; set;}
+		void StartTransfer(ResponsiveEnum trType);
+		void StopTransfer();
+		void StartAsyncCall(SimpleDelegate method);
 	}
 }

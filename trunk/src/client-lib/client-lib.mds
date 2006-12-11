@@ -1,15 +1,15 @@
 <Combine name="client-lib" fileversion="2.0">
-  <Configurations active="Release">
+  <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
-      <Entry build="True" name="client-lib" configuration="Debug" />
+      <Entry build="True" name="Boxerp.Client" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
-      <Entry build="True" name="client-lib" configuration="Release" />
+      <Entry build="True" name="Boxerp.Client" configuration="Release" />
     </Configuration>
   </Configurations>
   <DeployTargets />
-  <StartMode startupentry="client-lib" single="True">
-    <Execute type="None" entry="client-lib" />
+  <StartMode startupentry="Boxerp.Client" single="True">
+    <Execute type="None" entry="Boxerp.Client" />
   </StartMode>
   <Entries>
     <Entry filename="./client-lib/client-lib.mdp" />

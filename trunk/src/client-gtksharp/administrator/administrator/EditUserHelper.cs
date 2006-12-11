@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Boxerp.Models;
 using Boxerp.Objects;
 using Gtk;
@@ -43,6 +44,10 @@ namespace administrator
 					groups = adminObj.GetGroups();
 				else
 					groups = adminObj.GetDistinctGroups(user);
+			}
+			catch (ThreadAbortException)
+			{
+				groups = null;
 			}
 			catch (Exception ex)
 			{

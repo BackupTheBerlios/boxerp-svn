@@ -11,12 +11,7 @@ namespace Boxerp.Client
 	/// </summary>
 	public abstract class AbstractResponsiveHelper: IResponsiveClient
 	{
-		/*protected abstract void Init();*/
-		//private ThreadStart threadStartDownload;
-        //private ThreadStart threadStartUpload; 
-        //public Thread uploadThread; 
-        //public Thread downloadThread;
-        public delegate void SimpleDelegate();
+		private static Hashtable threadsPoolHash = Hashtable.Synchronized(new Hashtable());
         
         private int _asyncCallsCount = 0; 
         private ResponsiveEnum _transferType;
@@ -42,29 +37,12 @@ namespace Boxerp.Client
       		set { _cancelRequest = value; }
       	}
       	
-      	public virtual void StartTransfer()
-		{}
-		
-		public void StartAsyncCall(SimpleDelegate method)
+      	public void StartAsyncCall(SimpleDelegate method)
 		{
 			ProcessAsyncCall(method);
 		}
 		
-		
-		public virtual void PopulateGUI()
-		{
-		
-		}
-		
-        public void Init()
-        {
-            /*threadStartDownload = new ThreadStart(Download);
-            threadStartUpload = new ThreadStart(Upload);
-            uploadThread = new Thread(threadStartUpload);
-            downloadThread = new Thread(threadStartDownload);*/
-        }
-
-		public void StopCallHandler()
+		public void StopTransfer()
 		{
 			lock(this)
 			{
@@ -73,6 +51,7 @@ namespace Boxerp.Client
 					_asyncCallsCount --;
 					if (_asyncCallsCount == 0)
 					{
+						threadsPoolHash.Clear();
 						if (_baseTransferCompleteHandler != null)
             				_baseTransferCompleteHandler(_transferType, null);
 					}
@@ -81,7 +60,7 @@ namespace Boxerp.Client
 		}
 		
 		
-		protected void ProcessAsyncCall(SimpleDelegate method)
+		private void ProcessAsyncCall(SimpleDelegate method)
 		{
 			try
 			{
@@ -100,62 +79,44 @@ namespace Boxerp.Client
             }
 		}
 		
-		protected void Transfer(ResponsiveEnum trType)
+		public virtual void StartTransfer(Boxerp.Client.ResponsiveEnum trType)
 		{
 			_transferType = trType;
 			try
 			{
-				#if REMOTING
-					UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
-				#endif
+				if (threadsPoolHash.Count != 0)
+				{
+					// busy, show an error message
+				}
+				
 				List<MethodInfo> methods = this.GetResponsiveMethods(_transferType);
 				_asyncCallsCount = methods.Count;
 				foreach (MethodInfo method in methods)
 				{
-					//FIXME: invoke asyncrhonously
-					method.Invoke(this, null); // execute method
+					
+					ThreadStart methodStart = new SimpleInvoker(method, this).Invoke;
+					Thread methodThread = new Thread(methodStart);
+					methodThread.Start();
+					threadsPoolHash[methodThread.ManagedThreadId] = methodThread;
+					//method.Invoke(this, null); // execute method
 				}
 			}
 			catch (TargetInvocationException ex)
             {
                 Console.WriteLine("One responsive method raises exception:" + ex.Message+ ex.StackTrace);
-                //throw ex; // FIXME: How to catch an exception inside a thread?
+                throw ex;
             }
-            finally
+            catch(Exception ex)
             {
-            	//if (threadUploadStopHandler != null)
-            	//	threadUploadStopHandler(this, null);
+            	throw ex;
             }
+        	// TODO : Write the code to stop threads
 		}
 		
-		/*protected void Download()
-		{
-            try
-            {
-				#if REMOTING
-	   	 			UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
-				#endif
-                List<MethodInfo> methods = this.GetResponsiveMethods(ResponsiveEnum.Download);
-                foreach (MethodInfo method in methods)
-                    method.Invoke(this, null); // execute method	
-            }
-            catch (TargetInvocationException ex)
-            {
-                Console.WriteLine("On responsive method raises exception:" + ex.Message+ ex.StackTrace);
-                //throw ex; // FIXME: How to catch an exception inside a thread?
-            }
-            finally
-            {
-            	if (threadDownloadStopHandler != null)
-            		threadDownloadStopHandler(this , null);
-            }
-
-		}*/
 		
-		public List<System.Reflection.MethodInfo> GetResponsiveMethods(ResponsiveEnum rType)
+		private List<System.Reflection.MethodInfo> GetResponsiveMethods(ResponsiveEnum trType)
 		{
 			List<MethodInfo> responsiveMethods = new List<MethodInfo>();
-			//ArrayList responsiveMethods = new ArrayList();
 			MethodInfo[] methods = this.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
 			foreach(MethodInfo method in methods)
 			{
@@ -163,8 +124,10 @@ namespace Boxerp.Client
 				if (attributes.Length != 0)
 				{
 					ResponsiveAttribute att = (ResponsiveAttribute)attributes[0];
-					if (att.RespType == rType)
-						responsiveMethods.Add(method);
+					if (att.RespType == trType)
+					{
+						responsiveMethods.Add(method);						
+					}
 				}
 			}
 			return responsiveMethods;

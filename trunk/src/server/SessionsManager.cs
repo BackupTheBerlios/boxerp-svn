@@ -2,8 +2,8 @@
 // Authors:
 // 	Carlos Ble Jurado <carlosble@shidix.com>
 //
-// Copyright (C) 2005,2006 Carlos Ble 
-//  
+// Copyright (C) 2005,2006 Carlos Ble
+//
 // Redistribution and use in source and binary forms, with or
 // without modification, are permitted provided that the following
 // conditions are met:
@@ -14,7 +14,7 @@
 // copyright notice, this list of conditions and the following
 // disclaimer in the documentation and/or other materials
 // provided with the distribution.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -46,100 +46,103 @@ using NHibernate;
 namespace Boxerp.Objects
 {
 
-	public struct SessionStruct
-	{
-		public User user;
-		public DateTime lastHit;
-	}
-	
- 	public class SessionsManager 
-	{
-		private static SessionsManager instance = null;
-		private static Hashtable sHash = Hashtable.Synchronized(new Hashtable());
-		private static Random random = new Random( );
-		private static double EXPIRE = 10;
-		private SessionsManager(){}
+public struct SessionStruct
+{
+    public User user;
+    public DateTime lastHit;
+}
 
-		public static SessionsManager GetInstance()
-		{
-			if (instance == null)
-			{
-				instance = new SessionsManager();
-		   }
-			return instance;
-		}
+public class SessionsManager
+{
+    private static SessionsManager instance = null;
+    private static Hashtable sHash = Hashtable.Synchronized(new Hashtable());
+    private static Random random = new Random( );
+    private static double EXPIRE = 10;
+    private SessionsManager()
+    {}
 
-		public string GetSession(User u)
-		{
-			if (u != null)
-			{
-				string session = u.UserName + DateTime.Now.GetHashCode() + random.NextDouble().ToString();
-				SessionStruct sstruct = new SessionStruct();
-				sstruct.user = u;
-				sstruct.lastHit = DateTime.Now;
-				Console.WriteLine("new session=" + session);
-				sHash[session] = sstruct;
-				return session;
-			}
-			else
-			{
-				throw new NullReferenceException();
-			}
-		}
+    public static SessionsManager GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = new SessionsManager();
+        }
+        return instance;
+    }
 
-		// FIXME: Should I lock or Synchronized hashtable is enough?
-		public bool IsValidSession(string session)
-		{
-			if (sHash.ContainsKey(session))
-			{
-				SessionStruct sstruct = (SessionStruct)sHash[session];
-				DateTime dt = sstruct.lastHit;
-				dt = dt.AddMinutes(EXPIRE);			
-				if (DateTime.Compare(DateTime.Now, dt) <= 0)
-					return true;			
-				else
-					return false;		// expire
-			}
-			else
-				return false;
-		}
+    public string GetSession(User user)
+    {
+        if (user != null)
+        {
+            string session = user.UserName + DateTime.Now.GetHashCode() + random.NextDouble().ToString();
+            SessionStruct sstruct = new SessionStruct();
+            sstruct.user = user;
+            sstruct.lastHit = DateTime.Now;
+            sHash[session] = sstruct;
+            return session;
+        }
+        else
+        {
+            throw new NullReferenceException();
+        }
+    }
 
-		public bool IsValidSessionThenUpdate(string session)
-		{
-			if (session == null)
-				return false;
-			if (sHash.ContainsKey(session))
-			{
-				SessionStruct sstruct = (SessionStruct)sHash[session];
-				DateTime dt = sstruct.lastHit;
-				dt = dt.AddMinutes(EXPIRE);			// 
-				if (DateTime.Compare(DateTime.Now, dt) < 0)
-				{
-					sstruct.lastHit = DateTime.Now;	// FIXME: may I destroy the previous DateTime first?
-					sHash[session] = sstruct;
-					return true;			
-				}
-				else
-					return false;		// expire
-			}
-			else
-				return false;
-		}
+    // FIXME: Should I lock or Synchronized hashtable is enough?
+    public bool IsValidSession(string session)
+    {
+        if (sHash.ContainsKey(session))
+        {
+            SessionStruct sstruct = (SessionStruct)sHash[session];
+            DateTime dt = sstruct.lastHit;
+            dt = dt.AddMinutes(EXPIRE);
+            if (DateTime.Compare(DateTime.Now, dt) <= 0)
+                return true;
+            else
+                return false;		// expire
+        }
+        else
+            throw new UnauthorizedException();
+            //return false;
+    }
+
+    public bool IsValidSessionThenUpdate(string session)
+    {
+        if (session == null)
+            throw new UnauthorizedException();
+            //return false;
+        if (sHash.ContainsKey(session))
+        {
+            SessionStruct sstruct = (SessionStruct)sHash[session];
+            DateTime dt = sstruct.lastHit;
+            dt = dt.AddMinutes(EXPIRE);			//
+            if (DateTime.Compare(DateTime.Now, dt) < 0)
+            {
+                sstruct.lastHit = DateTime.Now;	// FIXME: may I destroy the previous DateTime first?
+                sHash[session] = sstruct;
+                return true;
+            }
+            else
+                return false;		// expire
+        }
+        else
+            throw new UnauthorizedException();
+            //return false;
+    }
 
 
-		
-		// Just for test:
-		/*
-		public string GetAllSessions()
-		{
-			string result = "";
-			foreach(Manager i in sHash.Keys)
-			{
-				result += (string)i + ",";
-			}
-			return result;
-		}*/
 
-		
-	}
+    // Just for test:
+    /*
+    public string GetAllSessions()
+    {
+    	string result = "";
+    	foreach(Manager i in sHash.Keys)
+    	{
+    		result += (string)i + ",";
+    	}
+    	return result;
+    }*/
+
+
+}
 }

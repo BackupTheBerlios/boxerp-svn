@@ -4,7 +4,7 @@ using System;
 namespace Boxerp.Client
 {
 	
-	public enum ResponsiveEnum
+	public enum ResponsiveEnum 
 	{
 		Read,
 		Write,

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Threading;
 using Boxerp.Models;
 using Boxerp.Objects;
 using Gtk;
@@ -32,21 +33,37 @@ namespace administrator
 		}
 		
 		[Responsive(ResponsiveEnum.Read)]
-		public void LoadEnterprises()
+		public void LoadTreeViewsFromDb()
 		{
 			try
 			{
-				// do this asyn
-				enterprises = adminObj.GetEnterprises();
+				if (!CancelRequest)
+					enterprises = adminObj.GetEnterprises();
+				if (!CancelRequest)
+					users = adminObj.GetUsers();
+				if (!CancelRequest)
+					groups = adminObj.GetGroups();
+				
+			}
+			catch (ThreadAbortException)
+			{
+				enterprises = null;
+				users = null;
+				groups = null;
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine("LoadEnterprise:" + ex.Message);
-				enterprises = null;
+				Console.WriteLine("LoadTreeViewsFromDb:" + ex.Message +","+ ex.StackTrace);
+				OnRemoteException(ex.Message);
+			}
+			finally
+			{
+				Console.WriteLine("ok finally");
+				StopTransfer();
 			}
 		}
 		
-		[Responsive(ResponsiveEnum.Read)]
+		/*[Responsive(ResponsiveEnum.Read)]
 		public void LoadUsers()
 		{
 			try
@@ -60,11 +77,29 @@ namespace administrator
 			}		
 		}
 		
+		public delegate Group[] GroupsDelegate();
+		
 		[Responsive(ResponsiveEnum.Read)]
 		public void LoadGroups()
 		{
 			try
 			{
+				GroupsDelegate remoteCall = adminObj.GetGroups;
+				IAsyncResult asyncResult = remoteCall.BeginInvoke(null,null);
+				bool success = true;
+				while (asyncResult.IsCompleted == false)
+				{
+					System.Threading.Thread.Sleep(100);
+					if (CancelRequest == true)
+					{
+						// abort the remote call
+						success = false;
+					}
+				}
+				if (success)
+				{
+					groups = remoteCall.EndInvoke(asyncResult);
+				}
 				groups = adminObj.GetGroups();
 			}
 			catch (Exception ex)
@@ -72,7 +107,11 @@ namespace administrator
 				Console.WriteLine("LoadGroups:" + ex.Message);
 				groups = null;
 			}		
-		}
+			finally 
+			{
+				groups = null;
+			}
+		}*/
 		
 		// TODO: load the trees from xml, not hardcoded
 		private void InitTreeViews()

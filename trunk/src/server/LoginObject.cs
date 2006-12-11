@@ -64,9 +64,12 @@ namespace Boxerp.Objects
  		{
          User u = User.FindByUsernameAndPasswd(user, password);
 			if (u != null) {
-				string session = sessionsMgr.GetSession(u);
-				UserInformation.SetSessionToken(session); // put the session token in the CallContext
-				return 0;
+            lock(this)
+            {
+				    string session = sessionsMgr.GetSession(u);
+				    UserInformation.SetSessionToken(session); // put the session token in the CallContext
+				    return 0;
+            }
 			}
 			else
 				return -1;

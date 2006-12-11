@@ -1,18 +1,16 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib.mds">
   <Files>
-    <File filename="Bienvenido" />
     <File filename="./client-lib/AbstractResponsiveHelper.cs" />
     <File filename="./client-lib/IResponsiveClient.cs" />
-    <File filename="./client-lib/ResponsiveEnum.cs" />
+    <File filename="./client-lib/IResponsiveCommons.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="client-lib" expanded="True">
-            <Node name="References" expanded="True" />
-            <Node name="AbstractResponsiveHelper.cs" expanded="False" selected="True" />
+          <Node name="Boxerp.Client" expanded="True">
+            <Node name="IResponsiveCommons.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -35,8 +33,8 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveConfiguration" value="Release" />
-      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib/AbstractResponsiveHelper.cs" />
+      <Property key="ActiveConfiguration" value="Debug" />
+      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib/IResponsiveCommons.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

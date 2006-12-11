@@ -1,15 +1,15 @@
 <Combine name="lib" fileversion="2.0">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
-      <Entry build="True" name="lib" configuration="Debug" />
+      <Entry build="True" name="Boxerp.Client.GtkSharp.Lib" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
-      <Entry build="True" name="lib" configuration="Release" />
+      <Entry build="True" name="Boxerp.Client.GtkSharp.Lib" configuration="Release" />
     </Configuration>
   </Configurations>
   <DeployTargets />
-  <StartMode startupentry="lib" single="True">
-    <Execute type="None" entry="lib" />
+  <StartMode startupentry="Boxerp.Client.GtkSharp.Lib" single="True">
+    <Execute type="None" entry="Boxerp.Client.GtkSharp.Lib" />
   </StartMode>
   <Entries>
     <Entry filename="./lib/lib.mdp" />

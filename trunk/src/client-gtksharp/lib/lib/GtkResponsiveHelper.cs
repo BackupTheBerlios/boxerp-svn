@@ -7,12 +7,11 @@ using Gtk;
 
 namespace Boxerp.Client.GtkSharp.Lib
 {
-	// TODO: llamar a upload/download pasandole el metodo que sea	
-	public abstract class GtkResponsiveHelper : AbstractResponsiveHelper
+	public abstract class GtkResponsiveHelper : AbstractResponsiveHelper, IResponsiveCommons
 	{
 		WaitDialog waitDialog;
 		WarningDialog warningDialog;
-		//static ThreadNotify threadNotify; // static ?, error prune code
+		private static Hashtable exceptionsMsgPool = Hashtable.Synchronized(new Hashtable());
 		protected bool transferSuccess;
 		protected Gtk.Window parentWindow;
 		
@@ -30,37 +29,26 @@ namespace Boxerp.Client.GtkSharp.Lib
          	}
       	}
 
-		
-		/*protected void InitThreads()
-		{
-			//threadStartUpload   = new ThreadStart(Upload);
-			//threadStartDownload = new ThreadStart(Download); 
-			
-		}*/
-		
 		public void Init(Gtk.Window win)
 		{
 			parentWindow = win;
-			//InitThreads();
 			base.BaseTransferCompleteEvent += this.OnTransferCompleted;
-			//ThreadDownloadStopEvent += OnDownloadStop;
-			//ThreadUploadStopEvent += OnUploadStop;
 		}
 	
-		public void StartTransfer(ResponsiveEnum transferType)
+		public override void StartTransfer(ResponsiveEnum transferType)
 		{
 			waitDialog = new WaitDialog(parentWindow); 
 			waitDialog.CancelEvent += OnCancel;
 			transferSuccess = true;
-			base.Transfer(transferType);
-			/*if (uploadThread.ThreadState != ThreadState.Unstarted)
-            {
-                //Console.WriteLine("thread is aborted:" + downloadThread.ThreadState.ToString());
-                uploadThread = new Thread(base.Upload);
-            }
-            uploadThread.Start();*/
+			base.StartTransfer(transferType);
+		}
+        
+        public void OnRemoteException(string msg)
+        {
+        	exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = msg;
+			transferSuccess = false;
         }
-		
+        
 		public void OnCancel(object sender, EventArgs e)
 		{
         	CancelRequest = true;	
@@ -68,14 +56,14 @@ namespace Boxerp.Client.GtkSharp.Lib
         	//a button to force cancelation by aborting threads
 		}
 		
-		public void OnTransferCompleted(object sender, EventArgs e)
+		private void TransferCompleted(object sender, EventArgs e)
 		{
 			ResponsiveEnum transferType = (ResponsiveEnum)sender;
-			
+			waitDialog.Stop();
+			waitDialog.Destroy();
 			if (transferSuccess) // FIXME: transferSuccess must be syncrhonized
          	{
-				waitDialog.Stop();
-				waitDialog.Destroy();
+				
 				if (transferType == ResponsiveEnum.Read)
 				{
 					this.PopulateGUI(); // FIXME: this could freeze, it is not resonsible
@@ -85,7 +73,10 @@ namespace Boxerp.Client.GtkSharp.Lib
 			else
 			{
 				warningDialog = new WarningDialog();
-         		warningDialog.Message = "Connection error";
+				string msg = "";
+				foreach (string i in exceptionsMsgPool.Values)
+					msg += i + "\n";
+         		warningDialog.Message = msg;
          		warningDialog.QuitOnOk = false;
             	warningDialog.Present();
          	}		
@@ -95,112 +86,14 @@ namespace Boxerp.Client.GtkSharp.Lib
          	}
 		}
 		
-		/*public void OnTransferStop(object sender, EventArgs e)
+		public void OnTransferCompleted(object sender, EventArgs e)
 		{
-			threadNotify = new ThreadNotify (new ReadyEvent (TransferCompleted));
-			threadNotify.WakeupMain();
-		}*/
-		
-		/*public void OnDownloadStop(object sender, EventArgs e)
-		{
-			threadNotify = new ThreadNotify (new ReadyEvent (DownloadComplete));
-			threadNotify.WakeupMain();
-		}*/
-		
-	
-/*		protected override void Upload()
-		{
-			try
-			{
-				UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
-				ArrayList methods = this.GetResponsiveMethods(ResponsiveEnum.Upload);
-				foreach (MethodInfo method in methods)
-				{
-					method.Invoke(this, null); // execute method	
-				}
-				uploadSuccess = true;
-			}
-			catch (Exception ex)
-			{
-            	Console.WriteLine("Exception: " + ex.Message);
-            	uploadSuccess = false;
-			}
-			finally
-			{
-				threadNotify.WakeupMain();
-			}			
+			Application.Invoke(sender, e, TransferCompleted);
 		}
-	*/
-		/*public override void StartDownload()
-		{
-			waitDialog = new WaitDialog(parentWindow); 
-			waitDialog.CancelEvent += OnCancel;
-			if (downloadThread.ThreadState != ThreadState.Unstarted)
-            {
-                //Console.WriteLine("thread is aborted:" + downloadThread.ThreadState.ToString());
-                downloadThread = new Thread(base.Download);
-            }
-            downloadThread.Start();
-			//threadDownload = new Thread(threadStartDownload);
-			//threadNotify = new ThreadNotify (new ReadyEvent (DownloadComplete));
-			//threadDownload.Start();		
-		}*/
-	
-/*		public override void Download()
-		{
-			try
-			{
-				UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
-				ArrayList methods = this.GetResponsiveMethods(ResponsiveEnum.Download);
-				foreach (MethodInfo method in methods)
-				{
-					method.Invoke(this, null); // execute method	
-				}
-				downloadSuccess = true;
-			}
-			catch (Exception ex)
-			{
-            	Console.WriteLine("Exception: " + ex.Message);
-            	downloadSuccess = false;
-			}
-			finally
-			{
-				threadNotify.WakeupMain();
-			}
-		}
-	*/
-		/*public void UploadComplete()
-		{
-			if (uploadSuccess)
-         	{
-				waitDialog.Stop();
-				waitDialog.Destroy();
-				parentWindow.Present();
-			}
-			else
-			{
-				warningDialog = new WarningDialog();
-         		warningDialog.Message = "Connection error";
-         		warningDialog.QuitOnOk = false;
-            	warningDialog.Present();
-         	}
-		}*/
-	
-		/*public void OnTransferCompleted(object sender, EventArgs e)
-		{
-			ResponsiveEnum transferType = sender as ResponsiveEnum;
-			// fixme: how to notify without jump to another method
-			threadNotify = new ThreadNotify (new ReadyEvent (TransferCompleted));
-			threadNotify.WakeupMain();
-			
-		}*/
 		
-
-		
-		public override void PopulateGUI()
+		public virtual void PopulateGUI()
 		{
 		
 		}		
 	}
-	
 }

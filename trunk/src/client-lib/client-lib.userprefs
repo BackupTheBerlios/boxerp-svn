@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib.mds">
   <Files>
+    <File filename="Bienvenido" />
     <File filename="./client-lib/AbstractResponsiveHelper.cs" />
     <File filename="./client-lib/IResponsiveClient.cs" />
     <File filename="./client-lib/IResponsiveCommons.cs" />

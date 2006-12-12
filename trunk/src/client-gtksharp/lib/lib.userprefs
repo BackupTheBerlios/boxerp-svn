@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/lib/lib.mds">
   <Files>
+    <File filename="Bienvenido" />
     <File filename="./lib/GtkResponsiveHelper.cs" />
     <File filename="./lib/SimpleListView.cs" />
     <File filename="./lib/WaitDialog.cs" />

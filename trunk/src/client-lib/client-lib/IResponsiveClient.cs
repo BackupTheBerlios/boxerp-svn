@@ -1,5 +1,6 @@
 
 using System;
+using System.Reflection;
 
 namespace Boxerp.Client
 {
@@ -8,7 +9,8 @@ namespace Boxerp.Client
 	{
 		bool CancelRequest { get; set;}
 		void StartTransfer(ResponsiveEnum trType);
-		void StopTransfer();
+		void StopTransfer(int threadId, MethodBase MethodBase, object output);
 		void StartAsyncCall(SimpleDelegate method);
+		
 	}
 }

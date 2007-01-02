@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Threading;
+using System.Reflection;
 using Boxerp.Models;
 using Boxerp.Objects;
 using Gtk;
@@ -12,44 +13,67 @@ using Boxerp.Client;
 namespace administrator
 {
 	
-	public class MainHelper : GtkResponsiveHelper
+	public partial class MainHelper : GtkResponsiveHelper
 	{
-		FilteredListView streeviewEnterprises, 
-								streeviewUsers, 
-								streeviewGroups;
-		Enterprise[] enterprises;
-		User[] users;
-		Group[] groups;
-		IAdmin adminObj;
+		FilteredListView ftreeviewEnterprises, 
+								ftreeviewUsers, 
+								ftreeviewGroups;
+		Enterprise[] _enterprises;
+		User[] _users;
+		Group[] _groups;
+		IAdmin _adminObj;
+		User _user;
+		
+		public Group[] Groups
+		{
+		    get { return _groups; }
+		}
+		
+		public User[] Users
+		{
+		    get { return _users; }
+		}
+		
+		public Enterprise[] Enterprises
+		{
+		    get { return _enterprises; }
+		}
+		
+		public User User
+		{
+		    get { return _user; }
+		    set { _user = value; }
+		}
 		
 		public MainHelper(Gtk.Window win, ref FilteredListView e, 
 					ref FilteredListView u, ref FilteredListView g)
 		{
-			this.streeviewEnterprises = e;
-			this.streeviewUsers = u;
-			this.streeviewGroups = g;
-			adminObj = (IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
+			ftreeviewEnterprises = e;
+			ftreeviewUsers = u;
+			ftreeviewGroups = g;
+			_adminObj = (IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
 			base.Init(win);
 		}
 		
 		[Responsive(ResponsiveEnum.Read)]
-		public void LoadTreeViewsFromDb()
+		protected void LoadModelsFromDb()
 		{
 			try
 			{
 				if (!CancelRequest)
-					enterprises = adminObj.GetEnterprises();
+					_enterprises = _adminObj.GetEnterprises();
 				if (!CancelRequest)
-					users = adminObj.GetUsers();
+					_users = _adminObj.GetUsers();
 				if (!CancelRequest)
-					groups = adminObj.GetGroups();
+					_groups = _adminObj.GetGroups();
 				
 			}
 			catch (ThreadAbortException)
 			{
-				enterprises = null;
-				users = null;
-				groups = null;
+				_enterprises = null;
+				_users = null;
+				_groups = null;
+				OnRemoteException("Operation aborted");
 			}
 			catch (Exception ex)
 			{
@@ -59,9 +83,35 @@ namespace administrator
 			finally
 			{
 				Console.WriteLine("ok finally");
-				StopTransfer();
+				StopTransfer(Thread.CurrentThread.ManagedThreadId, MethodInfo.GetCurrentMethod(), null);
 			}
 		}
+		
+		public void DeleteUser()
+		{
+		    int userId = 0;
+		    try
+		    {
+		        userId = _adminObj.DeleteUser(_user);
+		    }
+		    catch (ThreadAbortException)
+			{
+				userId = -1;
+				Console.WriteLine("Aborting thread....");
+				OnRemoteException("Operation aborted");
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("LoadTreeViewsFromDb:" + ex.Message +","+ ex.StackTrace);
+				OnRemoteException(ex.Message);
+			}
+		    finally
+		    {
+		        base.StopTransfer(Thread.CurrentThread.ManagedThreadId, MethodInfo.GetCurrentMethod(), userId);
+		    }
+		}
+		
+		
 		
 		/*[Responsive(ResponsiveEnum.Read)]
 		public void LoadUsers()
@@ -113,85 +163,7 @@ namespace administrator
 			}
 		}*/
 		
-		// TODO: load the trees from xml, not hardcoded
-		private void InitTreeViews()
-		{
-			// Enterprises treeview:
-			List<SimpleColumn> columns = new List<SimpleColumn>();
-			SimpleColumn column = new SimpleColumn();
-			column.Name = "Code";
-			column.Type = typeof(string);
-			column.Visible = true;
-			columns.Add(column);
-			
-			column.Name = "Name";
-			column.Type = typeof(object);
-			column.Visible = true;
-			columns.Add(column);
-			
-			column.Name = "Description";
-			column.Type = typeof(string);
-			column.Visible = true;
-			columns.Add(column);
-			this.streeviewEnterprises.Create(columns);
 
-			// Users treeview:
-			columns.Clear();
-			column.Name = "Code";
-			column.Type = typeof(string);
-			column.Visible = true;
-			columns.Add(column);
-			
-			column.Name = "Username";
-			column.Type = typeof(object);
-			column.Visible = true;
-			columns.Add(column);			
-			this.streeviewUsers.Create(columns);			
-
-			// Groups treeview:
-			columns.Clear();
-			column.Name = "Code";
-			column.Type = typeof(string);
-			column.Visible = true;
-			columns.Add(column);
-			
-			column.Name = "Groupname";
-			column.Type = typeof(object);
-			column.Visible = true;
-			columns.Add(column);			
-			this.streeviewGroups.Create(columns);									
-		}
 		
-		public override void PopulateGUI()
-		{
-			InitTreeViews();
-			if (enterprises != null)
-			foreach (Enterprise i in enterprises)
-			{
-				ArrayList columns = new ArrayList();
-				columns.Add(i.Id.ToString());
-				columns.Add(i);
-				columns.Add(i.Description);
-				this.streeviewEnterprises.InsertRow(columns);
-			}
-			
-			if (users != null)
-			foreach (User i in users)
-			{
-				ArrayList columns = new ArrayList();
-				columns.Add(i.Id.ToString());
-				columns.Add(i);
-				this.streeviewUsers.InsertRow(columns);
-			}
-			
-			if (groups != null)
-			foreach (Group i in groups)
-			{
-				ArrayList columns = new ArrayList();
-				columns.Add(i.Id.ToString());
-				columns.Add(i);
-				this.streeviewGroups.InsertRow(columns);
-			}	
-		}	
 	}
 }

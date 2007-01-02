@@ -46,6 +46,7 @@ namespace Boxerp.Models
 	{
 		int Id { get; set; }
 
+
 		string ToString();
 	}	
 }

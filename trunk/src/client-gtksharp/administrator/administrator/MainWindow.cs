@@ -8,7 +8,7 @@ namespace administrator
 {
 public class MainWindow: Gtk.Window
 {
-	protected MainHelper helper;
+	protected MainHelper _helper;
 	protected FilteredListView ftreeviewEnterprises;
 	protected FilteredListView ftreeviewUsers;
 	protected FilteredListView ftreeviewGroups;
@@ -20,9 +20,10 @@ public class MainWindow: Gtk.Window
 	public MainWindow (): base ("")
 	{
 		Stetic.Gui.Build (this, typeof(MainWindow));
-		helper = new MainHelper(this, ref ftreeviewEnterprises,
+		_helper = new MainHelper(this, ref ftreeviewEnterprises,
 								ref ftreeviewUsers, ref ftreeviewGroups);
-		helper.StartTransfer(ResponsiveEnum.Read);
+		_helper.StartTransfer(ResponsiveEnum.Read);
+		
 	}
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
@@ -57,20 +58,66 @@ public class MainWindow: Gtk.Window
 
 	protected virtual void OnNewUserClicked(object sender, System.EventArgs e)
 	{
-		if (editUserWindow == null)
-			editUserWindow = new EditUserWindow();
+		//if (editUserWindow == null)
+		//{
+			editUserWindow = new EditUserWindow(_helper.Groups);
+			editUserWindow.SaveSucessEvent += OnEditUserWindowSave;
+		//}
+		/*else
+		{
+		    editUserWindow.Clear();
+		    editUserWindow.Reload();
+		    editUserWindow.Present();
+		}*/
 	}
 
 	protected virtual void OnEditUserClicked(object sender, System.EventArgs e)
 	{
+	    //Console.WriteLine("ON EDIT USER CLICKED");
 		if (ftreeviewUsers.IsSelected())
-			editUserWindow = new EditUserWindow((User)ftreeviewUsers.SelectedObject);
+		{
+		    //Console.WriteLine("ok, is selected: " + ftreeviewUsers.SelectedObject);
+			editUserWindow = new EditUserWindow(_helper.Groups, (User)ftreeviewUsers.SelectedObject);
+	    }
 		else
-			editUserWindow = new EditUserWindow();
+		{
+		    editUserWindow = new EditUserWindow(_helper.Groups); // FIXME: get groups from client cache instead of passing in to this method
+		}
+		editUserWindow.SaveSucessEvent += OnEditUserWindowSave;
 	}
 
+    protected virtual void OnEditUserWindowSave(object sender, System.EventArgs e)
+    {
+        Console.WriteLine("save user ok");
+        if ((editUserWindow.User != null) && (editUserWindow.IsNewUser))
+        {
+            User user = editUserWindow.User;
+            ftreeviewUsers.InsertModel(user);
+            editUserWindow.IsNewUser = false;
+            /*ftreeviewUsers.TreeView.Selection.SelectAll();
+            if (ftreeviewUsers.IsSelected())
+            {
+                Console.WriteLine("ok, is selected: " + ftreeviewUsers.SelectedObject);
+            }*/
+        }
+    }
+    
 	protected virtual void OnDelUserClicked(object sender, System.EventArgs e)
 	{
+	    if (ftreeviewUsers.IsSelected())
+		{
+		    lock(_helper)
+		    {
+		        _helper.User = (User)ftreeviewUsers.SelectedObject;
+		        _helper.StartAsyncCall(_helper.DeleteUser);
+		    }
+		}
+		else
+		{
+		    WarningDialog wdialog = new WarningDialog();
+		    wdialog.Message = "Please select an user first";
+            wdialog.Present();		    
+		}
 	}
 
 	protected virtual void OnDelGroupClicked(object sender, System.EventArgs e)

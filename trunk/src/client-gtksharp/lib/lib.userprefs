@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
 <UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-gtksharp/lib/lib.mds">
   <Files>
-    <File filename="Bienvenido" />
+    <File filename="./lib/QuestionDialog.cs" />
     <File filename="./lib/GtkResponsiveHelper.cs" />
-    <File filename="./lib/SimpleListView.cs" />
     <File filename="./lib/WaitDialog.cs" />
     <File filename="./lib/WaitWindow.cs" />
   </Files>
@@ -13,6 +12,7 @@
         <Node expanded="True">
           <Node name="Boxerp.Client.GtkSharp.Lib" expanded="True">
             <Node name="References" expanded="True" />
+            <Node name="UserInterface" expanded="True" />
             <Node name="GtkResponsiveHelper.cs" expanded="False" selected="True" />
           </Node>
         </Node>

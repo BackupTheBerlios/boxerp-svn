@@ -10,4 +10,18 @@ methods, i.e:
         <permissionCheck name="Permission.Read" description="This method must check that not everybody can read"
     </class>
 --------------
-
+2. Use a cache system for models at client side. A refresh button will reload objects from 
+server to cache. In the meanwhile all the client application read the same models from the client cache
+--------------
+3. Reflection: check the code of an async method and throw an exception if it doesn't contains 
+a try-finally calling stopTransfer.
+--------------
+4. Write thead safe gtk widgets, for example when inserting and deleting rows on a treeview
+---------------
+5. Authorization thru IIdentity and IPrincipal. Howto Thread.CurrentPrincipal throug remoting
+---------------
+6. Invoke event using DynamicInvoke instead of ()
+--------------
+7. AbstractResponsive: Throw an exception when method list is zero
+---------------
+8. ResponsiveMethods should to be protected

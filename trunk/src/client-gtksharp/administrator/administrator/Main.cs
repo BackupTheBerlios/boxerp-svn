@@ -15,15 +15,20 @@ namespace administrator
 	{
 		LoginWindow loginWindow;
 		MainWindow mainWindow;
-		public void LoginSuccess()
+		public void LoginSuccess(object sender, EventArgs e)
 		{
 			//string session = loginWindow.Session;
-			loginWindow.Destroy();
+			//loginWindow.Hide();
+			//loginWindow.Destroy();
+			//loginWindow = null;
 			Console.WriteLine("Login success");
 			string session = SessionSingleton.GetInstance().GetSession();
 			Console.WriteLine(session);
 			mainWindow = new MainWindow();
 			mainWindow.Present();
+			loginWindow.Hide();
+			loginWindow.Destroy();
+			
 		}
 
 		
@@ -33,7 +38,7 @@ namespace administrator
 			RemotingConfiguration.Configure("./clientRemoting.config");
 			MainClass main = new MainClass();
 			main.loginWindow = new LoginWindow ();
-         	main.loginWindow.loginEvent += new LoginWindow.LoginEventHandler(main.LoginSuccess);
+         	main.loginWindow.LoginEvent += main.LoginSuccess;
          	main.loginWindow.Show ();
 			Application.Run ();
 		}

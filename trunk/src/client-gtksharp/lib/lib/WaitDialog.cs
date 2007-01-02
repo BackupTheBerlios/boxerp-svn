@@ -39,7 +39,19 @@ namespace Boxerp.Client.GtkSharp.Lib
 			this.Modal = true;
 			this.TransientFor = parent;
 			this.Hide();
-			actionArea.Remove(button);
+			//actionArea.Remove(button);
+			progressbar.BarStyle = Gtk.ProgressBarStyle.Continuous;
+			progressbar.PulseStep = 0.05;
+			GLib.Timeout.Add (300, new GLib.TimeoutHandler (FirstInstant));
+			GLib.Timeout.Add (100, new GLib.TimeoutHandler (DoPulse));
+		}
+		
+		public WaitDialog()
+		{
+			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.Lib.WaitDialog));
+			this.Modal = true;
+			this.Hide();
+			//actionArea.Remove(button);
 			progressbar.BarStyle = Gtk.ProgressBarStyle.Continuous;
 			progressbar.PulseStep = 0.05;
 			GLib.Timeout.Add (300, new GLib.TimeoutHandler (FirstInstant));
@@ -75,6 +87,25 @@ namespace Boxerp.Client.GtkSharp.Lib
 			if (cancelEventHandler != null)
 				cancelEventHandler(this, null);
                 //cancelEventHandler.Invoke(this, null);
+		}
+
+		protected virtual void OnClose(object sender, System.EventArgs e)
+		{
+		    Console.WriteLine("ON CLOSE!!!!!!");
+		    OnCancel(sender, e);
+		}
+
+		protected virtual void OnDeleteEvent(object o, Gtk.DeleteEventArgs args)
+		{
+		    /*Console.WriteLine("delte event:" + o.ToString()+","+ args.Event.Type.ToString());
+		    if (args.Event.SendEvent)
+		    {
+		        Console.WriteLine("send event!!:" + args.Event.Type.ToString());
+		    }*/
+		    if (o == this)
+		    {
+	            OnCancel(o, null);
+		    }
 		}
 		
 

@@ -13,6 +13,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 		protected Gtk.Button button;
 		protected Gtk.HButtonBox actionArea;
 		private EventHandler cancelEventHandler;
+		private bool exitOnCancel = true;
 
         public event EventHandler CancelEvent
         {
@@ -32,6 +33,12 @@ namespace Boxerp.Client.GtkSharp.Lib
 			get { return labelMsg.Text;}
 			set { labelMsg.Text = value;}
 		}
+		
+		public bool ExitOnCancel
+		{
+		    get { return exitOnCancel; }
+		    set { exitOnCancel = value; }
+		}
 
 		public WaitWindow() : 
 				base("")
@@ -43,6 +50,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 			progressbar.PulseStep = 0.05;
 			GLib.Timeout.Add (300, new GLib.TimeoutHandler (FirstInstant));
 			GLib.Timeout.Add (100, new GLib.TimeoutHandler (DoPulse));
+			exitOnCancel = true;
 		}
 		
 		public void Stop()
@@ -73,6 +81,25 @@ namespace Boxerp.Client.GtkSharp.Lib
 		{
 			if (cancelEventHandler != null)
                 cancelEventHandler(this, null);
+		}
+
+		protected virtual void OnDeleteEvent(object o, Gtk.DeleteEventArgs args)
+		{
+		    if (o == this)
+		    {   
+		        Console.WriteLine("On delete event");
+		        Stop();
+		        if (exitOnCancel)
+		        {
+		            Console.WriteLine("exit on cancel");
+		            args.RetVal = true;
+		            Gtk.Application.Quit();
+		        }
+		        else
+		        {
+		            OnCancel(o, null);
+		        }
+		    }
 		}
 	}
 	

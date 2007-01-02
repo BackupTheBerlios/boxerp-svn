@@ -30,6 +30,7 @@
 // THE POSSIBILITY OF SUCH DAMAGE.
 using System;
 using NHibernate.Expression;
+using Iesi.Collections;
 using System.Collections;
 using Castle.ActiveRecord;
 
@@ -42,7 +43,7 @@ namespace Boxerp.Models
 		private string _name;
 		private string _description;
 		private bool _published;
-		private IList _groups;
+		private ISet _groups;
 		
 
 		[PrimaryKey(PrimaryKeyType.Native)]
@@ -52,10 +53,10 @@ namespace Boxerp.Models
 			set { _id = value; }
 		}
 
-		[HasAndBelongsToMany( typeof(Group),
+		[HasAndBelongsToMany( typeof(Group), RelationType.Set,
 			Table="enterprises_groups",
 			ColumnRef="group_id", ColumnKey="enterprise_id")]
-		public IList Groups
+		public ISet Groups
 		{
 			get { return _groups; }
 			set { _groups = value; }

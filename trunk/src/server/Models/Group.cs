@@ -30,6 +30,7 @@
 // THE POSSIBILITY OF SUCH DAMAGE.
 using System;
 using NHibernate.Expression;
+using Iesi.Collections;
 using System.Collections;
 using Castle.ActiveRecord;
 
@@ -40,8 +41,8 @@ namespace Boxerp.Models
 	public class Group : ActiveRecordBase, IBoxerpModel
 	{
 		private int _id;
-		private IList _enterprises;
-		private IList _users;
+		private ISet _enterprises;
+		private ISet _users;
 		private string _groupName;
 		private bool _active;
 		private IDictionary _permissions;
@@ -53,26 +54,26 @@ namespace Boxerp.Models
 			set { _id = value; }
 		}
 
-		[HasAndBelongsToMany( typeof(Enterprise),
+		[HasAndBelongsToMany( typeof(Enterprise), RelationType.Set, 
 			Table="enterprises_groups",
 			ColumnRef="enterprise_id", ColumnKey="group_id")]
-		public IList Enterprises
+		public ISet Enterprises
 		{
 			get { return _enterprises; }
 			set { _enterprises = value; }
 		}
 
-		[HasAndBelongsToMany( typeof(User),
+		[HasAndBelongsToMany( typeof(User), RelationType.Set,
 			Table="users_groups",
 			ColumnRef="user_id", ColumnKey="group_id", Cascade=ManyRelationCascadeEnum.SaveUpdate)]
-		public IList Users
+		public ISet Users
 		{
 			get { return _users; }
 			set { _users = value; }
 		}
 
 		[HasMany(typeof(SectionPermission), Index="sectionpermission" ,IndexType="string", 
-			Cascade=ManyRelationCascadeEnum.All)]
+			Cascade=ManyRelationCascadeEnum.SaveUpdate)]
 		public IDictionary Permissions 
 		{
 			get { return _permissions; }
@@ -108,10 +109,21 @@ namespace Boxerp.Models
 			return GroupName;
 		}
 
-		public bool Equals(Group g)
+		public override bool Equals(Object obj )
 		{
-			return (g.Id == Id);
+                    Group group = obj as Group;
+                    if (group != null)
+                    {
+                        return (group.Id == Id);    
+                    }
+                    return false;
 		}
+
+                public override int GetHashCode()
+                {
+                    return Id;
+                }
+
 	}
 }
 

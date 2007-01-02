@@ -12,7 +12,8 @@ namespace Boxerp.Client
 	
 	public class SimpleInvoker
 	{
-		MethodInfo _method;
+		MethodInfo _method = null;
+		SimpleDelegate sdelegate = null;
 		Object _caller;
 		
 		private void CheckMethodSignature ()
@@ -28,13 +29,25 @@ namespace Boxerp.Client
 			CheckMethodSignature();
 		}
 		
+		public SimpleInvoker(SimpleDelegate method)
+		{
+		    sdelegate = method;
+		}
+		
 		public void Invoke()
 		{
 			#if REMOTING
-					Console.WriteLine("remotiniiiiiiiiiiii");
 					UserInformation.SetSessionToken(SessionSingleton.GetInstance().GetSession());
 			#endif
-			_method.Invoke(_caller, null);
+			if (_method != null)
+			{
+			    _method.Invoke(_caller, null);
+			}
+			else if (sdelegate != null)
+			{
+			    sdelegate();
+			}
+			   
 		}
 	}
 }

@@ -44,17 +44,17 @@ namespace Boxerp.Client.GtkSharp.Lib
         	    }
         	    store = new ListStore(columnsTypes);
         	    treeview.Model = store;
-        	    Console.WriteLine("create3");
+        	    //Console.WriteLine("create3");
         	    i = 0;
-        	    Console.WriteLine("create4");
+        	    //Console.WriteLine("create4");
 				foreach (SimpleColumn column in columns)
 				{
-					Console.WriteLine("COLUMN TYPE=" + column.Type.ToString());
+					//Console.WriteLine("COLUMN TYPE=" + column.Type.ToString());
                 	if (column.Type == typeof(Gdk.Pixbuf))
                 	{
-                		Console.WriteLine("create5 loop");
+                		//Console.WriteLine("create5 loop");
 			        	TreeViewColumn tc = treeview.AppendColumn ("", new CellRendererPixbuf (), "pixbuf", i++);
-			        	Console.WriteLine("create6 loop");
+			        	//Console.WriteLine("create6 loop");
 				    	if (tc != null)
 					    	tc.Visible = column.Visible;
 					}
@@ -73,11 +73,11 @@ namespace Boxerp.Client.GtkSharp.Lib
                 	else
                 	{
                 		
-                		Console.WriteLine("create 7 loop:" + column.Name);
+                		//Console.WriteLine("create 7 loop:" + column.Name);
                 		if (treeview == null)
                 			treeview = new Gtk.TreeView();
 				    	TreeViewColumn tc = treeview.AppendColumn (column.Name, new CellRendererText (), "text", i++);
-				    	Console.WriteLine("create8 loop");
+				    	//Console.WriteLine("create8 loop");
 				    	if (tc != null)
 				    		tc.Visible = column.Visible;
                 	}
@@ -106,6 +106,51 @@ namespace Boxerp.Client.GtkSharp.Lib
 			return iter;
 		}
 		
+		public TreeIter InsertModel (IBoxerpModel model)
+		{
+		    TreeIter iter = store.Append();
+		    if (model != null)
+		    {
+		        store.SetValue(iter, 0, model.Id.ToString());
+		        store.SetValue(iter, 1, model);
+		        return iter;
+		    }
+		    else
+		    {
+		        return Gtk.TreeIter.Zero;
+		    }
+		}
+		
+		public void DeleteModelById(int id)
+		{
+		    TreeIter iter = TreeIter.Zero;
+		    store.GetIterFirst(out iter);
+		    do
+		    {
+		        string tmpId = (string)store.GetValue(iter, 0);
+		        if (tmpId == id.ToString())
+		        {
+		            store.Remove(ref iter);
+		            break;
+		        }
+		    } while (store.IterNext(ref iter));
+		}
+		
+		public void DeleteByColumnId(int column, int id)
+		{
+		    TreeIter iter = TreeIter.Zero;
+		    store.GetIterFirst(out iter);
+		    do
+		    {
+		        string tmpId = (string)store.GetValue(iter, column);
+		        if (tmpId == id.ToString())
+		        {
+		            store.Remove(ref iter);
+		            break;
+		        }
+		    } while (store.IterNext(ref iter));
+		}
+
 		private void RenderObject (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
 		{
 			IBoxerpModel obj = (IBoxerpModel) model.GetValue (iter, 1);
@@ -143,6 +188,20 @@ namespace Boxerp.Client.GtkSharp.Lib
 			{
 				return null;
 			}
+		}
+		
+		public void Clear()
+		{
+		    Array.Clear(treeview.Columns, 0, treeview.Columns.Length);
+		    while (treeview.Columns.Length > 0)
+		    {
+		        //for (int i = 0; i < treeview.Columns.Length; i++)
+		        //{
+		        treeview.RemoveColumn(treeview.Columns[0]);
+		        //}
+		    }
+		    treeview.Model = null;
+		    store = null;
 		}
 	}
 }

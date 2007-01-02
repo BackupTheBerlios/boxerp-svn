@@ -51,6 +51,7 @@ namespace Boxerp.Objects
 		Group[] GetGroups();
 		Group[] GetDistinctGroups(User user);
 		int SaveUser(User user);
+                int DeleteUser(User user);
 		/*IList GetEnterprises(string session);
 		IList GetGroups(string session);
 		IList GetUsers(string session, 

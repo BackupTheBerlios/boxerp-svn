@@ -11,15 +11,15 @@ namespace Boxerp.Client
 	/// </summary>
 	public abstract class AbstractResponsiveHelper: IResponsiveClient
 	{
-		private static Hashtable threadsPoolHash = Hashtable.Synchronized(new Hashtable());
+		private static Hashtable _threadsPoolHash = Hashtable.Synchronized(new Hashtable());
         
         private int _asyncCallsCount = 0; 
         private ResponsiveEnum _transferType;
         private bool _cancelRequest = false;
         
-		private EventHandler _baseTransferCompleteHandler;
+		private ThreadEventHandler _baseTransferCompleteHandler;
 				
-		public event EventHandler BaseTransferCompleteEvent
+		public event ThreadEventHandler BaseTransferCompleteEvent
       	{
         	add
          	{
@@ -37,12 +37,12 @@ namespace Boxerp.Client
       		set { _cancelRequest = value; }
       	}
       	
-      	public void StartAsyncCall(SimpleDelegate method)
+      	public virtual void StartAsyncCall(SimpleDelegate method)
 		{
 			ProcessAsyncCall(method);
 		}
 		
-		public void StopTransfer()
+		public void StopTransfer(int threadId, MethodBase methodBase, object output)
 		{
 			lock(this)
 			{
@@ -51,9 +51,23 @@ namespace Boxerp.Client
 					_asyncCallsCount --;
 					if (_asyncCallsCount == 0)
 					{
-						threadsPoolHash.Clear();
+						_threadsPoolHash.Clear();
 						if (_baseTransferCompleteHandler != null)
-            				_baseTransferCompleteHandler(_transferType, null);
+						{
+            				ThreadEventArgs tea = new ThreadEventArgs(threadId, methodBase, output);
+            				Delegate[] invList = _baseTransferCompleteHandler.GetInvocationList();
+            				if (invList.Length > 0)
+            				{
+            				    object[] parameters = { _transferType, tea };
+            				    invList[0].DynamicInvoke(parameters);
+            				        
+            			        //_baseTransferCompleteHandler(_transferType, tea);
+            			    }
+            			    else
+            			    {
+            			        throw new NullReferenceException("BaseTransferCompleteEvent has no handler");
+            			    }
+            			}
 					}
 				}
 			}
@@ -64,15 +78,21 @@ namespace Boxerp.Client
 		{
 			try
 			{
-				_asyncCallsCount = 1;
-					//FIXME: invoke asyncrhonously
-				method(); 
-				//.Invoke(this, null); // execute method
+			    _transferType = ResponsiveEnum.Other;
+				_asyncCallsCount++; // = 1;
+				ThreadStart methodStart = new SimpleInvoker(method).Invoke;
+				Thread methodThread = new Thread(methodStart);
+				methodThread.Start();
+				_threadsPoolHash[methodThread.ManagedThreadId] = methodThread;
 			}
 			catch (TargetInvocationException ex)
             {
                 Console.WriteLine("responsive method raises exception:" + ex.Message+ ex.StackTrace);
-                //throw ex; // FIXME: How to catch an exception inside a thread?
+                throw ex; 
+            }
+            catch(Exception ex)
+            {
+            	throw ex;
             }
             finally
             {
@@ -84,20 +104,26 @@ namespace Boxerp.Client
 			_transferType = trType;
 			try
 			{
-				if (threadsPoolHash.Count != 0)
+				if (_threadsPoolHash.Count != 0)
 				{
 					// busy, show an error message
 				}
 				
 				List<MethodInfo> methods = this.GetResponsiveMethods(_transferType);
+				if (methods.Count == 0)
+				{
+				    throw new NullReferenceException("No private/protected responsive methods found");
+				}
+				
 				_asyncCallsCount = methods.Count;
+				
 				foreach (MethodInfo method in methods)
 				{
 					
 					ThreadStart methodStart = new SimpleInvoker(method, this).Invoke;
 					Thread methodThread = new Thread(methodStart);
 					methodThread.Start();
-					threadsPoolHash[methodThread.ManagedThreadId] = methodThread;
+					_threadsPoolHash[methodThread.ManagedThreadId] = methodThread;
 					//method.Invoke(this, null); // execute method
 				}
 			}
@@ -113,11 +139,18 @@ namespace Boxerp.Client
         	// TODO : Write the code to stop threads
 		}
 		
+		protected void ForceAbort()
+		{
+		    foreach(Thread thread in _threadsPoolHash.Values)
+		    {
+		        thread.Abort();
+		    }
+		}
 		
 		private List<System.Reflection.MethodInfo> GetResponsiveMethods(ResponsiveEnum trType)
 		{
 			List<MethodInfo> responsiveMethods = new List<MethodInfo>();
-			MethodInfo[] methods = this.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
+			MethodInfo[] methods = this.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
 			foreach(MethodInfo method in methods)
 			{
 				object[] attributes = method.GetCustomAttributes(typeof(ResponsiveAttribute), true);

@@ -30,6 +30,7 @@
 // THE POSSIBILITY OF SUCH DAMAGE.
 using System;
 using NHibernate.Expression;
+using Iesi.Collections;
 using System.Collections;
 using Castle.ActiveRecord;
 
@@ -40,7 +41,7 @@ namespace Boxerp.Models
 	public class User : ActiveRecordBase, IBoxerpModel
 	{
 		private int _id;
-		private IList _groups; 
+		private ISet _groups; 
 		private string _userName;
 		private string _realName;
 		private string _email;
@@ -56,17 +57,17 @@ namespace Boxerp.Models
 			set { _id = value; }
 		}
 
-		[HasAndBelongsToMany( typeof(Group),
+		[HasAndBelongsToMany( typeof(Group), RelationType.Set,
 			Table="users_groups",
-			ColumnRef="group_id", ColumnKey="user_id", Cascade=ManyRelationCascadeEnum.All)]
-		public IList Groups
+			ColumnRef="group_id",  ColumnKey="user_id", Cascade=ManyRelationCascadeEnum.SaveUpdate)]
+		public ISet Groups
 		{
 			get { return _groups; }
 			set { _groups = value; }
 		}
 	
 		[HasMany(typeof(SectionPermission), Index="sectionpermission" ,IndexType="string",
-			Cascade=ManyRelationCascadeEnum.All)]
+			Cascade=ManyRelationCascadeEnum.SaveUpdate)]
 		public IDictionary Permissions 
 		{
 			get { return _permissions; }
@@ -143,10 +144,20 @@ namespace Boxerp.Models
 			return UserName;
 		}
 
-		public bool Equals(User u)
+		public override bool Equals(Object obj )
 		{
-			return (u.Id == Id);
+                    User user = obj as User;
+                    if (user != null)
+                    {
+                        return (user.Id == Id);    
+                    }
+                    return false;
 		}
+
+                public override int GetHashCode()
+                {
+                    return Id;
+                }
 
 	}
 }

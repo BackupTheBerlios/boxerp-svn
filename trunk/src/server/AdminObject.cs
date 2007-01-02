@@ -1,6 +1,4 @@
 //
-// LoginObject.cs
-//
 // Authors:
 // 	Carlos Ble Jurado <carlosble@shidix.com>
 //
@@ -121,8 +119,10 @@ public class AdminObject : MarshalByRefObject, IAdmin
                         if (!u.Groups.Contains(i))
                             groups.Add(i);
                     }
-                    Console.WriteLine("ok, ok");
-                    return (Group[])groups.ToArray(groups[0].GetType());
+                    if (groups.Count > 0)
+                        return (Group[])groups.ToArray(groups[0].GetType());
+                    else
+                        return null;
                 }
                 return null;
             }
@@ -175,46 +175,50 @@ public class AdminObject : MarshalByRefObject, IAdmin
         return null;
     }
 
-    public int SaveUser(User u)
+    public int SaveUser(User user)
     {
         try
         {
             if (sessionsMgr.IsValidSessionThenUpdate(UserInformation.GetSessionToken()))
             {
-                Console.WriteLine(u.Id +","+u.UserName+","+u.RealName+","+
-                                  u.Email +","+u.Active);
-                User oldUser = User.Find(u.Id);
-                oldUser.UserName = u.UserName;
-                oldUser.RealName = u.RealName;
-                oldUser.Email = u.Email;
-                oldUser.Active = u.Active;
-                if (oldUser.Groups == null)
-                    oldUser.Groups = new ArrayList();
-                else
-                    oldUser.Groups.Clear();
-                oldUser.Update();
-                Console.WriteLine(u.Id +","+u.UserName+","+u.RealName+","+
-                                  u.Email +","+u.Active);
-                foreach (Group i in u.Groups)
+                //Console.WriteLine(u.Id +","+u.UserName+","+u.RealName+","+
+                //                  u.Email +","+u.Active);
+                //ActiveRecordBase.Replicate(u);
+                User persistentUser;
+                if (user.Id != 0)
                 {
-                    Group g = Group.Find(i.Id);
-                    g.Update();
-                    if (g != null)
+                    persistentUser = User.Find(user.Id);
+                    persistentUser.UserName = user.UserName;
+                    persistentUser.RealName = user.RealName;
+                    persistentUser.Email = user.Email;
+                    persistentUser.Active = user.Active;
+                    persistentUser.Password = user.Password;
+                    persistentUser.Save();
+                }
+                else
+                {
+                    persistentUser = user;
+                    persistentUser.Save();
+                }
+                    foreach (Group i in user.Groups)
                     {
-                        if (!g.Users.Contains(oldUser))
+                        Group group = Group.Find(i.Id);
+                        if (group != null)
                         {
+                            if (! group.Users.Contains(persistentUser))
+                            {
 
-                            Console.WriteLine(oldUser.Id +","+ oldUser.UserName+","+ oldUser.RealName);
-                            g.Users.Add(oldUser);
-                            oldUser.Groups.Add(g);
+                            Console.WriteLine(persistentUser.Id +","+ persistentUser.UserName+","+ persistentUser.RealName);
+                            group.Users.Add(persistentUser);
+                            //persistentUser.Groups.Add(g);
                             //g.Update();
                         }
-                        //g.Update();
+                        group.Save();
                     }
                     Console.WriteLine("Group id=" + i.Id);
                 }
-                oldUser.Update();
-                return 0;
+                persistentUser.Save();
+                return persistentUser.Id;
             }
             else
             {
@@ -232,7 +236,61 @@ public class AdminObject : MarshalByRefObject, IAdmin
             if (ex.InnerException != null)
                 Console.WriteLine("ERROR:" + ex.InnerException.Message +
                                   ":" + ex.InnerException.StackTrace);
-            return -1;
+            throw ex;
+        }
+    }
+
+    public int DeleteUser(User user)
+    {
+        try
+        {
+            if (sessionsMgr.IsValidSessionThenUpdate(UserInformation.GetSessionToken()))
+            {
+                //Console.WriteLine(u.Id +","+u.UserName+","+u.RealName+","+
+                //                  u.Email +","+u.Active);
+                //ActiveRecordBase.Replicate(u);
+                User persistentUser;
+                if ((user == null) || (user.Id != 0))
+                {
+                    persistentUser = User.Find(user.Id);
+                }
+                else
+                {
+                    throw new NullReferenceException("User not found");
+                }
+                int id = persistentUser.Id;
+                foreach (Group i in user.Groups)
+                {
+                    Group group = Group.Find(i.Id);
+                    if (group != null)
+                    {
+                        if (group.Users.Contains(persistentUser))
+                        {
+                            group.Users.Remove(persistentUser);
+                        }
+                        group.Save();
+                    }
+                }
+                persistentUser.Delete();
+                return id;
+            }
+            else
+            {
+                Console.WriteLine("not valid user");
+                return -1 ;
+            }
+        }
+        catch (UnauthorizedException ex)
+        {
+            throw ex;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("ERROR:" + ex.Message + ":" + ex.StackTrace);
+            if (ex.InnerException != null)
+                Console.WriteLine("ERROR:" + ex.InnerException.Message +
+                                  ":" + ex.InnerException.StackTrace);
+            throw ex;
         }
     }
 

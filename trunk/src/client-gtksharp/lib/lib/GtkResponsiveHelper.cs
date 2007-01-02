@@ -13,11 +13,11 @@ namespace Boxerp.Client.GtkSharp.Lib
 		WarningDialog warningDialog;
 		private static Hashtable exceptionsMsgPool = Hashtable.Synchronized(new Hashtable());
 		protected bool transferSuccess;
-		protected Gtk.Window parentWindow;
+		protected Gtk.Window parentWindow = null;
 		
 		// Just to notify clients when the transfer is completed
-		private EventHandler transferCompleteEventHandler;
-		public event EventHandler TransferCompleteEvent
+		private ThreadEventHandler transferCompleteEventHandler;
+		public event ThreadEventHandler TransferCompleteEvent
       	{
         	add
          	{
@@ -29,19 +29,55 @@ namespace Boxerp.Client.GtkSharp.Lib
          	}
       	}
 
+        /// <summary>
+        /// Pass in the parent window if you want it to present after the 
+        // asyncrhonous operation
+        /// </summary>
 		public void Init(Gtk.Window win)
 		{
 			parentWindow = win;
-			base.BaseTransferCompleteEvent += this.OnTransferCompleted;
+            Init();
+		}
+		
+		/// <summary>
+		/// Use this method when the parent window and this helper gonna be 
+		/// destroyed at the end of the async operation
+		/// <summary>
+		public void Init()
+		{
+			base.BaseTransferCompleteEvent += this.OnTransferCompleted;		    
 		}
 	
 		public override void StartTransfer(ResponsiveEnum transferType)
 		{
-			waitDialog = new WaitDialog(parentWindow); 
+		    if (parentWindow != null)
+		    {
+			    waitDialog = new WaitDialog(parentWindow);
+			}
+			else
+			{
+			    waitDialog = new WaitDialog();
+			}
 			waitDialog.CancelEvent += OnCancel;
 			transferSuccess = true;
 			base.StartTransfer(transferType);
 		}
+		
+		public override void StartAsyncCall(SimpleDelegate method)
+		{
+		    if (parentWindow != null)
+		    {
+			    waitDialog = new WaitDialog(parentWindow);
+			}
+			else
+			{
+			    waitDialog = new WaitDialog();
+			}
+			waitDialog.CancelEvent += OnCancel;
+			transferSuccess = true;
+			base.StartAsyncCall(method);
+		}
+		
         
         public void OnRemoteException(string msg)
         {
@@ -51,7 +87,15 @@ namespace Boxerp.Client.GtkSharp.Lib
         
 		public void OnCancel(object sender, EventArgs e)
 		{
-        	CancelRequest = true;	
+        	CancelRequest = true;
+        	QuestionDialog qdialog = new QuestionDialog();
+        	qdialog.Message = "The process is being cancelled, please wait. Do you want to force abort right now?";
+            int rtype = qdialog.Run();
+            if (rtype == (int)ResponseType.Yes)
+            {
+                ForceAbort();      
+            }
+            
         	//TODO: Show a dialog :" Please wait while cancelling" with
         	//a button to force cancelation by aborting threads
 		}
@@ -63,12 +107,20 @@ namespace Boxerp.Client.GtkSharp.Lib
 			waitDialog.Destroy();
 			if (transferSuccess) // FIXME: transferSuccess must be syncrhonized
          	{
-				
 				if (transferType == ResponsiveEnum.Read)
 				{
 					this.PopulateGUI(); // FIXME: this could freeze, it is not resonsible
 				}
-				parentWindow.Present();
+				else
+				{
+				    InfoDialog idialog = new InfoDialog();
+				    idialog.Message = "Operation Sucess";
+				    idialog.Present();
+				}
+				if (parentWindow != null)
+				{
+				    parentWindow.Present();
+				}
 			}
 			else
 			{
@@ -82,18 +134,18 @@ namespace Boxerp.Client.GtkSharp.Lib
          	}		
          	if (this.transferCompleteEventHandler != null)
          	{
-         		transferCompleteEventHandler(this, null);
+         	    transferCompleteEventHandler(sender, (ThreadEventArgs)e);
          	}
+            OnAsyncCallStop(sender, (ThreadEventArgs)e);
 		}
 		
-		public void OnTransferCompleted(object sender, EventArgs e)
+		public void OnTransferCompleted(object sender, ThreadEventArgs e)
 		{
 			Application.Invoke(sender, e, TransferCompleted);
 		}
 		
-		public virtual void PopulateGUI()
-		{
+		public virtual void PopulateGUI(){}
 		
-		}		
+		public virtual void OnAsyncCallStop(object sender, ThreadEventArgs teargs){}
 	}
 }

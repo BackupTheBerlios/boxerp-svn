@@ -1,0 +1,6 @@
+1. To keep the same models at distinct app windows: Do not load some models from the server 
+in window A and then reload from server the same models from server in window B. This avoids 
+data corruption and mismatch issues.
+2. To use a client objects cache like in SAF.Cache. Explicit models will be passed in as method 
+parameters but groups of well-known models will be stored and gotten from cache
+

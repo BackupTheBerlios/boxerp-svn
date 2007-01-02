@@ -44,16 +44,26 @@ namespace Boxerp.Client.GtkSharp.Lib
 			this.slistviewRight.Create(columns);
 		}
 		
-		public TreeIter InsertRowLeft(ArrayList row)
+		public TreeIter InsertRowToTheLeft(ArrayList row)
 		{
 			if (row == null)
 				Console.WriteLine("double list null");
 			return (this.slistviewLeft.InsertRow(row));
 		}
 		
-		public TreeIter InsertRowRight(ArrayList row)
+		public TreeIter InsertModelToTheLeft(IBoxerpModel model)
+		{
+		    return (slistviewLeft.InsertModel(model));
+		}
+		
+		public TreeIter InsertRowToTheRight(ArrayList row)
 		{
 			return (this.slistviewRight.InsertRow(row));
+		}
+		
+		public TreeIter InsertModelToTheRight(IBoxerpModel model)
+		{
+		    return (slistviewRight.InsertModel(model));
 		}
 		
 		public List<IBoxerpModel> GetLeftObjectList()
@@ -70,14 +80,14 @@ namespace Boxerp.Client.GtkSharp.Lib
 			TreeModel leftModel = slistviewLeft.TreeView.Model;
 			TreeModel model;
 			TreeIter iter;
-			Console.WriteLine("get selected:");
-			TreeViewColumn[] cols = slistviewRight.treeview.Columns;
-			foreach(TreeViewColumn c in cols)
+			//Console.WriteLine("get selected:");
+			//TreeViewColumn[] cols = slistviewRight.treeview.Columns;
+			/*foreach(TreeViewColumn c in cols)
 			{
 				Console.WriteLine("title:  " + c.Title);
-			}
-			Console.WriteLine(slistviewRight.treeview.Model.GetColumnType(0).ToString());
-			Console.WriteLine(slistviewRight.treeview.Model.GetColumnType(1).ToString());
+			}*/
+			//Console.WriteLine(slistviewRight.treeview.Model.GetColumnType(0).ToString());
+			//Console.WriteLine(slistviewRight.treeview.Model.GetColumnType(1).ToString());
 			if (slistviewRight.treeview.Selection.GetSelected(out model, out iter))
 			{
 				string code = (string) model.GetValue(iter, 0);
@@ -104,6 +114,12 @@ namespace Boxerp.Client.GtkSharp.Lib
 				rightModel.SetValue(iter, 0, code);
 				rightModel.SetValue(iter, 1, obj);
            	}
+		}
+		
+		public void Clear()
+		{
+		    slistviewRight.Clear();
+		    slistviewLeft.Clear();
 		}
 	}
 	

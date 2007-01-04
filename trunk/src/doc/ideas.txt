@@ -25,3 +25,9 @@ a try-finally calling stopTransfer.
 7. AbstractResponsive: Throw an exception when method list is zero
 ---------------
 8. ResponsiveMethods should to be protected
+---------------
+9. Transparent Lazy collections. By now we can use lazy collections but loading them from the server
+programmatically. To manage lazy collections transparently through remoting in a responsive fashion, would be wonderful.
+--------------
+10. As you abort a remote call, how does the system know if the operation was complete at the server side?
+

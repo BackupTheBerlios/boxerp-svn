@@ -200,6 +200,8 @@ public class AdminObject : MarshalByRefObject, IAdmin
                     persistentUser = user;
                     persistentUser.Save();
                 }
+                if (user.Groups != null)
+                {
                     foreach (Group i in user.Groups)
                     {
                         Group group = Group.Find(i.Id);
@@ -208,14 +210,14 @@ public class AdminObject : MarshalByRefObject, IAdmin
                             if (! group.Users.Contains(persistentUser))
                             {
 
-                            Console.WriteLine(persistentUser.Id +","+ persistentUser.UserName+","+ persistentUser.RealName);
-                            group.Users.Add(persistentUser);
-                            //persistentUser.Groups.Add(g);
-                            //g.Update();
+                                Console.WriteLine(persistentUser.Id +","+ persistentUser.UserName+","+ persistentUser.RealName);
+                                group.Users.Add(persistentUser);
+                                //persistentUser.Groups.Add(g);
+                                //g.Update();
+                            }
+                            group.Save();
                         }
-                        group.Save();
                     }
-                    Console.WriteLine("Group id=" + i.Id);
                 }
                 persistentUser.Save();
                 return persistentUser.Id;

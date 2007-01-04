@@ -4,6 +4,7 @@ using Boxerp;
 using Boxerp.Models;
 using Boxerp.Objects;
 using System.Threading;
+using System.Security.Principal;
 
 using NUnit.Framework;
 
@@ -23,6 +24,7 @@ public class Test2
 		UserInformation.SetUserName("demo");
 		if (loginObj.Login("demo", "pass") == 0)
 		{
+		    Boxerp.Client.SessionSingleton.GetInstance().SetSession(UserInformation.GetSessionToken());
 			users = adminObj.GetUsers();
 			Assert.IsNotNull(users);	
 		}
@@ -30,6 +32,18 @@ public class Test2
 			Assert.Fail("Login failed");
 	}
 
+    [Test]
+    public void TrySendIdentity()
+    {
+        
+            GenericIdentity gident = new GenericIdentity("Testing");
+            GenericPrincipal gprincipal = new GenericPrincipal(gident, null);
+            Thread.CurrentPrincipal = gprincipal;
+            Console.WriteLine("IDentity="+ Thread.CurrentPrincipal.Identity.Name);
+            loginObj.ReadIdentity();
+        
+    }
+    
 	[Test]
 	public void GetGroups()
 	{
@@ -38,7 +52,7 @@ public class Test2
 	}
 
 	
-	[Test]
+	/*[Test]
 	public void SaveUsers()
 	{
 		Assert.IsNotNull(users);
@@ -51,11 +65,11 @@ public class Test2
 			Assert.AreEqual(adminObj.SaveUser(u), 0);
 		}
 		
-		/*catch (Exception ex)
+		catch (Exception ex)
 		{
 			Console.WriteLine(ex.Message + " : " + ex.StackTrace);
 			if (ex.InnerException != null)
 				Console.WriteLine(ex.InnerException.Message + " : " + ex.InnerException.StackTrace);
-		}*/
-	}	
+		}
+	}*/	
 }

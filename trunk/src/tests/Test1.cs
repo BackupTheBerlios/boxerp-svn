@@ -11,18 +11,25 @@ using NUnit.Framework;
 [TestFixture]
 public class Test1
 {
+    [TestFixtureSetUp()]
+    public void Initialize()
+    {
+        RemotingConfiguration.Configure("./clientRemoting.config");
+    }
+    
 	[Test]
 	public void GetUsersWithoutLogin()
 	{
-		// USAGE: ./client.exe username login|nologin
-		RemotingConfiguration.Configure("./clientRemoting.config");
-
-		/*ILogin loginObj = 
-			(ILogin) RemotingHelper.GetObject(typeof(ILogin));*/
 		IAdmin adminObj = 
 			(IAdmin) RemotingHelper.GetObject(typeof(IAdmin));
  
-		Assert.IsNull(adminObj.GetUsers()); 	
-		Console.WriteLine("Permission denied test passed. OK");
+        try
+        {
+		    adminObj.GetUsers();
+		}
+		catch (Boxerp.Exceptions.UnauthorizedException)
+		{
+		    Assert.IsNull(null);
+		}	
 	}				  
 }

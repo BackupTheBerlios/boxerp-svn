@@ -68,13 +68,13 @@ namespace administrator
 					_groups = _adminObj.GetGroups();
 				
 			}
-			catch (ThreadAbortException)
+			catch (ThreadAbortException ex)
 			{
 				_enterprises = null;
 				_users = null;
 				_groups = null;
-				OnRemoteException("Operation aborted");
-			}
+				OnAbortRemoteCall(ex.StackTrace);
+		    }
 			catch (Exception ex)
 			{
 				Console.WriteLine("LoadTreeViewsFromDb:" + ex.Message +","+ ex.StackTrace);
@@ -82,7 +82,6 @@ namespace administrator
 			}
 			finally
 			{
-				Console.WriteLine("ok finally");
 				StopTransfer(Thread.CurrentThread.ManagedThreadId, MethodInfo.GetCurrentMethod(), null);
 			}
 		}
@@ -94,11 +93,10 @@ namespace administrator
 		    {
 		        userId = _adminObj.DeleteUser(_user);
 		    }
-		    catch (ThreadAbortException)
+		    catch (ThreadAbortException ex)
 			{
 				userId = -1;
-				Console.WriteLine("Aborting thread....");
-				OnRemoteException("Operation aborted");
+				OnAbortRemoteCall(ex.StackTrace);
 			}
 			catch (Exception ex)
 			{

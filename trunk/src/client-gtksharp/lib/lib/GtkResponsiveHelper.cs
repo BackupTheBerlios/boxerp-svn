@@ -85,6 +85,21 @@ namespace Boxerp.Client.GtkSharp.Lib
 			transferSuccess = false;
         }
         
+        public void OnAbortRemoteCall(string stacktrace)
+        {
+            string message = "Operation stopped.";
+            if ((stacktrace.IndexOf("WebAsyncResult.WaitUntilComplete") > 0) || (stacktrace.IndexOf("WebConnection.EndWrite") > 0))
+	        {
+	            message += "Warning!, the operation seems to have been succeded at the server side";
+                transferSuccess = true;
+                exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = message;    
+	        }
+	        else
+	        {
+	            transferSuccess = false;           
+            }
+        }
+        
 		public void OnCancel(object sender, EventArgs e)
 		{
         	CancelRequest = true;

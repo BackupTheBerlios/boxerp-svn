@@ -23,7 +23,6 @@ public class MainWindow: Gtk.Window
 		_helper = new MainHelper(this, ref ftreeviewEnterprises,
 								ref ftreeviewUsers, ref ftreeviewGroups);
 		_helper.StartTransfer(ResponsiveEnum.Read);
-		
 	}
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
@@ -34,7 +33,6 @@ public class MainWindow: Gtk.Window
 
 	protected virtual void OnTreeviewUsersActivated(object o, Gtk.RowActivatedArgs args)
 	{
-		Console.WriteLine("ACTIVATED");
 		Console.WriteLine("Users activated:" + args.RetVal);
 	}
 
@@ -88,7 +86,6 @@ public class MainWindow: Gtk.Window
 
     protected virtual void OnEditUserWindowSave(object sender, System.EventArgs e)
     {
-        Console.WriteLine("save user ok");
         if ((editUserWindow.User != null) && (editUserWindow.IsNewUser))
         {
             User user = editUserWindow.User;

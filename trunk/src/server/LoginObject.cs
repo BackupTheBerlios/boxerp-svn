@@ -5,7 +5,7 @@
 // 	Carlos Ble Jurado <carlosble@shidix.com>
 //
 // Copyright (C) 2005,2006 Shidix Technologies (www.shidix.com)
-// 
+//
 // Redistribution and use in source and binary forms, with or
 // without modification, are permitted provided that the following
 // conditions are met:
@@ -16,7 +16,7 @@
 // copyright notice, this list of conditions and the following
 // disclaimer in the documentation and/or other materials
 // provided with the distribution.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -47,32 +47,38 @@ using NHibernate;
 namespace Boxerp.Objects
 {
 
- 	public class LoginObject : MarshalByRefObject, ILogin
-	{
-		private static SessionsManager sessionsMgr = SessionsManager.GetInstance();
-		private static Random rand = new Random( );
-		
-		// Constructor
-		public LoginObject ()
-		{
-		}
-		///////////////////////////////////////////////////////////////////////////	
-				/// <summary>
-				/// 
-				/// </summary>
-		public int Login(string user, string password)
- 		{
-         User u = User.FindByUsernameAndPasswd(user, password);
-			if (u != null) {
+public class LoginObject : MarshalByRefObject, ILogin
+{
+    private static SessionsManager sessionsMgr = SessionsManager.GetInstance();
+    private static Random rand = new Random( );
+
+    // Constructor
+    public LoginObject ()
+    {}
+    ///////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    ///
+    /// </summary>
+    public int Login(string user, string password)
+    {
+        User u = User.FindByUsernameAndPasswd(user, password);
+        if (u != null)
+        {
             lock(this)
             {
-				    string session = sessionsMgr.GetSession(u);
-				    UserInformation.SetSessionToken(session); // put the session token in the CallContext
-				    return 0;
+                string session = sessionsMgr.GetSession(u);
+                UserInformation.SetSessionToken(session); // put the session token in the CallContext
+                return 0;
             }
-			}
-			else
-				return -1;
-		}
-	}	
+        }
+        else
+            return -1;
+    }
+
+    public void ReadIdentity()
+    {
+        System.Security.Principal.IPrincipal principal = System.Threading.Thread.CurrentPrincipal;
+        Console.WriteLine("principal=" + principal.Identity.Name);
+    }
+}
 }

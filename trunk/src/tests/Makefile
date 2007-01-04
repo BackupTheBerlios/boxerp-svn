@@ -1,7 +1,7 @@
-BIN= castle-bin
+BIN= . 
 MODELS=  -r:./Models.dll
 INTERFACES= -r:./Interfaces.dll  
-CASTLE= -r:./$(BIN)/Castle.ActiveRecord 
+CASTLE= -r:./Castle.ActiveRecord 
 TESTS= Test1.cs Test2.cs
 
 MONO= -r:Mono.Posix -r:System.Runtime.Remoting -pkg:nunit

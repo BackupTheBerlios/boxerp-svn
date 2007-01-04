@@ -159,6 +159,7 @@ namespace Boxerp.Client
 					ResponsiveAttribute att = (ResponsiveAttribute)attributes[0];
 					if (att.RespType == trType)
 					{
+					    // TODO: Search within method code calls to OnAbortRemoteCall, OnRemoteException, StopTransfer: Cecil?
 						responsiveMethods.Add(method);						
 					}
 				}

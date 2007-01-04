@@ -62,10 +62,10 @@ namespace administrator
 					SessionSingleton.GetInstance().SetSession(UserInformation.GetSessionToken());
 				}
 			}
-			catch (ThreadAbortException)
+			catch (ThreadAbortException ex)
 			{
 			    logon = false;
-			    OnRemoteException("Operation Aborted");
+			    OnAbortRemoteCall(ex.StackTrace);
 			}
 			catch (System.Net.WebException we)
 			{

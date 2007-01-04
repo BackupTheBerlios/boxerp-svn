@@ -88,9 +88,9 @@ namespace administrator
 					_user.Id = _adminObj.SaveUser(_user);
 				}
 			}
-			catch(ThreadAbortException)
+			catch(ThreadAbortException ex)
 			{
-			    OnRemoteException("Operation aborted");
+			    OnAbortRemoteCall(ex.StackTrace);
 			}
 			catch (Exception ex)
 			{

@@ -47,6 +47,6 @@ namespace Boxerp.Objects
  	public interface ILogin
 	{
 		int Login(string user, string password);
-
+                void ReadIdentity();
 	}	
 }

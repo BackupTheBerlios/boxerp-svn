@@ -52,9 +52,9 @@
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/gtk-sharp.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/Mono.Posix.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/pango-sharp.dll" />
-    <ProjectReference type="Assembly" localcopy="True" refto="../client-base/bin/Debug/Boxerp.Client.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../../server/Models.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../../server/Objects.dll" />
+    <ProjectReference type="Project" localcopy="True" refto="Boxerp.Client" />
   </References>
   <GtkDesignInfo>
     <ExportedWidgets>

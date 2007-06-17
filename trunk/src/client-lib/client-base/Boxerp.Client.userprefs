@@ -8,12 +8,15 @@
       <TreeView>
         <Node expanded="True">
           <Node name="Boxerp.Client" expanded="True" />
+          <Node name="Boxerp.Client.GtkSharp.Lib" expanded="True" selected="True" />
         </Node>
       </TreeView>
     </ViewMemento>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
       <TreeView>
-        <Node expanded="True" />
+        <Node expanded="True">
+          <Node name="Boxerp.Client.GtkSharp.Lib" expanded="True" />
+        </Node>
       </TreeView>
     </ViewMemento>
     <ViewMemento Id="MonoQuery.DatabasePad">

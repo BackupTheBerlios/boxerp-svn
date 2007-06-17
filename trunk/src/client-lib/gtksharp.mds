@@ -1,4 +1,4 @@
-<Combine name="lib" fileversion="2.0">
+<Combine name="gtksharp" fileversion="2.0">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="Boxerp.Client.GtkSharp.Lib" configuration="Debug" />
@@ -12,6 +12,6 @@
     <Execute type="None" entry="Boxerp.Client.GtkSharp.Lib" />
   </StartMode>
   <Entries>
-    <Entry filename="./lib/lib.mdp" />
+    <Entry filename="./gtksharp/gtksharp.mdp" />
   </Entries>
 </Combine>

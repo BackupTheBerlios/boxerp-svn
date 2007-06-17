@@ -2,16 +2,20 @@
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="administrator" configuration="Debug" />
+      <Entry build="True" name="Controllers" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="administrator" configuration="Release" />
+      <Entry build="True" name="Controllers" configuration="Release" />
     </Configuration>
   </Configurations>
-  <DeployTargets />
   <StartMode startupentry="administrator" single="True">
     <Execute type="None" entry="administrator" />
+    <Execute type="None" entry="Controllers" />
   </StartMode>
+  <DeployTargets />
   <Entries>
     <Entry filename="./administrator/administrator.mdp" />
+    <Entry filename="./Controllers/Controllers.mdp" />
   </Entries>
 </Combine>

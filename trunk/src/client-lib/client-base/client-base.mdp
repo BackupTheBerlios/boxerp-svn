@@ -13,9 +13,7 @@
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
   </Configurations>
-  <DeployTargets />
   <Contents>
-    <File name="./MyClass.cs" subtype="Code" buildaction="Compile" />
     <File name="./AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="./IResponsiveClient.cs" subtype="Code" buildaction="Compile" />
     <File name="./ResponsiveAttribute.cs" subtype="Code" buildaction="Compile" />
@@ -35,4 +33,5 @@
     <ProjectReference type="Assembly" localcopy="True" refto="../../server/Models.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../../server/Objects.dll" />
   </References>
+  <DeployTargets />
 </Project>

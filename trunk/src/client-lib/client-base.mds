@@ -1,4 +1,4 @@
-<Combine name="client-lib" fileversion="2.0">
+<Combine name="client-base" fileversion="2.0">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="Boxerp.Client" configuration="Debug" />
@@ -12,6 +12,6 @@
     <Execute type="None" entry="Boxerp.Client" />
   </StartMode>
   <Entries>
-    <Entry filename="./client-lib/client-lib.mdp" />
+    <Entry filename="./client-base/client-base.mdp" />
   </Entries>
 </Combine>

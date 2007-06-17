@@ -12,8 +12,9 @@ using Boxerp.Client;
 
 namespace administrator
 {
-	public partial class LoginHelper : GtkResponsiveHelper
+	public partial class LoginController
 	{
+		
 	    protected ILogin loginObj;
 		private bool logon;
 		private EventHandler loginEvent;
@@ -84,5 +85,24 @@ namespace administrator
 			    StopTransfer(Thread.CurrentThread.ManagedThreadId, MethodInfo.GetCurrentMethod(), logon);
 			}
 		}
+		
+				public override void PopulateGUI()
+		{
+		    if (logon)
+			{
+			    if (loginEvent != null)
+			    {
+			        loginEvent(this, null);
+				}
+			}
+			else
+			{
+			    WarningDialog wd = new WarningDialog();
+			    wd.Message = "Login incorrect";
+			    wd.Run();
+				Gtk.Application.Quit();
+			}
+		}
+
 	}
 }

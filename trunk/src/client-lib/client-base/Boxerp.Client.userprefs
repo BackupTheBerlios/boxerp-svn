@@ -1,20 +1,13 @@
 <?xml version="1.0"?>
-<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp.mds">
+<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client-lib/client-base/client-base.mds">
   <Files>
     <File filename="Welcome" />
-    <File filename="./gtksharp/QuestionDialog.cs" />
-    <File filename="./gtksharp/GtkResponsiveHelper.cs" />
-    <File filename="./gtksharp/WaitDialog.cs" />
-    <File filename="./gtksharp/WaitWindow.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="Boxerp.Client.GtkSharp.Lib" expanded="True">
-            <Node name="References" expanded="True" selected="True" />
-            <Node name="UserInterface" expanded="True" />
-          </Node>
+          <Node name="Boxerp.Client" expanded="True" />
         </Node>
       </TreeView>
     </ViewMemento>

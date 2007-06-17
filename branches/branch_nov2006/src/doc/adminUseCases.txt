@@ -1,0 +1,24 @@
+Use Cases list for administrator:
+
+1. List Enterprises
+2. List Groups
+3. List Users
+4. Create Enterprise
+5. Create Group
+6. Create User
+7. Set Group Permissions
+8. Set User Permissions
+9. Add a Group to an Enterprise
+10. Add a User to a Group
+11. Substract a Group from an Enterprise
+12. Substract a User from a Group
+13. Delete Enterprise
+14. Delete Group
+15. Delete User
+16. Search Enterprise
+17. Search Group
+18. Search User 
+
+----------------
+
+Use Cases details:

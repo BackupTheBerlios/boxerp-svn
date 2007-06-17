@@ -1,0 +1,33 @@
+Brain storming:
+
+--------------
+1. XML file at server containing a list of server methods
+and a list of permissions for every method. Load the file as a singleton
+when starting server and check values instead of change the code into the 
+methods, i.e:
+    <class="classX" method="methodX">
+        <permissionCheck name="Permission.Create" description="This method must check that not everybody can create"
+        <permissionCheck name="Permission.Read" description="This method must check that not everybody can read"
+    </class>
+--------------
+2. Use a cache system for models at client side. A refresh button will reload objects from 
+server to cache. In the meanwhile all the client application read the same models from the client cache
+--------------
+3. Reflection: check the code of an async method and throw an exception if it doesn't contains 
+a try-finally calling stopTransfer.
+--------------
+4. Write thead safe gtk widgets, for example when inserting and deleting rows on a treeview
+---------------
+5. Authorization thru IIdentity and IPrincipal. Howto Thread.CurrentPrincipal throug remoting
+---------------
+6. Invoke event using DynamicInvoke instead of ()
+--------------
+7. AbstractResponsive: Throw an exception when method list is zero
+---------------
+8. ResponsiveMethods should to be protected
+---------------
+9. Transparent Lazy collections. By now we can use lazy collections but loading them from the server
+programmatically. To manage lazy collections transparently through remoting in a responsive fashion, would be wonderful.
+--------------
+10. As you abort a remote call, how does the system know if the operation was complete at the server side?
+

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<UserCombinePreferences filename="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib.mds">
+  <Files>
+    <File filename="./client-lib/AbstractResponsiveHelper.cs" />
+    <File filename="./client-lib/IResponsiveClient.cs" />
+    <File filename="./client-lib/SimpleInvoker.cs" />
+  </Files>
+  <Views>
+    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
+      <TreeView>
+        <Node expanded="True">
+          <Node name="Boxerp.Client" expanded="True">
+            <Node name="AbstractResponsiveHelper.cs" expanded="False" selected="True" />
+          </Node>
+        </Node>
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
+      <TreeView>
+        <Node expanded="True" />
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoDevelop.NUnit.TestPad">
+      <TreeView>
+        <Node expanded="False" />
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoQuery.DatabasePad">
+      <TreeView>
+        <Node expanded="False" />
+      </TreeView>
+    </ViewMemento>
+  </Views>
+  <Properties>
+    <Properties>
+      <Property key="ActiveConfiguration" value="Debug" />
+      <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib/AbstractResponsiveHelper.cs" />
+    </Properties>
+  </Properties>
+</UserCombinePreferences>

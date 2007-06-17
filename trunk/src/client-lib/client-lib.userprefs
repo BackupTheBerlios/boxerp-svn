@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client-lib/client-base.mds">
+<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client-lib/client-lib.mds">
   <Files>
     <File filename="Welcome" />
     <File filename="./client-base/AbstractResponsiveHelper.cs" />

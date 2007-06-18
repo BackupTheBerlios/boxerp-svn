@@ -1,7 +1,7 @@
 
 using System;
 
-namespace Boxerp.Client.GtkSharp.Lib
+namespace Boxerp.Client.GtkSharp
 {
 	
 	
@@ -23,7 +23,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 		
 		public QuestionDialog()
 		{
-			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.Lib.QuestionDialog));
+			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.QuestionDialog));
 		}
 
 		protected virtual void OnNo(object sender, System.EventArgs e)

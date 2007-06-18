@@ -5,9 +5,9 @@ using System.Threading;
 using System.Reflection;
 using Gtk;
 
-namespace Boxerp.Client.GtkSharp.Lib
+namespace Boxerp.Client.GtkSharp
 {
-	public abstract class GtkResponsiveHelper : AbstractResponsiveHelper, IResponsiveCommons
+	public abstract class GtkResponsiveHelper : AbstractResponsiveHelper
 	{
 		WaitDialog waitDialog;
 		WarningDialog warningDialog;
@@ -48,7 +48,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 			base.BaseTransferCompleteEvent += this.OnTransferCompleted;		    
 		}
 	
-		public override void StartTransfer(ResponsiveEnum transferType)
+		public override void StartAsyncCallList(ResponsiveEnum transferType)
 		{
 		    if (parentWindow != null)
 		    {
@@ -79,13 +79,13 @@ namespace Boxerp.Client.GtkSharp.Lib
 		}
 		
         
-        public void OnRemoteException(string msg)
+        public override void OnRemoteException(string msg)
         {
         	exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = msg;
 			transferSuccess = false;
         }
         
-        public void OnAbortRemoteCall(string stacktrace)
+        public override void OnAbortRemoteCall(string stacktrace)
         {
             string message = "Operation stopped.";
             if ((stacktrace.IndexOf("WebAsyncResult.WaitUntilComplete") > 0) || (stacktrace.IndexOf("WebConnection.EndWrite") > 0))
@@ -100,7 +100,7 @@ namespace Boxerp.Client.GtkSharp.Lib
             }
         }
         
-		public void OnCancel(object sender, EventArgs e)
+		public override void OnCancel(object sender, EventArgs e)
 		{
         	CancelRequest = true;
         	QuestionDialog qdialog = new QuestionDialog();
@@ -154,13 +154,13 @@ namespace Boxerp.Client.GtkSharp.Lib
             OnAsyncCallStop(sender, (ThreadEventArgs)e);
 		}
 		
-		public void OnTransferCompleted(object sender, ThreadEventArgs e)
+		public override void OnTransferCompleted(object sender, ThreadEventArgs e)
 		{
 			Application.Invoke(sender, e, TransferCompleted);
 		}
+
+		public abstract void PopulateGUI();
 		
-		public virtual void PopulateGUI(){}
-		
-		public virtual void OnAsyncCallStop(object sender, ThreadEventArgs teargs){}
+		public override void OnAsyncCallStop(object sender, ThreadEventArgs teargs){}
 	}
 }

@@ -1,7 +1,7 @@
 
 using System;
 
-namespace Boxerp.Client.GtkSharp.Lib
+namespace Boxerp.Client.GtkSharp
 {
 	
 	public class WaitWindow : Gtk.Window
@@ -43,7 +43,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 		public WaitWindow() : 
 				base("")
 		{
-			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.Lib.WaitWindow));
+			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.WaitWindow));
 			this.Modal = true;
 			this.Hide();
 			progressbar.BarStyle = Gtk.ProgressBarStyle.Continuous;

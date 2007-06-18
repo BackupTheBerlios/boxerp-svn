@@ -1,7 +1,7 @@
 
 using System;
 
-namespace Boxerp.Client.GtkSharp.Lib
+namespace Boxerp.Client.GtkSharp
 {
 	
 	public class InfoDialog : Gtk.Dialog
@@ -16,7 +16,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 		
 		public InfoDialog()
 		{
-			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.Lib.InfoDialog));
+			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.InfoDialog));
 		}
 
 		protected virtual void OnOkClicked(object sender, System.EventArgs e)

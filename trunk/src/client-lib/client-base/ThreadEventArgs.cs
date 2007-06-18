@@ -8,30 +8,59 @@ namespace Boxerp.Client
 	
 	public class ThreadEventArgs : EventArgs
 	{
-		MethodBase methodBase;
-		object returnValue;
-		int threadId;
+		MethodBase _methodBase;
+		SimpleDelegate _method;
+		object _returnValue;
+		int _threadId;
+		bool _success;
 		
 		public ThreadEventArgs(int t, MethodBase m, object o)
 		{
-		    methodBase = m;
-		    returnValue = o;
-		    threadId = t;
+		    _methodBase = m;
+		    _returnValue = o;
+		    _threadId = t;
+		}
+
+		public ThreadEventArgs(int t, SimpleDelegate  m, object o)
+		{
+			_method = m;
+			_returnValue = o;
+			_threadId = t;
 		}
 		
 		public MethodBase MethodBase
 		{
-		    get { return methodBase; }
+		    get { return _methodBase; }
 		}
 		
 		public object ReturnValue
 		{
-		    get { return returnValue; }
+		    get { return _returnValue; }
 		}
 		
 		public int ThreadId
 		{
-		    get { return threadId; }
+		    get { return _threadId; }
+		}
+
+		public SimpleDelegate Method
+		{
+			get
+			{
+				return _method;
+			}
+		}
+
+		public bool Success
+		{
+			get
+			{
+				return _success;
+			}
+			set
+			{
+				_success = value;
+			}
 		}
 	}
 }

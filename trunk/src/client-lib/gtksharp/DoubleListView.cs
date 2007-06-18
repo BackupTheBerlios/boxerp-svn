@@ -5,7 +5,7 @@ using Gtk;
 using Boxerp.Models;
 using System.Collections;
 
-namespace Boxerp.Client.GtkSharp.Lib
+namespace Boxerp.Client.GtkSharp
 {
 	
 	// TODO: Implement drag&drop between treeviews
@@ -13,8 +13,8 @@ namespace Boxerp.Client.GtkSharp.Lib
 	{
 		protected Gtk.Label labelLeft;
 		protected Gtk.Label labelRight;
-		protected Boxerp.Client.GtkSharp.Lib.SimpleListView slistviewRight;
-		protected Boxerp.Client.GtkSharp.Lib.SimpleListView slistviewLeft;
+		protected Boxerp.Client.GtkSharp.SimpleListView slistviewRight;
+		protected Boxerp.Client.GtkSharp.SimpleListView slistviewLeft;
 		//protected Gtk.ScrolledWindow scrolledwindow2;
 		//protected Gtk.ScrolledWindow scrolledwindow1;
 		
@@ -31,7 +31,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 		
 		public DoubleListView()
 		{
-			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.Lib.DoubleListView));
+			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.DoubleListView));
 		}
 		
 		public void CreateLeftList(List<SimpleColumn> columns)

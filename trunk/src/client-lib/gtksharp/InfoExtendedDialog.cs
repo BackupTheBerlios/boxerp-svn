@@ -1,7 +1,7 @@
 
 using System;
 
-namespace Boxerp.Client.GtkSharp.Lib
+namespace Boxerp.Client.GtkSharp
 {
 	
 	public class InfoExtendedDialog : Gtk.Dialog
@@ -9,7 +9,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 		
 		public InfoExtendedDialog()
 		{
-			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog));
+			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.InfoExtendedDialog));
 		}
 	}
 	

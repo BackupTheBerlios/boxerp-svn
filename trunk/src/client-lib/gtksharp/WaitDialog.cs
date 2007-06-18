@@ -2,7 +2,7 @@
 using System;
 using Gtk;
 
-namespace Boxerp.Client.GtkSharp.Lib
+namespace Boxerp.Client.GtkSharp
 {
 	
 	public class WaitDialog : global::Gtk.Dialog
@@ -35,7 +35,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 
 		public WaitDialog(Gtk.Window parent)
 		{
-			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.Lib.WaitDialog));
+			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.WaitDialog));
 			this.Modal = true;
 			this.TransientFor = parent;
 			this.Hide();
@@ -48,7 +48,7 @@ namespace Boxerp.Client.GtkSharp.Lib
 		
 		public WaitDialog()
 		{
-			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.Lib.WaitDialog));
+			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.WaitDialog));
 			this.Modal = true;
 			this.Hide();
 			//actionArea.Remove(button);

@@ -1,0 +1,53 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{701CF3A1-60F3-4938-B0DD-CBFBC6DEF7D5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <RootNamespace>Boxerp.Client</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractBindableWrapper.cs" />
+    <Compile Include="AbstractResponsiveHelper.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BindableWrapper.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="IBindableWrapper.cs" />
+    <Compile Include="ICrudControl.cs" />
+    <Compile Include="IResponsiveClient.cs" />
+    <Compile Include="MyClass.cs" />
+    <Compile Include="RemotingHelper.cs" />
+    <Compile Include="ResponsiveAttribute.cs" />
+    <Compile Include="ResponsiveEnum.cs" />
+    <Compile Include="SessionSingleton.cs" />
+    <Compile Include="SimpleInvoker.cs" />
+    <Compile Include="ThreadEventArgs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>

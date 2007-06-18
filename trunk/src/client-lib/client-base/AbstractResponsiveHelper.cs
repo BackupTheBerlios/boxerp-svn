@@ -17,21 +17,7 @@ namespace Boxerp.Client
         private ResponsiveEnum _transferType;
         private bool _cancelRequest = false;
         
-		private ThreadEventHandler _baseTransferCompleteHandler;
-				
-		public event ThreadEventHandler BaseTransferCompleteEvent
-      	{
-        	add
-         	{
-            	_baseTransferCompleteHandler += value;
-         	}
-         	remove
-        	{
-        		_baseTransferCompleteHandler += value;
-            }
-      	}
-      	
-      	public bool CancelRequest
+		public bool CancelRequest
       	{
       		get { return _cancelRequest; }
       		set { _cancelRequest = value; }
@@ -42,32 +28,42 @@ namespace Boxerp.Client
 			ProcessAsyncCall(method);
 		}
 		
-		public void StopTransfer(int threadId, MethodBase methodBase, object output)
+		public void StopAsyncMethod(int threadId, MethodBase methodBase, object output)
 		{
-			lock(this)
+			ThreadEventArgs tea = new ThreadEventArgs(threadId, methodBase, output);
+			StopAsyncMethod(threadId, tea, output);
+		}
+
+		public void StopAsyncMethod(int threadId, SimpleDelegate method, object output)
+		{
+			ThreadEventArgs tea = new ThreadEventArgs(threadId, method, output);
+			StopAsyncMethod(threadId, tea, output);
+		}
+
+		private void StopAsyncMethod(int threadId, ThreadEventArgs args, object output)
+		{
+			lock (this)
 			{
 				if (_asyncCallsCount > 0)
 				{
-					_asyncCallsCount --;
+					_asyncCallsCount--;
 					if (_asyncCallsCount == 0)
 					{
 						_threadsPoolHash.Clear();
-						if (_baseTransferCompleteHandler != null)
+						OnTransferCompleted(_transferType, args);
+						/*if (_baseTransferCompleteHandler != null)
 						{
-            				ThreadEventArgs tea = new ThreadEventArgs(threadId, methodBase, output);
-            				Delegate[] invList = _baseTransferCompleteHandler.GetInvocationList();
-            				if (invList.Length > 0)
-            				{
-            				    object[] parameters = { _transferType, tea };
-            				    invList[0].DynamicInvoke(parameters);
-            				        
-            			        //_baseTransferCompleteHandler(_transferType, tea);
-            			    }
-            			    else
-            			    {
-            			        throw new NullReferenceException("BaseTransferCompleteEvent has no handler");
-            			    }
-            			}
+							Delegate[] invList = _baseTransferCompleteHandler.GetInvocationList();
+							if (invList.Length > 0)
+							{
+								object[] parameters = { _transferType, args };
+								invList[0].DynamicInvoke(parameters);
+							}
+							else
+							{
+								throw new NullReferenceException("BaseTransferCompleteEvent has no handler");
+							}
+						}*/
 					}
 				}
 			}
@@ -99,7 +95,7 @@ namespace Boxerp.Client
             }
 		}
 		
-		public virtual void StartTransfer(Boxerp.Client.ResponsiveEnum trType)
+		public virtual void StartAsyncCallList(Boxerp.Client.ResponsiveEnum trType)
 		{
 			_transferType = trType;
 			try
@@ -166,5 +162,17 @@ namespace Boxerp.Client
 			}
 			return responsiveMethods;
 		}
+
+		#region Abstract methods
+
+		public abstract void PopulateGUI();
+		public abstract void OnCancel(object sender, EventArgs e);
+		public abstract void OnRemoteException(string msg);
+		public abstract void OnAbortRemoteCall(string msg);
+		public abstract void OnTransferCompleted(object sender, ThreadEventArgs e);
+		public abstract void OnAsyncCallStop(object sender, ThreadEventArgs teargs);
+		public abstract event ThreadEventHandler TransferCompleteEvent;
+
+		#endregion
 	}
 }

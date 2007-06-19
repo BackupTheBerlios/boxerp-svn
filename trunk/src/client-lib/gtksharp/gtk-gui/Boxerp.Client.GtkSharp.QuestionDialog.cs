@@ -11,17 +11,18 @@
 namespace Stetic.SteticGenerated {
     
     
-    internal class BoxerpClientGtkSharpLibInfoDialog {
+    internal class BoxerpClientGtkSharpQuestionDialog {
         
         public static void Build(Gtk.Dialog cobj) {
             System.Collections.Hashtable bindings = new System.Collections.Hashtable();
-            // Widget Boxerp.Client.GtkSharp.Lib.InfoDialog
+            // Widget Boxerp.Client.GtkSharp.QuestionDialog
             cobj.Events = ((Gdk.EventMask)(256));
-            cobj.Name = "Boxerp.Client.GtkSharp.Lib.InfoDialog";
-            cobj.Title = Mono.Unix.Catalog.GetString("Info");
+            cobj.Name = "Boxerp.Client.GtkSharp.QuestionDialog";
+            cobj.Title = Mono.Unix.Catalog.GetString("Question");
             cobj.WindowPosition = ((Gtk.WindowPosition)(4));
+            cobj.Modal = true;
             cobj.HasSeparator = false;
-            // Internal child Boxerp.Client.GtkSharp.Lib.InfoDialog.VBox
+            // Internal child Boxerp.Client.GtkSharp.QuestionDialog.VBox
             Gtk.VBox w1 = cobj.VBox;
             w1.Events = ((Gdk.EventMask)(256));
             w1.Name = "dialog_VBox";
@@ -30,8 +31,6 @@ namespace Stetic.SteticGenerated {
             Gtk.HBox w2 = new Gtk.HBox();
             bindings["hbox1"] = w2;
             w2.Name = "hbox1";
-            w2.Spacing = 5;
-            w2.BorderWidth = ((uint)(5));
             // Container child hbox1.Gtk.Box+BoxChild
             Gtk.Image w3 = new Gtk.Image();
             bindings["image"] = w3;
@@ -42,6 +41,7 @@ namespace Stetic.SteticGenerated {
             w4.Position = 0;
             w4.Expand = false;
             w4.Fill = false;
+            w4.Padding = ((uint)(5));
             // Container child hbox1.Gtk.Box+BoxChild
             Gtk.Label w5 = new Gtk.Label();
             bindings["label"] = w5;
@@ -55,20 +55,21 @@ namespace Stetic.SteticGenerated {
             w7.Position = 0;
             w7.Expand = false;
             w7.Fill = false;
-            // Internal child Boxerp.Client.GtkSharp.Lib.InfoDialog.ActionArea
+            w7.Padding = ((uint)(5));
+            // Internal child Boxerp.Client.GtkSharp.QuestionDialog.ActionArea
             Gtk.HButtonBox w8 = cobj.ActionArea;
             w8.Events = ((Gdk.EventMask)(256));
-            w8.Name = "Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea";
-            w8.Spacing = 10;
+            w8.Name = "Boxerp.Client.GtkSharp.Lib.QuestionDialog_ActionArea";
+            w8.Spacing = 6;
             w8.BorderWidth = ((uint)(5));
             w8.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
-            // Container child Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+            // Container child Boxerp.Client.GtkSharp.Lib.QuestionDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
             Gtk.Button w9 = new Gtk.Button();
-            bindings["button35"] = w9;
+            bindings["button22"] = w9;
             w9.CanDefault = true;
             w9.CanFocus = true;
-            w9.Name = "button35";
-            // Container child button35.Gtk.Container+ContainerChild
+            w9.Name = "button22";
+            // Container child button22.Gtk.Container+ContainerChild
             Gtk.Alignment w10 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
             bindings["GtkAlignment"] = w10;
             w10.Name = "GtkAlignment";
@@ -79,29 +80,64 @@ namespace Stetic.SteticGenerated {
             w11.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w12 = new Gtk.Image();
-            bindings["image20"] = w12;
-            w12.Name = "image20";
-            w12.Pixbuf = Stetic.IconLoader.LoadIcon("gtk-ok", 16);
+            bindings["image216"] = w12;
+            w12.Name = "image216";
+            w12.Pixbuf = Stetic.IconLoader.LoadIcon("gtk-no", 16);
             w11.Add(w12);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w14 = new Gtk.Label();
             bindings["GtkLabel"] = w14;
             w14.Name = "GtkLabel";
-            w14.LabelProp = Mono.Unix.Catalog.GetString("Ok");
+            w14.LabelProp = Mono.Unix.Catalog.GetString("No");
             w11.Add(w14);
             w10.Add(w11);
             w9.Add(w10);
-            cobj.AddActionWidget(w9, 0);
+            cobj.AddActionWidget(w9, -9);
             Gtk.ButtonBox.ButtonBoxChild w18 = ((Gtk.ButtonBox.ButtonBoxChild)(w8[w9]));
             w18.Expand = false;
             w18.Fill = false;
+            // Container child Boxerp.Client.GtkSharp.Lib.QuestionDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+            Gtk.Button w19 = new Gtk.Button();
+            bindings["button24"] = w19;
+            w19.CanDefault = true;
+            w19.CanFocus = true;
+            w19.Name = "button24";
+            // Container child button24.Gtk.Container+ContainerChild
+            Gtk.Alignment w20 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            bindings["GtkAlignment1"] = w20;
+            w20.Name = "GtkAlignment1";
+            // Container child GtkAlignment1.Gtk.Container+ContainerChild
+            Gtk.HBox w21 = new Gtk.HBox();
+            bindings["GtkHBox1"] = w21;
+            w21.Name = "GtkHBox1";
+            w21.Spacing = 2;
+            // Container child GtkHBox1.Gtk.Container+ContainerChild
+            Gtk.Image w22 = new Gtk.Image();
+            bindings["image217"] = w22;
+            w22.Name = "image217";
+            w22.Pixbuf = Stetic.IconLoader.LoadIcon("gtk-yes", 16);
+            w21.Add(w22);
+            // Container child GtkHBox1.Gtk.Container+ContainerChild
+            Gtk.Label w24 = new Gtk.Label();
+            bindings["GtkLabel1"] = w24;
+            w24.Name = "GtkLabel1";
+            w24.LabelProp = Mono.Unix.Catalog.GetString("Yes");
+            w21.Add(w24);
+            w20.Add(w21);
+            w19.Add(w20);
+            cobj.AddActionWidget(w19, -8);
+            Gtk.ButtonBox.ButtonBoxChild w28 = ((Gtk.ButtonBox.ButtonBoxChild)(w8[w19]));
+            w28.Position = 1;
+            w28.Expand = false;
+            w28.Fill = false;
             if ((cobj.Child != null)) {
                 cobj.Child.ShowAll();
             }
             cobj.DefaultWidth = 400;
-            cobj.DefaultHeight = 104;
+            cobj.DefaultHeight = 99;
             cobj.Show();
-            w9.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnOkClicked")));
+            w9.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnNo")));
+            w19.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnYes")));
             System.Reflection.FieldInfo[] fields = cobj.GetType().GetFields(((System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic) | System.Reflection.BindingFlags.Instance));
             for (int n = 0; (n < fields.Length); n = (n + 1)) {
                 System.Reflection.FieldInfo field = fields[n];

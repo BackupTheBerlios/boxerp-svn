@@ -23,8 +23,11 @@
     <File name="./AbstractResponsiveHelper.cs" subtype="Code" buildaction="Compile" />
     <File name="./Delegates.cs" subtype="Code" buildaction="Compile" />
     <File name="./SimpleInvoker.cs" subtype="Code" buildaction="Compile" />
-    <File name="./IResponsiveCommons.cs" subtype="Code" buildaction="Compile" />
     <File name="./ThreadEventArgs.cs" subtype="Code" buildaction="Compile" />
+    <File name="./AbstractBindableWrapper.cs" subtype="Code" buildaction="Compile" />
+    <File name="./BindableWrapper.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ControlInterfaces.cs" subtype="Code" buildaction="Compile" />
+    <File name="./IBindableWrapper.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

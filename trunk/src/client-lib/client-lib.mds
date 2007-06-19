@@ -2,20 +2,24 @@
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="Boxerp.Client" configuration="Debug" />
-      <Entry build="True" name="Boxerp.Client.GtkSharp.Lib" configuration="Debug" />
+      <Entry build="True" name="Boxerp.Client.GtkSharp" configuration="Debug" />
+      <Entry build="False" name="Boxerp.Client.WPF" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Boxerp.Client" configuration="Release" />
-      <Entry build="True" name="Boxerp.Client.GtkSharp.Lib" configuration="Release" />
+      <Entry build="True" name="Boxerp.Client.GtkSharp" configuration="Release" />
+      <Entry build="False" name="Boxerp.Client.WPF" configuration="Debug" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="Boxerp.Client" single="True">
     <Execute type="None" entry="Boxerp.Client" />
-    <Execute type="None" entry="Boxerp.Client.GtkSharp.Lib" />
+    <Execute type="None" entry="Boxerp.Client.GtkSharp" />
+    <Execute type="None" entry="Boxerp.Client.WPF" />
   </StartMode>
   <DeployTargets />
   <Entries>
     <Entry filename="./client-base/client-base.mdp" />
     <Entry filename="./gtksharp/gtksharp.mdp" />
+    <Entry filename="./wpf/wpf.mdp" />
   </Entries>
 </Combine>

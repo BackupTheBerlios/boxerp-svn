@@ -11,17 +11,17 @@
 namespace Stetic.SteticGenerated {
     
     
-    internal class BoxerpClientGtkSharpLibWaitDialog {
+    internal class BoxerpClientGtkSharpWaitDialog {
         
         public static void Build(Gtk.Dialog cobj) {
             System.Collections.Hashtable bindings = new System.Collections.Hashtable();
-            // Widget Boxerp.Client.GtkSharp.Lib.WaitDialog
+            // Widget Boxerp.Client.GtkSharp.WaitDialog
             cobj.Events = ((Gdk.EventMask)(256));
-            cobj.Name = "Boxerp.Client.GtkSharp.Lib.WaitDialog";
+            cobj.Name = "Boxerp.Client.GtkSharp.WaitDialog";
             cobj.Title = Mono.Unix.Catalog.GetString("Operation in progress...");
             cobj.WindowPosition = ((Gtk.WindowPosition)(1));
             cobj.HasSeparator = false;
-            // Internal child Boxerp.Client.GtkSharp.Lib.WaitDialog.VBox
+            // Internal child Boxerp.Client.GtkSharp.WaitDialog.VBox
             Gtk.VBox w1 = cobj.VBox;
             w1.Events = ((Gdk.EventMask)(256));
             w1.Name = "dialog_VBox";
@@ -44,11 +44,11 @@ namespace Stetic.SteticGenerated {
             w5.Position = 1;
             w5.Expand = false;
             w5.Fill = false;
-            // Internal child Boxerp.Client.GtkSharp.Lib.WaitDialog.ActionArea
+            // Internal child Boxerp.Client.GtkSharp.WaitDialog.ActionArea
             Gtk.HButtonBox w6 = cobj.ActionArea;
             w6.Events = ((Gdk.EventMask)(256));
             w6.Name = "actionArea";
-            w6.Spacing = 10;
+            w6.Spacing = 6;
             w6.BorderWidth = ((uint)(5));
             w6.LayoutStyle = ((Gtk.ButtonBoxStyle)(2));
             // Container child actionArea.Gtk.ButtonBox+ButtonBoxChild
@@ -68,8 +68,8 @@ namespace Stetic.SteticGenerated {
             w9.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w10 = new Gtk.Image();
-            bindings["image24"] = w10;
-            w10.Name = "image24";
+            bindings["image222"] = w10;
+            w10.Name = "image222";
             w10.Pixbuf = Stetic.IconLoader.LoadIcon("gtk-cancel", 16);
             w9.Add(w10);
             // Container child GtkHBox.Gtk.Container+ContainerChild

@@ -11,25 +11,27 @@
 namespace Stetic.SteticGenerated {
     
     
-    internal class BoxerpClientGtkSharpLibInfoExtendedDialog {
+    internal class BoxerpClientGtkSharpInfoExtendedDialog {
         
         public static void Build(Gtk.Dialog cobj) {
             System.Collections.Hashtable bindings = new System.Collections.Hashtable();
-            // Widget Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog
+            // Widget Boxerp.Client.GtkSharp.InfoExtendedDialog
             cobj.Events = ((Gdk.EventMask)(256));
-            cobj.Name = "Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog";
+            cobj.Name = "Boxerp.Client.GtkSharp.InfoExtendedDialog";
             cobj.Title = Mono.Unix.Catalog.GetString("InfoExtendedDialog");
             cobj.WindowPosition = ((Gtk.WindowPosition)(4));
             cobj.HasSeparator = false;
-            // Internal child Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog.VBox
+            // Internal child Boxerp.Client.GtkSharp.InfoExtendedDialog.VBox
             Gtk.VBox w1 = cobj.VBox;
             w1.Events = ((Gdk.EventMask)(256));
             w1.Name = "dialog_VBox";
             w1.BorderWidth = ((uint)(2));
-            // Internal child Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog.ActionArea
+            // Internal child Boxerp.Client.GtkSharp.InfoExtendedDialog.ActionArea
             Gtk.HButtonBox w2 = cobj.ActionArea;
             w2.Events = ((Gdk.EventMask)(256));
             w2.Name = "Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog_ActionArea";
+            w2.Spacing = 6;
+            w2.BorderWidth = ((uint)(5));
             w2.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
             // Container child Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
             Gtk.Button w3 = new Gtk.Button();

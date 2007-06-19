@@ -11,15 +11,15 @@
 namespace Stetic.SteticGenerated {
     
     
-    internal class BoxerpClientGtkSharpLibWaitWindow {
+    internal class BoxerpClientGtkSharpWaitWindow {
         
         public static void Build(Gtk.Window cobj) {
             System.Collections.Hashtable bindings = new System.Collections.Hashtable();
-            // Widget Boxerp.Client.GtkSharp.Lib.WaitWindow
-            cobj.Name = "Boxerp.Client.GtkSharp.Lib.WaitWindow";
+            // Widget Boxerp.Client.GtkSharp.WaitWindow
+            cobj.Name = "Boxerp.Client.GtkSharp.WaitWindow";
             cobj.Title = Mono.Unix.Catalog.GetString("Operation in progress...");
             cobj.WindowPosition = ((Gtk.WindowPosition)(1));
-            // Container child Boxerp.Client.GtkSharp.Lib.WaitWindow.Gtk.Container+ContainerChild
+            // Container child Boxerp.Client.GtkSharp.WaitWindow.Gtk.Container+ContainerChild
             Gtk.VBox w1 = new Gtk.VBox();
             bindings["vbox"] = w1;
             w1.Events = ((Gdk.EventMask)(256));
@@ -68,8 +68,8 @@ namespace Stetic.SteticGenerated {
             w9.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w10 = new Gtk.Image();
-            bindings["image17"] = w10;
-            w10.Name = "image17";
+            bindings["image215"] = w10;
+            w10.Name = "image215";
             w10.Pixbuf = Stetic.IconLoader.LoadIcon("gtk-cancel", 16);
             w9.Add(w10);
             // Container child GtkHBox.Gtk.Container+ContainerChild

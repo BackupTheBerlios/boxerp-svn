@@ -11,21 +11,17 @@
 namespace Stetic.SteticGenerated {
     
     
-    internal class BoxerpClientGtkSharpLibWarningDialog {
+    internal class BoxerpClientGtkSharpInfoDialog {
         
         public static void Build(Gtk.Dialog cobj) {
             System.Collections.Hashtable bindings = new System.Collections.Hashtable();
-            // Widget Boxerp.Client.GtkSharp.Lib.WarningDialog
+            // Widget Boxerp.Client.GtkSharp.InfoDialog
             cobj.Events = ((Gdk.EventMask)(256));
-            cobj.Name = "Boxerp.Client.GtkSharp.Lib.WarningDialog";
-            cobj.Title = Mono.Unix.Catalog.GetString("Warning");
-            cobj.Icon = Stetic.IconLoader.LoadIcon("gtk-dialog-warning", 16);
+            cobj.Name = "Boxerp.Client.GtkSharp.InfoDialog";
+            cobj.Title = Mono.Unix.Catalog.GetString("Info");
             cobj.WindowPosition = ((Gtk.WindowPosition)(4));
-            cobj.Resizable = false;
-            cobj.AllowGrow = false;
-            cobj.DefaultWidth = 500;
             cobj.HasSeparator = false;
-            // Internal child Boxerp.Client.GtkSharp.Lib.WarningDialog.VBox
+            // Internal child Boxerp.Client.GtkSharp.InfoDialog.VBox
             Gtk.VBox w1 = cobj.VBox;
             w1.Events = ((Gdk.EventMask)(256));
             w1.Name = "dialog_VBox";
@@ -40,7 +36,7 @@ namespace Stetic.SteticGenerated {
             Gtk.Image w3 = new Gtk.Image();
             bindings["image"] = w3;
             w3.Name = "image";
-            w3.Pixbuf = Stetic.IconLoader.LoadIcon("stock_dialog-warning", 16);
+            w3.Pixbuf = Stetic.IconLoader.LoadIcon("gtk-dialog-info", 16);
             w2.Add(w3);
             Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(w2[w3]));
             w4.Position = 0;
@@ -50,7 +46,7 @@ namespace Stetic.SteticGenerated {
             Gtk.Label w5 = new Gtk.Label();
             bindings["label"] = w5;
             w5.Name = "label";
-            w5.LabelProp = "Warning";
+            w5.LabelProp = "Info";
             w2.Add(w5);
             Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(w2[w5]));
             w6.Position = 1;
@@ -59,20 +55,20 @@ namespace Stetic.SteticGenerated {
             w7.Position = 0;
             w7.Expand = false;
             w7.Fill = false;
-            // Internal child Boxerp.Client.GtkSharp.Lib.WarningDialog.ActionArea
+            // Internal child Boxerp.Client.GtkSharp.InfoDialog.ActionArea
             Gtk.HButtonBox w8 = cobj.ActionArea;
             w8.Events = ((Gdk.EventMask)(256));
-            w8.Name = "Boxerp.Client.GtkSharp.Lib.WarningDialog_ActionArea";
+            w8.Name = "Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea";
             w8.Spacing = 10;
             w8.BorderWidth = ((uint)(5));
             w8.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
-            // Container child Boxerp.Client.GtkSharp.Lib.WarningDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+            // Container child Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
             Gtk.Button w9 = new Gtk.Button();
-            bindings["buttonOk"] = w9;
+            bindings["button35"] = w9;
             w9.CanDefault = true;
             w9.CanFocus = true;
-            w9.Name = "buttonOk";
-            // Container child buttonOk.Gtk.Container+ContainerChild
+            w9.Name = "button35";
+            // Container child button35.Gtk.Container+ContainerChild
             Gtk.Alignment w10 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
             bindings["GtkAlignment"] = w10;
             w10.Name = "GtkAlignment";
@@ -83,8 +79,8 @@ namespace Stetic.SteticGenerated {
             w11.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w12 = new Gtk.Image();
-            bindings["image23"] = w12;
-            w12.Name = "image23";
+            bindings["image218"] = w12;
+            w12.Name = "image218";
             w12.Pixbuf = Stetic.IconLoader.LoadIcon("gtk-ok", 16);
             w11.Add(w12);
             // Container child GtkHBox.Gtk.Container+ContainerChild
@@ -102,9 +98,10 @@ namespace Stetic.SteticGenerated {
             if ((cobj.Child != null)) {
                 cobj.Child.ShowAll();
             }
+            cobj.DefaultWidth = 400;
             cobj.DefaultHeight = 104;
             cobj.Show();
-            w9.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnOk")));
+            w9.Clicked += ((System.EventHandler)(System.Delegate.CreateDelegate(typeof(System.EventHandler), cobj, "OnOkClicked")));
             System.Reflection.FieldInfo[] fields = cobj.GetType().GetFields(((System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic) | System.Reflection.BindingFlags.Instance));
             for (int n = 0; (n < fields.Length); n = (n + 1)) {
                 System.Reflection.FieldInfo field = fields[n];

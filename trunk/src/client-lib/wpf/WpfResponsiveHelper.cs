@@ -138,8 +138,6 @@ namespace Boxerp.Client.WPF
 			);
 		}
 
-		public override void PopulateGUI() { }
-
-		public override void OnAsyncCallStop(object sender, ThreadEventArgs teargs) { }
+		
 	}
 }

@@ -1,9 +1,8 @@
-
 using System;
 using System.Collections.Generic;
 using Gtk;
 using System.Collections;
-using Boxerp.Models;
+using Boxerp.Client;
 
 namespace Boxerp.Client.GtkSharp
 
@@ -18,17 +17,24 @@ namespace Boxerp.Client.GtkSharp
 		protected Gtk.TreeView treeview;
 		public event Gtk.RowActivatedHandler RowActivatedEvent;
 		public event System.EventHandler ColumnsChangedEvent;
-		public string filterRegex;
-		private IBoxerpModel selectedObject;
+		
+		public string _filterRegex;
+		private IBindableWrapper _selectedObject;
 		
 		public string FilterRegex
 		{
-			set { filterRegex = value; }
+			set 
+			{ 
+				_filterRegex = value; 
+			}
 		}
 		
 		public TreeView TreeView 
 		{
-			get { return treeview;}
+			get 
+			{ 
+				return treeview;
+			}
 		}
 		
 		public FilteredListView()
@@ -99,7 +105,7 @@ namespace Boxerp.Client.GtkSharp
 			}
 		}
 		
-		public TreeIter InsertRow (/*TreeIter parent,*/ ArrayList row)
+		public TreeIter InsertRow (ArrayList row)
 		{
 			TreeIter iter = store.Append();
 			// if store is a TreeStore:
@@ -117,12 +123,12 @@ namespace Boxerp.Client.GtkSharp
 			return iter;
 		}
 		
-		public TreeIter InsertModel (IBoxerpModel model)
+		public TreeIter InsertModel (IBindableWrapper model)
 		{
 		    TreeIter iter = store.Append();
 		    if (model != null)
 		    {
-		        store.SetValue(iter, 0, model.Id.ToString());
+		        store.SetValue(iter, 0, "fixme");
 		        store.SetValue(iter, 1, model);
 		        return iter;
 		    }
@@ -171,14 +177,14 @@ namespace Boxerp.Client.GtkSharp
 
 		private bool FilterTree (Gtk.TreeModel model, Gtk.TreeIter iter)
 		{
-			IBoxerpModel obj = (IBoxerpModel)model.GetValue (iter, 1);
+			IBindableWrapper bindable = (IBindableWrapper)model.GetValue (iter, 1);
  
  			if (filterRegex == null)
  				return true;
 			if (filterRegex == "")
 				return true;
  
-			if (obj.ToString().IndexOf(filterRegex) > -1)
+			if (bindable.ToString().IndexOf(filterRegex) > -1)
 				return true;
 			else
 				return false;
@@ -210,7 +216,7 @@ namespace Boxerp.Client.GtkSharp
 			{
 				if (treeview.Selection.GetSelected(out model, out iter))
 				{
-					selectedObject = (IBoxerpModel) model.GetValue(iter, 1);
+					_selectedObject = (IBindableWrapper) model.GetValue(iter, 1);
 					
 					return true;
 				}
@@ -224,9 +230,12 @@ namespace Boxerp.Client.GtkSharp
 			}
 		}
 		
-		public IBoxerpModel SelectedObject
+		public IBindableWrapper SelectedObject
 		{
-			get {return selectedObject; }
+			get 
+			{
+				return _selectedObject; 
+			}
 		}
 		
 		

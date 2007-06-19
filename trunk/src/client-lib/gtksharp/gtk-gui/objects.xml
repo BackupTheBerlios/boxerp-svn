@@ -1,43 +1,30 @@
 <objects>
-  <object type="Boxerp.Client.GtkSharp.Lib.SimpleTreeView" palette-category="widget" allow-children="false">
-    <itemgroups>
-      <itemgroup ref="Gtk.Widget" />
-    </itemgroups>
+  <object type="Boxerp.Client.GtkSharp.DoubleListView" palette-category="widget" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+  <object type="Boxerp.Client.GtkSharp.SimpleListView" palette-category="widget" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
     <signals>
-      <itemgroup ref="Gtk.Widget" />
+      <itemgroup label="SimpleListView Signals">
+        <signal name="RowActivatedEvent" />
+        <signal name="ColumnsChangedEvent" />
+      </itemgroup>
+    </signals>
+  </object>
+  <object type="Boxerp.Client.GtkSharp.SimpleTreeView" palette-category="widget" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals>
       <itemgroup label="SimpleTreeView Signals">
         <signal name="RowActivatedEvent" />
         <signal name="ColumnsChangedEvent" />
       </itemgroup>
     </signals>
   </object>
-  <object type="Boxerp.Client.GtkSharp.Lib.FilteredListView" palette-category="widget" allow-children="false">
-    <itemgroups>
-      <itemgroup ref="Gtk.Widget" />
-    </itemgroups>
+  <object type="Boxerp.Client.GtkSharp.FilteredListView" palette-category="widget" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
     <signals>
-      <itemgroup ref="Gtk.Widget" />
       <itemgroup label="FilteredListView Signals">
-        <signal name="RowActivatedEvent" />
-        <signal name="ColumnsChangedEvent" />
-      </itemgroup>
-    </signals>
-  </object>
-  <object type="Boxerp.Client.GtkSharp.Lib.DoubleListView" palette-category="widget" allow-children="false">
-    <itemgroups>
-      <itemgroup ref="Gtk.Widget" />
-    </itemgroups>
-    <signals>
-      <itemgroup ref="Gtk.Widget" />
-    </signals>
-  </object>
-  <object type="Boxerp.Client.GtkSharp.Lib.SimpleListView" palette-category="widget" allow-children="false">
-    <itemgroups>
-      <itemgroup ref="Gtk.Widget" />
-    </itemgroups>
-    <signals>
-      <itemgroup ref="Gtk.Widget" />
-      <itemgroup label="SimpleListView Signals">
         <signal name="RowActivatedEvent" />
         <signal name="ColumnsChangedEvent" />
       </itemgroup>

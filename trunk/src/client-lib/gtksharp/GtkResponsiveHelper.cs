@@ -7,17 +7,22 @@ using Gtk;
 
 namespace Boxerp.Client.GtkSharp
 {
-	public abstract class GtkResponsiveHelper : AbstractResponsiveHelper
+	public class GtkResponsiveHelper : AbstractResponsiveHelper
 	{
-		WaitDialog waitDialog;
-		WarningDialog warningDialog;
-		private static Hashtable exceptionsMsgPool = Hashtable.Synchronized(new Hashtable());
-		protected bool transferSuccess;
-		protected Gtk.Window parentWindow = null;
+		WaitDialog _waitDialog;
+		WarningDialog _warningDialog;
+		private static Hashtable _exceptionsMsgPool = Hashtable.Synchronized(new Hashtable());
+		protected bool _transferSuccess;
+		protected Gtk.Window _parentWindow = null;
+		
+		public GtkResponsiveHelper(Gtk.Window parent)
+		{
+			_parentWindow = parent;
+		}
 		
 		// Just to notify clients when the transfer is completed
 		private ThreadEventHandler transferCompleteEventHandler;
-		public event ThreadEventHandler TransferCompleteEvent
+		public override event ThreadEventHandler TransferCompleteEvent
       	{
         	add
          	{
@@ -29,60 +34,41 @@ namespace Boxerp.Client.GtkSharp
          	}
       	}
 
-        /// <summary>
-        /// Pass in the parent window if you want it to present after the 
-        // asyncrhonous operation
-        /// </summary>
-		public void Init(Gtk.Window win)
+        public override void StartAsyncCallList(ResponsiveEnum transferType)
 		{
-			parentWindow = win;
-            Init();
-		}
-		
-		/// <summary>
-		/// Use this method when the parent window and this helper gonna be 
-		/// destroyed at the end of the async operation
-		/// <summary>
-		public void Init()
-		{
-			base.BaseTransferCompleteEvent += this.OnTransferCompleted;		    
-		}
-	
-		public override void StartAsyncCallList(ResponsiveEnum transferType)
-		{
-		    if (parentWindow != null)
+		    if (_parentWindow != null)
 		    {
-			    waitDialog = new WaitDialog(parentWindow);
+			    _waitDialog = new WaitDialog(_parentWindow);
 			}
 			else
 			{
-			    waitDialog = new WaitDialog();
+			    _waitDialog = new WaitDialog();
 			}
-			waitDialog.CancelEvent += OnCancel;
-			transferSuccess = true;
-			base.StartTransfer(transferType);
+			_waitDialog.CancelEvent += OnCancel;
+			_transferSuccess = true;
+			base.StartAsyncCallList(transferType);
 		}
 		
 		public override void StartAsyncCall(SimpleDelegate method)
 		{
-		    if (parentWindow != null)
+		    if (_parentWindow != null)
 		    {
-			    waitDialog = new WaitDialog(parentWindow);
+			    _waitDialog = new WaitDialog(_parentWindow);
 			}
 			else
 			{
-			    waitDialog = new WaitDialog();
+			    _waitDialog = new WaitDialog();
 			}
-			waitDialog.CancelEvent += OnCancel;
-			transferSuccess = true;
+			_waitDialog.CancelEvent += OnCancel;
+			_transferSuccess = true;
 			base.StartAsyncCall(method);
 		}
 		
         
         public override void OnRemoteException(string msg)
         {
-        	exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = msg;
-			transferSuccess = false;
+        	_exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = msg;
+			_transferSuccess = false;
         }
         
         public override void OnAbortRemoteCall(string stacktrace)
@@ -91,12 +77,12 @@ namespace Boxerp.Client.GtkSharp
             if ((stacktrace.IndexOf("WebAsyncResult.WaitUntilComplete") > 0) || (stacktrace.IndexOf("WebConnection.EndWrite") > 0))
 	        {
 	            message += "Warning!, the operation seems to have been succeded at the server side";
-                transferSuccess = true;
-                exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = message;    
+                _transferSuccess = true;
+                _exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = message;    
 	        }
 	        else
 	        {
-	            transferSuccess = false;           
+	            _transferSuccess = false;           
             }
         }
         
@@ -118,49 +104,44 @@ namespace Boxerp.Client.GtkSharp
 		private void TransferCompleted(object sender, EventArgs e)
 		{
 			ResponsiveEnum transferType = (ResponsiveEnum)sender;
-			waitDialog.Stop();
-			waitDialog.Destroy();
-			if (transferSuccess) // FIXME: transferSuccess must be syncrhonized
+			_waitDialog.Stop();
+			_waitDialog.Destroy();
+			if (_transferSuccess) // FIXME: transferSuccess must be syncrhonized
          	{
 				if (transferType == ResponsiveEnum.Read)
 				{
-					this.PopulateGUI(); // FIXME: this could freeze, it is not resonsible
+					// todo: set up the eventargs.success
 				}
 				else
 				{
-				    InfoDialog idialog = new InfoDialog();
-				    idialog.Message = "Operation Sucess";
-				    idialog.Present();
+				    // todo: set up the eventargs.success
 				}
-				if (parentWindow != null)
+				if (_parentWindow != null)
 				{
-				    parentWindow.Present();
+				    _parentWindow.Present();
 				}
 			}
 			else
 			{
-				warningDialog = new WarningDialog();
+				_warningDialog = new WarningDialog();
 				string msg = "";
-				foreach (string i in exceptionsMsgPool.Values)
+				foreach (string i in _exceptionsMsgPool.Values)
 					msg += i + "\n";
-         		warningDialog.Message = msg;
-         		warningDialog.QuitOnOk = false;
-            	warningDialog.Present();
+         		_warningDialog.Message = msg;
+         		_warningDialog.QuitOnOk = false;
+            	_warningDialog.Present();
          	}		
          	if (this.transferCompleteEventHandler != null)
          	{
          	    transferCompleteEventHandler(sender, (ThreadEventArgs)e);
          	}
-            OnAsyncCallStop(sender, (ThreadEventArgs)e);
-		}
+        }
 		
 		public override void OnTransferCompleted(object sender, ThreadEventArgs e)
 		{
 			Application.Invoke(sender, e, TransferCompleted);
 		}
 
-		public abstract void PopulateGUI();
 		
-		public override void OnAsyncCallStop(object sender, ThreadEventArgs teargs){}
 	}
 }

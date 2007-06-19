@@ -165,12 +165,10 @@ namespace Boxerp.Client
 
 		#region Abstract methods
 
-		public abstract void PopulateGUI();
 		public abstract void OnCancel(object sender, EventArgs e);
 		public abstract void OnRemoteException(string msg);
 		public abstract void OnAbortRemoteCall(string msg);
 		public abstract void OnTransferCompleted(object sender, ThreadEventArgs e);
-		public abstract void OnAsyncCallStop(object sender, ThreadEventArgs teargs);
 		public abstract event ThreadEventHandler TransferCompleteEvent;
 
 		#endregion

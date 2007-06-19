@@ -1,7 +1,7 @@
-<Project name="Boxerp.Client.GtkSharp.Lib" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+<Project name="Boxerp.Client.GtkSharp" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="./bin/Debug" assembly="Boxerp.Client.GtkSharp.Lib" />
+      <Output directory="./bin/Debug" assembly="Boxerp.Client.GtkSharp" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
@@ -30,19 +30,19 @@
     <File name="./SimpleListView.cs" subtype="Code" buildaction="Compile" />
     <File name="./GtkResponsiveHelper.cs" subtype="Code" buildaction="Compile" />
     <File name="./QuestionDialog.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Boxerp.Client.GtkSharp.Lib.WaitWindow.cs" subtype="Code" buildaction="Compile" />
     <File name="./gtk-gui/button7.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Boxerp.Client.GtkSharp.Lib.SimpleListView.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Boxerp.Client.GtkSharp.Lib.SimpleTreeView.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Boxerp.Client.GtkSharp.Lib.QuestionDialog.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Boxerp.Client.GtkSharp.Lib.InfoDialog.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Boxerp.Client.GtkSharp.Lib.FilteredListView.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Boxerp.Client.GtkSharp.Lib.DoubleListView.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Boxerp.Client.GtkSharp.Lib.LoginWindow.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Boxerp.Client.GtkSharp.Lib.WarningDialog.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/Boxerp.Client.GtkSharp.DoubleListView.cs" subtype="Code" buildaction="Compile" />
     <File name="./gtk-gui/MainWindow.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Boxerp.Client.GtkSharp.Lib.WaitDialog.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/Boxerp.Client.GtkSharp.Lib.LoginWindow.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/Boxerp.Client.GtkSharp.FilteredListView.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/Boxerp.Client.GtkSharp.InfoDialog.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/Boxerp.Client.GtkSharp.InfoExtendedDialog.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/Boxerp.Client.GtkSharp.QuestionDialog.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/Boxerp.Client.GtkSharp.SimpleListView.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/Boxerp.Client.GtkSharp.SimpleTreeView.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/Boxerp.Client.GtkSharp.WaitDialog.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/Boxerp.Client.GtkSharp.WaitWindow.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/Boxerp.Client.GtkSharp.WarningDialog.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -52,16 +52,17 @@
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/gtk-sharp.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/Mono.Posix.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/pango-sharp.dll" />
-    <ProjectReference type="Assembly" localcopy="True" refto="../../server/Models.dll" />
-    <ProjectReference type="Assembly" localcopy="True" refto="../../server/Objects.dll" />
     <ProjectReference type="Project" localcopy="True" refto="Boxerp.Client" />
+    <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="gdk-sharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
   </References>
   <GtkDesignInfo>
     <ExportedWidgets>
-      <Widget>Boxerp.Client.GtkSharp.Lib.SimpleListView</Widget>
-      <Widget>Boxerp.Client.GtkSharp.Lib.SimpleTreeView</Widget>
-      <Widget>Boxerp.Client.GtkSharp.Lib.FilteredListView</Widget>
-      <Widget>Boxerp.Client.GtkSharp.Lib.DoubleListView</Widget>
+      <Widget>Boxerp.Client.GtkSharp.SimpleListView</Widget>
+      <Widget>Boxerp.Client.GtkSharp.SimpleTreeView</Widget>
+      <Widget>Boxerp.Client.GtkSharp.FilteredListView</Widget>
+      <Widget>Boxerp.Client.GtkSharp.DoubleListView</Widget>
     </ExportedWidgets>
   </GtkDesignInfo>
   <DeployTargets />

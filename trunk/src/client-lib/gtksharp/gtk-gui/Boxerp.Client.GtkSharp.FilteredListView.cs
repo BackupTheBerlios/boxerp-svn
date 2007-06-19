@@ -11,15 +11,15 @@
 namespace Stetic.SteticGenerated {
     
     
-    internal class BoxerpClientGtkSharpLibSimpleTreeView {
+    internal class BoxerpClientGtkSharpFilteredListView {
         
         public static void Build(Gtk.Bin cobj) {
             System.Collections.Hashtable bindings = new System.Collections.Hashtable();
-            // Widget Boxerp.Client.GtkSharp.Lib.SimpleTreeView
+            // Widget Boxerp.Client.GtkSharp.FilteredListView
             Stetic.BinContainer.Attach(cobj);
             cobj.Events = ((Gdk.EventMask)(256));
-            cobj.Name = "Boxerp.Client.GtkSharp.Lib.SimpleTreeView";
-            // Container child Boxerp.Client.GtkSharp.Lib.SimpleTreeView.Gtk.Container+ContainerChild
+            cobj.Name = "Boxerp.Client.GtkSharp.FilteredListView";
+            // Container child Boxerp.Client.GtkSharp.FilteredListView.Gtk.Container+ContainerChild
             Gtk.TreeView w1 = new Gtk.TreeView();
             bindings["treeview"] = w1;
             w1.CanFocus = true;

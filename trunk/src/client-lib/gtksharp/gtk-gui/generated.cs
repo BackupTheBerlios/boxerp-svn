@@ -21,56 +21,56 @@ namespace Stetic {
         
         public static void Build(object cobj, string id) {
             Stetic.Gui.Initialize();
-            if ((id == "Boxerp.Client.GtkSharp.Lib.WaitWindow")) {
-                Stetic.SteticGenerated.BoxerpClientGtkSharpLibWaitWindow.Build(((Gtk.Window)(cobj)));
+            if ((id == "Boxerp.Client.GtkSharp.WaitWindow")) {
+                Stetic.SteticGenerated.BoxerpClientGtkSharpWaitWindow.Build(((Gtk.Window)(cobj)));
             }
             else {
                 if ((id == "button7")) {
                     Stetic.SteticGenerated.button7.Build(((Gtk.Button)(cobj)));
                 }
                 else {
-                    if ((id == "Boxerp.Client.GtkSharp.Lib.SimpleListView")) {
-                        Stetic.SteticGenerated.BoxerpClientGtkSharpLibSimpleListView.Build(((Gtk.Bin)(cobj)));
+                    if ((id == "Boxerp.Client.GtkSharp.SimpleListView")) {
+                        Stetic.SteticGenerated.BoxerpClientGtkSharpSimpleListView.Build(((Gtk.Bin)(cobj)));
                     }
                     else {
-                        if ((id == "Boxerp.Client.GtkSharp.Lib.SimpleTreeView")) {
-                            Stetic.SteticGenerated.BoxerpClientGtkSharpLibSimpleTreeView.Build(((Gtk.Bin)(cobj)));
+                        if ((id == "Boxerp.Client.GtkSharp.SimpleTreeView")) {
+                            Stetic.SteticGenerated.BoxerpClientGtkSharpSimpleTreeView.Build(((Gtk.Bin)(cobj)));
                         }
                         else {
-                            if ((id == "Boxerp.Client.GtkSharp.Lib.QuestionDialog")) {
-                                Stetic.SteticGenerated.BoxerpClientGtkSharpLibQuestionDialog.Build(((Gtk.Dialog)(cobj)));
+                            if ((id == "Boxerp.Client.GtkSharp.QuestionDialog")) {
+                                Stetic.SteticGenerated.BoxerpClientGtkSharpQuestionDialog.Build(((Gtk.Dialog)(cobj)));
                             }
                             else {
-                                if ((id == "Boxerp.Client.GtkSharp.Lib.InfoDialog")) {
-                                    Stetic.SteticGenerated.BoxerpClientGtkSharpLibInfoDialog.Build(((Gtk.Dialog)(cobj)));
+                                if ((id == "Boxerp.Client.GtkSharp.InfoDialog")) {
+                                    Stetic.SteticGenerated.BoxerpClientGtkSharpInfoDialog.Build(((Gtk.Dialog)(cobj)));
                                 }
                                 else {
-                                    if ((id == "Boxerp.Client.GtkSharp.Lib.FilteredListView")) {
-                                        Stetic.SteticGenerated.BoxerpClientGtkSharpLibFilteredListView.Build(((Gtk.Bin)(cobj)));
+                                    if ((id == "Boxerp.Client.GtkSharp.FilteredListView")) {
+                                        Stetic.SteticGenerated.BoxerpClientGtkSharpFilteredListView.Build(((Gtk.Bin)(cobj)));
                                     }
                                     else {
-                                        if ((id == "Boxerp.Client.GtkSharp.Lib.DoubleListView")) {
-                                            Stetic.SteticGenerated.BoxerpClientGtkSharpLibDoubleListView.Build(((Gtk.Bin)(cobj)));
+                                        if ((id == "Boxerp.Client.GtkSharp.DoubleListView")) {
+                                            Stetic.SteticGenerated.BoxerpClientGtkSharpDoubleListView.Build(((Gtk.Bin)(cobj)));
                                         }
                                         else {
                                             if ((id == "Boxerp.Client.GtkSharp.Lib.LoginWindow")) {
                                                 Stetic.SteticGenerated.BoxerpClientGtkSharpLibLoginWindow.Build(((Gtk.Window)(cobj)));
                                             }
                                             else {
-                                                if ((id == "Boxerp.Client.GtkSharp.Lib.WarningDialog")) {
-                                                    Stetic.SteticGenerated.BoxerpClientGtkSharpLibWarningDialog.Build(((Gtk.Dialog)(cobj)));
+                                                if ((id == "Boxerp.Client.GtkSharp.WarningDialog")) {
+                                                    Stetic.SteticGenerated.BoxerpClientGtkSharpWarningDialog.Build(((Gtk.Dialog)(cobj)));
                                                 }
                                                 else {
                                                     if ((id == "MainWindow")) {
                                                         Stetic.SteticGenerated.MainWindow.Build(((Gtk.Window)(cobj)));
                                                     }
                                                     else {
-                                                        if ((id == "Boxerp.Client.GtkSharp.Lib.InfoExtendedDialog")) {
-                                                            Stetic.SteticGenerated.BoxerpClientGtkSharpLibInfoExtendedDialog.Build(((Gtk.Dialog)(cobj)));
+                                                        if ((id == "Boxerp.Client.GtkSharp.InfoExtendedDialog")) {
+                                                            Stetic.SteticGenerated.BoxerpClientGtkSharpInfoExtendedDialog.Build(((Gtk.Dialog)(cobj)));
                                                         }
                                                         else {
-                                                            if ((id == "Boxerp.Client.GtkSharp.Lib.WaitDialog")) {
-                                                                Stetic.SteticGenerated.BoxerpClientGtkSharpLibWaitDialog.Build(((Gtk.Dialog)(cobj)));
+                                                            if ((id == "Boxerp.Client.GtkSharp.WaitDialog")) {
+                                                                Stetic.SteticGenerated.BoxerpClientGtkSharpWaitDialog.Build(((Gtk.Dialog)(cobj)));
                                                             }
                                                         }
                                                     }

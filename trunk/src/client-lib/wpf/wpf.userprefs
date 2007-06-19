@@ -1,22 +1,14 @@
 <?xml version="1.0"?>
-<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client/administrator/administrator.mds">
+<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client-lib/wpf/wpf.mds">
   <Files>
     <File filename="Welcome" />
-    <File filename="./Controllers/EditUserController.cs" />
-    <File filename="./Controllers/LoginController.cs" />
-    <File filename="./Controllers/MainController.cs" />
-    <File filename="./administrator/GtkSharp/MainWindow.cs" />
+    <File filename="./MyClass.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="administrator" expanded="True">
-            <Node name="GtkSharp" expanded="True">
-              <Node name="MainWindow.cs" expanded="False" selected="True" />
-            </Node>
-          </Node>
-          <Node name="Controllers" expanded="True" />
+          <Node name="wpf" expanded="True" />
         </Node>
       </TreeView>
     </ViewMemento>
@@ -39,7 +31,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client/administrator/administrator/GtkSharp/MainWindow.cs" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/wpf/MyClass.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

@@ -13,7 +13,8 @@ namespace Boxerp.Client
 	public class SimpleInvoker
 	{
 		MethodInfo _method = null;
-		SimpleDelegate sdelegate = null;
+		Object[] _params = null;
+		SimpleDelegate _sdelegate = null;
 		Object _caller;
 		
 		private void CheckMethodSignature ()
@@ -31,7 +32,7 @@ namespace Boxerp.Client
 		
 		public SimpleInvoker(SimpleDelegate method)
 		{
-		    sdelegate = method;
+		    _sdelegate = method;
 		}
 		
 		public void Invoke()
@@ -41,11 +42,11 @@ namespace Boxerp.Client
 			#endif
 			if (_method != null)
 			{
-			    _method.Invoke(_caller, null);
+			    _method.Invoke(_caller, _params);	// _params is always null, so far
 			}
-			else if (sdelegate != null)
+			else if (_sdelegate != null)
 			{
-			    sdelegate();
+			    _sdelegate();
 			}
 			   
 		}

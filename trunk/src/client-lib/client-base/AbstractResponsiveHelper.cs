@@ -95,7 +95,7 @@ namespace Boxerp.Client
             }
 		}
 		
-		public virtual void StartAsyncCallList(Boxerp.Client.ResponsiveEnum trType)
+		public virtual void StartAsyncCallList(Boxerp.Client.ResponsiveEnum trType, IController controller)
 		{
 			_transferType = trType;
 			try
@@ -105,7 +105,7 @@ namespace Boxerp.Client
 					// busy, show an error message
 				}
 				
-				List<MethodInfo> methods = this.GetResponsiveMethods(_transferType);
+				List<MethodInfo> methods = this.GetResponsiveMethods(_transferType, controller);
 				if (methods.Count == 0)
 				{
 				    throw new NullReferenceException("No private/protected responsive methods found");
@@ -116,7 +116,7 @@ namespace Boxerp.Client
 				foreach (MethodInfo method in methods)
 				{
 					
-					ThreadStart methodStart = new SimpleInvoker(method, this).Invoke;
+					ThreadStart methodStart = new SimpleInvoker(method, controller).Invoke;
 					Thread methodThread = new Thread(methodStart);
 					methodThread.Start();
 					_threadsPoolHash[methodThread.ManagedThreadId] = methodThread;
@@ -143,10 +143,10 @@ namespace Boxerp.Client
 		    }
 		}
 		
-		private List<System.Reflection.MethodInfo> GetResponsiveMethods(ResponsiveEnum trType)
+		private List<System.Reflection.MethodInfo> GetResponsiveMethods(ResponsiveEnum trType, IController controller)
 		{
 			List<MethodInfo> responsiveMethods = new List<MethodInfo>();
-			MethodInfo[] methods = this.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
+			MethodInfo[] methods = controller.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
 			foreach(MethodInfo method in methods)
 			{
 				object[] attributes = method.GetCustomAttributes(typeof(ResponsiveAttribute), true);
@@ -166,8 +166,8 @@ namespace Boxerp.Client
 		#region Abstract methods
 
 		public abstract void OnCancel(object sender, EventArgs e);
-		public abstract void OnRemoteException(string msg);
-		public abstract void OnAbortRemoteCall(string msg);
+		public abstract void OnAsyncException(string msg);
+		public abstract void OnAbortAsyncCall(string msg);
 		public abstract void OnTransferCompleted(object sender, ThreadEventArgs e);
 		public abstract event ThreadEventHandler TransferCompleteEvent;
 

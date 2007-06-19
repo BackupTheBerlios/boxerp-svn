@@ -39,13 +39,13 @@ namespace Boxerp.Client.WPF
 			}
 		}
 
-		public override void StartAsyncCallList(ResponsiveEnum transferType)
+		public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller)
 		{
 			waitDialog = new WaitDialog();
 			waitDialog.CancelEvent += OnCancel;
 			transferSuccess = true;
 			waitDialog.Show();
-			base.StartAsyncCallList(transferType);
+			base.StartAsyncCallList(transferType, controller);
 		}
 
 		public override void StartAsyncCall(SimpleDelegate method)
@@ -58,13 +58,13 @@ namespace Boxerp.Client.WPF
 		}
 
 
-		public override void OnRemoteException(string msg)
+		public override void OnAsyncException(string msg)
 		{
 			exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = msg;
 			transferSuccess = false;
 		}
 
-		public override void OnAbortRemoteCall(string stacktrace)
+		public override void OnAbortAsyncCall(string stacktrace)
 		{
 			string message = "Operation stopped.";
 			if ((stacktrace.IndexOf("WebAsyncResult.WaitUntilComplete") > 0) || (stacktrace.IndexOf("WebConnection.EndWrite") > 0))
@@ -104,14 +104,7 @@ namespace Boxerp.Client.WPF
 			if (transferSuccess) // FIXME: transferSuccess must be syncrhonized
 			{
 				e.Success = true;
-				/*if (transferType == ResponsiveEnum.Read)
-				{
-					//this.PopulateGUI(); // FIXME: this could freeze, it is not resonsible
-				}
-				else
-				{
-					//MessageBox.Show("Operation Sucess");
-				}*/
+				e.TransferType = transferType;
 			}
 			else
 			{

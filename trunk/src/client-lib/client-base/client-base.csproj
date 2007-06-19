@@ -28,12 +28,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractBindableWrapper.cs" />
+    <Compile Include="AbstractController.cs" />
     <Compile Include="AbstractResponsiveHelper.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BindableWrapper.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="IBindableWrapper.cs" />
-    <Compile Include="ICrudControl.cs" />
+    <Compile Include="IControl.cs" />
+    <Compile Include="IController.cs" />
     <Compile Include="IResponsiveClient.cs" />
     <Compile Include="MyClass.cs" />
     <Compile Include="RemotingHelper.cs" />

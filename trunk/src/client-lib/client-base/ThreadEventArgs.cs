@@ -13,6 +13,7 @@ namespace Boxerp.Client
 		object _returnValue;
 		int _threadId;
 		bool _success;
+		ResponsiveEnum _transferType;
 		
 		public ThreadEventArgs(int t, MethodBase m, object o)
 		{
@@ -62,5 +63,18 @@ namespace Boxerp.Client
 				_success = value;
 			}
 		}
+
+		public ResponsiveEnum TransferType
+		{
+			get
+			{
+				return _transferType;
+			}
+			set
+			{
+				_transferType = value;
+			}
+		}
+
 	}
 }

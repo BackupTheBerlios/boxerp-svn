@@ -16,6 +16,10 @@ namespace Boxerp.Client
         private int _asyncCallsCount = 0; 
         private ResponsiveEnum _transferType;
         private bool _cancelRequest = false;
+
+		protected bool _transferSuccess = false;
+		protected static Hashtable _exceptionsMsgPool = Hashtable.Synchronized(new Hashtable());
+
         
 		public bool CancelRequest
       	{
@@ -163,11 +167,30 @@ namespace Boxerp.Client
 			return responsiveMethods;
 		}
 
+		public void OnAsyncException(Exception ex)
+		{
+			_exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = ex.Message + ", " + ex.StackTrace;
+			_transferSuccess = false;
+		}
+
+		public void OnAbortAsyncCall(Exception ex)
+		{
+			string message = "Operation stopped.";
+			if ((ex.StackTrace.IndexOf("WebAsyncResult.WaitUntilComplete") > 0) || (ex.StackTrace.IndexOf("WebConnection.EndWrite") > 0))
+			{
+				message += "Warning!, the operation seems to have been succeded at the server side";
+				_transferSuccess = true;
+				_exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = message;
+			}
+			else
+			{
+				_transferSuccess = false;
+			}
+		}
+
 		#region Abstract methods
 
 		public abstract void OnCancel(object sender, EventArgs e);
-		public abstract void OnAsyncException(string msg);
-		public abstract void OnAbortAsyncCall(string msg);
 		public abstract void OnTransferCompleted(object sender, ThreadEventArgs e);
 		public abstract event ThreadEventHandler TransferCompleteEvent;
 

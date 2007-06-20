@@ -19,7 +19,7 @@ namespace Boxerp.Client.GtkSharp
 		public event System.EventHandler ColumnsChangedEvent;
 		
 		public string _filterRegex;
-		private IBindableWrapper _selectedObject;
+		private object _selectedObject;
 		
 		public string FilterRegex
 		{
@@ -171,20 +171,20 @@ namespace Boxerp.Client.GtkSharp
 		
 		private void RenderObject (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
 		{
-			IBoxerpModel obj = (IBoxerpModel) model.GetValue (iter, 1);
+			object obj = model.GetValue (iter, 1);
 			(cell as Gtk.CellRendererText).Text = obj.ToString();
 		}
 
 		private bool FilterTree (Gtk.TreeModel model, Gtk.TreeIter iter)
 		{
-			IBindableWrapper bindable = (IBindableWrapper)model.GetValue (iter, 1);
+			object bindable = model.GetValue (iter, 1);
  
- 			if (filterRegex == null)
+ 			if (_filterRegex == null)
  				return true;
-			if (filterRegex == "")
+			if (_filterRegex == "")
 				return true;
  
-			if (bindable.ToString().IndexOf(filterRegex) > -1)
+			if (bindable.ToString().IndexOf(_filterRegex) > -1)
 				return true;
 			else
 				return false;
@@ -216,7 +216,7 @@ namespace Boxerp.Client.GtkSharp
 			{
 				if (treeview.Selection.GetSelected(out model, out iter))
 				{
-					_selectedObject = (IBindableWrapper) model.GetValue(iter, 1);
+					_selectedObject = model.GetValue(iter, 1);
 					
 					return true;
 				}
@@ -230,7 +230,7 @@ namespace Boxerp.Client.GtkSharp
 			}
 		}
 		
-		public IBindableWrapper SelectedObject
+		public object SelectedObject
 		{
 			get 
 			{

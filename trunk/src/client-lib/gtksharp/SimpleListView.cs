@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Gtk;
 using System.Collections;
-using Boxerp.Models;
+
 
 namespace Boxerp.Client.GtkSharp
 
@@ -106,13 +106,13 @@ namespace Boxerp.Client.GtkSharp
 			return iter;
 		}
 		
-		public TreeIter InsertModel (IBoxerpModel model)
+		public TreeIter InsertModel (System.Object model)
 		{
 		    TreeIter iter = store.Append();
 		    if (model != null)
 		    {
-		        store.SetValue(iter, 0, model.Id.ToString());
-		        store.SetValue(iter, 1, model);
+		        //store.SetValue(iter, 0, model.Id.ToString());
+		        store.SetValue(iter, 0, model);
 		        return iter;
 		    }
 		    else
@@ -153,8 +153,8 @@ namespace Boxerp.Client.GtkSharp
 
 		private void RenderObject (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
 		{
-			IBoxerpModel obj = (IBoxerpModel) model.GetValue (iter, 1);
-			(cell as Gtk.CellRendererText).Text = obj.ToString();
+			object item = model.GetValue (iter, 1);
+			(cell as Gtk.CellRendererText).Text = item.ToString();
 		}
 
 		public void OnRowActivated (object o, Gtk.RowActivatedArgs args)
@@ -169,16 +169,16 @@ namespace Boxerp.Client.GtkSharp
 				ColumnsChangedEvent(o, args);
 		}
 		
-		public List<IBoxerpModel> GetObjectsList()
+		public List<System.Object> GetObjectsList()
 		{
 			TreeIter iter;
-			List<IBoxerpModel> objects = new List<IBoxerpModel>();
+			List<System.Object> objects = new List<System.Object>();
 			try 
 			{
 				store.GetIterFirst(out iter);
 				do 
 				{
-					objects.Add((IBoxerpModel)store.GetValue(iter, 1));		
+					objects.Add((object)store.GetValue(iter, 1));		
 				} while (store.IterNext(ref iter));
 				if (objects.Count == 0)
 					return null;

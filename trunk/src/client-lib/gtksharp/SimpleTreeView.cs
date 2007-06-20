@@ -1,7 +1,6 @@
 using System;
 using Gtk;
 using System.Collections;
-using Boxerp.Models;
 
 namespace Boxerp.Client.GtkSharp
 
@@ -104,8 +103,8 @@ namespace Boxerp.Client.GtkSharp
 		
 		private void RenderObject (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
 		{
-			IBoxerpModel obj = (IBoxerpModel) model.GetValue (iter, 1);
-			(cell as Gtk.CellRendererText).Text = obj.ToString();
+			object item = model.GetValue (iter, 1);
+			(cell as Gtk.CellRendererText).Text = item.ToString();
 		}
 
 		public void OnRowActivated (object o, Gtk.RowActivatedArgs args)

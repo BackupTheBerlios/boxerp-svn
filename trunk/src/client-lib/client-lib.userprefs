@@ -2,26 +2,29 @@
 <UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client-lib/client-lib.mds">
   <Files>
     <File filename="Welcome" />
-    <File filename="./client-base/AbstractResponsiveHelper.cs" />
-    <File filename="./client-base/IResponsiveClient.cs" />
-    <File filename="./client-base/SimpleInvoker.cs" />
+    <File filename="./gtksharp/GtkResponsiveHelper.cs" />
+    <File filename="./wpf/WpfResponsiveHelper.cs" />
+    <File filename="./gtksharp/DoubleListView.cs" />
+    <File filename="./gtksharp/SimpleTreeView.cs" />
+    <File filename="./gtksharp/SimpleListView.cs" />
+    <File filename="./gtksharp/FilteredListView.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
-        <Node expanded="True" selected="True">
+        <Node expanded="True">
           <Node name="Boxerp.Client" expanded="True" />
-          <Node name="Boxerp.Client.GtkSharp.Lib" expanded="True">
-            <Node name="References" expanded="True" />
+          <Node name="Boxerp.Client.GtkSharp" expanded="True">
+            <Node name="UserInterface" expanded="True" />
+            <Node name="DoubleListView.cs" expanded="False" selected="True" />
           </Node>
+          <Node name="wpf" expanded="True" />
         </Node>
       </TreeView>
     </ViewMemento>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
       <TreeView>
-        <Node expanded="True">
-          <Node name="Boxerp.Client.GtkSharp.Lib" expanded="True" />
-        </Node>
+        <Node expanded="True" />
       </TreeView>
     </ViewMemento>
     <ViewMemento Id="MonoQuery.DatabasePad">
@@ -38,7 +41,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="Welcome" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/DoubleListView.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

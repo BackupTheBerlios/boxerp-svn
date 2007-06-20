@@ -11,8 +11,6 @@ namespace Boxerp.Client.GtkSharp
 	{
 		WaitDialog _waitDialog;
 		WarningDialog _warningDialog;
-		private static Hashtable _exceptionsMsgPool = Hashtable.Synchronized(new Hashtable());
-		protected bool _transferSuccess;
 		protected Gtk.Window _parentWindow = null;
 		
 		public GtkResponsiveHelper(Gtk.Window parent)
@@ -34,7 +32,7 @@ namespace Boxerp.Client.GtkSharp
          	}
       	}
 
-        public override void StartAsyncCallList(ResponsiveEnum transferType)
+        public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller)
 		{
 		    if (_parentWindow != null)
 		    {
@@ -46,7 +44,7 @@ namespace Boxerp.Client.GtkSharp
 			}
 			_waitDialog.CancelEvent += OnCancel;
 			_transferSuccess = true;
-			base.StartAsyncCallList(transferType);
+			base.StartAsyncCallList(transferType, controller);
 		}
 		
 		public override void StartAsyncCall(SimpleDelegate method)
@@ -64,29 +62,7 @@ namespace Boxerp.Client.GtkSharp
 			base.StartAsyncCall(method);
 		}
 		
-        
-        public override void OnRemoteException(string msg)
-        {
-        	_exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = msg;
-			_transferSuccess = false;
-        }
-        
-        public override void OnAbortRemoteCall(string stacktrace)
-        {
-            string message = "Operation stopped.";
-            if ((stacktrace.IndexOf("WebAsyncResult.WaitUntilComplete") > 0) || (stacktrace.IndexOf("WebConnection.EndWrite") > 0))
-	        {
-	            message += "Warning!, the operation seems to have been succeded at the server side";
-                _transferSuccess = true;
-                _exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = message;    
-	        }
-	        else
-	        {
-	            _transferSuccess = false;           
-            }
-        }
-        
-		public override void OnCancel(object sender, EventArgs e)
+        public override void OnCancel(object sender, EventArgs e)
 		{
         	CancelRequest = true;
         	QuestionDialog qdialog = new QuestionDialog();

@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("wpf")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Boxerp.Client.WPF")]
+[assembly: AssemblyDescription("Boxerp Framework")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("wpf")]
-[assembly: AssemblyCopyright("Copyright ©  2007")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyProduct("")]
+[assembly: AssemblyCopyright("Carlos Ble")]
+[assembly: AssemblyTrademark("Apache2 License")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

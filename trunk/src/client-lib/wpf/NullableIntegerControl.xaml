@@ -1,0 +1,16 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:boxerp="clr-namespace:Boxerp.Client.WPF"
+    x:Class="Boxerp.Client.WPF.NullableIntegerControl"
+    Width="247" Height="31" xmlns:d="http://schemas.microsoft.com/expression/blend/2006" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    <Grid>
+            <DockPanel LastChildFill="False" d:LayoutOverrides="GridBox">
+	  
+	  		<CheckBox Click="OnCheckBoxClicked" x:Name="_checkBox" Width="23" Content="" Margin="1,5,0,0" Height="18"/>
+	  		<Label x:Name="_title" Width="110" Height="23" Content="Title:"/>
+	  		<boxerp:IntegerTextBoxControl x:Name="_text" IsEnabled="False" Width="110" Height="24"/>
+	  
+	  	</DockPanel>
+    </Grid>
+</UserControl>

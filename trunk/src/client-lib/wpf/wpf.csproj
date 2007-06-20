@@ -44,6 +44,18 @@
     <Reference Include="WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntegerTextBoxControl.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>IntegerTextBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NullableIntegerControl.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>NullableIntegerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NullableTextControl.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>NullableTextControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WaitDialog.xaml.cs">
       <SubType>Code</SubType>
@@ -52,6 +64,9 @@
     <Compile Include="WpfResponsiveHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="IntegerTextBoxControl.xaml" />
+    <Page Include="NullableIntegerControl.xaml" />
+    <Page Include="NullableTextControl.xaml" />
     <Page Include="WaitDialog.xaml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

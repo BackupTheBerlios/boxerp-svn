@@ -69,7 +69,7 @@ namespace Boxerp.Client.WPF
 		{
 			get
 			{
-				if (_text._textBox.Text != String.Empty)
+				if ((_text._textBox.Text != String.Empty) && (_checkBox.IsChecked == true))
 				{
 					return Int32.Parse(_text._textBox.Text);
 				}

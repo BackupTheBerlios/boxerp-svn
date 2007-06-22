@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Reflection;
 
 namespace Boxerp.Client
 {
@@ -31,5 +32,17 @@ namespace Boxerp.Client
 		}
 
 		protected abstract void OnAsyncOperationFinish(Object sender, ThreadEventArgs args);
+
+		protected void StopAsyncCall()
+		{
+			System.Diagnostics.StackFrame sf = new System.Diagnostics.StackFrame(1);
+			System.Reflection.MethodBase mb = sf.GetMethod();
+			_responsiveHelper.StopAsyncMethod(System.Threading.Thread.CurrentThread.ManagedThreadId, mb, null);
+		}
+
+		protected MethodBase Method(SimpleDelegate del)
+		{
+			return (MethodBase)del.Method;
+		}
 	}
 }

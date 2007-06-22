@@ -13,8 +13,9 @@ namespace Boxerp.Client
 		object _returnValue;
 		int _threadId;
 		bool _success;
-		ResponsiveEnum _transferType;
-		
+		ResponsiveEnum _operationType;
+		string _exceptionMsg;
+
 		public ThreadEventArgs(int t, MethodBase m, object o)
 		{
 		    _methodBase = m;
@@ -38,7 +39,13 @@ namespace Boxerp.Client
 		{
 		    get { return _returnValue; }
 		}
-		
+
+		public string ExceptionMsg
+		{
+			get { return _exceptionMsg; }
+			set { _exceptionMsg = value; }
+		}
+
 		public int ThreadId
 		{
 		    get { return _threadId; }
@@ -64,15 +71,15 @@ namespace Boxerp.Client
 			}
 		}
 
-		public ResponsiveEnum TransferType
+		public ResponsiveEnum OperationType
 		{
 			get
 			{
-				return _transferType;
+				return _operationType;
 			}
 			set
 			{
-				_transferType = value;
+				_operationType = value;
 			}
 		}
 

@@ -18,10 +18,10 @@ namespace Boxerp.Client.WPF
 	public class WpfResponsiveHelper : AbstractResponsiveHelper
 	{
 		WaitDialog waitDialog;
+		Queue<WaitDialog> _dialogs = new Queue<WaitDialog>();
 				
-		public WpfResponsiveHelper()
-		{
-		}
+		public WpfResponsiveHelper(ConcurrencyMode mode) : base(mode){ }
+
 
 		// Just to notify clients when the transfer is completed
 		private ThreadEventHandler transferCompleteEventHandler;
@@ -37,35 +37,64 @@ namespace Boxerp.Client.WPF
 			}
 		}
 
+		/// <summary>
+		/// Create or manage a wait dialog and and invoke the base class. See more doc there
+		/// </summary>
+		/// <param name="transferType"></param>
+		/// <param name="controller"></param>
 		public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller)
 		{
-			waitDialog = new WaitDialog();
-			waitDialog.CancelEvent += OnCancel;
-			_transferSuccess = true;
-			waitDialog.Show();
+			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
+				|| (RunningThreads == 0))
+			{
+				waitDialog = new WaitDialog();
+				waitDialog.CancelEvent += OnCancel;
+				_dialogs.Enqueue(waitDialog);
+			}
+			
 			base.StartAsyncCallList(transferType, controller);
+
+			if (_concurrencyMode == ConcurrencyMode.Modal)
+			{
+				waitDialog.ShowDialog();
+			}
+			else
+			{
+				waitDialog.Show();
+				waitDialog.WindowState = WindowState.Normal;
+			}
 		}
 
 		public override void StartAsyncCall(SimpleDelegate method)
 		{
-			waitDialog = new WaitDialog();
-			waitDialog.CancelEvent += OnCancel;
-			waitDialog.Show();
-			_transferSuccess = true;
+			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
+				|| (RunningThreads == 0))
+			{
+				waitDialog = new WaitDialog();
+				waitDialog.CancelEvent += OnCancel;
+				_dialogs.Enqueue(waitDialog);
+			}
+
 			base.StartAsyncCall(method);
+
+			if (_concurrencyMode == ConcurrencyMode.Modal)
+			{
+				waitDialog.ShowDialog();
+			}
+			else
+			{
+				waitDialog.Show();
+				waitDialog.WindowState = WindowState.Normal;
+			}
 		}
 
 		public override void OnCancel(object sender, EventArgs e)
 		{
-			CancelRequest = true;
+			//CancelRequest = true;	 FIXME : for what thing was this intended?
+
+			MessageBox.Show("The process is being cancelled, it may take a while after you close this window");
 			
-			//QuestionDialog qdialog = new QuestionDialog();
-			//qdialog.Message = "The process is being cancelled, please wait. Do you want to force abort right now?";
-			//int rtype = qdialog.Run();
-			//if (rtype == (int)ResponseType.Yes)
-			//{
-				ForceAbort();
-			//}
+			ForceAbort();
 
 			//TODO: Show a dialog :" Please wait while cancelling" with
 			//a button to force cancelation by aborting threads
@@ -73,22 +102,13 @@ namespace Boxerp.Client.WPF
 
 		private void TransferCompleted(object sender, ThreadEventArgs e)
 		{
-			ResponsiveEnum transferType = (ResponsiveEnum)sender;
-			waitDialog.Stop();
-			waitDialog.Destroy();
-			waitDialog.Close();
-			if (_transferSuccess) // FIXME: transferSuccess must be syncrhonized
+			ResponsiveEnum operationType = e.OperationType;
+			WaitDialog wDialog = _dialogs.Dequeue();
+			wDialog.Close();
+			if (!e.Success)
 			{
-				e.Success = true;
-				e.TransferType = transferType;
-			}
-			else
-			{
-				string msg = "";
-				foreach (string i in _exceptionsMsgPool.Values)
-					msg += i + "\n";
-				MessageBox.Show(msg);
-				e.Success = false;
+				string msg = "Operation Aborted \n";
+				MessageBox.Show(msg + e.ExceptionMsg);
 			}
 			if (this.transferCompleteEventHandler != null)
 			{
@@ -105,7 +125,5 @@ namespace Boxerp.Client.WPF
 				e
 			);
 		}
-
-		
 	}
 }

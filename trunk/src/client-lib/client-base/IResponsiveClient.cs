@@ -8,7 +8,6 @@ namespace Boxerp.Client
 	public interface IResponsiveClient
 	{
 		/* Implemented in the abstract class */
-		bool CancelRequest { get; set;}
 		void StartAsyncCallList(ResponsiveEnum trType, IController controller);
 		void StopAsyncMethod(int threadId, MethodBase MethodBase, object output);
 		void StopAsyncMethod(int threadId, SimpleDelegate method, object output);

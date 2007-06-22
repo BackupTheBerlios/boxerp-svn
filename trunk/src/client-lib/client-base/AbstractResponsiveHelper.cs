@@ -11,142 +11,192 @@ namespace Boxerp.Client
 	/// </summary>
 	public abstract class AbstractResponsiveHelper: IResponsiveClient
 	{
-		private static Hashtable _threadsPoolHash = Hashtable.Synchronized(new Hashtable());
-        
-        private int _asyncCallsCount = 0; 
-        private ResponsiveEnum _transferType;
-        private bool _cancelRequest = false;
+		private static Queue<Dictionary<int, Thread>> _threadDictionariesQueue = new Queue<Dictionary<int, Thread>>();
+		private static Queue<bool> _operationSuccessQueue = new Queue<bool>();
+		private static Queue<string> _exceptionQueue = new Queue<string>();
+		private static Queue<ResponsiveEnum> _operationTypeQueue = new Queue<ResponsiveEnum>();
+		private static Queue<bool> _cancelRequestQueue = new Queue<bool>(); 
+		        
+		protected ConcurrencyMode _concurrencyMode;
+				
 
-		protected bool _transferSuccess = false;
-		protected static Hashtable _exceptionsMsgPool = Hashtable.Synchronized(new Hashtable());
+		public AbstractResponsiveHelper(ConcurrencyMode mode)
+		{
+			_concurrencyMode = mode;
+		}
 
-        
-		public bool CancelRequest
-      	{
-      		get { return _cancelRequest; }
-      		set { _cancelRequest = value; }
-      	}
-      	
+		protected int RunningThreads
+		{
+			get
+			{
+				return _threadDictionariesQueue.Count;
+			}
+		}
+
+		private bool canGoAhead()
+		{
+			if (_threadDictionariesQueue.Count != 0)
+			{
+				if (_concurrencyMode != ConcurrencyMode.Parallel)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// Create a new thread and put it in the queue 
+		/// (as long as there are no more running threads and the mode not be parallel)
+		/// </summary>
+		/// <param name="method"></param>
       	public virtual void StartAsyncCall(SimpleDelegate method)
 		{
-			ProcessAsyncCall(method);
+			try
+			{
+				if (canGoAhead())
+				{
+					Dictionary<int, Thread> threadsBlock = new Dictionary<int, Thread>();
+
+					ThreadStart methodStart = new SimpleInvoker(method).Invoke;
+					Thread methodThread = new Thread(methodStart);
+					methodThread.Start();
+
+					threadsBlock[methodThread.ManagedThreadId] = methodThread;
+
+					lock (this)
+					{
+						_threadDictionariesQueue.Enqueue(threadsBlock);
+						_operationSuccessQueue.Enqueue(true);
+						_exceptionQueue.Enqueue(null);
+						_operationTypeQueue.Enqueue(ResponsiveEnum.Other);
+						_cancelRequestQueue.Enqueue(false);
+					}
+				}
+			}
+			catch (TargetInvocationException ex)
+			{
+				Console.WriteLine("responsive method raises exception:" + ex.Message + ex.StackTrace);
+				throw ex;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
-		
+
+		/// <summary>
+		/// Create a block of parallel threads and put it in a single slot in the queue
+		/// </summary>
+		/// <param name="trType"></param>
+		/// <param name="controller"></param>
+		public virtual void StartAsyncCallList(Boxerp.Client.ResponsiveEnum trType, IController controller)
+		{
+			try
+			{
+				if (canGoAhead())
+				{
+					List<MethodInfo> methods = this.GetResponsiveMethods(trType, controller);
+					if (methods.Count == 0)
+					{
+						throw new NullReferenceException("No private/protected responsive methods found");
+					}
+
+					Dictionary<int, Thread> threadsBlock = new Dictionary<int, Thread>();
+					lock (this)
+					{
+						foreach (MethodInfo method in methods)
+						{
+							ThreadStart methodStart = new SimpleInvoker(method, controller).Invoke;
+							Thread methodThread = new Thread(methodStart);
+							methodThread.Start();
+
+							threadsBlock[methodThread.ManagedThreadId] = methodThread;
+						}
+						_threadDictionariesQueue.Enqueue(threadsBlock);
+						_operationSuccessQueue.Enqueue(true);
+						_exceptionQueue.Enqueue(null);
+						_operationTypeQueue.Enqueue(trType);
+						_cancelRequestQueue.Enqueue(false);
+					}
+				}
+			}
+			catch (TargetInvocationException ex)
+			{
+				Console.WriteLine("One responsive method raises exception:" + ex.Message + ex.StackTrace);
+				throw ex;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
 		public void StopAsyncMethod(int threadId, MethodBase methodBase, object output)
 		{
 			ThreadEventArgs tea = new ThreadEventArgs(threadId, methodBase, output);
-			StopAsyncMethod(threadId, tea, output);
+			StopAsyncMethod(tea, output);
 		}
 
 		public void StopAsyncMethod(int threadId, SimpleDelegate method, object output)
 		{
 			ThreadEventArgs tea = new ThreadEventArgs(threadId, method, output);
-			StopAsyncMethod(threadId, tea, output);
+			StopAsyncMethod(tea, output);
 		}
 
-		private void StopAsyncMethod(int threadId, ThreadEventArgs args, object output)
+		/// <summary>
+		/// Take the first block of threads in the queue and remove it from the queue. 
+		/// The contents of the block are the threads created by StartAsyncCall or StartAsyncCallList
+		/// When all the threads from that block have finished invoke OnTransferCompleted to access the GUI
+		/// </summary>
+		/// <param name="args"></param>
+		/// <param name="output"></param>
+		private void StopAsyncMethod(ThreadEventArgs args, object output)
 		{
 			lock (this)
 			{
-				if (_asyncCallsCount > 0)
+				Dictionary<int, Thread> firstThreadBlock = _threadDictionariesQueue.Peek();
+				if (firstThreadBlock.Count > 0)
 				{
-					_asyncCallsCount--;
-					if (_asyncCallsCount == 0)
+					firstThreadBlock.Remove(args.ThreadId);
+					if (firstThreadBlock.Count == 0)
 					{
-						_threadsPoolHash.Clear();
-						OnTransferCompleted(_transferType, args);
-						/*if (_baseTransferCompleteHandler != null)
-						{
-							Delegate[] invList = _baseTransferCompleteHandler.GetInvocationList();
-							if (invList.Length > 0)
-							{
-								object[] parameters = { _transferType, args };
-								invList[0].DynamicInvoke(parameters);
-							}
-							else
-							{
-								throw new NullReferenceException("BaseTransferCompleteEvent has no handler");
-							}
-						}*/
+						_threadDictionariesQueue.Dequeue();
+						_cancelRequestQueue.Dequeue();
+						args.Success = _operationSuccessQueue.Dequeue();
+						args.OperationType = _operationTypeQueue.Dequeue(); 
+						args.ExceptionMsg = _exceptionQueue.Dequeue();
+						OnTransferCompleted(args.OperationType, args);
 					}
 				}
 			}
 		}
 		
-		
-		private void ProcessAsyncCall(SimpleDelegate method)
-		{
-			try
-			{
-			    _transferType = ResponsiveEnum.Other;
-				_asyncCallsCount++; // = 1;
-				ThreadStart methodStart = new SimpleInvoker(method).Invoke;
-				Thread methodThread = new Thread(methodStart);
-				methodThread.Start();
-				_threadsPoolHash[methodThread.ManagedThreadId] = methodThread;
-			}
-			catch (TargetInvocationException ex)
-            {
-                Console.WriteLine("responsive method raises exception:" + ex.Message+ ex.StackTrace);
-                throw ex; 
-            }
-            catch(Exception ex)
-            {
-            	throw ex;
-            }
-            finally
-            {
-            }
-		}
-		
-		public virtual void StartAsyncCallList(Boxerp.Client.ResponsiveEnum trType, IController controller)
-		{
-			_transferType = trType;
-			try
-			{
-				if (_threadsPoolHash.Count != 0)
-				{
-					// busy, show an error message
-				}
-				
-				List<MethodInfo> methods = this.GetResponsiveMethods(_transferType, controller);
-				if (methods.Count == 0)
-				{
-				    throw new NullReferenceException("No private/protected responsive methods found");
-				}
-				
-				_asyncCallsCount = methods.Count;
-				
-				foreach (MethodInfo method in methods)
-				{
-					
-					ThreadStart methodStart = new SimpleInvoker(method, controller).Invoke;
-					Thread methodThread = new Thread(methodStart);
-					methodThread.Start();
-					_threadsPoolHash[methodThread.ManagedThreadId] = methodThread;
-					//method.Invoke(this, null); // execute method
-				}
-			}
-			catch (TargetInvocationException ex)
-            {
-                Console.WriteLine("One responsive method raises exception:" + ex.Message+ ex.StackTrace);
-                throw ex;
-            }
-            catch(Exception ex)
-            {
-            	throw ex;
-            }
-        	// TODO : Write the code to stop threads
-		}
-		
+		/// <summary>
+		///  Take the first block of threads in the queue and abort all of them
+		/// </summary>
 		protected void ForceAbort()
 		{
-		    foreach(Thread thread in _threadsPoolHash.Values)
-		    {
-		        thread.Abort();
-		    }
+			lock (this)
+			{
+				Dictionary<int, Thread> threadsBlock = _threadDictionariesQueue.Peek();
+				foreach (Thread thread in threadsBlock.Values)
+				{
+					if (thread.IsAlive)	// TODO: improve this somehow
+					{
+						thread.Abort();
+					}
+				}
+			}
 		}
 		
+		/// <summary>
+		/// Pick up all methods marked with the ResponsiveAttribute
+		/// </summary>
+		/// <param name="trType"></param>
+		/// <param name="controller"></param>
+		/// <returns></returns>
 		private List<System.Reflection.MethodInfo> GetResponsiveMethods(ResponsiveEnum trType, IController controller)
 		{
 			List<MethodInfo> responsiveMethods = new List<MethodInfo>();
@@ -169,8 +219,18 @@ namespace Boxerp.Client
 
 		public void OnAsyncException(Exception ex)
 		{
-			_exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = ex.Message + ", " + ex.StackTrace;
-			_transferSuccess = false;
+			lock (_exceptionQueue)
+			{
+				string exceptions = _exceptionQueue.Dequeue();
+				exceptions += ex.Message + ", " + ex.StackTrace + "\n";
+				_exceptionQueue.Enqueue(exceptions);
+			}
+
+			lock (_operationSuccessQueue)
+			{
+				_operationSuccessQueue.Dequeue();
+				_operationSuccessQueue.Enqueue(false);
+			}
 		}
 
 		public void OnAbortAsyncCall(Exception ex)
@@ -179,12 +239,17 @@ namespace Boxerp.Client
 			if ((ex.StackTrace.IndexOf("WebAsyncResult.WaitUntilComplete") > 0) || (ex.StackTrace.IndexOf("WebConnection.EndWrite") > 0))
 			{
 				message += "Warning!, the operation seems to have been succeded at the server side";
-				_transferSuccess = true;
-				_exceptionsMsgPool[Thread.CurrentThread.ManagedThreadId] = message;
+				lock (_exceptionQueue)
+				{
+					string exceptions = _exceptionQueue.Dequeue();
+					exceptions += message;
+					_exceptionQueue.Enqueue(exceptions);
+				}
 			}
-			else
+			lock (_operationSuccessQueue)
 			{
-				_transferSuccess = false;
+				_operationSuccessQueue.Dequeue();
+				_operationSuccessQueue.Enqueue(false);
 			}
 		}
 

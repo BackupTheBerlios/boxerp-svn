@@ -1,3 +1,8 @@
+// /home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/WaitDialo.cs created with MonoDevelop
+// User: carlos at 1:22 PM 6/23/2007
+//
+// To change standard headers go to Edit->Preferences->Coding->Standard Headers
+//
 
 using System;
 using Gtk;
@@ -5,16 +10,26 @@ using Gtk;
 namespace Boxerp.Client.GtkSharp
 {
 	
-	public class WaitDialog : global::Gtk.Dialog
+	
+	public partial class WaitDialog : Gtk.Dialog
 	{
-		protected Gtk.ProgressBar progressbar;
 		protected bool nonstop = true;
 		protected bool firstInstant = true;
-		protected Gtk.Label labelMsg;
-		protected Gtk.Button button;
-		protected Gtk.HButtonBox actionArea;
 		private EventHandler cancelEventHandler;
 
+		public WaitDialog()
+		{
+			this.Build();
+			this.Modal = true;
+			//this.TransientFor = parent;
+			this.Hide();
+			progressbar.BarStyle = Gtk.ProgressBarStyle.Continuous;
+			progressbar.PulseStep = 0.05;
+			GLib.Timeout.Add (300, new GLib.TimeoutHandler (FirstInstant));
+			GLib.Timeout.Add (100, new GLib.TimeoutHandler (DoPulse));
+		}
+		
+		
         public event EventHandler CancelEvent
         {
             add
@@ -33,31 +48,6 @@ namespace Boxerp.Client.GtkSharp
 			set { labelMsg.Text = value;}
 		}
 
-		public WaitDialog(Gtk.Window parent)
-		{
-			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.WaitDialog));
-			this.Modal = true;
-			this.TransientFor = parent;
-			this.Hide();
-			//actionArea.Remove(button);
-			progressbar.BarStyle = Gtk.ProgressBarStyle.Continuous;
-			progressbar.PulseStep = 0.05;
-			GLib.Timeout.Add (300, new GLib.TimeoutHandler (FirstInstant));
-			GLib.Timeout.Add (100, new GLib.TimeoutHandler (DoPulse));
-		}
-		
-		public WaitDialog()
-		{
-			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.WaitDialog));
-			this.Modal = true;
-			this.Hide();
-			//actionArea.Remove(button);
-			progressbar.BarStyle = Gtk.ProgressBarStyle.Continuous;
-			progressbar.PulseStep = 0.05;
-			GLib.Timeout.Add (300, new GLib.TimeoutHandler (FirstInstant));
-			GLib.Timeout.Add (100, new GLib.TimeoutHandler (DoPulse));
-		}
-		
 		public void Stop()
 		{
 			nonstop = false;
@@ -86,8 +76,7 @@ namespace Boxerp.Client.GtkSharp
 		{
 			if (cancelEventHandler != null)
 				cancelEventHandler(this, null);
-                //cancelEventHandler.Invoke(this, null);
-		}
+        }
 
 		protected virtual void OnClose(object sender, System.EventArgs e)
 		{
@@ -97,18 +86,10 @@ namespace Boxerp.Client.GtkSharp
 
 		protected virtual void OnDeleteEvent(object o, Gtk.DeleteEventArgs args)
 		{
-		    /*Console.WriteLine("delte event:" + o.ToString()+","+ args.Event.Type.ToString());
-		    if (args.Event.SendEvent)
-		    {
-		        Console.WriteLine("send event!!:" + args.Event.Type.ToString());
-		    }*/
 		    if (o == this)
 		    {
 	            OnCancel(o, null);
 		    }
 		}
-		
-
 	}
-	
 }

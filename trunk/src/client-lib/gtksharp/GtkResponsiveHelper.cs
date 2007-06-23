@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using System.Reflection;
 using Gtk;
@@ -10,10 +11,14 @@ namespace Boxerp.Client.GtkSharp
 	public class GtkResponsiveHelper : AbstractResponsiveHelper
 	{
 		WaitDialog _waitDialog;
-		WarningDialog _warningDialog;
+		WaitWindow _waitWindow;
+		Queue<WaitDialog> _dialogs = new Queue<WaitDialog>();
+		Queue<WaitWindow> _windows = new Queue<WaitWindow>();
+		//WarningDialog _warningDialog;
 		protected Gtk.Window _parentWindow = null;
 		
-		public GtkResponsiveHelper(Gtk.Window parent)
+		public GtkResponsiveHelper(Gtk.Window parent, ConcurrencyMode mode)
+			: base(mode)
 		{
 			_parentWindow = parent;
 		}
@@ -34,37 +39,72 @@ namespace Boxerp.Client.GtkSharp
 
         public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller)
 		{
-		    if (_parentWindow != null)
-		    {
-			    _waitDialog = new WaitDialog(_parentWindow);
+			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
+				|| (RunningThreads == 0))
+			{
+				if (_concurrencyMode == ConcurrencyMode.Modal)
+				{
+					_waitDialog = new WaitDialog(/*_parentWindow*/);
+					_waitDialog.CancelEvent += OnCancel;
+					_dialogs.Enqueue(_waitDialog);
+				}
+				else
+				{
+					_waitWindow = new WaitWindow();
+					_waitWindow.CancelEvent += OnCancel;
+					_windows.Enqueue(_waitWindow);
+				}
+			}
+			
+			base.StartAsyncCallList(transferType, controller);
+
+			if (_concurrencyMode == ConcurrencyMode.Modal)
+			{
+				_waitDialog.Show();
 			}
 			else
 			{
-			    _waitDialog = new WaitDialog();
+				_waitWindow.Show();
+				// TODO : if the window is minimized show it in the middle of the screen
 			}
-			_waitDialog.CancelEvent += OnCancel;
-			_transferSuccess = true;
-			base.StartAsyncCallList(transferType, controller);
 		}
 		
 		public override void StartAsyncCall(SimpleDelegate method)
 		{
-		    if (_parentWindow != null)
-		    {
-			    _waitDialog = new WaitDialog(_parentWindow);
+			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
+				|| (RunningThreads == 0))
+			{
+				if (_concurrencyMode == ConcurrencyMode.Modal)
+				{
+					_waitDialog = new WaitDialog(/*_parentWindow*/);
+					_waitDialog.CancelEvent += OnCancel;
+					_dialogs.Enqueue(_waitDialog);
+				}
+				else
+				{
+					_waitWindow = new WaitWindow();
+					_waitWindow.CancelEvent += OnCancel;
+					_windows.Enqueue(_waitWindow);
+				}
+			}
+			
+			base.StartAsyncCall(method);
+
+			if (_concurrencyMode == ConcurrencyMode.Modal)
+			{
+				_waitDialog.Show();
 			}
 			else
 			{
-			    _waitDialog = new WaitDialog();
+				_waitWindow.Show();
+				_waitWindow.Present();
+				// TODO : if the window is minimized show it in the middle of the screen
 			}
-			_waitDialog.CancelEvent += OnCancel;
-			_transferSuccess = true;
-			base.StartAsyncCall(method);
 		}
 		
         public override void OnCancel(object sender, EventArgs e)
 		{
-        	CancelRequest = true;
+        	CancelRequested = true;
         	QuestionDialog qdialog = new QuestionDialog();
         	qdialog.Message = "The process is being cancelled, please wait. Do you want to force abort right now?";
             int rtype = qdialog.Run();
@@ -79,43 +119,42 @@ namespace Boxerp.Client.GtkSharp
 		
 		private void TransferCompleted(object sender, EventArgs e)
 		{
-			ResponsiveEnum transferType = (ResponsiveEnum)sender;
-			_waitDialog.Stop();
-			_waitDialog.Destroy();
-			if (_transferSuccess) // FIXME: transferSuccess must be syncrhonized
-         	{
-				if (transferType == ResponsiveEnum.Read)
-				{
-					// todo: set up the eventargs.success
-				}
-				else
-				{
-				    // todo: set up the eventargs.success
-				}
-				if (_parentWindow != null)
-				{
-				    _parentWindow.Present();
-				}
+			ThreadEventArgs evArgs = (ThreadEventArgs) e;
+			
+			ResponsiveEnum operationType = evArgs.OperationType;
+			if (_concurrencyMode == ConcurrencyMode.Modal)
+			{
+				WaitDialog wDialog = _dialogs.Dequeue();
+				wDialog.Stop();
+				wDialog.Hide();
+				wDialog.Destroy();
 			}
 			else
 			{
-				_warningDialog = new WarningDialog();
-				string msg = "";
-				foreach (string i in _exceptionsMsgPool.Values)
-					msg += i + "\n";
-         		_warningDialog.Message = msg;
-         		_warningDialog.QuitOnOk = false;
-            	_warningDialog.Present();
-         	}		
-         	if (this.transferCompleteEventHandler != null)
-         	{
-         	    transferCompleteEventHandler(sender, (ThreadEventArgs)e);
-         	}
-        }
+				WaitWindow wWindow = _windows.Dequeue();
+				wWindow.Stop();
+				wWindow.Hide();
+				wWindow.Destroy();   // Is this close ?
+			}
+			
+			if (!evArgs.Success)
+			{
+				string msg = "Operation Aborted \n";
+				WarningDialog warning = new WarningDialog();
+				warning.Message = msg + evArgs.ExceptionMsg;
+         		warning.QuitOnOk = false;
+            	warning.Present();
+			}
+			
+			if (this.transferCompleteEventHandler != null)
+			{
+				transferCompleteEventHandler(sender, evArgs);
+			}
+		}
 		
 		public override void OnTransferCompleted(object sender, ThreadEventArgs e)
 		{
-			Application.Invoke(sender, e, TransferCompleted);
+			Application.Invoke(sender, (EventArgs)e, TransferCompleted);
 		}
 
 		

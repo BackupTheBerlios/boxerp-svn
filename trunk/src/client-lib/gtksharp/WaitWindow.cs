@@ -1,20 +1,35 @@
+// /home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/WaitDialo.cs created with MonoDevelop
+// User: carlos at 6:18 PM 6/23/2007
+//
+// To change standard headers go to Edit->Preferences->Coding->Standard Headers
+//
 
 using System;
 
 namespace Boxerp.Client.GtkSharp
 {
-	
-	public class WaitWindow : Gtk.Window
+	public partial class WaitWindow : Gtk.Window
 	{
-		protected Gtk.ProgressBar progressbar;
 		protected bool nonstop = true;
 		protected bool firstInstant = true;
-		protected Gtk.Label labelMsg;
-		protected Gtk.Button button;
-		protected Gtk.HButtonBox actionArea;
 		private EventHandler cancelEventHandler;
 		private bool exitOnCancel = true;
+		
+		public WaitWindow() : 
+				base(Gtk.WindowType.Toplevel)
+		{
+			this.Build();
+			
+			this.Modal = true;
+			this.Hide();
+			progressbar.BarStyle = Gtk.ProgressBarStyle.Continuous;
+			progressbar.PulseStep = 0.05;
+			GLib.Timeout.Add (300, new GLib.TimeoutHandler (FirstInstant));
+			GLib.Timeout.Add (100, new GLib.TimeoutHandler (DoPulse));
+			exitOnCancel = true;
 
+		}
+		
         public event EventHandler CancelEvent
         {
             add
@@ -40,19 +55,7 @@ namespace Boxerp.Client.GtkSharp
 		    set { exitOnCancel = value; }
 		}
 
-		public WaitWindow() : 
-				base("")
-		{
-			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.WaitWindow));
-			this.Modal = true;
-			this.Hide();
-			progressbar.BarStyle = Gtk.ProgressBarStyle.Continuous;
-			progressbar.PulseStep = 0.05;
-			GLib.Timeout.Add (300, new GLib.TimeoutHandler (FirstInstant));
-			GLib.Timeout.Add (100, new GLib.TimeoutHandler (DoPulse));
-			exitOnCancel = true;
-		}
-		
+
 		public void Stop()
 		{
 			nonstop = false;
@@ -101,6 +104,6 @@ namespace Boxerp.Client.GtkSharp
 		        }
 		    }
 		}
+
 	}
-	
 }

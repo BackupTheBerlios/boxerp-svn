@@ -19,22 +19,20 @@ namespace Boxerp.Client.GtkSharp {
         
         private Gtk.Label label;
         
-        private Gtk.Button button35;
+        private Gtk.Button buttonOk;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize();
             // Widget Boxerp.Client.GtkSharp.InfoDialog
-            this.Events = ((Gdk.EventMask)(256));
             this.Name = "Boxerp.Client.GtkSharp.InfoDialog";
             this.Title = Mono.Unix.Catalog.GetString("Info");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
             this.HasSeparator = false;
             // Internal child Boxerp.Client.GtkSharp.InfoDialog.VBox
             Gtk.VBox w1 = this.VBox;
-            w1.Events = ((Gdk.EventMask)(256));
-            w1.Name = "dialog_VBox";
+            w1.Name = "dialog1_VBox";
             w1.BorderWidth = ((uint)(2));
-            // Container child dialog_VBox.Gtk.Box+BoxChild
+            // Container child dialog1_VBox.Gtk.Box+BoxChild
             this.hbox1 = new Gtk.HBox();
             this.hbox1.Name = "hbox1";
             this.hbox1.Spacing = 5;
@@ -62,46 +60,28 @@ namespace Boxerp.Client.GtkSharp {
             w4.Fill = false;
             // Internal child Boxerp.Client.GtkSharp.InfoDialog.ActionArea
             Gtk.HButtonBox w5 = this.ActionArea;
-            w5.Events = ((Gdk.EventMask)(256));
-            w5.Name = "Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea";
-            w5.Spacing = 10;
+            w5.Name = "dialog1_ActionArea";
+            w5.Spacing = 6;
             w5.BorderWidth = ((uint)(5));
             w5.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
-            // Container child Boxerp.Client.GtkSharp.Lib.InfoDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
-            this.button35 = new Gtk.Button();
-            this.button35.CanDefault = true;
-            this.button35.CanFocus = true;
-            this.button35.Name = "button35";
-            // Container child button35.Gtk.Container+ContainerChild
-            Gtk.Alignment w6 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            w6.Name = "GtkAlignment";
-            // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w7 = new Gtk.HBox();
-            w7.Name = "GtkHBox";
-            w7.Spacing = 2;
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w8 = new Gtk.Image();
-            w8.Name = "image36";
-            w8.Pixbuf = Stetic.IconLoader.LoadIcon("gtk-ok", 16);
-            w7.Add(w8);
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w10 = new Gtk.Label();
-            w10.Name = "GtkLabel";
-            w10.LabelProp = Mono.Unix.Catalog.GetString("Ok");
-            w7.Add(w10);
-            w6.Add(w7);
-            this.button35.Add(w6);
-            this.AddActionWidget(this.button35, 0);
-            Gtk.ButtonBox.ButtonBoxChild w14 = ((Gtk.ButtonBox.ButtonBoxChild)(w5[this.button35]));
-            w14.Expand = false;
-            w14.Fill = false;
+            // Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+            this.buttonOk = new Gtk.Button();
+            this.buttonOk.CanDefault = true;
+            this.buttonOk.CanFocus = true;
+            this.buttonOk.Name = "buttonOk";
+            this.buttonOk.UseStock = true;
+            this.buttonOk.UseUnderline = true;
+            this.buttonOk.Label = "gtk-ok";
+            this.AddActionWidget(this.buttonOk, -5);
+            Gtk.ButtonBox.ButtonBoxChild w6 = ((Gtk.ButtonBox.ButtonBoxChild)(w5[this.buttonOk]));
+            w6.Expand = false;
+            w6.Fill = false;
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
             this.DefaultWidth = 400;
-            this.DefaultHeight = 104;
+            this.DefaultHeight = 97;
             this.Show();
-            this.button35.Clicked += new System.EventHandler(this.OnOkClicked);
         }
     }
 }

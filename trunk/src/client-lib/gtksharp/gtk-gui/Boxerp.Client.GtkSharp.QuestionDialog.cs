@@ -19,25 +19,21 @@ namespace Boxerp.Client.GtkSharp {
         
         private Gtk.Label label;
         
-        private Gtk.Button button22;
+        private Gtk.Button buttonCancel;
         
-        private Gtk.Button button24;
+        private Gtk.Button buttonOk;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize();
             // Widget Boxerp.Client.GtkSharp.QuestionDialog
-            this.Events = ((Gdk.EventMask)(256));
             this.Name = "Boxerp.Client.GtkSharp.QuestionDialog";
-            this.Title = Mono.Unix.Catalog.GetString("Question");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
-            this.Modal = true;
             this.HasSeparator = false;
             // Internal child Boxerp.Client.GtkSharp.QuestionDialog.VBox
             Gtk.VBox w1 = this.VBox;
-            w1.Events = ((Gdk.EventMask)(256));
-            w1.Name = "dialog_VBox";
+            w1.Name = "dialog1_VBox";
             w1.BorderWidth = ((uint)(2));
-            // Container child dialog_VBox.Gtk.Box+BoxChild
+            // Container child dialog1_VBox.Gtk.Box+BoxChild
             this.hbox1 = new Gtk.HBox();
             this.hbox1.Name = "hbox1";
             // Container child hbox1.Gtk.Box+BoxChild
@@ -62,79 +58,45 @@ namespace Boxerp.Client.GtkSharp {
             w4.Position = 0;
             w4.Expand = false;
             w4.Fill = false;
-            w4.Padding = ((uint)(5));
             // Internal child Boxerp.Client.GtkSharp.QuestionDialog.ActionArea
             Gtk.HButtonBox w5 = this.ActionArea;
-            w5.Events = ((Gdk.EventMask)(256));
-            w5.Name = "Boxerp.Client.GtkSharp.Lib.QuestionDialog_ActionArea";
+            w5.Name = "dialog1_ActionArea";
             w5.Spacing = 6;
             w5.BorderWidth = ((uint)(5));
             w5.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
-            // Container child Boxerp.Client.GtkSharp.Lib.QuestionDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
-            this.button22 = new Gtk.Button();
-            this.button22.CanDefault = true;
-            this.button22.CanFocus = true;
-            this.button22.Name = "button22";
-            // Container child button22.Gtk.Container+ContainerChild
-            Gtk.Alignment w6 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            w6.Name = "GtkAlignment";
-            // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w7 = new Gtk.HBox();
-            w7.Name = "GtkHBox";
-            w7.Spacing = 2;
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w8 = new Gtk.Image();
-            w8.Name = "image34";
-            w8.Pixbuf = Stetic.IconLoader.LoadIcon("gtk-no", 16);
-            w7.Add(w8);
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w10 = new Gtk.Label();
-            w10.Name = "GtkLabel";
-            w10.LabelProp = Mono.Unix.Catalog.GetString("No");
-            w7.Add(w10);
-            w6.Add(w7);
-            this.button22.Add(w6);
-            this.AddActionWidget(this.button22, -9);
-            Gtk.ButtonBox.ButtonBoxChild w14 = ((Gtk.ButtonBox.ButtonBoxChild)(w5[this.button22]));
-            w14.Expand = false;
-            w14.Fill = false;
-            // Container child Boxerp.Client.GtkSharp.Lib.QuestionDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
-            this.button24 = new Gtk.Button();
-            this.button24.CanDefault = true;
-            this.button24.CanFocus = true;
-            this.button24.Name = "button24";
-            // Container child button24.Gtk.Container+ContainerChild
-            Gtk.Alignment w15 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            w15.Name = "GtkAlignment1";
-            // Container child GtkAlignment1.Gtk.Container+ContainerChild
-            Gtk.HBox w16 = new Gtk.HBox();
-            w16.Name = "GtkHBox1";
-            w16.Spacing = 2;
-            // Container child GtkHBox1.Gtk.Container+ContainerChild
-            Gtk.Image w17 = new Gtk.Image();
-            w17.Name = "image35";
-            w17.Pixbuf = Stetic.IconLoader.LoadIcon("gtk-yes", 16);
-            w16.Add(w17);
-            // Container child GtkHBox1.Gtk.Container+ContainerChild
-            Gtk.Label w19 = new Gtk.Label();
-            w19.Name = "GtkLabel1";
-            w19.LabelProp = Mono.Unix.Catalog.GetString("Yes");
-            w16.Add(w19);
-            w15.Add(w16);
-            this.button24.Add(w15);
-            this.AddActionWidget(this.button24, -8);
-            Gtk.ButtonBox.ButtonBoxChild w23 = ((Gtk.ButtonBox.ButtonBoxChild)(w5[this.button24]));
-            w23.Position = 1;
-            w23.Expand = false;
-            w23.Fill = false;
+            // Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+            this.buttonCancel = new Gtk.Button();
+            this.buttonCancel.CanDefault = true;
+            this.buttonCancel.CanFocus = true;
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.UseStock = true;
+            this.buttonCancel.UseUnderline = true;
+            this.buttonCancel.Label = "gtk-cancel";
+            this.AddActionWidget(this.buttonCancel, -6);
+            Gtk.ButtonBox.ButtonBoxChild w6 = ((Gtk.ButtonBox.ButtonBoxChild)(w5[this.buttonCancel]));
+            w6.Expand = false;
+            w6.Fill = false;
+            // Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+            this.buttonOk = new Gtk.Button();
+            this.buttonOk.CanDefault = true;
+            this.buttonOk.CanFocus = true;
+            this.buttonOk.Name = "buttonOk";
+            this.buttonOk.UseStock = true;
+            this.buttonOk.UseUnderline = true;
+            this.buttonOk.Label = "gtk-ok";
+            this.AddActionWidget(this.buttonOk, -5);
+            Gtk.ButtonBox.ButtonBoxChild w7 = ((Gtk.ButtonBox.ButtonBoxChild)(w5[this.buttonOk]));
+            w7.Position = 1;
+            w7.Expand = false;
+            w7.Fill = false;
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
             this.DefaultWidth = 400;
             this.DefaultHeight = 99;
             this.Show();
-            this.button22.Clicked += new System.EventHandler(this.OnNo);
-            this.button24.Clicked += new System.EventHandler(this.OnYes);
+            this.buttonCancel.Clicked += new System.EventHandler(this.OnNo);
+            this.buttonOk.Clicked += new System.EventHandler(this.OnYes);
         }
     }
 }

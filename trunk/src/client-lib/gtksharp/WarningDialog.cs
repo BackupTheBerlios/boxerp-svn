@@ -1,19 +1,24 @@
+// /home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/WarningDia.cs created with MonoDevelop
+// User: carlos at 6:36 PM 6/23/2007
+//
+// To change standard headers go to Edit->Preferences->Coding->Standard Headers
+//
 
 using System;
 
 namespace Boxerp.Client.GtkSharp
 {
 	
-	public class WarningDialog : Gtk.Dialog
+	
+	public partial class WarningDialog : Gtk.Dialog
 	{
-		protected Gtk.Label label;
 		protected bool quitOnOk = false;
 		
 		public WarningDialog()
 		{
-			Stetic.Gui.Build(this, typeof(Boxerp.Client.GtkSharp.WarningDialog));
+			this.Build();
 		}
-
+		
 		public string Message 
 		{
 			get { return label.Text; }
@@ -32,6 +37,6 @@ namespace Boxerp.Client.GtkSharp
 			if (quitOnOk)
 				Gtk.Application.Quit();
 		}
+
 	}
-	
 }

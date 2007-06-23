@@ -17,30 +17,28 @@ namespace Boxerp.Client.GtkSharp {
         
         private Gtk.ProgressBar progressbar;
         
-        private Gtk.Button button;
+        private Gtk.Button buttonCancel;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize();
             // Widget Boxerp.Client.GtkSharp.WaitDialog
-            this.Events = ((Gdk.EventMask)(256));
             this.Name = "Boxerp.Client.GtkSharp.WaitDialog";
-            this.Title = Mono.Unix.Catalog.GetString("Operation in progress...");
-            this.WindowPosition = ((Gtk.WindowPosition)(1));
+            this.WindowPosition = ((Gtk.WindowPosition)(4));
             this.HasSeparator = false;
             // Internal child Boxerp.Client.GtkSharp.WaitDialog.VBox
             Gtk.VBox w1 = this.VBox;
-            w1.Events = ((Gdk.EventMask)(256));
-            w1.Name = "dialog_VBox";
-            w1.Spacing = 2;
+            w1.Name = "dialog1_VBox";
             w1.BorderWidth = ((uint)(2));
-            // Container child dialog_VBox.Gtk.Box+BoxChild
+            // Container child dialog1_VBox.Gtk.Box+BoxChild
             this.labelMsg = new Gtk.Label();
             this.labelMsg.Name = "labelMsg";
             this.labelMsg.LabelProp = "Please wait";
             w1.Add(this.labelMsg);
             Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(w1[this.labelMsg]));
             w2.Position = 0;
-            // Container child dialog_VBox.Gtk.Box+BoxChild
+            w2.Expand = false;
+            w2.Fill = false;
+            // Container child dialog1_VBox.Gtk.Box+BoxChild
             this.progressbar = new Gtk.ProgressBar();
             this.progressbar.Name = "progressbar";
             w1.Add(this.progressbar);
@@ -50,48 +48,28 @@ namespace Boxerp.Client.GtkSharp {
             w3.Fill = false;
             // Internal child Boxerp.Client.GtkSharp.WaitDialog.ActionArea
             Gtk.HButtonBox w4 = this.ActionArea;
-            w4.Events = ((Gdk.EventMask)(256));
-            w4.Name = "actionArea";
+            w4.Name = "dialog1_ActionArea";
             w4.Spacing = 6;
             w4.BorderWidth = ((uint)(5));
             w4.LayoutStyle = ((Gtk.ButtonBoxStyle)(2));
-            // Container child actionArea.Gtk.ButtonBox+ButtonBoxChild
-            this.button = new Gtk.Button();
-            this.button.CanDefault = true;
-            this.button.CanFocus = true;
-            this.button.Name = "button";
-            // Container child button.Gtk.Container+ContainerChild
-            Gtk.Alignment w5 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            w5.Name = "GtkAlignment";
-            // Container child GtkAlignment.Gtk.Container+ContainerChild
-            Gtk.HBox w6 = new Gtk.HBox();
-            w6.Name = "GtkHBox";
-            w6.Spacing = 2;
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Image w7 = new Gtk.Image();
-            w7.Name = "image38";
-            w7.Pixbuf = Stetic.IconLoader.LoadIcon("gtk-cancel", 16);
-            w6.Add(w7);
-            // Container child GtkHBox.Gtk.Container+ContainerChild
-            Gtk.Label w9 = new Gtk.Label();
-            w9.Name = "GtkLabel";
-            w9.LabelProp = Mono.Unix.Catalog.GetString("Cancel");
-            w6.Add(w9);
-            w5.Add(w6);
-            this.button.Add(w5);
-            this.AddActionWidget(this.button, -7);
-            Gtk.ButtonBox.ButtonBoxChild w13 = ((Gtk.ButtonBox.ButtonBoxChild)(w4[this.button]));
-            w13.Expand = false;
-            w13.Fill = false;
+            // Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+            this.buttonCancel = new Gtk.Button();
+            this.buttonCancel.CanDefault = true;
+            this.buttonCancel.CanFocus = true;
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.UseStock = true;
+            this.buttonCancel.UseUnderline = true;
+            this.buttonCancel.Label = "gtk-cancel";
+            this.AddActionWidget(this.buttonCancel, -6);
+            Gtk.ButtonBox.ButtonBoxChild w5 = ((Gtk.ButtonBox.ButtonBoxChild)(w4[this.buttonCancel]));
+            w5.Expand = false;
+            w5.Fill = false;
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
             this.DefaultWidth = 400;
-            this.DefaultHeight = 113;
+            this.DefaultHeight = 106;
             this.Show();
-            this.Close += new System.EventHandler(this.OnClose);
-            this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnDeleteEvent);
-            this.button.Clicked += new System.EventHandler(this.OnCancel);
         }
     }
 }

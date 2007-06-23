@@ -32,7 +32,24 @@ namespace Boxerp.Client
 				return _threadDictionariesQueue.Count;
 			}
 		}
-
+		
+		public bool CancelRequested
+		{
+			get
+			{
+				return _cancelRequestQueue.Peek();
+			}
+			set
+			{
+				lock (_cancelRequestQueue)
+				{
+					_cancelRequestQueue.Dequeue();
+					bool isCancel = value;
+					_cancelRequestQueue.Enqueue(isCancel);
+				}
+			}
+		}
+		
 		private bool canGoAhead()
 		{
 			if (_threadDictionariesQueue.Count != 0)

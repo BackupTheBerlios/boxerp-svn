@@ -9,7 +9,7 @@ using Boxerp.Objects;
 using System.Threading;
 using Boxerp.Client;
 
-namespace administrator
+namespace Admin
 {
 	class MainClass
 	{

@@ -6,7 +6,7 @@
   <import>
     <widget-library name="../../../../client-lib/gtksharp/bin/Debug/Boxerp.Client.GtkSharp.dll" />
   </import>
-  <widget class="Gtk.Window" id="administrator.TestWindow" design-size="351 92">
+  <widget class="Gtk.Window" id="Admin.TestWindow" design-size="351 92">
     <property name="MemberName" />
     <property name="Title" translatable="yes">TestWindow</property>
     <property name="WindowPosition">CenterOnParent</property>

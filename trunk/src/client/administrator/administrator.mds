@@ -11,7 +11,7 @@
       <Entry build="True" name="Interfaces" configuration="Release" />
     </Configuration>
   </Configurations>
-  <StartMode startupentry="administrator" single="True">
+  <StartMode startupentry="Admin" single="True">
     <Execute type="None" entry="administrator" />
     <Execute type="None" entry="Controllers" />
     <Execute type="None" entry="Interfaces" />

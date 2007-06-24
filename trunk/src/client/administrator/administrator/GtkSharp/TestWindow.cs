@@ -5,12 +5,12 @@
 //
 
 using System;
-using Interfaces;
-using Controllers;
+using Admin.Interfaces;
+using Admin.Controllers;
 using Boxerp.Client;
 using Boxerp.Client.GtkSharp;
 
-namespace administrator
+namespace Admin
 {
 	
 	

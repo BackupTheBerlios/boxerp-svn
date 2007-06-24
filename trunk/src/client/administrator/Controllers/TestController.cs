@@ -5,10 +5,10 @@
 //
 
 using System;
-using Interfaces;
+using Admin.Interfaces;
 using Boxerp.Client;
 
-namespace Controllers
+namespace Admin.Controllers
 {
 	
 	

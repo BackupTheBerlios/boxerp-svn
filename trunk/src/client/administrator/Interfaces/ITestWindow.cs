@@ -6,7 +6,7 @@
 
 using System;
 
-namespace Interfaces
+namespace Admin.Interfaces
 {
 	
 	

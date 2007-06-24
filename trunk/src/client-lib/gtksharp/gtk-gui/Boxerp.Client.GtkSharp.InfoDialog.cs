@@ -27,6 +27,7 @@ namespace Boxerp.Client.GtkSharp {
             this.Name = "Boxerp.Client.GtkSharp.InfoDialog";
             this.Title = Mono.Unix.Catalog.GetString("Info");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
+            this.Modal = true;
             this.HasSeparator = false;
             // Internal child Boxerp.Client.GtkSharp.InfoDialog.VBox
             Gtk.VBox w1 = this.VBox;
@@ -80,8 +81,9 @@ namespace Boxerp.Client.GtkSharp {
                 this.Child.ShowAll();
             }
             this.DefaultWidth = 400;
-            this.DefaultHeight = 97;
+            this.DefaultHeight = 99;
             this.Show();
+            this.buttonOk.Clicked += new System.EventHandler(this.OnOk);
         }
     }
 }

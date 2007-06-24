@@ -14,37 +14,20 @@ namespace Boxerp.Client.GtkSharp
 		WaitWindow _waitWindow;
 		Queue<WaitDialog> _dialogs = new Queue<WaitDialog>();
 		Queue<WaitWindow> _windows = new Queue<WaitWindow>();
-		//WarningDialog _warningDialog;
-		protected Gtk.Window _parentWindow = null;
 		
-		public GtkResponsiveHelper(Gtk.Window parent, ConcurrencyMode mode)
+		public GtkResponsiveHelper(ConcurrencyMode mode)
 			: base(mode)
 		{
-			_parentWindow = parent;
 		}
 		
-		// Just to notify clients when the transfer is completed
-		private ThreadEventHandler transferCompleteEventHandler;
-		public override event ThreadEventHandler TransferCompleteEvent
-      	{
-        	add
-         	{
-            	transferCompleteEventHandler += value;
-         	}
-         	remove
-        	{
-            	transferCompleteEventHandler -= value;
-         	}
-      	}
-
-        public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller)
+		public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller)
 		{
 			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
 				|| (RunningThreads == 0))
 			{
 				if (_concurrencyMode == ConcurrencyMode.Modal)
 				{
-					_waitDialog = new WaitDialog(/*_parentWindow*/);
+					_waitDialog = new WaitDialog();
 					_waitDialog.CancelEvent += OnCancel;
 					_dialogs.Enqueue(_waitDialog);
 				}
@@ -60,7 +43,7 @@ namespace Boxerp.Client.GtkSharp
 
 			if (_concurrencyMode == ConcurrencyMode.Modal)
 			{
-				_waitDialog.Show();
+				_waitDialog.Run();
 			}
 			else
 			{
@@ -76,7 +59,7 @@ namespace Boxerp.Client.GtkSharp
 			{
 				if (_concurrencyMode == ConcurrencyMode.Modal)
 				{
-					_waitDialog = new WaitDialog(/*_parentWindow*/);
+					_waitDialog = new WaitDialog();
 					_waitDialog.CancelEvent += OnCancel;
 					_dialogs.Enqueue(_waitDialog);
 				}
@@ -92,7 +75,7 @@ namespace Boxerp.Client.GtkSharp
 
 			if (_concurrencyMode == ConcurrencyMode.Modal)
 			{
-				_waitDialog.Show();
+				_waitDialog.Run();
 			}
 			else
 			{
@@ -106,22 +89,18 @@ namespace Boxerp.Client.GtkSharp
 		{
         	CancelRequested = true;
         	QuestionDialog qdialog = new QuestionDialog();
+			qdialog.Modal = true;
         	qdialog.Message = "The process is being cancelled, please wait. Do you want to force abort right now?";
-            int rtype = qdialog.Run();
-            if (rtype == (int)ResponseType.Yes)
-            {
-                ForceAbort();      
+            int rType = qdialog.Run();
+			if (rType == (int)ResponseType.Ok)
+			{
+			    ForceAbort();      
             }
-            
-        	//TODO: Show a dialog :" Please wait while cancelling" with
-        	//a button to force cancelation by aborting threads
-		}
+        }
 		
 		private void TransferCompleted(object sender, EventArgs e)
 		{
 			ThreadEventArgs evArgs = (ThreadEventArgs) e;
-			
-			ResponsiveEnum operationType = evArgs.OperationType;
 			if (_concurrencyMode == ConcurrencyMode.Modal)
 			{
 				WaitDialog wDialog = _dialogs.Dequeue();
@@ -142,7 +121,7 @@ namespace Boxerp.Client.GtkSharp
 				string msg = "Operation Aborted \n";
 				WarningDialog warning = new WarningDialog();
 				warning.Message = msg + evArgs.ExceptionMsg;
-         		warning.QuitOnOk = false;
+				warning.QuitOnOk = false;
             	warning.Present();
 			}
 			

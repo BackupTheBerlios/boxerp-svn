@@ -27,7 +27,9 @@ namespace Boxerp.Client.GtkSharp {
             Stetic.Gui.Initialize();
             // Widget Boxerp.Client.GtkSharp.QuestionDialog
             this.Name = "Boxerp.Client.GtkSharp.QuestionDialog";
+            this.Title = Mono.Unix.Catalog.GetString("Question");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
+            this.Modal = true;
             this.HasSeparator = false;
             // Internal child Boxerp.Client.GtkSharp.QuestionDialog.VBox
             Gtk.VBox w1 = this.VBox;
@@ -95,8 +97,8 @@ namespace Boxerp.Client.GtkSharp {
             this.DefaultWidth = 400;
             this.DefaultHeight = 99;
             this.Show();
-            this.buttonCancel.Clicked += new System.EventHandler(this.OnNo);
-            this.buttonOk.Clicked += new System.EventHandler(this.OnYes);
+            this.buttonCancel.Clicked += new System.EventHandler(this.OnCancel);
+            this.buttonOk.Clicked += new System.EventHandler(this.OnOk);
         }
     }
 }

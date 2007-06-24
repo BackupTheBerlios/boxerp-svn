@@ -20,6 +20,20 @@ namespace Boxerp.Client
 		protected ConcurrencyMode _concurrencyMode;
 				
 
+		// Just to notify clients when the transfer is completed
+		protected ThreadEventHandler transferCompleteEventHandler;
+		public event ThreadEventHandler TransferCompleteEvent
+      	{
+        	add
+         	{
+            	transferCompleteEventHandler += value;
+         	}
+         	remove
+        	{
+            	transferCompleteEventHandler -= value;
+         	}
+      	}
+		
 		public AbstractResponsiveHelper(ConcurrencyMode mode)
 		{
 			_concurrencyMode = mode;
@@ -197,12 +211,16 @@ namespace Boxerp.Client
 		{
 			lock (this)
 			{
-				Dictionary<int, Thread> threadsBlock = _threadDictionariesQueue.Peek();
-				foreach (Thread thread in threadsBlock.Values)
+				if (_threadDictionariesQueue.Count > 0)
 				{
-					if (thread.IsAlive)	// TODO: improve this somehow
+					Dictionary<int, Thread> threadsBlock = _threadDictionariesQueue.Peek();
+					foreach (Thread thread in threadsBlock.Values)
 					{
-						thread.Abort();
+						Console.WriteLine("state: " + thread.IsAlive + "," + thread.ThreadState); 
+						if ((thread.IsAlive) && (thread.ThreadState != ThreadState.Stopped))
+						{
+							thread.Abort();
+						}
 					}
 				}
 			}
@@ -274,7 +292,7 @@ namespace Boxerp.Client
 
 		public abstract void OnCancel(object sender, EventArgs e);
 		public abstract void OnTransferCompleted(object sender, ThreadEventArgs e);
-		public abstract event ThreadEventHandler TransferCompleteEvent;
+		
 
 		#endregion
 	}

@@ -17,6 +17,11 @@ namespace Boxerp.Client.GtkSharp
 		{
 			this.Build();
 		}
+
+		protected virtual void OnOk (object sender, System.EventArgs e)
+		{
+			this.Destroy();
+		}
 		
 		public string Message 
 		{

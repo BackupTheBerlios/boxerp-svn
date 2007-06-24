@@ -23,20 +23,6 @@ namespace Boxerp.Client.WPF
 		public WpfResponsiveHelper(ConcurrencyMode mode) : base(mode){ }
 
 
-		// Just to notify clients when the transfer is completed
-		private ThreadEventHandler transferCompleteEventHandler;
-		public override event ThreadEventHandler TransferCompleteEvent
-		{
-			add
-			{
-				transferCompleteEventHandler += value;
-			}
-			remove
-			{
-				transferCompleteEventHandler -= value;
-			}
-		}
-
 		/// <summary>
 		/// Create or manage a wait dialog and and invoke the base class. See more doc there
 		/// </summary>
@@ -90,8 +76,10 @@ namespace Boxerp.Client.WPF
 
 		public override void OnCancel(object sender, EventArgs e)
 		{
-			//CancelRequest = true;	 FIXME : for what thing was this intended?
+			CancelRequested = true;	 
 
+			
+			// TODO: Ask the user before force abort
 			MessageBox.Show("The process is being cancelled, it may take a while after you close this window");
 			
 			ForceAbort();

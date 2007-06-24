@@ -25,7 +25,9 @@ namespace Boxerp.Client.GtkSharp {
             Stetic.Gui.Initialize();
             // Widget Boxerp.Client.GtkSharp.WarningDialog
             this.Name = "Boxerp.Client.GtkSharp.WarningDialog";
+            this.Title = Mono.Unix.Catalog.GetString("Warning");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
+            this.Modal = true;
             this.HasSeparator = false;
             // Internal child Boxerp.Client.GtkSharp.WarningDialog.VBox
             Gtk.VBox w1 = this.VBox;
@@ -81,6 +83,7 @@ namespace Boxerp.Client.GtkSharp {
             this.DefaultWidth = 400;
             this.DefaultHeight = 106;
             this.Show();
+            this.buttonOk.Clicked += new System.EventHandler(this.OnOk);
         }
     }
 }

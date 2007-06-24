@@ -30,13 +30,13 @@ namespace Boxerp.Client.GtkSharp
 		    get { return answer; }
 		}
 		
-		protected virtual void OnNo(object sender, System.EventArgs e)
+		protected virtual void OnCancel(object sender, System.EventArgs e)
 		{
 		    answer = false;
 		    this.Hide();
 		}
 		
-		protected virtual void OnYes(object sender, System.EventArgs e)
+		protected virtual void OnOk(object sender, System.EventArgs e)
 		{
 		    answer = true;
 		    this.Hide();		    

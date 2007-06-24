@@ -23,6 +23,7 @@ namespace Boxerp.Client.GtkSharp {
             Stetic.Gui.Initialize();
             // Widget Boxerp.Client.GtkSharp.WaitDialog
             this.Name = "Boxerp.Client.GtkSharp.WaitDialog";
+            this.Title = Mono.Unix.Catalog.GetString("Operation in Progress");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
             this.HasSeparator = false;
             // Internal child Boxerp.Client.GtkSharp.WaitDialog.VBox
@@ -68,8 +69,9 @@ namespace Boxerp.Client.GtkSharp {
                 this.Child.ShowAll();
             }
             this.DefaultWidth = 400;
-            this.DefaultHeight = 106;
+            this.DefaultHeight = 109;
             this.Show();
+            this.buttonCancel.Clicked += new System.EventHandler(this.OnCancel);
         }
     }
 }

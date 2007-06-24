@@ -2,27 +2,29 @@
 <UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client/administrator/administrator.mds">
   <Files>
     <File filename="Welcome" />
-    <File filename="./Controllers/EditUserController.cs" />
-    <File filename="./Controllers/LoginController.cs" />
-    <File filename="./Controllers/MainController.cs" />
-    <File filename="./administrator/GtkSharp/MainWindow.cs" />
+    <File filename="./administrator/GtkSharp/Main.cs" />
+    <File filename="./Controllers/TestController.cs" />
+    <File filename="./administrator/GtkSharp/TestWindow.cs" />
+    <File filename="./Interfaces/ITestWindow.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
-        <Node expanded="True">
+        <Node expanded="True" selected="True">
           <Node name="administrator" expanded="True">
-            <Node name="GtkSharp" expanded="True">
-              <Node name="MainWindow.cs" expanded="False" selected="True" />
-            </Node>
+            <Node name="UserInterface" expanded="True" />
+            <Node name="GtkSharp" expanded="True" />
           </Node>
-          <Node name="Controllers" expanded="True" />
+          <Node name="Controllers" expanded="True">
+            <Node name="References" expanded="True" />
+          </Node>
+          <Node name="Interfaces" expanded="True" />
         </Node>
       </TreeView>
     </ViewMemento>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
       <TreeView>
-        <Node expanded="True" />
+        <Node expanded="True" selected="True" />
       </TreeView>
     </ViewMemento>
     <ViewMemento Id="MonoQuery.DatabasePad">
@@ -39,7 +41,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client/administrator/administrator/GtkSharp/MainWindow.cs" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client/administrator/administrator/GtkSharp/TestWindow.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

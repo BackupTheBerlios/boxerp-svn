@@ -13,7 +13,7 @@ namespace administrator
 {
 	class MainClass
 	{
-		LoginWindow loginWindow;
+/*		LoginWindow loginWindow;
 		MainWindow mainWindow;
 		public void LoginSuccess(object sender, EventArgs e)
 		{
@@ -30,17 +30,21 @@ namespace administrator
 			loginWindow.Destroy();
 			
 		}
-
+*/
 		
 		public static void Main (string[] args)
 		{
 			Application.Init ();
-			RemotingConfiguration.Configure("./clientRemoting.config");
-			MainClass main = new MainClass();
-			main.loginWindow = new LoginWindow ();
+			//RemotingConfiguration.Configure("./clientRemoting.config");
+			//MainClass main = new MainClass();
+			TestWindow test = new TestWindow();
+			test.Show();
+			Application.Run();
+/*			main.loginWindow = new LoginWindow ();
          	main.loginWindow.LoginEvent += main.LoginSuccess;
          	main.loginWindow.Show ();
 			Application.Run ();
+			 */
 		}
 	}
 }

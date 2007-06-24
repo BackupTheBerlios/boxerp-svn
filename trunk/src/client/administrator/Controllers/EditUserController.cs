@@ -13,7 +13,7 @@ using Boxerp.Client;
 namespace administrator
 {
 	
-	public partial class EditUserController 
+/*	public partial class EditUserController 
 	{
 		DoubleListView doubleListView;
 		User _user;
@@ -76,7 +76,7 @@ namespace administrator
 				Console.WriteLine("ok finally load gropus:" + transferSuccess);
 				StopTransfer();
 			}
-		}*/
+		}
 
 		[Responsive(ResponsiveEnum.Write)]
 		protected void SaveUser()
@@ -215,4 +215,5 @@ namespace administrator
 		}
 
 	}
+*/
 }

@@ -6,7 +6,7 @@ using Boxerp.Client;
 
 namespace administrator 
 {
-public class MainWindow: Gtk.Window
+/*public class MainWindow: Gtk.Window
 {
 	protected MainHelper _helper;
 	protected FilteredListView ftreeviewEnterprises;
@@ -66,7 +66,7 @@ public class MainWindow: Gtk.Window
 		    editUserWindow.Clear();
 		    editUserWindow.Reload();
 		    editUserWindow.Present();
-		}*/
+		}
 	}
 
 	protected virtual void OnEditUserClicked(object sender, System.EventArgs e)
@@ -95,7 +95,7 @@ public class MainWindow: Gtk.Window
             if (ftreeviewUsers.IsSelected())
             {
                 Console.WriteLine("ok, is selected: " + ftreeviewUsers.SelectedObject);
-            }*/
+            }
         }
     }
     
@@ -140,5 +140,5 @@ public class MainWindow: Gtk.Window
 	protected virtual void OnDelEnterpriseClicked(object sender, System.EventArgs e)
 	{
 	}
-}
+}*/
 }

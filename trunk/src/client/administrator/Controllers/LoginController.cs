@@ -1,6 +1,6 @@
-
+/*
 using System;
-using System.Collections.Generic;
+using System.Collections.Generics;
 using System.Collections;
 using System.Threading;
 using System.Reflection;
@@ -12,10 +12,9 @@ using Boxerp.Client;
 
 namespace administrator
 {
-	public partial class LoginController
+	public class LoginController : AbstractController
 	{
-		
-	    protected ILogin loginObj;
+		/*protected ILogin loginObj;
 		private bool logon;
 		private EventHandler loginEvent;
 		private string username, password;
@@ -48,13 +47,12 @@ namespace administrator
 		    base.Init();
 		}
 		
-		[Responsive(ResponsiveEnum.Read)]
 		protected void Login()
 		{
 			try
 			{
 			    
-			    Console.WriteLine("login!");
+			    /*Console.WriteLine("login!");
 				UserInformation.SetUserName(username);
 				int code = loginObj.Login(username, password);
 				if (code == 0)
@@ -65,28 +63,29 @@ namespace administrator
 			}
 			catch (ThreadAbortException ex)
 			{
-			    logon = false;
-			    OnAbortRemoteCall(ex.StackTrace);
+			    //logon = false;
+				
+			    //OnAbortRemoteCall(ex.StackTrace);
 			}
 			catch (System.Net.WebException we)
 			{
-			    logon = false;
-				Console.WriteLine("Excepction: " + we.Message);
-				OnRemoteException("Network failure:" + we.Message);
+			    //logon = false;
+				//Console.WriteLine("Excepction: " + we.Message);
+				//OnRemoteException("Network failure:" + we.Message);
 			}
 			catch (Exception e)
 			{
-				logon = false;
-				Console.WriteLine("Exception: " + e.Message);
-				OnRemoteException(e.Message);
+				//logon = false;
+				//Console.WriteLine("Exception: " + e.Message);
+				//OnRemoteException(e.Message);
 			}
 			finally
 			{
-			    StopTransfer(Thread.CurrentThread.ManagedThreadId, MethodInfo.GetCurrentMethod(), logon);
+			    //StopTransfer(Thread.CurrentThread.ManagedThreadId, MethodInfo.GetCurrentMethod(), logon);
 			}
 		}
 		
-				public override void PopulateGUI()
+/*		public override void PopulateGUI()
 		{
 		    if (logon)
 			{
@@ -103,6 +102,7 @@ namespace administrator
 				Gtk.Application.Quit();
 			}
 		}
-
+		 
 	}
 }
+*/

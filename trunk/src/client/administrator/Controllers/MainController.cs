@@ -13,7 +13,7 @@ using Boxerp.Client;
 namespace administrator
 {
 	
-	public partial class MainHelper : GtkResponsiveHelper
+/*	public partial class MainHelper : GtkResponsiveHelper
 	{
 		FilteredListView ftreeviewEnterprises, 
 								ftreeviewUsers, 
@@ -253,9 +253,9 @@ namespace administrator
 			{
 				groups = null;
 			}
-		}*/
+		}
 		
 
 		
-	}
+	}*/
 }

@@ -10,15 +10,16 @@
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
-        <Node expanded="True" selected="True">
-          <Node name="administrator" expanded="True">
-            <Node name="UserInterface" expanded="True" />
-            <Node name="GtkSharp" expanded="True" />
+        <Node expanded="True">
+          <Node name="Admin" expanded="True">
+            <Node name="GtkSharp" expanded="True">
+              <Node name="TestWindow.cs" expanded="False" selected="True" />
+            </Node>
           </Node>
-          <Node name="Controllers" expanded="True">
+          <Node name="Admin.Controllers" expanded="True">
             <Node name="References" expanded="True" />
           </Node>
-          <Node name="Interfaces" expanded="True" />
+          <Node name="Admin.Interfaces" expanded="True" />
         </Node>
       </TreeView>
     </ViewMemento>

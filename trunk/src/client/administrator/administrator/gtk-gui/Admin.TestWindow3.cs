@@ -11,7 +11,7 @@
 namespace Admin {
     
     
-    public partial class TestWindow {
+    public partial class TestWindow3 {
         
         private Gtk.HBox hbox1;
         
@@ -23,11 +23,11 @@ namespace Admin {
         
         protected virtual void Build() {
             Stetic.Gui.Initialize();
-            // Widget Admin.TestWindow
-            this.Name = "Admin.TestWindow";
-            this.Title = Mono.Unix.Catalog.GetString("TestWindow");
+            // Widget Admin.TestWindow3
+            this.Name = "Admin.TestWindow3";
+            this.Title = Mono.Unix.Catalog.GetString("TestWindow3");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
-            // Container child Admin.TestWindow.Gtk.Container+ContainerChild
+            // Container child Admin.TestWindow3.Gtk.Container+ContainerChild
             this.hbox1 = new Gtk.HBox();
             this.hbox1.Name = "hbox1";
             this.hbox1.Spacing = 6;
@@ -50,7 +50,7 @@ namespace Admin {
             this.button4.CanFocus = true;
             this.button4.Name = "button4";
             this.button4.UseUnderline = true;
-            this.button4.Label = Mono.Unix.Catalog.GetString("Start in ConcurrencyMode.Modal");
+            this.button4.Label = Mono.Unix.Catalog.GetString("Start in ConcurrencyMode.Parallel");
             this.vbox1.Add(this.button4);
             Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.vbox1[this.button4]));
             w2.Position = 1;
@@ -64,10 +64,9 @@ namespace Admin {
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.DefaultWidth = 351;
-            this.DefaultHeight = 92;
+            this.DefaultWidth = 400;
+            this.DefaultHeight = 118;
             this.Show();
-            this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnDeleteEvent);
             this.button4.Clicked += new System.EventHandler(this.OnClicked);
         }
     }

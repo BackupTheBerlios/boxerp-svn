@@ -1,5 +1,5 @@
-// /home/carlos/boxerp_completo/trunk/src/client/administrator/administrator/TestWindow.cs created with MonoDevelop
-// User: carlos at 10:01 PM 6/23/2007
+// /home/carlos/boxerp_completo/trunk/src/client/administrator/administrator/GtkSharp/TestWindow2.cs created with MonoDevelop
+// User: carlos at 6:54 AM 6/29/2007
 //
 // To change standard headers go to Edit->Preferences->Coding->Standard Headers
 //
@@ -9,22 +9,22 @@
 using System;
 using Admin.Interfaces;
 using Admin.Controllers;
-using Boxerp.Client;
 using Boxerp.Client.GtkSharp;
+using Boxerp.Client;
 
 namespace Admin
 {
 	
 	
-	public partial class TestWindow : Gtk.Window, ITestWindow
+	public partial class TestWindow2 : Gtk.Window, ITestWindow
 	{
 		private TestController _controller;
 		
-		public TestWindow() : 
+		public TestWindow2() : 
 				base(Gtk.WindowType.Toplevel)
 		{
 			this.Build();
-			_controller = new TestController(new GtkResponsiveHelper(ConcurrencyMode.Modal), this);
+			_controller = new TestController(new GtkResponsiveHelper(ConcurrencyMode.SingletonThread), this);
 		}
 
 		protected virtual void OnClicked (object sender, System.EventArgs e)

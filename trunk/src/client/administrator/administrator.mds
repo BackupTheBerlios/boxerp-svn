@@ -19,7 +19,7 @@
   <DeployTargets />
   <Entries>
     <Entry filename="./administrator/administrator.mdp" />
-    <Entry filename="./Controllers/Controllers.mdp" />
-    <Entry filename="./Interfaces/Interfaces.mdp" />
+    <Entry filename="./administrator/Controllers/Controllers.mdp" />
+    <Entry filename="./administrator/Interfaces/Interfaces.mdp" />
   </Entries>
 </Combine>

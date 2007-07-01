@@ -19,8 +19,8 @@
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Assembly" localcopy="True" refto="../../../client-lib/gtksharp/bin/Debug/Boxerp.Client.GtkSharp.dll" />
-    <ProjectReference type="Assembly" localcopy="True" refto="../../../client-lib/client-base/bin/Debug/Boxerp.Client.dll" />
     <ProjectReference type="Project" localcopy="True" refto="Admin.Interfaces" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../../client-lib/client-base/bin/Debug/Boxerp.Client.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../../client-lib/gtksharp/bin/Debug/Boxerp.Client.GtkSharp.dll" />
   </References>
 </Project>

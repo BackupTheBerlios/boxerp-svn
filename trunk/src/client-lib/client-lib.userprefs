@@ -3,18 +3,15 @@
   <Files>
     <File filename="Welcome" />
     <File filename="./gtksharp/GtkResponsiveHelper.cs" />
-    <File filename="./gtksharp/InfoDialog.cs" />
-    <File filename="./gtksharp/WaitDialog.cs" />
     <File filename="./client-base/AbstractResponsiveHelper.cs" />
+    <File filename="./wpf/WpfResponsiveHelper.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="Boxerp.Client" expanded="True">
-            <Node name="AbstractResponsiveHelper.cs" expanded="False" selected="True" />
-          </Node>
-          <Node name="Boxerp.Client.GtkSharp" expanded="True">
+          <Node name="Boxerp.Client" expanded="True" />
+          <Node name="Boxerp.Client.GtkSharp" expanded="True" selected="True">
             <Node name="UserInterface" expanded="True" />
           </Node>
           <Node name="wpf" expanded="True" />

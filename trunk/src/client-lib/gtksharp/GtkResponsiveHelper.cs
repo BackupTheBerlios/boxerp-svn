@@ -34,6 +34,7 @@ namespace Boxerp.Client.GtkSharp
 				else
 				{
 					_waitWindow = new WaitWindow();
+					_waitWindow.Modal = false;
 					_waitWindow.CancelEvent += OnCancel;
 					_windows.Enqueue(_waitWindow);
 				}
@@ -47,7 +48,8 @@ namespace Boxerp.Client.GtkSharp
 			}
 			else
 			{
-				_waitWindow.Show();
+				_waitWindow.ShowAll();
+				_waitWindow.Present();
 				// TODO : if the window is minimized show it in the middle of the screen
 			}
 		}
@@ -66,6 +68,7 @@ namespace Boxerp.Client.GtkSharp
 				else
 				{
 					_waitWindow = new WaitWindow();
+					_waitWindow.Modal = false;
 					_waitWindow.CancelEvent += OnCancel;
 					_windows.Enqueue(_waitWindow);
 				}
@@ -79,7 +82,7 @@ namespace Boxerp.Client.GtkSharp
 			}
 			else
 			{
-				_waitWindow.Show();
+				_waitWindow.ShowAll();
 				_waitWindow.Present();
 				// TODO : if the window is minimized show it in the middle of the screen
 			}

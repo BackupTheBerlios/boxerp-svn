@@ -2,23 +2,17 @@
 <UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client/administrator/administrator.mds">
   <Files>
     <File filename="Welcome" />
-    <File filename="./administrator/GtkSharp/Main.cs" />
-    <File filename="./Controllers/TestController.cs" />
-    <File filename="./administrator/GtkSharp/TestWindow.cs" />
-    <File filename="./Interfaces/ITestWindow.cs" />
+    <File filename="./administrator/GtkSharp/TestWindow2.cs" />
+    <File filename="./administrator/Controllers/TestController.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="Admin" expanded="True">
-            <Node name="GtkSharp" expanded="True">
-              <Node name="TestWindow.cs" expanded="False" selected="True" />
-            </Node>
-          </Node>
-          <Node name="Admin.Controllers" expanded="True">
+          <Node name="Admin" expanded="True" selected="True">
             <Node name="References" expanded="True" />
           </Node>
+          <Node name="Admin.Controllers" expanded="True" />
           <Node name="Admin.Interfaces" expanded="True" />
         </Node>
       </TreeView>
@@ -42,7 +36,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client/administrator/administrator/GtkSharp/TestWindow.cs" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client/administrator/administrator/Controllers/TestController.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

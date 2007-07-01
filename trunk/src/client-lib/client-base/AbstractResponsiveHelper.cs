@@ -11,11 +11,11 @@ namespace Boxerp.Client
 	/// </summary>
 	public abstract class AbstractResponsiveHelper: IResponsiveClient
 	{
-		private static Queue<Dictionary<int, Thread>> _threadDictionariesQueue = new Queue<Dictionary<int, Thread>>();
-		private static Queue<bool> _operationSuccessQueue = new Queue<bool>();
-		private static Queue<string> _exceptionQueue = new Queue<string>();
-		private static Queue<ResponsiveEnum> _operationTypeQueue = new Queue<ResponsiveEnum>();
-		private static Queue<bool> _cancelRequestQueue = new Queue<bool>(); 
+		private  Queue<Dictionary<int, Thread>> _threadDictionariesQueue = new Queue<Dictionary<int, Thread>>();
+		private  Queue<bool> _operationSuccessQueue = new Queue<bool>();
+		private  Queue<string> _exceptionQueue = new Queue<string>();
+		private  Queue<ResponsiveEnum> _operationTypeQueue = new Queue<ResponsiveEnum>();
+		private  Queue<bool> _cancelRequestQueue = new Queue<bool>(); 
 		        
 		protected ConcurrencyMode _concurrencyMode;
 				

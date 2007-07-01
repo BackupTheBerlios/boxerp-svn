@@ -7,16 +7,15 @@
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="Boxerp.Client" expanded="True" />
-          <Node name="Boxerp.Client.GtkSharp.Lib" expanded="True" selected="True" />
+          <Node name="Boxerp.Client" expanded="True">
+            <Node name="AbstractBindableWrapper.cs" expanded="False" selected="True" />
+          </Node>
         </Node>
       </TreeView>
     </ViewMemento>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
       <TreeView>
-        <Node expanded="True">
-          <Node name="Boxerp.Client.GtkSharp.Lib" expanded="True" />
-        </Node>
+        <Node expanded="True" />
       </TreeView>
     </ViewMemento>
     <ViewMemento Id="MonoQuery.DatabasePad">

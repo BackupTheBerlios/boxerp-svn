@@ -1,0 +1,25 @@
+<Combine name="administrator" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="administrator" configuration="Debug" />
+      <Entry build="True" name="Controllers" configuration="Debug" />
+      <Entry build="True" name="Interfaces" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="administrator" configuration="Release" />
+      <Entry build="True" name="Controllers" configuration="Release" />
+      <Entry build="True" name="Interfaces" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="Admin" single="True">
+    <Execute type="None" entry="administrator" />
+    <Execute type="None" entry="Controllers" />
+    <Execute type="None" entry="Interfaces" />
+  </StartMode>
+  <DeployTargets />
+  <Entries>
+    <Entry filename="./administrator/administrator.mdp" />
+    <Entry filename="./administrator/Controllers/Controllers.mdp" />
+    <Entry filename="./administrator/Interfaces/Interfaces.mdp" />
+  </Entries>
+</Combine>

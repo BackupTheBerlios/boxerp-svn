@@ -24,9 +24,26 @@ namespace Boxerp.Client.WPF
 			InitializeComponent();
 		}
 
+		public string Text
+		{
+			get
+			{
+				return _textBox.Text;
+			}
+			set
+			{
+				_textBox.Text = CleanString(value);
+			}
+		}
+
 		private string CleanString()
 		{
-			string currentStr = _textBox.Text;
+			return CleanString(_textBox.Text);
+		}
+
+		private string CleanString(string val)
+		{
+			string currentStr = val;
 			string cleaned = String.Empty;
 			if (currentStr.Length > 0)
 			{

@@ -10,6 +10,6 @@ namespace Boxerp.Client
 
 	public interface IBindableWrapper<T> : IBindableWrapper
 	{
-
+		Type GetWrappedObjectType();
 	}
 }

@@ -25,6 +25,11 @@ namespace Boxerp.Client
 			}
 		}
 
+		public Type GetWrappedObjectType()
+		{
+			return typeof(T);
+		}
+
 		public void UnDo()
 		{
 			if (_undoStack.Count > 0)

@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Boxerp.Client, Version=1.0.2725.23321, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\client-base\bin\Debug\Boxerp.Client.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86" />
     <Reference Include="PresentationFramework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -68,6 +64,12 @@
     <Page Include="NullableIntegerControl.xaml" />
     <Page Include="NullableTextControl.xaml" />
     <Page Include="WaitDialog.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\client-base\client-base.csproj">
+      <Project>{701CF3A1-60F3-4938-B0DD-CBFBC6DEF7D5}</Project>
+      <Name>client-base</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />

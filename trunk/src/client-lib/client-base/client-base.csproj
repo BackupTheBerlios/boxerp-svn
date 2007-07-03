@@ -31,6 +31,7 @@
     <Compile Include="AbstractController.cs" />
     <Compile Include="AbstractResponsiveHelper.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BindableWithCollection.cs" />
     <Compile Include="BindableWrapper.cs" />
     <Compile Include="ConcurrencyMode.cs" />
     <Compile Include="Delegates.cs" />

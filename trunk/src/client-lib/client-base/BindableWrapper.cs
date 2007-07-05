@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Castle.DynamicProxy;
 
 namespace Boxerp.Client
 {
@@ -12,13 +13,13 @@ namespace Boxerp.Client
 	public class BindableWrapper<T> : AbstractBindableWrapper<T, BindableWrapper<T>.WrapObject<T>>
 	{
 		public BindableWrapper(T businessObj)
-		{
-			Data = new BindableWrapper<T>.WrapObject<T>(businessObj);
-		}
+			: base(businessObj, typeof(BindableWrapper<T>.WrapObject<T>))
+		{}
 
 		public class WrapObject<D> : AbstractBindableWrapper<D, BindableWrapper<D>.WrapObject<D>>.BindableFields<D>
 		{
-			public WrapObject(D businessObj) : base (businessObj) {}
+			public WrapObject(D businessObj, IInterceptor interceptor) : 
+				base (businessObj, interceptor) {}
 		}
 	}
 }

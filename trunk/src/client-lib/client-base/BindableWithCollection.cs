@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Castle.DynamicProxy;
 
 namespace Boxerp.Client
 {
 	public class BindableWithCollection<T, Y> : AbstractBindableWrapper<T, BindableWithCollection<T, Y>.WrapObject<T, Y>>
 	{
 		public BindableWithCollection(T businessObj)
-		{
-			Data = new BindableWithCollection<T, Y>.WrapObject<T, Y>(businessObj);
-		}
+			: base (businessObj, typeof(BindableWithCollection<T, Y>.WrapObject<T, Y>))
+		{}
 
 		public Type GetRelatedObjectType()
 		{
@@ -31,8 +31,8 @@ namespace Boxerp.Client
 				set { _list = value; }
 			}
 			
-			public WrapObject(D businessObj)
-				: base(businessObj)	{}
+			public WrapObject(D businessObj, IInterceptor interceptor)
+				: base(businessObj, interceptor)	{}
 		}
 	}
 }

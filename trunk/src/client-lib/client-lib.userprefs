@@ -5,6 +5,9 @@
     <File filename="./gtksharp/GtkResponsiveHelper.cs" />
     <File filename="./client-base/AbstractResponsiveHelper.cs" />
     <File filename="./wpf/WpfResponsiveHelper.cs" />
+    <File filename="./gtksharp/WaitWindow.cs" />
+    <File filename="Documentation" />
+    <File filename="./gtksharp/WaitDialog.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
@@ -37,7 +40,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/client-base/AbstractResponsiveHelper.cs" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/WaitDialog.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

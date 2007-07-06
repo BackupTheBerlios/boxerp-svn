@@ -30,9 +30,9 @@ namespace Boxerp.Client
 				get { return _list; }
 				set { _list = value; }
 			}
-			
-			public WrapObject(D businessObj, IInterceptor interceptor)
-				: base(businessObj, interceptor)	{}
+
+			public WrapObject() { }
+				
 		}
 	}
 }

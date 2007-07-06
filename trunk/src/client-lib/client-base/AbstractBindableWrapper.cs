@@ -47,8 +47,10 @@ namespace Boxerp.Client
 		{
 			lock (this)
 			{
-				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, this, businessObj, this);
-				copyBOtoProxy(businessObj);
+				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, this);
+				T proxy = (T)_generator.CreateClassProxy(typeof(T), this);
+				copyBOtoProxy(proxy, businessObj);
+				Data.BusinessObj = proxy;
 			}
 		}
 
@@ -58,8 +60,6 @@ namespace Boxerp.Client
 			{
 				return _bindableFields;
 			}
-
-			
 		}
 
 		public Type GetWrappedObjectType()
@@ -186,7 +186,7 @@ namespace Boxerp.Client
 		{
 			if (!_dontIntercept)
 			{
-				if (invocation.Method.Name.Contains("set_"))	// setting the property value
+				if (invocation.Method.Name.StartsWith("set_"))	// setting the property value
 				{
 					string propDirtyName = invocation.Method.Name;
 					string propName = propDirtyName.Substring(propDirtyName.IndexOf('_') + 1);
@@ -229,23 +229,12 @@ namespace Boxerp.Client
 		}
 		#endregion
 
-
-
 		public abstract class BindableFields<D>
 		{
-			private bool _isDirty = false;
 			private D _businessObj;
-			private ProxyGenerator _proxyGenerator = new ProxyGenerator();
-
-			public BindableFields(D businessObj, IInterceptor interceptor)
+			
+			public BindableFields()
 			{
-				_businessObj = (D)_proxyGenerator.CreateClassProxy(typeof(D), interceptor);
-			}
-
-			public bool IsDirty
-			{
-				get { return _isDirty; }
-				set { _isDirty = value; }
 			}
 
 			public D BusinessObj
@@ -254,7 +243,6 @@ namespace Boxerp.Client
 				{
 					return _businessObj;
 				}
-
 				internal set
 				{
 					_businessObj = value;

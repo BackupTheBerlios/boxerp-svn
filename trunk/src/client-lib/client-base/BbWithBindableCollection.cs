@@ -33,10 +33,11 @@ using Castle.DynamicProxy;
 
 namespace Boxerp.Client
 {
-	public class BindableWithCollection<T, Y> : AbstractBindableWrapper<T, BindableWithCollection<T, Y>.WrapObject<T, Y>>
+	public class BdWithBindableCollection<T, Y> : AbstractBindableWrapper<T, BdWithBindableCollection<T, Y>.WrapObject<T, Y>>
+		where Y : IBindableWrapper
 	{
-		public BindableWithCollection(T businessObj)
-			: base (businessObj, typeof(BindableWithCollection<T, Y>.WrapObject<T, Y>))
+		public BdWithBindableCollection(T businessObj)
+			: base (businessObj, typeof(BdWithBindableCollection<T, Y>.WrapObject<T, Y>))
 		{}
 
 		public Type GetRelatedObjectType()
@@ -49,7 +50,25 @@ namespace Boxerp.Client
 			return typeof(List<Y>);
 		}
 		
-		public class WrapObject<D, Z> : AbstractBindableWrapper<D, BindableWithCollection<D, Z>.WrapObject<D, Z>>.BindableFields<D>
+		public override void Undo()
+		{
+			base.Undo();
+			foreach (Y listItem in Data.Collection)
+			{
+				listItem.Undo();
+			}
+		}
+			
+		public override void Redo()
+		{
+			base.Redo();
+			foreach (Y listItem in Data.Collection)
+			{
+				listItem.Redo();
+			}
+		}
+
+		public class WrapObject<D, Z> : AbstractBindableWrapper<D, BdWithBindableCollection<D, Z>.WrapObject<D, Z>>.BindableFields<D>
 		{
 			private ProxyGenerator _proxyGenerator = new ProxyGenerator();
 			private List<Z> _list;
@@ -67,11 +86,23 @@ namespace Boxerp.Client
 				}
 			}
 
+			
 			public WrapObject(IInterceptor interceptor)
 				: base(interceptor)
 			{
 				// to intercept changes in the list fields: add/remove items
 				_list = (List<Z>)_proxyGenerator.CreateClassProxy(typeof(List<Z>), interceptor);
+			}
+					
+			public WrapObject(IInterceptor interceptor, List<Z> sourceList)
+				: base(interceptor)
+			{
+				// to intercept changes in the list fields: add/remove items
+				_list = (List<Z>)_proxyGenerator.CreateClassProxy(typeof(List<Z>), interceptor);
+				foreach (Z sourceItem in sourceList)
+				{
+						_list.Add(sourceItem);
+				}
 			}
 		}
 	}

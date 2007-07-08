@@ -33,6 +33,8 @@ namespace Boxerp.Client
 {
 	public interface IBindableWrapper
 	{
+		void Undo();
+		void Redo();
 	}
 
 	public interface IBindableWrapper<T> : IBindableWrapper

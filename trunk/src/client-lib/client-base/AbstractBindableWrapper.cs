@@ -47,7 +47,7 @@ namespace Boxerp.Client
 		{
 			lock (this)
 			{
-				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, this);
+				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, this, this);
 				T proxy = (T)_generator.CreateClassProxy(typeof(T), this);
 				copyBOtoProxy(proxy, businessObj);
 				Data.BusinessObj = proxy;
@@ -67,7 +67,7 @@ namespace Boxerp.Client
 			return typeof(T);
 		}
 
-		public void UnDo()
+		public virtual void Undo()
 		{
 			if (_undoStack.Count > 0)
 			{
@@ -79,7 +79,7 @@ namespace Boxerp.Client
 			}
 		}
 
-		public void ReDo()
+		public virtual void Redo()
 		{
 			if (_redoStack.Count > 0)
 			{
@@ -232,9 +232,11 @@ namespace Boxerp.Client
 		public abstract class BindableFields<D>
 		{
 			private D _businessObj;
+			protected IInterceptor _interceptor;
 			
-			public BindableFields()
+			public BindableFields(IInterceptor interceptor)
 			{
+				_interceptor = interceptor;
 			}
 
 			public D BusinessObj

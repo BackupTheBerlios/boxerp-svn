@@ -31,12 +31,12 @@
     <File name="./IController.cs" subtype="Code" buildaction="Compile" />
     <File name="./ConcurrencyMode.cs" subtype="Code" buildaction="Compile" />
     <File name="./AbstractController.cs" subtype="Code" buildaction="Compile" />
+    <File name="./BindableWithCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="./BbWithBindableCollection.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Assembly" localcopy="True" refto="../../server/Interfaces.dll" />
-    <ProjectReference type="Assembly" localcopy="True" refto="../../server/Models.dll" />
-    <ProjectReference type="Assembly" localcopy="True" refto="../../server/Objects.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../server/castle-bin/Castle.DynamicProxy.dll" />
   </References>
   <DeployTargets />
 </Project>

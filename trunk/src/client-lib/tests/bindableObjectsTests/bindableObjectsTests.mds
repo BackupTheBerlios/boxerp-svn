@@ -1,0 +1,16 @@
+<Combine name="bindableObjectsTests" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="bindableObjectsTests" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="bindableObjectsTests" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="bindableObjectsTests" single="True">
+    <Execute type="None" entry="bindableObjectsTests" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./bindableObjectsTests/bindableObjectsTests.mdp" />
+  </Entries>
+</Combine>

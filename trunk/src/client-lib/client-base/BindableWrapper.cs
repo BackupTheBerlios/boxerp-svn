@@ -45,7 +45,11 @@ namespace Boxerp.Client
 
 		public class WrapObject<D> : AbstractBindableWrapper<D, BindableWrapper<D>.WrapObject<D>>.BindableFields<D>
 		{
-			public WrapObject() { }
+			public WrapObject(IInterceptor interceptor)
+				: base(interceptor)
+			{ 
+			
+			}
 				
 		}
 	}

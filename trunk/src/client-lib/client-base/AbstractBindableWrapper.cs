@@ -43,6 +43,23 @@ namespace Boxerp.Client
 		private ProxyGenerator _generator = new ProxyGenerator();
 		private bool _dontIntercept = false;
 
+		public AbstractBindableWrapper(T businessObj, Type wrapper, params object[] constructorParams)
+		{
+			lock (this)
+			{
+				object[] argumentsForConstructor = new object[constructorParams.Length + 1];
+				argumentsForConstructor[0] = this;
+				for (int i = 1; i < argumentsForConstructor.Length; i++)
+				{
+						argumentsForConstructor[i] = constructorParams[i -1];
+				}
+				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, this, argumentsForConstructor);
+				T proxy = (T)_generator.CreateClassProxy(typeof(T), this);
+				copyBOtoProxy(proxy, businessObj);
+				Data.BusinessObj = proxy;
+			}
+		}
+
 		public AbstractBindableWrapper(T businessObj, Type wrapper)
 		{
 			lock (this)
@@ -53,7 +70,7 @@ namespace Boxerp.Client
 				Data.BusinessObj = proxy;
 			}
 		}
-
+			
 		public Y Data
 		{
 			get

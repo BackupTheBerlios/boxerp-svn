@@ -4,7 +4,6 @@
     <File filename="Welcome" />
     <File filename="./bindableObjectsTests/SimpleBusinessObjTests.cs" />
     <File filename="./bindableObjectsTests/SimpleBusinessObject.cs" />
-    <File filename="./bindableObjectsTests/NestedBusinessObject.cs" />
     <File filename="./bindableObjectsTests/NestedBusinessObjTests.cs" />
     <File filename="./bindableObjectsTests/NestedCollectionBusinessObjTests.cs" />
     <File filename="./bindableObjectsTests/NestedBindableCollectionTests.cs" />
@@ -38,7 +37,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/tests/bindableObjectsTests/bindableObjectsTests/NestedBindableCollectionTests.cs" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/tests/bindableObjectsTests/bindableObjectsTests/NestedBusinessObjTests.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

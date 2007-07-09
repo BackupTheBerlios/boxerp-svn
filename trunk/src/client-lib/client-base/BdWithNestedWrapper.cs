@@ -33,60 +33,49 @@ using Castle.DynamicProxy;
 
 namespace Boxerp.Client
 {
-	public class BdWithBindableCollection<T, Y> : AbstractBindableWrapper<T, BdWithBindableCollection<T, Y>.WrapObject<T, Y>>
+	public class BdWithNestedWrapper<T, Y> : AbstractBindableWrapper<T, BdWithNestedWrapper<T, Y>.WrapObject<T, Y>>
 		where Y : IBindableWrapper
 	{
-		public BdWithBindableCollection(T businessObj, List<Y> sourceList)
-			: base (businessObj, typeof(BdWithBindableCollection<T, Y>.WrapObject<T, Y>), sourceList)
+		public BdWithNestedWrapper(T businessObj, Y nestedWrapper)
+			: base (businessObj, typeof(BdWithNestedWrapper<T, Y>.WrapObject<T, Y>), nestedWrapper)
 		{}
 
-		public BdWithBindableCollection(T businessObj)
-			: base (businessObj, typeof(BdWithBindableCollection<T, Y>.WrapObject<T, Y>))
+		public BdWithNestedWrapper(T businessObj)
+			: base (businessObj, typeof(BdWithNestedWrapper<T, Y>.WrapObject<T, Y>))
 		{}
 			
-		public Type GetRelatedObjectType()
+		public Type GetNestedObjectType()
 		{
 			return typeof(Y);
 		}
 
-		public virtual Type GetCollectionType()
-		{
-			return typeof(List<Y>);
-		}
-		
 		public override void Undo()
 		{
 			base.Undo();
-			foreach (Y listItem in Data.Collection)
-			{
-				listItem.Undo();
-			}
+			Data.NestedWrapper.Undo();	
 		}
 			
 		public override void Redo()
 		{
 			base.Redo();
-			foreach (Y listItem in Data.Collection)
-			{
-				listItem.Redo();
-			}
+			Data.NestedWrapper.Redo();
 		}
 
-		public class WrapObject<D, Z> : AbstractBindableWrapper<D, BdWithBindableCollection<D, Z>.WrapObject<D, Z>>.BindableFields<D>
+		public class WrapObject<D, Z> : AbstractBindableWrapper<D, BdWithNestedWrapper<D, Z>.WrapObject<D, Z>>.BindableFields<D>
+				where Z : IBindableWrapper
 		{
-			private ProxyGenerator _proxyGenerator = new ProxyGenerator();
-			private List<Z> _list;
+			private Z _nestedWrapper;
 			
-			public virtual List<Z> Collection     // virtual to intercept the get and set
+			public virtual Z NestedWrapper     // virtual to intercept the get and set
 			{
 				get 
 				{ 
-					return _list; 
+					return _nestedWrapper; 
 				}
 				
-				internal set 
+				set 
 				{ 
-					_list = value; 
+					_nestedWrapper = value; 
 				}
 			}
 
@@ -94,19 +83,13 @@ namespace Boxerp.Client
 			public WrapObject(IInterceptor interceptor)
 				: base(interceptor)
 			{
-				// to intercept changes in the list fields: add/remove items
-				_list = (List<Z>)_proxyGenerator.CreateClassProxy(typeof(List<Z>), interceptor);
+				
 			}
 					
-			public WrapObject(IInterceptor interceptor, List<Z> sourceList)
+			public WrapObject(IInterceptor interceptor, Z nestedWrapper)
 				: base(interceptor)
 			{
-				// to intercept changes in the list fields: add/remove items
-				_list = (List<Z>)_proxyGenerator.CreateClassProxy(typeof(List<Z>), interceptor);
-				foreach (Z sourceItem in sourceList)
-				{
-						_list.Add(sourceItem);
-				}
+				_nestedWrapper = nestedWrapper;
 			}
 		}
 	}

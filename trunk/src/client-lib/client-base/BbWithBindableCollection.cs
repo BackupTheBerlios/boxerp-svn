@@ -73,6 +73,7 @@ namespace Boxerp.Client
 		}
 
 		public class WrapObject<D, Z> : AbstractBindableWrapper<D, BdWithBindableCollection<D, Z>.WrapObject<D, Z>>.BindableFields<D>
+			where Z : IBindableWrapper
 		{
 			private ProxyGenerator _proxyGenerator = new ProxyGenerator();
 			private List<Z> _list;

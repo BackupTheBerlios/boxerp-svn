@@ -30,7 +30,9 @@ public class NestedBindableCollectionTests
 	{
 		BdWithBindableCollection<SimpleBusinessObject, BindableWrapper<SimpleBusinessObject>> bindable =
 				new BdWithBindableCollection<SimpleBusinessObject,BindableWrapper<SimpleBusinessObject>>
-					(new SimpleBusinessObject());	
+					(new SimpleBusinessObject());
+
+		Assert.AreEqual(bindable.Data.Collection.Count, 0);
 		bindable.Data.Collection.Add(new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject()));
 		bindable.Data.Collection[0].Data.BusinessObj.Name = "whatever";
 			

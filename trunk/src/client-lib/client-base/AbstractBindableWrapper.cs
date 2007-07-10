@@ -198,6 +198,16 @@ namespace Boxerp.Client
 			return (Y)copy;
 		}
 
+		/*public void PushOnUndo()
+		{
+			_undoStack.Push(cloneBindable(_bindableFields, _bindableFields.SwallowCopy()));
+		}
+
+		public void PushOnRedo()
+		{
+
+		}*/
+
 		#region Interceptor implementation
 		public override object Intercept(IInvocation invocation, params object[] args)
 		{

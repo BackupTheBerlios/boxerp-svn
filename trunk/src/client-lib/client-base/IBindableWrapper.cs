@@ -28,13 +28,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Castle.DynamicProxy;
 
 namespace Boxerp.Client
 {
-	public interface IBindableWrapper
+	public interface IBindableWrapper : IInterceptor
 	{
 		void Undo();
 		void Redo();
+		//void PushOnUndo();
+		//void PushOnRedo();
 	}
 
 	public interface IBindableWrapper<T> : IBindableWrapper

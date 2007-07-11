@@ -1,0 +1,6 @@
+Dependencies :
+ 1 - CastleProject
+	The CastleProject license is Apache2.
+	The binaries in this folder corresponde to : Build 443 - 7/5/2007 11:49 PM
+ 2 - NUnit
+

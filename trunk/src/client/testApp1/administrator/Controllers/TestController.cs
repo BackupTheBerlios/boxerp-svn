@@ -50,7 +50,7 @@ namespace Admin.Controllers
 		
 		protected override void OnAsyncOperationFinish(Object sender, ThreadEventArgs args)
 		{
-			if ((args.Success) && (args.MethodBase == Method(runMethod)))
+			if ((args.Success) && (args.MethodBase == MethodBase(runMethod)))
 			{
 				_control.ShowSomething();
 			}

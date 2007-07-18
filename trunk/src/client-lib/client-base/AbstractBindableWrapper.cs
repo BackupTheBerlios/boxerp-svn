@@ -31,10 +31,11 @@ using System.Collections;
 using System.Text;
 using System.Reflection;
 using Castle.DynamicProxy;
+using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
-	public abstract class AbstractBindableWrapper<T, Y> : StandardInterceptor, 
+	public abstract class AbstractBindableWrapper<T, Y> : IInterceptor, 
 		IBindableWrapper<T> where Y : AbstractBindableWrapper<T, Y>.BindableFields<T>
 	{
 		private Y _bindableFields;
@@ -53,7 +54,9 @@ namespace Boxerp.Client
 				{
 						argumentsForConstructor[i] = constructorParams[i -1];
 				}
-				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, this, argumentsForConstructor);
+				IInterceptor[] interceptors = new AbstractBindableWrapper<T, Y>[1];
+				interceptors[0] = this;
+				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, interceptors, argumentsForConstructor);
 				T proxy = (T)_generator.CreateClassProxy(typeof(T), this);
 				copyBOtoProxy(proxy, businessObj);
 				Data.BusinessObj = proxy;
@@ -64,7 +67,11 @@ namespace Boxerp.Client
 		{
 			lock (this)
 			{
-				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, this, this);
+				IInterceptor[] interceptors = new AbstractBindableWrapper<T, Y>[1];
+				interceptors[0] = this;
+				object[] arguments = new object[1];
+				arguments[0] = this;
+				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, interceptors,  arguments);
 				T proxy = (T)_generator.CreateClassProxy(typeof(T), this);
 				copyBOtoProxy(proxy, businessObj);
 				Data.BusinessObj = proxy;
@@ -182,15 +189,17 @@ namespace Boxerp.Client
 				{
 					IList enumerable = (IList)copyValue;
 
-					int j = 0;
-					foreach (object value in enumerable)
+					object[] enumerableCopy = new object[enumerable.Count];
+					for (int k = 0; k < enumerable.Count; k++)
 					{
+						object value = enumerable[k];
 						if (value is ICloneable)
 						{
-							enumerable[j] = ((ICloneable)value).Clone();
+							enumerableCopy[k] = ((ICloneable)value).Clone();
 						}
-						j++;
 					}
+					copyValue = enumerableCopy;	// TODO: review this making sure the garbage collection works 
+					
 				}
 				i++;
 			}
@@ -209,7 +218,7 @@ namespace Boxerp.Client
 		}*/
 
 		#region Interceptor implementation
-		public override object Intercept(IInvocation invocation, params object[] args)
+		public void Intercept(IInvocation invocation)
 		{
 			if (!_dontIntercept)
 			{
@@ -244,15 +253,15 @@ namespace Boxerp.Client
 						oldValue = propInfo.GetValue(_bindableFields, null);
 					}
 
-					if (oldValue != args[0])
+					if (oldValue != invocation.Arguments[0])
 					{
 						_undoStack.Push(cloneBindable(_bindableFields, _bindableFields.SwallowCopy()));		// property is gonna change, put it in the undo stack
 					}
 
-					base.Intercept(invocation, args);	// set the property
+					
 				}
 			}
-			return base.Intercept(invocation, args);
+			invocation.Proceed();
 		}
 		#endregion
 

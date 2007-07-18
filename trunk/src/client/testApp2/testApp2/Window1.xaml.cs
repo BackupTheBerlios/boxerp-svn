@@ -36,13 +36,13 @@ namespace testApp2
 
 		public void OnUndo(Object sender, RoutedEventArgs args)
 		{
-			_bindableSampleObj.UnDo();
+			_bindableSampleObj.Undo();
 			refresh();
 		}
 
 		public void OnRedo(Object sender, RoutedEventArgs args)
 		{
-			_bindableSampleObj.ReDo();
+			_bindableSampleObj.Redo();
 			refresh();
 		}
 

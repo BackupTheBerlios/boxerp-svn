@@ -67,7 +67,7 @@ namespace Boxerp.Client
 			_responsiveHelper.StopAsyncMethod(System.Threading.Thread.CurrentThread.ManagedThreadId, mb, null);
 		}
 
-		protected MethodBase Method(SimpleDelegate del)
+		protected MethodBase MethodBase(SimpleDelegate del)
 		{
 			return (MethodBase)del.Method;
 		}

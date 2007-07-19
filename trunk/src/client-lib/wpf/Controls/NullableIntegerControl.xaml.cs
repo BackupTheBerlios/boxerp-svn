@@ -38,15 +38,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Boxerp.Client.WPF
+namespace Boxerp.Client.WPF.Controls
 {
 	/// <summary>
-	/// Interaction logic for NullableTextControl.xaml
+	/// Interaction logic for NullableIntegerControl.xaml
 	/// </summary>
 
-	public partial class NullableTextControl : System.Windows.Controls.UserControl
+	public partial class NullableIntegerControl : System.Windows.Controls.UserControl
 	{
-		public NullableTextControl()
+		public NullableIntegerControl()
 		{
 			InitializeComponent();
 		}
@@ -54,27 +54,30 @@ namespace Boxerp.Client.WPF
 		public static DependencyProperty TitleProperty = DependencyProperty.Register(
 			"Title",
 			typeof(string),
-			typeof(NullableTextControl),
+			typeof(NullableIntegerControl),
 			new FrameworkPropertyMetadata("title", FrameworkPropertyMetadataOptions.AffectsRender,
-				new PropertyChangedCallback(OnTitleChanged), null));
+			new PropertyChangedCallback(OnTitleChanged), null));
 
 		private static void OnTitleChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
-			NullableTextControl control = (NullableTextControl)o;
+			NullableIntegerControl control = (NullableIntegerControl)o;
 			control._title.Content = (string)e.NewValue;
 		}
 
 		public static DependencyProperty TextProperty = DependencyProperty.Register(
-			"Text",
-			typeof(string),
-			typeof(NullableTextControl),
+			"Integer",
+			typeof(int?),
+			typeof(NullableIntegerControl),
 			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender,
-				new PropertyChangedCallback(OnTextChanged), null));
+				new PropertyChangedCallback(OnIntegerChanged), null));
 
-		private static void OnTextChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		private static void OnIntegerChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
-			NullableTextControl control = (NullableTextControl)o;
-			control._text.Text = (string)e.NewValue;
+			if (e.NewValue != null)
+			{
+				NullableIntegerControl control = (NullableIntegerControl)o;
+				control._text._textBox.Text = e.NewValue.ToString();
+			}
 		}
 
 		public string Title
@@ -89,15 +92,28 @@ namespace Boxerp.Client.WPF
 			}
 		}
 
-		public string Text
+		public int? Integer
 		{
 			get
 			{
-				return (string)GetValue(TextProperty);
+				if ((_text._textBox.Text != String.Empty) && (_checkBox.IsChecked == true))
+				{
+					return Int32.Parse(_text._textBox.Text);
+				}
+				else
+				{
+					return null;
+				}
 			}
 			set
 			{
 				SetValue(TextProperty, value);
+				if (value != null)
+				{
+					_checkBox.IsChecked = true;
+					_text._textBox.IsEnabled = true;
+					_text.IsEnabled = true;
+				}
 			}
 		}
 
@@ -105,11 +121,11 @@ namespace Boxerp.Client.WPF
 		{
 			if (_checkBox.IsChecked == true)
 			{
-				_checkBox.IsEnabled = true;
+				_text.IsEnabled = true;
 			}
 			else
 			{
-				_checkBox.IsEnabled = false;
+				_text.IsEnabled = false;
 			}
 		}
 

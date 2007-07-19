@@ -38,15 +38,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Boxerp.Client.WPF
+namespace Boxerp.Client.WPF.Controls
 {
 	/// <summary>
-	/// Interaction logic for NullableIntegerControl.xaml
+	/// Interaction logic for NullableTextControl.xaml
 	/// </summary>
 
-	public partial class NullableIntegerControl : System.Windows.Controls.UserControl
+	public partial class NullableTextControl : System.Windows.Controls.UserControl
 	{
-		public NullableIntegerControl()
+		public NullableTextControl()
 		{
 			InitializeComponent();
 		}
@@ -54,30 +54,27 @@ namespace Boxerp.Client.WPF
 		public static DependencyProperty TitleProperty = DependencyProperty.Register(
 			"Title",
 			typeof(string),
-			typeof(NullableIntegerControl),
+			typeof(NullableTextControl),
 			new FrameworkPropertyMetadata("title", FrameworkPropertyMetadataOptions.AffectsRender,
-			new PropertyChangedCallback(OnTitleChanged), null));
+				new PropertyChangedCallback(OnTitleChanged), null));
 
 		private static void OnTitleChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
-			NullableIntegerControl control = (NullableIntegerControl)o;
+			NullableTextControl control = (NullableTextControl)o;
 			control._title.Content = (string)e.NewValue;
 		}
 
 		public static DependencyProperty TextProperty = DependencyProperty.Register(
-			"Integer",
-			typeof(int?),
-			typeof(NullableIntegerControl),
+			"Text",
+			typeof(string),
+			typeof(NullableTextControl),
 			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender,
-				new PropertyChangedCallback(OnIntegerChanged), null));
+				new PropertyChangedCallback(OnTextChanged), null));
 
-		private static void OnIntegerChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		private static void OnTextChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
-			if (e.NewValue != null)
-			{
-				NullableIntegerControl control = (NullableIntegerControl)o;
-				control._text._textBox.Text = e.NewValue.ToString();
-			}
+			NullableTextControl control = (NullableTextControl)o;
+			control._text.Text = (string)e.NewValue;
 		}
 
 		public string Title
@@ -92,28 +89,15 @@ namespace Boxerp.Client.WPF
 			}
 		}
 
-		public int? Integer
+		public string Text
 		{
 			get
 			{
-				if ((_text._textBox.Text != String.Empty) && (_checkBox.IsChecked == true))
-				{
-					return Int32.Parse(_text._textBox.Text);
-				}
-				else
-				{
-					return null;
-				}
+				return (string)GetValue(TextProperty);
 			}
 			set
 			{
 				SetValue(TextProperty, value);
-				if (value != null)
-				{
-					_checkBox.IsChecked = true;
-					_text._textBox.IsEnabled = true;
-					_text.IsEnabled = true;
-				}
 			}
 		}
 
@@ -121,11 +105,11 @@ namespace Boxerp.Client.WPF
 		{
 			if (_checkBox.IsChecked == true)
 			{
-				_text.IsEnabled = true;
+				_checkBox.IsEnabled = true;
 			}
 			else
 			{
-				_text.IsEnabled = false;
+				_checkBox.IsEnabled = false;
 			}
 		}
 

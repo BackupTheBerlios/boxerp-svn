@@ -1,6 +1,6 @@
 ﻿<UserControl
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="Boxerp.Client.WPF.IntegerTextBoxControl"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="Boxerp.Client.WPF.Controls.IntegerTextBoxControl"
     Width="110" Height="23">
     <Grid>
             

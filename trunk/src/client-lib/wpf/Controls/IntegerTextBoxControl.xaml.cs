@@ -38,7 +38,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Boxerp.Client.WPF
+namespace Boxerp.Client.WPF.Controls
 {
 	/// <summary>
 	/// Interaction logic for IntegerTextBoxControl.xaml

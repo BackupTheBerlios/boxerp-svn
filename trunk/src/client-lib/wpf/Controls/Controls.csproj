@@ -28,6 +28,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Draft.PresentationDesignMarkup, Version=0.0.4030.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\Microsoft Visual Studio 8\Common7\IDE\Cider\Draft.PresentationDesignMarkup.DLL</HintPath>
+    </Reference>
     <Reference Include="PresentationCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86" />
     <Reference Include="PresentationFramework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -37,6 +41,13 @@
     <Reference Include="WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateCalendarControl.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>DateCalendarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DateControl.xaml.cs">
+      <DependentUpon>DateControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DecimalTextBoxControl.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>DecimalTextBoxControl.xaml</DependentUpon>
@@ -53,6 +64,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DateCalendarControl.xaml" />
+    <Page Include="DateControl.xaml" />
     <Page Include="DecimalTextBoxControl.xaml" />
     <Page Include="IntegerTextBoxControl.xaml" />
     <Page Include="NullableIntegerControl.xaml" />

@@ -1,0 +1,73 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="Boxerp.Client.WPF.Controls.DateControl"
+    Width="224" Height="23">
+	<UserControl.Resources>
+		 <XmlDataProvider x:Key="days">
+			<x:XData>
+				<Days xmlns="">
+					<Day>1</Day>
+<Day>2</Day>
+<Day>3</Day>
+<Day>4</Day>
+<Day>5</Day>
+<Day>6</Day>
+<Day>7</Day>
+<Day>8</Day>
+<Day>9</Day>
+<Day>10</Day>
+<Day>11</Day>
+<Day>12</Day>
+<Day>13</Day>
+<Day>14</Day>
+<Day>15</Day>
+<Day>16</Day>
+<Day>17</Day>
+<Day>18</Day>
+<Day>19</Day>
+<Day>20</Day>
+<Day>21</Day>
+<Day>22</Day>
+<Day>23</Day>
+<Day>24</Day>
+<Day>25</Day>
+<Day>26</Day>
+<Day>27</Day>
+<Day>28</Day>
+<Day>29</Day>
+<Day>30</Day>
+<Day>31</Day>
+					
+				</Days>
+			</x:XData>
+		</XmlDataProvider>
+		<XmlDataProvider x:Key="months">
+			<x:XData>
+				<Months xmlns="">
+					<Month>1</Month>
+<Month>2</Month>
+<Month>3</Month>
+<Month>4</Month>
+<Month>5</Month>
+<Month>6</Month>
+<Month>7</Month>
+<Month>8</Month>
+<Month>9</Month>
+<Month>10</Month>
+<Month>11</Month>
+<Month>12</Month>
+					
+				</Months>
+			</x:XData>
+		</XmlDataProvider> 
+		  
+	</UserControl.Resources>
+	
+    <Grid>
+            
+    	<ComboBox HorizontalAlignment="Left" Margin="0,0,0,1" SelectionChanged="OnMonthDayChanged" x:Name="_days" Width="55" IsSynchronizedWithCurrentItem="True"  DataContext="{StaticResource days}" ItemsSource="{Binding XPath=Days/*}"/>
+      <ComboBox x:Name="_months" SelectionChanged="OnMonthDayChanged" IsSynchronizedWithCurrentItem="True" Margin="59,0,92,1"  DataContext="{StaticResource months}" ItemsSource="{Binding XPath=Months/*}" />
+    	<ComboBox x:Name="_years" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Right" Margin="0,0,1,1" Width="87" />
+            
+    </Grid>
+</UserControl>

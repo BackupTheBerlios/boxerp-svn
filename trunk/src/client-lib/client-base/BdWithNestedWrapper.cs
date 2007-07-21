@@ -38,8 +38,8 @@ namespace Boxerp.Client
 		where Y : IBindableWrapper
 	{
 		public BdWithNestedWrapper(T businessObj, Y nestedWrapper)
-			: base (businessObj, typeof(BdWithNestedWrapper<T, Y>.WrapObject<T, Y>), nestedWrapper)
-		{}
+			: base(businessObj, typeof(BdWithNestedWrapper<T, Y>.WrapObject<T, Y>), new object[] { nestedWrapper })
+		{ }
 
 		public BdWithNestedWrapper(T businessObj)
 			: base (businessObj, typeof(BdWithNestedWrapper<T, Y>.WrapObject<T, Y>))

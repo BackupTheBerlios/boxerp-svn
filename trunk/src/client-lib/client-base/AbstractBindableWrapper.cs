@@ -52,23 +52,38 @@ namespace Boxerp.Client
 		/// <param name="constructorParams">The parameters to the wrapper class constructor</param>
 		/// <param name="disableBusinessObjectInterception">Whether enable or disable BO interception, it means Undo and Redo capability for the BO</param>
 		public AbstractBindableWrapper(T businessObj, Type wrapper, 
-			bool disableWrapperInterception, bool disableBusinessObjectInterception, params object[] constructorParams)
+			bool disableWrapperInterception, bool disableBusinessObjectInterception, object[] constructorParams)
 		{
 			lock (this)
 			{
-				object[] argumentsForConstructor = new object[constructorParams.Length + 1];
-				argumentsForConstructor[0] = this;
-				for (int i = 1; i < argumentsForConstructor.Length; i++)
+				object[] argumentsForConstructor;
+				Type[] argumentTypes;
+
+				if ((constructorParams != null) && (constructorParams.Length > 0))
 				{
-						argumentsForConstructor[i] = constructorParams[i -1];
+					argumentsForConstructor = new object[constructorParams.Length + 1];
+					argumentTypes = new Type[constructorParams.Length + 1];
+					for (int i = 1; i < argumentsForConstructor.Length; i++)
+					{
+						object item = constructorParams[i - 1];
+						argumentsForConstructor[i] = item;
+						argumentTypes[i] = item.GetType();
+					}
 				}
+				else
+				{
+					argumentsForConstructor = new object[1];
+					argumentTypes = new Type[1];
+				}
+				
+				argumentsForConstructor[0] = this;
+				argumentTypes[0] = typeof(IInterceptor);
+
 				IInterceptor[] interceptors = new AbstractBindableWrapper<T, Y>[1];
 				interceptors[0] = this;
 
 				if (disableWrapperInterception)
 				{
-					Type[] argumentTypes = new Type[1];
-					argumentTypes[0] = typeof(IInterceptor);
 					ConstructorInfo constructor = wrapper.GetConstructor(argumentTypes);
 					_bindableFields = (Y)constructor.Invoke(argumentsForConstructor);
 				}
@@ -96,7 +111,7 @@ namespace Boxerp.Client
 		/// <param name="businessObj">The business object to wrap</param>
 		/// <param name="wrapper">The wrapper class type</param>
 		/// <param name="constructorParams">The parameters to the wrapper class constructor</param>
-		public AbstractBindableWrapper(T businessObj, Type wrapper, params object[] constructorParams)
+		public AbstractBindableWrapper(T businessObj, Type wrapper, object[] constructorParams)
 			: this(businessObj, wrapper, false, false, constructorParams)
 		{
 			
@@ -111,9 +126,21 @@ namespace Boxerp.Client
 		/// <param name="disableBusinessObjectInterception">Whether enable or disable BO interception, it means Undo and Redo capability for the BO</param>
 		/// <param name="disableWrapperInterception">Whether disable Undo and Redo capability for the wrapper</param>
 		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableWrapperInterception, bool disableBusinessObjectInterception)
-			: this (businessObj, wrapper, disableWrapperInterception, disableBusinessObjectInterception, new object[0])
+			: this (businessObj, wrapper, disableWrapperInterception, disableBusinessObjectInterception, null)
 		{
 			
+		}
+
+		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableInterception, object[] constructorParams)
+			: this(businessObj, wrapper, disableInterception, disableInterception, constructorParams)
+		{
+
+		}
+
+		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableUndoRedo)
+			: this(businessObj, wrapper, disableUndoRedo, disableUndoRedo, null)
+		{
+
 		}
 
 		/// <summary>
@@ -122,7 +149,7 @@ namespace Boxerp.Client
 		/// <param name="businessObj">The business object to wrap</param>
 		/// <param name="wrapper">The wrapper class type</param>
 		public AbstractBindableWrapper(T businessObj, Type wrapper)
-			: this(businessObj, wrapper, false, false)
+			: this(businessObj, wrapper, false, false, null)
 		{
 	
 		}

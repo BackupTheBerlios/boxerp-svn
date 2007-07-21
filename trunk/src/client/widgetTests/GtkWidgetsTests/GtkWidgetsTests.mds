@@ -1,0 +1,16 @@
+<Combine name="GtkWidgetsTests" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="GtkWidgetsTests" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="GtkWidgetsTests" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="GtkWidgetsTests" single="True">
+    <Execute type="None" entry="GtkWidgetsTests" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./GtkWidgetsTests/GtkWidgetsTests.mdp" />
+  </Entries>
+</Combine>

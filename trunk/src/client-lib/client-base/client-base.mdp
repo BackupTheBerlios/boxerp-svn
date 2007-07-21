@@ -34,10 +34,20 @@
     <File name="./BindableWithCollection.cs" subtype="Code" buildaction="Compile" />
     <File name="./BbWithBindableCollection.cs" subtype="Code" buildaction="Compile" />
     <File name="./BdWithNestedWrapper.cs" subtype="Code" buildaction="Compile" />
+    <File name="./IUIBinder.cs" subtype="Code" buildaction="Compile" />
+    <File name="./IValidator.cs" subtype="Code" buildaction="Compile" />
+    <File name="./UIBinderBase.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ValidateAttribute.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ValidationConstraint.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ValidationException.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Validator.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ControlsHelpers" subtype="Directory" buildaction="Compile" />
+    <File name="./ControlsHelpers/IntegerTextBoxHelper.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Assembly" localcopy="True" refto="../../server/castle-bin/Castle.DynamicProxy.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../dependencies/Castle.Core.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../dependencies/Castle.DynamicProxy2.dll" />
   </References>
   <DeployTargets />
 </Project>

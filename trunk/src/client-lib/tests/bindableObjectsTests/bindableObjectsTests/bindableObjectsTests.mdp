@@ -24,9 +24,10 @@
     <File name="./NestedBindableWrapperTests.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
-    <ProjectReference type="Assembly" localcopy="True" refto="../../../../server/castle-bin/nunit.framework.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../../../client-base/bin/Debug/Boxerp.Client.dll" />
-    <ProjectReference type="Assembly" localcopy="True" refto="../../../client-base/bin/Debug/Castle.DynamicProxy.dll" />
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../../dependencies/Castle.Core.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../../dependencies/Castle.DynamicProxy2.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../../dependencies/nunit.framework.dll" />
   </References>
 </Project>

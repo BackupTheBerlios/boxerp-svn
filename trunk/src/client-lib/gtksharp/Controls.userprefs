@@ -1,30 +1,23 @@
 <?xml version="1.0"?>
-<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client-lib/client-lib.mds">
+<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/Controls.mds">
   <Files>
     <File filename="Welcome" />
-    <File filename="./client-base/AbstractBindableWrapper.cs" />
-    <File filename="./client-base/BindableWithCollection.cs" />
-    <File filename="./client-base/BindableWrapper.cs" />
-    <File filename="./client-base/IBindableWrapper.cs" />
-    <File filename="./client-base/BbWithBindableCollection.cs" />
+    <File filename="./Controls/IntegerTextBoxControl.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="Boxerp.Client" expanded="True" selected="True">
+          <Node name="Boxerp.Client.GtkSharp.Controls" expanded="True" selected="True">
             <Node name="References" expanded="True" />
-          </Node>
-          <Node name="Boxerp.Client.GtkSharp" expanded="True">
             <Node name="UserInterface" expanded="True" />
           </Node>
-          <Node name="wpf" expanded="True" />
         </Node>
       </TreeView>
     </ViewMemento>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
       <TreeView>
-        <Node expanded="True" selected="True" />
+        <Node expanded="True" />
       </TreeView>
     </ViewMemento>
     <ViewMemento Id="MonoQuery.DatabasePad">
@@ -41,7 +34,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/client-base/AbstractBindableWrapper.cs" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/Controls/IntegerTextBoxControl.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

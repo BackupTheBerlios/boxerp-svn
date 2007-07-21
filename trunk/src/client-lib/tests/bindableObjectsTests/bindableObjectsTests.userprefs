@@ -4,9 +4,11 @@
     <File filename="Welcome" />
     <File filename="./bindableObjectsTests/SimpleBusinessObjTests.cs" />
     <File filename="./bindableObjectsTests/SimpleBusinessObject.cs" />
-    <File filename="./bindableObjectsTests/NestedBusinessObjTests.cs" />
+    <File filename="./bindableObjectsTests/ComplexBusinessObjTests.cs" />
     <File filename="./bindableObjectsTests/NestedCollectionBusinessObjTests.cs" />
     <File filename="./bindableObjectsTests/NestedBindableCollectionTests.cs" />
+    <File filename="./bindableObjectsTests/ComplexBusinessObject.cs" />
+    <File filename="./bindableObjectsTests/NestedBindableWrapperTests.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
@@ -37,7 +39,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/tests/bindableObjectsTests/bindableObjectsTests/NestedBusinessObjTests.cs" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/tests/bindableObjectsTests/bindableObjectsTests/NestedBindableWrapperTests.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

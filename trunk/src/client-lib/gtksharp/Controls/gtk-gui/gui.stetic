@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<stetic-interface>
+  <configuration>
+    <images-root-path>../</images-root-path>
+  </configuration>
+  <import>
+    <widget-library name="../../bin/Debug/Boxerp.Client.GtkSharp.dll" />
+    <widget-library name="../bin/Debug/Boxerp.Client.GtkSharp.Controls.dll" internal="true" />
+  </import>
+  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Controls.IntegerTextBoxControl" design-size="162 37">
+    <property name="MemberName" />
+    <child>
+      <widget class="Gtk.Entry" id="_textBox">
+        <property name="MemberName" />
+        <property name="CanFocus">True</property>
+        <property name="IsEditable">True</property>
+        <property name="InvisibleChar">●</property>
+        <signal name="KeyReleaseEvent" handler="OnKeyReleased" />
+      </widget>
+    </child>
+  </widget>
+</stetic-interface>

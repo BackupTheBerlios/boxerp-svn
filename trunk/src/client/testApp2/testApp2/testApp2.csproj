@@ -102,6 +102,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="BindingInfo\Window1.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

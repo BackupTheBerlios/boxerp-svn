@@ -1,6 +1,8 @@
 //
 // Copyright (c) 2007, Boxerp Project (www.boxerp.org)
 //
+// Copyright (C) 2005,2006 Shidix Technologies (www.shidix.com)
+//
 // Redistribution and use in source and binary forms, with or
 // without modification, are permitted provided that the following
 // conditions are met:
@@ -25,42 +27,39 @@
 // IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 // THE POSSIBILITY OF SUCH DAMAGE.
 
+// created on 12/10/2006 at 13:57
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Castle.DynamicProxy;
-using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
-	/// <summary>
-	/// This structure forces the devoloper who extends BindableWrapper to write a private nested class 
-	/// which provide for the bindable fields
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	public class BindableWrapper<T> : AbstractBindableWrapper<T, BindableWrapper<T>.WrapObject<T>>
+	[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+	public class ValidateAttribute : Attribute
 	{
-		public BindableWrapper(T businessObj)
-			: base(businessObj, typeof(BindableWrapper<T>.WrapObject<T>))
-		{ }
+		private ValidationConstraint _validationConstraint;
+		private string _errorMsg;
 
-		public BindableWrapper(T businessObj, Type businessObjInterface)
-			: base(businessObj, typeof(BindableWrapper<T>.WrapObject<T>), businessObjInterface)
-		{}
-
-		public BindableWrapper(T businessObj, bool disableInterception)
-			: base(businessObj, typeof(BindableWrapper<T>.WrapObject<T>), disableInterception, disableInterception)
-		{ }
-
-
-		public class WrapObject<D> : AbstractBindableWrapper<D, BindableWrapper<D>.WrapObject<D>>.BindableFields<D>
+		public string ErrorMsg
 		{
-			public WrapObject(IInterceptor interceptor)
-				: base(interceptor)
-			{ 
-			
-			}
-				
+			get { return _errorMsg; }
+			set { _errorMsg = value; }
 		}
+
+		public ValidationConstraint ValidationConstraint
+		{
+			get { return _validationConstraint; }
+			set { _validationConstraint = value; }
+		}
+
+		public ValidateAttribute(ValidationConstraint constraint)
+		{
+			_validationConstraint = constraint;
+		}
+		
+		public ValidateAttribute(ValidationConstraint constraint, string errorMsg)
+		{
+			_validationConstraint = constraint;
+			_errorMsg = errorMsg;
+		}
+
 	}
 }

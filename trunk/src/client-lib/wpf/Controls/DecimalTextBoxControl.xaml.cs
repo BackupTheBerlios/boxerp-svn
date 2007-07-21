@@ -28,6 +28,33 @@ namespace Boxerp.Client.WPF.Controls
 			InitializeComponent();
 		}
 
+		public static DependencyProperty TextProperty = DependencyProperty.Register(
+			"Text",
+			typeof(string),
+			typeof(DecimalTextBoxControl),
+			new FrameworkPropertyMetadata("0.0", FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(OnTextChanged), null));
+
+		public static DependencyProperty DecimalSeparatorProperty = DependencyProperty.Register(
+			"DecimalSeparator",
+			typeof(char),
+			typeof(DecimalTextBoxControl),
+			new FrameworkPropertyMetadata('.', FrameworkPropertyMetadataOptions.None, null, null));
+
+		public static DependencyProperty DecimalDigitsProperty = DependencyProperty.Register(
+			"DecimalDigits",
+			typeof(int),
+			typeof(DecimalTextBoxControl),
+			new FrameworkPropertyMetadata(2, FrameworkPropertyMetadataOptions.None, null, null));
+
+		private static void OnTextChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		{
+			DecimalTextBoxControl control = (DecimalTextBoxControl)o;
+			if (e.NewValue != null)
+			{
+				control._textBox.Text = control.CleanString((string)e.NewValue);
+			}
+		}
+
 		public char DecimalSeparator
 		{
 			get { return _decimalSeparator; }
@@ -44,11 +71,15 @@ namespace Boxerp.Client.WPF.Controls
 		{
 			get
 			{
-				return _textBox.Text;
+				if (_textBox.Text.Length == 0)
+				{
+					return "0";
+				}
+				return (string) GetValue(TextProperty);
 			}
 			set
 			{
-				_textBox.Text = CleanString(value);
+				SetValue(TextProperty, _textBox.Text);
 			}
 		}
 
@@ -71,6 +102,10 @@ namespace Boxerp.Client.WPF.Controls
 					{
 						break;
 					}
+					else if ((readingDecimals) && (c == DecimalSeparator))
+					{
+						break;
+					}
 					else if (readingDecimals)
 					{
 						decimals++;
@@ -83,10 +118,28 @@ namespace Boxerp.Client.WPF.Controls
 					else if (c == DecimalSeparator)
 					{
 						readingDecimals = true;
+						cleaned += c.ToString();
 					}
 				}
 			}
 			return cleaned;
+		}
+
+		private bool ContainsDecimalSymbol()
+		{
+			if (_textBox.Text.Contains(DecimalSeparator.ToString()))
+			{
+				if (_textBox.Text.IndexOf(DecimalSeparator.ToString()) == _textBox.Text.LastIndexOf(DecimalSeparator.ToString()))
+				{
+					return false;
+				}
+			}
+			else
+			{
+				return false;
+			}
+
+			return true;
 		}
 
 		private void OnKeyUp(Object sender, KeyEventArgs args)
@@ -99,11 +152,37 @@ namespace Boxerp.Client.WPF.Controls
 			{
 				string key = args.Key.ToString();
 				char character = key[key.Length - 1];
+
+				if (((args.Key == Key.OemPeriod) && (DecimalSeparator == '.')) || 
+					((args.Key == Key.OemComma) && (DecimalSeparator == ',')))
+				{
+					character = DecimalSeparator;
+				}
+
 				if ((!Char.IsNumber(character)) && (character != DecimalSeparator))
 				{
 					MessageBox.Show("Error: Only numbers and decimal separator are allowed in this box");
 					_textBox.Text = CleanString();
 				}
+				else
+				{
+					if (ContainsDecimalSymbol())
+					{
+						MessageBox.Show("The decimal separator has been already set");
+						_textBox.Text = CleanString();
+					}
+				}
+
+				int indexOfDecimal = _textBox.Text.IndexOf(DecimalSeparator.ToString());
+				int lengthOfDecimals = _textBox.Text.Length - indexOfDecimal;
+
+				if ((_textBox.Text.Contains(DecimalSeparator.ToString()) && 
+					(_textBox.Text.Substring(indexOfDecimal, lengthOfDecimals -1).Length > DecimalDigits)))
+				{
+					_textBox.Text = CleanString();
+				}
+
+				Text = _textBox.Text;
 			}
 		}
 	}

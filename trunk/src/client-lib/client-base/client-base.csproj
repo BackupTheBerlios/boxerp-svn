@@ -38,6 +38,9 @@
     <Compile Include="AbstractBindableWrapper.cs" />
     <Compile Include="AbstractController.cs" />
     <Compile Include="AbstractResponsiveHelper.cs" />
+    <Compile Include="ValidateAttribute.cs" />
+    <Compile Include="ValidationConstraint.cs" />
+    <Compile Include="Validator.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BbWithBindableCollection.cs" />
     <Compile Include="BdWithNestedWrapper.cs" />
@@ -49,6 +52,8 @@
     <Compile Include="IControl.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="IResponsiveClient.cs" />
+    <Compile Include="IUIBinder.cs" />
+    <Compile Include="IValidator.cs" />
     <Compile Include="MyClass.cs" />
     <Compile Include="RemotingHelper.cs" />
     <Compile Include="ResponsiveAttribute.cs" />
@@ -56,6 +61,8 @@
     <Compile Include="SessionSingleton.cs" />
     <Compile Include="SimpleInvoker.cs" />
     <Compile Include="ThreadEventArgs.cs" />
+    <Compile Include="UIBinderBase.cs" />
+    <Compile Include="ValidationException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

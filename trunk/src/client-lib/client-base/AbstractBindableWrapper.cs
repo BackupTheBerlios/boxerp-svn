@@ -44,7 +44,15 @@ namespace Boxerp.Client
 		private ProxyGenerator _generator = new ProxyGenerator();
 		private bool _dontIntercept = false;
 
-		public AbstractBindableWrapper(T businessObj, Type wrapper, params object[] constructorParams)
+		/// <summary>
+		/// When the wrapper class constructor requires parameters they must be passed in thru the constructorParams
+		/// </summary>
+		/// <param name="businessObj">The business object to wrap</param>
+		/// <param name="wrapper">The wrapper class type</param>
+		/// <param name="constructorParams">The parameters to the wrapper class constructor</param>
+		/// <param name="disableBusinessObjectInterception">Whether enable or disable BO interception, it means Undo and Redo capability for the BO</param>
+		public AbstractBindableWrapper(T businessObj, Type wrapper, 
+			bool disableWrapperInterception, bool disableBusinessObjectInterception, params object[] constructorParams)
 		{
 			lock (this)
 			{
@@ -56,14 +64,77 @@ namespace Boxerp.Client
 				}
 				IInterceptor[] interceptors = new AbstractBindableWrapper<T, Y>[1];
 				interceptors[0] = this;
-				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, interceptors, argumentsForConstructor);
-				T proxy = (T)_generator.CreateClassProxy(typeof(T), this);
-				copyBOtoProxy(proxy, businessObj);
-				Data.BusinessObj = proxy;
+
+				if (disableWrapperInterception)
+				{
+					Type[] argumentTypes = new Type[1];
+					argumentTypes[0] = typeof(IInterceptor);
+					ConstructorInfo constructor = wrapper.GetConstructor(argumentTypes);
+					_bindableFields = (Y)constructor.Invoke(argumentsForConstructor);
+				}
+				else
+				{
+					_bindableFields = (Y)_generator.CreateClassProxy(wrapper, interceptors, argumentsForConstructor);
+				}
+
+				if (disableBusinessObjectInterception)
+				{
+					Data.BusinessObj = businessObj;
+				}
+				else
+				{
+					T proxy = (T)_generator.CreateClassProxy(typeof(T), this);
+					copyBOtoProxy(proxy, businessObj);
+					Data.BusinessObj = proxy;
+				}
 			}
 		}
 
+		/// <summary>
+		/// When the wrapper class constructor requires parameters they must be passed in thru the constructorParams
+		/// </summary>
+		/// <param name="businessObj">The business object to wrap</param>
+		/// <param name="wrapper">The wrapper class type</param>
+		/// <param name="constructorParams">The parameters to the wrapper class constructor</param>
+		public AbstractBindableWrapper(T businessObj, Type wrapper, params object[] constructorParams)
+			: this(businessObj, wrapper, false, false, constructorParams)
+		{
+			
+		}
+
+
+		/// <summary>
+		/// Business object with a default constructor and wrapper class without parameters, other than the interceptor
+		/// </summary>
+		/// <param name="businessObj">The business object to wrap</param>
+		/// <param name="wrapper">The wrapper class type</param>
+		/// <param name="disableBusinessObjectInterception">Whether enable or disable BO interception, it means Undo and Redo capability for the BO</param>
+		/// <param name="disableWrapperInterception">Whether disable Undo and Redo capability for the wrapper</param>
+		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableWrapperInterception, bool disableBusinessObjectInterception)
+			: this (businessObj, wrapper, disableWrapperInterception, disableBusinessObjectInterception, new object[0])
+		{
+			
+		}
+
+		/// <summary>
+		/// Business object with a default constructor and wrapper class without parameters, other than the interceptor
+		/// </summary>
+		/// <param name="businessObj">The business object to wrap</param>
+		/// <param name="wrapper">The wrapper class type</param>
 		public AbstractBindableWrapper(T businessObj, Type wrapper)
+			: this(businessObj, wrapper, false, false)
+		{
+	
+		}
+
+		/// <summary>
+		/// Intended to be used when the business object doesn't have a default constructor with no parameters:
+		/// public BOName() {}
+		/// </summary>
+		/// <param name="businessObj">The business object to wrap</param>
+		/// <param name="wrapper">The wrapper class type</param>
+		/// <param name="businessObjInterface">The business object interface</param>
+		public AbstractBindableWrapper(T businessObj, Type wrapper, Type businessObjInterface)
 		{
 			lock (this)
 			{
@@ -71,13 +142,16 @@ namespace Boxerp.Client
 				interceptors[0] = this;
 				object[] arguments = new object[1];
 				arguments[0] = this;
-				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, interceptors,  arguments);
-				T proxy = (T)_generator.CreateClassProxy(typeof(T), this);
+				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, interceptors, arguments);
+				// TODO: Make this work, because it is failing
+				T proxy = (T)_generator.CreateInterfaceProxyWithoutTarget(businessObjInterface, interceptors);
 				copyBOtoProxy(proxy, businessObj);
 				Data.BusinessObj = proxy;
 			}
 		}
-			
+
+		
+
 		public Y Data
 		{
 			get

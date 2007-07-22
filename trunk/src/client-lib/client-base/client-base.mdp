@@ -15,18 +15,12 @@
   </Configurations>
   <Contents>
     <File name="./AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="./IResponsiveClient.cs" subtype="Code" buildaction="Compile" />
-    <File name="./ResponsiveAttribute.cs" subtype="Code" buildaction="Compile" />
-    <File name="./ResponsiveEnum.cs" subtype="Code" buildaction="Compile" />
     <File name="./SessionSingleton.cs" subtype="Code" buildaction="Compile" />
     <File name="./RemotingHelper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./AbstractResponsiveHelper.cs" subtype="Code" buildaction="Compile" />
     <File name="./Delegates.cs" subtype="Code" buildaction="Compile" />
     <File name="./SimpleInvoker.cs" subtype="Code" buildaction="Compile" />
-    <File name="./ThreadEventArgs.cs" subtype="Code" buildaction="Compile" />
     <File name="./IControl.cs" subtype="Code" buildaction="Compile" />
     <File name="./IController.cs" subtype="Code" buildaction="Compile" />
-    <File name="./ConcurrencyMode.cs" subtype="Code" buildaction="Compile" />
     <File name="./AbstractController.cs" subtype="Code" buildaction="Compile" />
     <File name="./ControlsHelpers" subtype="Directory" buildaction="Compile" />
     <File name="./ControlsHelpers/IntegerTextBoxHelper.cs" subtype="Code" buildaction="Compile" />
@@ -45,6 +39,13 @@
     <File name="./Validation/ValidationException.cs" subtype="Code" buildaction="Compile" />
     <File name="./Validation/Validator.cs" subtype="Code" buildaction="Compile" />
     <File name="./Validation/IValidator.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Responsiveness" subtype="Directory" buildaction="Compile" />
+    <File name="./Responsiveness/AbstractResponsiveHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Responsiveness/ConcurrencyMode.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Responsiveness/IResponsiveClient.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Responsiveness/ResponsiveAttribute.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Responsiveness/ResponsiveEnum.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Responsiveness/ThreadEventArgs.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

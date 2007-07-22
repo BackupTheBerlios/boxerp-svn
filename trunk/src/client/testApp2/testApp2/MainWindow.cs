@@ -8,16 +8,21 @@ using Gtk;
 using testApp2;
 using Boxerp.Client;
 using Boxerp.Client.GtkSharp;
+using Boxerp.Client.GtkSharp.Controls;
 
 public partial class MainWindow: Gtk.Window
 {	
 	private BindableWrapper<SampleBObj> _bindable; 
 	private bool _update = true;
+	private IntegerTextBoxControl _age = new IntegerTextBoxControl();
 	
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
 		_bindable = new BindableWrapper<SampleBObj>(new SampleBObj());
+		vbox2.PackEnd(_age, true, true, 0);
+		 
+		_age.BindObject(_bindable, _bindable.Data.BusinessObj, "Age", BindingOptions.TwoWay);
 		
 	}
 	
@@ -33,6 +38,8 @@ public partial class MainWindow: Gtk.Window
 		{
 			Console.WriteLine("name changed:" + _name.Text);
 			_bindable.Data.BusinessObj.Name = _name.Text;
+			Console.WriteLine("age = " + _bindable.Data.BusinessObj.Age);
+			_bindable.Data.BusinessObj.Age = 50;
 		}
 	}
 
@@ -45,24 +52,24 @@ public partial class MainWindow: Gtk.Window
 		}
 	}
 
-	protected virtual void OnAgeChanged (object sender, System.EventArgs e)
+	/*protected virtual void OnAgeChanged (object sender, System.EventArgs e)
 	{
 		if ((_update) && (_age.Text.Length > 0))
 		{
 			Console.WriteLine("age changed:" + _age.Text);
 			_bindable.Data.BusinessObj.Age = Convert.ToInt32(_age.Text);
 		}
-	}
+	}*/
 
 	protected virtual void OnRedoClicked (object sender, System.EventArgs e)
 	{
-		_bindable.ReDo();
+		_bindable.Redo();
 		refresh();
 	}
 
 	protected virtual void OnUndoClicked (object sender, System.EventArgs e)
 	{
-		_bindable.UnDo();
+		_bindable.Undo();
 		refresh();
 	}
 	
@@ -71,7 +78,6 @@ public partial class MainWindow: Gtk.Window
 		_update = false;
 		_name.Text = _bindable.Data.BusinessObj.Name;
 		_description.Text = _bindable.Data.BusinessObj.Description;
-		_age.Text = _bindable.Data.BusinessObj.Age.ToString();
 		_update = true;
 	}
 }

@@ -5,8 +5,9 @@
   </configuration>
   <import>
     <widget-library name="../../../../client-lib/gtksharp/bin/Debug/Boxerp.Client.GtkSharp.dll" />
+    <widget-library name="../../../../client-lib/gtksharp/Controls/bin/Debug/Boxerp.Client.GtkSharp.Controls.dll" />
   </import>
-  <widget class="Gtk.Window" id="MainWindow" design-size="400 164">
+  <widget class="Gtk.Window" id="MainWindow" design-size="400 167">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Bindable Business Objects</property>
     <property name="WindowPosition">CenterOnParent</property>
@@ -109,12 +110,12 @@
               </packing>
             </child>
             <child>
-              <widget class="Gtk.Entry" id="_age">
+              <widget class="Gtk.VBox" id="vbox2">
                 <property name="MemberName" />
-                <property name="CanFocus">True</property>
-                <property name="IsEditable">True</property>
-                <property name="InvisibleChar">●</property>
-                <signal name="Changed" handler="OnAgeChanged" />
+                <property name="Spacing">6</property>
+                <child>
+                  <placeholder />
+                </child>
               </widget>
               <packing>
                 <property name="Position">1</property>

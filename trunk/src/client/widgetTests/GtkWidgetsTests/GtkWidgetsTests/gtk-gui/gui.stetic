@@ -4,8 +4,8 @@
     <images-root-path>../</images-root-path>
   </configuration>
   <import>
-    <widget-library name="../../../../../client-lib/gtksharp/Controls/Controls/bin/Debug/Boxerp.Client.GtkSharp.Controls.dll" />
     <widget-library name="../../../../../client-lib/gtksharp/bin/Debug/Boxerp.Client.GtkSharp.dll" />
+    <widget-library name="../../../../../client-lib/gtksharp/Controls/bin/Debug/Boxerp.Client.GtkSharp.Controls.dll" />
   </import>
   <widget class="Gtk.Window" id="MainWindow" design-size="400 300">
     <property name="MemberName" />

@@ -11,6 +11,7 @@
       <TreeView>
         <Node expanded="True">
           <Node name="testApp2" expanded="True" selected="True">
+            <Node name="References" expanded="True" />
             <Node name="BusinessObjects" expanded="True" />
           </Node>
         </Node>

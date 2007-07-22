@@ -46,11 +46,13 @@
     <File name="./Responsiveness/ResponsiveAttribute.cs" subtype="Code" buildaction="Compile" />
     <File name="./Responsiveness/ResponsiveEnum.cs" subtype="Code" buildaction="Compile" />
     <File name="./Responsiveness/ThreadEventArgs.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/IBindableWidget.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/BindingOptions.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
-    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Assembly" localcopy="True" refto="../../dependencies/Castle.Core.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../../dependencies/Castle.DynamicProxy2.dll" />
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   </References>
   <DeployTargets />
 </Project>

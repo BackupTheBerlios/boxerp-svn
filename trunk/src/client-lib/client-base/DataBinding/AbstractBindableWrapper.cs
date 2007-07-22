@@ -352,6 +352,7 @@ namespace Boxerp.Client
 							if (pInfo.Name == propName)
 							{
 								oldValue = pInfo.GetValue(_bindableFields.BusinessObj, null);
+								propInfo = pInfo;
 								break;
 							}
 						}
@@ -364,10 +365,12 @@ namespace Boxerp.Client
 					if (oldValue != invocation.Arguments[0])
 					{
 						_undoStack.Push(cloneBindable(_bindableFields, _bindableFields.SwallowCopy()));		// property is gonna change, put it in the undo stack
+						invocation.Proceed();
 						if (PropertyChanged != null)
 						{
-								PropertyChanged(_bindableFields, new PropertyChangedEventArgs(propInfo.ToString()));
+								PropertyChanged(_bindableFields, new PropertyChangedEventArgs(propInfo.Name));
 						}
+						return;
 					}			
 				}
 			}

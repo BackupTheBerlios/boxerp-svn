@@ -9,9 +9,9 @@
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="GtkWidgetsTests" expanded="True">
+          <Node name="GtkWidgetsTests" expanded="True" selected="True">
             <Node name="References" expanded="True" />
-            <Node name="UserInterface" expanded="False" selected="True" />
+            <Node name="UserInterface" expanded="True" />
           </Node>
         </Node>
       </TreeView>

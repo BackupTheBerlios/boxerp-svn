@@ -30,7 +30,7 @@ public partial class MainWindow {
     
     private Gtk.Label label3;
     
-    private Gtk.Entry _age;
+    private Gtk.VBox vbox2;
     
     private Gtk.HBox hbox4;
     
@@ -119,13 +119,11 @@ public partial class MainWindow {
         w7.Expand = false;
         w7.Fill = false;
         // Container child hbox3.Gtk.Box+BoxChild
-        this._age = new Gtk.Entry();
-        this._age.CanFocus = true;
-        this._age.Name = "_age";
-        this._age.IsEditable = true;
-        this._age.InvisibleChar = '●';
-        this.hbox3.Add(this._age);
-        Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(this.hbox3[this._age]));
+        this.vbox2 = new Gtk.VBox();
+        this.vbox2.Name = "vbox2";
+        this.vbox2.Spacing = 6;
+        this.hbox3.Add(this.vbox2);
+        Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(this.hbox3[this.vbox2]));
         w8.Position = 1;
         this.vbox1.Add(this.hbox3);
         Gtk.Box.BoxChild w9 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox3]));
@@ -164,12 +162,11 @@ public partial class MainWindow {
             this.Child.ShowAll();
         }
         this.DefaultWidth = 400;
-        this.DefaultHeight = 164;
+        this.DefaultHeight = 167;
         this.Show();
         this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnDeleteEvent);
         this._name.Changed += new System.EventHandler(this.OnNameChanged);
         this._description.Changed += new System.EventHandler(this.OnDescriptionChanged);
-        this._age.Changed += new System.EventHandler(this.OnAgeChanged);
         this.button1.Clicked += new System.EventHandler(this.OnUndoClicked);
         this.button2.Clicked += new System.EventHandler(this.OnRedoClicked);
     }

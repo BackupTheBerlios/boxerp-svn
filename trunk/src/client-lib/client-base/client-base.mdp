@@ -24,25 +24,27 @@
     <File name="./Delegates.cs" subtype="Code" buildaction="Compile" />
     <File name="./SimpleInvoker.cs" subtype="Code" buildaction="Compile" />
     <File name="./ThreadEventArgs.cs" subtype="Code" buildaction="Compile" />
-    <File name="./AbstractBindableWrapper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./BindableWrapper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./IBindableWrapper.cs" subtype="Code" buildaction="Compile" />
     <File name="./IControl.cs" subtype="Code" buildaction="Compile" />
     <File name="./IController.cs" subtype="Code" buildaction="Compile" />
     <File name="./ConcurrencyMode.cs" subtype="Code" buildaction="Compile" />
     <File name="./AbstractController.cs" subtype="Code" buildaction="Compile" />
-    <File name="./BindableWithCollection.cs" subtype="Code" buildaction="Compile" />
-    <File name="./BbWithBindableCollection.cs" subtype="Code" buildaction="Compile" />
-    <File name="./BdWithNestedWrapper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./IUIBinder.cs" subtype="Code" buildaction="Compile" />
-    <File name="./IValidator.cs" subtype="Code" buildaction="Compile" />
-    <File name="./UIBinderBase.cs" subtype="Code" buildaction="Compile" />
-    <File name="./ValidateAttribute.cs" subtype="Code" buildaction="Compile" />
-    <File name="./ValidationConstraint.cs" subtype="Code" buildaction="Compile" />
-    <File name="./ValidationException.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Validator.cs" subtype="Code" buildaction="Compile" />
     <File name="./ControlsHelpers" subtype="Directory" buildaction="Compile" />
     <File name="./ControlsHelpers/IntegerTextBoxHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding" subtype="Directory" buildaction="Compile" />
+    <File name="./DataBinding/AbstractBindableWrapper.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/BbWithBindableCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/BdWithNestedWrapper.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/BindableWithCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/BindableWrapper.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/IBindableWrapper.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/UIBinderBase.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/IUIBinder.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Validation" subtype="Directory" buildaction="Compile" />
+    <File name="./Validation/ValidateAttribute.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Validation/ValidationConstraint.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Validation/ValidationException.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Validation/Validator.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Validation/IValidator.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

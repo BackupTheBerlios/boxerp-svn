@@ -28,12 +28,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
 using Castle.DynamicProxy;
 using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
-	public interface IBindableWrapper : IInterceptor
+	public interface IBindableWrapper : IInterceptor, INotifyPropertyChanged 
 	{
 		void Undo();
 		void Redo();

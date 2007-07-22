@@ -28,6 +28,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.ComponentModel;
 using System.Text;
 using System.Reflection;
 using Castle.DynamicProxy;
@@ -38,6 +39,12 @@ namespace Boxerp.Client
 	public abstract class AbstractBindableWrapper<T, Y> : IInterceptor, 
 		IBindableWrapper<T> where Y : AbstractBindableWrapper<T, Y>.BindableFields<T>
 	{
+		#region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+			
 		private Y _bindableFields;
 		private Stack<Y> _undoStack = new Stack<Y>();
 		private Stack<Y> _redoStack = new Stack<Y>();
@@ -357,9 +364,11 @@ namespace Boxerp.Client
 					if (oldValue != invocation.Arguments[0])
 					{
 						_undoStack.Push(cloneBindable(_bindableFields, _bindableFields.SwallowCopy()));		// property is gonna change, put it in the undo stack
-					}
-
-					
+						if (PropertyChanged != null)
+						{
+								PropertyChanged(_bindableFields, new PropertyChangedEventArgs(propInfo.ToString()));
+						}
+					}			
 				}
 			}
 			invocation.Proceed();

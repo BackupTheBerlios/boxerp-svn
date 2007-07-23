@@ -35,34 +35,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractBindableWrapper.cs" />
     <Compile Include="AbstractController.cs" />
-    <Compile Include="AbstractResponsiveHelper.cs" />
-    <Compile Include="ValidateAttribute.cs" />
-    <Compile Include="ValidationConstraint.cs" />
-    <Compile Include="Validator.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="BbWithBindableCollection.cs" />
-    <Compile Include="BdWithNestedWrapper.cs" />
-    <Compile Include="BindableWithCollection.cs" />
-    <Compile Include="BindableWrapper.cs" />
-    <Compile Include="ConcurrencyMode.cs" />
+    <Compile Include="ControlsHelpers\IntegerTextBoxHelper.cs" />
+    <Compile Include="DataBinding\AbstractBindableWrapper.cs" />
+    <Compile Include="DataBinding\BbWithBindableCollection.cs" />
+    <Compile Include="DataBinding\BdWithNestedWrapper.cs" />
+    <Compile Include="DataBinding\BindableWithCollection.cs" />
+    <Compile Include="DataBinding\BindableWrapper.cs" />
+    <Compile Include="DataBinding\BindingOptions.cs" />
+    <Compile Include="DataBinding\IBindableWidget.cs" />
+    <Compile Include="DataBinding\IBindableWrapper.cs" />
+    <Compile Include="DataBinding\IUIBinder.cs" />
+    <Compile Include="DataBinding\UIBinderBase.cs" />
     <Compile Include="Delegates.cs" />
-    <Compile Include="IBindableWrapper.cs" />
     <Compile Include="IControl.cs" />
     <Compile Include="IController.cs" />
-    <Compile Include="IResponsiveClient.cs" />
-    <Compile Include="IUIBinder.cs" />
-    <Compile Include="IValidator.cs" />
     <Compile Include="MyClass.cs" />
     <Compile Include="RemotingHelper.cs" />
-    <Compile Include="ResponsiveAttribute.cs" />
-    <Compile Include="ResponsiveEnum.cs" />
+    <Compile Include="Responsiveness\AbstractResponsiveHelper.cs" />
+    <Compile Include="Responsiveness\ConcurrencyMode.cs" />
+    <Compile Include="Responsiveness\IResponsiveClient.cs" />
+    <Compile Include="Responsiveness\ResponsiveAttribute.cs" />
+    <Compile Include="Responsiveness\ResponsiveEnum.cs" />
+    <Compile Include="Responsiveness\ThreadEventArgs.cs" />
     <Compile Include="SessionSingleton.cs" />
     <Compile Include="SimpleInvoker.cs" />
-    <Compile Include="ThreadEventArgs.cs" />
-    <Compile Include="UIBinderBase.cs" />
-    <Compile Include="ValidationException.cs" />
+    <Compile Include="Validation\IValidator.cs" />
+    <Compile Include="Validation\ValidateAttribute.cs" />
+    <Compile Include="Validation\ValidationConstraint.cs" />
+    <Compile Include="Validation\ValidationException.cs" />
+    <Compile Include="Validation\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

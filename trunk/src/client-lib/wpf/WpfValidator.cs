@@ -25,11 +25,11 @@ namespace Boxerp.Client.WPF
 				{
 					if (ex.ValidationConstraint == ValidationConstraint.NotNull)
 					{
-						MessageBox.Show("The {0} field cannot be null", ex.Message);
+						MessageBox.Show("The " + ex.Message + " field cannot be null");
 					}
 					if (ex.ValidationConstraint == ValidationConstraint.NotEmpty)
 					{
-						MessageBox.Show("The {0} field cannot be empty", ex.Message);
+						MessageBox.Show("The " + ex.Message + " field cannot be empty");
 					}
 				}
 

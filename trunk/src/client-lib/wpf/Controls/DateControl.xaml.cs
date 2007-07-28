@@ -25,6 +25,13 @@ namespace Boxerp.Client.WPF.Controls
 		private const int DAYS_MONTH = 31;
 		private const int MONTHS_YEAR = 12;
 		private bool _populatingCombo = false;
+		private bool _innerSetDateProperty = false;
+
+		public bool InnerSetDateProperty
+		{
+			get { return _innerSetDateProperty; }
+			internal set { _innerSetDateProperty = value; }
+		}
 
         public DateControl()
         {
@@ -80,7 +87,7 @@ namespace Boxerp.Client.WPF.Controls
             }
         }
 
-        public bool IsDateEnabled
+		public bool IsDateEnabled
         {
             get 
             { 
@@ -92,6 +99,34 @@ namespace Boxerp.Client.WPF.Controls
             }
 		}
 
+		public static DependencyProperty DateProperty = DependencyProperty.Register(
+			"Date",
+			typeof(DateTime?),
+			typeof(DateControl),
+			new FrameworkPropertyMetadata(DateTime.MinValue, FrameworkPropertyMetadataOptions.AffectsRender,
+				new PropertyChangedCallback(OnDateChanged), null));
+
+		private static void OnDateChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		{
+			DateControl control = (DateControl)o;
+			if ((e.NewValue != null) && (!control.InnerSetDateProperty))
+			{
+				control.PopulateGui((DateTime)e.NewValue);
+			}
+		}
+
+		public DateTime? Date
+		{
+			get
+			{
+				return (DateTime)GetValue(DateProperty);
+			}
+			set
+			{
+				SetValue(DateProperty, value);
+			}
+		}
+
 		#endregion
 
 		public void OnMonthDayChanged(Object sender, SelectionChangedEventArgs args)
@@ -100,7 +135,12 @@ namespace Boxerp.Client.WPF.Controls
 			{
 				if (!_populatingCombo)
 				{
-					DateTime selectedDate = GetDate();
+					lock (this)
+					{
+						_innerSetDateProperty = true;
+						SetValue(DateProperty, GetDate());
+						_innerSetDateProperty = false;
+					}
 				}
 			}
 			catch (Exception)
@@ -111,61 +151,62 @@ namespace Boxerp.Client.WPF.Controls
 			}
 		}
 
-		public DateTime Date
-		{
-			set
-			{
-				PopulateGui(value);
-			}
-		}
+		
 
 		public void PopulateGui(DateTime date)
         {
-			_populatingCombo = true;
-            // I wonder why ItemsSource and Items properties are null because I've defined the ItemsSource in XAML!!!
-			// I can't loop through them programmatically !!!
-
-			// This is better: As they are already populated from XAML, if you don't invoke Clear it blows up on runtime 
-			// when you try to add the items in order to go through them and get one selected !!! 
-            _days.ItemsSource = null;
-            _days.Items.Clear();
-            _months.ItemsSource = null;
-            _months.Items.Clear();
-            
-
-            for (int i = 1; i <= DAYS_MONTH; i++)
-            {
-                _days.Items.Add(i);
-                if (i == date.Day)
-                {
-                    _days.SelectedItem = i;
-                }
-            }
-
-            for (int i = 1; i <= MONTHS_YEAR; i++)
-            {
-                _months.Items.Add(i);
-                if (i == date.Month)
-                {
-                    _months.SelectedItem = i;
-                }
-            }
-
-			_years.Items.Clear();
-            for (int y = date.Year - YEARS_OFFSET_BIRTHDAY; y < date.Year + YEARS_OFFSET_BIRTHDAY; y++)
-            {
-                _years.Items.Add(y);
-                if (y == date.Year)
-                {
-                    _years.SelectedItem = y;
-                }
-            }
-			if (_years.SelectedItem == null)
+			if ((date != DateTime.MinValue) && (date != null))
 			{
-				_years.SelectedIndex = 0;
-			}
+				_populatingCombo = true;
+				// I wonder why ItemsSource and Items properties are null because I've defined the ItemsSource in XAML!!!
+				// I can't loop through them programmatically !!!
 
-			_populatingCombo = false;
+				// This is better: As they are already populated from XAML, if you don't invoke Clear it blows up on runtime 
+				// when you try to add the items in order to go through them and get one selected !!! 
+				_days.ItemsSource = null;
+				_days.Items.Clear();
+				_months.ItemsSource = null;
+				_months.Items.Clear();
+
+
+				for (int i = 1; i <= DAYS_MONTH; i++)
+				{
+					_days.Items.Add(i);
+					if (i == date.Day)
+					{
+						_days.SelectedItem = i;
+					}
+				}
+
+				for (int i = 1; i <= MONTHS_YEAR; i++)
+				{
+					_months.Items.Add(i);
+					if (i == date.Month)
+					{
+						_months.SelectedItem = i;
+					}
+				}
+
+				_years.Items.Clear();
+				for (int y = date.Year - YEARS_OFFSET_BIRTHDAY; y < date.Year + YEARS_OFFSET_BIRTHDAY; y++)
+				{
+					_years.Items.Add(y);
+					if (y == date.Year)
+					{
+						_years.SelectedItem = y;
+					}
+				}
+				if (_years.SelectedItem == null)
+				{
+					_years.SelectedIndex = 0;
+				}
+
+				_populatingCombo = false;
+			}
+			else
+			{
+				PopulateYears();
+			}
         }
 
         public void PopulateYears()

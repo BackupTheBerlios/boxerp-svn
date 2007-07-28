@@ -67,7 +67,7 @@
             
     	<ComboBox HorizontalAlignment="Left" Margin="0,0,0,1" SelectionChanged="OnMonthDayChanged" x:Name="_days" Width="55" IsSynchronizedWithCurrentItem="True"  DataContext="{StaticResource days}" ItemsSource="{Binding XPath=Days/*}"/>
       <ComboBox x:Name="_months" SelectionChanged="OnMonthDayChanged" IsSynchronizedWithCurrentItem="True" Margin="59,0,92,1"  DataContext="{StaticResource months}" ItemsSource="{Binding XPath=Months/*}" />
-    	<ComboBox x:Name="_years" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Right" Margin="0,0,1,1" Width="87" />
+    	<ComboBox x:Name="_years" SelectionChanged="OnMonthDayChanged" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Right" Margin="0,0,1,1" Width="87" />
             
     </Grid>
 </UserControl>

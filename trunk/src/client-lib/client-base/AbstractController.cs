@@ -52,6 +52,14 @@ namespace Boxerp.Client
 			}
 		}
 
+		public int CurrentThread
+		{
+			get
+			{
+				return System.Threading.Thread.CurrentThread.ManagedThreadId;
+			}
+		}
+
 		public AbstractController(IResponsiveClient helper)
 		{
 			_responsiveHelper = helper;
@@ -60,6 +68,10 @@ namespace Boxerp.Client
 
 		protected abstract void OnAsyncOperationFinish(Object sender, ThreadEventArgs args);
 
+		/// <summary>
+		/// This method is a short version for calling StopAsyncMethod in the responsive helper. Use it when you don't have to pass 
+		/// any extra information on why the method is being stopped
+		/// </summary>
 		protected void StopAsyncCall()
 		{
 			System.Diagnostics.StackFrame sf = new System.Diagnostics.StackFrame(1);

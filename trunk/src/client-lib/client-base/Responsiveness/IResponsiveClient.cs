@@ -43,6 +43,7 @@ namespace Boxerp.Client
 		void StartAsyncCall(SimpleDelegate method);
 		void OnAsyncException(Exception ex);
 		void OnAbortAsyncCall(Exception ex);
+		bool CancelRequested { get; }
 
 		/* Not implemented in the abstract class */
 		void OnCancel(object sender, EventArgs e);

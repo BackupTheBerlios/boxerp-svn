@@ -1,0 +1,15 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Boxerp.Client.WPF.QuestionWindow"
+    Title="Warning" Height="227" Width="661"
+    >
+    <Grid>
+        
+    	<TextBox Margin="8,8,8,59" x:Name="_msg" Text="Message" BorderBrush="#FF919191" BorderThickness="1,1,1,1" IsEnabled="True" TextAlignment="Center"/>
+    	<Button Click="OnYes" Height="27" Content="Yes" Margin="241,0,212,14" x:Name="_yesButton" VerticalAlignment="Bottom"/>
+        
+    	<Button Click="OnNo" Height="27" Content="No" HorizontalAlignment="Right" Margin="0,0,8,14" x:Name="_noButton" VerticalAlignment="Bottom" Width="200"/>
+        
+    </Grid>
+</Window>

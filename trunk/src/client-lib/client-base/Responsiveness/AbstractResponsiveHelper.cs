@@ -82,7 +82,7 @@ namespace Boxerp.Client
 			{
 				return _cancelRequestQueue.Peek();
 			}
-			set
+			protected set
 			{
 				lock (_cancelRequestQueue)
 				{
@@ -193,12 +193,24 @@ namespace Boxerp.Client
 			}
 		}
 
+		/// <summary>
+		/// Stops the current thread passing in information about the thread itself, and any outcome information
+		/// </summary>
+		/// <param name="threadId">You can use the CurrentThread Abstract Controller's property or System.Threading.Thread.CurrentThread.ManagedThreadId</param>
+		/// <param name="methodBase">The method who is running. You can call MethodBase(method), implemented in the Abstract Controller</param>
+		/// <param name="output">Any info you want to send. It could be a message, an exception or whatever you need</param>
 		public void StopAsyncMethod(int threadId, MethodBase methodBase, object output)
 		{
 			ThreadEventArgs tea = new ThreadEventArgs(threadId, methodBase, output);
 			StopAsyncMethod(tea, output);
 		}
 
+		/// <summary>
+		/// Stops the current thread passing in information about the thread itself, and any outcome information
+		/// </summary>
+		/// <param name="threadId">You can use the CurrentThread Abstract Controller's property or System.Threading.Thread.CurrentThread.ManagedThreadId</param>
+		/// <param name="method">The method who is running. You can pass the method if its signature matches the SimpleDelegate</param>
+		/// <param name="output">Any info you want to send. It could be a message, an exception or whatever you need</param>
 		public void StopAsyncMethod(int threadId, SimpleDelegate method, object output)
 		{
 			ThreadEventArgs tea = new ThreadEventArgs(threadId, method, output);
@@ -286,7 +298,7 @@ namespace Boxerp.Client
 			lock (_exceptionQueue)
 			{
 				string exceptions = _exceptionQueue.Dequeue();
-				exceptions += ex.Message + ", " + ex.StackTrace + "\n";
+				exceptions += ex.Message + ", " + ex.StackTrace + "\n";	// FIXME, _exceptionQueue should be a Queue<Exception> to be able to separate the message from the stacktrace
 				_exceptionQueue.Enqueue(exceptions);
 			}
 

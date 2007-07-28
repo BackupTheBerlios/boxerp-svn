@@ -45,10 +45,15 @@ namespace Boxerp.Client.WPF
 	public class WpfResponsiveHelper : AbstractResponsiveHelper
 	{
 		WaitDialog waitDialog;
+		private bool _displayExceptions = true;
 		Queue<WaitDialog> _dialogs = new Queue<WaitDialog>();
 				
 		public WpfResponsiveHelper(ConcurrencyMode mode) : base(mode){ }
 
+		public WpfResponsiveHelper(ConcurrencyMode mode, bool displayExceptions) : base(mode) 
+		{
+			_displayExceptions = displayExceptions;
+		}
 
 		/// <summary>
 		/// Create or manage a wait dialog and and invoke the base class. See more doc there
@@ -103,16 +108,17 @@ namespace Boxerp.Client.WPF
 
 		public override void OnCancel(object sender, EventArgs e)
 		{
-			CancelRequested = true;	 
+			CancelRequested = true;
 
-			
-			// TODO: Ask the user before force abort
-			MessageBox.Show("The process is being cancelled, it may take a while after you close this window");
-			
-			ForceAbort();
-
-			//TODO: Show a dialog :" Please wait while cancelling" with
-			//a button to force cancelation by aborting threads
+			QuestionWindow win = new QuestionWindow();
+			win.Msg = "Operation is being cancelled";
+			win.YesButtonLabel = "Force abortion right now";
+			win.NoButtonLabel = "Wait for the process to finish correctly";
+			win.ShowDialog();
+			if (win.Yes)
+			{
+				ForceAbort();
+			}
 		}
 
 		private void TransferCompleted(object sender, ThreadEventArgs e)
@@ -120,10 +126,19 @@ namespace Boxerp.Client.WPF
 			ResponsiveEnum operationType = e.OperationType;
 			WaitDialog wDialog = _dialogs.Dequeue();
 			wDialog.Close();
-			if (!e.Success)
+			if ((_displayExceptions) && (!e.Success))
 			{
 				string msg = "Operation Aborted \n";
-				MessageBox.Show(msg + e.ExceptionMsg);
+				if ((e.ExceptionMsg != null) && (e.ExceptionMsg.Length > 0))
+				{
+					ErrorWindow win = new ErrorWindow();
+					win.Msg = string.Format("{0}{1}", msg, e.ExceptionMsg);
+					win.ShowDialog();
+				}
+				else
+				{
+					MessageBox.Show(msg);
+				}
 			}
 			if (this.transferCompleteEventHandler != null)
 			{

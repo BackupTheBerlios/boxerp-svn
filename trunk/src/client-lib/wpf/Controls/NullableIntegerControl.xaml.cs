@@ -46,9 +46,18 @@ namespace Boxerp.Client.WPF.Controls
 
 	public partial class NullableIntegerControl : System.Windows.Controls.UserControl
 	{
+		private bool _innerIntegerChanged = false;
+
+		public bool InnerIntegerChanged
+		{
+			get { return _innerIntegerChanged; }
+			internal set { _innerIntegerChanged = value; }
+		}
+
 		public NullableIntegerControl()
 		{
 			InitializeComponent();
+			_text.IntegerChanged += OnIntegerChanged;
 		}
 
 		public static DependencyProperty TitleProperty = DependencyProperty.Register(
@@ -64,19 +73,23 @@ namespace Boxerp.Client.WPF.Controls
 			control._title.Content = (string)e.NewValue;
 		}
 
-		public static DependencyProperty TextProperty = DependencyProperty.Register(
+		public static DependencyProperty IntegerProperty = DependencyProperty.Register(
 			"Integer",
 			typeof(int?),
 			typeof(NullableIntegerControl),
-			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender,
+			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
 				new PropertyChangedCallback(OnIntegerChanged), null));
 
 		private static void OnIntegerChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
-			if (e.NewValue != null)
+			NullableIntegerControl control = (NullableIntegerControl)o;
+			if ((e.NewValue != null) && (!control.InnerIntegerChanged))
 			{
-				NullableIntegerControl control = (NullableIntegerControl)o;
 				control._text._textBox.Text = e.NewValue.ToString();
+				control._text.Integer = (int?)e.NewValue;
+				control._checkBox.IsChecked = true;
+				control._text._textBox.IsEnabled = true;
+				control._text.IsEnabled = true;
 			}
 		}
 
@@ -96,9 +109,9 @@ namespace Boxerp.Client.WPF.Controls
 		{
 			get
 			{
-				if ((_text._textBox.Text != String.Empty) && (_checkBox.IsChecked == true))
+				if (_checkBox.IsChecked == true)
 				{
-					return Int32.Parse(_text._textBox.Text);
+					return _text.Integer;
 				}
 				else
 				{
@@ -107,13 +120,17 @@ namespace Boxerp.Client.WPF.Controls
 			}
 			set
 			{
-				SetValue(TextProperty, value);
-				if (value != null)
-				{
-					_checkBox.IsChecked = true;
-					_text._textBox.IsEnabled = true;
-					_text.IsEnabled = true;
-				}
+				SetValue(IntegerProperty, value);
+			}
+		}
+
+		private void OnIntegerChanged(Object sender, EventArgs args)
+		{
+			lock (this)
+			{
+				_innerIntegerChanged = true;
+				Integer = _text.Integer;
+				_innerIntegerChanged = false;
 			}
 		}
 

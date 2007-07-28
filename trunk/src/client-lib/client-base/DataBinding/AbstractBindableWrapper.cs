@@ -50,6 +50,7 @@ namespace Boxerp.Client
 		private Stack<Y> _redoStack = new Stack<Y>();
 		private ProxyGenerator _generator = new ProxyGenerator();
 		private bool _dontIntercept = false;
+		private bool _disableUndoRedo = false;
 
 		/// <summary>
 		/// When the wrapper class constructor requires parameters they must be passed in thru the constructorParams
@@ -58,11 +59,18 @@ namespace Boxerp.Client
 		/// <param name="wrapper">The wrapper class type</param>
 		/// <param name="constructorParams">The parameters to the wrapper class constructor</param>
 		/// <param name="disableBusinessObjectInterception">Whether enable or disable BO interception, it means Undo and Redo capability for the BO</param>
+		/// <param name="disableUndoRedo">If disableWrapperInterception is false and disableBusinessObjectInterception is false the Undo-Redo feature is enable by default unless you set the disableUndoRedo to true</param>
 		public AbstractBindableWrapper(T businessObj, Type wrapper, 
-			bool disableWrapperInterception, bool disableBusinessObjectInterception, object[] constructorParams)
+			bool disableWrapperInterception, bool disableBusinessObjectInterception, bool disableUndoRedo, object[] constructorParams)
 		{
 			lock (this)
 			{
+				_disableUndoRedo = disableUndoRedo;
+				if (disableBusinessObjectInterception && disableWrapperInterception)
+				{
+					_disableUndoRedo = true;
+				}
+
 				object[] argumentsForConstructor;
 				Type[] argumentTypes;
 
@@ -105,7 +113,7 @@ namespace Boxerp.Client
 				}
 				else
 				{
-					T proxy = (T)_generator.CreateClassProxy(typeof(T), this);
+					T proxy = (T)_generator.CreateClassProxy(typeof(T), interceptors);
 					copyBOtoProxy(proxy, businessObj);
 					Data.BusinessObj = proxy;
 				}
@@ -119,7 +127,7 @@ namespace Boxerp.Client
 		/// <param name="wrapper">The wrapper class type</param>
 		/// <param name="constructorParams">The parameters to the wrapper class constructor</param>
 		public AbstractBindableWrapper(T businessObj, Type wrapper, object[] constructorParams)
-			: this(businessObj, wrapper, false, false, constructorParams)
+			: this(businessObj, wrapper, false, false, false, constructorParams)
 		{
 			
 		}
@@ -133,19 +141,25 @@ namespace Boxerp.Client
 		/// <param name="disableBusinessObjectInterception">Whether enable or disable BO interception, it means Undo and Redo capability for the BO</param>
 		/// <param name="disableWrapperInterception">Whether disable Undo and Redo capability for the wrapper</param>
 		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableWrapperInterception, bool disableBusinessObjectInterception)
-			: this (businessObj, wrapper, disableWrapperInterception, disableBusinessObjectInterception, null)
+			: this (businessObj, wrapper, disableWrapperInterception, disableBusinessObjectInterception, false, null)
 		{
 			
 		}
 
 		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableInterception, object[] constructorParams)
-			: this(businessObj, wrapper, disableInterception, disableInterception, constructorParams)
+			: this(businessObj, wrapper, disableInterception, disableInterception, false, constructorParams)
 		{
 
 		}
 
-		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableUndoRedo)
-			: this(businessObj, wrapper, disableUndoRedo, disableUndoRedo, null)
+		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableWrapperInterception, bool disableBOInterception, bool disableUndoRedo)
+			: this(businessObj, wrapper, disableWrapperInterception, disableBOInterception, disableUndoRedo, null)
+		{
+
+		}
+
+		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableInterception)
+			: this(businessObj, wrapper, disableInterception, disableInterception, true, null)
 		{
 
 		}
@@ -156,7 +170,7 @@ namespace Boxerp.Client
 		/// <param name="businessObj">The business object to wrap</param>
 		/// <param name="wrapper">The wrapper class type</param>
 		public AbstractBindableWrapper(T businessObj, Type wrapper)
-			: this(businessObj, wrapper, false, false, null)
+			: this(businessObj, wrapper, false, false, false, null)
 		{
 	
 		}
@@ -178,7 +192,7 @@ namespace Boxerp.Client
 				arguments[0] = this;
 				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, interceptors, arguments);
 				// TODO: Make this work, because it is failing
-				T proxy = (T)_generator.CreateInterfaceProxyWithoutTarget(businessObjInterface, interceptors);
+				T proxy = (T)_generator.CreateInterfaceProxyWithTarget(businessObjInterface, businessObj, interceptors);
 				copyBOtoProxy(proxy, businessObj);
 				Data.BusinessObj = proxy;
 			}
@@ -201,7 +215,7 @@ namespace Boxerp.Client
 
 		public virtual void Undo()
 		{
-			if (_undoStack.Count > 0)
+			if ((!_disableUndoRedo) && (_undoStack.Count > 0))
 			{
 				_redoStack.Push(_bindableFields);
 				if (_undoStack.Count > 0)
@@ -213,7 +227,7 @@ namespace Boxerp.Client
 
 		public virtual void Redo()
 		{
-			if (_redoStack.Count > 0)
+			if ((!_disableUndoRedo) && (_redoStack.Count > 0))
 			{
 				_undoStack.Push(_bindableFields);
 				if (_redoStack.Count > 0)
@@ -315,16 +329,6 @@ namespace Boxerp.Client
 			return (Y)copy;
 		}
 
-		/*public void PushOnUndo()
-		{
-			_undoStack.Push(cloneBindable(_bindableFields, _bindableFields.SwallowCopy()));
-		}
-
-		public void PushOnRedo()
-		{
-
-		}*/
-
 		#region Interceptor implementation
 		public void Intercept(IInvocation invocation)
 		{
@@ -364,7 +368,10 @@ namespace Boxerp.Client
 
 					if (oldValue != invocation.Arguments[0])
 					{
-						_undoStack.Push(cloneBindable(_bindableFields, _bindableFields.SwallowCopy()));		// property is gonna change, put it in the undo stack
+						if (!_disableUndoRedo)
+						{
+							_undoStack.Push(cloneBindable(_bindableFields, _bindableFields.SwallowCopy()));		// property is gonna change, put it in the undo stack
+						}
 						invocation.Proceed();
 						if (PropertyChanged != null)
 						{

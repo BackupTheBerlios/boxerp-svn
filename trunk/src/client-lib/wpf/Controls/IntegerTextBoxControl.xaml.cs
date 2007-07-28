@@ -51,15 +51,103 @@ namespace Boxerp.Client.WPF.Controls
 			InitializeComponent();
 		}
 
+		public event EventHandler IntegerChanged;
+
+		public static DependencyProperty MaxValueProperty = DependencyProperty.Register(
+			"MaxValue",
+			typeof(int?),
+			typeof(IntegerTextBoxControl),
+			new FrameworkPropertyMetadata(Int32.MaxValue, FrameworkPropertyMetadataOptions.AffectsRender,
+				new PropertyChangedCallback(OnMaxValueChanged), null));
+
+		private static void OnMaxValueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		{
+			/*IntegerTextBoxControl control = (IntegerTextBoxControl)o;
+			if (e.NewValue != null)
+			{
+				control._textBox.Text = control.CleanString(e.NewValue.ToString());
+			}*/
+		}
+
+		public int? MaxValue
+		{
+			get
+			{
+				return (int?)GetValue(MaxValueProperty);
+			}
+			set
+			{
+				SetValue(MaxValueProperty, value);
+			}
+		}
+
+
+		public static DependencyProperty IntegerProperty = DependencyProperty.Register(
+			"Integer",
+			typeof(int?),
+			typeof(IntegerTextBoxControl),
+			new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender,
+				new PropertyChangedCallback(OnIntegerChanged), null));
+
+		private static void OnIntegerChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		{
+			IntegerTextBoxControl control = (IntegerTextBoxControl)o;
+			if (e.NewValue != null)
+			{
+				control._textBox.Text = control.CleanString(e.NewValue.ToString());
+			}
+		}
+
+		public int? Integer
+		{
+			get
+			{
+				if (_textBox.Text.Length == 0)
+				{
+					return null;
+				}
+				return (int?)GetValue(IntegerProperty);
+			}
+			set
+			{
+				SetValue(IntegerProperty, value);
+				
+				if (IntegerChanged != null)
+				{
+					IntegerChanged.Invoke(this, null);
+				}
+			}
+		}
+
+		public static DependencyProperty TextProperty = DependencyProperty.Register(
+			"Text",
+			typeof(string),
+			typeof(IntegerTextBoxControl),
+			new FrameworkPropertyMetadata("0", FrameworkPropertyMetadataOptions.AffectsRender,
+				new PropertyChangedCallback(OnTextChanged), null));
+
+		private static void OnTextChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		{
+			IntegerTextBoxControl control = (IntegerTextBoxControl)o;
+			if (e.NewValue != null)
+			{
+				control._textBox.Text = control.CleanString((string)e.NewValue);
+			}
+		}
+
 		public string Text
 		{
 			get
 			{
+				if (_textBox.Text.Length == 0)
+				{
+					return "0";
+				}
 				return _textBox.Text;
 			}
 			set
 			{
-				_textBox.Text = CleanString(value);
+				SetValue(TextProperty, value);
 			}
 		}
 
@@ -87,18 +175,24 @@ namespace Boxerp.Client.WPF.Controls
 
 		private void OnKeyUp(Object sender, KeyEventArgs args)
 		{
-			if ((args.Key != Key.Tab) && (args.Key != Key.Delete) &&
-				(args.Key != Key.Left) && (args.Key != Key.Right) &&
+			if ((args.Key != Key.Tab) && (args.Key != Key.Left) && (args.Key != Key.Right) &&
 				(args.Key != Key.Enter) && (args.Key != Key.End) &&
-				(args.Key != Key.Home) && (args.Key != Key.Clear) &&
-				(args.Key != Key.Back))
+				(args.Key != Key.Home) && (args.Key != Key.Clear))
 			{
 				string key = args.Key.ToString();
 				char character = key[key.Length - 1];
-				if (!Char.IsNumber(character))
+				
+				if ((args.Key != Key.Delete) && (args.Key != Key.Back) && (!Char.IsNumber(character)))
 				{
 					MessageBox.Show("Error: Only numbers are allowed in this box");
-					_textBox.Text = CleanString();
+				}
+				Text = _textBox.Text;
+				Integer = Int32.Parse(Text);
+				if ((MaxValue != null) && (Integer > MaxValue))
+				{
+					MessageBox.Show("The maximun value allowed is: " + MaxValue);
+					Text = MaxValue.ToString();
+					Integer = MaxValue;
 				}
 			}
 		}

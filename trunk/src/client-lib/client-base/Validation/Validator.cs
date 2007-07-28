@@ -42,7 +42,7 @@ namespace Boxerp.Client
 						ValidationConstraint constraints = ValidationConstraint.NoConstraints;
 						string error = null;
 						bool isBoxerpValidation = false;
-						if (att is ValidateAttribute)	// if the validation attribute comes from Boxerp.Client
+						if (att is Boxerp.Client.ValidateAttribute)	// if the validation attribute comes from Boxerp.Client
 						{
 							ValidateAttribute vAtt = (ValidateAttribute)att;
 							constraints = vAtt.ValidationConstraint;
@@ -51,7 +51,7 @@ namespace Boxerp.Client
 						}
 						else                            // if the validation attribute comes from MS Enterprise Library or any other 
 						{
-							error = property.ToString();
+							error = property.Name;
 							if (att.ToString().Contains("NotNull"))	// FIXME : change the string for a value from the app.config or web.config
 							{
 								constraints = constraints | ValidationConstraint.NotNull;

@@ -38,11 +38,11 @@ namespace Boxerp.Client
 			ValidationConstraint = constraint;
 		}
 
-		public ValidationException(ValidationConstraint constraint, string msg, bool isBoxerpValidationAttribute)
+		public ValidationException(ValidationConstraint constraint, string msg, bool isBoxerpValidation)
 			: base(msg)
 		{
 			ValidationConstraint = constraint;
-			_isBoxerpValidationAttribute = IsBoxerpValidationAttribute;
+			_isBoxerpValidationAttribute = isBoxerpValidation;
 		}
 
 		public ValidationException(ValidationConstraint constraint, PropertyInfo prop)

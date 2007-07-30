@@ -61,11 +61,6 @@
     <Compile Include="Responsiveness\ThreadEventArgs.cs" />
     <Compile Include="SessionSingleton.cs" />
     <Compile Include="SimpleInvoker.cs" />
-    <Compile Include="Validation\IValidator.cs" />
-    <Compile Include="Validation\ValidateAttribute.cs" />
-    <Compile Include="Validation\ValidationConstraint.cs" />
-    <Compile Include="Validation\ValidationException.cs" />
-    <Compile Include="Validation\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

@@ -27,39 +27,14 @@
 // IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 // THE POSSIBILITY OF SUCH DAMAGE.
 
-// created on 12/10/2006 at 13:57
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Boxerp.Client
+namespace Boxerp.Validation
 {
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-	public class ValidateAttribute : Attribute
+	public interface IValidator
 	{
-		private ValidationConstraint _validationConstraint;
-		private string _errorMsg;
-
-		public string ErrorMsg
-		{
-			get { return _errorMsg; }
-			set { _errorMsg = value; }
-		}
-
-		public ValidationConstraint ValidationConstraint
-		{
-			get { return _validationConstraint; }
-			set { _validationConstraint = value; }
-		}
-
-		public ValidateAttribute(ValidationConstraint constraint)
-		{
-			_validationConstraint = constraint;
-		}
-		
-		public ValidateAttribute(ValidationConstraint constraint, string errorMsg)
-		{
-			_validationConstraint = constraint;
-			_errorMsg = errorMsg;
-		}
-
+		bool Validate(Object businessObject);
 	}
 }

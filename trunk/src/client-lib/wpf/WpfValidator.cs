@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Boxerp.Client.WPF
 {
+	/*
 	public class WpfValidator : IValidator
 	{
 
@@ -37,4 +38,5 @@ namespace Boxerp.Client.WPF
 			}
 		}
 	}
+	 */
 }

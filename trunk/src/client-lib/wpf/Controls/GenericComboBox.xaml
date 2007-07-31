@@ -1,0 +1,8 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="Boxerp.Client.WPF.Controls.GenericComboBox"
+    Width="194" Height="23">
+    
+	<ComboBox x:Name="_combo"/>
+	
+</UserControl>

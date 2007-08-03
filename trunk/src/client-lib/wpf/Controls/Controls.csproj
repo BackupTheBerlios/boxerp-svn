@@ -60,6 +60,7 @@
       <SubType>Code</SubType>
       <DependentUpon>GenericComboBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helper.cs" />
     <Compile Include="IntegerTextBoxControl.xaml.cs">
       <DependentUpon>IntegerTextBoxControl.xaml</DependentUpon>
     </Compile>

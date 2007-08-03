@@ -175,17 +175,25 @@ namespace Boxerp.Client.WPF.Controls
 
 		private void OnKeyUp(Object sender, KeyEventArgs args)
 		{
-			if ((args.Key != Key.Tab) && (args.Key != Key.Left) && (args.Key != Key.Right) &&
-				(args.Key != Key.Enter) && (args.Key != Key.End) &&
-				(args.Key != Key.Home) && (args.Key != Key.Clear))
+			if (Helper.IsValidKey(args.Key))
 			{
 				string key = args.Key.ToString();
 				char character = key[key.Length - 1];
 				
-				if ((args.Key != Key.Delete) && (args.Key != Key.Back) && (!Char.IsNumber(character)))
+				if (!Helper.IsValidCharacter(args.Key, character))
 				{
 					MessageBox.Show("Error: Only numbers are allowed in this box");
 				}
+				
+				string text = _textBox.Text;
+
+				string maxIntValue = Int32.MaxValue.ToString();
+				if ((text.Length > maxIntValue.Length) || ((text.Length == maxIntValue.Length) && (text.CompareTo(maxIntValue) > 0)))
+				{
+					MessageBox.Show("Error: The value is too big");
+					_textBox.Text = maxIntValue;
+				}
+
 				Text = _textBox.Text;
 				Integer = Int32.Parse(Text);
 				if ((MaxValue != null) && (Integer > MaxValue))

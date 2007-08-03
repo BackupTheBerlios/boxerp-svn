@@ -204,7 +204,5 @@ namespace Boxerp.Client.WPF.Controls
 				}
 			}
 		}
-
-
 	}
 }

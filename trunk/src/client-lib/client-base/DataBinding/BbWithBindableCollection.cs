@@ -34,6 +34,7 @@ using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
+	[Serializable]
 	public class BdWithBindableCollection<T, Y> : AbstractBindableWrapper<T, BdWithBindableCollection<T, Y>.WrapObject<T, Y>>
 		where Y : IBindableWrapper
 	{
@@ -73,10 +74,13 @@ namespace Boxerp.Client
 			}
 		}
 
+		[Serializable]
 		public class WrapObject<D, Z> : AbstractBindableWrapper<D, BdWithBindableCollection<D, Z>.WrapObject<D, Z>>.BindableFields<D>
 			where Z : IBindableWrapper
 		{
+			[NonSerialized]
 			private ProxyGenerator _proxyGenerator = new ProxyGenerator();
+
 			private List<Z> _list;
 			
 			public virtual List<Z> Collection     // virtual to intercept the get and set

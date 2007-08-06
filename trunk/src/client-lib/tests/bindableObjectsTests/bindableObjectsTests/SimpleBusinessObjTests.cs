@@ -5,6 +5,8 @@
 //
 // project created on 7/7/2007 at 3:15 PM
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Boxerp.Client;
 using NUnit.Framework;
 
@@ -70,9 +72,86 @@ public class BindableObjectsMain
 		
 		bindableObj.Redo();
 		Assert.AreEqual(bindableObj.Data.BusinessObj.Name, "qwerty");
-	}	
-	
+	}
 
+	[Test]
+	public void SerializationTest()
+	{
+		BindableWrapper<SimpleBusinessObject> bindableObj =
+			new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
+		
+		MemoryStream stream = new MemoryStream();
+		BinaryFormatter formatter = new BinaryFormatter();
+		formatter.Serialize(stream, bindableObj);
+		stream.Position = 0;
+
+		object deserializedObject = formatter.Deserialize(stream);
+		Assert.IsNotNull(deserializedObject);
+		BindableWrapper<SimpleBusinessObject> deserializedBindable = (BindableWrapper<SimpleBusinessObject>)deserializedObject;
+
+		Assert.IsNotNull(deserializedBindable);
+	}
+
+	/// <summary>
+	/// Show how the references to the business object are affected when it is wrapped into a bindable and also how the references to the bindable
+	/// work. As you may see the business object is not updated but the bindable object that wraps it. 
+	/// </summary>
+	[Test]
+	public void ObjectReferencesOnUndo()
+	{
+		BindableWrapper<SimpleBusinessObject> bindableReference;
+		SimpleBusinessObject businessObjReference;
+
+		SimpleBusinessObject businessObj = new SimpleBusinessObject();
+		businessObjReference = businessObj;
+
+		BindableWrapper<SimpleBusinessObject> bindableObj =
+			new BindableWrapper<SimpleBusinessObject>(businessObj);
+		bindableReference = bindableObj;
+
+
+		bindableObj.Data.BusinessObj.Name = "asdf";
+		bindableObj.Data.BusinessObj.Description = "asdfsdf";
+		bindableObj.Data.BusinessObj.Age = 25;
+
+		bindableObj.Data.BusinessObj.Name = "qwerty";
+		
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Name, "qwerty");
+		Assert.AreEqual(bindableReference.Data.BusinessObj.Name, "qwerty");
+		Assert.IsNull(businessObjReference.Name);
+
+		bindableObj.Undo();
+
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Name, "asdf");
+		Assert.AreEqual(bindableReference.Data.BusinessObj.Name, "asdf");
+		Assert.IsNull(businessObjReference.Name);
+
+	}
+
+	[Test]
+	public void SerializationWithEventSubscriberTest()
+	{
+		BindableWrapper<SimpleBusinessObject> bindableObj =
+			new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
+		
+		AnySubscriber subscriber = new AnySubscriber();
+		bindableObj.PropertyChanged += subscriber.OnPropertyChanged;
+
+		Assert.IsTrue(bindableObj.HasSubscribers);
+
+		MemoryStream stream = new MemoryStream();
+		BinaryFormatter formatter = new BinaryFormatter();
+		formatter.Serialize(stream, bindableObj);
+		stream.Position = 0;
+
+		object deserializedObject = formatter.Deserialize(stream);
+		Assert.IsNotNull(deserializedObject);
+		BindableWrapper<SimpleBusinessObject> deserializedBindable = (BindableWrapper<SimpleBusinessObject>)deserializedObject;
+
+		Assert.IsNotNull(deserializedBindable);
+
+		Assert.IsFalse(deserializedBindable.HasSubscribers);
+	}
 }
 
 }

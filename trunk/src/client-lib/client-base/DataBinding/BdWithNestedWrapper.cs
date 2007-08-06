@@ -34,6 +34,7 @@ using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
+	[Serializable]
 	public class BdWithNestedWrapper<T, Y> : AbstractBindableWrapper<T, BdWithNestedWrapper<T, Y>.WrapObject<T, Y>>
 		where Y : IBindableWrapper
 	{
@@ -62,6 +63,7 @@ namespace Boxerp.Client
 			Data.NestedWrapper.Redo();
 		}
 
+		[Serializable]
 		public class WrapObject<D, Z> : AbstractBindableWrapper<D, BdWithNestedWrapper<D, Z>.WrapObject<D, Z>>.BindableFields<D>
 				where Z : IBindableWrapper
 		{

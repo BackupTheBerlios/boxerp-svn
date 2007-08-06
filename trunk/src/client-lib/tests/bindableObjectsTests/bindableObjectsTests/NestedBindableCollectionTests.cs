@@ -5,6 +5,8 @@
 //
 
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Boxerp.Client;
 using NUnit.Framework;
 
@@ -69,6 +71,29 @@ public class NestedBindableCollectionTests
 		bindable.Redo();
 			
 		Assert.AreEqual(bindable.Data.BusinessObj.Name, "qwerty");
+	}
+
+	[Test]
+	public void SerializationTest()
+	{
+		BdWithBindableCollection<SimpleBusinessObject, BindableWrapper<SimpleBusinessObject>> bindable =
+				new BdWithBindableCollection<SimpleBusinessObject, BindableWrapper<SimpleBusinessObject>>
+					(new SimpleBusinessObject());
+
+		bindable.Data.BusinessObj.Name = "asdf";
+		
+		MemoryStream stream = new MemoryStream();
+		BinaryFormatter formatter = new BinaryFormatter();
+		formatter.Serialize(stream, bindable);
+		stream.Position = 0;
+
+		object deserializedObject = formatter.Deserialize(stream);
+		Assert.IsNotNull(deserializedObject);
+		BdWithBindableCollection<SimpleBusinessObject, BindableWrapper<SimpleBusinessObject>> deserializedBindable =
+			(BdWithBindableCollection<SimpleBusinessObject, BindableWrapper<SimpleBusinessObject>>)deserializedObject;
+
+		Assert.IsNotNull(deserializedBindable);
+		Assert.AreEqual(deserializedBindable.Data.BusinessObj.Name, "asdf");
 	}
 }
 	

@@ -5,6 +5,8 @@
 //
 
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Boxerp.Client;
 using NUnit.Framework;
 
@@ -83,5 +85,26 @@ public class ComplexBusinessObjTests
 		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject, sbo2);
 	}
 
+	[Test]
+	public void SerializationTest()
+	{
+		BindableWrapper<ComplexBusinessObject> bindableObj =
+			new BindableWrapper<ComplexBusinessObject>(new ComplexBusinessObject());
+		bindableObj.Data.BusinessObj.SomeFlag = true;
+		bindableObj.Data.BusinessObj.NestedObject = new SimpleBusinessObject();
+
+		MemoryStream stream = new MemoryStream();
+		BinaryFormatter formatter = new BinaryFormatter();
+		formatter.Serialize(stream, bindableObj);
+		stream.Position = 0;
+
+		object deserializedObject = formatter.Deserialize(stream);
+		Assert.IsNotNull(deserializedObject);
+		BindableWrapper<ComplexBusinessObject> deserializedBindable = (BindableWrapper<ComplexBusinessObject>)deserializedObject;
+
+		Assert.IsNotNull(deserializedBindable);
+		Assert.IsTrue(deserializedBindable.Data.BusinessObj.SomeFlag);
+		Assert.IsNotNull(deserializedBindable.Data.BusinessObj.NestedObject);
+	}
 }
 }

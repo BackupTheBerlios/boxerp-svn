@@ -9,7 +9,7 @@ using System;
 namespace bindableObjectsTests
 {
 	
-	
+	[Serializable]
 	public class SimpleBusinessObject : ICloneable
 	{
 		private string _name;
@@ -65,4 +65,13 @@ namespace bindableObjectsTests
 			return new SimpleBusinessObject(_name, _description, _age);
 		}
 	}
+
+	public class AnySubscriber
+	{
+		public void OnPropertyChanged(Object sender, EventArgs args)
+		{
+			throw new Exception("testing");
+		}
+	}
+
 }

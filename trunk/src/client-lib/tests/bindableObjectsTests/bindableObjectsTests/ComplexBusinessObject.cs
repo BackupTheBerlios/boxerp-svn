@@ -9,7 +9,7 @@ using System;
 namespace bindableObjectsTests
 {
 	
-	
+	[Serializable]
 	public class ComplexBusinessObject : ICloneable
 	{
 		private bool _someFlag;

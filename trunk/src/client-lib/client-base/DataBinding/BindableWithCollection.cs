@@ -34,6 +34,7 @@ using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
+	[Serializable]
 	public class BindableWithCollection<T, Y> : AbstractBindableWrapper<T, BindableWithCollection<T, Y>.WrapObject<T, Y>>
 	{
 		public BindableWithCollection(T businessObj)
@@ -50,6 +51,7 @@ namespace Boxerp.Client
 			return typeof(List<Y>);
 		}
 		
+		[Serializable]
 		public class WrapObject<D, Z> : AbstractBindableWrapper<D, BindableWithCollection<D, Z>.WrapObject<D, Z>>.BindableFields<D>
 		{
 			private ProxyGenerator _proxyGenerator = new ProxyGenerator();

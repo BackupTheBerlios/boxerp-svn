@@ -36,11 +36,13 @@ using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
+	[Serializable]
 	public abstract class AbstractBindableWrapper<T, Y> : IInterceptor, 
 		IBindableWrapper<T> where Y : AbstractBindableWrapper<T, Y>.BindableFields<T>
 	{
 		#region INotifyPropertyChanged Members
 
+		[field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
@@ -48,6 +50,7 @@ namespace Boxerp.Client
 		private Y _bindableFields;
 		private Stack<Y> _undoStack = new Stack<Y>();
 		private Stack<Y> _redoStack = new Stack<Y>();
+		[NonSerialized]
 		private ProxyGenerator _generator = new ProxyGenerator();
 		private bool _dontIntercept = false;
 		private bool _disableUndoRedo = false;
@@ -211,6 +214,14 @@ namespace Boxerp.Client
 		public Type GetWrappedObjectType()
 		{
 			return typeof(T);
+		}
+
+		public bool HasSubscribers
+		{
+			get
+			{
+				return (PropertyChanged != null);
+			}
 		}
 
 		public virtual void Undo()
@@ -385,6 +396,7 @@ namespace Boxerp.Client
 		}
 		#endregion
 
+		[Serializable]
 		public abstract class BindableFields<D>
 		{
 			private D _businessObj;

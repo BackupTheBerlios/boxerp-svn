@@ -38,6 +38,7 @@ namespace Boxerp.Client
 	/// which provide for the bindable fields
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
+	[Serializable]
 	public class BindableWrapper<T> : AbstractBindableWrapper<T, BindableWrapper<T>.WrapObject<T>>
 	{
 		public BindableWrapper(T businessObj)
@@ -52,7 +53,7 @@ namespace Boxerp.Client
 			: base(businessObj, typeof(BindableWrapper<T>.WrapObject<T>), disableInterception, disableInterception)
 		{ }
 
-
+		[Serializable]
 		public class WrapObject<D> : AbstractBindableWrapper<D, BindableWrapper<D>.WrapObject<D>>.BindableFields<D>
 		{
 			public WrapObject(IInterceptor interceptor)

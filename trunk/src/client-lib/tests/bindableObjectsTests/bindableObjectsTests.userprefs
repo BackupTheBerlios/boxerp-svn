@@ -39,7 +39,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/tests/bindableObjectsTests/bindableObjectsTests/NestedBindableWrapperTests.cs" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/tests/bindableObjectsTests/bindableObjectsTests/ComplexBusinessObject.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

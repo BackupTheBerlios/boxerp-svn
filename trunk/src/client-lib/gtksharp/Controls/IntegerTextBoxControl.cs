@@ -14,79 +14,92 @@ namespace Boxerp.Client.GtkSharp.Controls
 {
 	
 	
-	public partial class IntegerTextBoxControl : Gtk.Bin, IBindableWidget
+	public partial class IntegerTextBoxControl : Gtk.Bin, IUIWidget
 	{
-		private IBindableWrapper _bindableObject = null;
-		private object _owner;
-		private PropertyInfo _bindingProperty = null;
-		private string _propertyName = null;
-		private BindingOptions _bindingOptions = BindingOptions.OneWay;
+		private int _maxValue = Int32.MaxValue;
+		private BindableWidgetCore WidgetCore;
 		
 		public IntegerTextBoxControl()
 		{
 			this.Build();
+			WidgetCore = new BindableWidgetCore(this);
 		}
 
-		public void BindObject(IBindableWrapper bObject, object owner, string bindingProperty, BindingOptions options)
+		public int Integer
 		{
-			_bindableObject = bObject;
-			_owner = owner;
-			_bindingProperty = owner.GetType().GetProperty(bindingProperty);
-			_propertyName = bindingProperty;
-			if (_bindingProperty == null)
+			get
 			{
-				throw new NullReferenceException("Error binding object. Property " + bindingProperty + " doesn't exist");
+				return Int32.Parse(_textBox.Text);
 			}
-			Console.WriteLine("Binding Object property:" + _bindingProperty.Name);
-			_bindableObject.PropertyChanged += OnBindingPropertyChanged;
-			_bindingOptions = options;
+			set
+			{
+				_textBox.Text = value.ToString();
+			}
 		}
 		
-		private void OnBindingPropertyChanged(object o, PropertyChangedEventArgs args)
+		public int MaxValue
 		{
-			Console.WriteLine("binding prop changed:" + args.PropertyName + "," + _propertyName);
-			if (args.PropertyName.Equals(_propertyName))
+			get
 			{
-				object propValue = _bindingProperty.GetValue(_owner, null);
-				Console.WriteLine("prop new value = " + propValue);
-				if (propValue != null)
-				{
-					_textBox.Text = propValue.ToString();
-				}
+				return _maxValue;
 			}
+			set
+			{
+				_maxValue = value;
+			}
+		}
+		
+		public void UpdateValue(object val)
+		{
+			_textBox.Text = val.ToString();
 		}
 		
 		protected virtual void OnKeyReleased (object o, Gtk.KeyReleaseEventArgs args)
 		{
-			
-			if ((args.Event.Key != Key.Tab) && (args.Event.Key != Key.Delete) &&
-				(args.Event.Key != Key.Left) && (args.Event.Key != Key.Right) &&
-				(args.Event.Key != Key.Return) && (args.Event.Key != Key.End) &&
-				(args.Event.Key != Key.Home) && (args.Event.Key != Key.Clear) &&
-				(args.Event.Key != Key.BackSpace))
+			if (Helper.IsValidKey(args.Event.Key))
 			{
 				string key = args.Event.Key.ToString();
 			    char character = key[key.Length - 1];
-				Console.WriteLine(character);
-				if (!System.Char.IsNumber(character))
+				
+				if (!Helper.IsValidNumericCharacter(args.Event.Key, character))
 				{
 					WarningDialog wdialog = new WarningDialog();
 					wdialog.Message = "Error: Only numbers are allowed in this box";
 					wdialog.Present();
-					_textBox.Text = IntegerTextBoxHelper.CleanString(_textBox.Text);
 				}
 				else
 				{
-					if ((_bindingOptions == BindingOptions.TwoWay) && (_bindingProperty != null))
+					string text = _textBox.Text;
+
+					string maxIntValue = Int32.MaxValue.ToString();
+					if ((text.Length > maxIntValue.Length) || ((text.Length == maxIntValue.Length) && (text.CompareTo(maxIntValue) > 0)))
 					{
-						Console.WriteLine("On key up:" +_bindingProperty.ToString() + ", " + _textBox.Text);
-						_bindingProperty.SetValue(_owner, Int32.Parse(_textBox.Text), null);
+						WarningDialog wdialog = new WarningDialog();
+						wdialog.Message = "Error: Value is too big";
+						wdialog.Present();
+						Integer = Int32.MaxValue;
+					}
+
+					if ((MaxValue != Int32.MaxValue) && (Integer > MaxValue))
+					{
+						WarningDialog wdialog = new WarningDialog();
+						wdialog.Message = "The maximun value allowed is: " + MaxValue;
+						wdialog.Present();
+						Integer = MaxValue;
+					}
+					
+					if ((WidgetCore.BindingOptions == BindingOptions.TwoWay) && (WidgetCore.BindingProperty != null))
+					{
+						//Console.WriteLine("On key up:" +_bindingProperty.ToString() + ", " + _textBox.Text);
+						
+						WidgetCore.SetPropertyValue(Integer);
 					}
 					else
 					{
-						Console.WriteLine(_bindingOptions);
+						//Console.WriteLine(_bindingOptions);
 					}
 				}
+				_textBox.Text = IntegerTextBoxHelper.CleanString(_textBox.Text);
 			}
 		}
 	}

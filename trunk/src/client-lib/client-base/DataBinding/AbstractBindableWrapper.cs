@@ -37,7 +37,7 @@ using Castle.Core.Interceptor;
 namespace Boxerp.Client
 {
 	[Serializable]
-	public abstract class AbstractBindableWrapper<T, Y> : IInterceptor, 
+	public abstract class AbstractBindableWrapper<T, Y> : IInterceptor, INotifyPropertyChanged,
 		IBindableWrapper<T> where Y : AbstractBindableWrapper<T, Y>.BindableFields<T>
 	{
 		#region INotifyPropertyChanged Members

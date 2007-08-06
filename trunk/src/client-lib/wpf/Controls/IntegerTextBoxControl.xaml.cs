@@ -37,6 +37,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Boxerp.Client;
 
 namespace Boxerp.Client.WPF.Controls
 {
@@ -94,7 +95,7 @@ namespace Boxerp.Client.WPF.Controls
 			IntegerTextBoxControl control = (IntegerTextBoxControl)o;
 			if (e.NewValue != null)
 			{
-				control._textBox.Text = control.CleanString(e.NewValue.ToString());
+				control._textBox.Text = IntegerTextBoxHelper.CleanString(e.NewValue.ToString());
 			}
 		}
 
@@ -131,7 +132,7 @@ namespace Boxerp.Client.WPF.Controls
 			IntegerTextBoxControl control = (IntegerTextBoxControl)o;
 			if (e.NewValue != null)
 			{
-				control._textBox.Text = control.CleanString((string)e.NewValue);
+				control._textBox.Text = IntegerTextBoxHelper.CleanString((string)e.NewValue);
 			}
 		}
 
@@ -153,24 +154,7 @@ namespace Boxerp.Client.WPF.Controls
 
 		private string CleanString()
 		{
-			return CleanString(_textBox.Text);
-		}
-
-		private string CleanString(string val)
-		{
-			string currentStr = val;
-			string cleaned = String.Empty;
-			if (currentStr.Length > 0)
-			{
-				foreach (char c in currentStr)
-				{
-					if (Char.IsNumber(c))
-					{
-						cleaned += c.ToString();
-					}
-				}
-			}
-			return cleaned;
+			return  IntegerTextBoxHelper.CleanString(_textBox.Text);
 		}
 
 		private void OnKeyUp(Object sender, KeyEventArgs args)

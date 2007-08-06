@@ -2,14 +2,23 @@
 <UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client-lib/client-lib.mds">
   <Files>
     <File filename="Welcome" />
-    <File filename="./wpf/Controls/IntegerTextBoxControl.xaml.cs" />
+    <File filename="./client-base/DataBinding/AbstractBindableWrapper.cs" />
+    <File filename="./client-base/DataBinding/IBindableWidget.cs" />
+    <File filename="./client-base/DataBinding/BindingOptions.cs" />
+    <File filename="./client-base/DataBinding/BindableWrapper.cs" />
     <File filename="./client-base/ControlsHelpers/IntegerTextBoxHelper.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="Boxerp.Client" expanded="True" selected="True" />
+          <Node name="Boxerp.Client" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="ControlsHelpers" expanded="True" />
+            <Node name="DataBinding" expanded="True">
+              <Node name="AbstractBindableWrapper.cs" expanded="False" selected="True" />
+            </Node>
+          </Node>
           <Node name="Boxerp.Client.GtkSharp" expanded="True">
             <Node name="UserInterface" expanded="True" />
           </Node>
@@ -36,7 +45,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="Welcome" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/client-base/DataBinding/AbstractBindableWrapper.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

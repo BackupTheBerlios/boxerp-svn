@@ -3,14 +3,19 @@
   <Files>
     <File filename="Welcome" />
     <File filename="./Controls/IntegerTextBoxControl.cs" />
+    <File filename="./Controls/Helper.cs" />
+    <File filename="../wpf/Controls/Helper.cs" />
+    <File filename="./Controls/BindableWidgetCore.cs" />
+    <File filename="./Controls/IUIWidget.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="Boxerp.Client.GtkSharp.Controls" expanded="True" selected="True">
+          <Node name="Boxerp.Client.GtkSharp.Controls" expanded="True">
             <Node name="References" expanded="True" />
             <Node name="UserInterface" expanded="True" />
+            <Node name="IntegerTextBoxControl.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>

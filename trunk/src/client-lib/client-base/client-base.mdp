@@ -33,12 +33,6 @@
     <File name="./DataBinding/IBindableWrapper.cs" subtype="Code" buildaction="Compile" />
     <File name="./DataBinding/UIBinderBase.cs" subtype="Code" buildaction="Compile" />
     <File name="./DataBinding/IUIBinder.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Validation" subtype="Directory" buildaction="Compile" />
-    <File name="./Validation/ValidateAttribute.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Validation/ValidationConstraint.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Validation/ValidationException.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Validation/Validator.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Validation/IValidator.cs" subtype="Code" buildaction="Compile" />
     <File name="./Responsiveness" subtype="Directory" buildaction="Compile" />
     <File name="./Responsiveness/AbstractResponsiveHelper.cs" subtype="Code" buildaction="Compile" />
     <File name="./Responsiveness/ConcurrencyMode.cs" subtype="Code" buildaction="Compile" />

@@ -28,14 +28,53 @@
 //
 
 using System;
-using System.ComponentModel;
+using Boxerp.Client.GtkSharp;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
-		
-	public interface IUIWidget
+	
+	
+	public partial class TextBoxControl : Gtk.Bin, IUIWidget
 	{
-		void UpdateValue(object val);	
-	}
+		private BindableWidgetCore _widgetCore;
+		
+		public TextBoxControl()
+		{
+			this.Build();
+			_widgetCore = new BindableWidgetCore(this);
+		}
 
+#region IUIWidget implementation
+		public BindableWidgetCore WidgetCore
+		{
+			get
+			{
+				return _widgetCore;
+			}
+		}
+
+		public void UpdateValue(string property, object val)
+		{
+			_textBox.Text = val.ToString();
+		}
+
+#endregion
+		
+		public string Text
+		{
+			get
+			{
+				return _textBox.Text;
+			}
+			set
+			{
+				_textBox.Text = value;
+			}
+		}
+
+		protected virtual void OnKeyReleased (object o, Gtk.KeyReleaseEventArgs args)
+		{
+			WidgetCore.SetPropertyValue(Text);
+		}
+	}
 }

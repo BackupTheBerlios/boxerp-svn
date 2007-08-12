@@ -17,14 +17,29 @@ namespace Boxerp.Client.GtkSharp.Controls
 	public partial class IntegerTextBoxControl : Gtk.Bin, IUIWidget
 	{
 		private int _maxValue = Int32.MaxValue;
-		private BindableWidgetCore WidgetCore;
+		private BindableWidgetCore _widgetCore;
 		
 		public IntegerTextBoxControl()
 		{
 			this.Build();
-			WidgetCore = new BindableWidgetCore(this);
+			_widgetCore = new BindableWidgetCore(this);
 		}
 
+#region IUIWidget implementation
+		public BindableWidgetCore WidgetCore
+		{
+			get
+			{
+				return _widgetCore;
+			}
+		}
+
+		public void UpdateValue(string property, object val)
+		{
+			_textBox.Text = val.ToString();
+		}
+#endregion
+		
 		public int Integer
 		{
 			get
@@ -47,11 +62,6 @@ namespace Boxerp.Client.GtkSharp.Controls
 			{
 				_maxValue = value;
 			}
-		}
-		
-		public void UpdateValue(object val)
-		{
-			_textBox.Text = val.ToString();
 		}
 		
 		protected virtual void OnKeyReleased (object o, Gtk.KeyReleaseEventArgs args)
@@ -88,16 +98,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 						Integer = MaxValue;
 					}
 					
-					if ((WidgetCore.BindingOptions == BindingOptions.TwoWay) && (WidgetCore.BindingProperty != null))
-					{
-						//Console.WriteLine("On key up:" +_bindingProperty.ToString() + ", " + _textBox.Text);
-						
-						WidgetCore.SetPropertyValue(Integer);
-					}
-					else
-					{
-						//Console.WriteLine(_bindingOptions);
-					}
+					WidgetCore.SetPropertyValue(Integer);
 				}
 				_textBox.Text = IntegerTextBoxHelper.CleanString(_textBox.Text);
 			}

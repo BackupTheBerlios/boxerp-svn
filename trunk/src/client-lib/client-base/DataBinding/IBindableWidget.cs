@@ -31,6 +31,9 @@ namespace Boxerp.Client
 {
 	public interface IBindableWidget
 	{
-		void BindObject(IBindableWrapper bObject, object propertyOwner, string bindingProperty, BindingOptions options);
+		void BindObject(IBindableWrapper bObject, object propertyOwner, 
+		                       string bindingProperty, string widgetProperty, BindingOptions options);
+		void BindObject(IBindableWrapper bObject, string path, string widgetProperty, BindingOptions options);
+		
 	}
 }

@@ -1,2 +1,19 @@
 <objects>
+  <object type="Boxerp.Client.GtkSharp.Controls.IntegerTextBoxControl" palette-category="widget" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups>
+      <itemgroup label="IntegerTextBoxControl Properties">
+        <property name="Integer" />
+        <property name="MaxValue" />
+      </itemgroup>
+    </itemgroups>
+    <signals />
+  </object>
+  <object type="Boxerp.Client.GtkSharp.Controls.TextBoxControl" palette-category="widget" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups>
+      <itemgroup label="TextBoxControl Properties">
+        <property name="Text" />
+      </itemgroup>
+    </itemgroups>
+    <signals />
+  </object>
 </objects>

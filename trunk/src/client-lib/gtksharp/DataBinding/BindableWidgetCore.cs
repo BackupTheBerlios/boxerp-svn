@@ -34,14 +34,15 @@ using System.Reflection;
 using System.ComponentModel;
 
 
-namespace Boxerp.Client.GtkSharp.Controls
+namespace Boxerp.Client.GtkSharp
 {
 	public class BindableWidgetCore : IBindableWidget
 	{
 		private IBindableWrapper _bindableObject = null;
 		private object _propertyOwner;
-		private PropertyInfo _bindingProperty = null;
-		private string _propertyName = null;
+		private PropertyInfo _boBindingProperty = null;
+		private string _boPropertyName = null;
+		private string _widgetBindingProperty = null;
 		private BindingOptions _bindingOptions = BindingOptions.OneWay;
 		private IUIWidget _uiWidget;
 		
@@ -61,19 +62,19 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 
-		public virtual System.Reflection.PropertyInfo BindingProperty 
+		public virtual System.Reflection.PropertyInfo BOBindingProperty 
 		{
 			get 
 			{
-				return _bindingProperty;
+				return _boBindingProperty;
 			}
 		}
 
-		public virtual string PropertyName 
+		public virtual string BOPropertyName 
 		{
 			get 
 			{
-				return _propertyName;
+				return _boPropertyName;
 			}
 		}
 
@@ -90,38 +91,77 @@ namespace Boxerp.Client.GtkSharp.Controls
 			_uiWidget = uiWidget;
 		}
 		
-		public void BindObject(IBindableWrapper bObject, object propertyOwner, string bindingProperty, BindingOptions options)
+		public void BindObject(IBindableWrapper bObject, object propertyOwner, 
+		                       string bindingProperty, string widgetProperty, BindingOptions options)
 		{
+			_widgetBindingProperty = widgetProperty; 
 			_bindableObject = bObject;
 			_propertyOwner = propertyOwner;
-			_bindingProperty = propertyOwner.GetType().GetProperty(bindingProperty);
-			_propertyName = bindingProperty;
-			if (_bindingProperty == null)
+			_boBindingProperty = propertyOwner.GetType().GetProperty(bindingProperty);
+			_boPropertyName = bindingProperty;
+			if (_boBindingProperty == null)
 			{
 				throw new NullReferenceException("Error binding object. Property " + bindingProperty + " doesn't exist");
 			}
-			Console.WriteLine("Binding Object property:" + _bindingProperty.Name);
+			Console.WriteLine("Binding Object property:" + _boBindingProperty.Name);
 			_bindableObject.PropertyChanged += OnPropertyChanged;
 			_bindingOptions = options;
+		}
+		
+		public void BindObject(IBindableWrapper bObject, string path, string widgetProperty, BindingOptions options)
+		{
+			_widgetBindingProperty = widgetProperty;
+			_bindableObject = bObject;
+			_bindingOptions = options;
+			_bindableObject.PropertyChanged += OnPropertyChanged;
+			
+			string[] pathArray = path.Split('.');
+			_boPropertyName = pathArray[pathArray.Length -1]; // the last element of the path is the property
+			// now get the object whose property we've got
+			if (pathArray.Length == 1)      
+			{
+				_propertyOwner = bObject;
+			}
+			else
+			{
+				// the first element of the path have to be a property of the bObject
+				int i = 0;
+				PropertyInfo prop = bObject.GetType().GetProperty(pathArray[0]);
+				_propertyOwner = prop.GetValue(bObject, null);
+				while (pathArray.Length -2 > i)
+				{
+					i++;
+					prop = _propertyOwner.GetType().GetProperty(pathArray[i]);
+					_propertyOwner = prop.GetValue(_propertyOwner, null); // try this with indexed properties!
+					_boBindingProperty = _propertyOwner.GetType().GetProperty(_boPropertyName);
+				}
+			}
+			
+			Console.WriteLine("}}}" + _propertyOwner);
+			Console.WriteLine("}}}" + _boBindingProperty.Name);
 		}
 		
 		public void OnPropertyChanged(object o, PropertyChangedEventArgs args)
 		{
 			//Console.WriteLine("binding prop changed:" + args.PropertyName + "," + _propertyName);
-			if (args.PropertyName.Equals(_propertyName))
+			if (args.PropertyName.Equals(_boPropertyName))
 			{
-				object propValue = _bindingProperty.GetValue(_propertyOwner, null);
+				object propValue = _boBindingProperty.GetValue(_propertyOwner, null);
 				Console.WriteLine("prop new value = " + propValue);
 				if (propValue != null)
 				{
-					_uiWidget.UpdateValue(propValue);
+					_uiWidget.UpdateValue(_widgetBindingProperty, propValue);
 				}
 			}
 		}
 				
 		public void SetPropertyValue(object val)
 		{
-			_bindingProperty.SetValue(_propertyOwner, val, null);	
+			if ((BindingOptions == BindingOptions.TwoWay) && (BOBindingProperty != null))
+			{
+				Console.WriteLine("setting value: " + val);
+				_boBindingProperty.SetValue(_propertyOwner, val, null);
+			}
 		}
 		
 	}

@@ -41,12 +41,12 @@ using System.Windows.Shapes;
 namespace Boxerp.Client.WPF.Controls
 {
 	/// <summary>
-	/// Interaction logic for NullableTextControl.xaml
+	/// Interaction logic for NullableTextBox.xaml
 	/// </summary>
 
-	public partial class NullableTextControl : System.Windows.Controls.UserControl
+	public partial class NullableTextBox : System.Windows.Controls.UserControl
 	{
-		public NullableTextControl()
+		public NullableTextBox()
 		{
 			InitializeComponent();
 		}
@@ -54,26 +54,26 @@ namespace Boxerp.Client.WPF.Controls
 		public static DependencyProperty TitleProperty = DependencyProperty.Register(
 			"Title",
 			typeof(string),
-			typeof(NullableTextControl),
+			typeof(NullableTextBox),
 			new FrameworkPropertyMetadata("title", FrameworkPropertyMetadataOptions.AffectsRender,
 				new PropertyChangedCallback(OnTitleChanged), null));
 
 		private static void OnTitleChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
-			NullableTextControl control = (NullableTextControl)o;
+			NullableTextBox control = (NullableTextBox)o;
 			control._title.Content = (string)e.NewValue;
 		}
 
 		public static DependencyProperty TextProperty = DependencyProperty.Register(
 			"Text",
 			typeof(string),
-			typeof(NullableTextControl),
+			typeof(NullableTextBox),
 			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender,
 				new PropertyChangedCallback(OnTextChanged), null));
 
 		private static void OnTextChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
-			NullableTextControl control = (NullableTextControl)o;
+			NullableTextBox control = (NullableTextBox)o;
 			control._text.Text = (string)e.NewValue;
 		}
 

@@ -28,6 +28,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Boxerp.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\client-base\bin\Debug\Boxerp.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Boxerp.Collections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Collections\Boxerp.Collections\Boxerp.Collections\bin\Debug\Boxerp.Collections.dll</HintPath>

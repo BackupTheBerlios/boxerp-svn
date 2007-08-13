@@ -38,19 +38,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Boxerp.Client;
+
 namespace Boxerp.Client.WPF.Controls
 {
 	/// <summary>
-	/// Interaction logic for DecimalTextBoxControl.xaml
+	/// Interaction logic for DecimalTextBox.xaml
 	/// </summary>
 
-	public partial class DecimalTextBoxControl : System.Windows.Controls.UserControl
+	public partial class DecimalTextBox : System.Windows.Controls.UserControl
 	{
+		private bool _cleaned = false;
 
+		public bool Cleaned
+		{
+			get { return _cleaned; }
+			set { _cleaned = value; }
+		}
 		private char _decimalSeparator = '.';
 		private int _decimalDigits = 2;
 
-		public DecimalTextBoxControl()
+		public DecimalTextBox()
 		{
 			InitializeComponent();
 		}
@@ -58,7 +66,7 @@ namespace Boxerp.Client.WPF.Controls
 		public static DependencyProperty MaxValueProperty = DependencyProperty.Register(
 			"MaxValue",
 			typeof(int?),
-			typeof(DecimalTextBoxControl),
+			typeof(DecimalTextBox),
 			new FrameworkPropertyMetadata(Int32.MaxValue, FrameworkPropertyMetadataOptions.AffectsRender,
 				new PropertyChangedCallback(OnMaxValueChanged), null));
 
@@ -79,15 +87,22 @@ namespace Boxerp.Client.WPF.Controls
 		public static DependencyProperty TextProperty = DependencyProperty.Register(
 			"Text",
 			typeof(string),
-			typeof(DecimalTextBoxControl),
+			typeof(DecimalTextBox),
 			new FrameworkPropertyMetadata("0.0", FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(OnTextChanged), null));
 
 		private static void OnTextChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
-			DecimalTextBoxControl control = (DecimalTextBoxControl)o;
+			DecimalTextBox control = (DecimalTextBox)o;
 			if (e.NewValue != null)
 			{
-				control._textBox.Text = control.CleanString((string)e.NewValue);
+				if (control.Cleaned)
+				{
+					control._textBox.Text = (string)e.NewValue;
+				}
+				else
+				{
+					control._textBox.Text = DecimalTextBoxHelper.CleanString((string)e.NewValue, control.DecimalDigits, control.DecimalSeparator);
+				}
 			}
 		}
 
@@ -103,14 +118,40 @@ namespace Boxerp.Client.WPF.Controls
 			}
 			set
 			{
-				SetValue(TextProperty, _textBox.Text);
+				lock (this)
+				{
+					Cleaned = true;
+					if (value != null)
+					{
+						Cleaned = true;
+						string cleaned = DecimalTextBoxHelper.CleanString(value, DecimalDigits, DecimalSeparator);
+						SetValue(TextProperty, cleaned);
+						Cleaned = false;
+					}
+				}
+			}
+		}
+
+		public decimal Decimal
+		{
+			get
+			{
+				if (_textBox.Text.Length == 0)
+				{
+					return 0;
+				}
+				return (decimal)GetValue(TextProperty);
+			}
+			set
+			{
+				Text = value.ToString();
 			}
 		}
 
 		public static DependencyProperty DecimalSeparatorProperty = DependencyProperty.Register(
 			"DecimalSeparator",
 			typeof(char),
-			typeof(DecimalTextBoxControl),
+			typeof(DecimalTextBox),
 			new FrameworkPropertyMetadata('.', FrameworkPropertyMetadataOptions.None, null, null));
 
 		public char DecimalSeparator
@@ -122,7 +163,7 @@ namespace Boxerp.Client.WPF.Controls
 		public static DependencyProperty DecimalDigitsProperty = DependencyProperty.Register(
 			"DecimalDigits",
 			typeof(int),
-			typeof(DecimalTextBoxControl),
+			typeof(DecimalTextBox),
 			new FrameworkPropertyMetadata(2, FrameworkPropertyMetadataOptions.None, null, null));
 
 		public int DecimalDigits
@@ -134,44 +175,7 @@ namespace Boxerp.Client.WPF.Controls
 		
 		private string CleanString()
 		{
-			return CleanString(_textBox.Text);
-		}
-
-		private string CleanString(string val)
-		{
-			string currentStr = val;
-			string cleaned = String.Empty;
-			if (currentStr.Length > 0)
-			{
-				bool readingDecimals = false;
-				int decimals = 0;
-				foreach (char c in currentStr)
-				{
-					if ((readingDecimals) && (decimals == DecimalDigits))
-					{
-						break;
-					}
-					else if ((readingDecimals) && (c == DecimalSeparator))
-					{
-						break;
-					}
-					else if (readingDecimals)
-					{
-						decimals++;
-					}
-
-					if (Char.IsNumber(c))
-					{
-						cleaned += c.ToString();
-					}
-					else if (c == DecimalSeparator)
-					{
-						readingDecimals = true;
-						cleaned += c.ToString();
-					}
-				}
-			}
-			return cleaned;
+			return DecimalTextBoxHelper.CleanString(_textBox.Text, DecimalDigits, DecimalSeparator);
 		}
 
 		private bool ContainsDecimalSymbol()
@@ -229,6 +233,7 @@ namespace Boxerp.Client.WPF.Controls
 
 				Text = _textBox.Text;
 				decimal val = Convert.ToDecimal(Text);
+
 				if ((MaxValue != null) && (val > MaxValue))
 				{
 					MessageBox.Show("The maximun value allowed is: " + MaxValue);

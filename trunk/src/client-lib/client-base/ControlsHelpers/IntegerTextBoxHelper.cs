@@ -47,6 +47,10 @@ namespace Boxerp.Client
 					}
 				}
 			}
+			if (cleaned.Length == 0)
+			{
+				cleaned = "0";
+			}
 			return cleaned;
 		}
 	}

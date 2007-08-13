@@ -41,10 +41,10 @@ using System.Windows.Shapes;
 namespace Boxerp.Client.WPF.Controls
 {
 	/// <summary>
-	/// Interaction logic for NullableIntegerControl.xaml
+	/// Interaction logic for NullableIntegerBox.xaml
 	/// </summary>
 
-	public partial class NullableIntegerControl : System.Windows.Controls.UserControl
+	public partial class NullableIntegerBox : System.Windows.Controls.UserControl
 	{
 		private bool _innerIntegerChanged = false;
 
@@ -54,7 +54,7 @@ namespace Boxerp.Client.WPF.Controls
 			internal set { _innerIntegerChanged = value; }
 		}
 
-		public NullableIntegerControl()
+		public NullableIntegerBox()
 		{
 			InitializeComponent();
 			_text.IntegerChanged += OnIntegerChanged;
@@ -63,26 +63,26 @@ namespace Boxerp.Client.WPF.Controls
 		public static DependencyProperty TitleProperty = DependencyProperty.Register(
 			"Title",
 			typeof(string),
-			typeof(NullableIntegerControl),
+			typeof(NullableIntegerBox),
 			new FrameworkPropertyMetadata("title", FrameworkPropertyMetadataOptions.AffectsRender,
 			new PropertyChangedCallback(OnTitleChanged), null));
 
 		private static void OnTitleChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
-			NullableIntegerControl control = (NullableIntegerControl)o;
+			NullableIntegerBox control = (NullableIntegerBox)o;
 			control._title.Content = (string)e.NewValue;
 		}
 
 		public static DependencyProperty IntegerProperty = DependencyProperty.Register(
 			"Integer",
 			typeof(int?),
-			typeof(NullableIntegerControl),
+			typeof(NullableIntegerBox),
 			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
 				new PropertyChangedCallback(OnIntegerChanged), null));
 
 		private static void OnIntegerChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
-			NullableIntegerControl control = (NullableIntegerControl)o;
+			NullableIntegerBox control = (NullableIntegerBox)o;
 			if ((e.NewValue != null) && (!control.InnerIntegerChanged))
 			{
 				control._text._textBox.Text = e.NewValue.ToString();

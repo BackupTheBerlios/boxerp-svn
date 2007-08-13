@@ -17,9 +17,9 @@ namespace Boxerp.Client.WPF.Controls
 	/// Interaction logic for DateCalendarControl.xaml
 	/// </summary>
 
-	public partial class DateCalendarControl : System.Windows.Controls.UserControl
+	public partial class DateCalendar : System.Windows.Controls.UserControl
 	{
-		public DateCalendarControl()
+		public DateCalendar()
 		{
 			InitializeComponent();
 		}

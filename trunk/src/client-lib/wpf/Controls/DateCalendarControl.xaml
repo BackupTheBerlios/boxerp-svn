@@ -1,4 +1,4 @@
-<UserControl x:Class="Boxerp.Client.WPF.Controls.DateCalendarControl"
+<UserControl x:Class="Boxerp.Client.WPF.Controls.DateCalendar"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid>

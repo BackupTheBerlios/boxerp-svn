@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="AbstractController.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="ControlsHelpers\DecimalTextBoxHelper.cs" />
     <Compile Include="ControlsHelpers\IntegerTextBoxHelper.cs" />
     <Compile Include="DataBinding\AbstractBindableWrapper.cs" />
     <Compile Include="DataBinding\BbWithBindableCollection.cs" />

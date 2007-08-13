@@ -42,12 +42,20 @@ using Boxerp.Client;
 namespace Boxerp.Client.WPF.Controls
 {
 	/// <summary>
-	/// Interaction logic for IntegerTextBoxControl.xaml
+	/// Interaction logic for IntegerTextBox.xaml
 	/// </summary>
 
-	public partial class IntegerTextBoxControl : System.Windows.Controls.UserControl
+	public partial class IntegerTextBox : System.Windows.Controls.UserControl
 	{
-		public IntegerTextBoxControl()
+		private bool _cleaned = false;
+
+		public bool Cleaned
+		{
+			get { return _cleaned; }
+			set { _cleaned = value; }
+		}
+
+		public IntegerTextBox()
 		{
 			InitializeComponent();
 		}
@@ -57,17 +65,13 @@ namespace Boxerp.Client.WPF.Controls
 		public static DependencyProperty MaxValueProperty = DependencyProperty.Register(
 			"MaxValue",
 			typeof(int?),
-			typeof(IntegerTextBoxControl),
+			typeof(IntegerTextBox),
 			new FrameworkPropertyMetadata(Int32.MaxValue, FrameworkPropertyMetadataOptions.AffectsRender,
 				new PropertyChangedCallback(OnMaxValueChanged), null));
 
 		private static void OnMaxValueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
-			/*IntegerTextBoxControl control = (IntegerTextBoxControl)o;
-			if (e.NewValue != null)
-			{
-				control._textBox.Text = control.CleanString(e.NewValue.ToString());
-			}*/
+			
 		}
 
 		public int? MaxValue
@@ -86,16 +90,23 @@ namespace Boxerp.Client.WPF.Controls
 		public static DependencyProperty IntegerProperty = DependencyProperty.Register(
 			"Integer",
 			typeof(int?),
-			typeof(IntegerTextBoxControl),
+			typeof(IntegerTextBox),
 			new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender,
 				new PropertyChangedCallback(OnIntegerChanged), null));
 
 		private static void OnIntegerChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
-			IntegerTextBoxControl control = (IntegerTextBoxControl)o;
+			IntegerTextBox control = (IntegerTextBox)o;
 			if (e.NewValue != null)
 			{
-				control._textBox.Text = IntegerTextBoxHelper.CleanString(e.NewValue.ToString());
+				if (control.Cleaned)
+				{
+					control._textBox.Text = e.NewValue.ToString();
+				}
+				else
+				{
+					control._textBox.Text = IntegerTextBoxHelper.CleanString(e.NewValue.ToString());
+				}
 			}
 		}
 
@@ -111,28 +122,16 @@ namespace Boxerp.Client.WPF.Controls
 			}
 			set
 			{
-				SetValue(IntegerProperty, value);
-				
-				if (IntegerChanged != null)
+				lock (this)
 				{
-					IntegerChanged.Invoke(this, null);
+					Cleaned = true;
+					SetValue(IntegerProperty, value);
+					Cleaned = false;
+					if (IntegerChanged != null)
+					{
+						IntegerChanged.Invoke(this, null);
+					}
 				}
-			}
-		}
-
-		public static DependencyProperty TextProperty = DependencyProperty.Register(
-			"Text",
-			typeof(string),
-			typeof(IntegerTextBoxControl),
-			new FrameworkPropertyMetadata("0", FrameworkPropertyMetadataOptions.AffectsRender,
-				new PropertyChangedCallback(OnTextChanged), null));
-
-		private static void OnTextChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-		{
-			IntegerTextBoxControl control = (IntegerTextBoxControl)o;
-			if (e.NewValue != null)
-			{
-				control._textBox.Text = IntegerTextBoxHelper.CleanString((string)e.NewValue);
 			}
 		}
 
@@ -148,7 +147,8 @@ namespace Boxerp.Client.WPF.Controls
 			}
 			set
 			{
-				SetValue(TextProperty, value);
+				string cleaned = IntegerTextBoxHelper.CleanString(value);
+				Integer = Int32.Parse(cleaned);
 			}
 		}
 
@@ -178,12 +178,13 @@ namespace Boxerp.Client.WPF.Controls
 					_textBox.Text = maxIntValue;
 				}
 
-				Text = _textBox.Text;
-				Integer = Int32.Parse(Text);
+				string cleaned = CleanString();
+				_textBox.Text = cleaned;
+				Integer = Int32.Parse(cleaned);
+
 				if ((MaxValue != null) && (Integer > MaxValue))
 				{
 					MessageBox.Show("The maximun value allowed is: " + MaxValue);
-					Text = MaxValue.ToString();
 					Integer = MaxValue;
 				}
 			}

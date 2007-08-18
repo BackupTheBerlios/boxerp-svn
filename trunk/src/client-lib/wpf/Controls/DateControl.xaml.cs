@@ -27,6 +27,8 @@ namespace Boxerp.Client.WPF.Controls
 		private bool _populatingCombo = false;
 		private bool _innerSetDateProperty = false;
 
+		public event SelectionChangedEventHandler DateChanged;
+
 		public bool InnerSetDateProperty
 		{
 			get { return _innerSetDateProperty; }
@@ -141,6 +143,10 @@ namespace Boxerp.Client.WPF.Controls
 						SetValue(DateProperty, GetDate());
 						_innerSetDateProperty = false;
 					}
+				}
+				if (DateChanged != null)
+				{
+					DateChanged.Invoke(this, null);
 				}
 			}
 			catch (Exception)

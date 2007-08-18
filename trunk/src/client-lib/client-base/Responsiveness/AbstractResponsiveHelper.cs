@@ -228,18 +228,25 @@ namespace Boxerp.Client
 		{
 			lock (this)
 			{
-				Dictionary<int, Thread> firstThreadBlock = _threadDictionariesQueue.Peek();
-				if (firstThreadBlock.Count > 0)
+				if (_threadDictionariesQueue.Count == 0)
 				{
-					firstThreadBlock.Remove(args.ThreadId);
-					if (firstThreadBlock.Count == 0)
+					throw new Exception("Error trying to stop asynchronous call. You are most likely calling StopAsyncMethod more than once");
+				}
+				else
+				{
+					Dictionary<int, Thread> firstThreadBlock = _threadDictionariesQueue.Peek();
+					if (firstThreadBlock.Count > 0)
 					{
-						_threadDictionariesQueue.Dequeue();
-						_cancelRequestQueue.Dequeue();
-						args.Success = _operationSuccessQueue.Dequeue();
-						args.OperationType = _operationTypeQueue.Dequeue(); 
-						args.ExceptionMsg = _exceptionQueue.Dequeue();
-						OnTransferCompleted(args.OperationType, args);
+						firstThreadBlock.Remove(args.ThreadId);
+						if (firstThreadBlock.Count == 0)
+						{
+							_threadDictionariesQueue.Dequeue();
+							_cancelRequestQueue.Dequeue();
+							args.Success = _operationSuccessQueue.Dequeue();
+							args.OperationType = _operationTypeQueue.Dequeue();
+							args.ExceptionMsg = _exceptionQueue.Dequeue();
+							OnTransferCompleted(args.OperationType, args);
+						}
 					}
 				}
 			}

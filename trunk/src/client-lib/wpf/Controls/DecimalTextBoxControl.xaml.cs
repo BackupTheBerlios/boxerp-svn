@@ -208,7 +208,7 @@ namespace Boxerp.Client.WPF.Controls
 					character = DecimalSeparator;
 				}
 
-				if ((!Helper.IsValidCharacter(args.Key, character)) && (character != DecimalSeparator))
+				if ((!Helper.IsNumber(args.Key, character)) && (character != DecimalSeparator))
 				{
 					MessageBox.Show("Error: Only numbers and decimal separator are allowed in this box");
 					_textBox.Text = CleanString();

@@ -31,26 +31,50 @@ using System.Text;
 
 namespace Boxerp.Client
 {
-	public class IntegerTextBoxHelper 
+	public class DecimalTextBoxHelper
 	{
-		public static string CleanString(string val)
+		public static string CleanString(string val, int decimalDigits, char decimalSeparator)
 		{
 			string currentStr = val;
 			string cleaned = String.Empty;
 			if (currentStr.Length > 0)
 			{
+				bool readingDecimals = false;
+				int decimals = 0;
 				foreach (char c in currentStr)
 				{
+					if ((readingDecimals) && (decimals == decimalDigits))
+					{
+						break;
+					}
+					else if ((readingDecimals) && (c == decimalSeparator))
+					{
+						break;
+					}
+					else if (readingDecimals)
+					{
+						decimals++;
+					}
+
 					if (Char.IsNumber(c))
 					{
 						cleaned += c.ToString();
 					}
+					else if (c == decimalSeparator)
+					{
+						readingDecimals = true;
+						cleaned += c.ToString();
+					}
+				}
+				if (cleaned == ".")
+				{
+					cleaned = "0.0";
+				}
+				else if (cleaned.Length == 0)
+				{
+					return "0";
 				}
 			}
-			/*if (cleaned.Length == 0)
-			{
-				cleaned = "0";
-			}*/
 			return cleaned;
 		}
 	}

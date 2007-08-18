@@ -38,7 +38,8 @@ namespace Boxerp.Client.WPF.Controls
 		{
 			if ((key != Key.Tab) && (key != Key.Left) && (key != Key.Right) &&
 				(key != Key.Enter) && (key != Key.End) &&
-				(key != Key.Home) && (key != Key.Clear))
+				(key != Key.Home) && (key != Key.Clear)
+				&& (key != Key.RightShift) && (key != Key.LeftShift))
 			{
 				return true;
 			}
@@ -46,7 +47,7 @@ namespace Boxerp.Client.WPF.Controls
 			return false;
 		}
 
-		public static bool IsValidCharacter(Key key, char character)
+		public static bool IsNumber(Key key, char character)
 		{
 			if ((key != Key.Delete) && (key != Key.Back) && (!Char.IsNumber(character)))
 			{
@@ -55,5 +56,21 @@ namespace Boxerp.Client.WPF.Controls
 
 			return true;
 		}
+
+		public static bool IsLetterOrDigit(Key key, char character)
+		{
+			if ((key != Key.Delete) && (key != Key.Back) && (!Char.IsLetterOrDigit(character)))
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		public static bool IsDeleteOrBack(Key key)
+		{
+			return ((key == Key.Delete) || (key == Key.Back));
+		}
+
 	}
 }

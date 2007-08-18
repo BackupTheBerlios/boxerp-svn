@@ -31,7 +31,7 @@ using System.Text;
 
 namespace Boxerp.Client
 {
-	public class IntegerTextBoxHelper 
+	public class SystemNameTextBoxHelper
 	{
 		public static string CleanString(string val)
 		{
@@ -39,18 +39,28 @@ namespace Boxerp.Client
 			string cleaned = String.Empty;
 			if (currentStr.Length > 0)
 			{
+				// cannot start with a number
+				while (Char.IsNumber(currentStr[0]))
+				{
+					if (currentStr.Length > 2)
+					{
+						currentStr = currentStr.Substring(1, currentStr.Length - 1);
+					}
+					else
+					{
+						currentStr = String.Empty;
+						break;
+					}
+				}
+				
 				foreach (char c in currentStr)
 				{
-					if (Char.IsNumber(c))
+					if (Char.IsLetterOrDigit(c))
 					{
 						cleaned += c.ToString();
 					}
 				}
 			}
-			/*if (cleaned.Length == 0)
-			{
-				cleaned = "0";
-			}*/
 			return cleaned;
 		}
 	}

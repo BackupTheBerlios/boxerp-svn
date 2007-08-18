@@ -22,6 +22,10 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Boxerp.Collections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Collections\Boxerp.Collections\Boxerp.Collections\bin\Debug\Boxerp.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dependencies\Castle.Core.dll</HintPath>
@@ -39,15 +43,19 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ControlsHelpers\DecimalTextBoxHelper.cs" />
     <Compile Include="ControlsHelpers\IntegerTextBoxHelper.cs" />
+    <Compile Include="ControlsHelpers\SystemNameTextBoxHelper.cs" />
     <Compile Include="DataBinding\AbstractBindableWrapper.cs" />
     <Compile Include="DataBinding\BbWithBindableCollection.cs" />
     <Compile Include="DataBinding\BdWithNestedWrapper.cs" />
+    <Compile Include="DataBinding\BindableCollection.cs" />
     <Compile Include="DataBinding\BindableWithCollection.cs" />
     <Compile Include="DataBinding\BindableWrapper.cs" />
     <Compile Include="DataBinding\BindingOptions.cs" />
     <Compile Include="DataBinding\IBindableWidget.cs" />
     <Compile Include="DataBinding\IBindableWrapper.cs" />
+    <Compile Include="DataBinding\IChildObject.cs" />
     <Compile Include="DataBinding\IUIBinder.cs" />
+    <Compile Include="DataBinding\PropertyComparer.cs" />
     <Compile Include="DataBinding\UIBinderBase.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="IControl.cs" />

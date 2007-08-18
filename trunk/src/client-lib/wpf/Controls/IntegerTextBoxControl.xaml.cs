@@ -148,7 +148,14 @@ namespace Boxerp.Client.WPF.Controls
 			set
 			{
 				string cleaned = IntegerTextBoxHelper.CleanString(value);
-				Integer = Int32.Parse(cleaned);
+				if (cleaned.Length == 0)
+				{
+					Integer = 0;
+				}
+				else
+				{
+					Integer = Int32.Parse(cleaned);
+				}
 			}
 		}
 
@@ -164,7 +171,7 @@ namespace Boxerp.Client.WPF.Controls
 				string key = args.Key.ToString();
 				char character = key[key.Length - 1];
 				
-				if (!Helper.IsValidCharacter(args.Key, character))
+				if (!Helper.IsNumber(args.Key, character))
 				{
 					MessageBox.Show("Error: Only numbers are allowed in this box");
 				}
@@ -180,7 +187,14 @@ namespace Boxerp.Client.WPF.Controls
 
 				string cleaned = CleanString();
 				_textBox.Text = cleaned;
-				Integer = Int32.Parse(cleaned);
+				if (cleaned.Length == 0)
+				{
+					Integer = 0;
+				}
+				else
+				{
+					Integer = Int32.Parse(cleaned);
+				}
 
 				if ((MaxValue != null) && (Integer > MaxValue))
 				{

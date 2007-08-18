@@ -64,6 +64,7 @@ namespace Boxerp.Client.WPF.Controls
 
 	public class GenericComboBox<T> : GenericComboBox
 	{
+		private bool _sortItems = false;
 		private InterceptedList<T> _items = new InterceptedList<T>();
 
 		public event SelectionChangedEventHandler SelectionChanged
@@ -86,9 +87,35 @@ namespace Boxerp.Client.WPF.Controls
 			_items.ClearEvent += OnClear;
 		}
 
+		public GenericComboBox(bool sortItems)
+			: this ()
+		{
+			_sortItems = sortItems;
+		}
+
 		private void OnItemAdded(Object item, EventArgs args)
 		{
-			Combo.Items.Add(item);
+			if ((_sortItems) && (Combo.Items.Count > 0))
+			{
+				bool inserted = false;
+				for (int i = 0; i < Combo.Items.Count; i++)
+				{
+					if (Combo.Items[i].ToString().CompareTo(item.ToString()) > 0)
+					{
+						Combo.Items.Insert(i, item);
+						inserted = true;
+						break;
+					}
+				}
+				if (!inserted)
+				{
+					Combo.Items.Insert(Combo.Items.Count, item);
+				}
+			}
+			else
+			{
+				Combo.Items.Add(item);
+			}
 		}
 
 		

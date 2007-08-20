@@ -7,7 +7,7 @@
     <Grid>
             <boxerp:DateControl x:Name="_dateControl" Margin="0,0,66,0"/>
 			
-    	<boxerp:IntegerTextBox HorizontalAlignment="Right" Margin="0,0,38,0" MaxValue="24" Integer="12" x:Name="_hours" Width="24" />
+    	<boxerp:IntegerTextBox HorizontalAlignment="Right" Margin="0,0,38,0" MaxValue="23" Integer="12" x:Name="_hours" Width="24" />
     	<boxerp:IntegerTextBox Width="24" HorizontalAlignment="Right" MaxValue="59" Integer="30" Margin="0,0,8,0.277" x:Name="_minutes"/>
     	
 		<Label Width="12" Content=":" HorizontalAlignment="Right" Margin="0,0,29,0" x:Name="Label"/>

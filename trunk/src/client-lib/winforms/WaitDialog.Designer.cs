@@ -37,7 +37,6 @@ namespace Boxerp.Client.WindowsForms
     {
         private Label infoLabel;
         private ProgressBar progressBarControl;
-        private Button cancelButton;
 
         /// <summary>
         /// Required designer variable.
@@ -71,7 +70,6 @@ namespace Boxerp.Client.WindowsForms
 
             this.progressBarControl = new System.Windows.Forms.ProgressBar();
             this.infoLabel = new System.Windows.Forms.Label();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // progressBarControl
@@ -95,7 +93,6 @@ namespace Boxerp.Client.WindowsForms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 99);
-            this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.progressBarControl);
             this.Name = "WaitDialogForm";

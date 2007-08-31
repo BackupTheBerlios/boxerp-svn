@@ -47,6 +47,7 @@ namespace Boxerp.Client.WPF
 		WaitDialog waitDialog;
 		private bool _displayExceptions = true;
 		Queue<WaitDialog> _dialogs = new Queue<WaitDialog>();
+		Queue<QuestionWindow> _questionWindows = new Queue<QuestionWindow>();
 				
 		public WpfResponsiveHelper(ConcurrencyMode mode) : base(mode){ }
 
@@ -72,14 +73,25 @@ namespace Boxerp.Client.WPF
 			
 			base.StartAsyncCallList(transferType, controller);
 
-			if (_concurrencyMode == ConcurrencyMode.Modal)
+			try
 			{
-				waitDialog.ShowDialog();
+				if (_concurrencyMode == ConcurrencyMode.Modal)
+				{
+					waitDialog.ShowDialog();
+				}
+				else
+				{
+					waitDialog.Show();
+					waitDialog.WindowState = WindowState.Normal;
+				}
 			}
-			else
+			catch (System.Reflection.TargetInvocationException ex)
 			{
-				waitDialog.Show();
-				waitDialog.WindowState = WindowState.Normal;
+				throw ex.InnerException;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
 			}
 		}
 
@@ -95,14 +107,25 @@ namespace Boxerp.Client.WPF
 
 			base.StartAsyncCall(method);
 
-			if (_concurrencyMode == ConcurrencyMode.Modal)
+			try
 			{
-				waitDialog.ShowDialog();
+				if (_concurrencyMode == ConcurrencyMode.Modal)
+				{
+					waitDialog.ShowDialog();
+				}
+				else
+				{
+					waitDialog.Show();
+					waitDialog.WindowState = WindowState.Normal;
+				}
 			}
-			else
+			catch (System.Reflection.TargetInvocationException ex)
 			{
-				waitDialog.Show();
-				waitDialog.WindowState = WindowState.Normal;
+				throw ex.InnerException;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
 			}
 		}
 
@@ -114,10 +137,18 @@ namespace Boxerp.Client.WPF
 			win.Msg = "Operation is being cancelled";
 			win.YesButtonLabel = "Force abortion right now";
 			win.NoButtonLabel = "Wait for the process to finish correctly";
-			win.ShowDialog();
-			if (win.Yes)
+			_questionWindows.Enqueue(win);
+			if (RunningThreads > 0)
 			{
-				ForceAbort();
+				win.ShowDialog();
+				if ((win.Yes) && (RunningThreads > 0))
+				{
+					ForceAbort();
+				}
+				if (_questionWindows.Count > 0)
+				{
+					_questionWindows.Dequeue();
+				}
 			}
 		}
 
@@ -126,6 +157,11 @@ namespace Boxerp.Client.WPF
 			ResponsiveEnum operationType = e.OperationType;
 			WaitDialog wDialog = _dialogs.Dequeue();
 			wDialog.Close();
+			if (_questionWindows.Count > 0)
+			{
+				_questionWindows.Dequeue().Close();
+			}
+
 			if ((_displayExceptions) && (!e.Success))
 			{
 				string msg = "Operation Aborted \n";

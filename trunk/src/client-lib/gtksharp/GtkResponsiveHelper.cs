@@ -42,7 +42,8 @@ namespace Boxerp.Client.GtkSharp
 		WaitWindow _waitWindow;
 		Queue<WaitDialog> _dialogs = new Queue<WaitDialog>();
 		Queue<WaitWindow> _windows = new Queue<WaitWindow>();
-		
+		Queue<QuestionDialog> _questionWindows = new Queue<QuestionDialog>();
+
 		public GtkResponsiveHelper(ConcurrencyMode mode)
 			: base(mode)
 		{
@@ -70,15 +71,26 @@ namespace Boxerp.Client.GtkSharp
 			
 			base.StartAsyncCallList(transferType, controller);
 
-			if (_concurrencyMode == ConcurrencyMode.Modal)
+			try
 			{
-				_waitDialog.Run();
+				if (_concurrencyMode == ConcurrencyMode.Modal)
+				{
+					_waitDialog.Run();
+				}
+				else
+				{
+					_waitWindow.ShowAll();
+					_waitWindow.Present();
+					// TODO : if the window is minimized show it in the middle of the screen
+				}
 			}
-			else
+			catch (System.Reflection.TargetInvocationException ex)
 			{
-				_waitWindow.ShowAll();
-				_waitWindow.Present();
-				// TODO : if the window is minimized show it in the middle of the screen
+				throw ex.InnerException;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
 			}
 		}
 		
@@ -104,15 +116,26 @@ namespace Boxerp.Client.GtkSharp
 			
 			base.StartAsyncCall(method);
 
-			if (_concurrencyMode == ConcurrencyMode.Modal)
+			try
 			{
-				_waitDialog.Run();
+				if (_concurrencyMode == ConcurrencyMode.Modal)
+				{
+					_waitDialog.Run();
+				}
+				else
+				{
+					_waitWindow.ShowAll();
+					_waitWindow.Present();
+					// TODO : if the window is minimized show it in the middle of the screen
+				}
 			}
-			else
+			catch (System.Reflection.TargetInvocationException ex)
 			{
-				_waitWindow.ShowAll();
-				_waitWindow.Present();
-				// TODO : if the window is minimized show it in the middle of the screen
+				throw ex.InnerException;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
 			}
 		}
 		
@@ -122,11 +145,19 @@ namespace Boxerp.Client.GtkSharp
         	QuestionDialog qdialog = new QuestionDialog();
 			qdialog.Modal = true;
         	qdialog.Message = "The process is being cancelled, please wait. Do you want to force abort right now?";
-            int rType = qdialog.Run();
-			if (rType == (int)ResponseType.Ok)
+			_questionWindows.Enqueue(qdialog);
+			if (RunningThreads > 0)
 			{
-			    ForceAbort();      
-            }
+				int rType = qdialog.Run();
+				if ((rType == (int)ResponseType.Ok) && (RunningThreads > 0))
+				{
+					ForceAbort();
+				}
+				if (_questionWindows.Count > 0)
+				{
+					_questionWindows.Dequeue();
+				}
+			}
         }
 		
 		private void TransferCompleted(object sender, EventArgs e)
@@ -146,7 +177,13 @@ namespace Boxerp.Client.GtkSharp
 				wWindow.Hide();
 				wWindow.Destroy();   // Is this close ?
 			}
-			
+			if (_questionWindows.Count > 0)
+			{
+				QuestionDialog qd = _questionWindows.Dequeue();
+				qd.Hide();
+				qd.Destroy();
+			}
+
 			if (!evArgs.Success)
 			{
 				string msg = "Operation Aborted \n";

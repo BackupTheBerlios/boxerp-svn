@@ -40,6 +40,8 @@ namespace Boxerp.Client
 	/// </summary>
 	public abstract class AbstractResponsiveHelper: IResponsiveClient
 	{
+		// All threads launched at a time are kept in a queue, trying to have a single unit for every client async call.
+		// Along with the threads there should be queues for success messages, exceptions, cancelling requests and type of async operations:
 		private  Queue<Dictionary<int, Thread>> _threadDictionariesQueue = new Queue<Dictionary<int, Thread>>();
 		private  Queue<bool> _operationSuccessQueue = new Queue<bool>();
 		private  Queue<string> _exceptionQueue = new Queue<string>();
@@ -80,7 +82,14 @@ namespace Boxerp.Client
 		{
 			get
 			{
-				return _cancelRequestQueue.Peek();
+				if (_cancelRequestQueue.Count > 0)
+				{
+					return _cancelRequestQueue.Peek();
+				}
+				else
+				{
+					return false;
+				}
 			}
 			protected set
 			{
@@ -108,7 +117,7 @@ namespace Boxerp.Client
 
 		/// <summary>
 		/// Create a new thread and put it in the queue 
-		/// (as long as there are no more running threads and the mode not be parallel)
+		/// (as long as there are no more running threads and the mode is not parallel)
 		/// </summary>
 		/// <param name="method"></param>
       	public virtual void StartAsyncCall(SimpleDelegate method)

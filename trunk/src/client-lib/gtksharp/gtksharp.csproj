@@ -78,16 +78,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="DoubleListView.cs" />
-    <Compile Include="FilteredListView.cs" />
     <Compile Include="GtkResponsiveHelper.cs" />
     <Compile Include="InfoDialog.cs" />
     <Compile Include="InfoExtendedDialog.cs" />
     <Compile Include="LoginWindow.cs" />
     <Compile Include="QuestionDialog.cs" />
     <Compile Include="SimpleColumn.cs" />
-    <Compile Include="SimpleListView.cs" />
-    <Compile Include="SimpleTreeView.cs" />
     <Compile Include="WaitDialog.cs" />
     <Compile Include="WaitWindow.cs" />
     <Compile Include="WarningDialog.cs" />

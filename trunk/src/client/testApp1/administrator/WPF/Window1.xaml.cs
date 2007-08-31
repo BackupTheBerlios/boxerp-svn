@@ -38,6 +38,11 @@ namespace Admin
 			_controller.RunMethod();
 		}
 
+		public void OnClickedWithCancellingLogic(Object sender, RoutedEventArgs args)
+		{
+			_controller.RunMethodWithCancellationLogic();
+		}
+
 		#region ITestWindow Members
 
 		public void ShowSomething()

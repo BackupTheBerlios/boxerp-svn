@@ -24,9 +24,9 @@ namespace Admin.Controllers
 		
 		public void RunMethod()
 		{
-			_responsiveHelper.StartAsyncCall(runMethod);
+			ResponsiveHelper.StartAsyncCall(runMethod);
 		}
-		
+
 		private void runMethod()
 		{
 			try
@@ -35,22 +35,60 @@ namespace Admin.Controllers
 			}
 			catch (System.Threading.ThreadAbortException ex)
 			{
-				_responsiveHelper.OnAbortAsyncCall(ex);
+				ResponsiveHelper.OnAbortAsyncCall(ex);
 			}
 			catch (Exception ex)
 			{
-				_responsiveHelper.OnAsyncException(ex);
+				ResponsiveHelper.OnAsyncException(ex);
 			}
 			finally
 			{
 				StopAsyncCall();
 			}
 		}
+
+		public void RunMethodWithCancellationLogic()
+		{
+			ResponsiveHelper.StartAsyncCall(runMethodWithCancellationLogic);
+		}
+
+		private void runMethodWithCancellationLogic()
+		{
+			try
+			{
+				for (int i = 0; i < 5; i++)
+				{
+					if (ResponsiveHelper.CancelRequested)
+					{
+						break;
+					}
+					System.Threading.Thread.Sleep(i * 1000);
+				}
+			}
+			catch (System.Threading.ThreadAbortException ex)
+			{
+				ResponsiveHelper.OnAbortAsyncCall(ex);
+			}
+			catch (Exception ex)
+			{
+				ResponsiveHelper.OnAsyncException(ex);
+			}
+			finally
+			{
+				StopAsyncCall();
+			}
+		}
+
+		
 		
 		
 		protected override void OnAsyncOperationFinish(Object sender, ThreadEventArgs args)
 		{
 			if ((args.Success) && (args.MethodBase == MethodBase(runMethod)))
+			{
+				_control.ShowSomething();
+			}
+			if ((args.Success) && (args.MethodBase == MethodBase(runMethodWithCancellationLogic)))
 			{
 				_control.ShowSomething();
 			}

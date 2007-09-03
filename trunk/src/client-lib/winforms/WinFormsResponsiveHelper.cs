@@ -193,7 +193,7 @@ namespace Boxerp.Client.WindowsForms
 
         public override void OnTransferCompleted(object sender, ThreadEventArgs e)
         {
-            throw new NotImplementedException("Not yet..");
+            TransferCompleted(sender, (EventArgs)e);  
         }
     }
 }

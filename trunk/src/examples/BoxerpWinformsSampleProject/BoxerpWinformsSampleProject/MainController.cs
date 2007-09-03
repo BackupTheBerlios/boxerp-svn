@@ -15,7 +15,7 @@ namespace BoxerpWinformsSampleProject
 
         protected override void  OnAsyncOperationFinish(object sender, ThreadEventArgs args)
         {
- 	        throw new Exception("The method or operation is not implemented.");
+			_control.ShowMessage("OK!!!");
         }
     
         public MainController(IResponsiveClient helper, IMain control)
@@ -34,8 +34,9 @@ namespace BoxerpWinformsSampleProject
             try
             {
                 //yeah i know there is a download file async  ;)
-                WebClient client = new WebClient();
-                client.DownloadFile(_control.File, "C:\test.exe");
+                //WebClient client = new WebClient();
+                //client.DownloadFile(_control.File, "C:\test.exe");
+				System.Threading.Thread.Sleep(1000);
             }
             catch (System.Threading.ThreadAbortException ex)
             {

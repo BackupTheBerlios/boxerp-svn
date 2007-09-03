@@ -8,5 +8,6 @@ namespace BoxerpWinformsSampleProject
     {
         Uri File { get; }
         void DoLongFileDownload();
+		void ShowMessage(string msg);
     }
 }

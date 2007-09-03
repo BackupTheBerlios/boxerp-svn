@@ -100,7 +100,6 @@ namespace Boxerp.Client.WindowsForms
 	    private void WaitDialogForm_FormClosing(object sender, FormClosingEventArgs e)
 	    {
             Console.WriteLine("Closing!!");
-            OnCancel(sender, e);
 	    }
 
         protected virtual void OnCancel(object sender, System.EventArgs e)
@@ -119,7 +118,6 @@ namespace Boxerp.Client.WindowsForms
 	    private void WaitDialogForm_FormClosed(object sender, FormClosedEventArgs e)
 	    {
 	        Console.WriteLine("Closed!");
-            OnCancel(sender, e);
 	    }
 
         private void WaitDialog_Load(object sender, EventArgs e)

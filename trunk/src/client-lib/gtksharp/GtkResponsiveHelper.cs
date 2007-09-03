@@ -48,7 +48,7 @@ namespace Boxerp.Client.GtkSharp
 			: base(mode)
 		{
 		}
-		
+
 		public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller)
 		{
 			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
@@ -68,7 +68,7 @@ namespace Boxerp.Client.GtkSharp
 					_windows.Enqueue(_waitWindow);
 				}
 			}
-			
+
 			base.StartAsyncCallList(transferType, controller);
 
 			try
@@ -93,7 +93,7 @@ namespace Boxerp.Client.GtkSharp
 				throw ex;
 			}
 		}
-		
+
 		public override void StartAsyncCall(SimpleDelegate method)
 		{
 			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
@@ -113,7 +113,7 @@ namespace Boxerp.Client.GtkSharp
 					_windows.Enqueue(_waitWindow);
 				}
 			}
-			
+
 			base.StartAsyncCall(method);
 
 			try
@@ -138,13 +138,13 @@ namespace Boxerp.Client.GtkSharp
 				throw ex;
 			}
 		}
-		
-        public override void OnCancel(object sender, EventArgs e)
+
+		public override void OnCancel(object sender, EventArgs e)
 		{
-        	CancelRequested = true;
-        	QuestionDialog qdialog = new QuestionDialog();
+			CancelRequested = true;
+			QuestionDialog qdialog = new QuestionDialog();
 			qdialog.Modal = true;
-        	qdialog.Message = "The process is being cancelled, please wait. Do you want to force abort right now?";
+			qdialog.Message = "The process is being cancelled, please wait. Do you want to force abort right now?";
 			_questionWindows.Enqueue(qdialog);
 			if (RunningThreads > 0)
 			{
@@ -158,11 +158,11 @@ namespace Boxerp.Client.GtkSharp
 					_questionWindows.Dequeue();
 				}
 			}
-        }
-		
+		}
+
 		private void TransferCompleted(object sender, EventArgs e)
 		{
-			ThreadEventArgs evArgs = (ThreadEventArgs) e;
+			ThreadEventArgs evArgs = (ThreadEventArgs)e;
 			if (_concurrencyMode == ConcurrencyMode.Modal)
 			{
 				WaitDialog wDialog = _dialogs.Dequeue();
@@ -190,20 +190,18 @@ namespace Boxerp.Client.GtkSharp
 				WarningDialog warning = new WarningDialog();
 				warning.Message = msg + evArgs.ExceptionMsg;
 				warning.QuitOnOk = false;
-            	warning.Present();
+				warning.Present();
 			}
-			
+
 			if (this.transferCompleteEventHandler != null)
 			{
 				transferCompleteEventHandler(sender, evArgs);
 			}
 		}
-		
+
 		public override void OnTransferCompleted(object sender, ThreadEventArgs e)
 		{
 			Application.Invoke(sender, (EventArgs)e, TransferCompleted);
 		}
-
-		
 	}
 }

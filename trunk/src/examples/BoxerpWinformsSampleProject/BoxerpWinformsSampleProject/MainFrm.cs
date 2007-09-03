@@ -54,5 +54,10 @@ namespace BoxerpWinformsSampleProject
             _file = new Uri(FileLocationTxt.Text);
             DoLongFileDownload();
         }
+
+		public void ShowMessage(string msg)
+		{
+			MessageBox.Show(msg);
+		}
     }
 }

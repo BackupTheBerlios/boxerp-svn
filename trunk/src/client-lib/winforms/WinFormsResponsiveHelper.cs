@@ -182,7 +182,17 @@ namespace Boxerp.Client.WindowsForms
             if (!evArgs.Success)
             {
                 string msg = "Operation Aborted \n";
-                MessageBox.Show(msg, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				string fullMsg;
+				if ((evArgs.ExceptionMsg != null) && (evArgs.ExceptionMsg.Length > 0))
+				{
+					fullMsg = string.Format("{0}{1}", msg, evArgs.ExceptionMsg);
+				}
+				else
+				{
+					fullMsg = msg;
+				}
+
+                MessageBox.Show(fullMsg, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (this.transferCompleteEventHandler != null)
@@ -193,7 +203,14 @@ namespace Boxerp.Client.WindowsForms
 
         public override void OnTransferCompleted(object sender, ThreadEventArgs e)
         {
-            TransferCompleted(sender, (EventArgs)e);  
-        }
+			if (_waitDialog != null)
+			{
+				_waitDialog.BeginInvoke(new EventHandler(TransferCompleted), new object[] { this, e });
+			}
+			else
+			{
+				_waitWindow.BeginInvoke(new EventHandler(TransferCompleted), new object[] { this, e });
+			}
+		}
     }
 }

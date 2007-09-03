@@ -41,7 +41,7 @@ namespace Boxerp.Client.WindowsForms
         WaitDialog _waitWindow;
         Queue<WaitDialog> _dialogs = new Queue<WaitDialog>();
         Queue<WaitDialog> _windows = new Queue<WaitDialog>();
-        Queue<MessageBox> _questionWindows = new Queue<MessageBox>();
+        Queue<QuestionDialog> _questionWindows = new Queue<QuestionDialog>();
 
         /// <summary>
         /// 
@@ -76,11 +76,11 @@ namespace Boxerp.Client.WindowsForms
                 {
                     if (_concurrencyMode == ConcurrencyMode.Modal)
                     {
-                        _waitDialog.Show();
+                        _waitDialog.Run();
                     }
                     else
                     {
-                        _waitWindow.Show();
+                        _waitWindow.Run();
                     }
                 }
 
@@ -88,7 +88,7 @@ namespace Boxerp.Client.WindowsForms
                 {
                     throw ex.InnerException;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     throw;
                 }
@@ -108,8 +108,7 @@ namespace Boxerp.Client.WindowsForms
                 }
                 else
                 {
-                    _waitWindow = new WaitWindow(false);
-                    _waitWindow.Modal = false;
+                    _waitWindow = new WaitDialog(false);
                     _waitWindow.CancelEvent += OnCancel;
                     _windows.Enqueue(_waitWindow);
                 }
@@ -121,11 +120,11 @@ namespace Boxerp.Client.WindowsForms
             {
                 if (_concurrencyMode == ConcurrencyMode.Modal)
                 {
-                    _waitDialog.Show();
+                    _waitDialog.Run();
                 }
                 else
                 {
-                    _waitWindow.Show();
+                    _waitWindow.Run();
                 }
             }
             catch (System.Reflection.TargetInvocationException ex)

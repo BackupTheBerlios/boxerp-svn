@@ -38,12 +38,33 @@ namespace Boxerp.Client.WindowsForms
     /// </summary>
 	public partial class WaitDialog : Form
 	{
+        protected bool nonstop = true;
+        protected bool firstInstance = true;
+        private EventHandler cancelEventHandler;
+
+        public event EventHandler CancelEvent
+        {
+            add
+            {
+                cancelEventHandler += value;
+            }
+            remove
+            {
+                cancelEventHandler -= value;
+            }
+
+        }
+
         /// <summary>
         /// Initialize controls
         /// </summary>
-		public WaitDialog()
+		public WaitDialog(bool isModal)
 		{
 			InitializeComponent();
+
+            if (isModal)
+                this.Modal = true;
+
 		}
 
         /// <summary>
@@ -54,7 +75,16 @@ namespace Boxerp.Client.WindowsForms
 	    private void WaitDialogForm_FormClosing(object sender, FormClosingEventArgs e)
 	    {
             Console.WriteLine("Closing!!");
+            OnCancel(sender, e);
 	    }
+
+        protected virtual void OnCancel(object sender, System.EventArgs e)
+        {
+            if (cancelEventHandler != null)
+            {
+                cancelEventHandler(this, null);
+            }
+        }
 
         /// <summary>
         /// Fired when the form is closed.
@@ -64,6 +94,12 @@ namespace Boxerp.Client.WindowsForms
 	    private void WaitDialogForm_FormClosed(object sender, FormClosedEventArgs e)
 	    {
 	        Console.WriteLine("Closed!");
+            OnCancel(sender, e);
 	    }
+
+        private void WaitDialog_Load(object sender, EventArgs e)
+        {
+
+        }
 	}
 }

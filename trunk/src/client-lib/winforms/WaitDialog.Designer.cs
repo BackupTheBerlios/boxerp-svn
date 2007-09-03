@@ -64,10 +64,6 @@ namespace Boxerp.Client.WindowsForms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "WaitDialog";
-
             this.progressBarControl = new System.Windows.Forms.ProgressBar();
             this.infoLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -88,19 +84,21 @@ namespace Boxerp.Client.WindowsForms
             this.infoLabel.TabIndex = 1;
             this.infoLabel.Text = "Operation in progress. Please wait...";
             // 
-            // WaitDialogForm
+            // WaitDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 99);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.progressBarControl);
-            this.Name = "WaitDialogForm";
+            this.Name = "WaitDialog";
             this.Text = "Work in progress...";
             this.TopMost = true;
-            this.ResumeLayout(false);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(WaitDialogForm_FormClosing);
+            this.Load += new System.EventHandler(this.WaitDialog_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WaitDialogForm_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WaitDialogForm_FormClosing);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -38,7 +38,7 @@ using System.Windows.Forms;
 
 namespace Boxerp.Client.WindowsForms
 {
-    enum ResponseType
+    public enum ResponseType
     {
         Ok,
         Cancel
@@ -56,7 +56,6 @@ namespace Boxerp.Client.WindowsForms
             if (isModal)
             {
                 this._isModal = true;
-                this.Modal = true;
             }
             else
             {

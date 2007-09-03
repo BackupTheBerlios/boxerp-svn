@@ -95,18 +95,106 @@ namespace Boxerp.Client.WindowsForms
             }
         }
 
+        public override void StartAsyncCall(SimpleDelegate method)
+        {
+            if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
+                || (RunningThreads == 0))
+            {
+                if (_concurrencyMode == ConcurrencyMode.Modal)
+                {
+                    _waitDialog = new WaitDialog(true);
+                    _waitDialog.CancelEvent += OnCancel;
+                    _dialogs.Enqueue(_waitDialog);
+                }
+                else
+                {
+                    _waitWindow = new WaitWindow(false);
+                    _waitWindow.Modal = false;
+                    _waitWindow.CancelEvent += OnCancel;
+                    _windows.Enqueue(_waitWindow);
+                }
+            }
+
+            base.StartAsyncCall(method);
+
+            try
+            {
+                if (_concurrencyMode == ConcurrencyMode.Modal)
+                {
+                    _waitDialog.Show();
+                }
+                else
+                {
+                    _waitWindow.Show();
+                }
+            }
+            catch (System.Reflection.TargetInvocationException ex)
+            {
+                throw ex.InnerException;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         public override void OnCancel(object sender, EventArgs e)
         {
             CancelRequested = true;
 
+            QuestionDialog ques = new QuestionDialog(true);
+            ques.Message = "The process is being cancelled, please wait.  Do you want to force abort right now?";
+            _questionWindows.Enqueue(ques);
+            if (RunningThreads > 0)
+            {
+                ResponseType resp = ques.Run();
+                if ((resp == ResponseType.Ok) && (RunningThreads > 0))
+                {
+                    ForceAbort();
+                }
+                if (_questionWindows.Count > 0)
+                {
+                    _questionWindows.Dequeue();
+                }
+            }
+        }
+
+        private void TransferCompleted(object sender, EventArgs e)
+        {
+            ThreadEventArgs evArgs = (ThreadEventArgs)e;
+            if (_concurrencyMode == ConcurrencyMode.Modal)
+            {
+                WaitDialog dia = _dialogs.Dequeue();
+                dia.Close();
+            }
+            else
+            {
+                WaitDialog dia = _windows.Dequeue();
+                dia.Close();
+            }
+
+            if (_questionWindows.Count > 0)
+            {
+                QuestionDialog dia = _questionWindows.Dequeue();
+                dia.Close();
+            }
+
+            if (!evArgs.Success)
+            {
+                string msg = "Operation Aborted \n";
+                MessageBox.Show(msg, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (this.transferCompleteEventHandler != null)
+            {
+                transferCompleteEventHandler(sender, evArgs);
+            }
         }
 
         public override void OnTransferCompleted(object sender, ThreadEventArgs e)
         {
-            throw new Exception("The method or operation is not implemented.");
-
-            
+            throw new NotImplementedException("Not yet..");
         }
     }
 }

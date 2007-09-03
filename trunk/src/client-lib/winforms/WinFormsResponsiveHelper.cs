@@ -35,7 +35,7 @@ namespace Boxerp.Client.WindowsForms
     /// <summary>
     /// This class helps to keep winform applications responsive 
     /// </summary>
-    public abstract class WinFormsResponsiveHelper : AbstractResponsiveHelper
+    public class WinFormsResponsiveHelper : AbstractResponsiveHelper
     {
         WaitDialog _waitDialog;
         WaitDialog _waitWindow;

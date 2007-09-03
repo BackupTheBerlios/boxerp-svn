@@ -38,8 +38,7 @@ namespace Boxerp.Client.WindowsForms
     /// </summary>
 	public partial class WaitDialog : Form
 	{
-        protected bool nonstop = true;
-        protected bool firstInstance = true;
+
         private EventHandler cancelEventHandler;
 
         public event EventHandler CancelEvent

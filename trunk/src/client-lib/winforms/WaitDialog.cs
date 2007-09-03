@@ -40,6 +40,15 @@ namespace Boxerp.Client.WindowsForms
 	{
 
         private EventHandler cancelEventHandler;
+        protected readonly bool _isModal;
+
+        public bool IsModal
+        {
+            get
+            {
+                return _isModal;
+            }
+        }
 
         public event EventHandler CancelEvent
         {
@@ -62,8 +71,14 @@ namespace Boxerp.Client.WindowsForms
 			InitializeComponent();
 
             if (isModal)
+            {
+                _isModal = true;
                 this.Modal = true;
-
+            }
+            else
+            {
+                _isModal = false;
+            }
 		}
 
         /// <summary>

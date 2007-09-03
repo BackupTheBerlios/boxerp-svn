@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Boxerp.Client.WindowsForms
 {
@@ -165,18 +166,18 @@ namespace Boxerp.Client.WindowsForms
             if (_concurrencyMode == ConcurrencyMode.Modal)
             {
                 WaitDialog dia = _dialogs.Dequeue();
-                dia.Close();
+                dia.Invoke(new MethodInvoker(dia.Close));
             }
             else
             {
                 WaitDialog dia = _windows.Dequeue();
-                dia.Close();
+                dia.Invoke(new MethodInvoker(dia.Close));
             }
 
             if (_questionWindows.Count > 0)
             {
                 QuestionDialog dia = _questionWindows.Dequeue();
-                dia.Close();
+                dia.Invoke(new MethodInvoker(dia.Close));
             }
 
             if (!evArgs.Success)

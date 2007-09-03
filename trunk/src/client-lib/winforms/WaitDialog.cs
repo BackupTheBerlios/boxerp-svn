@@ -46,7 +46,7 @@ namespace Boxerp.Client.WindowsForms
         {
             get
             {
-                return _isModal;
+                return Modal;
             }
         }
 
@@ -73,13 +73,24 @@ namespace Boxerp.Client.WindowsForms
             if (isModal)
             {
                 _isModal = true;
-                this.Modal = true;
             }
             else
             {
                 _isModal = false;
             }
 		}
+
+        public void Run()
+        {
+            if (_isModal)
+            {
+                this.ShowDialog();
+            }
+            else
+            {
+                this.Show();
+            }
+        }
 
         /// <summary>
         /// Fired when the form is closing

@@ -30,6 +30,7 @@ namespace BoxerpWinformsSampleProject
         {
             this.DownloadFileBtn = new System.Windows.Forms.Button();
             this.FileLocationTxt = new System.Windows.Forms.TextBox();
+            this.MessageLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // DownloadFileBtn
@@ -50,11 +51,20 @@ namespace BoxerpWinformsSampleProject
             this.FileLocationTxt.TabIndex = 1;
             this.FileLocationTxt.Text = "http://download.microsoft.com/vwdsetup.exe";
             // 
+            // MessageLbl
+            // 
+            this.MessageLbl.AutoSize = true;
+            this.MessageLbl.Location = new System.Drawing.Point(42, 56);
+            this.MessageLbl.Name = "MessageLbl";
+            this.MessageLbl.Size = new System.Drawing.Size(0, 13);
+            this.MessageLbl.TabIndex = 2;
+            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 86);
+            this.Controls.Add(this.MessageLbl);
             this.Controls.Add(this.FileLocationTxt);
             this.Controls.Add(this.DownloadFileBtn);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -70,6 +80,7 @@ namespace BoxerpWinformsSampleProject
 
         private System.Windows.Forms.Button DownloadFileBtn;
         private System.Windows.Forms.TextBox FileLocationTxt;
+        private System.Windows.Forms.Label MessageLbl;
     }
 }
 

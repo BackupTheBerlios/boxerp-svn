@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using Boxerp.Client.WindowsForms;
 using Boxerp.Client;
+using System.Collections;
+using System.Data.SqlClient;
 
 namespace BoxerpWinformsSampleProject
 {
@@ -18,7 +20,7 @@ namespace BoxerpWinformsSampleProject
 
         public MainFrm()
         {
-            _controller = new MainController(new WinFormsResponsiveHelper(ConcurrencyMode.Modal), this);
+            _controller = new MainController(new WinFormsResponsiveHelper(ConcurrencyMode.Parallel), this);
             InitializeComponent();
         }
 
@@ -30,7 +32,7 @@ namespace BoxerpWinformsSampleProject
                 return _controller;
             }
         }
-
+        
         private void MainFrm_Load(object sender, EventArgs e)
         {
 
@@ -57,7 +59,7 @@ namespace BoxerpWinformsSampleProject
 
 		public void ShowMessage(string msg)
 		{
-			MessageBox.Show(msg);
+            MessageLbl.Text = msg;
 		}
     }
 }

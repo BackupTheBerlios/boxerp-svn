@@ -25,7 +25,8 @@ namespace winFormsTestApp2
 			businessObject.Description = "is a cool developer";
 			businessObject.Age = 25;
 
-			_bindable = new BindableWrapper<SampleBObj>(businessObject);
+			_bindable = new BindableWrapper<SampleBObj>(businessObject, false);
+			_bindable.PropertyChanged += OnPropertyChanged;
 
 			// bind the object
 			
@@ -40,12 +41,26 @@ namespace winFormsTestApp2
 
 		private void OnUndoClicked(object sender, EventArgs e)
 		{
+			// I've noticed that there is a bug in the Undo feature, well, not in that but in the procedure
+			// that keeps track of the changes, because the same change is saved several times in the 
+			// changesStack. So please do some changes in the textboxes and click Undo several times to see any effects.
 			_bindable.Undo();
+			MessageBox.Show("The name is: " + _bindable.Data.BusinessObj.Name);
+
+			// why is the textbox not updated?. The object is suppously bound! . I think it could be a bug in the bindableWrapper architecture.
+			// leave this to me.
+
+		}
+
+		public void OnPropertyChanged(Object sender, PropertyChangedEventArgs args)
+		{
+			Console.WriteLine("This is just to check that the bindableWrapper works");
 		}
 
 		private void OnRedoClicked(object sender, EventArgs e)
 		{
 			_bindable.Redo();
+			MessageBox.Show("The name is: " + _bindable.Data.BusinessObj.Name);
 		}
 
 		private void OnChangeData(object sender, EventArgs e)
@@ -55,6 +70,7 @@ namespace winFormsTestApp2
 			_bindable.Data.BusinessObj.Description = "Es un tio de puta madre";
 			_bindable.Data.BusinessObj.Age = 50;
 
+			// This is a single change, not an undo operation. This is for you
 			// Question for you: Why the UI doesn't refresh untill we explictly change the Text property?
 			// if you remove this line it doesn't refresh unless you write something in one of the textboxes
 			_name.Text = "Paco";

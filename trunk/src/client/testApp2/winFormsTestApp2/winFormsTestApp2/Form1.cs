@@ -41,9 +41,12 @@ namespace winFormsTestApp2
 
 		private void OnUndoClicked(object sender, EventArgs e)
 		{
-			// I've noticed that there is a bug in the Undo feature, well, not in that but in the procedure
+			// I've noticed that there is a problem in the Undo feature, well, not in that but in the procedure
 			// that keeps track of the changes, because the same change is saved several times in the 
 			// changesStack. So please do some changes in the textboxes and click Undo several times to see any effects.
+			// I think that the OnChangeData method is forcing a change in the object and then the UI gets 
+			// updated somehow and it updates the business object again an so forth, so the object is pushed
+			// into the changes stack several times. I didn't see this behaviour on wpf or gtk.
 			_bindable.Undo();
 			MessageBox.Show("The name is: " + _bindable.Data.BusinessObj.Name);
 

@@ -11,6 +11,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Boxerp.Client;
 using Boxerp.Client.WPF;
+using Boxerp.Client.WPF.Controls;
+
+using System.ComponentModel;
 
 namespace testApp2
 {
@@ -20,48 +23,60 @@ namespace testApp2
 
 	public partial class Window1 : System.Windows.Window
 	{
-		private BindableWrapper<SampleBObj> _bindableSampleObj = new BindableWrapper<SampleBObj>(new SampleBObj());
+		private BindableWrapper<SampleBObj> _bindableSampleObj;
 
 		public Window1()
 		{
 			InitializeComponent();
-		}
 
-		private void refresh()
-		{
-			_name.Text = _bindableSampleObj.Data.BusinessObj.Name;
-			_description.Text = _bindableSampleObj.Data.BusinessObj.Description;
-			_age.Text = _bindableSampleObj.Data.BusinessObj.Age.ToString();
+			SampleBObj businessObject = new SampleBObj();
+			businessObject.Name = "test";
+			businessObject.Description = "description";
+			businessObject.Age = 10;
+
+			_bindableSampleObj = new BindableWrapper<SampleBObj>(businessObject);
+			_bindableSampleObj.PropertyChanged += OnPropertyChanged;
+
+			DataContext = _bindableSampleObj.Data.BusinessObj;
 		}
 
 		public void OnUndo(Object sender, RoutedEventArgs args)
 		{
 			_bindableSampleObj.Undo();
-			refresh();
+			refreshDataContext();
+		}
+
+		private void refreshDataContext()
+		{
+			DataContext = null;
+			DataContext = _bindableSampleObj.Data.BusinessObj;
+			//this.UpdateLayout();
 		}
 
 		public void OnRedo(Object sender, RoutedEventArgs args)
 		{
 			_bindableSampleObj.Redo();
-			refresh();
+			refreshDataContext();
 		}
 
-		public void OnNameLostFocus(Object sender, RoutedEventArgs args)
+		private void OnPropertyChanged(Object sender, PropertyChangedEventArgs args)
 		{
-			_bindableSampleObj.Data.BusinessObj.Name = _name.Text;
+			Console.WriteLine("Property changed:" + args.PropertyName);
+			refreshDataContext();
 		}
 
-		public void OnDescriptionLostFocus(Object sender, RoutedEventArgs args)
+		public void OnChangeData(Object sender, RoutedEventArgs args)
 		{
-			_bindableSampleObj.Data.BusinessObj.Description = _description.Text;
+			_bindableSampleObj.Data.BusinessObj.Name = "whatever";
+			_bindableSampleObj.Data.BusinessObj.Description = "whatever123";
+			_bindableSampleObj.Data.BusinessObj.Age = 1000;
 		}
 
-		public void OnAgeLostFocus(Object sender, RoutedEventArgs args)
+		public void OnReadData(Object sender, RoutedEventArgs args)
 		{
-			if (_age.Text.Length > 0)
-			{
-				_bindableSampleObj.Data.BusinessObj.Age = Convert.ToInt32(_age.Text);
-			}
+			MessageBox.Show(_bindableSampleObj.Data.BusinessObj.Name + ", " +
+							_bindableSampleObj.Data.BusinessObj.Description + ", " +
+							_bindableSampleObj.Data.BusinessObj.Age);
 		}
 	}
 }

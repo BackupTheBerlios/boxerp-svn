@@ -1,25 +1,29 @@
 ﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:boxerp="clr-namespace:Boxerp.Client.WPF;assembly=Boxerp.Client.WPF"
+	  xmlns:boxerp="clr-namespace:Boxerp.Client.WPF.Controls;assembly=Boxerp.Client.WPF.Controls"
     x:Class="testApp2.Window1"
-    Title="testApp2" Height="276" Width="323"
+    Title="testApp2" Height="367" Width="323"
     >
     <Grid>
         
     	<Label HorizontalAlignment="Left" Margin="24,62,0,0" VerticalAlignment="Top" Width="47" Height="24" Content="Name:"/>
-    	<Label Width="71" Content="Description:" HorizontalAlignment="Left" Margin="24,101,0,117"/>
-    	<Label Width="47" Content="Age:" HorizontalAlignment="Left" Margin="24,0,0,79" VerticalAlignment="Bottom" Height="24"/>
-    	<TextBox LostFocus="OnNameLostFocus" Margin="108,62,41,0" x:Name="_name" VerticalAlignment="Top" Height="24" Text="" TextWrapping="Wrap"/>
-    	<TextBox LostFocus="OnDescriptionLostFocus" Text="" TextWrapping="Wrap" Margin="108,101,41,117" x:Name="_description"/>
+    	<Label Width="71" Content="Description:" HorizontalAlignment="Left" Margin="24,101,0,0" VerticalAlignment="Top" Height="24"/>
+    	<Label Width="47" Content="Age:" HorizontalAlignment="Left" Margin="24,139,0,0" VerticalAlignment="Top" Height="24"/>
+    	<TextBox Text="{Binding Path=Name, Mode=TwoWay}" Margin="108,62,41,0" x:Name="_name" VerticalAlignment="Top" Height="24" TextWrapping="Wrap"/>
+    	<TextBox Text="{Binding Path=Description, Mode=TwoWay}" TextWrapping="Wrap" Margin="108,101,41,0" x:Name="_description" VerticalAlignment="Top" Height="24"/>
     	
-		<boxerp:IntegerTextBoxControl LostFocus="OnAgeLostFocus" Margin="108,0,41,79" x:Name="_age" VerticalAlignment="Bottom" Height="24"/>
+		<boxerp:IntegerTextBox Integer="{Binding Path=Age, Mode=TwoWay}" Margin="136,139,69,0" x:Name="_age" VerticalAlignment="Top" Height="24"/>
     	
-		<Button Click="OnUndo" Margin="56,0,152,31" VerticalAlignment="Bottom" Height="24" Content="Undo"/>
+		<Button Click="OnUndo" Margin="56,0,152,122" VerticalAlignment="Bottom" Height="24" Content="Undo"/>
     	
-		<Button Click="OnRedo" Height="24" Content="Redo" HorizontalAlignment="Right" Margin="0,0,41,31" VerticalAlignment="Bottom" Width="107"/>
+		<Button Click="OnRedo" Height="24" Content="Redo" HorizontalAlignment="Right" Margin="0,0,41,122" VerticalAlignment="Bottom" Width="107"/>
     	
 		<Label Margin="8,8,71,0" VerticalAlignment="Top" Height="36" Content="Write something in the textboxes and &#xd;&#xa;try the buttons"/>
+    	
+    	<Button Click="OnChangeData" Height="24" Content="Change Data" Margin="74,0,69,76" VerticalAlignment="Bottom"/>
+    	
+    	<Button Click="OnReadData" Height="24" Content="Read Data" Margin="74,0,69,38" VerticalAlignment="Bottom"/>
         
     </Grid>
 </Window>

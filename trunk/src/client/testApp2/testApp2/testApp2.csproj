@@ -45,6 +45,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\client-lib\wpf\bin\Debug\Boxerp.Client.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="Boxerp.Client.WPF.Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\client-lib\wpf\Controls\bin\Debug\Boxerp.Client.WPF.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\dependencies\Castle.Core.dll</HintPath>

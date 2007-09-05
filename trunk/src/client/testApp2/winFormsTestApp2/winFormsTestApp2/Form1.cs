@@ -41,29 +41,42 @@ namespace winFormsTestApp2
 
 		private void OnUndoClicked(object sender, EventArgs e)
 		{
-			// I've noticed that there is a problem in the Undo feature, well, not in that but in the procedure
-			// that keeps track of the changes, because the same change is saved several times in the 
-			// changesStack. So please do some changes in the textboxes and click Undo several times to see any effects.
-			// I think that the OnChangeData method is forcing a change in the object and then the UI gets 
-			// updated somehow and it updates the business object again an so forth, so the object is pushed
-			// into the changes stack several times. I didn't see this behaviour on wpf or gtk.
 			_bindable.Undo();
-			MessageBox.Show("The name is: " + _bindable.Data.BusinessObj.Name);
+			
+			// I'd like not to need to call refresh explicitly. My understanding of the 2way binding is that
+			// a change in the data source should update the UI.
+			refreshBindings();
 
-			// why is the textbox not updated?. The object is suppously bound! . I think it could be a bug in the bindableWrapper architecture.
-			// leave this to me.
+			// I think I know why it happens: the _bindable is the one that has a PropertyChanged event, 
+			// but the bound object is not the _bindable but the _bindable.Data.BusinesObj.
+		}
+
+		/// <summary>
+		/// I have to work to avoid writing methods like this
+		/// </summary>
+		public void refreshBindings()
+		{
+			_name.DataBindings.Clear();
+			_name.DataBindings.Add("Text", _bindable.Data.BusinessObj, "Name", false, DataSourceUpdateMode.OnPropertyChanged);
+
+			_description.DataBindings.Clear();
+			_description.DataBindings.Add("Text", _bindable.Data.BusinessObj, "Description", false, DataSourceUpdateMode.OnPropertyChanged);
+
+			_age.DataBindings.Clear();
+			_age.DataBindings.Add("Text", _bindable.Data.BusinessObj, "Age", false, DataSourceUpdateMode.OnPropertyChanged);
 
 		}
 
 		public void OnPropertyChanged(Object sender, PropertyChangedEventArgs args)
 		{
-			Console.WriteLine("This is just to check that the bindableWrapper works");
+			Console.WriteLine("Property changed: " + args.PropertyName);
+			refreshBindings();
 		}
 
 		private void OnRedoClicked(object sender, EventArgs e)
 		{
 			_bindable.Redo();
-			MessageBox.Show("The name is: " + _bindable.Data.BusinessObj.Name);
+			refreshBindings();
 		}
 
 		private void OnChangeData(object sender, EventArgs e)
@@ -73,11 +86,6 @@ namespace winFormsTestApp2
 			_bindable.Data.BusinessObj.Description = "Es un tio de puta madre";
 			_bindable.Data.BusinessObj.Age = 50;
 
-			// This is a single change, not an undo operation. This is for you
-			// Question for you: Why the UI doesn't refresh untill we explictly change the Text property?
-			// if you remove this line it doesn't refresh unless you write something in one of the textboxes
-			_name.Text = "Paco";
-			
 		}
 
 		private void OnReadData(object sender, EventArgs e)

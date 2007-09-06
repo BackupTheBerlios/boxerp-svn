@@ -9,6 +9,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Boxerp.Client;
 using NUnit.Framework;
+using System.Reflection;
 
 namespace bindableObjectsTests
 {
@@ -151,6 +152,19 @@ public class BindableObjectsMain
 		Assert.IsNotNull(deserializedBindable);
 
 		Assert.IsFalse(deserializedBindable.HasSubscribers);
+	}
+
+	[Test]
+	public void DynamicINotifyPropertyChangedProxy_TEST1()
+	{
+		Type generatedType =
+				DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(
+					typeof(SimpleBusinessObject), new Type[0]);
+		foreach (MemberInfo member in generatedType.GetMembers())
+		{
+			Console.WriteLine("-- {0} {1};", member.MemberType, member.Name);
+		}
+		Assert.IsTrue(true);
 	}
 }
 

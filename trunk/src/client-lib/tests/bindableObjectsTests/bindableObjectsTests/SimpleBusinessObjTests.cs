@@ -22,8 +22,9 @@ public class BindableObjectsMain
 	[Test]
 	public void CreateBindable()
 	{
-		BindableWrapper<SimpleBusinessObject> bindableObj = 
-			new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
+			BindableWrapper<SimpleBusinessObject> bindableObj =
+				new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
+		
 		Assert.IsNotNull(bindableObj);
 	}
 
@@ -177,6 +178,20 @@ public class BindableObjectsMain
 		SimpleExplicitPropChanged proxy = (SimpleExplicitPropChanged)
 			generator.CreateClassProxy(typeof(SimpleExplicitPropChanged), new Castle.Core.Interceptor.IInterceptor[0]);
 	}
+
+	[Test]
+	public void DoubleProxyTest()
+	{
+		Type generatedType =
+				DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(
+					typeof(SimpleBusinessObject), new Type[0]);
+		Castle.DynamicProxy.ProxyGenerator generator = new Castle.DynamicProxy.ProxyGenerator();
+		SimpleBusinessObject proxy = (SimpleBusinessObject)
+			generator.CreateClassProxy(generatedType, new Castle.Core.Interceptor.IInterceptor[0]);
+	
+
+	}
+
 
 }
 

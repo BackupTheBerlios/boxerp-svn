@@ -59,8 +59,7 @@ namespace Boxerp.Client
 
 			FieldBuilder eventHandler = targetTypeBld.DefineField("PropertyChanged", typeof(PropertyChangedEventHandler), FieldAttributes.Private);
 
-
-			//Type objType = Type.GetType("System.Object");
+			// Create the constructor
 			ConstructorInfo objCtor = baseType.GetConstructor(constructorParamsTypes); 
 
 			ConstructorBuilder targetCtor = targetTypeBld.DefineConstructor(
@@ -69,50 +68,93 @@ namespace Boxerp.Client
                       constructorParamsTypes);
 			ILGenerator ctorIL = targetCtor.GetILGenerator();
 
+
+			ctorIL.Emit(OpCodes.Ldarg_0); // this
 			// pass all the parameters: 
-			for (int i = 0; i < constructorParamsTypes.Length; i++)
+			for (int i = 1; i <= constructorParamsTypes.Length; i++)
 			{
 				ctorIL.Emit(OpCodes.Ldarg_S, i);
 			}
 
 			ctorIL.Emit(OpCodes.Call, objCtor);
 
-			ctorIL.Emit(OpCodes.Ret); 
+			ctorIL.Emit(OpCodes.Ret);
 
-
-		   	// Implementation of the add_PropertyChanged method. The lines bellow but in IL Code
-				//MethodImplAttribute(MethodImplOptions.Synchronized)]
-				// public void add_PropertyChanged(PropertyChangedEventHandler handler) 
-				// {
-				//     PropertyChanged = (PropertyChangedEventHandler) Delegate.Combine(PropertyChanged, handler);
-				// }
-
-			string[] mthdNames = new string[] { "add_PropertyChanged", "remove_PropertyChanged" };
-
-			foreach (string mthdName in mthdNames)
-			{
-				MethodBuilder getFieldMthd = targetTypeBld.DefineMethod(
-							 mthdName,
-							 MethodAttributes.Public, typeof(void), 
-							 new Type[] { typeof(PropertyChangedEventHandler) } );
-
-				ILGenerator mthdIL = getFieldMthd.GetILGenerator();
-
-				//mthdIL.Emit(OpCodes.Mkrefany, eventHandler); this line?
-				mthdIL.Emit(OpCodes.Stfld, eventHandler); // or maybe this? // I want to push the eventHanderl onto the stack
-				mthdIL.Emit(OpCodes.Ldarg_0);	// this pushes the argument onto the stack
-				mthdIL.Emit(OpCodes.Call, typeof(Delegate).GetMethod("Combine", new Type[] { typeof(Delegate), typeof(Delegate) }));
-
-				mthdIL.Emit(OpCodes.Ret);
-			}
+			AddOrRemoveMethod(targetTypeBld, eventField, eventHandler, true);
+			AddOrRemoveMethod(targetTypeBld, eventField, eventHandler, false);
 			
 			targetType = targetTypeBld.CreateType();
 
-		   // Let's save it, just for posterity.
-	       
-		   myAsmBuilder.Save("Dynamic.dll");
+		    myAsmBuilder.Save("Dynamic.dll");
 	    
-		   return targetType;
+			return targetType;
 		}
+
+		private static void AddOrRemoveMethod(TypeBuilder builder, EventBuilder eventBuilder, FieldBuilder eventHandler, bool operation)
+		{
+			// Implementation of the add_PropertyChanged method. The lines bellow but in IL Code
+			//MethodImplAttribute(MethodImplOptions.Synchronized)]
+			// public void add_PropertyChanged(PropertyChangedEventHandler handler) 
+			// {
+			//     PropertyChanged = (PropertyChangedEventHandler) Delegate.Combine(PropertyChanged, handler);
+			// }
+			// Disassembled il code:
+			// IL_0000:  /* 02   |                  */ ldarg.0
+			// IL_0001:  /* 02   |                  */ ldarg.0
+			// IL_0002:  /* 7B   | (04)000001       */ ldfld      class [System/*23000002*/]System.ComponentModel.PropertyChangedEventHandler/*01000004*/ ReflectionEmit.SimplePropertyChangedImplementation/*02000003*/::PropertyChanged /* 04000001 */
+			// IL_0007:  /* 03   |                  */ ldarg.1
+			// IL_0008:  /* 28   | (0A)00003B       */ call       class [mscorlib/*23000001*/]System.Delegate/*01000032*/ [mscorlib/*23000001*/]System.Delegate/*01000032*/::Combine(class [mscorlib/*23000001*/]System.Delegate/*01000032*/,
+			//                                                    class [mscorlib/*23000001*/]System.Delegate/*01000032*/) /* 0A00003B */
+			// IL_000d:  /* 74   | (01)000004       */ castclass  [System/*23000002*/]System.ComponentModel.PropertyChangedEventHandler/*01000004*/
+			// IL_0012:  /* 7D   | (04)000001       */ stfld      class [System/*23000002*/]System.ComponentModel.PropertyChangedEventHandler/*01000004*/ ReflectionEmit.SimplePropertyChangedImplementation/*02000003*/::PropertyChanged /* 04000001 */
+			// IL_0017:  /* 2A   |                  */ ret
+
+			string methodName;
+
+			if (operation)
+			{
+				methodName = "add_PropertyChanged";
+			}
+			else
+			{
+				methodName = "remove_PropertyChanged";
+			}
+
+			// code  generation
+			MethodBuilder method = builder.DefineMethod(
+							 methodName,
+							 MethodAttributes.Public, typeof(void),
+							 new Type[] { typeof(PropertyChangedEventHandler) });
+
+			ILGenerator mthdIL = method.GetILGenerator();
+
+			mthdIL.Emit(OpCodes.Ldarg_0);
+			mthdIL.Emit(OpCodes.Ldarg_0);
+			mthdIL.Emit(OpCodes.Ldfld, eventHandler);
+			mthdIL.Emit(OpCodes.Ldarg_1);
+			if (operation)
+			{
+				mthdIL.Emit(OpCodes.Call, typeof(System.Delegate).GetMethod("Combine", new Type[] { typeof(Delegate), typeof(Delegate) }));
+			}
+			else
+			{
+				mthdIL.Emit(OpCodes.Call, typeof(System.Delegate).GetMethod("Remove", new Type[] { typeof(Delegate), typeof(Delegate) }));
+			}
+
+			mthdIL.Emit(OpCodes.Castclass, typeof(PropertyChangedEventHandler));
+			mthdIL.Emit(OpCodes.Stfld, eventHandler);
+			mthdIL.Emit(OpCodes.Ret);
+			
+			// attach the methods to the event
+			if (operation)
+			{
+				eventBuilder.SetAddOnMethod(method);
+			}
+			else
+			{
+				eventBuilder.SetRemoveOnMethod(method);
+			}
+		}
+
 	}
 }

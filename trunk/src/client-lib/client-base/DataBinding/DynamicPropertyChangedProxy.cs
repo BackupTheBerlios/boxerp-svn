@@ -85,7 +85,7 @@ namespace Boxerp.Client
 			
 			targetType = targetTypeBld.CreateType();
 
-		    myAsmBuilder.Save("Dynamic.dll");
+		    //myAsmBuilder.Save("Dynamic.dll");
 	    
 			return targetType;
 		}
@@ -123,9 +123,9 @@ namespace Boxerp.Client
 			// code  generation
 			MethodBuilder method = builder.DefineMethod(
 							 methodName,
-							 MethodAttributes.Public, typeof(void),
-							 new Type[] { typeof(PropertyChangedEventHandler) });
-
+							 MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.SpecialName |
+							 MethodAttributes.HideBySig, typeof(void), new Type[] { typeof(PropertyChangedEventHandler) });
+			
 			ILGenerator mthdIL = method.GetILGenerator();
 
 			mthdIL.Emit(OpCodes.Ldarg_0);

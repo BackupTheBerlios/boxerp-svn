@@ -55,6 +55,7 @@
     <Compile Include="DataBinding\IBindableWidget.cs" />
     <Compile Include="DataBinding\IBindableWrapper.cs" />
     <Compile Include="DataBinding\IChildObject.cs" />
+    <Compile Include="DataBinding\ICustomNotifyPropertyChanged.cs" />
     <Compile Include="DataBinding\IUIBinder.cs" />
     <Compile Include="DataBinding\PropertyComparer.cs" />
     <Compile Include="DataBinding\UIBinderBase.cs" />

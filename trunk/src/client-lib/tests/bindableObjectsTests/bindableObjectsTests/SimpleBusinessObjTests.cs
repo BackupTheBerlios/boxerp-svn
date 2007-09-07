@@ -164,8 +164,20 @@ public class BindableObjectsMain
 		{
 			Console.WriteLine("-- {0} {1};", member.MemberType, member.Name);
 		}
+
+		ICustomNotifyPropertyChanged myObject = (ICustomNotifyPropertyChanged) Activator.CreateInstance(generatedType);
+		
 		Assert.IsTrue(true);
 	}
+
+	[Test]
+	public void CastleDynamicProxy2Test()
+	{
+		Castle.DynamicProxy.ProxyGenerator generator = new Castle.DynamicProxy.ProxyGenerator();
+		SimpleExplicitPropChanged proxy = (SimpleExplicitPropChanged)
+			generator.CreateClassProxy(typeof(SimpleExplicitPropChanged), new Castle.Core.Interceptor.IInterceptor[0]);
+	}
+
 }
 
 }

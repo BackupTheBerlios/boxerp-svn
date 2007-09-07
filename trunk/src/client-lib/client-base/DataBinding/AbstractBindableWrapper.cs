@@ -107,7 +107,10 @@ namespace Boxerp.Client
 				}
 				else
 				{
-					_bindableFields = (Y)_generator.CreateClassProxy(wrapper, interceptors, argumentsForConstructor);
+					// double proxy. The first one implents the INotifyPropertyChanged interface
+					Type notifiableType = DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(wrapper, argumentTypes);
+					_bindableFields = (Y)_generator.CreateClassProxy(notifiableType, interceptors, argumentsForConstructor);
+
 				}
 
 				if (disableBusinessObjectInterception)
@@ -116,7 +119,10 @@ namespace Boxerp.Client
 				}
 				else
 				{
-					T proxy = (T)_generator.CreateClassProxy(typeof(T), interceptors);
+					// double proxy. The first one implents the INotifyPropertyChanged interface
+					Type notifiableType = DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(typeof(T), new Type[0]);
+					T proxy = (T)_generator.CreateClassProxy(notifiableType, new Type[] { typeof(ICustomNotifyPropertyChanged) }, interceptors);
+					//T proxy = (T)_generator.CreateClassProxy(typeof(T), interceptors);
 					copyBOtoProxy(proxy, businessObj);
 					Data.BusinessObj = proxy;
 				}
@@ -387,6 +393,14 @@ namespace Boxerp.Client
 						if (PropertyChanged != null)
 						{
 								PropertyChanged(_bindableFields, new PropertyChangedEventArgs(propInfo.Name));
+								if (_bindableFields is ICustomNotifyPropertyChanged)
+								{
+									ICustomNotifyPropertyChanged notifiable = _bindableFields as ICustomNotifyPropertyChanged;
+									if (notifiable.HasSubscribers())
+									{
+										notifiable.ThrowPropertyChangedEvent(propInfo.Name);
+									}
+								}
 						}
 						return;
 					}			

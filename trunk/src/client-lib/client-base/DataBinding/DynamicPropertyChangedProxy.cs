@@ -51,7 +51,7 @@ namespace Boxerp.Client
 
 			ModuleBuilder targetModule = myAsmBuilder.DefineDynamicModule("DynamicModule", "Dynamic.dll");
 
-			Type[] interfaces = new Type[] { typeof(INotifyPropertyChanged) };
+			Type[] interfaces = new Type[] { typeof(ICustomNotifyPropertyChanged) };
 
 			TypeBuilder targetTypeBld = targetModule.DefineType("PropertyChangedProxy", TypeAttributes.Public, baseType, interfaces);
 
@@ -79,10 +79,14 @@ namespace Boxerp.Client
 			ctorIL.Emit(OpCodes.Call, objCtor);
 
 			ctorIL.Emit(OpCodes.Ret);
+			
+
 
 			AddOrRemoveMethod(targetTypeBld, eventField, eventHandler, true);
 			AddOrRemoveMethod(targetTypeBld, eventField, eventHandler, false);
-			
+			HasSubscribersMethod(targetTypeBld, eventHandler);
+			ThrowPropertyChangedMethod(targetTypeBld, eventHandler);
+
 			targetType = targetTypeBld.CreateType();
 
 		    //myAsmBuilder.Save("Dynamic.dll");
@@ -156,5 +160,42 @@ namespace Boxerp.Client
 			}
 		}
 
+		private static void HasSubscribersMethod(TypeBuilder builder, FieldBuilder eventHandler)
+		{
+			MethodBuilder method = builder.DefineMethod(
+							 "HasSubscribers",
+							 MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.Final, typeof(bool), new Type[0]);
+
+			ILGenerator mthdIL = method.GetILGenerator();
+
+			// this code is not valid. I want to do:  return PropertyChanged != null
+			mthdIL.Emit(OpCodes.Ldarg_0);
+			mthdIL.Emit(OpCodes.Ldarg_0);
+			mthdIL.Emit(OpCodes.Ldfld, eventHandler);
+			mthdIL.Emit(OpCodes.Brfalse_S);
+			// but no fucking idea how to write it in IL. The lines above are just a first attemp
+
+			mthdIL.Emit(OpCodes.Ret);
+		}
+
+		private static void ThrowPropertyChangedMethod(TypeBuilder builder, FieldBuilder eventHandler)
+		{
+			MethodBuilder method = builder.DefineMethod(
+							 "ThrowPropertyChangedEvent",
+							 MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.Final, typeof(void), new Type[] { typeof(string) });
+
+			ILGenerator mthdIL = method.GetILGenerator();
+
+			mthdIL.Emit(OpCodes.Ldarg_0);
+			mthdIL.Emit(OpCodes.Ldarg_0);
+			mthdIL.Emit(OpCodes.Ldfld, eventHandler);
+			mthdIL.Emit(OpCodes.Ldarg_1);
+			
+			mthdIL.Emit(OpCodes.Call, typeof(PropertyChangedEventHandler).GetMethod("Invoke",  
+				new Type[] { typeof(PropertyChangedEventHandler), typeof(PropertyChangedEventArgs)}));
+
+
+			mthdIL.Emit(OpCodes.Ret);
+		}
 	}
 }

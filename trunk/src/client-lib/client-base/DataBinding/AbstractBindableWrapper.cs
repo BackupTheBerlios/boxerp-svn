@@ -53,6 +53,8 @@ namespace Boxerp.Client
 		[NonSerialized]
 		private ProxyGenerator _generator = new ProxyGenerator();
 		private bool _dontIntercept = false;
+		private bool _disableBusinessObjInterception = false;
+		private bool _disableWrapperInterception = false;
 		private bool _disableUndoRedo = false;
 
 		/// <summary>
@@ -69,6 +71,8 @@ namespace Boxerp.Client
 			lock (this)
 			{
 				_disableUndoRedo = disableUndoRedo;
+				_disableBusinessObjInterception = disableBusinessObjectInterception;
+				_disableWrapperInterception = disableWrapperInterception;
 				if (disableBusinessObjectInterception && disableWrapperInterception)
 				{
 					_disableUndoRedo = true;
@@ -97,9 +101,6 @@ namespace Boxerp.Client
 				argumentsForConstructor[0] = this;
 				argumentTypes[0] = typeof(IInterceptor);
 
-				IInterceptor[] interceptors = new AbstractBindableWrapper<T, Y>[1];
-				interceptors[0] = this;
-
 				if (disableWrapperInterception)
 				{
 					ConstructorInfo constructor = wrapper.GetConstructor(argumentTypes);
@@ -109,23 +110,11 @@ namespace Boxerp.Client
 				{
 					// double proxy. The first one implents the INotifyPropertyChanged interface
 					Type notifiableType = DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(wrapper, argumentTypes);
-					_bindableFields = (Y)_generator.CreateClassProxy(notifiableType, interceptors, argumentsForConstructor);
+					_bindableFields = (Y)_generator.CreateClassProxy(notifiableType, new IInterceptor[] { this }, argumentsForConstructor);
 
 				}
 
-				if (disableBusinessObjectInterception)
-				{
-					Data.BusinessObj = businessObj;
-				}
-				else
-				{
-					// double proxy. The first one implents the INotifyPropertyChanged interface
-					Type notifiableType = DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(typeof(T), new Type[0]);
-					T proxy = (T)_generator.CreateClassProxy(notifiableType, new Type[] { typeof(ICustomNotifyPropertyChanged) }, interceptors);
-					//T proxy = (T)_generator.CreateClassProxy(typeof(T), interceptors);
-					copyBOtoProxy(proxy, businessObj);
-					Data.BusinessObj = proxy;
-				}
+				RefreshBusinessObj(businessObj);
 			}
 		}
 
@@ -207,7 +196,23 @@ namespace Boxerp.Client
 			}
 		}
 
-		
+		public void RefreshBusinessObj(T businessObj)
+		{
+			if (_disableBusinessObjInterception)
+			{
+				Data.BusinessObj = businessObj;
+			}
+			else
+			{
+				// double proxy. The first one implents the INotifyPropertyChanged interface
+				Type notifiableType =
+					DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(typeof(T), new Type[0]);
+
+				T proxy = (T)_generator.CreateClassProxy(notifiableType, new IInterceptor[] { this } );
+				copyBOtoProxy(proxy, businessObj);
+				Data.BusinessObj = proxy;
+			}
+		}
 
 		public Y Data
 		{

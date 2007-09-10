@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Boxerp.Client;
 using NUnit.Framework;
 using System.Reflection;
+using System.ComponentModel;
 
 namespace bindableObjectsTests
 {
@@ -192,7 +193,22 @@ public class BindableObjectsMain
 
 	}
 
+	[Test]
+	public void PropertyChangedSubscriberTest()
+	{
+		BindableWrapper<SimpleBusinessObject> bindableObj =
+		new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
 
+		bindableObj.PropertyChanged += onPropertyChanged;
+
+		bindableObj.Data.BusinessObj.Name = "change1";
+		bindableObj.Data.BusinessObj.Name = "change2";
+	}
+
+	private void onPropertyChanged(Object sender, PropertyChangedEventArgs args)
+	{
+		Console.Out.WriteLine("Changed: " + args.PropertyName);
+	}
 }
 
 }

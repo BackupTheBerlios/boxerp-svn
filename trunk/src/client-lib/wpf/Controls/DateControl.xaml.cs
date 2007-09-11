@@ -27,78 +27,120 @@ namespace Boxerp.Client.WPF.Controls
 		private bool _populatingCombo = false;
 		private bool _innerSetDateProperty = false;
 
-		public event SelectionChangedEventHandler DateChanged;
 
-		public bool InnerSetDateProperty
-		{
-			get { return _innerSetDateProperty; }
-			internal set { _innerSetDateProperty = value; }
-		}
+		#region XAML properties
 
-        public DateControl()
-        {
-			_populatingCombo = true;
-            InitializeComponent();
-            PopulateYears();
-			_populatingCombo = false;
-		}
+		public static DependencyProperty MinDateProperty = DependencyProperty.Register(
+			"MinDate",
+			typeof(DateTime?),
+			typeof(DateControl),
+			new FrameworkPropertyMetadata(DateTime.Parse("1/1/1900") , FrameworkPropertyMetadataOptions.AffectsRender,
+				new PropertyChangedCallback(OnMinDateChanged), null));
 
-		public ComboBox Days
+		private static void OnMinDateChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		{ }
+
+		public DateTime? MinDate
 		{
 			get
 			{
-				return _days;
+				return (DateTime?)GetValue(MinDateProperty);
+			}
+			set
+			{
+				SetValue(MinDateProperty, value);
 			}
 		}
 
-		public ComboBox Months
+		public static DependencyProperty MinAgeProperty = DependencyProperty.Register(
+			"MinAge",
+			typeof(int?),
+			typeof(DateControl),
+			new FrameworkPropertyMetadata(18, FrameworkPropertyMetadataOptions.AffectsRender,
+				new PropertyChangedCallback(OnMinAgeChanged), null));
+
+		private static void OnMinAgeChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		{ }
+
+		public int? MinAge
 		{
 			get
 			{
-				return _months;
+				return (int?)GetValue(MinAgeProperty);
+			}
+			set
+			{
+				SetValue(MinAgeProperty, value);
 			}
 		}
 
-		public ComboBox Years
+		public static DependencyProperty YearsOffsetProperty = DependencyProperty.Register(
+			"YearsOffset",
+			typeof(int),
+			typeof(DateControl),
+			new FrameworkPropertyMetadata(20, FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+				
+		public int YearsOffset
 		{
 			get
 			{
-				return _years;
+				return (int)GetValue(YearsOffsetProperty);
+			}
+			set
+			{
+				SetValue(YearsOffsetProperty, value);
 			}
 		}
 
-		#region XAML binding properties and methods
+
+		public static DependencyProperty IsDateOfBirthProperty = DependencyProperty.Register(
+			"IsDateOfBirth",
+			typeof(bool),
+			typeof(DateControl),
+			new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+
+		public bool IsDateOfBirth
+		{
+			get
+			{
+				return (bool)GetValue(IsDateOfBirthProperty);
+			}
+			set
+			{
+				SetValue(IsDateOfBirthProperty, value);
+			}
+		}
 
 		public static DependencyProperty IsDateEnabledProperty = DependencyProperty.Register(
-            "IsDateEnabled",
-            typeof(bool),
-            typeof(DateControl),
-            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender,
-                                        new PropertyChangedCallback(OnEnabledChanged), null));
+			"IsDateEnabled",
+			typeof(bool),
+			typeof(DateControl),
+			new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender,
+										new PropertyChangedCallback(OnEnabledChanged), null));
 
-        private static void OnEnabledChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            DateControl control = (DateControl)o;
-            if ((bool)e.NewValue == true)
-            {
-                control.enable();
-            }
-            else
-            {
-                control.disable();
-            }
-        }
+		private static void OnEnabledChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		{
+			DateControl control = (DateControl)o;
+			if ((bool)e.NewValue == true)
+			{
+				control.enable();
+			}
+			else
+			{
+				control.disable();
+			}
+		}
 
 		public bool IsDateEnabled
-        {
-            get 
-            { 
-                return (bool)GetValue(IsDateEnabledProperty); 
-            }
-            set
-            {
-                SetValue(IsDateEnabledProperty, value);
-            }
+		{
+			get
+			{
+				return (bool)GetValue(IsDateEnabledProperty);
+			}
+			set
+			{
+				SetValue(IsDateEnabledProperty, value);
+			}
 		}
 
 		public static DependencyProperty DateProperty = DependencyProperty.Register(
@@ -129,7 +171,49 @@ namespace Boxerp.Client.WPF.Controls
 			}
 		}
 
+
 		#endregion
+
+
+		public event SelectionChangedEventHandler DateChanged;
+
+		public bool InnerSetDateProperty
+		{
+			get { return _innerSetDateProperty; }
+			internal set { _innerSetDateProperty = value; }
+		}
+
+		public DateControl()
+        {
+			_populatingCombo = true;
+            InitializeComponent();
+            PopulateYears();
+			_populatingCombo = false;
+		}
+
+		public ComboBox Days
+		{
+			get
+			{
+				return _days;
+			}
+		}
+
+		public ComboBox Months
+		{
+			get
+			{
+				return _months;
+			}
+		}
+
+		public ComboBox Years
+		{
+			get
+			{
+				return _years;
+			}
+		}
 
 		public void OnMonthDayChanged(Object sender, SelectionChangedEventArgs args)
 		{
@@ -194,18 +278,17 @@ namespace Boxerp.Client.WPF.Controls
 				}
 
 				_years.Items.Clear();
-				for (int y = date.Year - YEARS_OFFSET_BIRTHDAY; y < date.Year + YEARS_OFFSET_BIRTHDAY; y++)
+
+				if (IsDateOfBirth)
 				{
-					_years.Items.Add(y);
-					if (y == date.Year)
-					{
-						_years.SelectedItem = y;
-					}
+					PopulateYearsBirthDate();
 				}
-				if (_years.SelectedItem == null)
+				else
 				{
-					_years.SelectedIndex = 0;
+					PopulateYears();
 				}
+
+				_years.SelectedItem = date.Year;
 
 				_populatingCombo = false;
 			}
@@ -219,7 +302,7 @@ namespace Boxerp.Client.WPF.Controls
         {
 			_populatingCombo = true;
 
-            for (int y = DateTime.Now.Year; y < DateTime.Now.Year + YEARS_OFFSET_CURRENTLY; y++)
+            for (int y = DateTime.Now.Year; y < DateTime.Now.Year + YearsOffset; y++)
             {
                 _years.Items.Add(y);
             }
@@ -233,7 +316,7 @@ namespace Boxerp.Client.WPF.Controls
 			_populatingCombo = true;
 
 			_years.Items.Clear();
-			for (int y = 1900; y < DateTime.Now.Year - 16; y++)
+			for (int y = MinDate.Value.Year; y < DateTime.Now.Year - MinAge.Value; y++)
 			{
 				_years.Items.Add(y);
 			}

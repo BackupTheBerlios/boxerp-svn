@@ -1,0 +1,18 @@
+<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:boxerp="clr-namespace:Boxerp.Client.WPF;assembly=Boxerp.Client.WPF"
+    x:Class="testApp3.MainWindow"
+    Title="testApp3" Height="276" Width="323"
+    >
+    <Grid>
+        <Label HorizontalAlignment="Left" Margin="24,62,0,0" VerticalAlignment="Top" Width="47" Height="24" Content="Name:"/>
+    	<Label Width="71" Content="Description:" HorizontalAlignment="Left" Margin="24,101,0,117"/>
+    	<Label Width="47" Content="Age:" HorizontalAlignment="Left" Margin="24,0,0,79" VerticalAlignment="Bottom" Height="24"/>
+    	
+		<boxerp:TextBoxControl x:Name="_username" Text="{Binding Path=Data.BusinessObj.Username}"/>
+		<boxerp:TextBoxControl x:Name="_password" Text="{Binding Path=Data.BusinessObj.Password}"/>
+		<boxerp:TextBoxControl x:Name="_email" Text="{Binding Path=Data.BusinessObj.Email}"/>
+		<boxerp:TextBoxControl x:Name="_desk" Text="{Binding Path=Data.BusinessObj.Desk}"/>
+    </Grid>
+</Window>

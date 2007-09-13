@@ -9,6 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Boxerp.Client.WPF.Controls</RootNamespace>
     <AssemblyName>Boxerp.Client.WPF.Controls</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>boxerpkey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -94,6 +96,9 @@
     <Page Include="NullableIntegerControl.xaml" />
     <Page Include="NullableTextControl.xaml" />
     <Page Include="SystemNameTextBox.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="boxerpkey.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.WinFX.targets" />

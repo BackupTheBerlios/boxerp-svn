@@ -39,10 +39,10 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("Boxerp.Client")]
 [assembly: AssemblyDescription("Boxerp Framework")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
+[assembly: AssemblyCompany("Boxerp")]
+[assembly: AssemblyProduct("Boxerp")]
 [assembly: AssemblyCopyright("Carlos Ble")]
-[assembly: AssemblyTrademark("Apache2 License")]
+[assembly: AssemblyTrademark("BSD License")]
 [assembly: AssemblyCulture("")]
 
 // The assembly version has following format :
@@ -52,10 +52,13 @@ using System.Runtime.CompilerServices;
 // You can specify all values by your own or you can build default build and revision
 // numbers with the '*' character (the default):
 
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.2.0.0")]
 
 // The following attributes specify the key for the sign of your assembly. See the
 // .NET Framework documentation for more information about signing.
 // This is not required, if you don't want signing let these attributes like they're.
 [assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyKeyFile("")]
+
+[assembly: AssemblyKeyFile("boxerp.snk")]
+
+[assembly: AssemblyFileVersionAttribute("0.2.0.0")]

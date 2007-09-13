@@ -285,7 +285,7 @@ namespace Boxerp.Client.WPF.Controls
 				}
 				else
 				{
-					PopulateYears();
+					PopulateYears(date.Year, DateTime.Now.Year + YearsOffset);
 				}
 
 				_years.SelectedItem = date.Year;
@@ -310,6 +310,20 @@ namespace Boxerp.Client.WPF.Controls
 
 			_populatingCombo = false;
         }
+
+		public void PopulateYears(int startYear, int endYear)
+		{
+			_populatingCombo = true;
+
+			for (int y = startYear; y < endYear; y++)
+			{
+				_years.Items.Add(y);
+			}
+			_years.SelectedIndex = 0;
+
+			_populatingCombo = false;
+		}
+		
 
 		public void PopulateYearsBirthDate()
 		{

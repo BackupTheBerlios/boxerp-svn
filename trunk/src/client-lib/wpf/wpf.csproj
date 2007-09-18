@@ -46,6 +46,7 @@
       <SubType>Code</SubType>
       <DependentUpon>ErrorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IWpfWaitControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionWindow.xaml.cs">
       <SubType>Code</SubType>

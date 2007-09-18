@@ -36,18 +36,23 @@ namespace Boxerp.Client.WindowsForms
     /// <summary>
     /// This is the winforms implementation of the waiting dialog while work is being done.
     /// </summary>
-	public partial class WaitDialog : Form
+	public partial class WaitDialog : Form, IWinFormsWaitControl
 	{
 
         private EventHandler cancelEventHandler;
-        protected readonly bool _isModal;
+        protected bool _isModal;
+		private bool _isProgressDiscrete;
 
         public bool IsModal
         {
             get
             {
-                return Modal;
+				return _isModal;
             }
+			set
+			{
+				_isModal = value;
+			}
         }
 
         public event EventHandler CancelEvent
@@ -63,23 +68,6 @@ namespace Boxerp.Client.WindowsForms
 
         }
 
-        /// <summary>
-        /// Initialize controls
-        /// </summary>
-		public WaitDialog(bool isModal)
-		{
-			InitializeComponent();
-
-            if (isModal)
-            {
-                _isModal = true;
-            }
-            else
-            {
-                _isModal = false;
-            }
-		}
-
         public void Run()
         {
             if (_isModal)
@@ -92,7 +80,7 @@ namespace Boxerp.Client.WindowsForms
             }
         }
 
-        /// <summary>
+		/// <summary>
         /// Fired when the form is closing
         /// </summary>
         /// <param name="sender"></param>
@@ -124,5 +112,39 @@ namespace Boxerp.Client.WindowsForms
         {
 
         }
+
+		#region IWaitControl Members
+
+
+		public void ShowControl()
+		{
+			Run();
+		}
+
+		public bool IsProgressDiscrete
+		{
+			get
+			{
+				return _isProgressDiscrete;
+			}
+			set
+			{
+				_isProgressDiscrete = value;
+			}
+		}
+
+		public void UpdateProgress(int amount, int total)
+		{
+			if (!_isProgressDiscrete)
+			{
+				throw new Exception("Can not update the progress on a continuos status bar");
+			}
+		}
+
+		public void CloseControl()
+		{
+			Close();
+		}
+		#endregion
 	}
 }

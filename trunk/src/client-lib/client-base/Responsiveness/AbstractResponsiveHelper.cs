@@ -155,6 +155,10 @@ namespace Boxerp.Client
 			}
 		}
 
+		public abstract void StartAsyncCall(SimpleDelegate method, bool showWaitControl);
+		
+
+
 		/// <summary>
 		/// Create a block of parallel threads and put it in a single slot in the queue
 		/// </summary>
@@ -201,6 +205,8 @@ namespace Boxerp.Client
 				throw ex;
 			}
 		}
+
+		public abstract void StartAsyncCallList(Boxerp.Client.ResponsiveEnum trType, IController controller, bool showWaitControl);
 
 		/// <summary>
 		/// Stops the current thread passing in information about the thread itself, and any outcome information

@@ -59,6 +59,5 @@ using System.Runtime.CompilerServices;
 // This is not required, if you don't want signing let these attributes like they're.
 [assembly: AssemblyDelaySign(false)]
 
-[assembly: AssemblyKeyFile("boxerp.snk")]
 
 [assembly: AssemblyFileVersionAttribute("0.2.0.0")]

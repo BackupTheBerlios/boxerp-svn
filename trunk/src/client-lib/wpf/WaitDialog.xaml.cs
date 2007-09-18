@@ -43,9 +43,11 @@ namespace Boxerp.Client.WPF
 	/// Interaction logic for WaitDialog.xaml
 	/// </summary>
 
-	public partial class WaitDialog : System.Windows.Window
+	public partial class WaitDialog : System.Windows.Window, IWpfWaitControl
 	{
 		private EventHandler _cancelEventHandler;
+		private bool _isProgressDiscrete;
+		private bool _isModal;
 
 		public event EventHandler CancelEvent
 		{
@@ -78,5 +80,57 @@ namespace Boxerp.Client.WPF
 		{
 			_cancelEventHandler(this, null);
 		}
+
+		public bool IsModal
+		{
+			get
+			{
+				return _isModal;
+			}
+			set
+			{
+				_isModal = value;
+			}
+		}
+
+		public bool IsProgressDiscrete
+		{
+			get
+			{
+				return _isProgressDiscrete;
+			}
+			set
+			{
+				_isProgressDiscrete = value;
+			}
+		}
+
+		public void UpdateProgress(int amount, int total)
+		{
+			if (!_isProgressDiscrete)
+			{
+				throw new Exception("Can not update the progress on a continuos status bar");
+			}
+		}
+
+		public void ShowControl()
+		{
+			if (_isModal)
+			{
+				ShowDialog();
+			}
+			else
+			{
+				Show(); 
+				WindowState = WindowState.Normal;
+			}
+		}
+
+		public void CloseControl()
+		{
+			Close();
+		}
+
+
 	}
 }

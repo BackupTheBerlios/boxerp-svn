@@ -30,18 +30,27 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
+using Boxerp.Client;
+
 namespace Boxerp.Client.WindowsForms
 {
+
+	public class WinFormsResponsiveHelper : WinFormsResponsiveHelper<WaitDialog>
+	{
+		public WinFormsResponsiveHelper(ConcurrencyMode mode)
+			: base(mode)
+		{
+		}
+	}
 
     /// <summary>
     /// This class helps to keep winform applications responsive 
     /// </summary>
-    public class WinFormsResponsiveHelper : AbstractResponsiveHelper
+    public class WinFormsResponsiveHelper<T> : AbstractResponsiveHelper
+		where T : IWinFormsWaitControl, new()
     {
-        WaitDialog _waitDialog;
-        WaitDialog _waitWindow;
-        Queue<WaitDialog> _dialogs = new Queue<WaitDialog>();
-        Queue<WaitDialog> _windows = new Queue<WaitDialog>();
+		T _waitDialog;
+		Queue<T> _dialogs = new Queue<T>();
         Queue<QuestionDialog> _questionWindows = new Queue<QuestionDialog>();
 
         /// <summary>
@@ -53,36 +62,29 @@ namespace Boxerp.Client.WindowsForms
         {
         }
 
-        public override void StartAsyncCallList(ResponsiveEnum trType, IController controller)
+		public override void StartAsyncCallList(ResponsiveEnum trType, IController controller)
+		{
+			StartAsyncCallList(trType, controller, true);
+		}
+
+        public override void StartAsyncCallList(ResponsiveEnum trType, IController controller, bool showWaitControl)
         {
             if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
                 || (RunningThreads == 0))
             {
-                if (_concurrencyMode == ConcurrencyMode.Modal)
-                {
-                    _waitDialog = new WaitDialog(true);
-                    _waitDialog.CancelEvent += OnCancel;
-                    _dialogs.Enqueue(_waitDialog);
-                }
-                else
-                {
-                    _waitWindow = new WaitDialog(false);
-                    _waitWindow.CancelEvent += OnCancel;
-                    _windows.Enqueue(_waitWindow);
-                }
+				_waitDialog = new T();
+                _waitDialog.CancelEvent += OnCancel;
+                _dialogs.Enqueue(_waitDialog);
+            }
 
-                base.StartAsyncCallList(trType, controller);
+			base.StartAsyncCallList(trType, controller);
 
+			if (showWaitControl)
+			{
                 try
                 {
-                    if (_concurrencyMode == ConcurrencyMode.Modal)
-                    {
-                        _waitDialog.Run();
-                    }
-                    else
-                    {
-                        _waitWindow.Run();
-                    }
+					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
+                    _waitDialog.ShowControl();
                 }
 
                 catch (System.Reflection.TargetInvocationException ex)
@@ -96,46 +98,39 @@ namespace Boxerp.Client.WindowsForms
             }
         }
 
-        public override void StartAsyncCall(SimpleDelegate method)
+		public override void StartAsyncCall(SimpleDelegate method)
+		{
+			StartAsyncCall(method, true);
+		}
+
+        public override void StartAsyncCall(SimpleDelegate method, bool showWaitControl)
         {
             if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
                 || (RunningThreads == 0))
             {
-                if (_concurrencyMode == ConcurrencyMode.Modal)
-                {
-                    _waitDialog = new WaitDialog(true);
-                    _waitDialog.CancelEvent += OnCancel;
-                    _dialogs.Enqueue(_waitDialog);
-                }
-                else
-                {
-                    _waitWindow = new WaitDialog(false);
-                    _waitWindow.CancelEvent += OnCancel;
-                    _windows.Enqueue(_waitWindow);
-                }
+				_waitDialog = new T();
+				_waitDialog.CancelEvent += OnCancel;
+				_dialogs.Enqueue(_waitDialog);
             }
 
             base.StartAsyncCall(method);
 
-            try
-            {
-                if (_concurrencyMode == ConcurrencyMode.Modal)
-                {
-                    _waitDialog.Run();
-                }
-                else
-                {
-                    _waitWindow.Run();
-                }
-            }
-            catch (System.Reflection.TargetInvocationException ex)
-            {
-                throw ex.InnerException;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+			if (showWaitControl)
+			{
+				try
+				{
+					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
+					_waitDialog.ShowControl();
+				}
+				catch (System.Reflection.TargetInvocationException ex)
+				{
+					throw ex.InnerException;
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+				}
+			}
         }
 
 
@@ -163,21 +158,13 @@ namespace Boxerp.Client.WindowsForms
         private void TransferCompleted(object sender, EventArgs e)
         {
             ThreadEventArgs evArgs = (ThreadEventArgs)e;
-            if (_concurrencyMode == ConcurrencyMode.Modal)
+            T dia = _dialogs.Dequeue();
+            dia.Invoke(new MethodInvoker(dia.CloseControl));
+            
+			if (_questionWindows.Count > 0)
             {
-                WaitDialog dia = _dialogs.Dequeue();
-                dia.Invoke(new MethodInvoker(dia.Close));
-            }
-            else
-            {
-                WaitDialog dia = _windows.Dequeue();
-                dia.Invoke(new MethodInvoker(dia.Close));
-            }
-
-            if (_questionWindows.Count > 0)
-            {
-                QuestionDialog dia = _questionWindows.Dequeue();
-                dia.Invoke(new MethodInvoker(dia.Close));
+                QuestionDialog qdia = _questionWindows.Dequeue();
+                qdia.Invoke(new MethodInvoker(dia.CloseControl));
             }
 
             if (!evArgs.Success)
@@ -207,10 +194,6 @@ namespace Boxerp.Client.WindowsForms
 			if (_waitDialog != null)
 			{
 				_waitDialog.BeginInvoke(new EventHandler(TransferCompleted), new object[] { this, e });
-			}
-			else
-			{
-				_waitWindow.BeginInvoke(new EventHandler(TransferCompleted), new object[] { this, e });
 			}
 		}
     }

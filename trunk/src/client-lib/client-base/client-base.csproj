@@ -69,10 +69,12 @@
     <Compile Include="Responsiveness\AbstractResponsiveHelper.cs" />
     <Compile Include="Responsiveness\ConcurrencyMode.cs" />
     <Compile Include="Responsiveness\IResponsiveClient.cs" />
+    <Compile Include="Responsiveness\IWaitControl.cs" />
     <Compile Include="Responsiveness\ResponsiveAttribute.cs" />
     <Compile Include="Responsiveness\ResponsiveEnum.cs" />
     <Compile Include="Responsiveness\ResponsivenessSingleton.cs" />
     <Compile Include="Responsiveness\ThreadEventArgs.cs" />
+    <Compile Include="Responsiveness\WaitControlFactory.cs" />
     <Compile Include="SessionSingleton.cs" />
     <Compile Include="SimpleInvoker.cs" />
   </ItemGroup>

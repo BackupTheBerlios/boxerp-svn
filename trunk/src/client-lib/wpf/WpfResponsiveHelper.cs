@@ -40,20 +40,42 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Boxerp.Client;
+
 namespace Boxerp.Client.WPF
 {
-	public class WpfResponsiveHelper : AbstractResponsiveHelper
-	{
-		WaitDialog waitDialog;
-		private bool _displayExceptions = true;
-		Queue<WaitDialog> _dialogs = new Queue<WaitDialog>();
-		Queue<QuestionWindow> _questionWindows = new Queue<QuestionWindow>();
-				
-		public WpfResponsiveHelper(ConcurrencyMode mode) : base(mode){ }
 
-		public WpfResponsiveHelper(ConcurrencyMode mode, bool displayExceptions) : base(mode) 
+	public class WpfResponsiveHelper : WpfResponsiveHelper<WaitDialog> 
+	{
+		public WpfResponsiveHelper(ConcurrencyMode mode) : this(mode, true) { }
+
+		public WpfResponsiveHelper(ConcurrencyMode mode, bool displayExceptions)
+			: base(mode)
 		{
 			_displayExceptions = displayExceptions;
+		}
+	}
+
+	public class WpfResponsiveHelper<T> : AbstractResponsiveHelper
+		where T : IWpfWaitControl, new()
+	{
+		T _waitDialog;
+		
+		protected bool _displayExceptions = true;
+		Queue<T> _dialogs = new Queue<T>();
+		Queue<QuestionWindow> _questionWindows = new Queue<QuestionWindow>();
+				
+		public WpfResponsiveHelper(ConcurrencyMode mode) : this (mode, true){ }
+
+		public WpfResponsiveHelper(ConcurrencyMode mode, bool displayExceptions)
+			: base(mode)
+		{
+			_displayExceptions = displayExceptions;
+		}
+
+		public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller)
+		{
+			StartAsyncCallList(transferType, controller, true);
 		}
 
 		/// <summary>
@@ -61,71 +83,68 @@ namespace Boxerp.Client.WPF
 		/// </summary>
 		/// <param name="transferType"></param>
 		/// <param name="controller"></param>
-		public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller)
+		public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller, bool showWaitControl)
 		{
 			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
 				|| (RunningThreads == 0))
 			{
-				waitDialog = new WaitDialog();
-				waitDialog.CancelEvent += OnCancel;
-				_dialogs.Enqueue(waitDialog);
+				_waitDialog = new T();
+				_waitDialog.CancelEvent += OnCancel;
+				_dialogs.Enqueue(_waitDialog);
 			}
 			
 			base.StartAsyncCallList(transferType, controller);
 
-			try
+			if (showWaitControl)
 			{
-				if (_concurrencyMode == ConcurrencyMode.Modal)
+				try
 				{
-					waitDialog.ShowDialog();
+					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
+					_waitDialog.ShowControl();
 				}
-				else
+				catch (System.Reflection.TargetInvocationException ex)
 				{
-					waitDialog.Show();
-					waitDialog.WindowState = WindowState.Normal;
+					throw ex.InnerException;
 				}
-			}
-			catch (System.Reflection.TargetInvocationException ex)
-			{
-				throw ex.InnerException;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
+				catch (Exception ex)
+				{
+					throw ex;
+				}
 			}
 		}
 
 		public override void StartAsyncCall(SimpleDelegate method)
 		{
+			StartAsyncCall(method, true);
+		}
+
+		public override void StartAsyncCall(SimpleDelegate method, bool showWaitControl)
+		{
 			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
 				|| (RunningThreads == 0))
 			{
-				waitDialog = new WaitDialog();
-				waitDialog.CancelEvent += OnCancel;
-				_dialogs.Enqueue(waitDialog);
+					_waitDialog = new T();
+					_waitDialog.CancelEvent += OnCancel;
+					_dialogs.Enqueue(_waitDialog);
 			}
 
 			base.StartAsyncCall(method);
 
-			try
+			if (showWaitControl)
 			{
-				if (_concurrencyMode == ConcurrencyMode.Modal)
+				try
 				{
-					waitDialog.ShowDialog();
+					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
+					_waitDialog.ShowControl();
 				}
-				else
+				catch (System.Reflection.TargetInvocationException ex)
 				{
-					waitDialog.Show();
-					waitDialog.WindowState = WindowState.Normal;
+					throw ex.InnerException;
 				}
-			}
-			catch (System.Reflection.TargetInvocationException ex)
-			{
-				throw ex.InnerException;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
+				catch (Exception ex)
+				{
+					throw ex;
+				}
 			}
 		}
 
@@ -155,8 +174,8 @@ namespace Boxerp.Client.WPF
 		private void TransferCompleted(object sender, ThreadEventArgs e)
 		{
 			ResponsiveEnum operationType = e.OperationType;
-			WaitDialog wDialog = _dialogs.Dequeue();
-			wDialog.Close();
+			T wDialog = _dialogs.Dequeue();
+			wDialog.CloseControl();
 			if (_questionWindows.Count > 0)
 			{
 				_questionWindows.Dequeue().Close();
@@ -184,7 +203,7 @@ namespace Boxerp.Client.WPF
 
 		public override void OnTransferCompleted(object sender, ThreadEventArgs e)
 		{
-			waitDialog.Dispatcher.BeginInvoke(
+			_waitDialog.Dispatcher.BeginInvoke(
 				System.Windows.Threading.DispatcherPriority.Normal, 
 				new ThreadEventHandler(TransferCompleted),
 				sender,

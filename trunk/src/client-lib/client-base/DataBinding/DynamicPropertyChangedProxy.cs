@@ -40,12 +40,55 @@ namespace Boxerp.Client
 {
 	public class DynamicPropertyChangedProxy
 	{
+		private static AssemblyBuilder _assemblyBuilder = null;
+		private static ModuleBuilder _moduleBuilder = null;
+		private static string ASSEMBLY_NAME = "Boxerp.DynamicAssembly";
+		private static string ASSEMBLY_DLL = "Boxerp.DynamicAssembly.dll";
+		private static string DYNAMIC_MOD_NAME = "DynamicClasses";
+
+		private static AssemblyBuilder MyAssemblyBuilder
+		{
+			get
+			{
+				if (_assemblyBuilder == null)
+				{
+					AppDomain myDomain = Thread.GetDomain();
+					AssemblyName myAsmName = new AssemblyName();
+					myAsmName.Name = ASSEMBLY_NAME;
+					_assemblyBuilder = myDomain.DefineDynamicAssembly(myAsmName, AssemblyBuilderAccess.RunAndSave);
+				}
+
+				return _assemblyBuilder;
+			}
+		}
+
+		private static ModuleBuilder ModuleBuilder
+		{
+			get
+			{
+				if (_moduleBuilder == null)
+				{
+					_moduleBuilder = MyAssemblyBuilder.DefineDynamicModule(DYNAMIC_MOD_NAME, ASSEMBLY_DLL);
+				}
+
+				return _moduleBuilder;
+			}
+		}
+
 		public static string CleanBaseTypeName(string sourceName)
 		{
+			string[] namespaces = sourceName.Split(new char[] { '.' });
+			sourceName = namespaces[namespaces.Length -1];
+			sourceName += DateTime.Now.ToString("ddMMyyyyHH");
+			/*Random random = new Random();
+			for (int i = 0; i < 3; i++)
+			{
+				sourceName += random.Next(9999 * i).ToString();
+			}*/
+
 			char[] garbage = new char[] { '.', '[', ']', '+', '\'', '\\', '`', ','};
 			string cleaned = String.Empty;
-			//string[] namespaces = sourceName.Split(new char[] { '.' });
-			//sourceName = namespaces[namespaces.Length - 1];
+			
 			foreach (char sourceChar in sourceName)
 			{
 				bool clean = true;
@@ -62,6 +105,7 @@ namespace Boxerp.Client
 					cleaned += sourceChar;
 				}
 			}
+
 			return cleaned;
 		}
 
@@ -69,17 +113,20 @@ namespace Boxerp.Client
 		{
 			Type targetType = null;
 			
-			AppDomain myDomain = Thread.GetDomain();
-			AssemblyName myAsmName = new AssemblyName();
-			myAsmName.Name = "Boxerp.DynamicAssembly";
-    
-			AssemblyBuilder myAsmBuilder = myDomain.DefineDynamicAssembly(myAsmName, AssemblyBuilderAccess.RunAndSave);
-
-			ModuleBuilder targetModule = myAsmBuilder.DefineDynamicModule("DynamicModule", "Dynamic.dll");
-
 			Type[] interfaces = new Type[] { typeof(ICustomNotifyPropertyChanged) };
 
-			TypeBuilder targetTypeBld = targetModule.DefineType("PropertyChangedProxy_" + CleanBaseTypeName(baseType.ToString()), TypeAttributes.Public, baseType, interfaces);
+			string className = "PropChPrxy_" + CleanBaseTypeName(baseType.ToString());
+
+			// If this proxy has been created already do not create it again
+			foreach (Type t in MyAssemblyBuilder.GetTypes())
+			{
+				if (t.ToString() == className)
+				{
+					//return t; If I do that there is another exception I have to check
+				}
+			}
+
+			TypeBuilder targetTypeBld = ModuleBuilder.DefineType(className, TypeAttributes.Public, baseType, interfaces);
 
 			// add the Serializable Attribute:
 			ConstructorInfo attributeCtorInfo = typeof(SerializableAttribute).GetConstructor(new Type[0]);
@@ -112,7 +159,6 @@ namespace Boxerp.Client
 			ctorIL.Emit(OpCodes.Ret);
 			
 
-
 			AddOrRemoveMethod(targetTypeBld, eventField, eventHandler, true);
 			AddOrRemoveMethod(targetTypeBld, eventField, eventHandler, false);
 			HasSubscribersMethod(targetTypeBld, eventHandler);
@@ -120,8 +166,8 @@ namespace Boxerp.Client
 
 			targetType = targetTypeBld.CreateType();
 
-		    myAsmBuilder.Save("Dynamic.dll");
-	    
+			MyAssemblyBuilder.Save(ASSEMBLY_DLL);
+			
 			return targetType;
 		}
 
@@ -199,6 +245,20 @@ namespace Boxerp.Client
 
 		/// <summary>
 		/// The generated code should be: return (PropertyChanged == null)
+		/// CIL disassembled code:
+		/// .maxstack  2
+		/// .locals /*11000003*/ init ([0] bool CS$1$0000)
+		/// IL_0000:  /* 00   |                  */ nop
+		/// IL_0001:  /* 02   |                  */ ldarg.0
+		/// IL_0002:  /* 7B   | (04)000002       */ ldfld      class [System/*23000003*/]System.ComponentModel.PropertyChangedEventHandler/*01000005*/ ConsoleApplication1.TestClass/*02000004*/::PropertyChanged /* 04000002 */
+		/// IL_0007:  /* 14   |                  */ ldnull
+		/// IL_0008:  /* FE01 |                  */ ceq
+		/// IL_000a:  /* 16   |                  */ ldc.i4.0
+		/// IL_000b:  /* FE01 |                  */ ceq
+		/// IL_000d:  /* 0A   |                  */ stloc.0
+		/// IL_000e:  /* 2B   | 00               */ br.s       IL_0010
+		/// IL_0010:  /* 06   |                  */ ldloc.0
+		/// IL_0011:  /* 2A   |                  */ ret
 		/// </summary>
 		/// <param name="builder"></param>
 		/// <param name="eventHandler"></param>
@@ -206,25 +266,40 @@ namespace Boxerp.Client
 		{
 			MethodBuilder method = builder.DefineMethod(
 							 "HasSubscribers",
-							 MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.Final, typeof(bool), new Type[0]);
+							 MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual | MethodAttributes.Final, 
+							 typeof(bool), 
+							 new Type[0]);
 
 			ILGenerator mthdIL = method.GetILGenerator();
-
+			
 			LocalBuilder returnedValue = mthdIL.DeclareLocal(typeof(bool));
-
-			// this code is not valid. I want to do:  return PropertyChanged != null
-			//mthdIL.Emit(OpCodes.Ldarg_0);
+						
+			mthdIL.Emit(OpCodes.Nop);
 			mthdIL.Emit(OpCodes.Ldarg_0);
 			mthdIL.Emit(OpCodes.Ldfld, eventHandler);
-			mthdIL.Emit(OpCodes.Brfalse, (byte)0);
-			mthdIL.Emit(OpCodes.Ldind_I1, Convert.ToInt32(true));
-			// but no fucking idea how to write it in IL. The lines above are just a first attemp
-
+			mthdIL.Emit(OpCodes.Ldnull);
+			mthdIL.Emit(OpCodes.Ceq);
+			mthdIL.Emit(OpCodes.Ldc_I4_0);
+			mthdIL.Emit(OpCodes.Ceq);
+			mthdIL.Emit(OpCodes.Stloc_0);
+			//mthdIL.Emit(OpCodes.Br_S);
+			mthdIL.Emit(OpCodes.Ldloc_0);
 			mthdIL.Emit(OpCodes.Ret);
 		}
 
 		/// <summary>
-		/// The generated code should be: PropertyChanged.Invoke(this, something)
+		/// The generated code should be: PropertyChanged.Invoke(this, new PropertyChangedEventArgs(value))
+		/// CIL disassembled code:
+		/// IL_0001:  /* 02   |                  */ ldarg.0
+		/// IL_0002:  /* 7B   | (04)000002       */ ldfld      class [System/*23000003*/]System.ComponentModel.PropertyChangedEventHandler/*01000005*/ ConsoleApplication1.TestClass/*02000004*/::PropertyChanged /* 04000002 */
+		/// IL_0007:  /* 02   |                  */ ldarg.0
+		/// IL_0008:  /* 03   |                  */ ldarg.1
+		/// IL_0009:  /* 73   | (0A)00001F       */ newobj     instance void [System/*23000003*/]System.ComponentModel.PropertyChangedEventArgs/*0100001D*/::.ctor(string) /* 0A00001F */
+		/// IL_000e:  /* 6F   | (0A)000020       */ callvirt   instance void [System/*23000003*/]System.ComponentModel.PropertyChangedEventHandler/*01000005*/::Invoke(object, class [System/*23000003*/]System.ComponentModel.PropertyChangedEventArgs/*0100001D*/) /* 0A000020 */
+		/// IL_0013:  /* 00   |                  */ nop
+		/// .line 22,22 : 3,4 ''
+		/// //000022: 		}
+		/// IL_0014:  /* 2A   |                  */ ret
 		/// </summary>
 		/// <param name="builder"></param>
 		/// <param name="eventHandler"></param>
@@ -232,19 +307,21 @@ namespace Boxerp.Client
 		{
 			MethodBuilder method = builder.DefineMethod(
 							 "ThrowPropertyChangedEvent",
-							 MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.Final, typeof(void), new Type[] { typeof(string) });
+							 MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual | MethodAttributes.Final, typeof(void), new Type[] { typeof(string) });
 
 			ILGenerator mthdIL = method.GetILGenerator();
 
-			mthdIL.Emit(OpCodes.Ldarg_0);
+			ConstructorInfo propEventArgsCtor = typeof(PropertyChangedEventArgs).GetConstructor(new Type[] { typeof(string) });
+
+			mthdIL.Emit(OpCodes.Nop);
 			mthdIL.Emit(OpCodes.Ldarg_0);
 			mthdIL.Emit(OpCodes.Ldfld, eventHandler);
+			mthdIL.Emit(OpCodes.Ldarg_0);
 			mthdIL.Emit(OpCodes.Ldarg_1);
-			
-			mthdIL.Emit(OpCodes.Call, typeof(PropertyChangedEventHandler).GetMethod("Invoke",  
+			mthdIL.Emit(OpCodes.Newobj, propEventArgsCtor);
+			mthdIL.Emit(OpCodes.Callvirt, typeof(PropertyChangedEventHandler).GetMethod("Invoke",  
 				new Type[] { typeof(PropertyChangedEventHandler), typeof(PropertyChangedEventArgs)}));
-
-
+			mthdIL.Emit(OpCodes.Nop);
 			mthdIL.Emit(OpCodes.Ret);
 		}
 	}

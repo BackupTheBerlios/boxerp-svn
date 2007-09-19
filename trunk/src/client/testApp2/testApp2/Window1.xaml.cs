@@ -35,7 +35,7 @@ namespace testApp2
 			businessObject.Age = 10;
 
 			_bindableSampleObj = new BindableWrapper<SampleBObj>(businessObject);
-			_bindableSampleObj.PropertyChanged += OnPropertyChanged;
+			//_bindableSampleObj.PropertyChanged += OnPropertyChanged;
 
 			DataContext = _bindableSampleObj.Data.BusinessObj;
 		}
@@ -43,26 +43,26 @@ namespace testApp2
 		public void OnUndo(Object sender, RoutedEventArgs args)
 		{
 			_bindableSampleObj.Undo();
-			refreshDataContext();
+			//refreshDataContext();
 		}
 
-		private void refreshDataContext()
-		{
-			DataContext = null;
-			DataContext = _bindableSampleObj.Data.BusinessObj;
+		//private void refreshDataContext()
+		//{
+			//DataContext = null;
+			//DataContext = _bindableSampleObj.Data.BusinessObj;
 			//this.UpdateLayout();
-		}
+		//}/
 
 		public void OnRedo(Object sender, RoutedEventArgs args)
 		{
 			_bindableSampleObj.Redo();
-			refreshDataContext();
+			//refreshDataContext();
 		}
 
 		private void OnPropertyChanged(Object sender, PropertyChangedEventArgs args)
 		{
 			Console.WriteLine("Property changed:" + args.PropertyName);
-			refreshDataContext();
+			//refreshDataContext();
 		}
 
 		public void OnChangeData(Object sender, RoutedEventArgs args)

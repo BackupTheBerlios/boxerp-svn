@@ -34,10 +34,9 @@ namespace winFormsTestApp2
 			this._name = new System.Windows.Forms.TextBox();
 			this._description = new System.Windows.Forms.TextBox();
 			this._age = new System.Windows.Forms.TextBox();
-			this.button1 = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
+			this.button1 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -88,26 +87,6 @@ namespace winFormsTestApp2
 			this._age.Size = new System.Drawing.Size(169, 20);
 			this._age.TabIndex = 5;
 			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(175, 145);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 6;
-			this.button1.Text = "Redo";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.OnRedoClicked);
-			// 
-			// button2
-			// 
-			this.button2.Location = new System.Drawing.Point(94, 145);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 7;
-			this.button2.Text = "Undo";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.OnUndoClicked);
-			// 
 			// button3
 			// 
 			this.button3.Location = new System.Drawing.Point(79, 184);
@@ -128,15 +107,24 @@ namespace winFormsTestApp2
 			this.button4.UseVisualStyleBackColor = true;
 			this.button4.Click += new System.EventHandler(this.OnReadData);
 			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(15, 256);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(233, 23);
+			this.button1.TabIndex = 10;
+			this.button1.Text = "Form2";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.OnShowForm2);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(292, 266);
+			this.ClientSize = new System.Drawing.Size(386, 307);
+			this.Controls.Add(this.button1);
 			this.Controls.Add(this.button4);
 			this.Controls.Add(this.button3);
-			this.Controls.Add(this.button2);
-			this.Controls.Add(this.button1);
 			this.Controls.Add(this._age);
 			this.Controls.Add(this._description);
 			this.Controls.Add(this._name);
@@ -158,10 +146,9 @@ namespace winFormsTestApp2
 		private System.Windows.Forms.TextBox _name;
 		private System.Windows.Forms.TextBox _description;
 		private System.Windows.Forms.TextBox _age;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.Button button1;
 	}
 }
 

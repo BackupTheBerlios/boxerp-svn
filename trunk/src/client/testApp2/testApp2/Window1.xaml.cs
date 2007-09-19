@@ -49,12 +49,13 @@ namespace testApp2
 				}
 				else
 				{
-					//DataContext = _bindableSampleObj.Data.BusinessObj;
-					Binding myBinding = new Binding("Name");
+					DataContext = _bindableSampleObj.Data.BusinessObj;
+
+					/*Binding myBinding = new Binding("Name");
 					myBinding.BindsDirectlyToSource = false;
 					myBinding.Source = _bindableSampleObj.Data.BusinessObj;
 					
-					_name.SetBinding(TextBox.TextProperty, myBinding);
+					_name.SetBinding(TextBox.TextProperty, myBinding);*/
 				}
 			}
 			catch (Exception ex)

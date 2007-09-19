@@ -24,59 +24,88 @@ namespace testApp2
 	public partial class Window1 : System.Windows.Window
 	{
 		private BindableWrapper<SampleBObj> _bindableSampleObj;
+		private Proxy2 _proxy2;
+		bool _useRealProxy = false;
 
 		public Window1()
 		{
 			InitializeComponent();
 
-			SampleBObj businessObject = new SampleBObj();
-			businessObject.Name = "test";
-			businessObject.Description = "description";
-			businessObject.Age = 10;
+			try
+			{
+				SampleBObj businessObject = new SampleBObj();
+				businessObject.Name = "test";
+				businessObject.Description = "description";
+				businessObject.Age = 10;
 
-			_bindableSampleObj = new BindableWrapper<SampleBObj>(businessObject);
-			//_bindableSampleObj.PropertyChanged += OnPropertyChanged;
+				_bindableSampleObj = new BindableWrapper<SampleBObj>(businessObject);
 
-			DataContext = _bindableSampleObj.Data.BusinessObj;
+				_proxy2 = new Proxy2();
+				_proxy2.Name = "test";
+
+				if (_useRealProxy)
+				{
+					DataContext = _proxy2;
+				}
+				else
+				{
+					//DataContext = _bindableSampleObj.Data.BusinessObj;
+					Binding myBinding = new Binding("Name");
+					myBinding.BindsDirectlyToSource = false;
+					myBinding.Source = _bindableSampleObj.Data.BusinessObj;
+					
+					_name.SetBinding(TextBox.TextProperty, myBinding);
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message + ex.StackTrace);
+			}
 		}
 
 		public void OnUndo(Object sender, RoutedEventArgs args)
 		{
 			_bindableSampleObj.Undo();
-			//refreshDataContext();
 		}
-
-		//private void refreshDataContext()
-		//{
-			//DataContext = null;
-			//DataContext = _bindableSampleObj.Data.BusinessObj;
-			//this.UpdateLayout();
-		//}/
 
 		public void OnRedo(Object sender, RoutedEventArgs args)
 		{
 			_bindableSampleObj.Redo();
-			//refreshDataContext();
 		}
 
 		private void OnPropertyChanged(Object sender, PropertyChangedEventArgs args)
 		{
 			Console.WriteLine("Property changed:" + args.PropertyName);
-			//refreshDataContext();
 		}
 
 		public void OnChangeData(Object sender, RoutedEventArgs args)
 		{
-			_bindableSampleObj.Data.BusinessObj.Name = "whatever";
-			_bindableSampleObj.Data.BusinessObj.Description = "whatever123";
-			_bindableSampleObj.Data.BusinessObj.Age = 1000;
+			if (_useRealProxy)
+			{
+				_proxy2.Name = "change";
+				_proxy2.Description = "asdf";
+				_proxy2.Age = 111;
+			}
+			else
+			{
+				_bindableSampleObj.Data.BusinessObj.Name = "whatever";
+				_bindableSampleObj.Data.BusinessObj.Description = "whatever123";
+				_bindableSampleObj.Data.BusinessObj.Age = 1000;
+			}
 		}
 
 		public void OnReadData(Object sender, RoutedEventArgs args)
 		{
-			MessageBox.Show(_bindableSampleObj.Data.BusinessObj.Name + ", " +
+			if (_useRealProxy)
+			{
+				MessageBox.Show(_proxy2.Name + _proxy2.Description + _proxy2.Age);
+			}
+			else
+			{
+				MessageBox.Show(_bindableSampleObj.Data.BusinessObj.Name + ", " +
 							_bindableSampleObj.Data.BusinessObj.Description + ", " +
 							_bindableSampleObj.Data.BusinessObj.Age);
+			}
 		}
 	}
 }

@@ -12,6 +12,8 @@ using NUnit.Framework;
 using System.Reflection;
 using System.ComponentModel;
 
+using Boxerp.Client;
+
 namespace bindableObjectsTests
 {
 
@@ -215,6 +217,7 @@ public class BindableObjectsMain
 
 		bindableObj.Data.BusinessObj.Name = "change1";
 		bindableObj.Data.BusinessObj.Name = "change2";
+		Assert.IsTrue(((ICustomNotifyPropertyChanged)bindableObj.Data.BusinessObj).HasSubscribers());
 	}
 
 	private void onPropertyChanged(Object sender, PropertyChangedEventArgs args)

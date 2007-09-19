@@ -406,6 +406,14 @@ namespace Boxerp.Client
 						{
 							PropertyChanged(_bindableFields, new PropertyChangedEventArgs(propInfo.Name));		
 						}
+						if (_bindableFields is ICustomNotifyPropertyChanged)
+						{
+							ICustomNotifyPropertyChanged notifiable = _bindableFields as ICustomNotifyPropertyChanged;
+							if (notifiable.HasSubscribers())
+							{
+								notifiable.ThrowPropertyChangedEvent(propInfo.Name);
+							}
+						}
 						if (_bindableFields.BusinessObj is ICustomNotifyPropertyChanged)
 						{
 							ICustomNotifyPropertyChanged notifiable = _bindableFields.BusinessObj as ICustomNotifyPropertyChanged;

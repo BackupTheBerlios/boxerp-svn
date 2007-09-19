@@ -42,15 +42,15 @@ namespace Boxerp.Client
 	public class BindableWrapper<T> : AbstractBindableWrapper<T, BindableWrapper<T>.WrapObject<T>>
 	{
 		public BindableWrapper(T businessObj)
-			: base(businessObj, typeof(BindableWrapper<T>.WrapObject<T>))
+			: base(businessObj)
 		{ }
 
-		public BindableWrapper(T businessObj, Type businessObjInterface)
-			: base(businessObj, typeof(BindableWrapper<T>.WrapObject<T>), businessObjInterface)
-		{}
+		/*public BindableWrapper(T businessObj, Type businessObjInterface)
+			: base(businessObj, businessObjInterface)
+		{}*/
 
 		public BindableWrapper(T businessObj, bool disableInterception)
-			: base(businessObj, typeof(BindableWrapper<T>.WrapObject<T>), disableInterception, disableInterception)
+			: base(businessObj, disableInterception, disableInterception)
 		{ }
 
 		[Serializable]

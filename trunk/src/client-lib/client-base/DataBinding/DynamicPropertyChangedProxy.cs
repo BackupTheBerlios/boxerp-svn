@@ -75,20 +75,11 @@ namespace Boxerp.Client
 			}
 		}
 
-		public static string CleanBaseTypeName(string sourceName)
+		public static string CleanGarbageSimbols(string sourceName)
 		{
-			string[] namespaces = sourceName.Split(new char[] { '.' });
-			sourceName = namespaces[namespaces.Length -1];
-			sourceName += DateTime.Now.ToString("ddMMyyyyHH");
-			/*Random random = new Random();
-			for (int i = 0; i < 3; i++)
-			{
-				sourceName += random.Next(9999 * i).ToString();
-			}*/
-
-			char[] garbage = new char[] { '.', '[', ']', '+', '\'', '\\', '`', ','};
+			char[] garbage = new char[] { '.', '[', ']', '+', '\'', '\\', '`', ',' };
 			string cleaned = String.Empty;
-			
+
 			foreach (char sourceChar in sourceName)
 			{
 				bool clean = true;
@@ -109,20 +100,54 @@ namespace Boxerp.Client
 			return cleaned;
 		}
 
+		public static string CleanBaseTypeName(string sourceName)
+		{
+			string[] namespaces = sourceName.Split(new char[] { '.' });
+			sourceName = namespaces[namespaces.Length -1];
+			sourceName += DateTime.Now.ToString("ddMMyyyyHH");// +Guid.NewGuid().ToString();
+			/*Random random = new Random();
+			for (int i = 0; i < 3; i++)
+			{
+				sourceName += random.Next(9999 * i).ToString();
+			}*/
+
+			return CleanGarbageSimbols(sourceName);
+		}
+
+		public static string GetBindableClassName(string sourceName)
+		{
+			sourceName = CleanGarbageSimbols(sourceName);
+			int start = sourceName.IndexOf("Bindable");
+			int end = sourceName.IndexOf("1", start);
+			return sourceName.Substring(start);
+		}
+
+		public static Type CreateINotifyPropertyChangedBindableProxy(Type baseType, Type[] constructorParamsTypes)
+		{
+			string className = "PropChPrxy_" + GetBindableClassName(baseType.ToString());
+			return CreateINotifyPropertyChangedTypeProxy(baseType, constructorParamsTypes, className);
+		}
+
 		public static Type CreateINotifyPropertyChangedTypeProxy(Type baseType, Type[] constructorParamsTypes)
+		{
+			string className = "PropChPrxy_" + CleanBaseTypeName(baseType.ToString());
+			return CreateINotifyPropertyChangedTypeProxy(baseType, constructorParamsTypes, className);
+		}
+
+		public static Type CreateINotifyPropertyChangedTypeProxy(Type baseType, Type[] constructorParamsTypes, string className)
 		{
 			Type targetType = null;
 			
 			Type[] interfaces = new Type[] { typeof(ICustomNotifyPropertyChanged) };
 
-			string className = "PropChPrxy_" + CleanBaseTypeName(baseType.ToString());
+			
 
 			// If this proxy has been created already do not create it again
 			foreach (Type t in MyAssemblyBuilder.GetTypes())
 			{
 				if (t.ToString() == className)
 				{
-					//return t; If I do that there is another exception I have to check
+					return t; 
 				}
 			}
 
@@ -166,7 +191,7 @@ namespace Boxerp.Client
 
 			targetType = targetTypeBld.CreateType();
 
-			MyAssemblyBuilder.Save(ASSEMBLY_DLL);
+			//MyAssemblyBuilder.Save(ASSEMBLY_DLL);
 			
 			return targetType;
 		}

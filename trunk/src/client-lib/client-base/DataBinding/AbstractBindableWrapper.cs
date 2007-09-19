@@ -65,8 +65,8 @@ namespace Boxerp.Client
 		/// <param name="constructorParams">The parameters to the wrapper class constructor</param>
 		/// <param name="disableBusinessObjectInterception">Whether enable or disable BO interception, it means Undo and Redo capability for the BO</param>
 		/// <param name="disableUndoRedo">If disableWrapperInterception is false and disableBusinessObjectInterception is false the Undo-Redo feature is enable by default unless you set the disableUndoRedo to true</param>
-		public AbstractBindableWrapper(T businessObj, Type wrapper, 
-			bool disableWrapperInterception, bool disableBusinessObjectInterception, bool disableUndoRedo, object[] constructorParams)
+		public AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, 
+			bool disableBusinessObjectInterception, bool disableUndoRedo, object[] constructorParams)
 		{
 			lock (this)
 			{
@@ -103,13 +103,13 @@ namespace Boxerp.Client
 
 				if (disableWrapperInterception)
 				{
-					ConstructorInfo constructor = wrapper.GetConstructor(argumentTypes);
+					ConstructorInfo constructor = typeof(Y).GetConstructor(argumentTypes);
 					_bindableFields = (Y)constructor.Invoke(argumentsForConstructor);
 				}
 				else
 				{
 					// double proxy. The first one implents the INotifyPropertyChanged interface
-					Type notifiableType = DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(wrapper, argumentTypes);
+					Type notifiableType = DynamicPropertyChangedProxy.CreateINotifyPropertyChangedBindableProxy(typeof(Y), argumentTypes);
 					_bindableFields = (Y)_generator.CreateClassProxy(notifiableType, new IInterceptor[] { this }, argumentsForConstructor);
 
 				}
@@ -124,8 +124,8 @@ namespace Boxerp.Client
 		/// <param name="businessObj">The business object to wrap</param>
 		/// <param name="wrapper">The wrapper class type</param>
 		/// <param name="constructorParams">The parameters to the wrapper class constructor</param>
-		public AbstractBindableWrapper(T businessObj, Type wrapper, object[] constructorParams)
-			: this(businessObj, wrapper, false, false, false, constructorParams)
+		public AbstractBindableWrapper(T businessObj, object[] constructorParams)
+			: this(businessObj, false, false, false, constructorParams)
 		{
 			
 		}
@@ -138,26 +138,26 @@ namespace Boxerp.Client
 		/// <param name="wrapper">The wrapper class type</param>
 		/// <param name="disableBusinessObjectInterception">Whether enable or disable BO interception, it means Undo and Redo capability for the BO</param>
 		/// <param name="disableWrapperInterception">Whether disable Undo and Redo capability for the wrapper</param>
-		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableWrapperInterception, bool disableBusinessObjectInterception)
-			: this (businessObj, wrapper, disableWrapperInterception, disableBusinessObjectInterception, false, null)
+		public AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, bool disableBusinessObjectInterception)
+			: this (businessObj, disableWrapperInterception, disableBusinessObjectInterception, false, null)
 		{
 			
 		}
 
-		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableInterception, object[] constructorParams)
-			: this(businessObj, wrapper, disableInterception, disableInterception, false, constructorParams)
+		public AbstractBindableWrapper(T businessObj, bool disableInterception, object[] constructorParams)
+			: this(businessObj, disableInterception, disableInterception, false, constructorParams)
 		{
 
 		}
 
-		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableWrapperInterception, bool disableBOInterception, bool disableUndoRedo)
-			: this(businessObj, wrapper, disableWrapperInterception, disableBOInterception, disableUndoRedo, null)
+		public AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, bool disableBOInterception, bool disableUndoRedo)
+			: this(businessObj, disableWrapperInterception, disableBOInterception, disableUndoRedo, null)
 		{
 
 		}
 
-		public AbstractBindableWrapper(T businessObj, Type wrapper, bool disableInterception)
-			: this(businessObj, wrapper, disableInterception, disableInterception, true, null)
+		public AbstractBindableWrapper(T businessObj, bool disableInterception)
+			: this(businessObj, disableInterception, disableInterception, true, null)
 		{
 
 		}
@@ -167,8 +167,8 @@ namespace Boxerp.Client
 		/// </summary>
 		/// <param name="businessObj">The business object to wrap</param>
 		/// <param name="wrapper">The wrapper class type</param>
-		public AbstractBindableWrapper(T businessObj, Type wrapper)
-			: this(businessObj, wrapper, false, false, false, null)
+		public AbstractBindableWrapper(T businessObj)
+			: this(businessObj, false, false, false, null)
 		{
 	
 		}
@@ -180,7 +180,7 @@ namespace Boxerp.Client
 		/// <param name="businessObj">The business object to wrap</param>
 		/// <param name="wrapper">The wrapper class type</param>
 		/// <param name="businessObjInterface">The business object interface</param>
-		public AbstractBindableWrapper(T businessObj, Type wrapper, Type businessObjInterface)
+		/*public AbstractBindableWrapper(T businessObj, Type businessObjInterface)
 		{
 			lock (this)
 			{
@@ -188,13 +188,13 @@ namespace Boxerp.Client
 				interceptors[0] = this;
 				object[] arguments = new object[1];
 				arguments[0] = this;
-				_bindableFields = (Y)_generator.CreateClassProxy(wrapper, interceptors, arguments);
+				_bindableFields = (Y)_generator.CreateClassProxy(typeof(Y), interceptors, arguments);
 				// TODO: Make this work, because it is failing
 				T proxy = (T)_generator.CreateInterfaceProxyWithTarget(businessObjInterface, businessObj, interceptors);
 				copyBOtoProxy(proxy, businessObj);
 				Data.BusinessObj = proxy;
 			}
-		}
+		}*/
 
 		public void RefreshBusinessObj(T businessObj)
 		{
@@ -397,15 +397,15 @@ namespace Boxerp.Client
 						invocation.Proceed();
 						if (PropertyChanged != null)
 						{
-								PropertyChanged(_bindableFields, new PropertyChangedEventArgs(propInfo.Name));
-								if (_bindableFields is ICustomNotifyPropertyChanged)
-								{
-									ICustomNotifyPropertyChanged notifiable = _bindableFields as ICustomNotifyPropertyChanged;
-									if (notifiable.HasSubscribers())
-									{
-										notifiable.ThrowPropertyChangedEvent(propInfo.Name);
-									}
-								}
+							PropertyChanged(_bindableFields, new PropertyChangedEventArgs(propInfo.Name));		
+						}
+						if (_bindableFields is ICustomNotifyPropertyChanged)
+						{
+							ICustomNotifyPropertyChanged notifiable = _bindableFields as ICustomNotifyPropertyChanged;
+							if (notifiable.HasSubscribers())
+							{
+								notifiable.ThrowPropertyChangedEvent(propInfo.Name);
+							}
 						}
 						return;
 					}			

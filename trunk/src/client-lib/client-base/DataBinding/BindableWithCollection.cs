@@ -38,7 +38,7 @@ namespace Boxerp.Client
 	public class BindableWithCollection<T, Y> : AbstractBindableWrapper<T, BindableWithCollection<T, Y>.WrapObject<T, Y>>
 	{
 		public BindableWithCollection(T businessObj)
-			: base (businessObj, typeof(BindableWithCollection<T, Y>.WrapObject<T, Y>))
+			: base (businessObj)
 		{}
 
 		public Type GetRelatedObjectType()

@@ -39,11 +39,11 @@ namespace Boxerp.Client
 		where Y : IBindableWrapper
 	{
 		public BdWithBindableCollection(T businessObj, List<Y> sourceList)
-			: base(businessObj, typeof(BdWithBindableCollection<T, Y>.WrapObject<T, Y>), new object[] { sourceList })
+			: base(businessObj, new object[] { sourceList })
 		{ }
 
 		public BdWithBindableCollection(T businessObj)
-			: base (businessObj, typeof(BdWithBindableCollection<T, Y>.WrapObject<T, Y>))
+			: base (businessObj)
 		{}
 			
 		public Type GetRelatedObjectType()

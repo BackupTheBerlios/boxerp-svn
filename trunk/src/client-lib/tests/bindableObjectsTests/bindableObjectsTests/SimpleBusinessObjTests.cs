@@ -205,6 +205,18 @@ public class BindableObjectsMain
 		bindableObj.Data.BusinessObj.Name = "change2";
 	}
 
+	[Test]
+	public void InternalPropertyChangedSubscriberTest()
+	{
+		BindableWrapper<SimpleBusinessObject> bindableObj =
+		new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
+
+		bindableObj.Data.DataBindable.PropertyChanged += onPropertyChanged;
+
+		bindableObj.Data.BusinessObj.Name = "change1";
+		bindableObj.Data.BusinessObj.Name = "change2";
+	}
+
 	private void onPropertyChanged(Object sender, PropertyChangedEventArgs args)
 	{
 		Console.Out.WriteLine("Changed: " + args.PropertyName);

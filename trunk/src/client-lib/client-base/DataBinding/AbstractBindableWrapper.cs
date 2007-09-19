@@ -322,7 +322,14 @@ namespace Boxerp.Client
 					{
 						T proxyCopy = (T)_generator.CreateClassProxy(typeof(T), this);
 						copyBOtoProxy(proxyCopy, (T)((ICloneable)copyValue).Clone());
-						copyProp.SetValue(copy, proxyCopy, null);
+						try
+						{
+							copyProp.SetValue(copy, proxyCopy, null);
+						}
+						catch (Exception ex)
+						{
+							Console.Out.WriteLine("FIXTHIS URGENTLY: " + ex.Message);
+						}
 					}
 					else
 					{
@@ -399,9 +406,9 @@ namespace Boxerp.Client
 						{
 							PropertyChanged(_bindableFields, new PropertyChangedEventArgs(propInfo.Name));		
 						}
-						if (_bindableFields is ICustomNotifyPropertyChanged)
+						if (_bindableFields.BusinessObj is ICustomNotifyPropertyChanged)
 						{
-							ICustomNotifyPropertyChanged notifiable = _bindableFields as ICustomNotifyPropertyChanged;
+							ICustomNotifyPropertyChanged notifiable = _bindableFields.BusinessObj as ICustomNotifyPropertyChanged;
 							if (notifiable.HasSubscribers())
 							{
 								notifiable.ThrowPropertyChangedEvent(propInfo.Name);
@@ -435,6 +442,14 @@ namespace Boxerp.Client
 				internal set
 				{
 					_businessObj = value;
+				}
+			}
+
+			public INotifyPropertyChanged DataBindable
+			{
+				get
+				{
+					return (INotifyPropertyChanged)_businessObj;
 				}
 			}
 

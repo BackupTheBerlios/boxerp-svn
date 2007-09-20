@@ -38,13 +38,14 @@ using System.ComponentModel;
 
 namespace Boxerp.Client
 {
-	public class DynamicPropertyChangedProxy
+	public static class DynamicPropertyChangedProxy
 	{
 		private static AssemblyBuilder _assemblyBuilder = null;
 		private static ModuleBuilder _moduleBuilder = null;
-		private static string ASSEMBLY_NAME = "Boxerp.DynamicAssembly";
-		private static string ASSEMBLY_DLL = "Boxerp.DynamicAssembly.dll";
-		private static string DYNAMIC_MOD_NAME = "DynamicClasses";
+		private static string ASSEMBLY_NAME = "BoxerpDynamicAssembly";
+		private static string DYNAMIC_MOD_NAME = ASSEMBLY_NAME;
+		private static string ASSEMBLY_DLL = DYNAMIC_MOD_NAME + ".dll";
+		
 
 		private static AssemblyBuilder MyAssemblyBuilder
 		{
@@ -52,23 +53,37 @@ namespace Boxerp.Client
 			{
 				if (_assemblyBuilder == null)
 				{
-					AppDomain myDomain = Thread.GetDomain();
 					AssemblyName myAsmName = new AssemblyName();
 					myAsmName.Name = ASSEMBLY_NAME;
-					_assemblyBuilder = myDomain.DefineDynamicAssembly(myAsmName, AssemblyBuilderAccess.RunAndSave);
+					#if CREATE_DLL_FILE
+						_assemblyBuilder = Thread.GetDomain().DefineDynamicAssembly(myAsmName, AssemblyBuilderAccess.RunAndSave);
+					#else
+						_assemblyBuilder = Thread.GetDomain().DefineDynamicAssembly(myAsmName, AssemblyBuilderAccess.Run);
+					#endif
 				}
 
 				return _assemblyBuilder;
 			}
 		}
 
-		private static ModuleBuilder ModuleBuilder
+		private static ModuleBuilder MyModuleBuilder
 		{
 			get
 			{
 				if (_moduleBuilder == null)
 				{
-					_moduleBuilder = MyAssemblyBuilder.DefineDynamicModule(DYNAMIC_MOD_NAME, ASSEMBLY_DLL);
+					try
+					{
+						#if CREATE_DLL_FILE
+							_moduleBuilder = MyAssemblyBuilder.DefineDynamicModule(DYNAMIC_MOD_NAME, ASSEMBLY_DLL);
+						#else
+							_moduleBuilder = MyAssemblyBuilder.DefineDynamicModule(DYNAMIC_MOD_NAME);
+						#endif
+					}
+					catch (Exception ex)
+					{
+						Console.Out.WriteLine("Module Builder creation exception: " + ex.Message);
+					}
 				}
 
 				return _moduleBuilder;
@@ -100,6 +115,7 @@ namespace Boxerp.Client
 			return cleaned;
 		}
 
+		#region clean names functions
 		public static string CleanBaseTypeName(string sourceName)
 		{
 			string[] namespaces = sourceName.Split(new char[] { '.' });
@@ -121,6 +137,7 @@ namespace Boxerp.Client
 			int end = sourceName.IndexOf("1", start);
 			return sourceName.Substring(start);
 		}
+		#endregion
 
 		public static Type CreateINotifyPropertyChangedBindableProxy(Type baseType, Type[] constructorParamsTypes)
 		{
@@ -136,12 +153,6 @@ namespace Boxerp.Client
 
 		public static Type CreateINotifyPropertyChangedTypeProxy(Type baseType, Type[] constructorParamsTypes, string className)
 		{
-			Type targetType = null;
-			
-			Type[] interfaces = new Type[] { typeof(ICustomNotifyPropertyChanged) };
-
-			
-
 			// If this proxy has been created already do not create it again
 			foreach (Type t in MyAssemblyBuilder.GetTypes())
 			{
@@ -151,13 +162,22 @@ namespace Boxerp.Client
 				}
 			}
 
-			TypeBuilder targetTypeBld = ModuleBuilder.DefineType(className, TypeAttributes.Public, baseType, interfaces);
+			#if CREATE_DLL_FILE
+				if (System.IO.File.Exists(ASSEMBLY_DLL))
+				{
+					System.IO.File.Delete(ASSEMBLY_DLL);
+				}
+			#endif
 
-			// add the Serializable Attribute:
+			Type targetType = null;
+			Type[] interfaces = new Type[] { typeof(ICustomNotifyPropertyChanged) };
+
+			TypeBuilder targetTypeBld = MyModuleBuilder.DefineType(className, TypeAttributes.Public, baseType, interfaces);
+
+			// add the Serializable Attribute to the class:
 			ConstructorInfo attributeCtorInfo = typeof(SerializableAttribute).GetConstructor(new Type[0]);
 			CustomAttributeBuilder customAttBuilder = new CustomAttributeBuilder(attributeCtorInfo, new object[0]);
 			targetTypeBld.SetCustomAttribute(customAttBuilder);
-
 
 			EventBuilder eventField = targetTypeBld.DefineEvent("PropertyChanged", EventAttributes.None, typeof(PropertyChangedEventHandler));
 
@@ -193,8 +213,10 @@ namespace Boxerp.Client
 
 			targetType = targetTypeBld.CreateType();
 
-			//MyAssemblyBuilder.Save(ASSEMBLY_DLL);
-			
+			#if CREATE_DLL_FILE
+				MyAssemblyBuilder.Save(ASSEMBLY_DLL);
+			#endif
+
 			return targetType;
 		}
 

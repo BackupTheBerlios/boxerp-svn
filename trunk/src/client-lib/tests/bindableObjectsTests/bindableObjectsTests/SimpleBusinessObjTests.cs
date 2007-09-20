@@ -80,6 +80,24 @@ public class BindableObjectsMain
 	}
 
 	[Test]
+	public void SerializationBoTest()
+	{
+		BindableWrapper<SimpleBusinessObject> bindableObj =
+			new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
+
+		MemoryStream stream = new MemoryStream();
+		BinaryFormatter formatter = new BinaryFormatter();
+		formatter.Serialize(stream, bindableObj.Data.BusinessObj);
+		stream.Position = 0;
+
+		object deserializedObject = formatter.Deserialize(stream);
+		Assert.IsNotNull(deserializedObject);
+		SimpleBusinessObject deserializedBindable = (SimpleBusinessObject)deserializedObject;
+
+		Assert.IsNotNull(deserializedBindable);
+	}
+
+	[Test]
 	public void SerializationTest()
 	{
 		BindableWrapper<SimpleBusinessObject> bindableObj =

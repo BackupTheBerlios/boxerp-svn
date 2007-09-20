@@ -11,10 +11,10 @@
     	<Label HorizontalAlignment="Left" Margin="24,62,0,0" VerticalAlignment="Top" Width="47" Height="24" Content="Name:"/>
     	<Label Width="71" Content="Description:" HorizontalAlignment="Left" Margin="24,101,0,0" VerticalAlignment="Top" Height="24"/>
     	<Label Width="47" Content="Age:" HorizontalAlignment="Left" Margin="24,139,0,0" VerticalAlignment="Top" Height="24"/>
-    	<TextBox Text="{Binding Path=Name, Mode=TwoWay}" Margin="108,62,41,0" x:Name="_name" VerticalAlignment="Top" Height="24" TextWrapping="Wrap"/>
-    	<TextBox Text="{Binding Path=Description, Mode=TwoWay}" TextWrapping="Wrap" Margin="108,101,41,0" x:Name="_description" VerticalAlignment="Top" Height="24"/>
+    	<TextBox Text="{Binding Path=(testApp2:SampleBObj.Name), Mode=TwoWay}" Margin="108,62,41,0" x:Name="_name" VerticalAlignment="Top" Height="24" TextWrapping="Wrap"/>
+    	<TextBox Text="{Binding Path=(testApp2:SampleBObj.Description), Mode=TwoWay}" TextWrapping="Wrap" Margin="108,101,41,0" x:Name="_description" VerticalAlignment="Top" Height="24"/>
     	
-		<boxerp:IntegerTextBox Integer="{Binding Path=Age, Mode=TwoWay}" Margin="136,139,69,0" x:Name="_age" VerticalAlignment="Top" Height="24"/>
+		<boxerp:IntegerTextBox Integer="{Binding Path=(testApp2:SampleBObj.Age), Mode=TwoWay}" Margin="136,139,69,0" x:Name="_age" VerticalAlignment="Top" Height="24"/>
     	<!--
       <TextBox Text="" Margin="108,62,41,0" x:Name="_name" VerticalAlignment="Top" Height="24" TextWrapping="Wrap"/>
     	<TextBox Text="" TextWrapping="Wrap" Margin="108,101,41,0" x:Name="_description" VerticalAlignment="Top" Height="24"/>

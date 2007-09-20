@@ -66,12 +66,12 @@ namespace testApp2
 
 		public void OnUndo(Object sender, RoutedEventArgs args)
 		{
-			_bindableSampleObj.Undo();
+			//_bindableSampleObj.Undo();
 		}
 
 		public void OnRedo(Object sender, RoutedEventArgs args)
 		{
-			_bindableSampleObj.Redo();
+			//_bindableSampleObj.Redo();
 		}
 
 		private void OnPropertyChanged(Object sender, PropertyChangedEventArgs args)

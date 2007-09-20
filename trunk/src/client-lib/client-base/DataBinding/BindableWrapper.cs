@@ -42,12 +42,8 @@ namespace Boxerp.Client
 	public class BindableWrapper<T> : AbstractBindableWrapper<T, BindableWrapper<T>.WrapObject<T>>
 	{
 		public BindableWrapper(T businessObj)
-			: base(businessObj)
+			: base(businessObj, true, false, false)
 		{ }
-
-		/*public BindableWrapper(T businessObj, Type businessObjInterface)
-			: base(businessObj, businessObjInterface)
-		{}*/
 
 		public BindableWrapper(T businessObj, bool disableInterception)
 			: base(businessObj, disableInterception, disableInterception)
@@ -61,7 +57,6 @@ namespace Boxerp.Client
 			{ 
 			
 			}
-				
 		}
 	}
 }

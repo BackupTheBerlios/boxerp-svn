@@ -50,12 +50,6 @@ namespace testApp2
 				else
 				{
 					DataContext = _bindableSampleObj.Data.BusinessObj;
-
-					/*Binding myBinding = new Binding("Name");
-					myBinding.BindsDirectlyToSource = false;
-					myBinding.Source = _bindableSampleObj.Data.BusinessObj;
-					
-					_name.SetBinding(TextBox.TextProperty, myBinding);*/
 				}
 			}
 			catch (Exception ex)
@@ -66,12 +60,12 @@ namespace testApp2
 
 		public void OnUndo(Object sender, RoutedEventArgs args)
 		{
-			//_bindableSampleObj.Undo();
+			_bindableSampleObj.Undo();
 		}
 
 		public void OnRedo(Object sender, RoutedEventArgs args)
 		{
-			//_bindableSampleObj.Redo();
+			_bindableSampleObj.Redo();
 		}
 
 		private void OnPropertyChanged(Object sender, PropertyChangedEventArgs args)

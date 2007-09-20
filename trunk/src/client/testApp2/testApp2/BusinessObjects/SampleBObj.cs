@@ -6,7 +6,8 @@ using Boxerp.Client;
 
 namespace testApp2
 {
-public class SampleBObj : ICloneable
+	[Serializable]
+	public class SampleBObj 
 	{
 		private string _name, _description;
 		private int _age;
@@ -37,19 +38,9 @@ public class SampleBObj : ICloneable
 			_description = description;
 			_age = age;
 		}
-		
-
-		#region ICloneable Members
-
-		public object Clone()
-		{
-			SampleBObj clone = new SampleBObj(Name, Description, Age);
-			return clone;
-		}
-
-		#endregion
 	}
 
+	[Serializable]
 	public class Proxy1 : SampleBObj, ICustomNotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -64,6 +55,7 @@ public class SampleBObj : ICloneable
 		}
 	}
 
+	[Serializable]
 	public class Proxy2 : Proxy1
 	{
 		public override string Name

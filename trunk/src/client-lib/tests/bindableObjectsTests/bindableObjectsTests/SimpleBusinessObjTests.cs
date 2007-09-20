@@ -213,7 +213,7 @@ public class BindableObjectsMain
 		BindableWrapper<SimpleBusinessObject> bindableObj =
 		new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
 
-		bindableObj.Data.DataBindable.PropertyChanged += onPropertyChanged;
+		bindableObj.Data.BusinessObjBinding.PropertyChanged += onPropertyChanged;
 
 		bindableObj.Data.BusinessObj.Name = "change1";
 		bindableObj.Data.BusinessObj.Name = "change2";

@@ -53,6 +53,7 @@
     <Compile Include="DataBinding\BindableWithCollection.cs" />
     <Compile Include="DataBinding\BindableWrapper.cs" />
     <Compile Include="DataBinding\BindingOptions.cs" />
+    <Compile Include="DataBinding\Cloner.cs" />
     <Compile Include="DataBinding\DynamicPropertyChangedProxy.cs" />
     <Compile Include="DataBinding\IBindableWidget.cs" />
     <Compile Include="DataBinding\IBindableWrapper.cs" />

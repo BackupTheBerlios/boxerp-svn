@@ -158,9 +158,11 @@ namespace Boxerp.Client
 			CustomAttributeBuilder customAttBuilder = new CustomAttributeBuilder(attributeCtorInfo, new object[0]);
 			targetTypeBld.SetCustomAttribute(customAttBuilder);
 
+
 			EventBuilder eventField = targetTypeBld.DefineEvent("PropertyChanged", EventAttributes.None, typeof(PropertyChangedEventHandler));
 
-			FieldBuilder eventHandler = targetTypeBld.DefineField("PropertyChanged", typeof(PropertyChangedEventHandler), FieldAttributes.Private);
+			// the propertyChanged event shouldn't be serializable
+			FieldBuilder eventHandler = targetTypeBld.DefineField("PropertyChanged", typeof(PropertyChangedEventHandler), FieldAttributes.Private | FieldAttributes.NotSerialized);
 
 			// Create the constructor
 			ConstructorInfo objCtor = baseType.GetConstructor(constructorParamsTypes); 

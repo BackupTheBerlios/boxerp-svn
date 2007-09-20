@@ -204,14 +204,32 @@ namespace Boxerp.Client
 			}
 			else
 			{
-				// double proxy. The first one implents the INotifyPropertyChanged interface
-				Type notifiableType =
-					DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(typeof(T), new Type[0]);
-
-				T proxy = (T)_generator.CreateClassProxy(notifiableType, new IInterceptor[] { this } );
+				T proxy = CreateDoubleProxy();
 				copyBOtoProxy(proxy, businessObj);
 				Data.BusinessObj = proxy;
 			}
+		}
+
+		/// <summary>
+		/// The first proxy is a class that extends T and implements the ICustomNotifyPropertyChanged
+		/// The second proxy is the Interception one using the Castle.DynamicProxy2.
+		/// In case the business object T already implements the INotifyPropertyChanged, then the first proxy is not needed
+		/// </summary>
+		/// <returns></returns>
+		private T CreateDoubleProxy()
+		{
+			Type notifiableType;
+
+			if (!(typeof(T) is INotifyPropertyChanged))
+			{
+				notifiableType = DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(typeof(T), new Type[0]);
+			}
+			else
+			{
+				notifiableType = typeof(T);
+			}
+
+			return (T)_generator.CreateClassProxy(notifiableType, new IInterceptor[] { this });
 		}
 
 		public Y Data
@@ -314,43 +332,53 @@ namespace Boxerp.Client
 			foreach (PropertyInfo originalProp in original.GetType().GetProperties())
 			{
 				PropertyInfo copyProp = properties[i];
-				object copyValue = originalProp.GetValue(original, null);
-
-				if (copyValue is ICloneable)
+				if (originalProp.CanRead)
 				{
-					if (copyValue is T)	// not only clone but create a proxy
-					{
-						T proxyCopy = (T)_generator.CreateClassProxy(typeof(T), this);
-						copyBOtoProxy(proxyCopy, (T)((ICloneable)copyValue).Clone());
-						try
-						{
-							copyProp.SetValue(copy, proxyCopy, null);
-						}
-						catch (Exception ex)
-						{
-							Console.Out.WriteLine("FIXTHIS URGENTLY: " + ex.Message);
-						}
-					}
-					else
-					{
-						copyProp.SetValue(copy, ((ICloneable)copyValue).Clone(), null);
-					}
-				}
-				else if (copyValue is IEnumerable)
-				{
-					IList enumerable = (IList)copyValue;
+					object copyValue = originalProp.GetValue(original, null);
 
-					object[] enumerableCopy = new object[enumerable.Count];
-					for (int k = 0; k < enumerable.Count; k++)
+					if (! (copyValue is IEnumerable)) // fix this. The question should be. if copyValue is Serializable
 					{
-						object value = enumerable[k];
-						if (value is ICloneable)
+						if (copyValue is T)	// if it is the business object
 						{
-							enumerableCopy[k] = ((ICloneable)value).Clone();
+							// at this line the business object should be a proxy already so clone the whole thing
+							//T proxy = CreateDoubleProxy();
+							//copyBOtoProxy(proxy, (T)((ICloneable)copyValue).Clone());
+							if (copyProp.CanWrite)
+							{
+								T proxyClone = (T) Cloner.Clone(copyValue);
+								//proxyClone = copyPropertyChangedSubscribers(copyValue, proxyClone)
+								copyProp.SetValue(copy, proxyClone, null);
+								// the propertyChanged event is not cloned as it shouldn't be serializable to avoid serializing subscribers
+								// so after cloning it is necessary to copy the subscribers
+							}
+						}
+						else
+						{
+							if (copyValue is ICloneable)
+							{
+								copyProp.SetValue(copy, ((ICloneable)copyValue).Clone(), null);
+							}
+							/*
+							 * else if is Serializable make the copy serializing 
+							 */
 						}
 					}
-					copyValue = enumerableCopy;	// TODO: review this making sure the garbage collection works 
-					
+					else if (copyValue is IEnumerable)
+					{
+						IList enumerable = (IList)copyValue;
+
+						object[] enumerableCopy = new object[enumerable.Count];
+						for (int k = 0; k < enumerable.Count; k++)
+						{
+							object value = enumerable[k];
+							if (value is ICloneable)
+							{
+								enumerableCopy[k] = ((ICloneable)value).Clone();
+							}
+						}
+						copyValue = enumerableCopy;	// TODO: review this making sure the garbage collection works 
+
+					}
 				}
 				i++;
 			}
@@ -401,7 +429,9 @@ namespace Boxerp.Client
 						{
 							_undoStack.Push(cloneBindable(_bindableFields, _bindableFields.SwallowCopy()));		// property is gonna change, put it in the undo stack
 						}
+
 						invocation.Proceed();
+
 						if (PropertyChanged != null)
 						{
 							PropertyChanged(_bindableFields, new PropertyChangedEventArgs(propInfo.Name));		
@@ -453,7 +483,7 @@ namespace Boxerp.Client
 				}
 			}
 
-			public INotifyPropertyChanged DataBindable
+			public INotifyPropertyChanged BusinessObjBinding
 			{
 				get
 				{

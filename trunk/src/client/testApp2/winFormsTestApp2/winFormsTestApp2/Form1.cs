@@ -55,8 +55,7 @@ namespace winFormsTestApp2
 
 		private void OnShowForm2(object sender, EventArgs e)
 		{
-			Form2 f2 = new Form2();
-			f2.Show();
+			
 		}
 
 

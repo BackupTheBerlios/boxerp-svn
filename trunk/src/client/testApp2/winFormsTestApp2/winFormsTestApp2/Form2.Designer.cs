@@ -30,14 +30,14 @@ namespace winFormsTestApp2
 		{
 			this.button4 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
-			this.button1 = new System.Windows.Forms.Button();
 			this._age = new System.Windows.Forms.TextBox();
 			this._description = new System.Windows.Forms.TextBox();
 			this._name = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
+			this.button1 = new System.Windows.Forms.Button();
+			this.button2 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// button4
@@ -45,7 +45,7 @@ namespace winFormsTestApp2
 			this.button4.Location = new System.Drawing.Point(94, 225);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(169, 23);
-			this.button4.TabIndex = 19;
+			this.button4.TabIndex = 17;
 			this.button4.Text = "Read Data";
 			this.button4.UseVisualStyleBackColor = true;
 			this.button4.Click += new System.EventHandler(this.OnReadData);
@@ -55,30 +55,10 @@ namespace winFormsTestApp2
 			this.button3.Location = new System.Drawing.Point(94, 196);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(169, 23);
-			this.button3.TabIndex = 18;
+			this.button3.TabIndex = 16;
 			this.button3.Text = "Change the Data";
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.OnChangeData);
-			// 
-			// button2
-			// 
-			this.button2.Location = new System.Drawing.Point(109, 157);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 17;
-			this.button2.Text = "Undo";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.OnUndo);
-			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(190, 157);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 16;
-			this.button1.Text = "Redo";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.OnRedo);
 			// 
 			// _age
 			// 
@@ -128,15 +108,35 @@ namespace winFormsTestApp2
 			this.label1.TabIndex = 10;
 			this.label1.Text = "Name:";
 			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(96, 150);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(75, 23);
+			this.button1.TabIndex = 18;
+			this.button1.Text = "Undo";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.OnUndo);
+			// 
+			// button2
+			// 
+			this.button2.Location = new System.Drawing.Point(177, 150);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(75, 23);
+			this.button2.TabIndex = 19;
+			this.button2.Text = "Redo";
+			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.OnRedo);
+			// 
 			// Form2
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(292, 266);
-			this.Controls.Add(this.button4);
-			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);
+			this.Controls.Add(this.button4);
+			this.Controls.Add(this.button3);
 			this.Controls.Add(this._age);
 			this.Controls.Add(this._description);
 			this.Controls.Add(this._name);
@@ -154,13 +154,13 @@ namespace winFormsTestApp2
 
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.TextBox _age;
 		private System.Windows.Forms.TextBox _description;
 		private System.Windows.Forms.TextBox _name;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button button2;
 	}
 }

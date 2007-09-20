@@ -16,7 +16,7 @@ namespace winFormsTestApp2
 	public partial class Form2 : Form
 	{
 		private BindableWrapper<SampleBObj> _bindable;
-		
+
 		public Form2()
 		{
 			InitializeComponent();
@@ -25,14 +25,14 @@ namespace winFormsTestApp2
 			businessObject.Description = "test2";
 			businessObject.Age = 44;
 
-			
+
 			_bindable = new BindableWrapper<SampleBObj>(businessObject);
-			
+
 			// bind the object
 
-			_name.DataBindings.Add("Text", _bindable.Data.DataBindable, "Name", false, DataSourceUpdateMode.OnPropertyChanged);
-			_description.DataBindings.Add("Text", _bindable.Data.DataBindable, "Description", false, DataSourceUpdateMode.OnPropertyChanged);
-			_age.DataBindings.Add("Text", _bindable.Data.DataBindable, "Age", false, DataSourceUpdateMode.OnPropertyChanged);
+			_name.DataBindings.Add("Text", _bindable.Data.BusinessObjBinding, "Name", false, DataSourceUpdateMode.OnPropertyChanged);
+			_description.DataBindings.Add("Text", _bindable.Data.BusinessObjBinding, "Description", false, DataSourceUpdateMode.OnPropertyChanged);
+			_age.DataBindings.Add("Text", _bindable.Data.BusinessObjBinding, "Age", false, DataSourceUpdateMode.OnPropertyChanged);
 		}
 
 		private void OnUndo(object sender, EventArgs e)
@@ -66,7 +66,7 @@ namespace winFormsTestApp2
 							_bindable.Data.BusinessObj.Age);
 		}
 
-		
+
 
 
 	}

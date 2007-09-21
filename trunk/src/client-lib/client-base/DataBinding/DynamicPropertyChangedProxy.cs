@@ -222,6 +222,7 @@ namespace Boxerp.Client
 			AddOrRemoveMethod(targetTypeBld, eventField, eventHandler, false);
 			HasSubscribersMethod(targetTypeBld, eventHandler);
 			ThrowPropertyChangedMethod(targetTypeBld, eventHandler);
+			GetSubscribersListMethod(targetTypeBld, eventHandler);
 
 			targetType = targetTypeBld.CreateType();
 
@@ -385,5 +386,43 @@ namespace Boxerp.Client
 			mthdIL.Emit(OpCodes.Nop);
 			mthdIL.Emit(OpCodes.Ret);
 		}
+
+		/// <summary>
+		/// The generated code should be: return PropertyChanged.GetInvocationList()
+		/// CIL disassembled code:
+		///   .locals /*11000002*/ init ([0] class [mscorlib/*23000001*/]System.Delegate/*01000004*/[] CS$1$0000)
+		///    IL_0000:  /* 00   |                  */ nop
+		///    IL_0001:  /* 02   |                  */ ldarg.0
+		///	   IL_0002:  /* 7B   | (04)000001       */ ldfld      class [System/*23000003*/]System.ComponentModel.PropertyChangedEventHandler/*01000005*/ ConsoleApplication1.TestClass/*02000002*/::PropertyChanged /* 04000001 */
+		///    IL_0007:  /* 6F   | (0A)000012       */ callvirt   instance class [mscorlib/*23000001*/]System.Delegate/*01000004*/[] [mscorlib/*23000001*/]System.Delegate/*01000004*/::GetInvocationList() /* 0A000012 */
+		///    IL_000c:  /* 0A   |                  */ stloc.0
+		///    IL_000d:  /* 2B   | 00               */ br.s       IL_000f
+		///	   IL_000f:  /* 06   |                  */ ldloc.0
+		///    IL_0010:  /* 2A   |                  */ ret
+ 		/// </summary>
+		/// <param name="builder"></param>
+		/// <param name="eventHandler"></param>
+		private static void GetSubscribersListMethod(TypeBuilder builder, FieldBuilder eventHandler)
+		{
+			MethodBuilder method = builder.DefineMethod(
+							 "GetSubscribersList",
+							 MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual | MethodAttributes.Final, typeof(Delegate[]), new Type[0]);
+
+			ILGenerator mthdIL = method.GetILGenerator();
+
+			LocalBuilder returnedValue = mthdIL.DeclareLocal(typeof(Delegate[]));
+
+			mthdIL.Emit(OpCodes.Nop);
+			mthdIL.Emit(OpCodes.Ldarg_0);
+			mthdIL.Emit(OpCodes.Ldfld, eventHandler);
+			mthdIL.Emit(OpCodes.Callvirt, typeof(PropertyChangedEventHandler).GetMethod("GetInvocationList", new Type[0]));
+			mthdIL.Emit(OpCodes.Stloc_0);
+			//mthdIL.Emit(OpCodes.Br_S);
+			mthdIL.Emit(OpCodes.Ldloc_0);
+			mthdIL.Emit(OpCodes.Ret);
+		}
+
+
+
 	}
 }

@@ -53,6 +53,11 @@ namespace testApp2
 		{
 			PropertyChanged(this, new PropertyChangedEventArgs(name));
 		}
+
+		public Delegate[] GetSubscribersList()
+		{
+			return PropertyChanged.GetInvocationList();
+		}
 	}
 
 	[Serializable]

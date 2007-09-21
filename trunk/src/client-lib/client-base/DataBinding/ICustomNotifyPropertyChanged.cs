@@ -10,5 +10,6 @@ namespace Boxerp.Client
 	{
 		bool HasSubscribers();
 		void ThrowPropertyChangedEvent(string propertyName);
+		Delegate[] GetSubscribersList();
 	}
 }

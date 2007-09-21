@@ -266,7 +266,9 @@ namespace Boxerp.Client
 				_redoStack.Push(_bindableFields);
 				if (_undoStack.Count > 0)
 				{
-					_bindableFields = _undoStack.Pop();
+					Y tmpBindable = _undoStack.Pop();
+					_bindableFields.BusinessObj = tmpBindable.BusinessObj;
+					throwPropertyChangedAllProperties();
 				}
 			}
 		}
@@ -279,6 +281,7 @@ namespace Boxerp.Client
 				if (_redoStack.Count > 0)
 				{
 					_bindableFields = _redoStack.Pop();
+					throwPropertyChangedAllProperties();
 				}
 			}
 		}
@@ -329,67 +332,31 @@ namespace Boxerp.Client
 			}
 		}
 
-		protected virtual Y cloneBindable(Y original, AbstractBindableWrapper<T, Y>.BindableFields<T> copy)
+		protected virtual Y cloneBindable()
 		{
-			PropertyInfo[] properties = copy.GetType().GetProperties();
-
-			_dontIntercept = true;
-			int i = 0;
-			foreach (PropertyInfo originalProp in original.GetType().GetProperties())
+			// clone by serializing
+			Y bindableClone = (Y)Cloner.Clone(_bindableFields);
+			// reasing the things that were not serialized:
+			bindableClone.Interceptor = this;
+			if (bindableClone is ICustomNotifyPropertyChanged)
 			{
-				PropertyInfo copyProp = properties[i];
-				if (originalProp.CanRead)
+				ICustomNotifyPropertyChanged bindableNotifiable = bindableClone as ICustomNotifyPropertyChanged;
+				Delegate[] subscribers = (_bindableFields as ICustomNotifyPropertyChanged).GetSubscribersList();
+				foreach (Delegate subscriber in subscribers)
 				{
-					object copyValue = originalProp.GetValue(original, null);
-
-					if (! (copyValue is IEnumerable)) // fix this. The question should be. if copyValue is Serializable
-					{
-						if (copyValue is T)	// if it is the business object
-						{
-							// at this line the business object should be a proxy already so clone the whole thing
-							//T proxy = CreateDoubleProxy();
-							//copyBOtoProxy(proxy, (T)((ICloneable)copyValue).Clone());
-							if (copyProp.CanWrite)
-							{
-								T proxyClone = (T) Cloner.Clone(copyValue);
-								//proxyClone = copyPropertyChangedSubscribers(copyValue, proxyClone)
-								copyProp.SetValue(copy, proxyClone, null);
-								// the propertyChanged event is not cloned as it shouldn't be serializable to avoid serializing subscribers
-								// so after cloning it is necessary to copy the subscribers
-							}
-						}
-						else
-						{
-							if (copyValue is ICloneable)
-							{
-								copyProp.SetValue(copy, ((ICloneable)copyValue).Clone(), null);
-							}
-							/*
-							 * else if is Serializable make the copy serializing 
-							 */
-						}
-					}
-					else if (copyValue is IEnumerable)
-					{
-						IList enumerable = (IList)copyValue;
-
-						object[] enumerableCopy = new object[enumerable.Count];
-						for (int k = 0; k < enumerable.Count; k++)
-						{
-							object value = enumerable[k];
-							if (value is ICloneable)
-							{
-								enumerableCopy[k] = ((ICloneable)value).Clone();
-							}
-						}
-						copyValue = enumerableCopy;	// TODO: review this making sure the garbage collection works 
-
-					}
+					bindableNotifiable.PropertyChanged += (PropertyChangedEventHandler) subscriber;
 				}
-				i++;
 			}
-			_dontIntercept = false;
-			return (Y)copy;
+			if (bindableClone.BusinessObj is ICustomNotifyPropertyChanged)
+			{
+				Delegate[] subscribers = (_bindableFields.BusinessObj as ICustomNotifyPropertyChanged).GetSubscribersList();
+				foreach (Delegate subscriber in subscribers)
+				{
+					bindableClone.BusinessObjBinding.PropertyChanged += (PropertyChangedEventHandler) subscriber;
+				}
+			}
+
+			return bindableClone;
 		}
 
 		#region Interceptor implementation
@@ -433,31 +400,13 @@ namespace Boxerp.Client
 					{
 						if (!_disableUndoRedo)
 						{
-							_undoStack.Push(cloneBindable(_bindableFields, _bindableFields.SwallowCopy()));		// property is gonna change, put it in the undo stack
+							_undoStack.Push(cloneBindable());
 						}
 
 						invocation.Proceed();
 
-						if (PropertyChanged != null)
-						{
-							PropertyChanged(_bindableFields, new PropertyChangedEventArgs(propInfo.Name));		
-						}
-						if (_bindableFields is ICustomNotifyPropertyChanged)
-						{
-							ICustomNotifyPropertyChanged notifiable = _bindableFields as ICustomNotifyPropertyChanged;
-							if (notifiable.HasSubscribers())
-							{
-								notifiable.ThrowPropertyChangedEvent(propInfo.Name);
-							}
-						}
-						if (_bindableFields.BusinessObj is ICustomNotifyPropertyChanged)
-						{
-							ICustomNotifyPropertyChanged notifiable = _bindableFields.BusinessObj as ICustomNotifyPropertyChanged;
-							if (notifiable.HasSubscribers())
-							{
-								notifiable.ThrowPropertyChangedEvent(propInfo.Name);
-							}
-						}
+						throwPropertyChangedIfSubscribers(propInfo.Name);
+
 						return;
 					}			
 				}
@@ -466,12 +415,65 @@ namespace Boxerp.Client
 		}
 		#endregion
 
+		/// <summary>
+		/// There are 3 objects having a PropertyChanged event. This class, the _bindableFields and the Business Object.
+		/// The event should be raised for all the subscribers in the 3 objects
+		/// </summary>
+		private void throwPropertyChangedIfSubscribers(string propertyName)
+		{
+			if (PropertyChanged != null)
+			{
+				PropertyChanged(_bindableFields, new PropertyChangedEventArgs(propertyName));
+			}
+			if (_bindableFields is ICustomNotifyPropertyChanged)
+			{
+				ICustomNotifyPropertyChanged notifiable = _bindableFields as ICustomNotifyPropertyChanged;
+				if (notifiable.HasSubscribers())
+				{
+					notifiable.ThrowPropertyChangedEvent(propertyName);
+				}
+			}
+			if (_bindableFields.BusinessObj is ICustomNotifyPropertyChanged)
+			{
+				ICustomNotifyPropertyChanged notifiable = _bindableFields.BusinessObj as ICustomNotifyPropertyChanged;
+				if (notifiable.HasSubscribers())
+				{
+					notifiable.ThrowPropertyChangedEvent(propertyName);
+				}
+			}
+		}
+
+		/// <summary>
+		/// this works for the properties of the business object but not for the properties of the _bindableFields. Fix this ASAP
+		/// </summary>
+		private void throwPropertyChangedAllProperties()
+		{
+			foreach (PropertyInfo pInfo in _bindableFields.BusinessObj.GetType().GetProperties())
+			{
+				throwPropertyChangedIfSubscribers(pInfo.Name);
+			}
+		}
+
 		[Serializable]
 		public abstract class BindableFields<D>
 		{
 			private D _businessObj;
+
+			[field: NonSerialized]
 			protected IInterceptor _interceptor;
-			
+
+			internal IInterceptor Interceptor
+			{
+				get
+				{
+					return _interceptor;
+				}
+				set
+				{
+					_interceptor = value;
+				}
+			}
+
 			public BindableFields(IInterceptor interceptor)
 			{
 				_interceptor = interceptor;

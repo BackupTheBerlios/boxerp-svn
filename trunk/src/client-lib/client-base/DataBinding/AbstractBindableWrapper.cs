@@ -48,10 +48,16 @@ namespace Boxerp.Client
         #endregion
 			
 		private Y _bindableFields;
+
+		[field: NonSerialized]
 		private Stack<Y> _undoStack = new Stack<Y>();
+
+		[field: NonSerialized]
 		private Stack<Y> _redoStack = new Stack<Y>();
-		[NonSerialized]
+		
+		[field: NonSerialized]
 		private ProxyGenerator _generator = new ProxyGenerator();
+
 		private bool _dontIntercept = false;
 		private bool _disableBusinessObjInterception = false;
 		private bool _disableWrapperInterception = false;

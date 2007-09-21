@@ -98,6 +98,20 @@ public class BindableObjectsMain
 	}
 
 	[Test]
+	public void SerializationCastleDynamicProxy2()
+	{
+		Castle.DynamicProxy.ProxyGenerator generator = new Castle.DynamicProxy.ProxyGenerator();
+		SimpleBusinessObject proxy = (SimpleBusinessObject)
+			generator.CreateClassProxy(typeof(SimpleBusinessObject), new Castle.Core.Interceptor.IInterceptor[0]);
+		MemoryStream stream = new MemoryStream();
+		BinaryFormatter formatter = new BinaryFormatter();
+		formatter.Serialize(stream, proxy);
+		stream.Position = 0;
+		object deserializedObject = formatter.Deserialize(stream);
+		Assert.IsNotNull(deserializedObject);
+	}
+
+	[Test]
 	public void SerializationTest()
 	{
 		BindableWrapper<SimpleBusinessObject> bindableObj =

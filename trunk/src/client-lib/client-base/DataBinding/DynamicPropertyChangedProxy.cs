@@ -58,8 +58,10 @@ namespace Boxerp.Client
 					#if CREATE_DLL_FILE
 						_assemblyBuilder = Thread.GetDomain().DefineDynamicAssembly(myAsmName, AssemblyBuilderAccess.RunAndSave);
 					#else
-						_assemblyBuilder = Thread.GetDomain().DefineDynamicAssembly(myAsmName, AssemblyBuilderAccess.Run);
+						_assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(myAsmName, AssemblyBuilderAccess.Run);
 					#endif
+
+						AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
 				}
 
 				return _assemblyBuilder;
@@ -88,6 +90,16 @@ namespace Boxerp.Client
 
 				return _moduleBuilder;
 			}
+		}
+
+		public static Assembly OnAssemblyResolve(Object sender, ResolveEventArgs args)
+		{
+			if (args.Name.StartsWith(DYNAMIC_MOD_NAME))
+			{
+				return Assembly.GetAssembly(MyAssemblyBuilder.GetTypes()[0]);
+			}
+
+			return null;
 		}
 
 		public static string CleanGarbageSimbols(string sourceName)

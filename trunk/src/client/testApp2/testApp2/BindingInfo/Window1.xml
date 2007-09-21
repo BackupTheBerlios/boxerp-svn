@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<BindingInfo>
+
+  <Property widgetType="textbox" widgetName="_name" objectProperty="Data.BusinessObj.Name" />
+  <Property widgetType="textbox" widgetName="_description" objectProperty="Data.BusinessObj.Description" />
+  <Property widgetType="integerbox" widgetName="_age" objectProperty="Data.BusinessObj.Age" />
+  
+</BindingInfo>

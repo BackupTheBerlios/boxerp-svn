@@ -33,6 +33,8 @@ namespace winFormsTestApp2
 			_name.DataBindings.Add("Text", _bindable.Data.BusinessObjBinding, "Name", false, DataSourceUpdateMode.OnPropertyChanged);
 			_description.DataBindings.Add("Text", _bindable.Data.BusinessObjBinding, "Description", false, DataSourceUpdateMode.OnPropertyChanged);
 			_age.DataBindings.Add("Text", _bindable.Data.BusinessObjBinding, "Age", false, DataSourceUpdateMode.OnPropertyChanged);
+
+            _bindable.Data.BusinessObjBinding.PropertyChanged += OnPropertyChanged;
 		}
 
 		private void OnUndo(object sender, EventArgs e)

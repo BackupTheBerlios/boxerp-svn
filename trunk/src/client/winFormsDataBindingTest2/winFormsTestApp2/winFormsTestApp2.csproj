@@ -28,25 +28,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Boxerp.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Boxerp.Client, Version=0.2.0.0, Culture=neutral, PublicKeyToken=c81f1d62693cb1b8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\client-lib\client-base\bin\Debug\Boxerp.Client.dll</HintPath>
+      <HintPath>..\..\..\client-lib\client-base\bin\Debug\Boxerp.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Boxerp.Client.WindowsForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Boxerp.Client.WindowsForms, Version=0.2.0.0, Culture=neutral, PublicKeyToken=c81f1d62693cb1b8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\client-lib\winforms\bin\Debug\Boxerp.Client.WindowsForms.dll</HintPath>
+      <HintPath>..\..\..\client-lib\winforms\bin\Debug\Boxerp.Client.WindowsForms.dll</HintPath>
     </Reference>
-    <Reference Include="Boxerp.Collections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Boxerp.Collections, Version=0.2.0.0, Culture=neutral, PublicKeyToken=c81f1d62693cb1b8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\client-lib\client-base\bin\Debug\Boxerp.Collections.dll</HintPath>
+      <HintPath>..\..\..\client-lib\client-base\bin\Debug\Boxerp.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\dependencies\Castle.Core.dll</HintPath>
+      <HintPath>..\..\..\client-lib\client-base\bin\Debug\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.DynamicProxy2, Version=2.0.0.1, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\dependencies\Castle.DynamicProxy2.dll</HintPath>
+      <HintPath>..\..\..\client-lib\client-base\bin\Debug\Castle.DynamicProxy2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

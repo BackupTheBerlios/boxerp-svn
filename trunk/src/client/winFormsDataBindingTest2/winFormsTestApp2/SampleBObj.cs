@@ -7,9 +7,8 @@ using Boxerp.Client;
 namespace winFormsTestApp2
 {
 
-	// The business object can be any kind of object. In my mind they will be active record models ;-)
-
-	public class SampleBObj : ICloneable
+    [Serializable]
+	public class SampleBObj 
 	{
 		private string _name, _description;
 		private int _age;
@@ -40,19 +39,9 @@ namespace winFormsTestApp2
 			_description = description;
 			_age = age;
 		}
-		
-
-		#region ICloneable Members
-
-		public object Clone()
-		{
-			SampleBObj clone = new SampleBObj(Name, Description, Age);
-			return clone;
-		}
-
-		#endregion
 	}
 
+    [Serializable]
 	public class Proxy1 : SampleBObj, ICustomNotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -65,8 +54,14 @@ namespace winFormsTestApp2
 		{
 			PropertyChanged(this, new PropertyChangedEventArgs(name));
 		}
+
+        public Delegate[] GetSubscribersList()
+        {
+            return PropertyChanged.GetInvocationList();
+        }
 	}
 
+    [Serializable]
 	public class Proxy2 : Proxy1
 	{
 		public override string Name

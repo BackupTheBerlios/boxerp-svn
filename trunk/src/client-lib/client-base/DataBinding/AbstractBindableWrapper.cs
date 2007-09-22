@@ -263,13 +263,13 @@ namespace Boxerp.Client
 		{
 			if ((!_disableUndoRedo) && (_undoStack.Count > 0))
 			{
-				_redoStack.Push(_bindableFields);
+				_redoStack.Push(cloneBindable());
 				if (_undoStack.Count > 0)
 				{
 					Y tmpBindable = _undoStack.Pop();
-					_bindableFields.BusinessObj = tmpBindable.BusinessObj;
-					throwPropertyChangedAllProperties();
-				}
+					copyBindableProperties(tmpBindable);
+                    throwPropertyChangedAllProperties();
+			    }
 			}
 		}
 
@@ -277,11 +277,12 @@ namespace Boxerp.Client
 		{
 			if ((!_disableUndoRedo) && (_redoStack.Count > 0))
 			{
-				_undoStack.Push(_bindableFields);
+				_undoStack.Push(cloneBindable());
 				if (_redoStack.Count > 0)
 				{
-					_bindableFields = _redoStack.Pop();
-					throwPropertyChangedAllProperties();
+					Y tmpBindable = _redoStack.Pop();
+                    copyBindableProperties(tmpBindable);
+                    throwPropertyChangedAllProperties();
 				}
 			}
 		}
@@ -332,11 +333,91 @@ namespace Boxerp.Client
 			}
 		}
 
+        /// <summary>
+        /// Copy the properties of the source into _bindableFields.
+        /// FIXME: I think PropertyInfo.GetValue and SetValue passing in null as the last param throws 
+        /// an exception on indexed properties like arrays. Test this.
+        /// </summary>
+        /// <param name="source"></param>
+        protected virtual void copyBindableProperties(Y source)
+        {
+            lock (this)
+            {
+                _dontIntercept = true;
+
+                List<string> properties = new List<string>();
+
+                foreach (PropertyInfo pInfo in source.GetType().GetProperties())
+                {
+                    if (!properties.Contains(pInfo.Name))
+                    {
+                        if (pInfo.CanWrite)
+                        {
+                            object val = pInfo.GetValue(source, null);
+
+                            if (!(pInfo.PropertyType is IEnumerable))
+                            {
+                                if (typeof(T) == pInfo.PropertyType)
+                                {
+                                    copyBusinessObjectProperties((T)val);
+                                }
+                                else
+                                {
+                                    typeof(Y).GetProperty(pInfo.Name).SetValue(_bindableFields, val, null);
+                                }
+                            }
+                            else
+                            {
+                                /*IList enumerable = (IList)val;
+
+                                object[] enumerableCopy = new object[enumerable.Count];
+                                for (int k = 0; k < enumerable.Count; k++)
+                                {
+                                    object indexedValue = enumerable[k];
+                                    enumerableCopy[k] = indexedValue;
+                                }*/
+
+                                typeof(Y).GetProperty(pInfo.Name).SetValue(_bindableFields, val, null);
+                                // TODO: review this making sure the garbage collection works 
+                            }
+                        }
+                        properties.Add(pInfo.Name);
+                    }
+                }
+
+                _dontIntercept = false;
+            }
+        }
+
+        /// <summary>
+        /// Copy the properties of the source into _bindableFields.BusinessObj.
+        /// FIXME: I think PropertyInfo.GetValue and SetValue passing in null as the last param throws 
+        /// an exception on indexed properties like arrays. Test this.
+        /// </summary>
+        /// <param name="source"></param>
+        protected virtual void copyBusinessObjectProperties(T source)
+        {
+            List<string> properties = new List<string>();
+
+            foreach (PropertyInfo pInfo in source.GetType().GetProperties())
+            {
+                if (!properties.Contains(pInfo.Name))
+                {
+                    if (pInfo.CanWrite)
+                    {
+                        object val = pInfo.GetValue(source, null);
+                        typeof(T).GetProperty(pInfo.Name).SetValue(_bindableFields.BusinessObj, val, null);
+                        properties.Add(pInfo.Name);
+                    }
+                }
+            }
+        }
+
 		protected virtual Y cloneBindable()
 		{
 			// clone by serializing
 			Y bindableClone = (Y)Cloner.Clone(_bindableFields);
-			// reasing the things that were not serialized:
+			/*// reasing the things that were not serialized:
 			bindableClone.Interceptor = this;
 			if (bindableClone is ICustomNotifyPropertyChanged)
 			{
@@ -355,7 +436,7 @@ namespace Boxerp.Client
 					bindableClone.BusinessObjBinding.PropertyChanged += (PropertyChangedEventHandler) subscriber;
 				}
 			}
-
+            */
 			return bindableClone;
 		}
 
@@ -448,9 +529,15 @@ namespace Boxerp.Client
 		/// </summary>
 		private void throwPropertyChangedAllProperties()
 		{
+            List<string> properties = new List<string>();
+
 			foreach (PropertyInfo pInfo in _bindableFields.BusinessObj.GetType().GetProperties())
 			{
-				throwPropertyChangedIfSubscribers(pInfo.Name);
+                if (!properties.Contains(pInfo.Name))
+                {
+                    properties.Add(pInfo.Name);
+				    throwPropertyChangedIfSubscribers(pInfo.Name);
+                }
 			}
 		}
 

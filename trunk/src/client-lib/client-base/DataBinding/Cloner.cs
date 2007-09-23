@@ -9,7 +9,7 @@ namespace Boxerp.Client
 {
 	public static class Cloner
 	{
-		public static object Clone(object source)
+		public static object GetSerializedClone(object source)
 		{
 			using (MemoryStream buffer = new MemoryStream())
 			{

@@ -28,23 +28,15 @@ namespace winFormsTestApp2
 
 			_bindable = new BindableWrapper<SampleBObj>(businessObject);
 
-			// bind the object
-
-			_name.DataBindings.Add("Text", _bindable.Data.BusinessObjBinding, "Name", false, DataSourceUpdateMode.OnPropertyChanged);
+			// bind the object properties to the UI widgets
+            _name.DataBindings.Add("Text", _bindable.Data.BusinessObjBinding, "Name", false, DataSourceUpdateMode.OnPropertyChanged);
 			_description.DataBindings.Add("Text", _bindable.Data.BusinessObjBinding, "Description", false, DataSourceUpdateMode.OnPropertyChanged);
 			_age.DataBindings.Add("Text", _bindable.Data.BusinessObjBinding, "Age", false, DataSourceUpdateMode.OnPropertyChanged);
-
-            _bindable.Data.BusinessObjBinding.PropertyChanged += OnPropertyChanged;
 		}
 
 		private void OnUndo(object sender, EventArgs e)
 		{
 			_bindable.Undo();
-		}
-
-		public void OnPropertyChanged(Object sender, PropertyChangedEventArgs args)
-		{
-			Console.WriteLine("Property changed: " + args.PropertyName);
 		}
 
 		private void OnRedo(object sender, EventArgs e)

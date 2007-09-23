@@ -63,6 +63,22 @@ namespace Boxerp.Client
 		private bool _disableWrapperInterception = false;
 		private bool _disableUndoRedo = false;
 
+        public Y Data
+        {
+            get
+            {
+                return _bindableFields;
+            }
+        }
+
+        public bool HasSubscribers
+        {
+            get
+            {
+                return (PropertyChanged != null);
+            }
+        }
+
 		/// <summary>
 		/// When the wrapper class constructor requires parameters they must be passed in thru the constructorParams
 		/// </summary>
@@ -210,9 +226,9 @@ namespace Boxerp.Client
 			}
 			else
 			{
-				T proxy = CreateDoubleProxy();
-				copyBOtoProxy(proxy, businessObj);
-				Data.BusinessObj = proxy;
+				T proxy = createDoubleProxy();
+                Data.BusinessObj = proxy;
+				copyBOtoProxy(businessObj);
 			}
 		}
 
@@ -222,7 +238,7 @@ namespace Boxerp.Client
 		/// In case the business object T already implements the INotifyPropertyChanged, then the first proxy is not needed
 		/// </summary>
 		/// <returns></returns>
-		private T CreateDoubleProxy()
+		private T createDoubleProxy()
 		{
 			Type notifiableType;
 
@@ -238,25 +254,11 @@ namespace Boxerp.Client
 			return (T)_generator.CreateClassProxy(notifiableType, new IInterceptor[] { this });
 		}
 
-		public Y Data
-		{
-			get
-			{
-				return _bindableFields;
-			}
-		}
+		
 
 		public Type GetWrappedObjectType()
 		{
 			return typeof(T);
-		}
-
-		public bool HasSubscribers
-		{
-			get
-			{
-				return (PropertyChanged != null);
-			}
 		}
 
 		public virtual void Undo()
@@ -294,46 +296,15 @@ namespace Boxerp.Client
 
 		protected virtual void copyBOtoProxy(T businessObj)
 		{
-			_dontIntercept = true;
-			foreach (PropertyInfo boProperty in businessObj.GetType().GetProperties())
-			{
-				object propValue = boProperty.GetValue(businessObj, null);
-
-				foreach (PropertyInfo proxyProperty in Data.BusinessObj.GetType().GetProperties())
-				{
-					if (boProperty.Name == proxyProperty.Name)
-					{
-						proxyProperty.SetValue(Data.BusinessObj, propValue, null);
-						break;
-					}
-				}
-			}
-			_dontIntercept = false;
+            lock (this)
+            {
+                _dontIntercept = true;
+                copyBusinessObjectProperties(businessObj);
+                _dontIntercept = false;
+            }
 		}
 
-		protected virtual void copyBOtoProxy(T proxy, T businessObj)
-		{
-			lock (this)
-			{
-				_dontIntercept = true;
-				foreach (PropertyInfo boProperty in businessObj.GetType().GetProperties())
-				{
-					object propValue = boProperty.GetValue(businessObj, null);
-
-					foreach (PropertyInfo proxyProperty in proxy.GetType().GetProperties())
-					{
-						if (boProperty.Name == proxyProperty.Name)
-						{
-							proxyProperty.SetValue(proxy, propValue, null);
-							break;
-						}
-					}
-				}
-				_dontIntercept = false;
-			}
-		}
-
-        /// <summary>
+		/// <summary>
         /// Copy the properties of the source into _bindableFields.
         /// FIXME: I think PropertyInfo.GetValue and SetValue passing in null as the last param throws 
         /// an exception on indexed properties like arrays. Test this.
@@ -347,7 +318,7 @@ namespace Boxerp.Client
 
                 List<string> properties = new List<string>();
 
-                foreach (PropertyInfo pInfo in source.GetType().GetProperties())
+                foreach (PropertyInfo pInfo in typeof(Y).GetProperties())
                 {
                     if (!properties.Contains(pInfo.Name))
                     {
@@ -384,7 +355,6 @@ namespace Boxerp.Client
                         properties.Add(pInfo.Name);
                     }
                 }
-
                 _dontIntercept = false;
             }
         }
@@ -399,7 +369,7 @@ namespace Boxerp.Client
         {
             List<string> properties = new List<string>();
 
-            foreach (PropertyInfo pInfo in source.GetType().GetProperties())
+            foreach (PropertyInfo pInfo in typeof(T).GetProperties())
             {
                 if (!properties.Contains(pInfo.Name))
                 {
@@ -415,28 +385,7 @@ namespace Boxerp.Client
 
 		protected virtual Y cloneBindable()
 		{
-			// clone by serializing
-			Y bindableClone = (Y)Cloner.Clone(_bindableFields);
-			/*// reasing the things that were not serialized:
-			bindableClone.Interceptor = this;
-			if (bindableClone is ICustomNotifyPropertyChanged)
-			{
-				ICustomNotifyPropertyChanged bindableNotifiable = bindableClone as ICustomNotifyPropertyChanged;
-				Delegate[] subscribers = (_bindableFields as ICustomNotifyPropertyChanged).GetSubscribersList();
-				foreach (Delegate subscriber in subscribers)
-				{
-					bindableNotifiable.PropertyChanged += (PropertyChangedEventHandler) subscriber;
-				}
-			}
-			if (bindableClone.BusinessObj is ICustomNotifyPropertyChanged)
-			{
-				Delegate[] subscribers = (_bindableFields.BusinessObj as ICustomNotifyPropertyChanged).GetSubscribersList();
-				foreach (Delegate subscriber in subscribers)
-				{
-					bindableClone.BusinessObjBinding.PropertyChanged += (PropertyChangedEventHandler) subscriber;
-				}
-			}
-            */
+			Y bindableClone = (Y)Cloner.GetSerializedClone(_bindableFields);
 			return bindableClone;
 		}
 
@@ -445,39 +394,25 @@ namespace Boxerp.Client
 		{
 			if (!_dontIntercept)
 			{
-				if (invocation.Method.Name.StartsWith("set_"))	// setting the property value
+				if (invocation.Method.Name.StartsWith("set_"))	// setting the property 
 				{
 					string propDirtyName = invocation.Method.Name;
 					string propName = propDirtyName.Substring(propDirtyName.IndexOf('_') + 1);
 					PropertyInfo propInfo;
 					object oldValue = null;
 
-					// Search in the bindableFiels properties:
-					propInfo = _bindableFields.GetType().GetProperty(propName);
+					propInfo = typeof(Y).GetProperty(propName);
 					if (propInfo == null)
 					{
-						// Search in the business object
-						// I wanted to do this: 
-						// pInfo = _bindableFields.BusinessObj.GetType().GetProperty(propName)
-						// But the Proxy generator creates a class which extends from the Business Object, 
-						// so that it is ambiguous.
-						// This loop avoids the Ambiguos Match exception that happen because of the dinamic proxy
-						foreach (PropertyInfo pInfo in _bindableFields.BusinessObj.GetType().GetProperties())
-						{
-							if (pInfo.Name == propName)
-							{
-								oldValue = pInfo.GetValue(_bindableFields.BusinessObj, null);
-								propInfo = pInfo;
-								break;
-							}
-						}
-					}
+                        propInfo = typeof(T).GetProperty(propName);
+                        oldValue = propInfo.GetValue(_bindableFields.BusinessObj, null);
+                    }
 					else
 					{
 						oldValue = propInfo.GetValue(_bindableFields, null);
 					}
 
-					if (oldValue != invocation.Arguments[0])
+					if (!areEqual(oldValue, invocation.Arguments[0]))
 					{
 						if (!_disableUndoRedo)
 						{
@@ -485,16 +420,28 @@ namespace Boxerp.Client
 						}
 
 						invocation.Proceed();
-
-						throwPropertyChangedIfSubscribers(propInfo.Name);
-
-						return;
+                        throwPropertyChangedIfSubscribers(propInfo.Name);
+                        return;
 					}			
 				}
 			}
 			invocation.Proceed();
 		}
 		#endregion
+
+        private bool areEqual(object obj1, object obj2)
+        {
+            if (obj1.GetType() == typeof(string))
+            {
+                if (obj1.ToString().CompareTo(obj2.ToString()) == 0)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            return (obj1.Equals(obj2));
+        }
 
 		/// <summary>
 		/// There are 3 objects having a PropertyChanged event. This class, the _bindableFields and the Business Object.
@@ -531,7 +478,7 @@ namespace Boxerp.Client
 		{
             List<string> properties = new List<string>();
 
-			foreach (PropertyInfo pInfo in _bindableFields.BusinessObj.GetType().GetProperties())
+			foreach (PropertyInfo pInfo in typeof(T).GetProperties())
 			{
                 if (!properties.Contains(pInfo.Name))
                 {
@@ -584,11 +531,6 @@ namespace Boxerp.Client
 				{
 					return (INotifyPropertyChanged)_businessObj;
 				}
-			}
-
-			public BindableFields<D> SwallowCopy()
-			{
-				return (BindableFields<D>)MemberwiseClone();
 			}
 		}
 	}

@@ -23,7 +23,7 @@ namespace testApp2
 
 	public partial class Window1 : System.Windows.Window
 	{
-		private BindableWrapper<SampleBObj> _bindableSampleObj;
+		private BindableWrapper<SampleBObj> _bindable;
 		private Proxy2 _proxy2;
 		bool _useRealProxy = false;
 
@@ -33,23 +33,24 @@ namespace testApp2
 
 			try
 			{
+				_proxy2 = new Proxy2();
+				_proxy2.Name = "test";
+
+
 				SampleBObj businessObject = new SampleBObj();
 				businessObject.Name = "test";
 				businessObject.Description = "description";
 				businessObject.Age = 10;
 
-				_bindableSampleObj = new BindableWrapper<SampleBObj>(businessObject);
-
-				_proxy2 = new Proxy2();
-				_proxy2.Name = "test";
-
+				_bindable = new BindableWrapper<SampleBObj>(businessObject);
+							
 				if (_useRealProxy)
 				{
 					DataContext = _proxy2;
 				}
-				else
+				else // using dynamic proxy
 				{
-					DataContext = _bindableSampleObj.Data.BusinessObj;
+					DataContext = _bindable.Data.BusinessObj;
 				}
 			}
 			catch (Exception ex)
@@ -60,17 +61,12 @@ namespace testApp2
 
 		public void OnUndo(Object sender, RoutedEventArgs args)
 		{
-			_bindableSampleObj.Undo();
+			_bindable.Undo();
 		}
 
 		public void OnRedo(Object sender, RoutedEventArgs args)
 		{
-			_bindableSampleObj.Redo();
-		}
-
-		private void OnPropertyChanged(Object sender, PropertyChangedEventArgs args)
-		{
-			Console.WriteLine("Property changed:" + args.PropertyName);
+			_bindable.Redo();
 		}
 
 		public void OnChangeData(Object sender, RoutedEventArgs args)
@@ -83,9 +79,9 @@ namespace testApp2
 			}
 			else
 			{
-				_bindableSampleObj.Data.BusinessObj.Name = "whatever";
-				_bindableSampleObj.Data.BusinessObj.Description = "whatever123";
-				_bindableSampleObj.Data.BusinessObj.Age = 1000;
+				_bindable.Data.BusinessObj.Name = "whatever";
+				_bindable.Data.BusinessObj.Description = "whatever123";
+				_bindable.Data.BusinessObj.Age = 1000;
 			}
 		}
 
@@ -97,9 +93,9 @@ namespace testApp2
 			}
 			else
 			{
-				MessageBox.Show(_bindableSampleObj.Data.BusinessObj.Name + ", " +
-							_bindableSampleObj.Data.BusinessObj.Description + ", " +
-							_bindableSampleObj.Data.BusinessObj.Age);
+				MessageBox.Show(_bindable.Data.BusinessObj.Name + ", " +
+							_bindable.Data.BusinessObj.Description + ", " +
+							_bindable.Data.BusinessObj.Age);
 			}
 		}
 	}

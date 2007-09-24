@@ -3,7 +3,7 @@
   <Files>
     <File filename="Welcome" />
     <File filename="./client-base/DataBinding/AbstractBindableWrapper.cs" />
-    <File filename="./client-base/DataBinding/IBindableWidget.cs" />
+    <File filename="./client-base/DataBinding/IBindableCore.cs" />
     <File filename="./client-base/DataBinding/BindingOptions.cs" />
     <File filename="./client-base/DataBinding/BindableWrapper.cs" />
     <File filename="./client-base/ControlsHelpers/IntegerTextBoxHelper.cs" />
@@ -11,21 +11,23 @@
     <File filename="./gtksharp/QuestionDialog.cs" />
     <File filename="./gtksharp/InfoDialog.cs" />
     <File filename="./gtksharp/WaitWindow.cs" />
-    <File filename="./gtksharp/WarningDialog.cs" />
     <File filename="./gtksharp/WaitDialog.cs" />
-    <File filename="./gtksharp/DataBinding/DataBinder.cs" />
-    <File filename="./gtksharp/gtk-gui/Boxerp.Client.GtkSharp.QuestionDialog.cs" />
-    <File filename="./gtksharp/gtk-gui/Boxerp.Client.GtkSharp.WaitWindow.cs" />
-    <File filename="./gtksharp/gtk-gui/generated.cs" />
     <File filename="./gtksharp/GtkResponsiveHelper.cs" />
+    <File filename="./gtksharp/DataBinding/BindingMetadata.cs" />
+    <File filename="./client-base/Responsiveness/IWaitControl.cs" />
+    <File filename="./gtksharp/DataBinding/BindableWidgetCore.cs" />
+    <File filename="./gtksharp/DataBinding/IBindableWidget.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
           <Node name="Boxerp.Client" expanded="True" selected="True">
+            <Node name="DataBinding" expanded="True" />
+            <Node name="Responsiveness" expanded="True" />
+          </Node>
+          <Node name="Boxerp.Client.GtkSharp" expanded="True">
             <Node name="References" expanded="True" />
-            <Node name="ControlsHelpers" expanded="True" />
             <Node name="DataBinding" expanded="True" />
           </Node>
         </Node>
@@ -51,7 +53,7 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/client-base/DataBinding/AbstractBindableWrapper.cs" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/client-base/DataBinding/DynamicPropertyChangedProxy.cs" />
       <Property key="ActiveConfiguration" value="Debug" />
     </Properties>
   </Properties>

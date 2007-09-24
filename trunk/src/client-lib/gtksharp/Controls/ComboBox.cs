@@ -37,9 +37,11 @@ namespace Boxerp.Client.GtkSharp.Controls
 {
 	
 	
-	public partial class ComboBox : Gtk.Bin, IUIWidget
+	public partial class ComboBox : Gtk.Bin, IBindableWidget
 	{
 		private BindableWidgetCore _widgetCore;
+		private object _selectedItem = null;
+		private List<object> _items = new List<object>();
 		
 		public ComboBox()
 		{
@@ -47,7 +49,6 @@ namespace Boxerp.Client.GtkSharp.Controls
 			_widgetCore = new BindableWidgetCore(this);
 		}
 
-#region IUIWidget implementation
 		public BindableWidgetCore WidgetCore
 		{
 			get
@@ -55,5 +56,39 @@ namespace Boxerp.Client.GtkSharp.Controls
 				return _widgetCore;
 			}
 		}
+
+		public object SelectedItem 
+		{
+			get 
+			{
+				return _selectedItem;
+			}
+		}
+
+		public List<object> Items 
+		{
+			get 
+			{
+				return _items;
+			}
+		}
+		
+		public void UpdateValue(string property, object val)
+		{
+			_selectedItem = val;
+			// update the combo without calling again the SetPropertyValue
+		}
+
+		protected virtual void OnComboChanged (object sender, System.EventArgs e)
+		{
+			// Get the selected item 
+			//_selectedItem = _combo.Model.
+			WidgetCore.SetPropertyValue(_selectedItem);
+		}		
+				
+				
+				
+				
+				
 	}
 }

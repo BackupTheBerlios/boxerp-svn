@@ -34,7 +34,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 {
 	
 	
-	public partial class TextBoxControl : Gtk.Bin, IUIWidget
+	public partial class TextBoxControl : Gtk.Bin, IBindableWidget
 	{
 		private BindableWidgetCore _widgetCore;
 		

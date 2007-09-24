@@ -94,11 +94,16 @@ namespace Boxerp.Client
 
 		public static Assembly OnAssemblyResolve(Object sender, ResolveEventArgs args)
 		{
+			Console.Out.WriteLine("ON ASSEMBLY RESOLVE: (requesting)" + args.Name);
 			if (args.Name.StartsWith(DYNAMIC_MOD_NAME))
 			{
-				return Assembly.GetAssembly(MyAssemblyBuilder.GetTypes()[0]);
+				Console.Out.WriteLine("ON ASSEMBLY RESOLVE: " + MyAssemblyBuilder.GetTypes()[0].ToString());
+				Assembly tmpAssembly = Assembly.GetAssembly(MyAssemblyBuilder.GetTypes()[0]);
+				Console.Out.WriteLine("ON ASSEMBLY RESOLVE (loaded assembly): " + tmpAssembly.FullName);
+				return tmpAssembly;
+				
 			}
-
+			Console.Out.WriteLine("ASSEMBLY NOT FOUND");
 			return null;
 		}
 

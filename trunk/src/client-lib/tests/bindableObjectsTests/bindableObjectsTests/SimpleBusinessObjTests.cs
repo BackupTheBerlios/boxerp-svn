@@ -12,7 +12,6 @@ using NUnit.Framework;
 using System.Reflection;
 using System.ComponentModel;
 
-using Boxerp.Client;
 
 namespace bindableObjectsTests
 {

@@ -14,8 +14,10 @@
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="bindableObjectsTests" expanded="True" selected="True">
-            <Node name="References" expanded="True" />
+          <Node name="bindableObjectsTests" expanded="True">
+            <Node name="References" expanded="True">
+              <Node name="/home/carlos/boxerp_completo/trunk/src/client-lib/client-base/bin/Debug/Boxerp.Client.dll" expanded="False" selected="True" />
+            </Node>
           </Node>
         </Node>
       </TreeView>
@@ -38,7 +40,7 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/tests/bindableObjectsTests/bindableObjectsTests/ComplexBusinessObject.cs" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/tests/bindableObjectsTests/bindableObjectsTests/SimpleBusinessObjTests.cs" />
       <Property key="ActiveConfiguration" value="Debug" />
     </Properties>
   </Properties>

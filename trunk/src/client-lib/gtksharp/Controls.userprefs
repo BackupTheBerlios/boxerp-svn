@@ -36,8 +36,8 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveConfiguration" value="Debug" />
       <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/Controls/ComboBox.cs" />
+      <Property key="ActiveConfiguration" value="Debug" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

@@ -34,13 +34,12 @@
     <File name="./DataBinding/BindableWidgetCore.cs" subtype="Code" buildaction="Compile" />
     <File name="./DataBinding/BindingMetadata.cs" subtype="Code" buildaction="Compile" />
     <File name="./DataBinding/DataBinder.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/IUIWidget.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/IBindableWidget.cs" subtype="Code" buildaction="Compile" />
     <File name="./DataBinding/XamlParser.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/glade-sharp.dll" />
-    <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/glib-sharp.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/Mono.Posix.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/pango-sharp.dll" />
     <ProjectReference type="Project" localcopy="True" refto="Boxerp.Client" />

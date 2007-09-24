@@ -40,7 +40,7 @@
     <File name="./Responsiveness/ResponsiveAttribute.cs" subtype="Code" buildaction="Compile" />
     <File name="./Responsiveness/ResponsiveEnum.cs" subtype="Code" buildaction="Compile" />
     <File name="./Responsiveness/ThreadEventArgs.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/IBindableWidget.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/IBindableCore.cs" subtype="Code" buildaction="Compile" />
     <File name="./DataBinding/BindingOptions.cs" subtype="Code" buildaction="Compile" />
     <File name="./DataBinding/Cloner.cs" subtype="Code" buildaction="Compile" />
     <File name="./DataBinding/DynamicPropertyChangedProxy.cs" subtype="Code" buildaction="Compile" />

@@ -62,9 +62,9 @@ namespace Boxerp.Client.GtkSharp
 				object fieldValue = field.GetValue(_container);
 				Console.WriteLine("------- " + field.Name + field.FieldType);
 				//Console.WriteLine(" INTER  " + field.FieldType.GetInterfaces()[0].ToString());
-				if (fieldValue is IUIWidget)
+				if (fieldValue is IBindableWidget)
 				{
-					IUIWidget widget = (IUIWidget) fieldValue;
+					IBindableWidget widget = (IBindableWidget) fieldValue;
 					//Console.WriteLine(" ** widget ** " + widget);
 					//widget.WidgetCore.BindObject(_bindable, xxx, yyy, BindingOptions.TwoWay);
 					

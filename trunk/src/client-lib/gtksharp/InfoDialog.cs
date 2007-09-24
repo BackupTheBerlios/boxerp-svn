@@ -33,7 +33,7 @@ namespace Boxerp.Client.GtkSharp
 {
 	
 	
-	public partial class InfoDialog //: Gtk.Dialog
+	public partial class InfoDialog : Gtk.Dialog
 	{
 		
 		public InfoDialog()

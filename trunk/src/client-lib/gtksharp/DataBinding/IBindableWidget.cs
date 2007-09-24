@@ -33,7 +33,7 @@ using System.ComponentModel;
 namespace Boxerp.Client.GtkSharp
 {
 		
-	public interface IUIWidget
+	public interface IBindableWidget
 	{
 		// the BindableWidgetCore uses this function as the handler for the PropertyChanged event 
 		// in the business object so that the interface can refresh

@@ -36,11 +36,35 @@ namespace Boxerp.Client.GtkSharp
 {
 	
 	
-	public partial class WaitDialog : IWaitControl
+	public partial class WaitDialog : Gtk.Dialog, IWaitControl
 	{
 		protected bool nonstop = true;
 		protected bool firstInstant = true;
 		private EventHandler cancelEventHandler;
+		
+		public bool IsModal 
+		{
+			get 
+			{
+				return true;
+			}
+			set 
+			{
+				
+			}
+		}
+
+		public bool IsProgressDiscrete 
+		{
+			get 
+			{
+				return progressbar.BarStyle == Gtk.ProgressBarStyle.Continuous;
+			}
+			set 
+			{
+				
+			}
+		}
 
 		public WaitDialog()
 		{
@@ -67,6 +91,20 @@ namespace Boxerp.Client.GtkSharp
             }
         }
 
+		public void ShowControl ()
+		{
+			Run();
+		}
+
+		public void CloseControl ()
+		{
+			OnCancel(this, new EventArgs());
+		}
+
+		public void UpdateProgress (int amount, int total)
+		{
+		}
+		
 		public string Message
 		{
 			get { return labelMsg.Text;}

@@ -31,7 +31,7 @@ using System;
 
 namespace Boxerp.Client.GtkSharp
 {
-	public partial class WaitWindow : IWaitControl
+	public partial class WaitWindow : Gtk.Window, IWaitControl
 	{
 		protected bool nonstop = true;
 		protected bool firstInstant = true;
@@ -78,6 +78,30 @@ namespace Boxerp.Client.GtkSharp
 		    set { exitOnCancel = value; }
 		}
 
+		public bool IsModal 
+		{
+			get 
+			{
+				return false;
+			}
+			set 
+			{
+				
+			}
+		}
+
+		public bool IsProgressDiscrete 
+		{
+			get 
+			{
+				return progressbar.BarStyle == Gtk.ProgressBarStyle.Continuous;
+			}
+			set 
+			{
+				
+			}
+		}
+
 
 		public void Stop()
 		{
@@ -102,6 +126,22 @@ namespace Boxerp.Client.GtkSharp
 				progressbar.Pulse();
 			return nonstop;
 		}
+
+		public void ShowControl ()
+		{
+			Show();
+		}
+
+		public void CloseControl ()
+		{
+			OnCancel(this, new EventArgs());
+		}
+
+		public void UpdateProgress (int amount, int total)
+		{
+				
+		}
+			
 
 		protected virtual void OnCancel(object sender, System.EventArgs e)
 		{

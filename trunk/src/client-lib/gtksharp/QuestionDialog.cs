@@ -34,7 +34,7 @@ namespace Boxerp.Client.GtkSharp
 {
 	
 	
-	public partial class QuestionDialog //: Gtk.Dialog
+	public partial class QuestionDialog : Gtk.Dialog
 	{
 		private bool answer;
 		

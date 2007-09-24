@@ -51,6 +51,11 @@ namespace Boxerp.Client.GtkSharp
 
 		public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller)
 		{
+			StartAsyncCallList(transferType, controller, true);
+		}
+		
+		public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller, bool showWaitDialog)
+		{
 			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
 				|| (RunningThreads == 0))
 			{
@@ -73,15 +78,18 @@ namespace Boxerp.Client.GtkSharp
 
 			try
 			{
-				if (_concurrencyMode == ConcurrencyMode.Modal)
+				if (showWaitDialog)
 				{
-					_waitDialog.Run();
-				}
-				else
-				{
-					_waitWindow.ShowAll();
-					_waitWindow.Present();
-					// TODO : if the window is minimized show it in the middle of the screen
+					if (_concurrencyMode == ConcurrencyMode.Modal)
+					{
+						_waitDialog.Run();
+					}
+					else
+					{
+						_waitWindow.ShowAll();
+						_waitWindow.Present();
+						// TODO : if the window is minimized show it in the middle of the screen
+					}
 				}
 			}
 			catch (System.Reflection.TargetInvocationException ex)
@@ -94,8 +102,15 @@ namespace Boxerp.Client.GtkSharp
 			}
 		}
 
+		
 		public override void StartAsyncCall(SimpleDelegate method)
 		{
+			StartAsyncCall(method, true);	
+		}
+		
+		public override void StartAsyncCall(SimpleDelegate method, bool showWaitDialog)
+		{
+			
 			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
 				|| (RunningThreads == 0))
 			{
@@ -118,15 +133,18 @@ namespace Boxerp.Client.GtkSharp
 
 			try
 			{
-				if (_concurrencyMode == ConcurrencyMode.Modal)
+				if (showWaitDialog)
 				{
-					_waitDialog.Run();
-				}
-				else
-				{
-					_waitWindow.ShowAll();
-					_waitWindow.Present();
-					// TODO : if the window is minimized show it in the middle of the screen
+					if (_concurrencyMode == ConcurrencyMode.Modal)
+					{
+						_waitDialog.Run();
+					}
+					else
+					{
+						_waitWindow.ShowAll();
+						_waitWindow.Present();
+						// TODO : if the window is minimized show it in the middle of the screen
+					}
 				}
 			}
 			catch (System.Reflection.TargetInvocationException ex)

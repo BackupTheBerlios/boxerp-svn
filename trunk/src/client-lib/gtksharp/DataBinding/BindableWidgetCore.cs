@@ -36,7 +36,7 @@ using System.ComponentModel;
 
 namespace Boxerp.Client.GtkSharp
 {
-	public class BindableWidgetCore : IBindableWidget
+	public class BindableWidgetCore : IBindableCore
 	{
 		private IBindableWrapper _bindableObject = null;
 		private object _propertyOwner;
@@ -44,7 +44,7 @@ namespace Boxerp.Client.GtkSharp
 		private string _boPropertyName = null;
 		private string _widgetBindingProperty = null;
 		private BindingOptions _bindingOptions = BindingOptions.OneWay;
-		private IUIWidget _uiWidget;
+		private IBindableWidget _uiWidget;
 		
 		public virtual Boxerp.Client.IBindableWrapper BindableObject 
 		{
@@ -86,7 +86,7 @@ namespace Boxerp.Client.GtkSharp
 			}
 		}
 
-		public BindableWidgetCore(IUIWidget uiWidget)
+		public BindableWidgetCore(IBindableWidget uiWidget)
 		{
 			_uiWidget = uiWidget;
 		}

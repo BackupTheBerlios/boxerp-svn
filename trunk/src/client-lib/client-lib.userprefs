@@ -23,15 +23,10 @@
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="Boxerp.Client" expanded="True">
+          <Node name="Boxerp.Client" expanded="True" selected="True">
             <Node name="References" expanded="True" />
             <Node name="ControlsHelpers" expanded="True" />
             <Node name="DataBinding" expanded="True" />
-          </Node>
-          <Node name="Boxerp.Client.GtkSharp" expanded="True">
-            <Node name="References" expanded="True" />
-            <Node name="DataBinding" expanded="True" />
-            <Node name="GtkResponsiveHelper.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -56,7 +51,7 @@
   </Views>
   <Properties>
     <Properties>
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/GtkResponsiveHelper.cs" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/client-base/DataBinding/AbstractBindableWrapper.cs" />
       <Property key="ActiveConfiguration" value="Debug" />
     </Properties>
   </Properties>

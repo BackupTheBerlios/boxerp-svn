@@ -71,7 +71,7 @@ namespace Boxerp.Client.GtkSharp {
             w4.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w5 = new Gtk.Image();
-            w5.Name = "image41";
+            w5.Name = "image32";
             w5.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-cancel", Gtk.IconSize.Menu, 16);
             w4.Add(w5);
             // Container child GtkHBox.Gtk.Container+ContainerChild

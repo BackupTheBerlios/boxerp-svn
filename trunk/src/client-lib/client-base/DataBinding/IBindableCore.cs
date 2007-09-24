@@ -29,7 +29,7 @@ using System;
 
 namespace Boxerp.Client
 {
-	public interface IBindableWidget
+	public interface IBindableCore
 	{
 		void BindObject(IBindableWrapper bObject, object propertyOwner, 
 		                       string bindingProperty, string widgetProperty, BindingOptions options);

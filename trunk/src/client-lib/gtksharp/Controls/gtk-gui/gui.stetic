@@ -2,9 +2,9 @@
 <stetic-interface>
   <configuration>
     <images-root-path>../</images-root-path>
+    <target-gtk-version>2.10.2</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../../bin/Debug/Boxerp.Client.GtkSharp.dll" />
     <widget-library name="../bin/Debug/Boxerp.Client.GtkSharp.Controls.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Controls.IntegerTextBoxControl" design-size="162 37">

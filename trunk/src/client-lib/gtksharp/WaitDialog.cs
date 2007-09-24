@@ -36,7 +36,7 @@ namespace Boxerp.Client.GtkSharp
 {
 	
 	
-	public partial class WaitDialog : Gtk.Dialog, IWaitControl
+	public partial class WaitDialog : IWaitControl
 	{
 		protected bool nonstop = true;
 		protected bool firstInstant = true;

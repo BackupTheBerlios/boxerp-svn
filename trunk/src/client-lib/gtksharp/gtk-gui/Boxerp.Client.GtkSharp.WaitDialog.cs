@@ -17,7 +17,7 @@ namespace Boxerp.Client.GtkSharp {
         
         private Gtk.ProgressBar progressbar;
         
-        private Gtk.Button buttonCancel;
+        private Gtk.Button button140;
         
         protected virtual void Build() {
             Stetic.Gui.Initialize();
@@ -49,20 +49,16 @@ namespace Boxerp.Client.GtkSharp {
             w3.Fill = false;
             // Internal child Boxerp.Client.GtkSharp.WaitDialog.ActionArea
             Gtk.HButtonBox w4 = this.ActionArea;
-            w4.Name = "dialog1_ActionArea";
-            w4.Spacing = 6;
-            w4.BorderWidth = ((uint)(5));
-            w4.LayoutStyle = ((Gtk.ButtonBoxStyle)(2));
-            // Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
-            this.buttonCancel = new Gtk.Button();
-            this.buttonCancel.CanDefault = true;
-            this.buttonCancel.CanFocus = true;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.UseStock = true;
-            this.buttonCancel.UseUnderline = true;
-            this.buttonCancel.Label = "gtk-cancel";
-            this.AddActionWidget(this.buttonCancel, -6);
-            Gtk.ButtonBox.ButtonBoxChild w5 = ((Gtk.ButtonBox.ButtonBoxChild)(w4[this.buttonCancel]));
+            w4.Name = "GtkDialog_ActionArea";
+            w4.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
+            // Container child GtkDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
+            this.button140 = new Gtk.Button();
+            this.button140.CanFocus = true;
+            this.button140.Name = "button140";
+            this.button140.UseUnderline = true;
+            this.button140.Label = Mono.Unix.Catalog.GetString("button140");
+            this.AddActionWidget(this.button140, 0);
+            Gtk.ButtonBox.ButtonBoxChild w5 = ((Gtk.ButtonBox.ButtonBoxChild)(w4[this.button140]));
             w5.Expand = false;
             w5.Fill = false;
             if ((this.Child != null)) {
@@ -71,7 +67,6 @@ namespace Boxerp.Client.GtkSharp {
             this.DefaultWidth = 400;
             this.DefaultHeight = 109;
             this.Show();
-            this.buttonCancel.Clicked += new System.EventHandler(this.OnCancel);
         }
     }
 }

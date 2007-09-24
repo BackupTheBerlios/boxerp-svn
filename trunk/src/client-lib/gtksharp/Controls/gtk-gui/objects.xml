@@ -16,4 +16,8 @@
     </itemgroups>
     <signals />
   </object>
+  <object type="Boxerp.Client.GtkSharp.Controls.ComboBox" palette-category="widget" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
 </objects>

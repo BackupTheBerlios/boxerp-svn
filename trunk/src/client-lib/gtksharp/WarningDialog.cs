@@ -33,7 +33,7 @@ namespace Boxerp.Client.GtkSharp
 {
 	
 	
-	public partial class WarningDialog : Gtk.Dialog
+	public partial class WarningDialog// : Gtk.Dialog
 	{
 		protected bool quitOnOk = false;
 		

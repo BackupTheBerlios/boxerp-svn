@@ -41,7 +41,7 @@ namespace Boxerp.Client.GtkSharp {
             // Container child hbox1.Gtk.Box+BoxChild
             this.image = new Gtk.Image();
             this.image.Name = "image";
-            this.image.Pixbuf = Stetic.IconLoader.LoadIcon("stock_dialog-warning", 16);
+            this.image.Pixbuf = Stetic.IconLoader.LoadIcon(this, "stock_dialog-warning", Gtk.IconSize.Menu, 16);
             this.hbox1.Add(this.image);
             Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.hbox1[this.image]));
             w2.Position = 0;

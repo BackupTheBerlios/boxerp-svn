@@ -39,17 +39,15 @@
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/gdk-sharp.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/glade-sharp.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/glib-sharp.dll" />
-    <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/gtk-sharp.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/Mono.Posix.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="./gtklibs/pango-sharp.dll" />
     <ProjectReference type="Project" localcopy="True" refto="Boxerp.Client" />
-    <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <ProjectReference type="Gac" localcopy="True" refto="gdk-sharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.10.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="gdk-sharp, Version=2.10.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
   </References>
   <GtkDesignInfo partialTypes="True" isWidgetLibrary="True">
     <ExportedWidgets>

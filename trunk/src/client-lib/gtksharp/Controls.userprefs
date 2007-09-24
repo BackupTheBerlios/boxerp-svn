@@ -2,22 +2,18 @@
 <UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/Controls.mds">
   <Files>
     <File filename="Welcome" />
+    <File filename="../../../../branches/old-0.1/client/GuiExtractor.cs" />
     <File filename="./Controls/IntegerTextBoxControl.cs" />
     <File filename="./Controls/TextBoxControl.cs" />
-    <File filename="./Controls/XamlParser.cs" />
-    <File filename="../../../../branches/old-0.1/client/GuiExtractor.cs" />
-    <File filename="./Controls/DataBinder.cs" />
-    <File filename="./Controls/BindableWidgetCore.cs" />
-    <File filename="./Controls/BindingMetadata.cs" />
-    <File filename="./Controls/IUIWidget.cs" />
+    <File filename="./Controls/ComboBox.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="Boxerp.Client.GtkSharp.Controls" expanded="True" selected="True">
-            <Node name="References" expanded="True" />
+          <Node name="Boxerp.Client.GtkSharp.Controls" expanded="True">
             <Node name="UserInterface" expanded="True" />
+            <Node name="ComboBox.cs" expanded="False" selected="True" />
           </Node>
         </Node>
       </TreeView>
@@ -41,7 +37,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/Controls/DataBinder.cs" />
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/Controls/ComboBox.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

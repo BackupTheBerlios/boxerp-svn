@@ -20,6 +20,5 @@
   <Entries>
     <Entry filename="./client-base/client-base.mdp" />
     <Entry filename="./gtksharp/gtksharp.mdp" />
-    <Entry filename="./wpf/wpf.mdp" />
   </Entries>
 </Combine>

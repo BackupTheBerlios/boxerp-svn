@@ -431,6 +431,11 @@ namespace Boxerp.Client
 
         private bool areEqual(object obj1, object obj2)
         {
+			if (obj1 == null || obj2 == null)
+			{
+				return obj1 == obj2;
+			}
+			
             if (obj1.GetType() == typeof(string))
             {
                 if (obj1.ToString().CompareTo(obj2.ToString()) == 0)

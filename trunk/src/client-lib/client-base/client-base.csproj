@@ -55,7 +55,7 @@
     <Compile Include="DataBinding\BindingOptions.cs" />
     <Compile Include="DataBinding\Cloner.cs" />
     <Compile Include="DataBinding\DynamicPropertyChangedProxy.cs" />
-    <Compile Include="DataBinding\IBindableWidget.cs" />
+    <Compile Include="DataBinding\IBindableCore.cs" />
     <Compile Include="DataBinding\IBindableWrapper.cs" />
     <Compile Include="DataBinding\IChildObject.cs" />
     <Compile Include="DataBinding\ICustomNotifyPropertyChanged.cs" />

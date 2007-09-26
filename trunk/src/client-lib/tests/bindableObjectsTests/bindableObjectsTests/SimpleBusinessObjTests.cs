@@ -22,7 +22,7 @@ public class BindableObjectsMain
 {
 	
 	[Test]
-	public void CreateBindable()
+	public void CreateBindableSBO()
 	{
 			BindableWrapper<SimpleBusinessObject> bindableObj =
 				new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
@@ -31,7 +31,34 @@ public class BindableObjectsMain
 	}
 
 	[Test]
-	public void ChangeBindable()
+	public void CreateBindableSOCP()
+	{
+		BindableWrapper<SimpleObjectComplexProperties> bindableObj =
+			new BindableWrapper<SimpleObjectComplexProperties>(new SimpleObjectComplexProperties());
+
+		Assert.IsNotNull(bindableObj);
+	}
+
+	[Test]
+	public void CreateBindableSOROP()
+	{
+		BindableWrapper<SimpleObjectReadOnlyProperties> bindableObj =
+			new BindableWrapper<SimpleObjectReadOnlyProperties>(new SimpleObjectReadOnlyProperties());
+
+		Assert.IsNotNull(bindableObj);
+	}
+
+	[Test]
+	public void CreateBindableChangingFlags()
+	{
+		BindableWrapper<SimpleBusinessObject> bindableObj =
+				new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject(), true);
+
+		Assert.IsNotNull(bindableObj);
+	}
+
+	[Test]
+	public void ChangeBindableSBO()
 	{
 		BindableWrapper<SimpleBusinessObject> bindableObj =	
 			new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
@@ -42,9 +69,24 @@ public class BindableObjectsMain
 		Assert.AreEqual(bindableObj.Data.BusinessObj.Name, "asdf");
 		Assert.AreEqual(bindableObj.Data.BusinessObj.Age, 25);
 	}
+
+	[Test]
+	public void ChangeBindableSOCP()
+	{
+		BindableWrapper<SimpleObjectComplexProperties> bindableObj =
+			new BindableWrapper<SimpleObjectComplexProperties>(new SimpleObjectComplexProperties());
+		bindableObj.Data.BusinessObj.Code = "asdf";
+		bindableObj.Data.BusinessObj.Ages[2] = 70;
+		bindableObj.Data.BusinessObj.Names = new System.Collections.Generic.List<string>();
+		bindableObj.Data.BusinessObj.Names.Add("test");
+
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Code, "asdf");
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[2], 70);
+		Assert.IsTrue(bindableObj.Data.BusinessObj.Names.Contains("test"));
+	}
 	
 	[Test]
-	public void UndoChanges()
+	public void UndoChangesSBO()
 	{
 		BindableWrapper<SimpleBusinessObject> bindableObj =	
 			new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
@@ -58,9 +100,45 @@ public class BindableObjectsMain
 		bindableObj.Undo();
 		Assert.AreEqual(bindableObj.Data.BusinessObj.Name, "asdf");
 	}
+
+	[Test]
+	public void UndoChangesSBONoInterception()
+	{
+		BindableWrapper<SimpleBusinessObject> bindableObj =
+			new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject(), true);
+		bindableObj.Data.BusinessObj.Name = "asdf";
+		bindableObj.Data.BusinessObj.Description = "asdfsdf";
+		bindableObj.Data.BusinessObj.Age = 25;
+
+		bindableObj.Data.BusinessObj.Name = "qwerty";
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Name, "qwerty");
+
+		bindableObj.Undo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Name, "qwerty"); // no changes, no interception
+	}
+
+	[Test]
+	public void UndoChangesSOCP()
+	{
+		BindableWrapper<SimpleObjectComplexProperties> bindableObj =
+			new BindableWrapper<SimpleObjectComplexProperties>(new SimpleObjectComplexProperties());
+		bindableObj.Data.BusinessObj.Code = "asdf";
+		bindableObj.Data.BusinessObj.Ages[3] = 777;
+		bindableObj.Data.BusinessObj.Names = new System.Collections.Generic.List<string>();
+		bindableObj.Data.BusinessObj.Names.Add("test");
+
+		bindableObj.Data.BusinessObj.Code = "change";
+		bindableObj.Data.BusinessObj.Ages[3] = 22;
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Code, "change");
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[3], 22);
+		bindableObj.Undo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Code, "asdf");
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[3], 777); // array change is intercepted
+		Assert.IsTrue(bindableObj.Data.BusinessObj.Names.Contains("test")); // no undo for this as it is not intercepted
+	}
 	
 	[Test]
-	public void UndoRedoChanges()
+	public void UndoRedoChangesSBO()
 	{
 		BindableWrapper<SimpleBusinessObject> bindableObj =	
 			new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
@@ -79,7 +157,29 @@ public class BindableObjectsMain
 	}
 
 	[Test]
-	public void SerializationBoTest()
+	public void UndoRedoChangesSOBCP()
+	{
+		BindableWrapper<SimpleObjectComplexProperties> bindableObj =
+			new BindableWrapper<SimpleObjectComplexProperties>(new SimpleObjectComplexProperties());
+		bindableObj.Data.BusinessObj.Code = "asdf";
+		bindableObj.Data.BusinessObj.Ages[1]  = 0;
+		bindableObj.Data.BusinessObj.Names = new System.Collections.Generic.List<string>();
+		bindableObj.Data.BusinessObj.Names.Add("test");
+
+		bindableObj.Data.BusinessObj.Ages[1] = 80;
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[1], 80);
+
+		bindableObj.Undo();
+
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[1], 0);
+
+		bindableObj.Redo();
+
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[1], 80);
+	}
+
+	[Test]
+	public void SerializationSBOTest()
 	{
 		BindableWrapper<SimpleBusinessObject> bindableObj =
 			new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
@@ -92,6 +192,24 @@ public class BindableObjectsMain
 		object deserializedObject = formatter.Deserialize(stream);
 		Assert.IsNotNull(deserializedObject);
 		SimpleBusinessObject deserializedBindable = (SimpleBusinessObject)deserializedObject;
+
+		Assert.IsNotNull(deserializedBindable);
+	}
+
+	[Test]
+	public void SerializationSOCPTest()
+	{
+		BindableWrapper<SimpleObjectComplexProperties> bindableObj =
+			new BindableWrapper<SimpleObjectComplexProperties>(new SimpleObjectComplexProperties());
+		
+		MemoryStream stream = new MemoryStream();
+		BinaryFormatter formatter = new BinaryFormatter();
+		formatter.Serialize(stream, bindableObj.Data.BusinessObj);
+		stream.Position = 0;
+
+		object deserializedObject = formatter.Deserialize(stream);
+		Assert.IsNotNull(deserializedObject);
+		SimpleObjectComplexProperties deserializedBindable = (SimpleObjectComplexProperties)deserializedObject;
 
 		Assert.IsNotNull(deserializedBindable);
 	}
@@ -111,7 +229,7 @@ public class BindableObjectsMain
 	}
 
 	[Test]
-	public void SerializationTest()
+	public void SerializationBWSBOTest()
 	{
 		BindableWrapper<SimpleBusinessObject> bindableObj =
 			new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
@@ -124,6 +242,24 @@ public class BindableObjectsMain
 		object deserializedObject = formatter.Deserialize(stream);
 		Assert.IsNotNull(deserializedObject);
 		BindableWrapper<SimpleBusinessObject> deserializedBindable = (BindableWrapper<SimpleBusinessObject>)deserializedObject;
+
+		Assert.IsNotNull(deserializedBindable);
+	}
+
+	[Test]
+	public void SerializationBWSOCPTest()
+	{
+		BindableWrapper<SimpleObjectComplexProperties> bindableObj =
+			new BindableWrapper<SimpleObjectComplexProperties>(new SimpleObjectComplexProperties());
+		
+		MemoryStream stream = new MemoryStream();
+		BinaryFormatter formatter = new BinaryFormatter();
+		formatter.Serialize(stream, bindableObj);
+		stream.Position = 0;
+
+		object deserializedObject = formatter.Deserialize(stream);
+		Assert.IsNotNull(deserializedObject);
+		BindableWrapper<SimpleObjectComplexProperties> deserializedBindable = (BindableWrapper<SimpleObjectComplexProperties>)deserializedObject;
 
 		Assert.IsNotNull(deserializedBindable);
 	}
@@ -222,8 +358,6 @@ public class BindableObjectsMain
 		Castle.DynamicProxy.ProxyGenerator generator = new Castle.DynamicProxy.ProxyGenerator();
 		SimpleBusinessObject proxy = (SimpleBusinessObject)
 			generator.CreateClassProxy(generatedType, new Castle.Core.Interceptor.IInterceptor[0]);
-	
-
 	}
 
 	[Test]

@@ -5,12 +5,13 @@
 //
 
 using System;
+using System.Collections.Generic;
 
 namespace bindableObjectsTests
 {
 	
 	[Serializable]
-	public class SimpleBusinessObject : ICloneable
+	public class SimpleBusinessObject 
 	{
 		private string _name;
 		private string _description;
@@ -59,10 +60,54 @@ namespace bindableObjectsTests
 			_description = desc;
 			_age = age;
 		}
-		
-		public object Clone()
+	}
+
+	[Serializable]
+	public class SimpleObjectComplexProperties
+	{
+		private string _code;
+		private List<string> _names;
+		private string _description;
+		private int[] _ages = new int[] { 10, 20, 30, 40, 50, 60 };
+
+		public virtual string Code
 		{
-			return new SimpleBusinessObject(_name, _description, _age);
+			get { return _code; }
+			set { _code = value; }
+		}
+		
+		public virtual string Description
+		{
+			get { return _description; }
+			set { _description = value; }
+		}
+		
+		public virtual int[] Ages
+		{
+			get { return _ages; }
+			set { _ages = value; }
+		}
+		
+		public virtual List<string> Names
+		{
+			get { return _names; }
+			set { _names = value; }
+		}
+	}
+
+	[Serializable]
+	public class SimpleObjectReadOnlyProperties
+	{
+		private string _code;
+		
+		public virtual string Code
+		{
+			get { return _code; }
+		}
+
+		public void SetCode(string code)
+		{
+			_code = code + DateTime.Now.ToShortDateString();
 		}
 	}
 

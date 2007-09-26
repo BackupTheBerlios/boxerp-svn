@@ -54,7 +54,9 @@ namespace Boxerp.Client
 		[Serializable]
 		public class WrapObject<D, Z> : AbstractBindableWrapper<D, BindableWithCollection<D, Z>.WrapObject<D, Z>>.BindableFields<D>
 		{
+			[field: NonSerialized]
 			private ProxyGenerator _proxyGenerator = new ProxyGenerator();
+
 			private List<Z> _list;
 			
 			public virtual List<Z> Collection     // virtual to intercept the get and set

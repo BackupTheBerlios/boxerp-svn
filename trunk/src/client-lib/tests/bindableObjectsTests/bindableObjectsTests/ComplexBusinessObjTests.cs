@@ -43,16 +43,18 @@ public class ComplexBusinessObjTests
 			new BindableWrapper<ComplexBusinessObject>(new ComplexBusinessObject());
 		
 		SimpleBusinessObject sbo1 = new SimpleBusinessObject();
-		SimpleBusinessObject sbo2 = new SimpleBusinessObject();	
+		sbo1.Name = "sbo1";
+		SimpleBusinessObject sbo2 = new SimpleBusinessObject();
+		sbo2.Name = "sbo2";
 		bindableObj.Data.BusinessObj.NestedObject = sbo1;
 		
-		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject, sbo1);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo1.Name);
 		
 		bindableObj.Data.BusinessObj.NestedObject = sbo2;
-		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject, sbo2);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo2.Name);
 			
 		bindableObj.Undo();
-		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject, sbo1);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo1.Name);
 		
 		// the nested object is not IBindableWrapper so changes on its internal properties are not intercepted
 		bindableObj.Data.BusinessObj.NestedObject.Name = "whatever";
@@ -68,21 +70,23 @@ public class ComplexBusinessObjTests
 	{
 		BindableWrapper<ComplexBusinessObject> bindableObj =	
 			new BindableWrapper<ComplexBusinessObject>(new ComplexBusinessObject());
-		
+
 		SimpleBusinessObject sbo1 = new SimpleBusinessObject();
-		SimpleBusinessObject sbo2 = new SimpleBusinessObject();	
+		sbo1.Name = "sbo1";
+		SimpleBusinessObject sbo2 = new SimpleBusinessObject();
+		sbo2.Name = "sbo2";
 		bindableObj.Data.BusinessObj.NestedObject = sbo1;
 		
-		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject, sbo1);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo1.Name);
 		
 		bindableObj.Data.BusinessObj.NestedObject = sbo2;
-		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject, sbo2);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo2.Name);
 			
 		bindableObj.Undo();
-		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject, sbo1);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo1.Name);
 			
 		bindableObj.Redo();
-		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject, sbo2);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo2.Name);
 	}
 
 	[Test]

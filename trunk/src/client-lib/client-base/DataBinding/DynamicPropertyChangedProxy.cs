@@ -32,6 +32,7 @@ using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 // doc on Reflection.Emit:
 // http://msdn2.microsoft.com/en-us/library/system.reflection.emit.constructorbuilder.aspx
@@ -228,6 +229,11 @@ namespace Boxerp.Client
 			HasSubscribersMethod(targetTypeBld, eventHandler);
 			ThrowPropertyChangedMethod(targetTypeBld, eventHandler);
 			GetSubscribersListMethod(targetTypeBld, eventHandler);
+
+			if (typeof(ISerializable).IsAssignableFrom(baseType))
+			{
+				CreateDeserializationConstructor(targetTypeBld, baseType);
+			}
 
 			targetType = targetTypeBld.CreateType();
 
@@ -427,6 +433,40 @@ namespace Boxerp.Client
 			mthdIL.Emit(OpCodes.Ret);
 		}
 
+		/// <summary>
+		/// .method /*06000003*/ family hidebysig specialname rtspecialname 
+        ///  instance void  .ctor(class [mscorlib/*23000001*/]System.Runtime.Serialization.SerializationInfo/*01000005*/ info,
+        ///                       valuetype [mscorlib/*23000001*/]System.Runtime.Serialization.StreamingContext/*01000006*/ context) cil managed
+		///  IL_0000:  /* 02   |                  */ ldarg.0
+		///  IL_0001:  /* 03   |                  */ ldarg.1
+		///  IL_0002:  /* 04   |                  */ ldarg.2
+		///  IL_0003:  /* 28   | (0A)000011       */ call       instance void class [mscorlib/*23000001*/]System.Collections.Generic.Dictionary`2/*01000001*/<string,int32>/*1B000001*/::.ctor(class [mscorlib/*23000001*/]System.Runtime.Serialization.SerializationInfo/*01000005*/,
+		///                                                                                                                                                                               valuetype [mscorlib/*23000001*/]System.Runtime.Serialization.StreamingContext/*01000006*/) /* 0A000011 */
+		///  IL_0008:  /* 00   |                  */ nop
+		///  IL_0009:  /* 00   |                  */ nop
+		///  IL_000a:  /* 00   |                  */ nop
+		///  IL_000b:  /* 2A   |                  */ ret
+  		/// </summary>
+		/// <param name="builder"></param>
+		public static void CreateDeserializationConstructor(TypeBuilder builder, Type baseType)
+		{
+			ConstructorInfo serializationConstructor = baseType.GetConstructor(
+					BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+					null,
+					new Type[] { typeof(SerializationInfo), typeof(StreamingContext) },
+					null);
+
+			ConstructorBuilder targetCtor = builder.DefineConstructor(
+					  MethodAttributes.Family | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName,
+					  CallingConventions.Standard, new Type[] { typeof(SerializationInfo), typeof(StreamingContext) });
+			ILGenerator ctorIL = targetCtor.GetILGenerator();
+
+			ctorIL.Emit(OpCodes.Ldarg_0);
+			ctorIL.Emit(OpCodes.Ldarg_1);
+			ctorIL.Emit(OpCodes.Ldarg_2);
+			ctorIL.Emit(OpCodes.Call, serializationConstructor);
+			ctorIL.Emit(OpCodes.Ret);
+		}
 
 
 	}

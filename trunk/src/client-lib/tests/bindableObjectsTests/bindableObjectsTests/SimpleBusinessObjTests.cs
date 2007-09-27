@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Boxerp.Client;
 using NUnit.Framework;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.ComponentModel;
 
 
@@ -49,6 +50,42 @@ public class BindableObjectsMain
 	}
 
 	[Test]
+	public void CreateBindableSIC()
+	{
+		BindableWrapper<SimpleIndexedClass> bindableObj =
+			new BindableWrapper<SimpleIndexedClass>(new SimpleIndexedClass());
+
+		Assert.IsNotNull(bindableObj);
+	}
+
+	[Test]
+	public void CreateBindableSGO()
+	{
+		BindableWrapper<SimpleGenericObject<int>> bindableObj =
+			new BindableWrapper<SimpleGenericObject<int>>(new SimpleGenericObject<int>());
+
+		Assert.IsNotNull(bindableObj);
+	}
+
+	[Test]
+	public void CreateBindableSAS()
+	{
+		SimpleAutoSerializable businessObj = new SimpleAutoSerializable();
+
+		ConstructorInfo serializationConstructor = businessObj.GetType().GetConstructor(
+					BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+					null,
+					new Type[] { typeof(SerializationInfo), typeof(StreamingContext) },
+					null);
+		Assert.IsNotNull(serializationConstructor);
+
+		BindableWrapper<SimpleAutoSerializable> bindableObj =
+			new BindableWrapper<SimpleAutoSerializable>(businessObj);
+
+		Assert.IsNotNull(bindableObj);
+	}
+
+	[Test]
 	public void CreateBindableChangingFlags()
 	{
 		BindableWrapper<SimpleBusinessObject> bindableObj =
@@ -68,6 +105,30 @@ public class BindableObjectsMain
 		
 		Assert.AreEqual(bindableObj.Data.BusinessObj.Name, "asdf");
 		Assert.AreEqual(bindableObj.Data.BusinessObj.Age, 25);
+	}
+
+	[Test]
+	public void ChangeBindableSIC()
+	{
+		BindableWrapper<SimpleIndexedClass> bindableObj =
+			new BindableWrapper<SimpleIndexedClass>(new SimpleIndexedClass());
+
+		bindableObj.Data.BusinessObj.Code = "code";
+		bindableObj.Data.BusinessObj["test"] = 1;
+		Assert.AreEqual(bindableObj.Data.BusinessObj["test"], 1);
+		bindableObj.Data.BusinessObj["test"] = 2;
+		Assert.AreEqual(bindableObj.Data.BusinessObj["test"], 2);
+	}
+
+	[Test]
+	public void ChangeBindableSGO()
+	{
+		BindableWrapper<SimpleGenericObject<string>> bindableObj =
+			new BindableWrapper<SimpleGenericObject<string>>(new SimpleGenericObject<string>());
+
+		bindableObj.Data.BusinessObj.Code = "code";
+		bindableObj.Data.BusinessObj.GenericArray = new string[] { "test1", "test2"};
+		Assert.AreEqual(bindableObj.Data.BusinessObj.GenericArray[0], "test1");
 	}
 
 	[Test]
@@ -136,7 +197,31 @@ public class BindableObjectsMain
 		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[3], 777); // array change is intercepted
 		Assert.IsTrue(bindableObj.Data.BusinessObj.Names.Contains("test")); // no undo for this as it is not intercepted
 	}
-	
+
+	[Test]
+	public void UndoChangesSIC()
+	{
+		BindableWrapper<SimpleIndexedClass> bindableObj =
+			new BindableWrapper<SimpleIndexedClass>(new SimpleIndexedClass());
+		
+		bindableObj.Data.BusinessObj["test"] = 1;
+		bindableObj.Data.BusinessObj["test"] = 2;
+		bindableObj.Undo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj["test"], 1);
+	}
+
+	[Test]
+	public void UndoChangesSGO()
+	{
+		BindableWrapper<SimpleGenericObject<string>> bindableObj =
+			new BindableWrapper<SimpleGenericObject<string>>(new SimpleGenericObject<string>());
+
+		bindableObj.Data.BusinessObj.GenericArray = new string[] { "test1", "test2" };
+		bindableObj.Data.BusinessObj.GenericArray[0] = "test3";
+		bindableObj.Undo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj.GenericArray[0], "test1");
+	}
+
 	[Test]
 	public void UndoRedoChangesSBO()
 	{
@@ -176,6 +261,20 @@ public class BindableObjectsMain
 		bindableObj.Redo();
 
 		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[1], 80);
+	}
+
+	[Test]
+	public void UndoRedoChangesSIC()
+	{
+		BindableWrapper<SimpleIndexedClass> bindableObj =
+			new BindableWrapper<SimpleIndexedClass>(new SimpleIndexedClass());
+
+		bindableObj.Data.BusinessObj["test"] = 1;
+		bindableObj.Data.BusinessObj["test"] = 2;
+		bindableObj.Undo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj["test"], 1);
+		bindableObj.Redo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj["test"], 2);
 	}
 
 	[Test]

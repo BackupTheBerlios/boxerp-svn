@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace bindableObjectsTests
 {
@@ -108,6 +109,65 @@ namespace bindableObjectsTests
 		public void SetCode(string code)
 		{
 			_code = code + DateTime.Now.ToShortDateString();
+		}
+	}
+
+	[Serializable]
+	public class SimpleIndexedClass : Dictionary<string, int>
+	{
+		private string _code;
+		
+		public string Code
+		{
+			get { return _code; }
+			set { _code = value; }
+		}
+
+		public SimpleIndexedClass() { }
+
+		public SimpleIndexedClass(SerializationInfo info, StreamingContext context)
+			: base(info, context)
+		{
+		}
+
+		public override void GetObjectData(SerializationInfo info, StreamingContext context)
+		{
+			// implement this
+		}
+	}
+
+	//[Serializable]
+	public class SimpleAutoSerializable : ISerializable
+	{
+		public SimpleAutoSerializable() { }
+
+		public SimpleAutoSerializable(SerializationInfo info, StreamingContext context)
+		{
+			// implement this
+		}
+
+		public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+		{
+			// implement this
+		}
+	}
+
+	[Serializable]
+	public class SimpleGenericObject<T>
+	{
+		private string _code;
+		private T[] _genericArray;
+
+		public string Code
+		{
+			get { return _code; }
+			set { _code = value; }
+		}
+		
+		public T[] GenericArray
+		{
+			get { return _genericArray; }
+			set { _genericArray = value; }
 		}
 	}
 

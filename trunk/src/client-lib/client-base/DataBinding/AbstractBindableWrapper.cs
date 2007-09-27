@@ -375,9 +375,26 @@ namespace Boxerp.Client
                 {
                     if (pInfo.CanWrite)
                     {
-                        object val = pInfo.GetValue(source, null);
-                        typeof(T).GetProperty(pInfo.Name).SetValue(_bindableFields.BusinessObj, val, null);
-                        properties.Add(pInfo.Name);
+						//if ((typeof(ICollection).IsAssignableFrom(pInfo.DeclaringType))
+						//	&& (pInfo.DeclaringType != typeof(T)))
+						if (pInfo.GetGetMethod().GetParameters().Length > 0)
+						{
+							// fix this
+							/*object collection = pInfo.GetValue(source, new object[0]);
+							int listCount = (int)typeof(ICollection).GetProperty("Count").GetValue(collection, null);
+							object val;
+							for (int i = 0; i < listCount; i++)
+							{
+								val = pInfo.GetValue(source, new object[] { i });
+								typeof(T).GetProperty(pInfo.Name).SetValue(_bindableFields.BusinessObj, val, new object[] { i });
+							}*/
+						}
+						else
+						{
+							object val = pInfo.GetValue(source, null);
+							typeof(T).GetProperty(pInfo.Name).SetValue(_bindableFields.BusinessObj, val, null);
+						}
+						properties.Add(pInfo.Name);
                     }
                 }
             }

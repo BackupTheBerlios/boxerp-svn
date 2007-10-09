@@ -57,19 +57,34 @@ namespace Boxerp.Client.WPF
 	}
 
 	public class WpfResponsiveHelper<T> : AbstractResponsiveHelper
-		where T : IWpfWaitControl, new()
+		where T : class, IWpfWaitControl, new()
 	{
 		T _waitDialog;
-		
+
+		protected bool _userWaitDialogInstance = false;
 		protected bool _displayExceptions = true;
 		Queue<T> _dialogs = new Queue<T>();
 		Queue<QuestionWindow> _questionWindows = new Queue<QuestionWindow>();
 				
-		public WpfResponsiveHelper(ConcurrencyMode mode) : this (mode, true){ }
+		public WpfResponsiveHelper(ConcurrencyMode mode) : this (mode, true, null){ }
 
 		public WpfResponsiveHelper(ConcurrencyMode mode, bool displayExceptions)
+			: this(mode, true, null)
+		{}
+
+		/// <summary>
+		/// You might want your custom waitDialog to manage the wait process. For example you might 
+		/// want to have a status bar rather than a window. You can pass an instance of it in order
+		/// for the application to use it
+		/// </summary>
+		/// <param name="mode"></param>
+		/// <param name="displayExceptions">In case of exceptions during an async call, display them in a window or not</param>
+		/// <param name="waitDialogInstance">An instance of your WaitDialog class</param>
+		public WpfResponsiveHelper(ConcurrencyMode mode, bool displayExceptions, T waitDialogInstance)
 			: base(mode)
 		{
+			_waitDialog = waitDialogInstance;
+			_userWaitDialogInstance = _waitDialog == null ? false : true;
 			_displayExceptions = displayExceptions;
 		}
 
@@ -88,9 +103,13 @@ namespace Boxerp.Client.WPF
 			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
 				|| (RunningThreads == 0))
 			{
-				_waitDialog = new T();
+				if (!_userWaitDialogInstance)
+				{
+					_waitDialog = new T();
+					_dialogs.Enqueue(_waitDialog);
+				}
 				_waitDialog.CancelEvent += OnCancel;
-				_dialogs.Enqueue(_waitDialog);
+				
 			}
 			
 			base.StartAsyncCallList(transferType, controller);
@@ -123,9 +142,13 @@ namespace Boxerp.Client.WPF
 			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
 				|| (RunningThreads == 0))
 			{
+				if (!_userWaitDialogInstance)
+				{
 					_waitDialog = new T();
-					_waitDialog.CancelEvent += OnCancel;
 					_dialogs.Enqueue(_waitDialog);
+				}
+				_waitDialog.CancelEvent += OnCancel;
+				
 			}
 
 			base.StartAsyncCall(method);
@@ -174,7 +197,16 @@ namespace Boxerp.Client.WPF
 		private void TransferCompleted(object sender, ThreadEventArgs e)
 		{
 			ResponsiveEnum operationType = e.OperationType;
-			T wDialog = _dialogs.Dequeue();
+			T wDialog;
+			if (!_userWaitDialogInstance)
+			{
+				wDialog = _dialogs.Dequeue();
+			}
+			else
+			{
+				wDialog = _waitDialog;
+				wDialog.CancelEvent -= OnCancel;
+			}
 			wDialog.CloseControl();
 			if (_questionWindows.Count > 0)
 			{

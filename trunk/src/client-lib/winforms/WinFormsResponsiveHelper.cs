@@ -47,11 +47,12 @@ namespace Boxerp.Client.WindowsForms
     /// This class helps to keep winform applications responsive 
     /// </summary>
     public class WinFormsResponsiveHelper<T> : AbstractResponsiveHelper
-		where T : IWinFormsWaitControl, new()
+		where T : class, IWinFormsWaitControl, new()
     {
-		T _waitDialog;
-		Queue<T> _dialogs = new Queue<T>();
-        Queue<QuestionDialog> _questionWindows = new Queue<QuestionDialog>();
+		private T _waitDialog;
+		private bool _userWaitDialogInstance = false;
+		private Queue<T> _dialogs = new Queue<T>();
+        private Queue<QuestionDialog> _questionWindows = new Queue<QuestionDialog>();
 
         /// <summary>
         /// 
@@ -61,6 +62,20 @@ namespace Boxerp.Client.WindowsForms
             : base(mode)
         {
         }
+
+		/// <summary>
+		/// You might want your custom waitDialog to manage the wait process. For example you might 
+		/// want to have a status bar rather than a window. You can pass an instance of it in order
+		/// for the application to use it
+		/// </summary>
+		/// <param name="mode"></param>
+		/// <param name="waitDialogInstance">An instance of your WaitDialog class</param>
+		public WinFormsResponsiveHelper(ConcurrencyMode mode, T waitDialogInstance)
+			: base(mode)
+		{
+			_waitDialog = waitDialogInstance;
+			_userWaitDialogInstance = _waitDialog == null ? false : true;
+		}
 
 		public override void StartAsyncCallList(ResponsiveEnum trType, IController controller)
 		{
@@ -72,9 +87,13 @@ namespace Boxerp.Client.WindowsForms
             if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
                 || (RunningThreads == 0))
             {
-				_waitDialog = new T();
+				if (!_userWaitDialogInstance)
+				{
+					_waitDialog = new T();
+					_dialogs.Enqueue(_waitDialog);
+				}
                 _waitDialog.CancelEvent += OnCancel;
-                _dialogs.Enqueue(_waitDialog);
+                
             }
 
 			base.StartAsyncCallList(trType, controller);
@@ -108,9 +127,13 @@ namespace Boxerp.Client.WindowsForms
             if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
                 || (RunningThreads == 0))
             {
-				_waitDialog = new T();
+				if (!_userWaitDialogInstance)
+				{
+					_waitDialog = new T();
+					_dialogs.Enqueue(_waitDialog);
+				}
 				_waitDialog.CancelEvent += OnCancel;
-				_dialogs.Enqueue(_waitDialog);
+				
             }
 
             base.StartAsyncCall(method);
@@ -158,7 +181,17 @@ namespace Boxerp.Client.WindowsForms
         private void TransferCompleted(object sender, EventArgs e)
         {
             ThreadEventArgs evArgs = (ThreadEventArgs)e;
-            T dia = _dialogs.Dequeue();
+            T dia;
+			if (!_userWaitDialogInstance)
+			{
+				dia = _dialogs.Dequeue();
+			}
+			else
+			{
+				dia = _waitDialog;
+				dia.CancelEvent -= OnCancel;
+			}
+
             dia.Invoke(new MethodInvoker(dia.CloseControl));
             
 			if (_questionWindows.Count > 0)

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client-base", "client-base\client-base.csproj", "{701CF3A1-60F3-4938-B0DD-CBFBC6DEF7D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gtksharp", "gtksharp\gtksharp.csproj", "{A16E2117-A015-4EBC-9051-4D9FF2EF4280}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wpf", "wpf\wpf.csproj", "{1220483F-205B-4DEF-B90C-173258593EDE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "winforms", "winforms\winforms.csproj", "{323C228A-8F9B-4A89-9E8D-912FE7E297CE}"
@@ -21,9 +19,6 @@ Global
 		{701CF3A1-60F3-4938-B0DD-CBFBC6DEF7D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{701CF3A1-60F3-4938-B0DD-CBFBC6DEF7D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{701CF3A1-60F3-4938-B0DD-CBFBC6DEF7D5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A16E2117-A015-4EBC-9051-4D9FF2EF4280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A16E2117-A015-4EBC-9051-4D9FF2EF4280}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A16E2117-A015-4EBC-9051-4D9FF2EF4280}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1220483F-205B-4DEF-B90C-173258593EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1220483F-205B-4DEF-B90C-173258593EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1220483F-205B-4DEF-B90C-173258593EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU

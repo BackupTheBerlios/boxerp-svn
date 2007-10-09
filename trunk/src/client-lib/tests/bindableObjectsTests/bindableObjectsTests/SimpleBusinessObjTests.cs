@@ -163,6 +163,53 @@ public class BindableObjectsMain
 	}
 
 	[Test]
+	public void UndoChangesSOVT()
+	{
+		BindableWrapper<SimpleObjectValueTypes> bindableObj =
+			new BindableWrapper<SimpleObjectValueTypes>(new SimpleObjectValueTypes());
+		
+		bindableObj.Data.BusinessObj.Boolean = false;
+		bindableObj.Data.BusinessObj.Char = 'a';
+		bindableObj.Data.BusinessObj.Double = 100;
+		bindableObj.Data.BusinessObj.Float = 100;
+		bindableObj.Data.BusinessObj.Enum = SimpleEnum.line1;
+		bindableObj.Data.BusinessObj.Integer = 5;
+		bindableObj.Data.BusinessObj.Struct = new SimpleStruct();
+		
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Boolean, false);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Char, 'a');
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Double, 100);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Float, 100);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Enum, SimpleEnum.line1);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Integer, 5);
+		//Assert.AreEqual(bindableObj.Data.BusinessObj.Struct._int1, 1);
+
+		bindableObj.Data.BusinessObj.Boolean = true;
+		bindableObj.Undo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Boolean, false);
+
+		bindableObj.Data.BusinessObj.Char = 'b';
+		bindableObj.Undo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Char, 'a');
+
+		bindableObj.Data.BusinessObj.Double = 200;
+		bindableObj.Undo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Double, 100);
+
+		bindableObj.Data.BusinessObj.Float = 200;
+		bindableObj.Undo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Float, 100);
+
+		bindableObj.Data.BusinessObj.Enum = SimpleEnum.line2;
+		bindableObj.Undo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Enum, SimpleEnum.line1);
+
+		bindableObj.Data.BusinessObj.Integer = 7;
+		bindableObj.Undo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Integer, 5);
+	}
+
+	[Test]
 	public void UndoChangesSBONoInterception()
 	{
 		BindableWrapper<SimpleBusinessObject> bindableObj =
@@ -194,8 +241,14 @@ public class BindableObjectsMain
 		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[3], 22);
 		bindableObj.Undo();
 		Assert.AreEqual(bindableObj.Data.BusinessObj.Code, "asdf");
-		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[3], 777); // array change is intercepted
+		// array is not intercepted so it does not change
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[3], 22);
 		Assert.IsTrue(bindableObj.Data.BusinessObj.Names.Contains("test")); // no undo for this as it is not intercepted
+
+		bindableObj.Data.BusinessObj.Ages[3] = 22;
+		bindableObj.Data.BusinessObj.Ages[3] = 25;
+		bindableObj.Undo();
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[3], 25); // not intercepted so nothing to undo
 	}
 
 	[Test]
@@ -205,9 +258,15 @@ public class BindableObjectsMain
 			new BindableWrapper<SimpleIndexedClass>(new SimpleIndexedClass());
 		
 		bindableObj.Data.BusinessObj["test"] = 1;
+
 		bindableObj.Data.BusinessObj["test"] = 2;
+
+		Assert.AreEqual(bindableObj.Data.BusinessObj["test"], 2);
+
 		bindableObj.Undo();
-		Assert.AreEqual(bindableObj.Data.BusinessObj["test"], 1);
+
+		// changes in the objects within the collection are not intercepted so no undo changes
+		Assert.AreEqual(bindableObj.Data.BusinessObj["test"], 2);
 	}
 
 	[Test]
@@ -218,8 +277,26 @@ public class BindableObjectsMain
 
 		bindableObj.Data.BusinessObj.GenericArray = new string[] { "test1", "test2" };
 		bindableObj.Data.BusinessObj.GenericArray[0] = "test3";
+		bindableObj.Data.BusinessObj.Code = "code1";
+		bindableObj.Data.BusinessObj.Code = "code2";
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Code, "code2");
 		bindableObj.Undo();
-		Assert.AreEqual(bindableObj.Data.BusinessObj.GenericArray[0], "test1");
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Code, "code1");
+		// changes in array elements are not intercepted
+		Assert.AreEqual(bindableObj.Data.BusinessObj.GenericArray[0], "test3");
+	}
+
+	[Test]
+	public void UndoChangesSGO_CastleDynProxy()
+	{
+		Castle.DynamicProxy.ProxyGenerator generator = new Castle.DynamicProxy.ProxyGenerator();
+		SimpleGenericObject<string> proxy = (SimpleGenericObject<string>)
+			generator.CreateClassProxy(typeof(SimpleGenericObject<string>), new Castle.Core.Interceptor.IInterceptor[0]);
+		proxy.GenericArray = new string[] { "test1", "test2" };
+		proxy.GenericArray[0] = "test3";
+		proxy.Code = "code1";
+		Assert.AreEqual(proxy.Code, "code1");
+		Assert.AreEqual(proxy.GenericArray[0], "test3");
 	}
 
 	[Test]
@@ -256,7 +333,7 @@ public class BindableObjectsMain
 
 		bindableObj.Undo();
 
-		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[1], 0);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[1], 80);
 
 		bindableObj.Redo();
 
@@ -270,11 +347,21 @@ public class BindableObjectsMain
 			new BindableWrapper<SimpleIndexedClass>(new SimpleIndexedClass());
 
 		bindableObj.Data.BusinessObj["test"] = 1;
+
 		bindableObj.Data.BusinessObj["test"] = 2;
+
+		bindableObj.Data.BusinessObj.Code = "asdf";
+		bindableObj.Data.BusinessObj.Code = "12345";
+
 		bindableObj.Undo();
-		Assert.AreEqual(bindableObj.Data.BusinessObj["test"], 1);
-		bindableObj.Redo();
+
 		Assert.AreEqual(bindableObj.Data.BusinessObj["test"], 2);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Code, "asdf");
+
+		bindableObj.Redo();
+		
+		Assert.AreEqual(bindableObj.Data.BusinessObj["test"], 2);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Code, "12345");
 	}
 
 	[Test]

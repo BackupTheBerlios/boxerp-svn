@@ -308,6 +308,7 @@ namespace Boxerp.Client
         /// Copy the properties of the source into _bindableFields.
         /// FIXME: I think PropertyInfo.GetValue and SetValue passing in null as the last param throws 
         /// an exception on indexed properties like arrays. Test this.
+		/// 
         /// </summary>
         /// <param name="source"></param>
         protected virtual void copyBindableProperties(Y source)
@@ -326,31 +327,44 @@ namespace Boxerp.Client
                         {
                             object val = pInfo.GetValue(source, null);
 
-                            if (!(pInfo.PropertyType is IEnumerable))
-                            {
-                                if (typeof(T) == pInfo.PropertyType)
-                                {
-                                    copyBusinessObjectProperties((T)val);
-                                }
-                                else
-                                {
-                                    typeof(Y).GetProperty(pInfo.Name).SetValue(_bindableFields, val, null);
-                                }
-                            }
-                            else
-                            {
-                                /*IList enumerable = (IList)val;
+							if ((!typeof(string).IsAssignableFrom(pInfo.PropertyType))
+								&& (pInfo.PropertyType.GetProperties().Length > 0)
+								//&& (!typeof(IBindableWrapper).IsAssignableFrom(pInfo.PropertyType))
+								&& (typeof(T) != pInfo.PropertyType))
+							{
+								/* If the property type is an object that in turn has properties, then if it is not a IBindableWrapper,
+									do not copy the property. That is: if the property is not being intercepted, do not change it
+									when another property is changed.
+								 */
+							}
+							else
+							{
+								if (!(pInfo.PropertyType is IEnumerable))
+								{
+									if (typeof(T) == pInfo.PropertyType)
+									{
+										copyBusinessObjectProperties((T)val);
+									}
+									else
+									{
+										typeof(Y).GetProperty(pInfo.Name).SetValue(_bindableFields, val, null);
+									}
+								}
+								else
+								{
+									/*IList enumerable = (IList)val;
 
-                                object[] enumerableCopy = new object[enumerable.Count];
-                                for (int k = 0; k < enumerable.Count; k++)
-                                {
-                                    object indexedValue = enumerable[k];
-                                    enumerableCopy[k] = indexedValue;
-                                }*/
+									object[] enumerableCopy = new object[enumerable.Count];
+									for (int k = 0; k < enumerable.Count; k++)
+									{
+										object indexedValue = enumerable[k];
+										enumerableCopy[k] = indexedValue;
+									}*/
 
-                                typeof(Y).GetProperty(pInfo.Name).SetValue(_bindableFields, val, null);
-                                // TODO: review this making sure the garbage collection works 
-                            }
+									typeof(Y).GetProperty(pInfo.Name).SetValue(_bindableFields, val, null);
+									// TODO: review this making sure the garbage collection works 
+								}
+							}
                         }
                         properties.Add(pInfo.Name);
                     }
@@ -377,22 +391,34 @@ namespace Boxerp.Client
                     {
 						//if ((typeof(ICollection).IsAssignableFrom(pInfo.DeclaringType))
 						//	&& (pInfo.DeclaringType != typeof(T)))
-						if (pInfo.GetGetMethod().GetParameters().Length > 0)
+						if ((!typeof(string).IsAssignableFrom(pInfo.PropertyType))
+								&& (pInfo.PropertyType.GetProperties().Length > 0))
+								//&& (!typeof(IBindableWrapper).IsAssignableFrom(pInfo.PropertyType)))
 						{
-							// fix this
-							/*object collection = pInfo.GetValue(source, new object[0]);
-							int listCount = (int)typeof(ICollection).GetProperty("Count").GetValue(collection, null);
-							object val;
-							for (int i = 0; i < listCount; i++)
-							{
-								val = pInfo.GetValue(source, new object[] { i });
-								typeof(T).GetProperty(pInfo.Name).SetValue(_bindableFields.BusinessObj, val, new object[] { i });
-							}*/
+							/* If the property type is an object that in turn has properties, then if it is not a IBindableWrapper,
+									do not copy the property. That is: if the property is not being intercepted, do not change it
+									when another property is changed.
+								 */
 						}
 						else
 						{
-							object val = pInfo.GetValue(source, null);
-							typeof(T).GetProperty(pInfo.Name).SetValue(_bindableFields.BusinessObj, val, null);
+							if (pInfo.GetGetMethod().GetParameters().Length > 0)
+							{
+								// fix this
+								/*object collection = pInfo.GetValue(source, new object[0]);
+								int listCount = (int)typeof(ICollection).GetProperty("Count").GetValue(collection, null);
+								object val;
+								for (int i = 0; i < listCount; i++)
+								{
+									val = pInfo.GetValue(source, new object[] { i });
+									typeof(T).GetProperty(pInfo.Name).SetValue(_bindableFields.BusinessObj, val, new object[] { i });
+								}*/
+							}
+							else
+							{
+								object val = pInfo.GetValue(source, null);
+								typeof(T).GetProperty(pInfo.Name).SetValue(_bindableFields.BusinessObj, val, null);
+							}
 						}
 						properties.Add(pInfo.Name);
                     }

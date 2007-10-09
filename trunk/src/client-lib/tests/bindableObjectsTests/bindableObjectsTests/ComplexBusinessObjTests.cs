@@ -46,23 +46,21 @@ public class ComplexBusinessObjTests
 		sbo1.Name = "sbo1";
 		SimpleBusinessObject sbo2 = new SimpleBusinessObject();
 		sbo2.Name = "sbo2";
-		bindableObj.Data.BusinessObj.NestedObject = sbo1;
 		
+		bindableObj.Data.BusinessObj.NestedObject = sbo1;
 		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo1.Name);
 		
 		bindableObj.Data.BusinessObj.NestedObject = sbo2;
 		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo2.Name);
 			
 		bindableObj.Undo();
-		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo1.Name);
+		
+		// As the nested object is not intercepted undo does not have any effect
+		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo2.Name);
 		
 		// the nested object is not IBindableWrapper so changes on its internal properties are not intercepted
 		bindableObj.Data.BusinessObj.NestedObject.Name = "whatever";
 		bindableObj.Data.BusinessObj.NestedObject.Name = "somethingelse";
-			
-		bindableObj.Undo();
-			
-		Assert.IsNull(bindableObj.Data.BusinessObj.NestedObject);	
 	}
 	
 	[Test]
@@ -75,15 +73,16 @@ public class ComplexBusinessObjTests
 		sbo1.Name = "sbo1";
 		SimpleBusinessObject sbo2 = new SimpleBusinessObject();
 		sbo2.Name = "sbo2";
-		bindableObj.Data.BusinessObj.NestedObject = sbo1;
 		
+		bindableObj.Data.BusinessObj.NestedObject = sbo1;
 		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo1.Name);
 		
 		bindableObj.Data.BusinessObj.NestedObject = sbo2;
 		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo2.Name);
 			
 		bindableObj.Undo();
-		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo1.Name);
+		
+		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo2.Name);
 			
 		bindableObj.Redo();
 		Assert.AreEqual(bindableObj.Data.BusinessObj.NestedObject.Name, sbo2.Name);

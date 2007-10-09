@@ -63,6 +63,73 @@ namespace bindableObjectsTests
 		}
 	}
 
+	public enum SimpleEnum
+	{
+		line1,
+		line2
+	}
+
+	[Serializable]
+	public struct SimpleStruct
+	{
+		public int _int1;
+		public bool _bool1;
+	}
+
+	[Serializable]
+	public class SimpleObjectValueTypes
+	{
+		// Value types
+		private int _number;
+		public virtual int Integer
+		{
+			get { return _number; }
+			set { _number = value; }
+		}
+
+		private bool _boolean;
+		public virtual bool Boolean
+		{
+			get { return _boolean; }
+			set { _boolean = value; }
+		}
+
+		private float _float;
+		public virtual float Float
+		{
+			get { return _float; }
+			set { _float = value; }
+		}
+
+		private double _double;
+		public virtual double Double
+		{
+			get { return _double; }
+			set { _double = value; }
+		}
+
+		private char _char;
+		public virtual char Char
+		{
+			get { return _char; }
+			set { _char = value; }
+		}
+
+		private SimpleEnum _enum;
+		public virtual SimpleEnum Enum
+		{
+			get { return _enum; }
+			set { _enum = value; }
+		}
+
+		private SimpleStruct _struct;
+		public virtual SimpleStruct Struct
+		{
+			get { return _struct; }
+			set { _struct = value; }
+		}
+	}
+
 	[Serializable]
 	public class SimpleObjectComplexProperties
 	{
@@ -117,7 +184,7 @@ namespace bindableObjectsTests
 	{
 		private string _code;
 		
-		public string Code
+		public virtual string Code
 		{
 			get { return _code; }
 			set { _code = value; }
@@ -128,11 +195,13 @@ namespace bindableObjectsTests
 		public SimpleIndexedClass(SerializationInfo info, StreamingContext context)
 			: base(info, context)
 		{
+			_code = info.GetString("_code");
 		}
 
 		public override void GetObjectData(SerializationInfo info, StreamingContext context)
 		{
-			// implement this
+			base.GetObjectData(info, context);
+			info.AddValue("_code", _code);
 		}
 	}
 
@@ -158,13 +227,13 @@ namespace bindableObjectsTests
 		private string _code;
 		private T[] _genericArray;
 
-		public string Code
+		public virtual string Code
 		{
 			get { return _code; }
 			set { _code = value; }
 		}
 		
-		public T[] GenericArray
+		public virtual T[] GenericArray
 		{
 			get { return _genericArray; }
 			set { _genericArray = value; }

@@ -129,6 +129,14 @@ namespace Boxerp.Client.WPF.Controls
 			Combo.Items.Clear();
 		}
 
+		public bool IsItemSelected
+		{
+			get
+			{
+				return Combo.SelectedItem != null;
+			}
+		}
+
 		public T SelectedItem
 		{
 			get

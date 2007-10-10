@@ -141,7 +141,7 @@ namespace Boxerp.Client.WPF.Controls
 			{
 				if (_textBox.Text.Length == 0)
 				{
-					return "0";
+					return String.Empty;
 				}
 				return _textBox.Text;
 			}
@@ -150,7 +150,7 @@ namespace Boxerp.Client.WPF.Controls
 				string cleaned = IntegerTextBoxHelper.CleanString(value);
 				if (cleaned.Length == 0)
 				{
-					Integer = 0;
+					Integer = null;
 				}
 				else
 				{
@@ -189,7 +189,7 @@ namespace Boxerp.Client.WPF.Controls
 				_textBox.Text = cleaned;
 				if (cleaned.Length == 0)
 				{
-					Integer = 0;
+					Integer = null;
 				}
 				else
 				{

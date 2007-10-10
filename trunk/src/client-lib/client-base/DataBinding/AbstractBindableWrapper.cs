@@ -299,7 +299,7 @@ namespace Boxerp.Client
             lock (this)
             {
                 _dontIntercept = true;
-                copyBusinessObjectProperties(businessObj);
+                initializeProxyFromBusinessObject(businessObj);
                 _dontIntercept = false;
             }
 		}
@@ -396,6 +396,36 @@ namespace Boxerp.Client
                 }
             }
         }
+
+		/// <summary>
+		/// FIXME: I think PropertyInfo.GetValue and SetValue passing in null as the last param throws 
+		/// an exception on indexed properties like arrays. Test this.
+		/// </summary>
+		/// <param name="source"></param>
+		protected virtual void initializeProxyFromBusinessObject(T source)
+		{
+			List<string> properties = new List<string>();
+
+			foreach (PropertyInfo pInfo in typeof(T).GetProperties())
+			{
+				if (!properties.Contains(pInfo.Name))
+				{
+					if (pInfo.CanWrite)
+					{
+						if (pInfo.GetGetMethod().GetParameters().Length > 0)
+						{
+							// Do nothing on indexed properties
+						}
+						else
+						{
+							object val = pInfo.GetValue(source, null);
+							typeof(T).GetProperty(pInfo.Name).SetValue(_bindableFields.BusinessObj, val, null);
+						}
+						properties.Add(pInfo.Name);
+					}
+				}
+			}
+		}
 
 		protected virtual Y cloneBindable()
 		{

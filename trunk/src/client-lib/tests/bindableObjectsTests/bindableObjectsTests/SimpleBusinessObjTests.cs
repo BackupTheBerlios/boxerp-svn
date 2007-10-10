@@ -41,6 +41,25 @@ public class BindableObjectsMain
 	}
 
 	[Test]
+	public void CreateBindableSOCPWithData()
+	{
+		SimpleObjectComplexProperties bocp = new SimpleObjectComplexProperties();
+		bocp.Names = new System.Collections.Generic.List<string>();
+		bocp.Names.Add("name1");
+		bocp.Names.Add("name2");
+
+		BindableWrapper<SimpleObjectComplexProperties> bindableObj =
+			new BindableWrapper<SimpleObjectComplexProperties>(bocp);
+
+		Assert.IsNotNull(bindableObj);
+
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages.Length, 6);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Ages[0], 10);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Names.Count, 2);
+		Assert.AreEqual(bindableObj.Data.BusinessObj.Names[0], "name1");
+	}
+
+	[Test]
 	public void CreateBindableSOROP()
 	{
 		BindableWrapper<SimpleObjectReadOnlyProperties> bindableObj =

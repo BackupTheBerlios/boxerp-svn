@@ -1,16 +1,20 @@
 <?xml version="1.0"?>
-<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client/administrator/administrator.mds">
+<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client/responsivenessTest1/administrator.mds">
   <Files>
     <File filename="Welcome" />
     <File filename="./administrator/GtkSharp/TestWindow2.cs" />
     <File filename="./administrator/Controllers/TestController.cs" />
+    <File filename="./administrator/GtkSharp/TestWindow.cs" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="Admin" expanded="True" selected="True">
+          <Node name="Admin" expanded="True">
             <Node name="References" expanded="True" />
+            <Node name="GtkSharp" expanded="True">
+              <Node name="TestWindow.cs" expanded="False" selected="True" />
+            </Node>
           </Node>
           <Node name="Admin.Controllers" expanded="True" />
           <Node name="Admin.Interfaces" expanded="True" />
@@ -35,8 +39,8 @@
   </Views>
   <Properties>
     <Properties>
+      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client/responsivenessTest1/administrator/GtkSharp/TestWindow.cs" />
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client/administrator/administrator/Controllers/TestController.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>

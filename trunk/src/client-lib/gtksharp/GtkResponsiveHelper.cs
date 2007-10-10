@@ -45,8 +45,8 @@ namespace Boxerp.Client.GtkSharp
 	}
 
 	public class GtkResponsiveHelper<T, Y> : AbstractResponsiveHelper
-		where T : class, IWaitControl, new()
-		where Y : class, IWaitControl, new()
+		where T : class, IGtkWaitControl, new()
+		where Y : class, IGtkWaitControl, new()
 	{
 		private T _waitDialog;
 		private Y _waitWindow;
@@ -59,12 +59,12 @@ namespace Boxerp.Client.GtkSharp
 		private Queue<QuestionDialog> _questionWindows = new Queue<QuestionDialog>();
 
 		public GtkResponsiveHelper(ConcurrencyMode mode)
-			: this(mode, true, null)
+			: this(mode, true, null, null)
 		{
 		}
 
 		public GtkResponsiveHelper(ConcurrencyMode mode, bool displayExceptions)
-			: this(mode, displayExceptions, null)
+			: this(mode, displayExceptions, null, null)
 		{
 		}
 
@@ -92,7 +92,7 @@ namespace Boxerp.Client.GtkSharp
 				{
 					if (!_userWaitDialogInstance)
 					{
-						_waitDialog = new WaitDialog();
+						_waitDialog = new T();
 						_dialogs.Enqueue(_waitDialog);
 					}
 					_waitDialog.CancelEvent += OnCancel;
@@ -101,10 +101,10 @@ namespace Boxerp.Client.GtkSharp
 				{
 					if (!_userWaitWindowInstance)
 					{
-						_waitWindow = new WaitWindow();
+						_waitWindow = new Y();
 						_windows.Enqueue(_waitWindow);
 					}
-					_waitWindow.Modal = false;
+					_waitWindow.IsModal = false;
 					_waitWindow.CancelEvent += OnCancel;
 				}
 			}
@@ -117,12 +117,11 @@ namespace Boxerp.Client.GtkSharp
 				{
 					if (_concurrencyMode == ConcurrencyMode.Modal)
 					{
-						_waitDialog.Run();
+						_waitDialog.ShowControl();
 					}
 					else
 					{
-						_waitWindow.ShowAll();
-						_waitWindow.Present();
+						_waitWindow.ShowControl();
 						// TODO : if the window is minimized show it in the middle of the screen
 					}
 				}
@@ -153,7 +152,7 @@ namespace Boxerp.Client.GtkSharp
 				{
 					if (!_userWaitDialogInstance)
 					{
-						_waitDialog = new WaitDialog();
+						_waitDialog = new T();
 						_dialogs.Enqueue(_waitDialog);
 					}
 					_waitDialog.CancelEvent += OnCancel;
@@ -162,10 +161,10 @@ namespace Boxerp.Client.GtkSharp
 				{
 					if (!_userWaitWindowInstance)
 					{
-						_waitWindow = new WaitWindow();
+						_waitWindow = new Y();
 						_windows.Enqueue(_waitWindow);
 					}
-					_waitWindow.Modal = false;
+					_waitWindow.IsModal = false;
 					_waitWindow.CancelEvent += OnCancel;
 				}
 			}
@@ -178,12 +177,12 @@ namespace Boxerp.Client.GtkSharp
 				{
 					if (_concurrencyMode == ConcurrencyMode.Modal)
 					{
-						_waitDialog.Run();
+						_waitDialog.ShowControl();
 					}
 					else
 					{
-						_waitWindow.ShowAll();
-						_waitWindow.Present();
+						_waitWindow.ShowControl();
+					
 						// TODO : if the window is minimized show it in the middle of the screen
 					}
 				}
@@ -224,36 +223,32 @@ namespace Boxerp.Client.GtkSharp
 			ThreadEventArgs evArgs = (ThreadEventArgs)e;
 			if (_concurrencyMode == ConcurrencyMode.Modal)
 			{
-				WaitDialog wDialog;
+				T wDialog;
 				if (!_userWaitDialogInstance)
 				{
 					wDialog = _dialogs.Dequeue();
-					wDialog.Stop();
-					wDialog.Hide();
-					wDialog.Destroy();
+					wDialog.CloseControl();
+					wDialog.DestroyWidget();
 				}
 				else
 				{
 					wDialog = _waitDialog;
-					wDialog.Stop();
-					wDialog.Hide();
+					wDialog.CloseControl();
 				}
 			}
 			else
 			{
-				WaitWindow wWindow;
+				Y wWindow;
 				if (!_userWaitWindowInstance)
 				{
 					wWindow = _windows.Dequeue();
-					wWindow.Stop();
-					wWindow.Hide();
-					wWindow.Destroy();   
+					wWindow.CloseControl();
+					wWindow.DestroyWidget();
 				}
 				else
 				{
 					wWindow = _waitWindow;
-					wWindow.Stop();
-					wWindow.Hide();
+					wWindow.CloseControl();
 				}
 			}
 			if (_questionWindows.Count > 0)

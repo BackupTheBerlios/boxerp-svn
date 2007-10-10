@@ -56,6 +56,9 @@ namespace Boxerp.Client.GtkSharp
 		
 		public void Bind(string xaml)
 		{
+			XamlParser parser = new XamlParser(xaml);
+			parser.ParseXaml();
+			
 			FieldInfo[] fields = _container.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
 			foreach (FieldInfo field in fields)
 			{
@@ -69,8 +72,7 @@ namespace Boxerp.Client.GtkSharp
 					//widget.WidgetCore.BindObject(_bindable, xxx, yyy, BindingOptions.TwoWay);
 					
 					Console.WriteLine(_container.Name);
-					XamlParser parser = new XamlParser(xaml);
-					parser.ParseXaml();
+					
 					try
 					{
 						BindingMetadata metadata = parser.MetadataIndexer[field.Name];

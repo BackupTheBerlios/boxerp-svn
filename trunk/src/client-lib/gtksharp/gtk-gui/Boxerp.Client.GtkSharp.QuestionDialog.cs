@@ -24,7 +24,7 @@ namespace Boxerp.Client.GtkSharp {
         private Gtk.Button buttonOk;
         
         protected virtual void Build() {
-            Stetic.Gui.Initialize();
+            Stetic.Gui.Initialize(this);
             // Widget Boxerp.Client.GtkSharp.QuestionDialog
             this.Name = "Boxerp.Client.GtkSharp.QuestionDialog";
             this.Title = Mono.Unix.Catalog.GetString("Question");

@@ -20,7 +20,7 @@ namespace Boxerp.Client.GtkSharp {
         private Gtk.Button button140;
         
         protected virtual void Build() {
-            Stetic.Gui.Initialize();
+            Stetic.Gui.Initialize(this);
             // Widget Boxerp.Client.GtkSharp.WaitDialog
             this.Name = "Boxerp.Client.GtkSharp.WaitDialog";
             this.Title = Mono.Unix.Catalog.GetString("Operation in Progress");
@@ -50,22 +50,39 @@ namespace Boxerp.Client.GtkSharp {
             // Internal child Boxerp.Client.GtkSharp.WaitDialog.ActionArea
             Gtk.HButtonBox w4 = this.ActionArea;
             w4.Name = "GtkDialog_ActionArea";
-            w4.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
+            w4.Spacing = 6;
+            w4.BorderWidth = ((uint)(5));
+            w4.LayoutStyle = ((Gtk.ButtonBoxStyle)(1));
             // Container child GtkDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild
             this.button140 = new Gtk.Button();
             this.button140.CanFocus = true;
             this.button140.Name = "button140";
             this.button140.UseUnderline = true;
-            this.button140.Label = Mono.Unix.Catalog.GetString("button140");
+            // Container child button140.Gtk.Container+ContainerChild
+            Gtk.Alignment w5 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
+            // Container child GtkAlignment.Gtk.Container+ContainerChild
+            Gtk.HBox w6 = new Gtk.HBox();
+            w6.Spacing = 2;
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Image w7 = new Gtk.Image();
+            w7.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-cancel", Gtk.IconSize.Menu, 16);
+            w6.Add(w7);
+            // Container child GtkHBox.Gtk.Container+ContainerChild
+            Gtk.Label w9 = new Gtk.Label();
+            w9.LabelProp = Mono.Unix.Catalog.GetString("Cancel");
+            w9.UseUnderline = true;
+            w6.Add(w9);
+            w5.Add(w6);
+            this.button140.Add(w5);
             this.AddActionWidget(this.button140, 0);
-            Gtk.ButtonBox.ButtonBoxChild w5 = ((Gtk.ButtonBox.ButtonBoxChild)(w4[this.button140]));
-            w5.Expand = false;
-            w5.Fill = false;
+            Gtk.ButtonBox.ButtonBoxChild w13 = ((Gtk.ButtonBox.ButtonBoxChild)(w4[this.button140]));
+            w13.Expand = false;
+            w13.Fill = false;
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
             this.DefaultWidth = 400;
-            this.DefaultHeight = 109;
+            this.DefaultHeight = 114;
             this.Show();
         }
     }

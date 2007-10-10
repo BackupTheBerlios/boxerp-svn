@@ -24,7 +24,7 @@ namespace Boxerp.Client.GtkSharp {
         private Gtk.Button button;
         
         protected virtual void Build() {
-            Stetic.Gui.Initialize();
+            Stetic.Gui.Initialize(this);
             // Widget Boxerp.Client.GtkSharp.WaitWindow
             this.Name = "Boxerp.Client.GtkSharp.WaitWindow";
             this.Title = Mono.Unix.Catalog.GetString("Operation in Progress");
@@ -64,19 +64,15 @@ namespace Boxerp.Client.GtkSharp {
             this.button.Name = "button";
             // Container child button.Gtk.Container+ContainerChild
             Gtk.Alignment w3 = new Gtk.Alignment(0.5F, 0.5F, 0F, 0F);
-            w3.Name = "GtkAlignment";
             // Container child GtkAlignment.Gtk.Container+ContainerChild
             Gtk.HBox w4 = new Gtk.HBox();
-            w4.Name = "GtkHBox";
             w4.Spacing = 2;
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Image w5 = new Gtk.Image();
-            w5.Name = "image32";
             w5.Pixbuf = Stetic.IconLoader.LoadIcon(this, "gtk-cancel", Gtk.IconSize.Menu, 16);
             w4.Add(w5);
             // Container child GtkHBox.Gtk.Container+ContainerChild
             Gtk.Label w7 = new Gtk.Label();
-            w7.Name = "GtkLabel";
             w7.LabelProp = Mono.Unix.Catalog.GetString("Cancel");
             w4.Add(w7);
             w3.Add(w4);
@@ -95,7 +91,7 @@ namespace Boxerp.Client.GtkSharp {
                 this.Child.ShowAll();
             }
             this.DefaultWidth = 400;
-            this.DefaultHeight = 115;
+            this.DefaultHeight = 119;
             this.Show();
             this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnDeleteEvent);
             this.button.Clicked += new System.EventHandler(this.OnCancel);

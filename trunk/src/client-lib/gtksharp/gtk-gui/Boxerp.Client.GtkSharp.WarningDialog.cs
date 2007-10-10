@@ -22,7 +22,7 @@ namespace Boxerp.Client.GtkSharp {
         private Gtk.Button buttonOk;
         
         protected virtual void Build() {
-            Stetic.Gui.Initialize();
+            Stetic.Gui.Initialize(this);
             // Widget Boxerp.Client.GtkSharp.WarningDialog
             this.Name = "Boxerp.Client.GtkSharp.WarningDialog";
             this.Title = Mono.Unix.Catalog.GetString("Warning");

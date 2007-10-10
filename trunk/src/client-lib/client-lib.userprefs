@@ -1,60 +1,36 @@
-<?xml version="1.0"?>
-<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client-lib/client-lib.mds">
+﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp_completo/trunk/src/client-lib/client-lib.mds">
   <Files>
-    <File filename="Welcome" />
-    <File filename="./client-base/DataBinding/AbstractBindableWrapper.cs" />
-    <File filename="./client-base/DataBinding/IBindableCore.cs" />
-    <File filename="./client-base/DataBinding/BindingOptions.cs" />
-    <File filename="./client-base/DataBinding/BindableWrapper.cs" />
-    <File filename="./client-base/ControlsHelpers/IntegerTextBoxHelper.cs" />
-    <File filename="./client-base/DataBinding/DynamicPropertyChangedProxy.cs" />
-    <File filename="./gtksharp/QuestionDialog.cs" />
-    <File filename="./gtksharp/InfoDialog.cs" />
-    <File filename="./gtksharp/WaitWindow.cs" />
-    <File filename="./gtksharp/WaitDialog.cs" />
-    <File filename="./gtksharp/GtkResponsiveHelper.cs" />
-    <File filename="./gtksharp/DataBinding/BindingMetadata.cs" />
-    <File filename="./client-base/Responsiveness/IWaitControl.cs" />
-    <File filename="./gtksharp/DataBinding/BindableWidgetCore.cs" />
-    <File filename="./gtksharp/DataBinding/IBindableWidget.cs" />
+    <File name="Welcome" />
+    <File name="./gtksharp/DataBinding/DataBinder.cs" line="80" column="59" />
+    <File name="./gtksharp/DataBinding/BindableWidgetCore.cs" line="154" column="54" />
+    <File name="./client-base/DataBinding/AbstractBindableWrapper.cs" line="254" column="87" />
+    <File name="./gtksharp/GtkResponsiveHelper.cs" line="230" column="76" />
+    <File name="./wpf/WpfResponsiveHelper.cs" line="1" column="1" />
   </Files>
   <Views>
-    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
-      <TreeView>
-        <Node expanded="True">
-          <Node name="Boxerp.Client" expanded="True" selected="True">
-            <Node name="DataBinding" expanded="True" />
-            <Node name="Responsiveness" expanded="True" />
-          </Node>
-          <Node name="Boxerp.Client.GtkSharp" expanded="True">
-            <Node name="References" expanded="True" />
-            <Node name="DataBinding" expanded="True" />
-          </Node>
+    <ViewMemento id="ProjectPad">
+      <Node expanded="True">
+        <Node name="Boxerp.Client" expanded="True">
+          <Node name="DataBinding" expanded="True" />
+          <Node name="Responsiveness" expanded="True" />
         </Node>
-      </TreeView>
-    </ViewMemento>
-    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
-      <TreeView>
-        <Node expanded="True" selected="True">
-          <Node name="Boxerp.Client.GtkSharp" expanded="True" />
+        <Node name="Boxerp.Client.GtkSharp" expanded="True">
+          <Node name="GtkResponsiveHelper.cs" selected="True" />
         </Node>
-      </TreeView>
+      </Node>
     </ViewMemento>
-    <ViewMemento Id="MonoQuery.DatabasePad">
-      <TreeView>
-        <Node expanded="False" />
-      </TreeView>
+    <ViewMemento id="ClassPad">
+      <Node expanded="True" />
     </ViewMemento>
-    <ViewMemento Id="MonoDevelop.NUnit.TestPad">
-      <TreeView>
-        <Node expanded="False" />
-      </TreeView>
+    <ViewMemento id="ConnectionManagerPad">
+      <Node />
+    </ViewMemento>
+    <ViewMemento id="MonoDevelop.NUnit.TestPad">
+      <Node />
     </ViewMemento>
   </Views>
   <Properties>
-    <Properties>
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/client-base/DataBinding/DynamicPropertyChangedProxy.cs" />
-      <Property key="ActiveConfiguration" value="Debug" />
-    </Properties>
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp_completo/trunk/src/client-lib/gtksharp/GtkResponsiveHelper.cs" />
+    <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

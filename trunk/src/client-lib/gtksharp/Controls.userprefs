@@ -1,43 +1,33 @@
-<?xml version="1.0"?>
-<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/Controls.mds">
+﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp_completo/trunk/src/client-lib/gtksharp/Controls.mds">
   <Files>
-    <File filename="Welcome" />
-    <File filename="../../../../branches/old-0.1/client/GuiExtractor.cs" />
-    <File filename="./Controls/IntegerTextBoxControl.cs" />
-    <File filename="./Controls/TextBoxControl.cs" />
-    <File filename="./Controls/ComboBox.cs" />
+    <File name="Welcome" />
+    <File name="./Controls/TextBox.cs" line="74" column="1" />
+    <File name="./Controls/ComboBox.cs" line="1" column="1" />
+    <File name="./Controls/ListView.cs" line="229" column="4" />
+    <File name="./Controls/IntegerTextBox.cs" line="45" column="24" />
+    <File name="./Controls/DateControl.cs" line="31" column="30" />
+    <File name="../../../../branches/branch_nov2006/src/client-gtksharp/lib/lib/SimpleListView.cs" line="158" column="4" />
   </Files>
   <Views>
-    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
-      <TreeView>
-        <Node expanded="True">
-          <Node name="Boxerp.Client.GtkSharp.Controls" expanded="True">
-            <Node name="UserInterface" expanded="True" />
-            <Node name="ComboBox.cs" expanded="False" selected="True" />
-          </Node>
+    <ViewMemento id="ProjectPad">
+      <Node expanded="True">
+        <Node name="Boxerp.Client.GtkSharp.Controls" expanded="True">
+          <Node name="ListView.cs" selected="True" />
         </Node>
-      </TreeView>
+      </Node>
     </ViewMemento>
-    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
-      <TreeView>
-        <Node expanded="True" />
-      </TreeView>
+    <ViewMemento id="ClassPad">
+      <Node expanded="True" />
     </ViewMemento>
-    <ViewMemento Id="MonoQuery.DatabasePad">
-      <TreeView>
-        <Node expanded="False" />
-      </TreeView>
+    <ViewMemento id="ConnectionManagerPad">
+      <Node />
     </ViewMemento>
-    <ViewMemento Id="MonoDevelop.NUnit.TestPad">
-      <TreeView>
-        <Node expanded="False" />
-      </TreeView>
+    <ViewMemento id="MonoDevelop.NUnit.TestPad">
+      <Node />
     </ViewMemento>
   </Views>
   <Properties>
-    <Properties>
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client-lib/gtksharp/Controls/ComboBox.cs" />
-      <Property key="ActiveConfiguration" value="Debug" />
-    </Properties>
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp_completo/trunk/src/client-lib/gtksharp/Controls/ListView.cs" />
+    <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

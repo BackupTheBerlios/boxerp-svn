@@ -16,18 +16,19 @@ namespace Boxerp.Client.GtkSharp.Controls {
         private Gtk.ComboBox _combo;
         
         protected virtual void Build() {
-            Stetic.Gui.Initialize();
+            Stetic.Gui.Initialize(this);
             // Widget Boxerp.Client.GtkSharp.Controls.ComboBox
             Stetic.BinContainer.Attach(this);
             this.Name = "Boxerp.Client.GtkSharp.Controls.ComboBox";
             // Container child Boxerp.Client.GtkSharp.Controls.ComboBox.Gtk.Container+ContainerChild
-            this.combobox1 = new Gtk.ComboBox();
-            this.combobox1.Name = "combobox1";
-            this.Add(this.combobox1);
+            this._combo = new Gtk.ComboBox();
+            this._combo.Name = "_combo";
+            this.Add(this._combo);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
             this.Show();
+            this._combo.Changed += new System.EventHandler(this.OnComboChanged);
         }
     }
 }

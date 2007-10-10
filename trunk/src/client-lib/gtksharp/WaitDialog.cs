@@ -36,7 +36,7 @@ namespace Boxerp.Client.GtkSharp
 {
 	
 	
-	public partial class WaitDialog : Gtk.Dialog, IWaitControl
+	public partial class WaitDialog : Gtk.Dialog, IGtkWaitControl
 	{
 		protected bool nonstop = true;
 		protected bool firstInstant = true;
@@ -98,7 +98,14 @@ namespace Boxerp.Client.GtkSharp
 
 		public void CloseControl ()
 		{
-			OnCancel(this, new EventArgs());
+			//OnCancel(this, new EventArgs());
+			Stop();
+			Hide();
+		}
+		
+		public void DestroyWidget()
+		{
+			Destroy();
 		}
 
 		public void UpdateProgress (int amount, int total)

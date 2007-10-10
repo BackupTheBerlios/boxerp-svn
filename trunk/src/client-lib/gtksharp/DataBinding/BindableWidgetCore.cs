@@ -136,26 +136,49 @@ namespace Boxerp.Client.GtkSharp
 					_boBindingProperty = _propertyOwner.GetType().GetProperty(_boPropertyName);
 				}
 			}
-			
+			OnPropertyChanged(this, new PropertyChangedEventArgs(_boPropertyName));
 			Console.WriteLine("}}}" + _propertyOwner);
 			Console.WriteLine("}}}" + _boBindingProperty.Name);
 		}
 		
 		public void OnPropertyChanged(object o, PropertyChangedEventArgs args)
 		{
-			//Console.WriteLine("binding prop changed:" + args.PropertyName + "," + _propertyName);
-			if (args.PropertyName.Equals(_boPropertyName))
+			try
 			{
-				object propValue = _boBindingProperty.GetValue(_propertyOwner, null);
-				Console.WriteLine("prop new value = " + propValue);
-				if (propValue != null)
+				Console.WriteLine("binding prop changed:" + args.PropertyName + "," + _boPropertyName + "," + _propertyOwner
+				                  + ", " + _boBindingProperty);
+				Console.WriteLine("binding prop " +_widgetBindingProperty + "," + _uiWidget);
+				if (args.PropertyName.Equals(_boPropertyName))
 				{
-					_uiWidget.UpdateValue(_widgetBindingProperty, propValue);
+					object propValue = _boBindingProperty.GetValue(_propertyOwner, null);
+					Console.WriteLine("prop new value = " + propValue);
+					if (propValue != null)
+					{
+						_uiWidget.UpdateValue(_widgetBindingProperty, propValue);
+					}
 				}
+			}
+			catch (NullReferenceException ex)
+			{
+				Console.Out.WriteLine("The binding path is not correct:" + args.PropertyName);
+				throw ex;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
 			}
 		}
 				
 		public void SetPropertyValue(object val)
+		{
+			if ((BindingOptions == BindingOptions.TwoWay) && (BOBindingProperty != null))
+			{
+				Console.WriteLine("setting value: " + val);
+				_boBindingProperty.SetValue(_propertyOwner, val, null);
+			}
+		}
+		
+		public void SetPropertyValue(string propertyName, object val)
 		{
 			if ((BindingOptions == BindingOptions.TwoWay) && (BOBindingProperty != null))
 			{

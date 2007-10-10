@@ -8,10 +8,10 @@
     <widget-library name="../../bin/Debug/Boxerp.Client.GtkSharp.dll" />
     <widget-library name="../bin/Debug/Boxerp.Client.GtkSharp.Controls.dll" internal="true" />
   </import>
-  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Controls.IntegerTextBoxControl" design-size="162 37">
+  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Controls.IntegerTextBox" undoId="15" design-size="162 37">
     <property name="MemberName" />
-    <child>
-      <widget class="Gtk.Entry" id="_textBox">
+    <child undoId="17">
+      <widget class="Gtk.Entry" id="_textBox" undoId="16">
         <property name="MemberName" />
         <property name="CanFocus">True</property>
         <property name="IsEditable">True</property>
@@ -20,10 +20,10 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Controls.TextBoxControl" design-size="182 38">
+  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Controls.TextBox" undoId="18" design-size="182 38">
     <property name="MemberName" />
-    <child>
-      <widget class="Gtk.Entry" id="_textBox">
+    <child undoId="20">
+      <widget class="Gtk.Entry" id="_textBox" undoId="19">
         <property name="MemberName" />
         <property name="CanFocus">True</property>
         <property name="IsEditable">True</property>
@@ -32,15 +32,31 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Controls.ComboBox" design-size="300 30">
+  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Controls.ComboBox" undoId="21" design-size="300 31">
     <property name="MemberName" />
-    <child>
-      <widget class="Gtk.ComboBox" id="_combo">
+    <child undoId="23">
+      <widget class="Gtk.ComboBox" id="_combo" undoId="22">
         <property name="MemberName" />
         <property name="IsTextCombo">False</property>
         <property name="Items" translatable="yes" />
         <signal name="Changed" handler="OnComboChanged" after="yes" />
       </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Controls.ListView" design-size="300 300">
+    <property name="MemberName" />
+    <child>
+      <widget class="Gtk.TreeView" id="_treeview">
+        <property name="MemberName" />
+        <property name="CanFocus">True</property>
+        <property name="HeadersClickable">True</property>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Controls.DateControl" undoId="37" design-size="300 300">
+    <property name="MemberName" />
+    <child undoId="41">
+      <placeholder />
     </child>
   </widget>
 </stetic-interface>

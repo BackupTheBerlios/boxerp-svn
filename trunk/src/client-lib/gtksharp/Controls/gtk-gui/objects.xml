@@ -1,22 +1,30 @@
 <objects>
-  <object type="Boxerp.Client.GtkSharp.Controls.IntegerTextBoxControl" palette-category="widget" allow-children="false" base-type="Gtk.Bin">
+  <object type="Boxerp.Client.GtkSharp.Controls.ComboBox" palette-category="widget" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+  <object type="Boxerp.Client.GtkSharp.Controls.ListView" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+  <object type="Boxerp.Client.GtkSharp.Controls.IntegerTextBox" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
     <itemgroups>
-      <itemgroup label="IntegerTextBoxControl Properties">
+      <itemgroup label="IntegerTextBox Properties">
         <property name="Integer" />
         <property name="MaxValue" />
       </itemgroup>
     </itemgroups>
     <signals />
   </object>
-  <object type="Boxerp.Client.GtkSharp.Controls.TextBoxControl" palette-category="widget" allow-children="false" base-type="Gtk.Bin">
+  <object type="Boxerp.Client.GtkSharp.Controls.TextBox" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
     <itemgroups>
-      <itemgroup label="TextBoxControl Properties">
+      <itemgroup label="TextBox Properties">
         <property name="Text" />
       </itemgroup>
     </itemgroups>
     <signals />
   </object>
-  <object type="Boxerp.Client.GtkSharp.Controls.ComboBox" palette-category="widget" allow-children="false" base-type="Gtk.Bin">
+  <object type="Boxerp.Client.GtkSharp.Controls.DateControl" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
     <itemgroups />
     <signals />
   </object>

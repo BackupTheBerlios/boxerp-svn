@@ -31,6 +31,7 @@ using System;
 using Gdk;
 using Boxerp.Client.GtkSharp;
 using System.Reflection;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Boxerp.Client.GtkSharp.Controls

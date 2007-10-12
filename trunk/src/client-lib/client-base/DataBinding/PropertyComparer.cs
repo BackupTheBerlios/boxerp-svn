@@ -9,6 +9,7 @@ namespace Boxerp.Client
 	/// It compares the ToString() object of the given object property.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
+	/// 
 	public class PropertyComparer<T> : IComparer<T>
 	{
 		protected PropertyDescriptor _propDescriptor;

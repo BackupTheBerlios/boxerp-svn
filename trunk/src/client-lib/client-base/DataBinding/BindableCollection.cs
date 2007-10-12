@@ -11,9 +11,11 @@ using Boxerp.Collections;
 
 namespace Boxerp.Client
 {
+	[Serializable]
 	public class BindableCollection<T> : BindingList<T> 
 	{
 		private bool _isSorted = false;
+		[field: NonSerialized]
 		private PropertyComparer<T> _comparer = null;
 
 		public BindableCollection(){}

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Boxerp.Client;
+using Boxerp.Validation;
 
 namespace ValidationTests
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using Boxerp.Client;
+using Boxerp.Validation;
 
 namespace ValidationTests
 {

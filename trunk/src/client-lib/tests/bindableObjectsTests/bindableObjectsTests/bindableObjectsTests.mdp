@@ -17,6 +17,7 @@
     <File name="./SimpleBusinessObjTests.cs" subtype="Code" buildaction="Compile" />
     <File name="./AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
     <File name="./SimpleBusinessObject.cs" subtype="Code" buildaction="Compile" />
+    <File name="./BindableCollectionTests.cs" subtype="Code" buildaction="Compile" />
     <File name="./ComplexBusinessObject.cs" subtype="Code" buildaction="Compile" />
     <File name="./ComplexBusinessObjTests.cs" subtype="Code" buildaction="Compile" />
     <File name="./NestedCollectionBusinessObjTests.cs" subtype="Code" buildaction="Compile" />

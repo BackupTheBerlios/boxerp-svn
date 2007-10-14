@@ -1,19 +1,17 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.20706</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{705363E2-5EE3-4E64-A13A-526AC2423889}</ProjectGuid>
+    <ProjectGuid>{123AA091-CC44-4ED2-9274-653FA0961657}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ValidationTests</RootNamespace>
-    <AssemblyName>ValidationTests</AssemblyName>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>2.0</OldToolsVersion>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
+    <RootNamespace>Boxerp.Client.WindowsForms.Tests</RootNamespace>
+    <AssemblyName>Boxerp.Client.WindowsForms.Tests</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,28 +31,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Boxerp.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Castle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\client-base\bin\Debug\Boxerp.Client.dll</HintPath>
+      <HintPath>..\..\..\dependencies\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.2.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\dependencies\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\dependencies\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OtherBusinessObject.cs" />
-    <Compile Include="SimpleBusinessObject.cs" />
-    <Compile Include="ValidationTests.cs" />
+    <Compile Include="WinFormsBindableWrapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\validation\Boxerp.Validation\Boxerp.Validation.csproj">
-      <Project>{78E6D662-792C-4EE0-84BD-0F3E0DAE82F8}</Project>
-      <Name>Boxerp.Validation</Name>
+    <ProjectReference Include="..\..\client-base\client-base2008.csproj">
+      <Project>{701CF3A1-60F3-4938-B0DD-CBFBC6DEF7D5}</Project>
+      <Name>client-base2008</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\winforms\winforms.csproj">
+      <Project>{323C228A-8F9B-4A89-9E8D-912FE7E297CE}</Project>
+      <Name>winforms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -41,56 +41,63 @@ namespace winFormsTestApp2
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 9);
+			this.label1.Location = new System.Drawing.Point(18, 14);
+			this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(38, 13);
+			this.label1.Size = new System.Drawing.Size(58, 20);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Name:";
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(12, 55);
+			this.label2.Location = new System.Drawing.Point(18, 85);
+			this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(63, 13);
+			this.label2.Size = new System.Drawing.Size(100, 20);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Description:";
 			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(12, 101);
+			this.label3.Location = new System.Drawing.Point(18, 155);
+			this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(29, 13);
+			this.label3.Size = new System.Drawing.Size(43, 20);
 			this.label3.TabIndex = 2;
 			this.label3.Text = "Age:";
 			// 
 			// _name
 			// 
-			this._name.Location = new System.Drawing.Point(81, 6);
+			this._name.Location = new System.Drawing.Point(122, 9);
+			this._name.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this._name.Name = "_name";
-			this._name.Size = new System.Drawing.Size(169, 20);
+			this._name.Size = new System.Drawing.Size(252, 26);
 			this._name.TabIndex = 3;
 			// 
 			// _description
 			// 
-			this._description.Location = new System.Drawing.Point(81, 52);
+			this._description.Location = new System.Drawing.Point(122, 80);
+			this._description.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this._description.Name = "_description";
-			this._description.Size = new System.Drawing.Size(169, 20);
+			this._description.Size = new System.Drawing.Size(252, 26);
 			this._description.TabIndex = 4;
 			// 
 			// _age
 			// 
-			this._age.Location = new System.Drawing.Point(79, 101);
+			this._age.Location = new System.Drawing.Point(118, 155);
+			this._age.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this._age.Name = "_age";
-			this._age.Size = new System.Drawing.Size(169, 20);
+			this._age.Size = new System.Drawing.Size(252, 26);
 			this._age.TabIndex = 5;
 			// 
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(79, 184);
+			this.button3.Location = new System.Drawing.Point(118, 283);
+			this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(169, 23);
+			this.button3.Size = new System.Drawing.Size(254, 35);
 			this.button3.TabIndex = 8;
 			this.button3.Text = "Change the Data";
 			this.button3.UseVisualStyleBackColor = true;
@@ -98,9 +105,10 @@ namespace winFormsTestApp2
 			// 
 			// button4
 			// 
-			this.button4.Location = new System.Drawing.Point(79, 213);
+			this.button4.Location = new System.Drawing.Point(118, 328);
+			this.button4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(169, 23);
+			this.button4.Size = new System.Drawing.Size(254, 35);
 			this.button4.TabIndex = 9;
 			this.button4.Text = "Read Data";
 			this.button4.UseVisualStyleBackColor = true;
@@ -108,9 +116,9 @@ namespace winFormsTestApp2
 			// 
 			// Form1
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(386, 307);
+			this.ClientSize = new System.Drawing.Size(579, 472);
 			this.Controls.Add(this.button4);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this._age);
@@ -119,8 +127,10 @@ namespace winFormsTestApp2
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
+			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.Name = "Form1";
 			this.Text = "Form1";
+			this.Load += new System.EventHandler(this.Form1_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

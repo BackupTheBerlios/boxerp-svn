@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,8 +38,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Boxerp.Collections;
 
 namespace Boxerp.Client.WPF.Controls
 {
@@ -65,7 +64,7 @@ namespace Boxerp.Client.WPF.Controls
 	public class GenericComboBox<T> : GenericComboBox
 	{
 		private bool _sortItems = false;
-		private InterceptedList<T> _items = new InterceptedList<T>();
+		private BindableCollection<T> _items = new BindableCollection<T>();
 
 		public event SelectionChangedEventHandler SelectionChanged
 		{
@@ -161,7 +160,7 @@ namespace Boxerp.Client.WPF.Controls
 			}
 		}
 
-		public InterceptedList<T> Items
+		public BindingList<T> Items
 		{
 			get
 			{

@@ -35,9 +35,11 @@ namespace winFormsTestApp2
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(12, 51);
+			this.button1.Enabled = false;
+			this.button1.Location = new System.Drawing.Point(18, 78);
+			this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(240, 27);
+			this.button1.Size = new System.Drawing.Size(360, 42);
 			this.button1.TabIndex = 0;
 			this.button1.Text = "Test Proxy2";
 			this.button1.UseVisualStyleBackColor = true;
@@ -45,9 +47,10 @@ namespace winFormsTestApp2
 			// 
 			// button2
 			// 
-			this.button2.Location = new System.Drawing.Point(12, 84);
+			this.button2.Location = new System.Drawing.Point(18, 129);
+			this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(240, 27);
+			this.button2.Size = new System.Drawing.Size(360, 42);
 			this.button2.TabIndex = 1;
 			this.button2.Text = "Test Dynamic Proxy";
 			this.button2.UseVisualStyleBackColor = true;
@@ -55,9 +58,11 @@ namespace winFormsTestApp2
 			// 
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(12, 117);
+			this.button3.Enabled = false;
+			this.button3.Location = new System.Drawing.Point(18, 180);
+			this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(240, 27);
+			this.button3.Size = new System.Drawing.Size(360, 42);
 			this.button3.TabIndex = 2;
 			this.button3.Text = "Test Object Witch Collection";
 			this.button3.UseVisualStyleBackColor = true;
@@ -65,12 +70,13 @@ namespace winFormsTestApp2
 			// 
 			// MainForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(266, 419);
+			this.ClientSize = new System.Drawing.Size(399, 645);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);
+			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.Name = "MainForm";
 			this.Text = "MainForm";
 			this.ResumeLayout(false);

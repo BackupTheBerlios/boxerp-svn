@@ -41,75 +41,75 @@ namespace winFormsTestApp2
 		}
 	}
 
-    [Serializable]
-	public class Proxy1 : SampleBObj, ICustomNotifyPropertyChanged
-	{
-		public event PropertyChangedEventHandler PropertyChanged;
-		public bool HasSubscribers()
-		{
-			return PropertyChanged != null;
-		}
+//    [Serializable]
+//	public class Proxy1 : SampleBObj, ICustomNotifyPropertyChanged
+//	{
+//		public event PropertyChangedEventHandler PropertyChanged;
+//		public bool HasSubscribers()
+//		{
+//			return PropertyChanged != null;
+//		}
+//
+//		public void ThrowPropertyChangedEvent(string name)
+//		{
+//			PropertyChanged(this, new PropertyChangedEventArgs(name));
+//		}
+//
+//        public Delegate[] GetSubscribersList()
+//        {
+//            return PropertyChanged.GetInvocationList();
+//        }
+//	}
 
-		public void ThrowPropertyChangedEvent(string name)
-		{
-			PropertyChanged(this, new PropertyChangedEventArgs(name));
-		}
-
-        public Delegate[] GetSubscribersList()
-        {
-            return PropertyChanged.GetInvocationList();
-        }
-	}
-
-    [Serializable]
-	public class Proxy2 : Proxy1
-	{
-		public override string Name
-		{
-			get
-			{
-				return base.Name;
-			}
-			set
-			{
-				base.Name = value;
-				if (HasSubscribers())
-				{
-					ThrowPropertyChangedEvent("Name");
-				}
-			}
-		}
-
-		public override string Description
-		{
-			get
-			{
-				return base.Description;
-			}
-			set
-			{
-				base.Description = value;
-				if (HasSubscribers())
-				{
-					ThrowPropertyChangedEvent("Name");
-				}
-			}
-		}
-
-		public override int Age
-		{
-			get
-			{
-				return base.Age;
-			}
-			set
-			{
-				base.Age = value;
-				if (HasSubscribers())
-				{
-					ThrowPropertyChangedEvent("Name");
-				}
-			}
-		}
-	}
+//    [Serializable]
+//	public class Proxy2 : Proxy1
+//	{
+//		public override string Name
+//		{
+//			get
+//			{
+//				return base.Name;
+//			}
+//			set
+//			{
+//				base.Name = value;
+//				if (HasSubscribers())
+//				{
+//					ThrowPropertyChangedEvent("Name");
+//				}
+//			}
+//		}
+//
+//		public override string Description
+//		{
+//			get
+//			{
+//				return base.Description;
+//			}
+//			set
+//			{
+//				base.Description = value;
+//				if (HasSubscribers())
+//				{
+//					ThrowPropertyChangedEvent("Name");
+//				}
+//			}
+//		}
+//
+//		public override int Age
+//		{
+//			get
+//			{
+//				return base.Age;
+//			}
+//			set
+//			{
+//				base.Age = value;
+//				if (HasSubscribers())
+//				{
+//					ThrowPropertyChangedEvent("Name");
+//				}
+//			}
+//		}
+//	}
 }

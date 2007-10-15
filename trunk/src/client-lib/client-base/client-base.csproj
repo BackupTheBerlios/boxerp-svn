@@ -7,7 +7,7 @@
     <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>Boxerp.Client</AssemblyName>
     <RootNamespace>Boxerp.Client</RootNamespace>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>boxerpkey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

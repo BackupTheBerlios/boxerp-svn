@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boxerp.Collections", "Boxerp.Collections\Boxerp.Collections.csproj", "{323C228A-8F9B-4A89-9E8D-912FE7E297CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boxerp.Collections", "Boxerp.Collections\Boxerp.Collections.csproj", "{3D3E70F8-CCA0-4D6C-8276-E13FD70DB7FF}"
 	ProjectSection(WebsiteProperties) = preProject
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.Debug = "False"
@@ -13,10 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{323C228A-8F9B-4A89-9E8D-912FE7E297CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{323C228A-8F9B-4A89-9E8D-912FE7E297CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{323C228A-8F9B-4A89-9E8D-912FE7E297CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{323C228A-8F9B-4A89-9E8D-912FE7E297CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3E70F8-CCA0-4D6C-8276-E13FD70DB7FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3E70F8-CCA0-4D6C-8276-E13FD70DB7FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3E70F8-CCA0-4D6C-8276-E13FD70DB7FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3E70F8-CCA0-4D6C-8276-E13FD70DB7FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,7 +10,8 @@
     <RootNamespace>Boxerp.Client.WPF.Controls</RootNamespace>
     <AssemblyName>Boxerp.Client.WPF.Controls</AssemblyName>
     <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>boxerpkey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -84,9 +85,6 @@
     <Page Include="NullableIntegerControl.xaml" />
     <Page Include="NullableTextControl.xaml" />
     <Page Include="SystemNameTextBox.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="boxerpkey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\client-base\client-base.csproj">

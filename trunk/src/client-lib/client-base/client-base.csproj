@@ -43,11 +43,13 @@
     <Compile Include="ControlsHelpers\IntegerTextBoxHelper.cs" />
     <Compile Include="ControlsHelpers\SystemNameTextBoxHelper.cs" />
     <Compile Include="DataBinding\AbstractBindableWrapper.cs" />
+    <Compile Include="DataBinding\AbstractDataBinder.cs" />
     <Compile Include="DataBinding\BbWithBindableCollection.cs" />
     <Compile Include="DataBinding\BdWithNestedWrapper.cs" />
     <Compile Include="DataBinding\BindableCollection.cs" />
     <Compile Include="DataBinding\BindableWithCollection.cs" />
     <Compile Include="DataBinding\BindableWrapper.cs" />
+    <Compile Include="DataBinding\BindingMetadata.cs" />
     <Compile Include="DataBinding\BindingOptions.cs" />
     <Compile Include="DataBinding\Cloner.cs" />
     <Compile Include="DataBinding\DynamicPropertyChangedProxy.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="DataBinding\IUIBinder.cs" />
     <Compile Include="DataBinding\PropertyComparer.cs" />
     <Compile Include="DataBinding\UIBinderBase.cs" />
+    <Compile Include="DataBinding\XamlParser.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="IControl.cs" />
     <Compile Include="IController.cs" />

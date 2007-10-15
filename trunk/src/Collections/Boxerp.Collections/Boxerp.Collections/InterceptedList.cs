@@ -4,7 +4,6 @@ using System.Text;
 
 namespace Boxerp.Collections
 {
-	[Obsolete("Use ObservableCollection instead")]
 	internal class InterceptedList<T> : IList<T>
 	{
 		public event EventHandler CollectionChangedEvent;
@@ -12,7 +11,7 @@ namespace Boxerp.Collections
 		public event EventHandler ItemRemovedEvent;
 		public event EventHandler ClearEvent;
 
-        private List<T> innerList;
+        private List<T> innerList = new List<T>();
 
 		public virtual void Add(T item)
 		{
@@ -37,7 +36,7 @@ namespace Boxerp.Collections
 		public virtual void Clear()
 		{
 			innerList.Clear();
-			OnCollectionChanged(this);
+			//OnCollectionChanged();
 			if (ClearEvent != null)
 			{
 				ClearEvent.Invoke(this, null);
@@ -48,7 +47,7 @@ namespace Boxerp.Collections
 
         public int IndexOf(T item)
         {
-            innerList.IndexOf(item);
+            return innerList.IndexOf(item);
         }
 
         public void Insert(int index, T item)
@@ -81,7 +80,7 @@ namespace Boxerp.Collections
 
         public bool Contains(T item)
         {
-            innerList.Contains(item);
+            return innerList.Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)

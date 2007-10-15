@@ -30,10 +30,9 @@
 using System;
 using System.Xml;
 using System.Collections.Generic;
-using Gtk;
 using System.IO;
 
-namespace Boxerp.Client.GtkSharp
+namespace Boxerp.Client
 {
 	
 	

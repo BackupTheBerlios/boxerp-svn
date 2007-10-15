@@ -37,7 +37,7 @@ namespace Boxerp.Client.GtkSharp
 {
 	
 	
-	public class DataBinder
+	public class DataBinder : AbstractDataBinder
 	{
 		private Gtk.Bin _container;
 		private IBindableWrapper _bindable;

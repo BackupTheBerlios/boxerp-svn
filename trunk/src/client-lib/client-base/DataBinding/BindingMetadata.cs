@@ -29,7 +29,7 @@
 
 using System;
 
-namespace Boxerp.Client.GtkSharp
+namespace Boxerp.Client
 {
 	
 	

@@ -38,7 +38,7 @@ namespace Boxerp.Client
 {
 	[Serializable]
 	public abstract class AbstractBindableWrapper<T, Y> : IInterceptor, INotifyPropertyChanged,
-		IBindableWrapper<T> where Y : AbstractBindableWrapper<T, Y>.BindableFields<T>
+		IBindableWrapper<T, Y> where Y : AbstractBindableWrapper<T, Y>.BindableFields<T>
 	{
 		#region INotifyPropertyChanged Members
 
@@ -538,7 +538,7 @@ namespace Boxerp.Client
 		}
 
 		[Serializable]
-		public abstract class BindableFields<D>
+		public abstract class BindableFields<D> : ISimpleWrapper<D>
 		{
 			private D _businessObj;
 

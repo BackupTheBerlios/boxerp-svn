@@ -38,12 +38,23 @@ namespace Boxerp.Client
 	{
 		void Undo();
 		void Redo();
-		//void PushOnUndo();
-		//void PushOnRedo();
 	}
 
-	public interface IBindableWrapper<T> : IBindableWrapper
+	public interface ISimpleWrapper<T>
+	{
+		T BusinessObj { get; }
+	}
+
+	public interface IBindableWrapper<T, Y> : IBindableWrapper
+		where Y : ISimpleWrapper<T>
 	{
 		Type GetWrappedObjectType();
+		Y Data { get; }
+	}
+
+	public interface IBindableWrapper<X> : IBindableWrapper<X, ISimpleWrapper<X>>
+		where X : IBindableWrapper<X, ISimpleWrapper<X>>
+	{
+
 	}
 }

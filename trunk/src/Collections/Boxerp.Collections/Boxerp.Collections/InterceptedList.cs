@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Boxerp.Collections
 {
-	internal class InterceptedList<T> : IList<T>
+	public class InterceptedList<T> : IList<T>
 	{
 		public event EventHandler CollectionChangedEvent;
 		public event EventHandler ItemAddedEvent;

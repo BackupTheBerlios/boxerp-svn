@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="DataBinding\DataBinder.cs" />
     <Compile Include="DataBinding\IWinFormsDataBinder.cs" />
-    <Compile Include="DataBinding\WinFormsBindableWrapper.cs" />
     <Compile Include="IWinFormsWaitControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionDialog.cs">

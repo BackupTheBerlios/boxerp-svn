@@ -36,6 +36,46 @@ using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
+	/*[Serializable]
+	public abstract class AbstractBindableWrapper<T> : 
+		AbstractBindableWrapper<T, AbstractBindableWrapper<T>.WrapObject<T>>
+	{
+		public AbstractBindableWrapper(T businessObj, bool disableWrapperInterception,
+			bool disableBusinessObjectInterception, bool disableUndoRedo, object[] constructorParams)
+			: base (businessObj, disableWrapperInterception, disableBusinessObjectInterception, disableUndoRedo, constructorParams)
+		{}
+
+		public AbstractBindableWrapper(T businessObj, object[] constructorParams)
+			: this(businessObj, false, false, false, constructorParams)	{}
+
+		public AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, bool disableBusinessObjectInterception)
+			: this(businessObj, disableWrapperInterception, disableBusinessObjectInterception, false, null)	{}
+
+		public AbstractBindableWrapper(T businessObj, bool disableInterception, object[] constructorParams)
+			: this(businessObj, disableInterception, disableInterception, false, constructorParams)	{}
+
+		public AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, bool disableBOInterception, bool disableUndoRedo)
+			: this(businessObj, disableWrapperInterception, disableBOInterception, disableUndoRedo, null){}
+
+		public AbstractBindableWrapper(T businessObj, bool disableInterception)
+			: this(businessObj, disableInterception, disableInterception, true, null){}
+
+		public AbstractBindableWrapper(T businessObj)
+			: this(businessObj, false, false, false, null){	}
+
+
+		[Serializable]
+		public abstract class WrapObject<D> : 
+			AbstractBindableWrapper<D, AbstractBindableWrapper<D>.WrapObject<D>>.BindableFields<D>
+		{
+			public WrapObject(IInterceptor interceptor)
+				: base(interceptor)
+			{
+
+			}
+		}
+	}*/
+		
 	[Serializable]
 	public abstract class AbstractBindableWrapper<T, Y> : IInterceptor, INotifyPropertyChanged,
 		IBindableWrapper<T, Y> where Y : AbstractBindableWrapper<T, Y>.BindableFields<T>
@@ -63,7 +103,7 @@ namespace Boxerp.Client
 		private bool _disableWrapperInterception = false;
 		private bool _disableUndoRedo = false;
 
-        public Y Data
+		public Y Data
         {
             get
             {
@@ -582,5 +622,7 @@ namespace Boxerp.Client
 				}
 			}
 		}
+
+		
 	}
 }

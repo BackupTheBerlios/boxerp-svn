@@ -52,9 +52,8 @@ namespace Boxerp.Client
 		Y Data { get; }
 	}
 
-	public interface IBindableWrapper<X> : IBindableWrapper<X, ISimpleWrapper<X>>
-		where X : IBindableWrapper<X, ISimpleWrapper<X>>
+	/*public interface IBindableWrapper<X> : IBindableWrapper<X, ISimpleWrapper<X>>
 	{
 
-	}
+	}*/
 }

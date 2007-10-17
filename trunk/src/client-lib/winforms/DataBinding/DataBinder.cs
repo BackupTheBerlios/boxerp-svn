@@ -7,17 +7,34 @@ using System.Reflection;
 
 namespace Boxerp.Client.WindowsForms
 {
-	public class DataBinder<T, Y> : IWinFormsDataBinder<T, Y>
-		where T : IBindableWrapper<T>
-		where Y : IContainerControl
+	public class DataBinder<X, Z> : DataBinder<BindableWrapper<X>, X, BindableWrapper<X>.WrapObject<X>, Z>
+		where Z : IContainerControl
 	{
-		private Dictionary<string, string> boundObjectPropertyStringCases = new Dictionary<string, string>();
-		private T _bindableWrapper;
-		private Y _control;
-
-		public DataBinder(T bindableObj, Y control)
+		public DataBinder(X bindableObj, Z control)
+		   : base (new BindableWrapper<X>(bindableObj), control)
 		{
-			_bindableWrapper = bindableObj;
+			
+		}
+
+		public DataBinder(BindableWrapper<X> bindableWrapper, Z control)
+			: base (bindableWrapper, control)
+		{
+			
+		}
+	}
+
+	public class DataBinder<T, X, Y, Z> : IWinFormsDataBinder<T, X, Y, Z>
+		where Z : IContainerControl
+		where T : IBindableWrapper<X, Y>
+		where Y : ISimpleWrapper<X>
+	{
+		protected Dictionary<string, string> boundObjectPropertyStringCases = new Dictionary<string, string>();
+		protected T _bindableWrapper;
+		protected Z _control;
+
+		public DataBinder(T bindableWrapper, Z control)
+		{
+			_bindableWrapper = bindableWrapper;
 			_control = control;
 			buildPropertyInfoDictionary();
 		}

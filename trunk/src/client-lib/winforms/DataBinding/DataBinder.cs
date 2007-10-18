@@ -41,7 +41,7 @@ namespace Boxerp.Client.WindowsForms
 
 		private void buildPropertyInfoDictionary()
 		{
-			foreach (PropertyInfo pInfo in typeof(T).GetProperties())
+			foreach (PropertyInfo pInfo in typeof(X).GetProperties())
 			{
 				boundObjectPropertyStringCases.Add(pInfo.Name, pInfo.Name);
 				boundObjectPropertyStringCases.Add("_" + pInfo.Name, pInfo.Name);
@@ -79,7 +79,7 @@ namespace Boxerp.Client.WindowsForms
 
 		public void BindWithReflection()
 		{
-			Type formType = typeof(Y);
+			Type formType = _control.GetType();
 			System.Diagnostics.Debug.Assert(formType != null);
 			FieldInfo[] fieldInfos = formType.GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
 			foreach (FieldInfo lFieldInfo in fieldInfos)
@@ -92,7 +92,7 @@ namespace Boxerp.Client.WindowsForms
 						System.Diagnostics.Debug.WriteLine("binding " + lFieldInfo.Name + " type:" + lFieldInfo.FieldType + " to:" + boundObjectPropertyStringCases[lFieldInfo.Name]);
 						Console.WriteLine("binding " + lFieldInfo.Name + " type:" + lFieldInfo.FieldType + " to:" + boundObjectPropertyStringCases[lFieldInfo.Name]);
 
-						(lFieldInfo.GetValue(this) as Control).DataBindings.Add(
+						(lFieldInfo.GetValue(_control) as Control).DataBindings.Add(
 							"Text",
 							_bindableWrapper.Data.BusinessObj,
 							boundObjectPropertyStringCases[lFieldInfo.Name],

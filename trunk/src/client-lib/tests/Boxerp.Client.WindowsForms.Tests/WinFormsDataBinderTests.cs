@@ -4,11 +4,14 @@ using System.Text;
 using NUnit.Framework;
 using System.Windows.Forms;
 using Boxerp.Client.WindowsForms;
+using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Boxerp.Client.WindowsForms.Tests
 {
 	[TestFixture]
-	public class WinFormsBindableWrapperTests
+	public class WinFormsDataBinderTests
 	{
 		[Test]
 		public void BindsTextBox()
@@ -16,13 +19,16 @@ namespace Boxerp.Client.WindowsForms.Tests
 			Person bob = new Person("Bob");
 			TestForm form = new TestForm(bob);
 
+			form.Show();
+
 			Assert.AreEqual("Bob", form.NameTxt.Text);
 
 			bob.Name = "joe";
 
 			Assert.AreEqual("joe", form.NameTxt.Text);
-		}
 
+			form.Close();
+		}
 
 		public class TestForm : Form
 		{
@@ -30,7 +36,9 @@ namespace Boxerp.Client.WindowsForms.Tests
 			public TestForm(Person person)
 			{
 				name.Name = "name";
-				WinFormsBindableWrapper<Person> _bindable = new WinFormsBindableWrapper<Person>(person,this);
+				BindableWrapper<Person> _bindable = new BindableWrapper<Person>(person);
+				DataBinder<Person, Form> dataBinder  = new DataBinder<Person, Form>( _bindable, this);
+				dataBinder.BindWithReflection();
 				
 			}
 			public TextBox NameTxt

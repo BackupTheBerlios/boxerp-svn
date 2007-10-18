@@ -19,27 +19,63 @@ namespace Boxerp.Client.WindowsForms.Tests
 			Person bob = new Person("Bob");
 			TestForm form = new TestForm(bob);
 
-			form.Show();
+			form.Show();//TODO: need the winforms application event loop to run ot update the binding - NUnitForms?
 
 			Assert.AreEqual("Bob", form.NameTxt.Text);
 
-			bob.Name = "joe";
 
+			form.NameTxt.Text = "Alice";
+			//TODO: need the winforms application event loop to run ot update the binding - NUnitForms?
+			form.Hide();
+			form.Show();
+			Assert.AreEqual("Alice", bob.Name);
+
+			bob.Name = "joe";
+			//TODO: need the winforms application event loop to run ot update the binding - NUnitForms?
 			Assert.AreEqual("joe", form.NameTxt.Text);
 
+
 			form.Close();
+		}
+
+		[Test, Explicit]
+		public void InteractiveWinFormsTest()
+		{
+			Person bob = new Person("Bob");
+			TestForm form = new TestForm(bob);
+
+			Application.Run(form);
+			
 		}
 
 		public class TestForm : Form
 		{
 			TextBox name = new TextBox();
+			TextBox _name = new TextBox();
+			TextBox inputbox = new TextBox();
+			Person person;
+			FlowLayoutPanel flowPanel = new FlowLayoutPanel();
 			public TestForm(Person person)
 			{
+				this.person = person;
 				name.Name = "name";
+				_name.Name = "_name";
+				inputbox.Name = "inputbox";
+				Control holder = flowPanel;
+				Label lNewLabel = new Label() { Text = "name" };
+                holder.Controls.Add(lNewLabel);
+				holder.Controls.Add(name);
+				holder.Controls.Add(new Label(){Text = "_name"});
+				holder.Controls.Add(_name);
+				holder.Controls.Add(new Label() { Text = "input"});
+				holder.Controls.Add(inputbox);
+				flowPanel.Dock = DockStyle.Fill;
+				Controls.Add(flowPanel);
 				BindableWrapper<Person> _bindable = new BindableWrapper<Person>(person);
 				DataBinder<Person, Form> dataBinder  = new DataBinder<Person, Form>( _bindable, this);
 				dataBinder.BindWithReflection();
-				
+
+				inputbox.TextChanged += (sender, ea) => person.Name = inputbox.Text;
 			}
 			public TextBox NameTxt
 			{

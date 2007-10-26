@@ -39,6 +39,8 @@ namespace testApp3
 			Application.Init ();
 			MainWindow win = new MainWindow ();
 			win.Show ();
+			GroupsWindow gwin = new GroupsWindow();
+			gwin.Show();
 			
 			Application.Run ();
 		}

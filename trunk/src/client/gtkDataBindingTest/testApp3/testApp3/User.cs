@@ -33,8 +33,8 @@ using System.Text;
 
 namespace testApp3
 {
-	
-	public class User : ICloneable
+	[Serializable]
+	public class User 
 	{
 		private string _username;
 		private string _password;
@@ -99,17 +99,6 @@ namespace testApp3
 			_password = password;
 			_email = email;
 			_desk = desk;
-		}
-		
-		#region ICloneable Members
-
-		public object Clone()
-		{
-			User clone = new User(_username, _password, _email, _desk);
-			return clone;
-		}
-
-		#endregion
-		
+		}		
 	}
 }

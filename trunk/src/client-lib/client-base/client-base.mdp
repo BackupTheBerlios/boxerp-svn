@@ -46,11 +46,21 @@
     <File name="./DataBinding/DynamicPropertyChangedProxy.cs" subtype="Code" buildaction="Compile" />
     <File name="./DataBinding/ICustomNotifyPropertyChanged.cs" subtype="Code" buildaction="Compile" />
     <File name="./Responsiveness/IWaitControl.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/BindableCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/PropertyComparer.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/AbstractDataBinder.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/BindingMetadata.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/DynamicPropertyChangedProxy_Generation.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/IChildObject.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/IDataBinder.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/XamlParser.cs" subtype="Code" buildaction="Compile" />
+    <File name="./IUIData.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Assembly" localcopy="True" refto="../../dependencies/Castle.Core.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../../dependencies/Castle.DynamicProxy2.dll" />
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   </References>
   <DeployTargets />
 </Project>

@@ -28,18 +28,18 @@
 //
 
 using System;
-using System.ComponentModel;
+using Boxerp.Client.GtkSharp;
 
-namespace Boxerp.Client.GtkSharp
+namespace Boxerp.Client.GtkSharp.Controls
 {
-		
-	public interface IBindableWidget : IBindableCore
+	
+	
+	public partial class DateControl : Gtk.Bin
 	{
-		// the BindableWidgetCore uses this function as the handler for the PropertyChanged event 
-		// in the business object so that the interface can refresh
-		void UpdateValue(string widgetProperty, object val);	
 		
-		BindableWidgetCore WidgetCore { get; }
+		public DateControl()
+		{
+			this.Build();
+		}
 	}
-
 }

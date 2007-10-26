@@ -49,12 +49,12 @@ namespace Boxerp.Client.GtkSharp
 			_bindable = bindable;
 		}
 		
-		public void Bind()
+		public override void Bind()
 		{
 			Bind(_container.Name + ".xaml");
 		}
 		
-		public void Bind(string xaml)
+		public override void Bind(string xaml)
 		{
 			XamlParser parser = new XamlParser(xaml);
 			parser.ParseXaml();

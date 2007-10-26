@@ -32,6 +32,8 @@ using testApp3;
 using Boxerp.Client.GtkSharp.Controls;
 using Boxerp.Client.GtkSharp;
 using Boxerp.Client;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 public partial class MainWindow: Gtk.Window
 {	
@@ -43,15 +45,11 @@ public partial class MainWindow: Gtk.Window
 		Build ();
 		_user = new User();
 		
-		_bindable = new BindableWrapper<User>(_user, false);
+		_bindable = new BindableWrapper<User>(_user);
 		_bindable.Data.BusinessObj.Username = "Paco";
-		
-		
-		//XamlParser parser = new XamlParser("MainWindow.xaml");
 		
 		DataBinder binder = new DataBinder(this, _bindable);
 		binder.Bind();
-		
 	}
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
@@ -70,10 +68,13 @@ public partial class MainWindow: Gtk.Window
 
 	protected virtual void OnShowClicked (object sender, System.EventArgs e)
 	{
-		Console.WriteLine(_bindable.Data.BusinessObj.Username);
-		Console.WriteLine(_bindable.Data.BusinessObj.Password);
-		Console.WriteLine(_bindable.Data.BusinessObj.Email);
-		Console.WriteLine(_bindable.Data.BusinessObj.Desk);
+		InfoDialog dialog = new InfoDialog();
+		dialog.Title = "Contents of the Business Object";
+		dialog.Message = _bindable.Data.BusinessObj.Username + "," +
+			             _bindable.Data.BusinessObj.Password + "," +
+				         _bindable.Data.BusinessObj.Email + "," +
+				         _bindable.Data.BusinessObj.Desk;
+		dialog.Show();
 	}
 
 	protected virtual void OnRedoClicked (object sender, System.EventArgs e)

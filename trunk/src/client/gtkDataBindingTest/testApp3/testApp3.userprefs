@@ -1,43 +1,32 @@
-<?xml version="1.0"?>
-<UserCombinePreferences filename="/home/carlos/boxerp_completo/trunk/src/client/testApp3/testApp3/testApp3.mds">
+﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp_completo/trunk/src/client/gtkDataBindingTest/testApp3/testApp3.mds">
   <Files>
-    <File filename="Welcome" />
-    <File filename="./testApp3/Main.cs" />
-    <File filename="./testApp3/MainWindow.cs" />
-    <File filename="./testApp3/User.cs" />
-    <File filename="./testApp3/MainWindow.xaml" />
-    <File filename="../../testApp2/testApp2/Window1.xaml" />
+    <File name="Welcome" />
+    <File name="./testApp3/MainWindow.cs" line="60" column="1" />
+    <File name="./testApp3/User.cs" line="35" column="2" />
+    <File name="./testApp3/Group.cs" line="40" column="11" />
+    <File name="./testApp3/GroupsWindow.cs" line="124" column="4" />
+    <File name="./testApp3/Main.cs" line="41" column="4" />
   </Files>
   <Views>
-    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
-      <TreeView>
-        <Node expanded="True">
-          <Node name="testApp3" expanded="True" selected="True">
-            <Node name="References" expanded="True" />
-          </Node>
+    <ViewMemento id="ProjectPad">
+      <Node expanded="True">
+        <Node name="testApp3" expanded="True" selected="True">
+          <Node name="References" expanded="True" />
         </Node>
-      </TreeView>
+      </Node>
     </ViewMemento>
-    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
-      <TreeView>
-        <Node expanded="True" />
-      </TreeView>
+    <ViewMemento id="ClassPad">
+      <Node expanded="True" />
     </ViewMemento>
-    <ViewMemento Id="MonoQuery.DatabasePad">
-      <TreeView>
-        <Node expanded="False" />
-      </TreeView>
+    <ViewMemento id="ConnectionManagerPad">
+      <Node />
     </ViewMemento>
-    <ViewMemento Id="MonoDevelop.NUnit.TestPad">
-      <TreeView>
-        <Node expanded="False" />
-      </TreeView>
+    <ViewMemento id="MonoDevelop.NUnit.TestPad">
+      <Node />
     </ViewMemento>
   </Views>
   <Properties>
-    <Properties>
-      <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/carlos/boxerp_completo/trunk/src/client/testApp3/testApp3/testApp3/MainWindow.cs" />
-    </Properties>
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp_completo/trunk/src/client/gtkDataBindingTest/testApp3/testApp3/GroupsWindow.cs" />
+    <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

@@ -14,13 +14,13 @@ public partial class MainWindow {
     
     private Gtk.Table table1;
     
-    private Boxerp.Client.GtkSharp.Controls.IntegerTextBoxControl _desk;
+    private Boxerp.Client.GtkSharp.Controls.IntegerTextBox _desk;
     
-    private Boxerp.Client.GtkSharp.Controls.TextBoxControl _email;
+    private Boxerp.Client.GtkSharp.Controls.TextBox _email;
     
-    private Boxerp.Client.GtkSharp.Controls.TextBoxControl _password;
+    private Boxerp.Client.GtkSharp.Controls.TextBox _password;
     
-    private Boxerp.Client.GtkSharp.Controls.TextBoxControl _username;
+    private Boxerp.Client.GtkSharp.Controls.TextBox _username;
     
     private Gtk.Button button3;
     
@@ -41,7 +41,7 @@ public partial class MainWindow {
     private Gtk.Label label4;
     
     protected virtual void Build() {
-        Stetic.Gui.Initialize();
+        Stetic.Gui.Initialize(this);
         // Widget MainWindow
         this.Name = "MainWindow";
         this.Title = Mono.Unix.Catalog.GetString("MainWindow");
@@ -52,7 +52,7 @@ public partial class MainWindow {
         this.table1.RowSpacing = ((uint)(6));
         this.table1.ColumnSpacing = ((uint)(6));
         // Container child table1.Gtk.Table+TableChild
-        this._desk = new Boxerp.Client.GtkSharp.Controls.IntegerTextBoxControl();
+        this._desk = new Boxerp.Client.GtkSharp.Controls.IntegerTextBox();
         this._desk.Events = ((Gdk.EventMask)(256));
         this._desk.Name = "_desk";
         this._desk.Integer = 0;
@@ -66,7 +66,7 @@ public partial class MainWindow {
         w1.XOptions = ((Gtk.AttachOptions)(4));
         w1.YOptions = ((Gtk.AttachOptions)(4));
         // Container child table1.Gtk.Table+TableChild
-        this._email = new Boxerp.Client.GtkSharp.Controls.TextBoxControl();
+        this._email = new Boxerp.Client.GtkSharp.Controls.TextBox();
         this._email.Events = ((Gdk.EventMask)(256));
         this._email.Name = "_email";
         this.table1.Add(this._email);
@@ -78,7 +78,7 @@ public partial class MainWindow {
         w2.XOptions = ((Gtk.AttachOptions)(4));
         w2.YOptions = ((Gtk.AttachOptions)(4));
         // Container child table1.Gtk.Table+TableChild
-        this._password = new Boxerp.Client.GtkSharp.Controls.TextBoxControl();
+        this._password = new Boxerp.Client.GtkSharp.Controls.TextBox();
         this._password.Events = ((Gdk.EventMask)(256));
         this._password.Name = "_password";
         this.table1.Add(this._password);
@@ -90,7 +90,7 @@ public partial class MainWindow {
         w3.XOptions = ((Gtk.AttachOptions)(4));
         w3.YOptions = ((Gtk.AttachOptions)(4));
         // Container child table1.Gtk.Table+TableChild
-        this._username = new Boxerp.Client.GtkSharp.Controls.TextBoxControl();
+        this._username = new Boxerp.Client.GtkSharp.Controls.TextBox();
         this._username.Events = ((Gdk.EventMask)(256));
         this._username.Name = "_username";
         this.table1.Add(this._username);
@@ -198,8 +198,8 @@ public partial class MainWindow {
         if ((this.Child != null)) {
             this.Child.ShowAll();
         }
-        this.DefaultWidth = 410;
-        this.DefaultHeight = 300;
+        this.DefaultWidth = 444;
+        this.DefaultHeight = 196;
         this.Show();
         this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnDeleteEvent);
         this.button4.Clicked += new System.EventHandler(this.OnShowClicked);

@@ -31,25 +31,25 @@ using System;
 using Gdk;
 using Boxerp.Client.GtkSharp;
 using System.Reflection;
-using System.Collections.Generic;
 using System.ComponentModel;
+using Boxerp.Client;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
 	
 	
-	public partial class ComboBox : Gtk.Bin, IBindableWidget
+	public partial class IntegerTextBox : Gtk.Bin, IBindableWidget
 	{
+		private int _maxValue = Int32.MaxValue;
 		private BindableWidgetCore _widgetCore;
-		private object _selectedItem = null;
-		private List<object> _items = new List<object>();
 		
-		public ComboBox()
+		public IntegerTextBox()
 		{
 			this.Build();
 			_widgetCore = new BindableWidgetCore(this);
 		}
 
+#region IUIWidget implementation
 		public BindableWidgetCore WidgetCore
 		{
 			get
@@ -68,38 +68,74 @@ namespace Boxerp.Client.GtkSharp.Controls
 			_widgetCore.BindObject(wrapper, owner, path, widgetProperty, options);
 		}
 		
-		public object SelectedItem 
+		public void UpdateValue(string property, object val)
 		{
-			get 
-			{
-				return _selectedItem;
-			}
+			_textBox.Text = val.ToString();
 		}
-
-		public List<object> Items 
+#endregion
+		
+		public int Integer
 		{
-			get 
+			get
 			{
-				return _items;
+				return Int32.Parse(_textBox.Text);
+			}
+			set
+			{
+				_textBox.Text = value.ToString();
 			}
 		}
 		
-		public void UpdateValue(string property, object val)
+		public int MaxValue
 		{
-			_selectedItem = val;
-			// update the combo without calling again the SetPropertyValue
+			get
+			{
+				return _maxValue;
+			}
+			set
+			{
+				_maxValue = value;
+			}
 		}
-
-		protected virtual void OnComboChanged (object sender, System.EventArgs e)
+		
+		protected virtual void OnKeyReleased (object o, Gtk.KeyReleaseEventArgs args)
 		{
-			// Get the selected item 
-			//_selectedItem = _combo.Model.
-			WidgetCore.SetPropertyValue(_selectedItem);
-		}		
+			if (Helper.IsValidKey(args.Event.Key))
+			{
+				string key = args.Event.Key.ToString();
+			    char character = key[key.Length - 1];
 				
-				
-				
-				
-				
+				if (!Helper.IsValidNumericCharacter(args.Event.Key, character))
+				{
+					WarningDialog wdialog = new WarningDialog();
+					wdialog.Message = "Error: Only numbers are allowed in this box";
+					wdialog.Present();
+				}
+				else
+				{
+					string text = _textBox.Text;
+
+					string maxIntValue = Int32.MaxValue.ToString();
+					if ((text.Length > maxIntValue.Length) || ((text.Length == maxIntValue.Length) && (text.CompareTo(maxIntValue) > 0)))
+					{
+						WarningDialog wdialog = new WarningDialog();
+						wdialog.Message = "Error: Value is too big";
+						wdialog.Present();
+						Integer = Int32.MaxValue;
+					}
+
+					if ((MaxValue != Int32.MaxValue) && (Integer > MaxValue))
+					{
+						WarningDialog wdialog = new WarningDialog();
+						wdialog.Message = "The maximun value allowed is: " + MaxValue;
+						wdialog.Present();
+						Integer = MaxValue;
+					}
+					
+					WidgetCore.SetPropertyValue(Integer);
+				}
+				_textBox.Text = IntegerTextBoxHelper.CleanString(_textBox.Text);
+			}
+		}
 	}
 }

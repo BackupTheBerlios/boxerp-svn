@@ -28,18 +28,63 @@
 //
 
 using System;
-using System.ComponentModel;
+using Boxerp.Client.GtkSharp;
 
-namespace Boxerp.Client.GtkSharp
+namespace Boxerp.Client.GtkSharp.Controls
 {
-		
-	public interface IBindableWidget : IBindableCore
+	
+	
+	public partial class TextBox : Gtk.Bin, IBindableWidget
 	{
-		// the BindableWidgetCore uses this function as the handler for the PropertyChanged event 
-		// in the business object so that the interface can refresh
-		void UpdateValue(string widgetProperty, object val);	
+		private BindableWidgetCore _widgetCore;
 		
-		BindableWidgetCore WidgetCore { get; }
-	}
+		public TextBox()
+		{
+			this.Build();
+			_widgetCore = new BindableWidgetCore(this);
+		}
 
+#region IUIWidget implementation
+		public BindableWidgetCore WidgetCore
+		{
+			get
+			{
+				return _widgetCore;
+			}
+		}
+
+		public void BindObject(IBindableWrapper wrapper, string path, string widgetProperty, BindingOptions options)
+		{
+			_widgetCore.BindObject(wrapper, path, widgetProperty, options);
+		}
+		
+		public void BindObject(IBindableWrapper wrapper, object owner, string path, string widgetProperty, BindingOptions options)
+		{
+			_widgetCore.BindObject(wrapper, owner, path, widgetProperty, options);
+		}
+		
+		public void UpdateValue(string property, object val)
+		{
+			_textBox.Text = val.ToString();
+		}
+
+#endregion
+		
+		public string Text
+		{
+			get
+			{
+				return _textBox.Text;
+			}
+			set
+			{
+				_textBox.Text = value;
+			}
+		}
+
+		protected virtual void OnKeyReleased (object o, Gtk.KeyReleaseEventArgs args)
+		{
+			WidgetCore.SetPropertyValue(Text);
+		}
+	}
 }

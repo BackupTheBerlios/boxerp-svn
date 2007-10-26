@@ -1,21 +1,21 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp_completo/trunk/src/client-lib/client-lib.mds">
   <Files>
     <File name="Welcome" />
-    <File name="./gtksharp/DataBinding/DataBinder.cs" line="80" column="59" />
-    <File name="./gtksharp/DataBinding/BindableWidgetCore.cs" line="154" column="54" />
-    <File name="./client-base/DataBinding/AbstractBindableWrapper.cs" line="254" column="87" />
-    <File name="./gtksharp/GtkResponsiveHelper.cs" line="230" column="76" />
-    <File name="./wpf/WpfResponsiveHelper.cs" line="1" column="1" />
+    <File name="./client-base/IUIData.cs" line="36" column="26" />
+    <File name="./gtksharp/DataBinding/DataBinder.cs" line="52" column="19" />
+    <File name="./gtksharp/DataBinding/IBindableWidget.cs" line="42" column="3" />
+    <File name="./gtksharp/DataBinding/BindableWidgetCore.cs" line="116" column="47" />
+    <File name="./client-base/DataBinding/IBindableCore.cs" line="1" column="1" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
         <Node name="Boxerp.Client" expanded="True">
+          <Node name="References" expanded="True" />
           <Node name="DataBinding" expanded="True" />
-          <Node name="Responsiveness" expanded="True" />
         </Node>
-        <Node name="Boxerp.Client.GtkSharp" expanded="True">
-          <Node name="GtkResponsiveHelper.cs" selected="True" />
+        <Node name="Boxerp.Client.GtkSharp" expanded="True" selected="True">
+          <Node name="DataBinding" expanded="True" />
         </Node>
       </Node>
     </ViewMemento>
@@ -30,7 +30,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp_completo/trunk/src/client-lib/gtksharp/GtkResponsiveHelper.cs" />
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp_completo/trunk/src/client-lib/gtksharp/DataBinding/IBindableWidget.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

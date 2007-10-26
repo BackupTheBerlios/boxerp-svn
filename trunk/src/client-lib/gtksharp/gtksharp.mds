@@ -1,0 +1,16 @@
+<Combine name="Boxerp.Client.GtkSharp" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="Boxerp.Client.GtkSharp" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="Boxerp.Client.GtkSharp" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="Boxerp.Client.GtkSharp" single="True">
+    <Execute type="None" entry="Boxerp.Client.GtkSharp" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./gtksharp.mdp" />
+  </Entries>
+</Combine>

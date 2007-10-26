@@ -136,9 +136,11 @@ namespace Boxerp.Client.GtkSharp
 					_boBindingProperty = _propertyOwner.GetType().GetProperty(_boPropertyName);
 				}
 			}
+			Console.WriteLine("Property owner= " + _propertyOwner);
+			Console.WriteLine("bo binding property = " + _boBindingProperty.Name);
+			// read the value of the property for the first time
 			OnPropertyChanged(this, new PropertyChangedEventArgs(_boPropertyName));
-			Console.WriteLine("}}}" + _propertyOwner);
-			Console.WriteLine("}}}" + _boBindingProperty.Name);
+			
 		}
 		
 		public void OnPropertyChanged(object o, PropertyChangedEventArgs args)

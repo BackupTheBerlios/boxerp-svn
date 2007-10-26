@@ -39,7 +39,7 @@ using System.Runtime.Serialization;
 
 namespace Boxerp.Client
 {
-	public static class DynamicPropertyChangedProxy
+	public static partial class DynamicPropertyChangedProxy
 	{
 		private static AssemblyBuilder _assemblyBuilder = null;
 		private static ModuleBuilder _moduleBuilder = null;
@@ -108,7 +108,9 @@ namespace Boxerp.Client
 			return null;
 		}
 
-		public static string CleanGarbageSimbols(string sourceName)
+		#region clean names functions
+
+		private static string cleanGarbageSimbols(string sourceName)
 		{
 			char[] garbage = new char[] { '.', '[', ']', '+', '\'', '\\', '`', ',' };
 			string cleaned = String.Empty;
@@ -133,43 +135,43 @@ namespace Boxerp.Client
 			return cleaned;
 		}
 
-		#region clean names functions
-		public static string CleanBaseTypeName(string sourceName)
+		/// <summary>
+		/// TODO: When the class is generic it contains the "<" and ">". Change to code to take this into account
+		/// </summary>
+		/// <param name="sourceName"></param>
+		/// <returns></returns>
+		private static string cleanBaseTypeName(string sourceName)
 		{
 			string[] namespaces = sourceName.Split(new char[] { '.' });
 			sourceName = namespaces[namespaces.Length -1];
 			sourceName += DateTime.Now.ToString("ddMMyyyyHH");// +Guid.NewGuid().ToString();
-			/*Random random = new Random();
-			for (int i = 0; i < 3; i++)
-			{
-				sourceName += random.Next(9999 * i).ToString();
-			}*/
+			
 
-			return CleanGarbageSimbols(sourceName);
+			return cleanGarbageSimbols(sourceName);
 		}
 
-		public static string GetBindableClassName(string sourceName)
+		private static string getBindableClassName(string sourceName)
 		{
-			sourceName = CleanGarbageSimbols(sourceName);
+			sourceName = cleanGarbageSimbols(sourceName);
 			int start = sourceName.IndexOf("Bindable");
 			int end = sourceName.IndexOf("1", start);
 			return sourceName.Substring(start);
 		}
 		#endregion
 
-		public static Type CreateINotifyPropertyChangedBindableProxy(Type baseType, Type[] constructorParamsTypes)
+		public static Type CreateBindableWrapperProxy(Type baseType, Type[] constructorParamsTypes)
 		{
-			string className = "PropChPrxy_" + GetBindableClassName(baseType.ToString());
-			return CreateINotifyPropertyChangedTypeProxy(baseType, constructorParamsTypes, className);
+			string className = "PropChPrxy_" + getBindableClassName(baseType.ToString());
+			return CreateBusinessObjectProxy(baseType, constructorParamsTypes, className);
 		}
 
-		public static Type CreateINotifyPropertyChangedTypeProxy(Type baseType, Type[] constructorParamsTypes)
+		public static Type CreateBusinessObjectProxy(Type baseType, Type[] constructorParamsTypes)
 		{
-			string className = "PropChPrxy_" + CleanBaseTypeName(baseType.ToString());
-			return CreateINotifyPropertyChangedTypeProxy(baseType, constructorParamsTypes, className);
+			string className = "PropChPrxy_" + cleanBaseTypeName(baseType.ToString());
+			return CreateBusinessObjectProxy(baseType, constructorParamsTypes, className);
 		}
 
-		public static Type CreateINotifyPropertyChangedTypeProxy(Type baseType, Type[] constructorParamsTypes, string className)
+		public static Type CreateBusinessObjectProxy(Type baseType, Type[] constructorParamsTypes, string className)
 		{
 			// If this proxy has been created already do not create it again
 			foreach (Type t in MyAssemblyBuilder.GetTypes())
@@ -188,7 +190,7 @@ namespace Boxerp.Client
 			#endif
 
 			Type targetType = null;
-			Type[] interfaces = new Type[] { typeof(ICustomNotifyPropertyChanged) };
+			Type[] interfaces = new Type[] { typeof(ICustomNotifyPropertyChanged), typeof(ISerializable) };
 
 			TypeBuilder targetTypeBld = MyModuleBuilder.DefineType(className, TypeAttributes.Public, baseType, interfaces);
 
@@ -196,45 +198,21 @@ namespace Boxerp.Client
 			ConstructorInfo attributeCtorInfo = typeof(SerializableAttribute).GetConstructor(new Type[0]);
 			CustomAttributeBuilder customAttBuilder = new CustomAttributeBuilder(attributeCtorInfo, new object[0]);
 			targetTypeBld.SetCustomAttribute(customAttBuilder);
-
+			// add event 
 			EventBuilder eventField = targetTypeBld.DefineEvent("PropertyChanged", EventAttributes.None, typeof(PropertyChangedEventHandler));
-
 			// the propertyChanged event shouldn't be serializable
 			FieldBuilder eventHandler = targetTypeBld.DefineField("PropertyChanged", typeof(PropertyChangedEventHandler), FieldAttributes.Private | FieldAttributes.NotSerialized);
 
-			// Create the constructor
-			ConstructorInfo objCtor = baseType.GetConstructor(constructorParamsTypes); 
+			createDefaultConstructor(targetTypeBld, baseType, constructorParamsTypes);
+			createDeserializationConstructor(targetTypeBld, baseType);
+			getObjectDataMethod(targetTypeBld, baseType);
+			addOrRemoveMethod(targetTypeBld, eventField, eventHandler, true);
+			addOrRemoveMethod(targetTypeBld, eventField, eventHandler, false);
+			hasSubscribersMethod(targetTypeBld, eventHandler);
+			throwPropertyChangedMethod(targetTypeBld, eventHandler);
+			getSubscribersListMethod(targetTypeBld, eventHandler);
 
-			ConstructorBuilder targetCtor = targetTypeBld.DefineConstructor(
-                      MethodAttributes.Public,
-                      CallingConventions.Standard,
-                      constructorParamsTypes);
-			ILGenerator ctorIL = targetCtor.GetILGenerator();
-
-
-			ctorIL.Emit(OpCodes.Ldarg_0); // this
-			// pass all the parameters: 
-			for (int i = 1; i <= constructorParamsTypes.Length; i++)
-			{
-				ctorIL.Emit(OpCodes.Ldarg_S, i);
-			}
-
-			ctorIL.Emit(OpCodes.Call, objCtor);
-
-			ctorIL.Emit(OpCodes.Ret);
 			
-
-			AddOrRemoveMethod(targetTypeBld, eventField, eventHandler, true);
-			AddOrRemoveMethod(targetTypeBld, eventField, eventHandler, false);
-			HasSubscribersMethod(targetTypeBld, eventHandler);
-			ThrowPropertyChangedMethod(targetTypeBld, eventHandler);
-			GetSubscribersListMethod(targetTypeBld, eventHandler);
-
-			if (typeof(ISerializable).IsAssignableFrom(baseType))
-			{
-				CreateDeserializationConstructor(targetTypeBld, baseType);
-			}
-
 			targetType = targetTypeBld.CreateType();
 
 			#if CREATE_DLL_FILE
@@ -244,230 +222,12 @@ namespace Boxerp.Client
 			return targetType;
 		}
 
-		/// <summary>
-		/// Implementation of the add_PropertyChanged method. The lines bellow but in IL Code
-		///  MethodImplAttribute(MethodImplOptions.Synchronized)]
-		///  public void add_PropertyChanged(PropertyChangedEventHandler handler) 
-		///  {
-		///     PropertyChanged = (PropertyChangedEventHandler) Delegate.Combine(PropertyChanged, handler);
-		///  }
-		///  Disassembled il code:
-		///  IL_0000:  /* 02   |                  */ ldarg.0
-		///  IL_0001:  /* 02   |                  */ ldarg.0
-		///  IL_0002:  /* 7B   | (04)000001       */ ldfld      class [System/*23000002*/]System.ComponentModel.PropertyChangedEventHandler/*01000004*/ ReflectionEmit.SimplePropertyChangedImplementation/*02000003*/::PropertyChanged /* 04000001 */
-		///  IL_0007:  /* 03   |                  */ ldarg.1
-		///  IL_0008:  /* 28   | (0A)00003B       */ call       class [mscorlib/*23000001*/]System.Delegate/*01000032*/ [mscorlib/*23000001*/]System.Delegate/*01000032*/::Combine(class [mscorlib/*23000001*/]System.Delegate/*01000032*/,
-		///                                                    class [mscorlib/*23000001*/]System.Delegate/*01000032*/) /* 0A00003B */
-		///  IL_000d:  /* 74   | (01)000004       */ castclass  [System/*23000002*/]System.ComponentModel.PropertyChangedEventHandler/*01000004*/
-		///  IL_0012:  /* 7D   | (04)000001       */ stfld      class [System/*23000002*/]System.ComponentModel.PropertyChangedEventHandler/*01000004*/ ReflectionEmit.SimplePropertyChangedImplementation/*02000003*/::PropertyChanged /* 04000001 */
-		///  IL_0017:  /* 2A   |                  */ ret
-		/// 
-		/// </summary>
-		/// <param name="builder"></param>
-		/// <param name="eventBuilder"></param>
-		/// <param name="eventHandler"></param>
-		/// <param name="operation"></param>
-		private static void AddOrRemoveMethod(TypeBuilder builder, EventBuilder eventBuilder, FieldBuilder eventHandler, bool operation)
+		public static void ConsolePrint(ILGenerator generator, string msg)
 		{
-			string methodName;
-
-			if (operation)
-			{
-				methodName = "add_PropertyChanged";
-			}
-			else
-			{
-				methodName = "remove_PropertyChanged";
-			}
-
-			// code  generation
-			MethodBuilder method = builder.DefineMethod(
-							 methodName,
-							 MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.SpecialName |
-							 MethodAttributes.HideBySig, typeof(void), new Type[] { typeof(PropertyChangedEventHandler) });
-			
-			ILGenerator mthdIL = method.GetILGenerator();
-
-			mthdIL.Emit(OpCodes.Ldarg_0);
-			mthdIL.Emit(OpCodes.Ldarg_0);
-			mthdIL.Emit(OpCodes.Ldfld, eventHandler);
-			mthdIL.Emit(OpCodes.Ldarg_1);
-			if (operation)
-			{
-				mthdIL.Emit(OpCodes.Call, typeof(System.Delegate).GetMethod("Combine", new Type[] { typeof(Delegate), typeof(Delegate) }));
-			}
-			else
-			{
-				mthdIL.Emit(OpCodes.Call, typeof(System.Delegate).GetMethod("Remove", new Type[] { typeof(Delegate), typeof(Delegate) }));
-			}
-
-			mthdIL.Emit(OpCodes.Castclass, typeof(PropertyChangedEventHandler));
-			mthdIL.Emit(OpCodes.Stfld, eventHandler);
-			mthdIL.Emit(OpCodes.Ret);
-			
-			// attach the methods to the event
-			if (operation)
-			{
-				eventBuilder.SetAddOnMethod(method);
-			}
-			else
-			{
-				eventBuilder.SetRemoveOnMethod(method);
-			}
+			generator.Emit(OpCodes.Call, typeof(Console).GetMethod("get_Out", new Type[0]));
+			generator.Emit(OpCodes.Ldstr, msg);
+			generator.Emit(OpCodes.Callvirt, typeof(System.IO.TextWriter).GetMethod("WriteLine", new Type[] { typeof(string) }));
+			generator.Emit(OpCodes.Nop);
 		}
-
-		/// <summary>
-		/// The generated code should be: return (PropertyChanged == null)
-		/// CIL disassembled code:
-		/// .maxstack  2
-		/// .locals /*11000003*/ init ([0] bool CS$1$0000)
-		/// IL_0000:  /* 00   |                  */ nop
-		/// IL_0001:  /* 02   |                  */ ldarg.0
-		/// IL_0002:  /* 7B   | (04)000002       */ ldfld      class [System/*23000003*/]System.ComponentModel.PropertyChangedEventHandler/*01000005*/ ConsoleApplication1.TestClass/*02000004*/::PropertyChanged /* 04000002 */
-		/// IL_0007:  /* 14   |                  */ ldnull
-		/// IL_0008:  /* FE01 |                  */ ceq
-		/// IL_000a:  /* 16   |                  */ ldc.i4.0
-		/// IL_000b:  /* FE01 |                  */ ceq
-		/// IL_000d:  /* 0A   |                  */ stloc.0
-		/// IL_000e:  /* 2B   | 00               */ br.s       IL_0010
-		/// IL_0010:  /* 06   |                  */ ldloc.0
-		/// IL_0011:  /* 2A   |                  */ ret
-		/// </summary>
-		/// <param name="builder"></param>
-		/// <param name="eventHandler"></param>
-		private static void HasSubscribersMethod(TypeBuilder builder, FieldBuilder eventHandler)
-		{
-			MethodBuilder method = builder.DefineMethod(
-							 "HasSubscribers",
-							 MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual | MethodAttributes.Final, 
-							 typeof(bool), 
-							 new Type[0]);
-
-			ILGenerator mthdIL = method.GetILGenerator();
-			
-			LocalBuilder returnedValue = mthdIL.DeclareLocal(typeof(bool));
-						
-			mthdIL.Emit(OpCodes.Nop);
-			mthdIL.Emit(OpCodes.Ldarg_0);
-			mthdIL.Emit(OpCodes.Ldfld, eventHandler);
-			mthdIL.Emit(OpCodes.Ldnull);
-			mthdIL.Emit(OpCodes.Ceq);
-			mthdIL.Emit(OpCodes.Ldc_I4_0);
-			mthdIL.Emit(OpCodes.Ceq);
-			mthdIL.Emit(OpCodes.Stloc_0);
-			//mthdIL.Emit(OpCodes.Br_S);
-			mthdIL.Emit(OpCodes.Ldloc_0);
-			mthdIL.Emit(OpCodes.Ret);
-		}
-
-		/// <summary>
-		/// The generated code should be: PropertyChanged.Invoke(this, new PropertyChangedEventArgs(value))
-		/// CIL disassembled code:
-		/// IL_0001:  /* 02   |                  */ ldarg.0
-		/// IL_0002:  /* 7B   | (04)000002       */ ldfld      class [System/*23000003*/]System.ComponentModel.PropertyChangedEventHandler/*01000005*/ ConsoleApplication1.TestClass/*02000004*/::PropertyChanged /* 04000002 */
-		/// IL_0007:  /* 02   |                  */ ldarg.0
-		/// IL_0008:  /* 03   |                  */ ldarg.1
-		/// IL_0009:  /* 73   | (0A)00001F       */ newobj     instance void [System/*23000003*/]System.ComponentModel.PropertyChangedEventArgs/*0100001D*/::.ctor(string) /* 0A00001F */
-		/// IL_000e:  /* 6F   | (0A)000020       */ callvirt   instance void [System/*23000003*/]System.ComponentModel.PropertyChangedEventHandler/*01000005*/::Invoke(object, class [System/*23000003*/]System.ComponentModel.PropertyChangedEventArgs/*0100001D*/) /* 0A000020 */
-		/// IL_0013:  /* 00   |                  */ nop
-		/// .line 22,22 : 3,4 ''
-		/// //000022: 		}
-		/// IL_0014:  /* 2A   |                  */ ret
-		/// </summary>
-		/// <param name="builder"></param>
-		/// <param name="eventHandler"></param>
-		private static void ThrowPropertyChangedMethod(TypeBuilder builder, FieldBuilder eventHandler)
-		{
-			MethodBuilder method = builder.DefineMethod(
-							 "ThrowPropertyChangedEvent",
-							 MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual | MethodAttributes.Final, typeof(void), new Type[] { typeof(string) });
-
-			ILGenerator mthdIL = method.GetILGenerator();
-
-			ConstructorInfo propEventArgsCtor = typeof(PropertyChangedEventArgs).GetConstructor(new Type[] { typeof(string) });
-
-			mthdIL.Emit(OpCodes.Nop);
-			mthdIL.Emit(OpCodes.Ldarg_0);
-			mthdIL.Emit(OpCodes.Ldfld, eventHandler);
-			mthdIL.Emit(OpCodes.Ldarg_0);
-			mthdIL.Emit(OpCodes.Ldarg_1);
-			mthdIL.Emit(OpCodes.Newobj, propEventArgsCtor);
-			mthdIL.Emit(OpCodes.Callvirt, typeof(PropertyChangedEventHandler).GetMethod("Invoke",  
-				new Type[] { typeof(PropertyChangedEventHandler), typeof(PropertyChangedEventArgs)}));
-			mthdIL.Emit(OpCodes.Nop);
-			mthdIL.Emit(OpCodes.Ret);
-		}
-
-		/// <summary>
-		/// The generated code should be: return PropertyChanged.GetInvocationList()
-		/// CIL disassembled code:
-		///   .locals /*11000002*/ init ([0] class [mscorlib/*23000001*/]System.Delegate/*01000004*/[] CS$1$0000)
-		///    IL_0000:  /* 00   |                  */ nop
-		///    IL_0001:  /* 02   |                  */ ldarg.0
-		///	   IL_0002:  /* 7B   | (04)000001       */ ldfld      class [System/*23000003*/]System.ComponentModel.PropertyChangedEventHandler/*01000005*/ ConsoleApplication1.TestClass/*02000002*/::PropertyChanged /* 04000001 */
-		///    IL_0007:  /* 6F   | (0A)000012       */ callvirt   instance class [mscorlib/*23000001*/]System.Delegate/*01000004*/[] [mscorlib/*23000001*/]System.Delegate/*01000004*/::GetInvocationList() /* 0A000012 */
-		///    IL_000c:  /* 0A   |                  */ stloc.0
-		///    IL_000d:  /* 2B   | 00               */ br.s       IL_000f
-		///	   IL_000f:  /* 06   |                  */ ldloc.0
-		///    IL_0010:  /* 2A   |                  */ ret
- 		/// </summary>
-		/// <param name="builder"></param>
-		/// <param name="eventHandler"></param>
-		private static void GetSubscribersListMethod(TypeBuilder builder, FieldBuilder eventHandler)
-		{
-			MethodBuilder method = builder.DefineMethod(
-							 "GetSubscribersList",
-							 MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual | MethodAttributes.Final, typeof(Delegate[]), new Type[0]);
-
-			ILGenerator mthdIL = method.GetILGenerator();
-
-			LocalBuilder returnedValue = mthdIL.DeclareLocal(typeof(Delegate[]));
-
-			mthdIL.Emit(OpCodes.Nop);
-			mthdIL.Emit(OpCodes.Ldarg_0);
-			mthdIL.Emit(OpCodes.Ldfld, eventHandler);
-			mthdIL.Emit(OpCodes.Callvirt, typeof(PropertyChangedEventHandler).GetMethod("GetInvocationList", new Type[0]));
-			mthdIL.Emit(OpCodes.Stloc_0);
-			//mthdIL.Emit(OpCodes.Br_S);
-			mthdIL.Emit(OpCodes.Ldloc_0);
-			mthdIL.Emit(OpCodes.Ret);
-		}
-
-		/// <summary>
-		/// .method /*06000003*/ family hidebysig specialname rtspecialname 
-        ///  instance void  .ctor(class [mscorlib/*23000001*/]System.Runtime.Serialization.SerializationInfo/*01000005*/ info,
-        ///                       valuetype [mscorlib/*23000001*/]System.Runtime.Serialization.StreamingContext/*01000006*/ context) cil managed
-		///  IL_0000:  /* 02   |                  */ ldarg.0
-		///  IL_0001:  /* 03   |                  */ ldarg.1
-		///  IL_0002:  /* 04   |                  */ ldarg.2
-		///  IL_0003:  /* 28   | (0A)000011       */ call       instance void class [mscorlib/*23000001*/]System.Collections.Generic.Dictionary`2/*01000001*/<string,int32>/*1B000001*/::.ctor(class [mscorlib/*23000001*/]System.Runtime.Serialization.SerializationInfo/*01000005*/,
-		///                                                                                                                                                                               valuetype [mscorlib/*23000001*/]System.Runtime.Serialization.StreamingContext/*01000006*/) /* 0A000011 */
-		///  IL_0008:  /* 00   |                  */ nop
-		///  IL_0009:  /* 00   |                  */ nop
-		///  IL_000a:  /* 00   |                  */ nop
-		///  IL_000b:  /* 2A   |                  */ ret
-  		/// </summary>
-		/// <param name="builder"></param>
-		public static void CreateDeserializationConstructor(TypeBuilder builder, Type baseType)
-		{
-			ConstructorInfo serializationConstructor = baseType.GetConstructor(
-					BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-					null,
-					new Type[] { typeof(SerializationInfo), typeof(StreamingContext) },
-					null);
-
-			ConstructorBuilder targetCtor = builder.DefineConstructor(
-					  MethodAttributes.Family | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName,
-					  CallingConventions.Standard, new Type[] { typeof(SerializationInfo), typeof(StreamingContext) });
-			ILGenerator ctorIL = targetCtor.GetILGenerator();
-
-			ctorIL.Emit(OpCodes.Ldarg_0);
-			ctorIL.Emit(OpCodes.Ldarg_1);
-			ctorIL.Emit(OpCodes.Ldarg_2);
-			ctorIL.Emit(OpCodes.Call, serializationConstructor);
-			ctorIL.Emit(OpCodes.Ret);
-		}
-
-
 	}
 }

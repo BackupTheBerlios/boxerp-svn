@@ -116,6 +116,7 @@ public class BindableObjectsMain
 	[Test]
 	public void ChangeBindableSBO()
 	{
+		System.Diagnostics.Debug.WriteLine("asdfasdfsdf");
 		BindableWrapper<SimpleBusinessObject> bindableObj =	
 			new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject());
 		bindableObj.Data.BusinessObj.Name = "asdf";
@@ -534,7 +535,7 @@ public class BindableObjectsMain
 	public void DynamicINotifyPropertyChangedProxy_TEST1()
 	{
 		Type generatedType =
-				DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(
+				DynamicPropertyChangedProxy.CreateBusinessObjectProxy(
 					typeof(SimpleBusinessObject), new Type[0]);
 		foreach (MemberInfo member in generatedType.GetMembers())
 		{
@@ -558,7 +559,7 @@ public class BindableObjectsMain
 	public void DoubleProxyTest()
 	{
 		Type generatedType =
-				DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(
+				DynamicPropertyChangedProxy.CreateBusinessObjectProxy(
 					typeof(SimpleBusinessObject), new Type[0]);
 		Castle.DynamicProxy.ProxyGenerator generator = new Castle.DynamicProxy.ProxyGenerator();
 		SimpleBusinessObject proxy = (SimpleBusinessObject)

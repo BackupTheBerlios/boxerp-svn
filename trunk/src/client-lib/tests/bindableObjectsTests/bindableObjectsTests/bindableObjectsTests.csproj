@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.20706</ProductVersion>
+    <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{48ED1EDC-5930-48BD-821E-68B2186944FF}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -33,6 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Boxerp.Client, Version=0.2.0.0, Culture=neutral, PublicKeyToken=c81f1d62693cb1b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\client-base\bin\Debug\Boxerp.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Boxerp.Collections, Version=0.2.0.0, Culture=neutral, PublicKeyToken=c81f1d62693cb1b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Collections\Boxerp.Collections\Boxerp.Collections\bin\Debug\Boxerp.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\dependencies\Castle.Core.dll</HintPath>
@@ -54,6 +62,8 @@
     <Compile Include="BindableCollectionTests.cs" />
     <Compile Include="ComplexBusinessObject.cs" />
     <Compile Include="ComplexBusinessObjTests.cs" />
+    <Compile Include="HardCodedProxies.cs" />
+    <Compile Include="HardCodedProxiesTests.cs" />
     <Compile Include="NestedBindableCollectionTests.cs" />
     <Compile Include="NestedBindableWrapperTests.cs" />
     <Compile Include="NestedCollectionBusinessObjTests.cs" />

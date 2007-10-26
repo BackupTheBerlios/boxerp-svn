@@ -32,6 +32,22 @@ using System.Reflection;
 
 namespace Boxerp.Client
 {
+
+	public abstract class AbstractController<T> : AbstractController
+		where T : IUIData
+	{
+		public AbstractController(IResponsiveClient helper)
+			: base (helper)
+	{}
+
+		public abstract T Data { get; set; }
+		
+		public void Initialize(T data)
+		{
+			Data = data;
+		}
+	}
+
 	/// <summary>
 	/// All the controllers should extend this class, which enforce the responsive helper to be protected
 	/// and binds the complete event to the operation finish method

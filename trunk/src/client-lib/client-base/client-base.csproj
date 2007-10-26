@@ -15,7 +15,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>.\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,6 +53,7 @@
     <Compile Include="DataBinding\BindingOptions.cs" />
     <Compile Include="DataBinding\Cloner.cs" />
     <Compile Include="DataBinding\DynamicPropertyChangedProxy.cs" />
+    <Compile Include="DataBinding\DynamicPropertyChangedProxy_Generation.cs" />
     <Compile Include="DataBinding\IBindableCore.cs" />
     <Compile Include="DataBinding\IBindableWrapper.cs" />
     <Compile Include="DataBinding\IChildObject.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Delegates.cs" />
     <Compile Include="IControl.cs" />
     <Compile Include="IController.cs" />
+    <Compile Include="IUIData.cs" />
     <Compile Include="MyClass.cs" />
     <Compile Include="RemotingHelper.cs" />
     <Compile Include="Responsiveness\AbstractResponsiveHelper.cs" />

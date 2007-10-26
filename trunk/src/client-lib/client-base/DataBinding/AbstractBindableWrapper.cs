@@ -171,7 +171,7 @@ namespace Boxerp.Client
 				else
 				{
 					// double proxy. The first one implents the INotifyPropertyChanged interface
-					Type notifiableType = DynamicPropertyChangedProxy.CreateINotifyPropertyChangedBindableProxy(typeof(Y), argumentTypes);
+					Type notifiableType = DynamicPropertyChangedProxy.CreateBindableWrapperProxy(typeof(Y), argumentTypes);
 					_bindableFields = (Y)_generator.CreateClassProxy(notifiableType, new IInterceptor[] { this }, argumentsForConstructor);
 
 				}
@@ -284,7 +284,7 @@ namespace Boxerp.Client
 
 			if (!(typeof(T) is INotifyPropertyChanged))
 			{
-				notifiableType = DynamicPropertyChangedProxy.CreateINotifyPropertyChangedTypeProxy(typeof(T), new Type[0]);
+				notifiableType = DynamicPropertyChangedProxy.CreateBusinessObjectProxy(typeof(T), new Type[0]);
 			}
 			else
 			{

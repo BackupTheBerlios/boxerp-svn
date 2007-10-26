@@ -22,17 +22,9 @@ namespace Boxerp.Client
 		/// }
 		/// Otherwise the signature should be this:
 		/// public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-		/// {
-		///   FieldInfo[] fields = this.GetType().BaseType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-		///	  foreach (FieldInfo field in fields)
-		///	  {
-		///		object[] attributes = field.GetCustomAttributes(typeof(NonSerializedAttribute), true);
-		///		if (attributes.Length == 0)
-		///		{
-		///			info.AddValue(field.Name, field.GetValue(this));
-		///		}
-		///	  }
-		/// }
+		/// 
+		/// Body: See the hardcoded proxy at the bindableObjectTests
+		///   
 		/// </summary>
 		/// <param name="builder"></param>
 		/// <param name="baseType"></param>
@@ -70,10 +62,7 @@ namespace Boxerp.Client
 			}
 
 			ILGenerator mthdIL = method.GetILGenerator();
-			Label jump1 = mthdIL.DefineLabel();
-			Label jump2 = mthdIL.DefineLabel();
-			Label jump3 = mthdIL.DefineLabel();
-
+			
 			if (inheritsSerializable)
 			{
 				// C# : base.GetObjectData(info, context)
@@ -86,122 +75,26 @@ namespace Boxerp.Client
 			}
 			else
 			{
-				LocalBuilder localFieldsArray1 = mthdIL.DeclareLocal(typeof(FieldInfo[]));
-				LocalBuilder localField = mthdIL.DeclareLocal(typeof(FieldInfo));
-				LocalBuilder localAttributes = mthdIL.DeclareLocal(typeof(object[]));
-				LocalBuilder localFieldsArray2 = mthdIL.DeclareLocal(typeof(FieldInfo[]));
-				LocalBuilder localInteger = mthdIL.DeclareLocal(typeof(int));
-				LocalBuilder localBool = mthdIL.DeclareLocal(typeof(bool));
+				LocalBuilder localMembers = mthdIL.DeclareLocal(typeof(MemberInfo[]));
+				LocalBuilder localData = mthdIL.DeclareLocal(typeof(object[]));
 				
-				mthdIL.Emit(OpCodes.Nop); // IL_0009
+				mthdIL.Emit(OpCodes.Nop); 
 
-				ConsolePrint(mthdIL, "line 1");
-
-				// FieldInfo[] fields = this.GetType().BaseType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-				mthdIL.Emit(OpCodes.Ldarg_0); // IL_000a
+				mthdIL.Emit(OpCodes.Ldarg_0);
 				mthdIL.Emit(OpCodes.Call, typeof(object).GetMethod("GetType", new Type[0]));
-				mthdIL.Emit(OpCodes.Callvirt, typeof(Type).GetMethod("get_BaseType", new Type[0]));
-				mthdIL.Emit(OpCodes.Ldc_I4_S, 52); // binding flags -  IL_0010
-				mthdIL.Emit(OpCodes.Callvirt, typeof(Type).GetMethod("GetFields", new Type[] { typeof(BindingFlags) })); // IL_0012
-				mthdIL.Emit(OpCodes.Stloc_0); // IL_0017
-
-				ConsolePrint(mthdIL, "line 1.2");
-
-				
-
-				ConsolePrint(mthdIL, "line 1.4");
-
-				// foreach (FieldInfo field in fields)
-				mthdIL.Emit(OpCodes.Nop); // IL_0018
-				mthdIL.Emit(OpCodes.Ldloc_0); // IL_0019
-				mthdIL.Emit(OpCodes.Stloc_3); // IL_001a
-				mthdIL.Emit(OpCodes.Ldc_I4_0); // IL_001b
-				mthdIL.Emit(OpCodes.Stloc_S, localInteger); // IL_001c
-				
-				ConsolePrint(mthdIL, "line 1.6");
-				mthdIL.Emit(OpCodes.Br_S, jump3); // IL_001e
-				ConsolePrint(mthdIL, "line 1.7");
-				
-				mthdIL.MarkLabel(jump1);
-
-				ConsolePrint(mthdIL, "line 2");
-
-				mthdIL.Emit(OpCodes.Ldloc_3); // IL_0020
-				mthdIL.Emit(OpCodes.Ldloc_S, localInteger); // IL_0021
-				mthdIL.Emit(OpCodes.Ldelem_Ref); // IL_00022
-				mthdIL.Emit(OpCodes.Stloc_1); // IL_0023
-				mthdIL.Emit(OpCodes.Nop); // IL_00024
-
-				ConsolePrint(mthdIL, "line 3");
-
-				// object[] attributes = field.GetCustomAttributes(typeof(NonSerializedAttribute), true);
-				mthdIL.Emit(OpCodes.Ldloc_1); // IL_0025
-				mthdIL.Emit(OpCodes.Ldtoken, typeof(NonSerializedAttribute)); // IL_0026
-				mthdIL.Emit(OpCodes.Call, typeof(Type).GetMethod("GetTypeFromHandle", new Type[] { typeof(RuntimeTypeHandle) })); // IL_002b
-				mthdIL.Emit(OpCodes.Ldc_I4_1); // IL_0030
-				mthdIL.Emit(OpCodes.Callvirt, typeof(MemberInfo).GetMethod("GetCustomAttributes", new Type[] { typeof(Type), typeof(bool) })); // IL_0031
-				mthdIL.Emit(OpCodes.Stloc_2); // IL_0036
-
-				//ConsolePrint(mthdIL, "line 4");
-
-				// if (attributes.Length == 0)
-				mthdIL.Emit(OpCodes.Ldloc_2); // IL_0037
-				mthdIL.Emit(OpCodes.Ldlen); // IL_0038
-				mthdIL.Emit(OpCodes.Conv_I4); // IL_0039
-				mthdIL.Emit(OpCodes.Ldc_I4_0); // IL_003a
-				mthdIL.Emit(OpCodes.Ceq); // IL_003b
-				mthdIL.Emit(OpCodes.Ldc_I4_0); // IL_003d
-				mthdIL.Emit(OpCodes.Ceq); // IL_003e
-				mthdIL.Emit(OpCodes.Stloc_S, localBool); // IL_0040
-				mthdIL.Emit(OpCodes.Ldloc_S, localBool); // IL_0042
-				
-				mthdIL.Emit(OpCodes.Brtrue_S, jump2); // IL_0044
-
-				
-				mthdIL.Emit(OpCodes.Nop); // IL_0046
-
-				//ConsolePrint(mthdIL, "line 5");
-				
-
-				// info.AddValue(field.Name, field.GetValue(this));
-				mthdIL.Emit(OpCodes.Ldarg_1); // IL_0047
-				mthdIL.Emit(OpCodes.Ldloc_1); // IL_0048
-				mthdIL.Emit(OpCodes.Callvirt, typeof(MemberInfo).GetMethod("get_Name", new Type[0])); // IL_0049
-				mthdIL.Emit(OpCodes.Ldloc_1); // IL_004e
-				mthdIL.Emit(OpCodes.Ldarg_0); // IL_004f
-				mthdIL.Emit(OpCodes.Callvirt, typeof(FieldInfo).GetMethod("GetValue", new Type[] { typeof(object) })); // IL_0050
-				mthdIL.Emit(OpCodes.Callvirt, typeof(SerializationInfo).GetMethod("AddValue", new Type[] { typeof(string), typeof(object) })); // IL_0055
-				mthdIL.Emit(OpCodes.Nop); // IL_005a
-				mthdIL.Emit(OpCodes.Nop); // IL_005b
-
-				//ConsolePrint(mthdIL, "line 6");
-
-				mthdIL.MarkLabel(jump2);
-
-				mthdIL.Emit(OpCodes.Nop); // IL_005c
-				mthdIL.Emit(OpCodes.Ldloc_S, localInteger); // IL_005d
-				mthdIL.Emit(OpCodes.Ldc_I4_1); // IL_005f
-				mthdIL.Emit(OpCodes.Add); // IL_0060
-				mthdIL.Emit(OpCodes.Stloc_S, localInteger); // IL_0061
-
-				// foreach (FieldInfo field in fields)
-
-				mthdIL.MarkLabel(jump3);
-
-				mthdIL.Emit(OpCodes.Ldloc_S, localInteger); // IL_0063
-				mthdIL.Emit(OpCodes.Ldloc_3); // IL_0065
-
-				//ConsolePrint(mthdIL, "line 7");
-
-				mthdIL.Emit(OpCodes.Ldlen); // IL_0066
-				mthdIL.Emit(OpCodes.Conv_I4); // IL_0067
-				mthdIL.Emit(OpCodes.Clt); // IL_0068
-				mthdIL.Emit(OpCodes.Stloc_S, localBool); // IL_006a
-				mthdIL.Emit(OpCodes.Ldloc_S, localBool); // IL_006c
-
-				mthdIL.Emit(OpCodes.Brtrue_S, jump1); // IL_006e
+				mthdIL.Emit(OpCodes.Call, typeof(FormatterServices).GetMethod("GetSerializableMembers", new Type[] { typeof(Type) }));
+				mthdIL.Emit(OpCodes.Stloc_0);
+				mthdIL.Emit(OpCodes.Ldarg_0);
+				mthdIL.Emit(OpCodes.Ldloc_0);
+				mthdIL.Emit(OpCodes.Call, typeof(FormatterServices).GetMethod("GetObjectData", new Type[] { typeof(object), typeof(MemberInfo[]) }));
+				mthdIL.Emit(OpCodes.Stloc_1);
+				mthdIL.Emit(OpCodes.Ldarg_1);
+				mthdIL.Emit(OpCodes.Ldstr, SERIALIZED_DATA);
+				mthdIL.Emit(OpCodes.Ldloc_1);
+				mthdIL.Emit(OpCodes.Callvirt, typeof(SerializationInfo).GetMethod("AddValue", new Type[] { typeof(string), typeof(object) })); 
+				mthdIL.Emit(OpCodes.Nop);
 			}
-			mthdIL.Emit(OpCodes.Ret); // IL_0070
+			mthdIL.Emit(OpCodes.Ret); 
 		}
 
 		/// <summary>
@@ -210,32 +103,23 @@ namespace Boxerp.Client
 		/// protected SimplePropertyChangedImplementation(SerializationInfo info, StreamingContext c)	
 		///	: base(info, c)	
 		/// 
-		/// Otherwise there is no need for calling the base. The body is:
+		/// Otherwise there is no need for calling the base. There is a sample of the C# generated code
+		/// in the client-lib/tests/bindableObjectTests. The class is :
+		///    SimpleRealHardcoded_CompleteBoxerpProxy
 		/// 
-		/// FieldInfo[] fields = this.GetType().BaseType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-		///	foreach (FieldInfo field in fields)
-		///	{
-		///		object[] attributes = field.GetCustomAttributes(typeof(NonSerializedAttribute), true);
-		///		if (attributes.Length == 0)
-		///		{
-		///			field.SetValue(this, info.GetValue(field.Name, field.FieldType));
-		///		}
-		///	}
 		/// </summary>
 		/// <param name="builder"></param>
 		/// <param name="baseType"></param>
-		public static void createDeserializationConstructor(TypeBuilder builder, Type baseType)
+		public static void createDeserializationConstructor(TypeBuilder builder, Type baseType, Type[] constructorParamsTypes)
 		{
 			bool inheritsSerializable = baseType.IsAssignableFrom(typeof(ISerializable));
 
 			ConstructorBuilder targetCtor = builder.DefineConstructor(
 				  MethodAttributes.Family | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName,
 				  CallingConventions.Standard, new Type[] { typeof(SerializationInfo), typeof(StreamingContext) });
+			
 			ILGenerator ctorIL = targetCtor.GetILGenerator();
-			Label jump1 = ctorIL.DefineLabel();
-			Label jump2 = ctorIL.DefineLabel();
-			Label jump3 = ctorIL.DefineLabel();
-
+			
 			if (inheritsSerializable)
 			{
 				ConstructorInfo baseConstructor = baseType.GetConstructor(
@@ -253,98 +137,38 @@ namespace Boxerp.Client
 			}
 			else
 			{
-				LocalBuilder localFieldsArray1 = ctorIL.DeclareLocal(typeof(FieldInfo[]));
-				LocalBuilder localField = ctorIL.DeclareLocal(typeof(FieldInfo));
-				LocalBuilder localAttributes = ctorIL.DeclareLocal(typeof(object[]));
-				LocalBuilder localFieldsArray2 = ctorIL.DeclareLocal(typeof(FieldInfo[]));
-				LocalBuilder localInteger = ctorIL.DeclareLocal(typeof(int));
-				LocalBuilder localBool = ctorIL.DeclareLocal(typeof(bool));
+				LocalBuilder localData = ctorIL.DeclareLocal(typeof(object[]));
+				LocalBuilder localMembers = ctorIL.DeclareLocal(typeof(MemberInfo[]));
 				
-
 				ctorIL.Emit(OpCodes.Ldarg_0);
-				ctorIL.Emit(OpCodes.Call, typeof(object).GetConstructor(new Type[0]));
+				if (constructorParamsTypes == null)
+				{
+					ctorIL.Emit(OpCodes.Call, baseType.GetConstructor(new Type[0]));
+				}
+				else
+				{
+					ctorIL.Emit(OpCodes.Call, baseType.GetConstructor(constructorParamsTypes));
+				}
 				ctorIL.Emit(OpCodes.Nop);
-
-
-				ctorIL.Emit(OpCodes.Nop);
-
-				ctorIL.Emit(OpCodes.Ldarg_0); 
-				ctorIL.Emit(OpCodes.Call, typeof(object).GetMethod("GetType", new Type[0]));
-				ctorIL.Emit(OpCodes.Callvirt, typeof(Type).GetMethod("get_BaseType", new Type[0]));
-				ctorIL.Emit(OpCodes.Ldc_I4_S, 52); 
-				ctorIL.Emit(OpCodes.Callvirt, typeof(Type).GetMethod("GetFields", new Type[] { typeof(BindingFlags) })); // IL_0012
-				ctorIL.Emit(OpCodes.Stloc_0); 
 
 				ctorIL.Emit(OpCodes.Nop);
 
-				ctorIL.Emit(OpCodes.Ldloc_0);
-				ctorIL.Emit(OpCodes.Stloc_3);
-				ctorIL.Emit(OpCodes.Ldc_I4_0);
-				ctorIL.Emit(OpCodes.Stloc_S, localInteger);
-				ctorIL.Emit(OpCodes.Br_S, jump3);
-
-				ctorIL.MarkLabel(jump1);
-
-				ctorIL.Emit(OpCodes.Ldloc_3);
-				ctorIL.Emit(OpCodes.Ldloc_S, localInteger);
-				ctorIL.Emit(OpCodes.Ldelem_Ref);
-				ctorIL.Emit(OpCodes.Stloc_1);
-
-				ctorIL.Emit(OpCodes.Nop);
-
-				ctorIL.Emit(OpCodes.Ldloc_1);
-				ctorIL.Emit(OpCodes.Ldtoken, typeof(NonSerializedAttribute));
-				ctorIL.Emit(OpCodes.Call, typeof(Type).GetMethod("GetTypeFromHandle", new Type[] { typeof(RuntimeTypeHandle) }));
-				ctorIL.Emit(OpCodes.Ldc_I4_1);
-				ctorIL.Emit(OpCodes.Callvirt, typeof(MemberInfo).GetMethod("GetCustomAttributes", new Type[] { typeof(Type), typeof(bool) }));
-				ctorIL.Emit(OpCodes.Stloc_2);
-
-				ctorIL.Emit(OpCodes.Ldloc_2);
-				ctorIL.Emit(OpCodes.Ldlen);
-				ctorIL.Emit(OpCodes.Conv_I4);
-				ctorIL.Emit(OpCodes.Ldc_I4_0);
-				ctorIL.Emit(OpCodes.Ceq);
-				ctorIL.Emit(OpCodes.Ldc_I4_0);
-				ctorIL.Emit(OpCodes.Ceq);
-				ctorIL.Emit(OpCodes.Stloc_S, localBool);
-				ctorIL.Emit(OpCodes.Ldloc_S, localBool);
-				ctorIL.Emit(OpCodes.Brtrue_S, jump2);
-
-				ctorIL.Emit(OpCodes.Nop);
-
-				ctorIL.Emit(OpCodes.Ldloc_1);
-				ctorIL.Emit(OpCodes.Ldarg_0);
 				ctorIL.Emit(OpCodes.Ldarg_1);
-				ctorIL.Emit(OpCodes.Ldloc_1);
-				ctorIL.Emit(OpCodes.Callvirt, typeof(MemberInfo).GetMethod("get_Name", new Type[0]));
-				ctorIL.Emit(OpCodes.Ldloc_1);
-				ctorIL.Emit(OpCodes.Callvirt, typeof(FieldInfo).GetMethod("get_FieldType", new Type[0]));
+				ctorIL.Emit(OpCodes.Ldstr, SERIALIZED_DATA);
+				ctorIL.Emit(OpCodes.Ldtoken, typeof(object[]));
+				ctorIL.Emit(OpCodes.Call, typeof(Type).GetMethod("GetTypeFromHandle", new Type[] { typeof(RuntimeTypeHandle) }));
 				ctorIL.Emit(OpCodes.Callvirt, typeof(SerializationInfo).GetMethod("GetValue", new Type[] { typeof(string), typeof(Type) }));
-				ctorIL.Emit(OpCodes.Callvirt, typeof(FieldInfo).GetMethod("SetValue", new Type[] { typeof(object), typeof(object) }));
-
-				ctorIL.Emit(OpCodes.Nop);
-				ctorIL.Emit(OpCodes.Nop);
-
-				ctorIL.MarkLabel(jump2);
-
-				ctorIL.Emit(OpCodes.Nop);
-
-				ctorIL.Emit(OpCodes.Ldloc_S, localInteger);
-				ctorIL.Emit(OpCodes.Ldc_I4_1);
-				ctorIL.Emit(OpCodes.Add);
-				ctorIL.Emit(OpCodes.Stloc_S, localInteger);
-
-				ctorIL.MarkLabel(jump3);
-
-				ctorIL.Emit(OpCodes.Ldloc_S, localInteger);
-				ctorIL.Emit(OpCodes.Ldloc_3);
-				ctorIL.Emit(OpCodes.Ldlen);
-				ctorIL.Emit(OpCodes.Conv_I4);
-				ctorIL.Emit(OpCodes.Clt);
-				ctorIL.Emit(OpCodes.Stloc_S, localBool);
-				ctorIL.Emit(OpCodes.Ldloc_S, localBool);
-				ctorIL.Emit(OpCodes.Brtrue_S, jump1);
-
+				ctorIL.Emit(OpCodes.Castclass, typeof(object[]));
+				ctorIL.Emit(OpCodes.Stloc_0);
+				ctorIL.Emit(OpCodes.Ldarg_0);
+				ctorIL.Emit(OpCodes.Call, typeof(object).GetMethod("GetType", new Type[0]));
+				ctorIL.Emit(OpCodes.Call, typeof(FormatterServices).GetMethod("GetSerializableMembers", new Type[] { typeof(Type) }));
+				ctorIL.Emit(OpCodes.Stloc_1);
+				ctorIL.Emit(OpCodes.Ldarg_0);
+				ctorIL.Emit(OpCodes.Ldloc_1);
+				ctorIL.Emit(OpCodes.Ldloc_0);
+				ctorIL.Emit(OpCodes.Call, typeof(FormatterServices).GetMethod("PopulateObjectMembers", new Type[] { typeof(object), typeof(MemberInfo[]), typeof(object[]) }));
+				ctorIL.Emit(OpCodes.Pop);
 				ctorIL.Emit(OpCodes.Nop);
 			}
 

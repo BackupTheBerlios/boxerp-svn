@@ -46,6 +46,7 @@ namespace Boxerp.Client
 		private static string ASSEMBLY_NAME = "BoxerpDynamicAssembly";
 		private static string DYNAMIC_MOD_NAME = ASSEMBLY_NAME;
 		private static string ASSEMBLY_DLL = DYNAMIC_MOD_NAME + ".dll";
+		private static string SERIALIZED_DATA = "__serializedData";
 		
 
 		private static AssemblyBuilder MyAssemblyBuilder
@@ -171,6 +172,14 @@ namespace Boxerp.Client
 			return CreateBusinessObjectProxy(baseType, constructorParamsTypes, className);
 		}
 
+		/// <summary>
+		/// This proxy is quite similar to Castle.DynamicProxy2. It inherits the base type and make it 
+		/// implement 2 interfaces: ICustomNotifyPropertyChanged and ISerializable. 
+		/// You can see an example a hardcoded proxy here: 
+		///      client-lib/tests/bindableObjectTests.SimpleRealHardcoded_CompleteBoxerpProxy
+		/// The code that this proxy generates is something like that class above but it is generic,
+		/// it extends from any kind of base class. 
+		/// </summary>
 		public static Type CreateBusinessObjectProxy(Type baseType, Type[] constructorParamsTypes, string className)
 		{
 			// If this proxy has been created already do not create it again
@@ -204,7 +213,7 @@ namespace Boxerp.Client
 			FieldBuilder eventHandler = targetTypeBld.DefineField("PropertyChanged", typeof(PropertyChangedEventHandler), FieldAttributes.Private | FieldAttributes.NotSerialized);
 
 			createDefaultConstructor(targetTypeBld, baseType, constructorParamsTypes);
-			createDeserializationConstructor(targetTypeBld, baseType);
+			createDeserializationConstructor(targetTypeBld, baseType, constructorParamsTypes);
 			getObjectDataMethod(targetTypeBld, baseType);
 			addOrRemoveMethod(targetTypeBld, eventField, eventHandler, true);
 			addOrRemoveMethod(targetTypeBld, eventField, eventHandler, false);

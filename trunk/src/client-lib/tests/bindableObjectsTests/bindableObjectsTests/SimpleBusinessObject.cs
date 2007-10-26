@@ -192,7 +192,7 @@ namespace bindableObjectsTests
 
 		public SimpleIndexedClass() { }
 
-		public SimpleIndexedClass(SerializationInfo info, StreamingContext context)
+		/*public SimpleIndexedClass(SerializationInfo info, StreamingContext context)
 			: base(info, context)
 		{
 			_code = info.GetString("_code");
@@ -202,7 +202,7 @@ namespace bindableObjectsTests
 		{
 			base.GetObjectData(info, context);
 			info.AddValue("_code", _code);
-		}
+		}*/
 	}
 
 	//[Serializable]

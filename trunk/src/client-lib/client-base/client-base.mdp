@@ -55,6 +55,8 @@
     <File name="./DataBinding/IDataBinder.cs" subtype="Code" buildaction="Compile" />
     <File name="./DataBinding/XamlParser.cs" subtype="Code" buildaction="Compile" />
     <File name="./IUIData.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Responsiveness/ResponsivenessSingleton.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Logger.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Assembly" localcopy="True" refto="../../dependencies/Castle.Core.dll" />

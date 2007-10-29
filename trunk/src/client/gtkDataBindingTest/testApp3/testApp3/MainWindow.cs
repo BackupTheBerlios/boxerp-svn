@@ -54,8 +54,7 @@ public partial class MainWindow: Gtk.Window
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 	{
-		Application.Quit ();
-		a.RetVal = true;
+		
 	}
 
 	protected virtual void OnChangeClicked (object sender, System.EventArgs e)

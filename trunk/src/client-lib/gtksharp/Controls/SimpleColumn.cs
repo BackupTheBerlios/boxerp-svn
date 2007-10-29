@@ -4,7 +4,7 @@ using System;
 namespace Boxerp.Client.GtkSharp.Controls
 {
 	
-	public struct SimpleColumn
+	internal struct SimpleColumn
 	{
 		public string Name;
 		public System.Type Type;

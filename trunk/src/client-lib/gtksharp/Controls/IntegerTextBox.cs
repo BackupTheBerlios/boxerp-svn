@@ -68,7 +68,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			_widgetCore.BindObject(wrapper, owner, path, widgetProperty, options);
 		}
 		
-		public void UpdateValue(string property, object val)
+		void IBindableWidget.OnBoundDataChanged(string property, object val)
 		{
 			_textBox.Text = val.ToString();
 		}

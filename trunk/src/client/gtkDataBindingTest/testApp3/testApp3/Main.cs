@@ -37,10 +37,10 @@ namespace testApp3
 		public static void Main (string[] args)
 		{
 			Application.Init ();
-			MainWindow win = new MainWindow ();
-			win.Show ();
-			GroupsWindow gwin = new GroupsWindow();
-			gwin.Show();
+			
+			
+			MenuWindow menu = new MenuWindow();
+			menu.Show();
 			
 			Application.Run ();
 		}

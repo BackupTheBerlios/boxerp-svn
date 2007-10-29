@@ -36,25 +36,26 @@ namespace testApp3
 {
 	
 	
-	public partial class GroupsWindow : Gtk.Window
+	public partial class ListViewTest2 : Gtk.Window
 	{
-		private Group _group;
-		private BindableWrapper<Group> _bindableGroup;
+		private GroupAwareUsers _group;
+		private BindableWrapper<GroupAwareUsers> _bindableGroup;
 		
-		public GroupsWindow() : 
+		public ListViewTest2() : 
 				base(Gtk.WindowType.Toplevel)
 		{
 			this.Build();
 			
+			tryDataBinding();
 			addUsers();
 		}
 		
 		private void tryDataBinding()
 		{
 			createGroup();
-			_bindableGroup = new BindableWrapper<Group>(_group);			
+			_bindableGroup = new BindableWrapper<GroupAwareUsers>(_group);			
 			Console.WriteLine("users:" + _bindableGroup.Data.BusinessObj.Users.Count);
-			_listView.BindObject(_bindableGroup, "Data.BusinessObj.Users", "Items", BindingOptions.TwoWay);
+			_listView.BindObject(_bindableGroup, "Data.BusinessObj.Users", "BoundItems", BindingOptions.TwoWay);
 		}
 		
 		
@@ -72,7 +73,7 @@ namespace testApp3
 			user2.Email = "user2@user2.com";
 			user2.Password = "unsafe2";
 			
-			_group = new Group();
+			_group = new GroupAwareUsers();
 			_group.Name = "test";
 			_group.Users.Add(user1);
 			_group.Users.Add(user2);
@@ -92,9 +93,8 @@ namespace testApp3
 			user2.Email = "user2@user4.com";
 			user2.Password = "unsafe4";
 		
-			_listView.Items.Add(user1);
-			_listView.Items.Add(user2);
-
+			_group.Users.Add(user1);
+			_group.Users.Add(user2);
 		}
 
 		protected virtual void OnShowItem (object sender, System.EventArgs e)
@@ -102,16 +102,24 @@ namespace testApp3
 			if (_listView.SelectedItem != null)
 			{
 				object item = _listView.SelectedItem;
-				InfoDialog id = new InfoDialog();
-				id.Message = item.ToString();
+				displayItem(item);
 			}
+		}
+		
+		private void displayItem(object item)
+		{
+			InfoDialog id = new InfoDialog();
+			id.Message = item.ToString();
+			User selectedUser = (User)item;
+			string userProperties = ", " + selectedUser.Desk + ", " + selectedUser.Email  + ", "+ selectedUser.Password  + ", "+ selectedUser.Username;
+			id.Message += userProperties;
 		}
 		
 		protected virtual void OnDeleteItem (object sender, System.EventArgs e)
 		{
 			if (_listView.SelectedItem != null)
 			{
-				_listView.Items.Remove(_listView.SelectedItem);
+				_listView.BoundItems.Remove(_listView.SelectedItem);
 			}
 		}
 
@@ -120,7 +128,47 @@ namespace testApp3
 			User user = new User();
 			user.Username = "random" + DateTime.Now;
 			user.Password = "asdfsdf";
-			_listView.Items.Add(user);
+			_listView.BoundItems.Add(user);
+		}
+		
+		protected virtual void OnToggleSelectionMode (object sender, System.EventArgs e)
+		{
+			if (_listView.SelectionMode == Gtk.SelectionMode.Single)
+			{
+				_listView.SelectionMode = Gtk.SelectionMode.Multiple;
+			}
+			else
+			{
+				_listView.SelectionMode = Gtk.SelectionMode.Single;
+			}
+		}
+		
+		protected virtual void OnToggleDisplayMode (object sender, System.EventArgs e)
+		{
+			if (_listView.ItemsDisplayMode == ItemsDisplayMode.ObjectToString)
+			{
+				_listView.ItemsDisplayMode = ItemsDisplayMode.Reflection;
+			}
+			else
+			{
+				_listView.ItemsDisplayMode = ItemsDisplayMode.ObjectToString;
+			}
+		}
+
+		protected virtual void OnShowMultiple (object sender, System.EventArgs e)
+		{
+			if (_listView.SelectedItems != null)
+			{
+				foreach (object item in _listView.SelectedItems)
+				{
+					displayItem(item);
+				}
+			}
+		}
+
+		protected void OnDeleteEvent (object sender, Gtk.DeleteEventArgs a)
+		{
+			
 		}
 	}
 }

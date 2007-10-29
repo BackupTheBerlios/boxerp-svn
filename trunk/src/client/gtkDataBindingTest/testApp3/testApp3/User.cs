@@ -99,6 +99,12 @@ namespace testApp3
 			_password = password;
 			_email = email;
 			_desk = desk;
-		}		
+		}	
+		
+		public override string ToString ()
+		{
+			return Desk + Email + Username + Password;
+		}
+
 	}
 }

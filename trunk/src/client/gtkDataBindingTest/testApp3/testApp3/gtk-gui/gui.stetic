@@ -273,16 +273,17 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="testApp3.GroupsWindow" undoId="312" design-size="435 300">
+  <widget class="Gtk.Window" id="testApp3.GroupsWindow" undoId="2937" design-size="760 362">
     <property name="MemberName" />
-    <property name="Title" translatable="yes">ListView Test 1</property>
+    <property name="Title" translatable="yes">ListView - No databinding</property>
     <property name="WindowPosition">CenterOnParent</property>
-    <child undoId="534">
-      <widget class="Gtk.VBox" id="vbox1" undoId="518">
+    <signal name="DeleteEvent" handler="OnDeleteEvent" />
+    <child undoId="2964">
+      <widget class="Gtk.VBox" id="vbox1" undoId="2938">
         <property name="MemberName" />
         <property name="Spacing">6</property>
-        <child undoId="520">
-          <widget class="Gtk.Label" id="_label" undoId="519">
+        <child undoId="2940">
+          <widget class="Gtk.Label" id="_label" undoId="2939">
             <property name="MemberName" />
             <property name="LabelProp" translatable="yes">Users</property>
           </widget>
@@ -293,8 +294,8 @@
             <property name="Fill">False</property>
           </packing>
         </child>
-        <child undoId="525">
-          <widget class="Boxerp.Client.GtkSharp.Controls.ListView" id="_listView" undoId="521">
+        <child undoId="2945">
+          <widget class="Boxerp.Client.GtkSharp.Controls.ListView" id="_listView" undoId="2941">
             <property name="MemberName" />
             <property name="Events">ButtonPressMask</property>
           </widget>
@@ -303,12 +304,12 @@
             <property name="AutoSize">True</property>
           </packing>
         </child>
-        <child undoId="533">
-          <widget class="Gtk.HBox" id="hbox1" undoId="526">
+        <child undoId="2955">
+          <widget class="Gtk.HBox" id="hbox1" undoId="2946">
             <property name="MemberName" />
             <property name="Spacing">6</property>
-            <child undoId="528">
-              <widget class="Gtk.Button" id="button1" undoId="527">
+            <child undoId="2948">
+              <widget class="Gtk.Button" id="button1" undoId="2947">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -323,8 +324,8 @@
                 <property name="Fill">False</property>
               </packing>
             </child>
-            <child undoId="530">
-              <widget class="Gtk.Button" id="button2" undoId="529">
+            <child undoId="2950">
+              <widget class="Gtk.Button" id="button2" undoId="2949">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -339,8 +340,175 @@
                 <property name="Fill">False</property>
               </packing>
             </child>
-            <child undoId="532">
-              <widget class="Gtk.Button" id="button3" undoId="531">
+            <child undoId="2952">
+              <widget class="Gtk.Button" id="button3" undoId="2951">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextOnly</property>
+                <property name="Label" translatable="yes">Add Random Item</property>
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnAddItem" />
+              </widget>
+              <packing>
+                <property name="Position">2</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child undoId="2954">
+              <widget class="Gtk.Button" id="button7" undoId="2953">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextOnly</property>
+                <property name="Label" translatable="yes">Memory test</property>
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnMemoryTest" />
+              </widget>
+              <packing>
+                <property name="Position">3</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">2</property>
+            <property name="AutoSize">False</property>
+            <property name="Expand">False</property>
+          </packing>
+        </child>
+        <child undoId="2963">
+          <widget class="Gtk.HBox" id="hbox2" undoId="2956">
+            <property name="MemberName" />
+            <property name="Spacing">6</property>
+            <child undoId="2958">
+              <widget class="Gtk.Button" id="button6" undoId="2957">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextOnly</property>
+                <property name="Label" translatable="yes">Show Multiple Items</property>
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnShowMultiple" />
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child undoId="2960">
+              <widget class="Gtk.Button" id="button4" undoId="2959">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextOnly</property>
+                <property name="Label" translatable="yes">Change display mode</property>
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnToggleDisplayMode" />
+              </widget>
+              <packing>
+                <property name="Position">1</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child undoId="2962">
+              <widget class="Gtk.Button" id="button5" undoId="2961">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextOnly</property>
+                <property name="Label" translatable="yes">Change Selection Mode</property>
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnToggleSelectionMode" />
+              </widget>
+              <packing>
+                <property name="Position">2</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">3</property>
+            <property name="AutoSize">False</property>
+            <property name="Expand">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Window" id="testApp3.ListViewTest2" undoId="2082" design-size="474 300">
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">ListViewTest2 - DATABINDING</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <child undoId="2107">
+      <widget class="Gtk.VBox" id="vbox1" undoId="2083">
+        <property name="MemberName" />
+        <property name="Spacing">6</property>
+        <child undoId="2085">
+          <widget class="Gtk.Label" id="_label" undoId="2084">
+            <property name="MemberName" />
+            <property name="LabelProp" translatable="yes">Users</property>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child undoId="2090">
+          <widget class="Boxerp.Client.GtkSharp.Controls.ListView" id="_listView" undoId="2086">
+            <property name="MemberName" />
+            <property name="Events">ButtonPressMask</property>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+          </packing>
+        </child>
+        <child undoId="2098">
+          <widget class="Gtk.HBox" id="hbox1" undoId="2091">
+            <property name="MemberName" />
+            <property name="Spacing">6</property>
+            <child undoId="2093">
+              <widget class="Gtk.Button" id="button1" undoId="2092">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextOnly</property>
+                <property name="Label" translatable="yes">Show Selected Item</property>
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnShowItem" />
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child undoId="2095">
+              <widget class="Gtk.Button" id="button2" undoId="2094">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextOnly</property>
+                <property name="Label" translatable="yes">Delete Selected Item</property>
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnDeleteItem" />
+              </widget>
+              <packing>
+                <property name="Position">1</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child undoId="2097">
+              <widget class="Gtk.Button" id="button3" undoId="2096">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -358,6 +526,153 @@
           </widget>
           <packing>
             <property name="Position">2</property>
+            <property name="AutoSize">False</property>
+            <property name="Expand">False</property>
+          </packing>
+        </child>
+        <child undoId="2106">
+          <widget class="Gtk.HBox" id="hbox2" undoId="2099">
+            <property name="MemberName" />
+            <property name="Spacing">6</property>
+            <child undoId="2101">
+              <widget class="Gtk.Button" id="button6" undoId="2100">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextOnly</property>
+                <property name="Label" translatable="yes">Show Multiple Items</property>
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnShowMultiple" />
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child undoId="2103">
+              <widget class="Gtk.Button" id="button4" undoId="2102">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextOnly</property>
+                <property name="Label" translatable="yes">Change display mode</property>
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnToggleDisplayMode" />
+              </widget>
+              <packing>
+                <property name="Position">1</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child undoId="2105">
+              <widget class="Gtk.Button" id="button5" undoId="2104">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextOnly</property>
+                <property name="Label" translatable="yes">Change Selection Mode</property>
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnToggleSelectionMode" />
+              </widget>
+              <packing>
+                <property name="Position">2</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">3</property>
+            <property name="AutoSize">False</property>
+            <property name="Expand">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Window" id="testApp3.MenuWindow" undoId="2108" design-size="400 208">
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">MenuWindow</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <signal name="DeleteEvent" handler="OnExit" />
+    <child undoId="2144">
+      <widget class="Gtk.VBox" id="vbox1" undoId="2133">
+        <property name="MemberName" />
+        <property name="Spacing">6</property>
+        <child undoId="2135">
+          <widget class="Gtk.Label" id="label1" undoId="2134">
+            <property name="MemberName" />
+            <property name="LabelProp" translatable="yes">Gtk Databinding tests
+Some cases don't include databinding but basic widget tests</property>
+            <property name="Justify">Center</property>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child undoId="2137">
+          <widget class="Gtk.Button" id="button1" undoId="2136">
+            <property name="MemberName" />
+            <property name="CanFocus">True</property>
+            <property name="Type">TextOnly</property>
+            <property name="Label" translatable="yes">Basic databinding tests</property>
+            <property name="UseUnderline">True</property>
+            <signal name="Clicked" handler="OnBasicDataBinding" />
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child undoId="2139">
+          <widget class="Gtk.Button" id="button2" undoId="2138">
+            <property name="MemberName" />
+            <property name="CanFocus">True</property>
+            <property name="Type">TextOnly</property>
+            <property name="Label" translatable="yes">Basic ListView tests</property>
+            <property name="UseUnderline">True</property>
+            <signal name="Clicked" handler="OnBasicListView" />
+          </widget>
+          <packing>
+            <property name="Position">2</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child undoId="2141">
+          <widget class="Gtk.Button" id="button3" undoId="2140">
+            <property name="MemberName" />
+            <property name="CanFocus">True</property>
+            <property name="Type">TextOnly</property>
+            <property name="Label" translatable="yes">ListView + Databinding tests</property>
+            <property name="UseUnderline">True</property>
+            <signal name="Clicked" handler="OnListViewDataBinding" />
+          </widget>
+          <packing>
+            <property name="Position">3</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child undoId="2143">
+          <widget class="Gtk.Button" id="button4" undoId="2142">
+            <property name="MemberName" />
+            <property name="CanFocus">True</property>
+            <property name="Type">TextOnly</property>
+            <property name="Label" translatable="yes">DataGrid tests</property>
+            <property name="UseUnderline">True</property>
+          </widget>
+          <packing>
+            <property name="Position">4</property>
             <property name="AutoSize">True</property>
             <property name="Expand">False</property>
             <property name="Fill">False</property>

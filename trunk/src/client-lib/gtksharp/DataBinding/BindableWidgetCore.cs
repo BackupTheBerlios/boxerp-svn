@@ -103,7 +103,7 @@ namespace Boxerp.Client.GtkSharp
 			{
 				throw new NullReferenceException("Error binding object. Property " + bindingProperty + " doesn't exist");
 			}
-			Console.WriteLine("Binding Object property:" + _boBindingProperty.Name);
+			Logger.GetInstance().WriteLine("Binding Object property:" + _boBindingProperty.Name);
 			_bindableObject.PropertyChanged += OnPropertyChanged;
 			_bindingOptions = options;
 		}
@@ -136,8 +136,8 @@ namespace Boxerp.Client.GtkSharp
 					_boBindingProperty = _propertyOwner.GetType().GetProperty(_boPropertyName);
 				}
 			}
-			Console.WriteLine("Property owner= " + _propertyOwner);
-			Console.WriteLine("bo binding property = " + _boBindingProperty.Name);
+			Logger.GetInstance().WriteLine("Property owner= " + _propertyOwner);
+			Logger.GetInstance().WriteLine("bo binding property = " + _boBindingProperty.Name);
 			// read the value of the property for the first time
 			OnPropertyChanged(this, new PropertyChangedEventArgs(_boPropertyName));
 			
@@ -147,22 +147,22 @@ namespace Boxerp.Client.GtkSharp
 		{
 			try
 			{
-				Console.WriteLine("binding prop changed:" + args.PropertyName + "," + _boPropertyName + "," + _propertyOwner
+				Logger.GetInstance().WriteLine("binding prop changed:" + args.PropertyName + "," + _boPropertyName + "," + _propertyOwner
 				                  + ", " + _boBindingProperty);
-				Console.WriteLine("binding prop " +_widgetBindingProperty + "," + _uiWidget);
+				Logger.GetInstance().WriteLine("binding prop " +_widgetBindingProperty + "," + _uiWidget);
 				if (args.PropertyName.Equals(_boPropertyName))
 				{
 					object propValue = _boBindingProperty.GetValue(_propertyOwner, null);
-					Console.WriteLine("prop new value = " + propValue);
+					Logger.GetInstance().WriteLine("prop new value = " + propValue);
 					if (propValue != null)
 					{
-						_uiWidget.UpdateValue(_widgetBindingProperty, propValue);
+						_uiWidget.OnBoundDataChanged(_widgetBindingProperty, propValue);
 					}
 				}
 			}
 			catch (NullReferenceException ex)
 			{
-				Console.Out.WriteLine("The binding path is not correct:" + args.PropertyName);
+				Logger.GetInstance().WriteLine("The binding path is not correct:" + args.PropertyName);
 				throw ex;
 			}
 			catch (Exception ex)
@@ -175,7 +175,7 @@ namespace Boxerp.Client.GtkSharp
 		{
 			if ((BindingOptions == BindingOptions.TwoWay) && (BOBindingProperty != null))
 			{
-				Console.WriteLine("setting value: " + val);
+				Logger.GetInstance().WriteLine("setting value: " + val);
 				_boBindingProperty.SetValue(_propertyOwner, val, null);
 			}
 		}
@@ -184,7 +184,7 @@ namespace Boxerp.Client.GtkSharp
 		{
 			if ((BindingOptions == BindingOptions.TwoWay) && (BOBindingProperty != null))
 			{
-				Console.WriteLine("setting value: " + val);
+				Logger.GetInstance().WriteLine("setting value: " + val);
 				_boBindingProperty.SetValue(_propertyOwner, val, null);
 			}
 		}

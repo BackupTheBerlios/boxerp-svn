@@ -63,26 +63,26 @@ namespace Boxerp.Client.GtkSharp
 			foreach (FieldInfo field in fields)
 			{
 				object fieldValue = field.GetValue(_container);
-				Console.WriteLine("------- " + field.Name + field.FieldType);
-				//Console.WriteLine(" INTER  " + field.FieldType.GetInterfaces()[0].ToString());
+				Logger.GetInstance().WriteLine("------- " + field.Name + field.FieldType);
+				//Logger.GetInstance().WriteLine(" INTER  " + field.FieldType.GetInterfaces()[0].ToString());
 				if (fieldValue is IBindableWidget)
 				{
 					IBindableWidget widget = (IBindableWidget) fieldValue;
-					//Console.WriteLine(" ** widget ** " + widget);
+					//Logger.GetInstance().WriteLine(" ** widget ** " + widget);
 					//widget.WidgetCore.BindObject(_bindable, xxx, yyy, BindingOptions.TwoWay);
 					
-					Console.WriteLine(_container.Name);
+					Logger.GetInstance().WriteLine(_container.Name);
 					
 					try
 					{
 						BindingMetadata metadata = parser.MetadataIndexer[field.Name];
-						Console.WriteLine(metadata.WidgetName + "," + metadata.BindingPath);
+						Logger.GetInstance().WriteLine(metadata.WidgetName + "," + metadata.BindingPath);
 						widget.WidgetCore.BindObject(_bindable, metadata.BindingPath,  
 						                             metadata.WidgetBindingProperty, metadata.BindingOptions);
 					}
 					catch (KeyNotFoundException)
 					{
-						Console.Out.WriteLine("The field " + field.Name + "does not have any binding metadata");
+						Logger.GetInstance().WriteLine("The field " + field.Name + "does not have any binding metadata");
 					}
 				}
 			}	                              

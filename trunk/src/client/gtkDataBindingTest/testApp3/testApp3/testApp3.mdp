@@ -23,8 +23,12 @@
     <File name="./User.cs" subtype="Code" buildaction="Compile" />
     <File name="./MainWindow.xaml" subtype="Code" buildaction="Nothing" />
     <File name="./Group.cs" subtype="Code" buildaction="Compile" />
-    <File name="./GroupsWindow.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ListViewTest1.cs" subtype="Code" buildaction="Compile" />
     <File name="./gtk-gui/testApp3.GroupsWindow.cs" subtype="Code" buildaction="Compile" />
+    <File name="./ListViewTest2.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/testApp3.ListViewTest2.cs" subtype="Code" buildaction="Compile" />
+    <File name="./MenuWindow.cs" subtype="Code" buildaction="Compile" />
+    <File name="./gtk-gui/testApp3.MenuWindow.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Assembly" localcopy="True" refto="../../../../client-lib/client-base/bin/Debug/Boxerp.Client.dll" />

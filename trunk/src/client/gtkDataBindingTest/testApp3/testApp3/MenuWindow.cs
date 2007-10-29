@@ -28,81 +28,42 @@
 ////
 
 using System;
-using System.Collections.Generic;
-using Boxerp.Client;
-using Boxerp.Collections;
 
 namespace testApp3
 {
 	
-	[Serializable]
-	public class Group
+	
+	public partial class MenuWindow : Gtk.Window
 	{
-		private string _name;
-		private List<User> _users = new List<User>();
 		
-		public string Name 
+		public MenuWindow() : 
+				base(Gtk.WindowType.Toplevel)
 		{
-			get 
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-			}
+			this.Build();
 		}
 
-		public List<User> Users 
+		protected virtual void OnBasicDataBinding (object sender, System.EventArgs e)
 		{
-			get 
-			{
-				return _users;
-			}
-			set
-			{				
-				_users = value;
-			}
-		}
-		
-		public Group()
-		{
-		}
-	}
-	
-	[Serializable]
-	public class GroupAwareUsers 
-	{
-		private string _name;
-		private BindableCollection<User> _users = new BindableCollection<User>();
-		
-		public string Name 
-		{
-			get 
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-			}
+			MainWindow win = new MainWindow ();
+			win.Show ();
 		}
 
-		public BindableCollection<User> Users 
+		protected virtual void OnBasicListView (object sender, System.EventArgs e)
 		{
-			get 
-			{
-				return _users;
-			}
-			set
-			{				
-				_users = value;
-			}
+			GroupsWindow gwin = new GroupsWindow();
+			gwin.Show();
 		}
-		
-		public GroupAwareUsers()
+
+		protected virtual void OnListViewDataBinding (object sender, System.EventArgs e)
 		{
+			ListViewTest2 lvt2 = new ListViewTest2();
+			lvt2.Show();
+		}
+
+		protected virtual void OnExit (object o, Gtk.DeleteEventArgs args)
+		{
+			Gtk.Application.Quit ();
+			args.RetVal = true;
 		}
 	}
-	
 }

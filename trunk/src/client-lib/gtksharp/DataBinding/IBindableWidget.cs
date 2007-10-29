@@ -37,7 +37,7 @@ namespace Boxerp.Client.GtkSharp
 	{
 		// the BindableWidgetCore uses this function as the handler for the PropertyChanged event 
 		// in the business object so that the interface can refresh
-		void UpdateValue(string widgetProperty, object val);	
+		void OnBoundDataChanged(string widgetProperty, object newValue);	
 		
 		BindableWidgetCore WidgetCore { get; }
 	}

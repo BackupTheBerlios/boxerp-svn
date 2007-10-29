@@ -84,7 +84,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		public void UpdateValue(string property, object val)
+		void IBindableWidget.OnBoundDataChanged(string property, object val)
 		{
 			_selectedItem = val;
 			// update the combo without calling again the SetPropertyValue

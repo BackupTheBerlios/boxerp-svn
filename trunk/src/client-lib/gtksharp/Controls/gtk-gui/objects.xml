@@ -3,10 +3,6 @@
     <itemgroups />
     <signals />
   </object>
-  <object type="Boxerp.Client.GtkSharp.Controls.ListView" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
-    <itemgroups />
-    <signals />
-  </object>
   <object type="Boxerp.Client.GtkSharp.Controls.IntegerTextBox" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
     <itemgroups>
       <itemgroup label="IntegerTextBox Properties">
@@ -25,6 +21,10 @@
     <signals />
   </object>
   <object type="Boxerp.Client.GtkSharp.Controls.DateControl" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+  <object type="Boxerp.Client.GtkSharp.Controls.ListView" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
     <itemgroups />
     <signals />
   </object>

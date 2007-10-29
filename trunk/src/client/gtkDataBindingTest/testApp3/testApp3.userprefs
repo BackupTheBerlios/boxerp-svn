@@ -1,16 +1,19 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp_completo/trunk/src/client/gtkDataBindingTest/testApp3/testApp3.mds">
   <Files>
     <File name="Welcome" />
-    <File name="./testApp3/MainWindow.cs" line="59" column="3" />
+    <File name="./testApp3/MainWindow.cs" line="59" column="1" />
     <File name="./testApp3/User.cs" line="106" column="46" />
     <File name="./testApp3/Group.cs" line="106" column="3" />
-    <File name="./testApp3/Main.cs" line="36" column="3" />
-    <File name="./testApp3/ListViewTest2.cs" line="50" column="4" />
+    <File name="./testApp3/Main.cs" line="43" column="4" />
+    <File name="./testApp3/ListViewTest2.cs" line="180" column="26" />
+    <File name="./testApp3/ListViewTest1.cs" line="150" column="1" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="testApp3" expanded="True" selected="True" />
+        <Node name="testApp3" expanded="True">
+          <Node name="ListViewTest1.cs" selected="True" />
+        </Node>
       </Node>
     </ViewMemento>
     <ViewMemento id="ClassPad">
@@ -24,7 +27,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp_completo/trunk/src/client/gtkDataBindingTest/testApp3/testApp3/User.cs" />
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp_completo/trunk/src/client/gtkDataBindingTest/testApp3/testApp3/ListViewTest1.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

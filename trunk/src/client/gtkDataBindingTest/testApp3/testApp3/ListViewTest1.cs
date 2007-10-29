@@ -116,9 +116,11 @@ namespace testApp3
 
 		protected virtual void OnAddItem (object sender, System.EventArgs e)
 		{
+			int i = _listView.Items.Count;
 			User user = new User();
 			user.Username = "random" + DateTime.Now;
 			user.Password = "asdfsdf";
+			user.Desk = i;
 			_listView.Items.Add(user);
 		}
 		
@@ -166,7 +168,7 @@ namespace testApp3
 		{
 			Logger.GetInstance().ShowDebugInfo = false;
 			
-			for (int i = 0; i < 1000; i++)
+			for (int i = 0; i < 10000; i++)
 			{
 				this.OnAddItem(sender, e);
 			}

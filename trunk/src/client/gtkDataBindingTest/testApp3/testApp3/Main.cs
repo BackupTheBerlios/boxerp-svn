@@ -29,6 +29,7 @@
 // project created on 8/10/2007 at 11:45 PM
 using System;
 using Gtk;
+using Boxerp.Client;
 
 namespace testApp3
 {
@@ -38,6 +39,7 @@ namespace testApp3
 		{
 			Application.Init ();
 			
+			Logger.GetInstance().ShowDebugInfo = true;
 			
 			MenuWindow menu = new MenuWindow();
 			menu.Show();

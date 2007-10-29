@@ -72,7 +72,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		private PropertyInfo[] _itemsTypeProperties = null;
 		protected bool _columnsInitialized = false; 
 		private ItemsDisplayMode _itemsDisplayMode = ItemsDisplayMode.Reflection;
-
+		private bool _itemsDisplayModeChanged = false;
 		private Dictionary<int, object> _itemsPointers = new Dictionary<int, object>();
 		//private Dictionary<object, System.IntPtr> _itersPointers = new Dictionary<object, System.IntPtr>();
 		private Dictionary<object, TreeIter> _itersPointers = new Dictionary<object, TreeIter>();
@@ -85,12 +85,17 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 			set
 			{
-				if (BoundItems != null)
+				if (value != _itemsDisplayMode)
 				{
-					throw new NotSupportedException("Changing the items display mode when there are items bound to the list is not allow. Please call Unbind first");
+					_itemsDisplayModeChanged = true;
+					
+					if (BoundItems != null)
+					{
+						throw new NotSupportedException("Changing the items display mode when there are items bound to the list is not allow. Please call Unbind first");
+					}
+					_items.Clear();
+					_itemsDisplayMode = value;
 				}
-				_items.Clear();
-				_itemsDisplayMode = value;
 			}
 		}
 		
@@ -285,7 +290,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		
 		public void Unbind()
 		{
-			this.BoundItems = null;
+			BoundItems = null;
 		}
 		
 		private void OnItemRemoved(System.Object sender, EventArgs args)
@@ -387,7 +392,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			Logger.GetInstance().WriteLine("updateCollection:" + sourceItems.Count);
 			if ((sourceItems != null) && (sourceItems.Count > 0))
 			{
-				initializeItems(sourceItems[0]);
+				initializeTreeView(sourceItems[0]);
 				foreach (object item in sourceItems)
 				{
 					insertItem((object)item);
@@ -396,11 +401,21 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		private void initializeItems(object firstItem)
+		private void initializeTreeView(object firstItem)
 		{
 			_itemsType = firstItem.GetType();
 			_itemsTypeProperties = null;
-				
+			foreach (TreeViewColumn col in TreeView.Columns)
+			{
+				Logger.GetInstance().WriteLine("Removing column: " + col.Title);
+				TreeView.RemoveColumn(col);
+			}
+			if (_store != null)
+			{
+				TreeView.Model = null;
+				_store.Clear();
+				_store.Dispose();
+			}
 			Logger.GetInstance().WriteLine("initialize items:" + _itemsType);
 			createColumns();
 		}
@@ -432,7 +447,22 @@ namespace Boxerp.Client.GtkSharp.Controls
 			
 		private void createColumns()
 		{
-			List<SimpleColumn> columns = readObjectTypes();
+			List<SimpleColumn> columns;
+			
+			if (_itemsDisplayMode != ItemsDisplayMode.Reflection)
+			{
+				columns = new List<SimpleColumn>();
+				SimpleColumn column = new SimpleColumn();
+				column.Type = typeof(string);
+				column.Name = this._itemsType.ToString();
+				column.Visible = true;
+				columns.Add(column);				
+			}
+			else
+			{
+				columns = readObjectTypes();
+			}
+			
 			try
 			{
 				System.Type[] columnsTypes = new Type[columns.Count];
@@ -506,8 +536,25 @@ namespace Boxerp.Client.GtkSharp.Controls
 		
 		private TreeIter insertItem(object item)
 		{
+			if (_itemsDisplayModeChanged || 
+			    ((_itemsTypeProperties == null) && (ItemsDisplayMode == ItemsDisplayMode.Reflection)))
+			{
+				_itemsDisplayModeChanged = false;
+				initializeTreeView(item);				
+			}
+			
 			Logger.GetInstance().WriteLine("insert item:" + item);
-			ArrayList itemValues = getItemPropertiesValues(item);
+			ArrayList itemValues;
+			    
+			if (_itemsDisplayMode != ItemsDisplayMode.Reflection)
+			{
+				itemValues = new ArrayList();
+				itemValues.Add(item.ToString());
+			}
+			else
+			{
+				itemValues = getItemPropertiesValues(item);
+			}
 			
 			TreeIter iter = _store.Append();
 		    if (_treeview.Model != null)
@@ -568,11 +615,6 @@ namespace Boxerp.Client.GtkSharp.Controls
 		
 		private ArrayList getItemPropertiesValues(object item)
 		{
-			if (_itemsTypeProperties == null)
-			{
-				initializeItems(item);
-			}
-				
 			Logger.GetInstance().WriteLine("item type properties initialized:" + item.ToString());
 			ArrayList values = new ArrayList();
 			List<string> properties = new List<string>();

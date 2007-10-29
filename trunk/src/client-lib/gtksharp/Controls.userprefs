@@ -2,10 +2,10 @@
   <Files>
     <File name="Welcome" />
     <File name="../../../../branches/branch_nov2006/src/client-gtksharp/lib/lib/SimpleListView.cs" line="158" column="4" />
-    <File name="./Controls/TextBox.cs" line="74" column="1" />
-    <File name="./Controls/ComboBox.cs" line="1" column="1" />
-    <File name="./Controls/ListView.cs" line="197" column="4" />
-    <File name="./Controls/IntegerTextBox.cs" line="45" column="1" />
+    <File name="./Controls/TextBox.cs" line="66" column="42" />
+    <File name="./Controls/ComboBox.cs" line="87" column="42" />
+    <File name="./Controls/ListView.cs" line="540" column="92" />
+    <File name="./Controls/IntegerTextBox.cs" line="71" column="42" />
     <File name="./Controls/DateControl.cs" line="31" column="30" />
   </Files>
   <Views>
@@ -26,6 +26,6 @@
   </Views>
   <Properties>
     <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp_completo/trunk/src/client-lib/gtksharp/Controls/ListView.cs" />
-    <Property key="ActiveConfiguration" value="Debug" />
+    <Property key="ActiveConfiguration" value="Release" />
   </Properties>
 </UserCombinePreferences>

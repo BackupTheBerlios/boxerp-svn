@@ -125,9 +125,11 @@ namespace testApp3
 
 		protected virtual void OnAddItem (object sender, System.EventArgs e)
 		{
+			int i = _group.Users.Count;
 			User user = new User();
 			user.Username = "random" + DateTime.Now;
 			user.Password = "asdfsdf";
+			user.Desk = i;
 			_listView.BoundItems.Add(user);
 		}
 		
@@ -170,5 +172,16 @@ namespace testApp3
 		{
 			
 		}
+
+		protected virtual void OnMemoryTest (object sender, System.EventArgs e)
+		{
+			Logger.GetInstance().ShowDebugInfo = false;
+			
+			for (int i = 0; i < 10000; i++)
+			{
+				this.OnAddItem(sender, e);
+			}
+		}
+		
 	}
 }

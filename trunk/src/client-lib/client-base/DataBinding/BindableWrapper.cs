@@ -49,6 +49,10 @@ namespace Boxerp.Client
 			: base(businessObj, disableInterception, disableInterception)
 		{ }
 
+		public BindableWrapper(T businessObj, bool disableInterception, bool disableUndoRedo)
+			: base(businessObj, true, disableInterception, disableUndoRedo)
+		{ }
+
 		[Serializable]
 		public class WrapObject<D> : AbstractBindableWrapper<D, BindableWrapper<D>.WrapObject<D>>.BindableFields<D>
 		{

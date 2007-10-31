@@ -146,11 +146,24 @@ namespace Boxerp.Client
 		/// <returns></returns>
 		private static string cleanBaseTypeName(string sourceName)
 		{
-			string[] namespaces = sourceName.Split(new char[] { '.' });
-			sourceName = namespaces[namespaces.Length -1];
-			sourceName += DateTime.Now.ToString("ddMMyyyyHH");// +Guid.NewGuid().ToString();
-			
+			string[] qualifiedNameParts = sourceName.Split(',');
+			string nspace = qualifiedNameParts[0].Trim();
+			string assembly = qualifiedNameParts[1].Trim();
+			string firstPart;
+			if (assembly.Contains(nspace))
+			{
+				firstPart = nspace + assembly;
+			}
+			else
+			{
+				firstPart = nspace;
+			}
+			string version = qualifiedNameParts[2].Split('=')[1].Trim();
+			string culture = qualifiedNameParts[3].Split('=')[1].Trim();
+			string pubToken = qualifiedNameParts[4].Split('=')[1].Trim();
 
+			sourceName = firstPart + version + culture + pubToken;
+			
 			return cleanGarbageSimbols(sourceName);
 		}
 
@@ -173,7 +186,7 @@ namespace Boxerp.Client
 		public static Type CreateBusinessObjectProxy(Type baseType, Type[] constructorParamsTypes)
 		{
 			_isBusinessObj = true;
-			string className = "PropChPrxy_" + cleanBaseTypeName(baseType.ToString());
+			string className = "PropChPrxy_" + cleanBaseTypeName(baseType.AssemblyQualifiedName);
 			return CreateBusinessObjectProxy(baseType, constructorParamsTypes, className);
 		}
 

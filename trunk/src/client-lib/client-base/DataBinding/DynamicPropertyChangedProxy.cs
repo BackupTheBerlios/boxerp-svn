@@ -46,7 +46,11 @@ namespace Boxerp.Client
 		private static string ASSEMBLY_NAME = "BoxerpDynamicAssembly";
 		private static string DYNAMIC_MOD_NAME = ASSEMBLY_NAME;
 		private static string ASSEMBLY_DLL = DYNAMIC_MOD_NAME + ".dll";
-		private static string SERIALIZED_DATA = "__serializedData";
+		public static string SERIALIZED_DATA = "__serializedData";
+		public static string OBJECT_BASE_TYPE = "__businessObjBaseType";
+		public static string ARGUMENTS4CONSTRUCTOR = "__arguments4constructor";
+		public static string IS_BUSINESS_OBJECT = "__isBusinessObject";
+		private static bool _isBusinessObj = false;
 		
 
 		private static AssemblyBuilder MyAssemblyBuilder
@@ -62,8 +66,7 @@ namespace Boxerp.Client
 					#else
 						_assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(myAsmName, AssemblyBuilderAccess.Run);
 					#endif
-
-						AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
+						//AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
 				}
 
 				return _assemblyBuilder;
@@ -94,7 +97,7 @@ namespace Boxerp.Client
 			}
 		}
 
-		public static Assembly OnAssemblyResolve(Object sender, ResolveEventArgs args)
+		/*public static Assembly OnAssemblyResolve(Object sender, ResolveEventArgs args)
 		{
 			Console.Out.WriteLine("ON ASSEMBLY RESOLVE: (requesting)" + args.Name);
 			if (args.Name.StartsWith(DYNAMIC_MOD_NAME))
@@ -107,7 +110,7 @@ namespace Boxerp.Client
 			}
 			Console.Out.WriteLine("ASSEMBLY NOT FOUND");
 			return null;
-		}
+		}*/
 
 		#region clean names functions
 
@@ -162,12 +165,14 @@ namespace Boxerp.Client
 
 		public static Type CreateBindableWrapperProxy(Type baseType, Type[] constructorParamsTypes)
 		{
+			_isBusinessObj = false;
 			string className = "PropChPrxy_" + getBindableClassName(baseType.ToString());
 			return CreateBusinessObjectProxy(baseType, constructorParamsTypes, className);
 		}
 
 		public static Type CreateBusinessObjectProxy(Type baseType, Type[] constructorParamsTypes)
 		{
+			_isBusinessObj = true;
 			string className = "PropChPrxy_" + cleanBaseTypeName(baseType.ToString());
 			return CreateBusinessObjectProxy(baseType, constructorParamsTypes, className);
 		}
@@ -211,18 +216,27 @@ namespace Boxerp.Client
 			EventBuilder eventField = targetTypeBld.DefineEvent("PropertyChanged", EventAttributes.None, typeof(PropertyChangedEventHandler));
 			// the propertyChanged event shouldn't be serializable
 			FieldBuilder eventHandler = targetTypeBld.DefineField("PropertyChanged", typeof(PropertyChangedEventHandler), FieldAttributes.Private | FieldAttributes.NotSerialized);
-
+			
+			// the properties for the DynamicProxyHelper
+			FieldBuilder argsForConstructorField = targetTypeBld.DefineField(ARGUMENTS4CONSTRUCTOR, typeof(Type[]), FieldAttributes.Private | FieldAttributes.Static);
+			FieldBuilder baseTypeField = targetTypeBld.DefineField(OBJECT_BASE_TYPE, typeof(string), FieldAttributes.Private | FieldAttributes.Static);
+			FieldBuilder isBusinesSObjField = targetTypeBld.DefineField(IS_BUSINESS_OBJECT, typeof(bool), FieldAttributes.Private | FieldAttributes.Static);
+			
 			createDefaultConstructor(targetTypeBld, baseType, constructorParamsTypes);
 			createDeserializationConstructor(targetTypeBld, baseType, constructorParamsTypes);
-			getObjectDataMethod(targetTypeBld, baseType);
+			getObjectDataMethod(targetTypeBld, baseType, argsForConstructorField, baseTypeField, isBusinesSObjField);
 			addOrRemoveMethod(targetTypeBld, eventField, eventHandler, true);
 			addOrRemoveMethod(targetTypeBld, eventField, eventHandler, false);
 			hasSubscribersMethod(targetTypeBld, eventHandler);
 			throwPropertyChangedMethod(targetTypeBld, eventHandler);
 			getSubscribersListMethod(targetTypeBld, eventHandler);
-
 			
 			targetType = targetTypeBld.CreateType();
+
+			// set the private fields that are needed for the DynamicProxyHelper
+			targetType.GetField(argsForConstructorField.Name, BindingFlags.NonPublic | BindingFlags.Static).SetValue(null, constructorParamsTypes);
+			targetType.GetField(baseTypeField.Name, BindingFlags.NonPublic | BindingFlags.Static).SetValue(null, baseType.AssemblyQualifiedName);
+			targetType.GetField(isBusinesSObjField.Name, BindingFlags.NonPublic | BindingFlags.Static).SetValue(null, _isBusinessObj);
 
 			#if CREATE_DLL_FILE
 				MyAssemblyBuilder.Save(ASSEMBLY_DLL);

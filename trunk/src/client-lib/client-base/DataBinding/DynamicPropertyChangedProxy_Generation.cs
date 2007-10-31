@@ -28,7 +28,8 @@ namespace Boxerp.Client
 		/// </summary>
 		/// <param name="builder"></param>
 		/// <param name="baseType"></param>
-		private static void getObjectDataMethod(TypeBuilder builder, Type baseType)
+		private static void getObjectDataMethod(TypeBuilder builder, Type baseType,
+			FieldBuilder args4constructorField, FieldBuilder baseTypeField, FieldBuilder isBusinessObjField)
 		{
 			MethodBuilder method;
 			bool inheritsSerializable = baseType.IsAssignableFrom(typeof(ISerializable));
@@ -62,7 +63,41 @@ namespace Boxerp.Client
 			}
 
 			ILGenerator mthdIL = method.GetILGenerator();
-			
+
+			LocalBuilder localDynamicProxyHelperType = mthdIL.DeclareLocal(typeof(Type));
+			LocalBuilder localMembers = mthdIL.DeclareLocal(typeof(MemberInfo[]));
+			LocalBuilder localData = mthdIL.DeclareLocal(typeof(object[]));
+
+			// Tell the formatter that we want to Serialize the DynamicProxyHelper and not the proxy.
+			// In the deserialization the DynamicProxyHelper will recreate the proxy and set its values because 
+			// they are already contained in the SerializationInfo
+			mthdIL.Emit(OpCodes.Nop);
+			mthdIL.Emit(OpCodes.Ldarg_1);
+			mthdIL.Emit(OpCodes.Ldtoken, typeof(DynamicProxyHelper));
+			mthdIL.Emit(OpCodes.Call, typeof(Type).GetMethod("GetTypeFromHandle", new Type[] { typeof(RuntimeTypeHandle) }));
+			mthdIL.Emit(OpCodes.Callvirt, typeof(SerializationInfo).GetMethod("SetType", new Type[] { typeof(Type) }));
+			mthdIL.Emit(OpCodes.Nop);
+
+			// Now serialize the static fields needed for the DynamicProxyHelper
+			mthdIL.Emit(OpCodes.Ldarg_1);
+			mthdIL.Emit(OpCodes.Ldstr, ARGUMENTS4CONSTRUCTOR);
+			mthdIL.Emit(OpCodes.Ldsfld, args4constructorField);
+			mthdIL.Emit(OpCodes.Callvirt,
+				typeof(SerializationInfo).GetMethod("AddValue", new Type[] { typeof(string), typeof(Type[]) }));
+			mthdIL.Emit(OpCodes.Nop);
+			mthdIL.Emit(OpCodes.Ldarg_1);
+			mthdIL.Emit(OpCodes.Ldstr, OBJECT_BASE_TYPE);
+			mthdIL.Emit(OpCodes.Ldsfld, baseTypeField);
+			mthdIL.Emit(OpCodes.Callvirt,
+				typeof(SerializationInfo).GetMethod("AddValue", new Type[] { typeof(string), typeof(string) }));
+			mthdIL.Emit(OpCodes.Nop);
+			mthdIL.Emit(OpCodes.Ldarg_1);
+			mthdIL.Emit(OpCodes.Ldstr, IS_BUSINESS_OBJECT);
+			mthdIL.Emit(OpCodes.Ldsfld, isBusinessObjField);
+			mthdIL.Emit(OpCodes.Callvirt,
+				typeof(SerializationInfo).GetMethod("AddValue", new Type[] { typeof(string), typeof(bool) }));
+			mthdIL.Emit(OpCodes.Nop);
+
 			if (inheritsSerializable)
 			{
 				// C# : base.GetObjectData(info, context)
@@ -75,25 +110,24 @@ namespace Boxerp.Client
 			}
 			else
 			{
-				LocalBuilder localMembers = mthdIL.DeclareLocal(typeof(MemberInfo[]));
-				LocalBuilder localData = mthdIL.DeclareLocal(typeof(object[]));
-				
 				mthdIL.Emit(OpCodes.Nop); 
 
 				mthdIL.Emit(OpCodes.Ldarg_0);
 				mthdIL.Emit(OpCodes.Call, typeof(object).GetMethod("GetType", new Type[0]));
 				mthdIL.Emit(OpCodes.Call, typeof(FormatterServices).GetMethod("GetSerializableMembers", new Type[] { typeof(Type) }));
-				mthdIL.Emit(OpCodes.Stloc_0);
-				mthdIL.Emit(OpCodes.Ldarg_0);
-				mthdIL.Emit(OpCodes.Ldloc_0);
-				mthdIL.Emit(OpCodes.Call, typeof(FormatterServices).GetMethod("GetObjectData", new Type[] { typeof(object), typeof(MemberInfo[]) }));
 				mthdIL.Emit(OpCodes.Stloc_1);
+				mthdIL.Emit(OpCodes.Ldarg_0);
+				mthdIL.Emit(OpCodes.Ldloc_1);
+				mthdIL.Emit(OpCodes.Call, typeof(FormatterServices).GetMethod("GetObjectData", new Type[] { typeof(object), typeof(MemberInfo[]) }));
+				mthdIL.Emit(OpCodes.Stloc_2);
 				mthdIL.Emit(OpCodes.Ldarg_1);
 				mthdIL.Emit(OpCodes.Ldstr, SERIALIZED_DATA);
-				mthdIL.Emit(OpCodes.Ldloc_1);
+				mthdIL.Emit(OpCodes.Ldloc_2);
 				mthdIL.Emit(OpCodes.Callvirt, typeof(SerializationInfo).GetMethod("AddValue", new Type[] { typeof(string), typeof(object) })); 
+				 
 				mthdIL.Emit(OpCodes.Nop);
 			}
+			
 			mthdIL.Emit(OpCodes.Ret); 
 		}
 
@@ -137,7 +171,7 @@ namespace Boxerp.Client
 			}
 			else
 			{
-				LocalBuilder localData = ctorIL.DeclareLocal(typeof(object[]));
+				/*LocalBuilder localData = ctorIL.DeclareLocal(typeof(object[]));
 				LocalBuilder localMembers = ctorIL.DeclareLocal(typeof(MemberInfo[]));
 				
 				ctorIL.Emit(OpCodes.Ldarg_0);
@@ -168,7 +202,7 @@ namespace Boxerp.Client
 				ctorIL.Emit(OpCodes.Ldloc_1);
 				ctorIL.Emit(OpCodes.Ldloc_0);
 				ctorIL.Emit(OpCodes.Call, typeof(FormatterServices).GetMethod("PopulateObjectMembers", new Type[] { typeof(object), typeof(MemberInfo[]), typeof(object[]) }));
-				ctorIL.Emit(OpCodes.Pop);
+				ctorIL.Emit(OpCodes.Pop);*/
 				ctorIL.Emit(OpCodes.Nop);
 			}
 
@@ -387,5 +421,8 @@ namespace Boxerp.Client
 			mthdIL.Emit(OpCodes.Ldloc_0);
 			mthdIL.Emit(OpCodes.Ret);
 		}
+
+		
+
 	}
 }

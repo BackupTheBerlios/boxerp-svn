@@ -32,19 +32,24 @@ namespace Boxerp.Client
 			bool isBusinessObj = (bool)info.GetValue(DynamicPropertyChangedProxy.IS_BUSINESS_OBJECT, typeof(bool));
 			_baseT = Type.GetType(_baseTypeName, true, false);
 			Type firstProxyType;
+			object[] baseMemberData = (object[])_info.GetValue(DynamicPropertyChangedProxy.SERIALIZED_DATA, typeof(object[]));
+			ProxyGenerator generator = new ProxyGenerator();
+
 			if (isBusinessObj)
 			{
+				// the business objects have to have a default constructor
 				firstProxyType = DynamicPropertyChangedProxy.CreateBusinessObjectProxy(_baseT, _argumentsForConstructor);
+				_proxy = generator.CreateClassProxy(firstProxyType, (IInterceptor[])baseMemberData[0]);
 			}
 			else
 			{
+				// if it is not a business object then it has to be a BindableFields class which constructor has always an interceptor
 				firstProxyType = DynamicPropertyChangedProxy.CreateBindableWrapperProxy(_baseT, _argumentsForConstructor);
+				_proxy = generator.CreateClassProxy(firstProxyType, (IInterceptor[])baseMemberData[0], (object[])baseMemberData[0]);
 			}
 
-			object[] baseMemberData = (object[])_info.GetValue(DynamicPropertyChangedProxy.SERIALIZED_DATA, typeof(object[]));
 			
-			ProxyGenerator generator = new ProxyGenerator();
-			_proxy = generator.CreateClassProxy(firstProxyType, (IInterceptor[])baseMemberData[0]);
+			
 		}
 
 		#region IObjectReference Members

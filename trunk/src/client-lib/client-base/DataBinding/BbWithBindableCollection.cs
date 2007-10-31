@@ -96,7 +96,6 @@ namespace Boxerp.Client
 				}
 			}
 
-			
 			public WrapObject(IInterceptor interceptor)
 				: base(interceptor)
 			{

@@ -60,16 +60,18 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BindableCollectionTests.cs" />
-    <Compile Include="ComplexBusinessObject.cs" />
+    <Compile Include="Classes\ComplexBusinessObject.cs" />
     <Compile Include="ComplexBusinessObjTests.cs" />
-    <Compile Include="HardCodedProxies.cs" />
+    <Compile Include="Classes\HardcodedPlusIObjectRef.cs" />
+    <Compile Include="HardcodedPlusIObjectRefTests.cs" />
+    <Compile Include="Classes\HardCodedProxies.cs" />
     <Compile Include="HardCodedProxiesTests.cs" />
     <Compile Include="NestedBindableCollectionTests.cs" />
     <Compile Include="NestedBindableWrapperTests.cs" />
     <Compile Include="NestedCollectionBusinessObjTests.cs" />
-    <Compile Include="SimpleBusinessObject.cs" />
+    <Compile Include="Classes\SimpleBusinessObject.cs" />
     <Compile Include="SimpleBusinessObjTests.cs" />
-    <Compile Include="SimpleExplicitPropChanged.cs" />
+    <Compile Include="Classes\SimpleExplicitPropChanged.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\client-base\client-base2008.csproj">

@@ -171,7 +171,7 @@ namespace Boxerp.Client
 				else
 				{
 					// double proxy. The first one implents the INotifyPropertyChanged interface
-					Type notifiableType = DynamicPropertyChangedProxy.CreateBindableWrapperProxy(typeof(Y), argumentTypes);
+					Type notifiableType = DynamicPropertyChangedProxy.CreateBindableWrapperProxy(typeof(Y), argumentTypes, argumentsForConstructor);
 					_bindableFields = (Y)_generator.CreateClassProxy(notifiableType, new IInterceptor[] { this }, argumentsForConstructor);
 
 				}

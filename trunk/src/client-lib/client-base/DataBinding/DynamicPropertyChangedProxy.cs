@@ -48,7 +48,8 @@ namespace Boxerp.Client
 		private static string ASSEMBLY_DLL = DYNAMIC_MOD_NAME + ".dll";
 		public static string SERIALIZED_DATA = "__serializedData";
 		public static string OBJECT_BASE_TYPE = "__businessObjBaseType";
-		public static string ARGUMENTS4CONSTRUCTOR = "__arguments4constructor";
+		public static string ARGUMENTS_TYPES4CONSTRUCTOR = "__argumentsTypes4constructor";
+		public static string VALUES4CONSTRUCTOR = "__values4constructor";
 		public static string IS_BUSINESS_OBJECT = "__isBusinessObject";
 		private static bool _isBusinessObj = false;
 		
@@ -176,18 +177,18 @@ namespace Boxerp.Client
 		}
 		#endregion
 
-		public static Type CreateBindableWrapperProxy(Type baseType, Type[] constructorParamsTypes)
+		public static Type CreateBindableWrapperProxy(Type baseType, Type[] constructorParamsTypes, object[] valuesForConstructor)
 		{
 			_isBusinessObj = false;
 			string className = "PropChPrxy_" + getBindableClassName(baseType.ToString());
-			return CreateBusinessObjectProxy(baseType, constructorParamsTypes, className);
+			return CreateBusinessObjectProxy(baseType, constructorParamsTypes, valuesForConstructor, className);
 		}
 
 		public static Type CreateBusinessObjectProxy(Type baseType, Type[] constructorParamsTypes)
 		{
 			_isBusinessObj = true;
 			string className = "PropChPrxy_" + cleanBaseTypeName(baseType.AssemblyQualifiedName);
-			return CreateBusinessObjectProxy(baseType, constructorParamsTypes, className);
+			return CreateBusinessObjectProxy(baseType, constructorParamsTypes, new object[0], className);
 		}
 
 		/// <summary>
@@ -198,7 +199,7 @@ namespace Boxerp.Client
 		/// The code that this proxy generates is something like that class above but it is generic,
 		/// it extends from any kind of base class. 
 		/// </summary>
-		public static Type CreateBusinessObjectProxy(Type baseType, Type[] constructorParamsTypes, string className)
+		public static Type CreateBusinessObjectProxy(Type baseType, Type[] constructorParamsTypes, object[] values4Constructor, string className)
 		{
 			// If this proxy has been created already do not create it again
 			foreach (Type t in MyAssemblyBuilder.GetTypes())
@@ -231,13 +232,14 @@ namespace Boxerp.Client
 			FieldBuilder eventHandler = targetTypeBld.DefineField("PropertyChanged", typeof(PropertyChangedEventHandler), FieldAttributes.Private | FieldAttributes.NotSerialized);
 			
 			// the properties for the DynamicProxyHelper
-			FieldBuilder argsForConstructorField = targetTypeBld.DefineField(ARGUMENTS4CONSTRUCTOR, typeof(Type[]), FieldAttributes.Private | FieldAttributes.Static);
+			FieldBuilder argsForConstructorField = targetTypeBld.DefineField(ARGUMENTS_TYPES4CONSTRUCTOR, typeof(Type[]), FieldAttributes.Private | FieldAttributes.Static);
 			FieldBuilder baseTypeField = targetTypeBld.DefineField(OBJECT_BASE_TYPE, typeof(string), FieldAttributes.Private | FieldAttributes.Static);
 			FieldBuilder isBusinesSObjField = targetTypeBld.DefineField(IS_BUSINESS_OBJECT, typeof(bool), FieldAttributes.Private | FieldAttributes.Static);
+			FieldBuilder valuesForConstructorField = targetTypeBld.DefineField(VALUES4CONSTRUCTOR, typeof(object[]), FieldAttributes.Private | FieldAttributes.Static);
 			
 			createDefaultConstructor(targetTypeBld, baseType, constructorParamsTypes);
 			createDeserializationConstructor(targetTypeBld, baseType, constructorParamsTypes);
-			getObjectDataMethod(targetTypeBld, baseType, argsForConstructorField, baseTypeField, isBusinesSObjField);
+			getObjectDataMethod(targetTypeBld, baseType, argsForConstructorField, baseTypeField, isBusinesSObjField, valuesForConstructorField);
 			addOrRemoveMethod(targetTypeBld, eventField, eventHandler, true);
 			addOrRemoveMethod(targetTypeBld, eventField, eventHandler, false);
 			hasSubscribersMethod(targetTypeBld, eventHandler);
@@ -250,6 +252,7 @@ namespace Boxerp.Client
 			targetType.GetField(argsForConstructorField.Name, BindingFlags.NonPublic | BindingFlags.Static).SetValue(null, constructorParamsTypes);
 			targetType.GetField(baseTypeField.Name, BindingFlags.NonPublic | BindingFlags.Static).SetValue(null, baseType.AssemblyQualifiedName);
 			targetType.GetField(isBusinesSObjField.Name, BindingFlags.NonPublic | BindingFlags.Static).SetValue(null, _isBusinessObj);
+			targetType.GetField(valuesForConstructorField.Name, BindingFlags.NonPublic | BindingFlags.Static).SetValue(null, values4Constructor);
 
 			#if CREATE_DLL_FILE
 				MyAssemblyBuilder.Save(ASSEMBLY_DLL);

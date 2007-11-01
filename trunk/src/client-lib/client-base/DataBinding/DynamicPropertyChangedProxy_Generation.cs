@@ -29,7 +29,8 @@ namespace Boxerp.Client
 		/// <param name="builder"></param>
 		/// <param name="baseType"></param>
 		private static void getObjectDataMethod(TypeBuilder builder, Type baseType,
-			FieldBuilder args4constructorField, FieldBuilder baseTypeField, FieldBuilder isBusinessObjField)
+			FieldBuilder args4constructorField, FieldBuilder baseTypeField, FieldBuilder isBusinessObjField,
+			FieldBuilder valuesForConstructorField)
 		{
 			MethodBuilder method;
 			bool inheritsSerializable = baseType.IsAssignableFrom(typeof(ISerializable));
@@ -80,7 +81,7 @@ namespace Boxerp.Client
 
 			// Now serialize the static fields needed for the DynamicProxyHelper
 			mthdIL.Emit(OpCodes.Ldarg_1);
-			mthdIL.Emit(OpCodes.Ldstr, ARGUMENTS4CONSTRUCTOR);
+			mthdIL.Emit(OpCodes.Ldstr, ARGUMENTS_TYPES4CONSTRUCTOR);
 			mthdIL.Emit(OpCodes.Ldsfld, args4constructorField);
 			mthdIL.Emit(OpCodes.Callvirt,
 				typeof(SerializationInfo).GetMethod("AddValue", new Type[] { typeof(string), typeof(Type[]) }));
@@ -97,6 +98,12 @@ namespace Boxerp.Client
 			mthdIL.Emit(OpCodes.Callvirt,
 				typeof(SerializationInfo).GetMethod("AddValue", new Type[] { typeof(string), typeof(bool) }));
 			mthdIL.Emit(OpCodes.Nop);
+			mthdIL.Emit(OpCodes.Ldarg_1);
+			mthdIL.Emit(OpCodes.Ldstr, VALUES4CONSTRUCTOR);
+			mthdIL.Emit(OpCodes.Ldsfld, valuesForConstructorField);
+			mthdIL.Emit(OpCodes.Callvirt,
+				typeof(SerializationInfo).GetMethod("AddValue", new Type[] { typeof(string), typeof(object[]) }));
+			
 
 			if (inheritsSerializable)
 			{

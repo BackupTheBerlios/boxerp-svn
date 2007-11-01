@@ -17,6 +17,7 @@ namespace Boxerp.Client
 	{
 		private object _proxy;
 		private Type[] _argumentsForConstructor;
+		private object[] _valuesForConstructor;
 		private readonly SerializationInfo _info;
 		private readonly StreamingContext _context;
 		private string _baseTypeName;
@@ -27,7 +28,8 @@ namespace Boxerp.Client
 			_info = info;
 			_context = context;
 
-			_argumentsForConstructor = (Type[])info.GetValue(DynamicPropertyChangedProxy.ARGUMENTS4CONSTRUCTOR, typeof(Type[]));
+			_argumentsForConstructor = (Type[])info.GetValue(DynamicPropertyChangedProxy.ARGUMENTS_TYPES4CONSTRUCTOR, typeof(Type[]));
+			_valuesForConstructor = (object[])info.GetValue(DynamicPropertyChangedProxy.VALUES4CONSTRUCTOR, typeof(object[]));
 			_baseTypeName = (string)info.GetValue(DynamicPropertyChangedProxy.OBJECT_BASE_TYPE, typeof(string));
 			bool isBusinessObj = (bool)info.GetValue(DynamicPropertyChangedProxy.IS_BUSINESS_OBJECT, typeof(bool));
 			_baseT = Type.GetType(_baseTypeName, true, false);
@@ -44,8 +46,8 @@ namespace Boxerp.Client
 			else
 			{
 				// if it is not a business object then it has to be a BindableFields class which constructor has always an interceptor
-				firstProxyType = DynamicPropertyChangedProxy.CreateBindableWrapperProxy(_baseT, _argumentsForConstructor);
-				_proxy = generator.CreateClassProxy(firstProxyType, (IInterceptor[])baseMemberData[0], (object[])baseMemberData[0]);
+				firstProxyType = DynamicPropertyChangedProxy.CreateBindableWrapperProxy(_baseT, _argumentsForConstructor, _valuesForConstructor);
+				_proxy = generator.CreateClassProxy(firstProxyType, (IInterceptor[])baseMemberData[0], _valuesForConstructor);
 			}
 
 			

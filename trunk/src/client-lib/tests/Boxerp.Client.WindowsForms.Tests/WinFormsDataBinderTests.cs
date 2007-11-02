@@ -76,6 +76,9 @@ namespace Boxerp.Client.WindowsForms.Tests
 				dataBinder.BindWithReflection();
 
 				inputbox.TextChanged += (sender, ea) => person.Name = inputbox.Text;
+
+				//inputbox.TextChanged += (sender, ea) => name.Text = inputbox.Text;
+
 			}
 			public TextBox NameTxt
 			{
@@ -107,5 +110,47 @@ namespace Boxerp.Client.WindowsForms.Tests
 				this.name = name;
 			}
 		}
+
+
+//		[Serializable]
+//		public class Person : System.ComponentModel.INotifyPropertyChanged
+//		{
+//			private string name;
+//			public virtual string Name
+//			{
+//				get { return name; }
+//				set
+//				{
+//					if (name == value)
+//						return;
+//					name = value;
+//					OnPropertyChanged("Name");
+//				}
+//			}
+//
+//			protected void OnPropertyChanged(string p)
+//			{
+//				if (null != PropertyChanged)
+//					PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(p));
+//			}
+//			public Person()
+//			{
+//
+//			}
+//			/// <summary>
+//			/// Initializes a new instance of the Person class.
+//			/// </summary>
+//			/// <param name="name"></param>
+//			public Person(string name)
+//			{
+//				this.name = name;
+//			}
+//
+//			#region INotifyPropertyChanged Members
+//
+//			public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+//
+//			#endregion
+//		}
 	}
 }

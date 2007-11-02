@@ -1,0 +1,106 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A16E2117-A015-4EBC-9051-4D9FF2EF4280}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>Boxerp.Client.GtkSharp</AssemblyName>
+    <RootNamespace>Boxerp.Client.GtkSharp</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="atk-sharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>gtklibs\atk-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="gdk-sharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>gtklibs\gdk-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="glade-sharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>gtklibs\glade-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="glib-sharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>gtklibs\glib-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="gtk-sharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>gtklibs\gtk-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="libstetic, Version=0.0.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>gtklibs\libstetic.dll</HintPath>
+    </Reference>
+    <Reference Include="libsteticui, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>gtklibs\libsteticui.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>gtklibs\Mono.Posix.dll</HintPath>
+    </Reference>
+    <Reference Include="pango-sharp, Version=2.8.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>gtklibs\pango-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="DataBinding\BindableWidgetCore.cs" />
+    <Compile Include="DataBinding\DataBinder.cs" />
+    <Compile Include="DataBinding\IBindableWidget.cs" />
+    <Compile Include="gtk-gui\Boxerp.Client.GtkSharp.InfoDialog.cs" />
+    <Compile Include="gtk-gui\Boxerp.Client.GtkSharp.QuestionDialog.cs" />
+    <Compile Include="gtk-gui\Boxerp.Client.GtkSharp.WaitDialog.cs" />
+    <Compile Include="gtk-gui\Boxerp.Client.GtkSharp.WaitWindow.cs" />
+    <Compile Include="gtk-gui\Boxerp.Client.GtkSharp.WarningDialog.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="GtkResponsiveHelper.cs" />
+    <Compile Include="IGtkWaitControl.cs" />
+    <Compile Include="InfoDialog.cs" />
+    <Compile Include="InfoExtendedDialog.cs" />
+    <Compile Include="LoginWindow.cs" />
+    <Compile Include="QuestionDialog.cs" />
+    <Compile Include="SimpleColumn.cs" />
+    <Compile Include="WaitDialog.cs" />
+    <Compile Include="WaitWindow.cs" />
+    <Compile Include="WarningDialog.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gtk-gui\gui.stetic" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gtk-gui\objects.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\client-base\client-base2008.csproj">
+      <Project>{701CF3A1-60F3-4938-B0DD-CBFBC6DEF7D5}</Project>
+      <Name>client-base2008</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>

@@ -30,12 +30,15 @@
 using System;
 using Gtk;
 using System.Threading;
-using Boxerp.Models;
-using Boxerp.Objects;
+//using Boxerp.Models;
+//using Boxerp.Objects;
 
 namespace Boxerp.Client.GtkSharp
 {
-	
+	interface ILogin
+	{
+		string Login(string name,string pass);
+	}
 	public class LoginWindow : Gtk.Window
 	{
 		protected Gtk.Button buttonConnect;

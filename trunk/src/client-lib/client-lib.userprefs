@@ -12,9 +12,10 @@
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="Boxerp.Client" expanded="True" />
-        <Node name="Boxerp.Client.GtkSharp" expanded="True" selected="True">
-          <Node name="DataBinding" expanded="True" />
+        <Node name="Boxerp.Client.GtkSharp" expanded="True">
+          <Node name="DataBinding" expanded="True">
+            <Node name="DataBinder.cs" selected="True" />
+          </Node>
         </Node>
       </Node>
     </ViewMemento>

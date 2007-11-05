@@ -35,6 +35,8 @@
     <File name="./DataBinding/DataBinder.cs" subtype="Code" buildaction="Compile" />
     <File name="./DataBinding/IBindableWidget.cs" subtype="Code" buildaction="Compile" />
     <File name="./IGtkWaitControl.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/BindingColumn.cs" subtype="Code" buildaction="Compile" />
+    <File name="./DataBinding/BindingDescriptor.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

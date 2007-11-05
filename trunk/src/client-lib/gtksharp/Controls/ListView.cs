@@ -61,21 +61,13 @@ namespace Boxerp.Client.GtkSharp.Controls
 	///  2 - The user is using the Items properties. The items on it implement the INotifyPropertyChanged. What happen when an item changes? 
 	/// 
 	/// </summary>
-	public partial class ListView : Gtk.Bin, IBindableWidget
+	public partial class ListView : TreeViewWrapper, IBindableWidget
 	{
 		private BindableWidgetCore _widgetCore;
 		protected InterceptedList<object> _items = new InterceptedList<object>();
 		protected IBindingList _boundItems;
-		protected ListStore _store;
-		private Type _itemsType = typeof(System.Object);
-		// TODO: Widgets shouldn't support multithreading, throw an exception if that happens
-		private PropertyInfo[] _itemsTypeProperties = null;
-		protected bool _columnsInitialized = false; 
 		private ItemsDisplayMode _itemsDisplayMode = ItemsDisplayMode.Reflection;
 		private bool _itemsDisplayModeChanged = false;
-		private Dictionary<int, object> _itemsPointers = new Dictionary<int, object>();
-		//private Dictionary<object, System.IntPtr> _itersPointers = new Dictionary<object, System.IntPtr>();
-		private Dictionary<object, TreeIter> _itersPointers = new Dictionary<object, TreeIter>();
 		
 		public ItemsDisplayMode ItemsDisplayMode
 		{
@@ -99,6 +91,14 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
+		protected override Gtk.TreeView TreeView 
+		{ 
+			get
+			{
+				return _treeview;
+			}
+		}
+		
 		public InterceptedList<object> Items 
 		{
 			get 
@@ -119,44 +119,11 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		public Gtk.SelectionMode SelectionMode
+		public override object SelectedItem
 		{
 			get
 			{
-				return _treeview.Selection.Mode;
-			}
-			set
-			{
-				_treeview.Selection.Mode = value;
-			}
-		}
-		
-		/// <value>
-		/// If the SelectionMode is Multiple, this property will return null even if there are 
-		/// items selected. For that case use the SelectedItems property
-		/// </value>
-		public object SelectedItem
-		{
-			get
-			{
-				if (SelectionMode != Gtk.SelectionMode.Single)
-				{
-					return null;
-				}
-				
-				TreeIter iter;
-				if (_treeview.Selection.GetSelected(out iter))
-				{
-					Logger.GetInstance().WriteLine("Iter userData=" + iter.UserData.GetHashCode());
-					 return _itemsPointers[iter.UserData.GetHashCode()];
-				}
-				else
-				{
-					Logger.GetInstance().WriteLine("nothing selected");
-					Logger.GetInstance().WriteLine("nothing selected:" + iter.UserData.GetHashCode());
-				}
-				
-				return null;
+				return base.SelectedItem;
 			}
 			set
 			{
@@ -171,58 +138,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		public List<object> SelectedItems
-		{
-			get
-			{
-				if (SelectionMode != Gtk.SelectionMode.Multiple)
-				{
-					return null;
-				}
-				
-				TreePath[] pathArray = _treeview.Selection.GetSelectedRows();
-				if (pathArray.Length > 0)
-				{
-					List<object> selectedItems = new List<object>();
-					foreach (TreePath path in pathArray)
-					{
-						TreeIter iter;
-						_store.GetIter(out iter, path);
-						selectedItems.Add(_itemsPointers[iter.UserData.GetHashCode()]);
-					}
-					
-					return selectedItems;
-				}
-				
-				return null;
-			}
-			set
-			{
-				if (SelectionMode != Gtk.SelectionMode.Single)
-				{
-					throw new Exception("The selection mode is Multiple and have to be Single");
-				}
-				
-				throw new NotImplementedException("This feature is not implemented yet");
-			}
-		}
-		
-		public void RemoveSelectedItems()
-		{
-			if (SelectedItems != null)
-			{
-				foreach (object item in SelectedItems)
-				{
-					removeItemFromCurrentCollection(item);
-				}
-			}
-			else if (SelectedItem != null)
-			{
-				removeItemFromCurrentCollection(SelectedItem);
-			}
-		}
-		
-		private void removeItemFromCurrentCollection(object item)
+		protected override void removeItemFromCurrentCollection(object item)
 		{
 			if (BoundItems != null)
 			{
@@ -231,14 +147,6 @@ namespace Boxerp.Client.GtkSharp.Controls
 			else
 			{
 				Items.Remove(item);
-			}
-		}
-		
-		internal TreeView TreeView
-		{
-			get
-			{
-				return _treeview;
 			}
 		}
 		
@@ -280,12 +188,10 @@ namespace Boxerp.Client.GtkSharp.Controls
 			clear();
 		}
 		
-		private void clear()
+		protected override void clear()
 		 {
 			checkDataBindingIsNull();
-			_store.Clear();
-			_itemsPointers.Clear();
-			_itersPointers.Clear();
+			base.clear();
 		}
 		
 		public void Unbind()
@@ -297,32 +203,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		{
 			removeItem((object)sender);
 		}
-				
-		private void removeAt(int rowNumber)
-		{
-			TreeIter iter;
-			_store.GetIterFirst(out iter);
-			
-			int i = 0;
-			while (rowNumber > i)
-			{
-				if (_store.IterNext(ref iter))
-				{
-					i++;
-				}
-				else
-				{
-					break;
-				}
-			}
-			if (i == rowNumber)
-			{
-				_itersPointers.Remove(_itemsPointers[iter.UserData.GetHashCode()]);
-				_itemsPointers.Remove(iter.UserData.GetHashCode());
-				_store.Remove(ref iter);				
-			}
-		}
-		
+						
 		private void OnBoundItemsListChanged(System.Object sender, ListChangedEventArgs args)
 		{
 			Logger.GetInstance().WriteLine("OnBoundItemsListChanged:" + args.ListChangedType);
@@ -400,52 +281,13 @@ namespace Boxerp.Client.GtkSharp.Controls
 				Logger.GetInstance().WriteLine("items added");
 			}
 		}
-		
-		private void initializeTreeView(object firstItem)
-		{
-			_itemsType = firstItem.GetType();
-			_itemsTypeProperties = null;
-			foreach (TreeViewColumn col in TreeView.Columns)
-			{
-				Logger.GetInstance().WriteLine("Removing column: " + col.Title);
-				TreeView.RemoveColumn(col);
-			}
-			if (_store != null)
-			{
-				TreeView.Model = null;
-				_store.Clear();
-				_store.Dispose();
-			}
-			Logger.GetInstance().WriteLine("initialize items:" + _itemsType);
-			createColumns();
-		}
-		
+				
 		private void updateItem(object item)
 		{
 			
 		}
 		
-		private List<SimpleColumn> readObjectTypes()
-		{
-			List<SimpleColumn> columnTypes = new List<SimpleColumn>();
-			if (_itemsTypeProperties == null)
-			{
-				_itemsTypeProperties = _itemsType.GetProperties();
-			}
-			foreach (PropertyInfo pInfo in _itemsTypeProperties)
-            {
-				Logger.GetInstance().WriteLine("Reading property: " + pInfo.Name);
-				SimpleColumn scolumn = new SimpleColumn();
-				scolumn.Name = pInfo.Name;
-				scolumn.Type = pInfo.PropertyType;
-				scolumn.Visible = true;
-				columnTypes.Add(scolumn);
-			}
-			
-			return columnTypes;
-		}
-			
-		private void createColumns()
+		protected override void createColumns()
 		{
 			List<SimpleColumn> columns;
 			
@@ -525,16 +367,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 	
-		private void removeItem(object item)
-		{
-			TreeIter iter = _itersPointers[item];
-			_itersPointers.Remove(item);
-			Logger.GetInstance().WriteLine("removing item:" + iter.UserData.GetHashCode());
-			_itemsPointers.Remove(iter.UserData.GetHashCode());
-			_store.Remove(ref iter);			
-		}
-		
-		private TreeIter insertItem(object item)
+		protected override TreeIter insertItem(object item)
 		{
 			if (_itemsDisplayModeChanged || 
 			    ((_itemsTypeProperties == null) && (ItemsDisplayMode == ItemsDisplayMode.Reflection)))
@@ -611,40 +444,6 @@ namespace Boxerp.Client.GtkSharp.Controls
 		    {
 		        return Gtk.TreeIter.Zero;
 		    }
-		}
-		
-		private ArrayList getItemPropertiesValues(object item)
-		{
-			Logger.GetInstance().WriteLine("item type properties initialized:" + item.ToString());
-			ArrayList values = new ArrayList();
-			List<string> properties = new List<string>();
-			
-			foreach (PropertyInfo pInfo in _itemsTypeProperties)
-            {
-				Logger.GetInstance().WriteLine("Reading object property:" + pInfo.Name);
-                if (!properties.Contains(pInfo.Name))
-                {
-                    if (pInfo.GetGetMethod().GetParameters().Length > 0)
-					{
-						// TODO : indexed property
-					}
-					else
-					{
-						Logger.GetInstance().WriteLine("trying to read value");
-						object val = pInfo.GetValue(item, null);
-						Logger.GetInstance().WriteLine("reading value " + val);
-						values.Add(val);
-					}
-					properties.Add(pInfo.Name);
-               }
-			}
-			return values;
-		}
-		
-		private void RenderObject (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-		{
-			//System.Object obj = model.GetValue(column. (iter, 0);
-			//(cell as Gtk.CelRendererText).objectext = model.GetValue(iter, 0).ToString();// .Data.ToString();
 		}
 	}
 }

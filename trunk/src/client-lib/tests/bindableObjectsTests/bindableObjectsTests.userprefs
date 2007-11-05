@@ -17,16 +17,7 @@
     </ViewMemento>
     <ViewMemento id="MonoDevelop.NUnit.TestPad">
       <Node expanded="True" selected="True">
-        <Node name="bindableObjectsTests" expanded="True">
-          <Node name="bindableObjectsTests" expanded="True" />
-          <Node name="Boxerp" expanded="True">
-            <Node name="Client" expanded="True">
-              <Node name="Tests" expanded="True">
-                <Node name="BindableCollectionTests" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-        </Node>
+        <Node name="bindableObjectsTests" expanded="True" />
       </Node>
     </ViewMemento>
   </Views>

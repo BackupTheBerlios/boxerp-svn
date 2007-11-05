@@ -16,16 +16,17 @@
   <Contents>
     <File name="./SimpleBusinessObjTests.cs" subtype="Code" buildaction="Compile" />
     <File name="./AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="./SimpleBusinessObject.cs" subtype="Code" buildaction="Compile" />
     <File name="./BindableCollectionTests.cs" subtype="Code" buildaction="Compile" />
-    <File name="./ComplexBusinessObject.cs" subtype="Code" buildaction="Compile" />
     <File name="./ComplexBusinessObjTests.cs" subtype="Code" buildaction="Compile" />
     <File name="./NestedCollectionBusinessObjTests.cs" subtype="Code" buildaction="Compile" />
     <File name="./NestedBindableCollectionTests.cs" subtype="Code" buildaction="Compile" />
     <File name="./NestedBindableWrapperTests.cs" subtype="Code" buildaction="Compile" />
-    <File name="./SimpleExplicitPropChanged.cs" subtype="Code" buildaction="Compile" />
-    <File name="./HardCodedProxies.cs" subtype="Code" buildaction="Compile" />
     <File name="./HardCodedProxiesTests.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Classes/ComplexBusinessObject.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Classes/HardcodedPlusIObjectRef.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Classes/HardCodedProxies.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Classes/SimpleBusinessObject.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Classes/SimpleExplicitPropChanged.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

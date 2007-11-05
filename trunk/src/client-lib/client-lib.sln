@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wpf", "wpf\wpf.csproj", "{1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "winforms", "winforms\winforms.csproj", "{323C228A-8F9B-4A89-9E8D-912FE7E297CE}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Boxerp.Setup", "Setup\Setup.vdproj", "{33932EAF-EF67-4AE0-8496-62C5D2494B91}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,8 +24,6 @@ Global
 		{323C228A-8F9B-4A89-9E8D-912FE7E297CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{323C228A-8F9B-4A89-9E8D-912FE7E297CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{323C228A-8F9B-4A89-9E8D-912FE7E297CE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33932EAF-EF67-4AE0-8496-62C5D2494B91}.Debug|Any CPU.ActiveCfg = Debug
-		{33932EAF-EF67-4AE0-8496-62C5D2494B91}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

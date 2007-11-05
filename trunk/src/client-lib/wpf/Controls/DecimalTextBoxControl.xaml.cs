@@ -140,7 +140,7 @@ namespace Boxerp.Client.WPF.Controls
 				{
 					return 0;
 				}
-				return (decimal)GetValue(TextProperty);
+				return Convert.ToDecimal(GetValue(TextProperty));
 			}
 			set
 			{

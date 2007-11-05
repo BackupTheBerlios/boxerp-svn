@@ -127,6 +127,10 @@ namespace Boxerp.Client.WPF.Controls
 					Cleaned = true;
 					SetValue(IntegerProperty, value);
 					Cleaned = false;
+					if ((_textBox.Text.Length == 0) && (value == 0))
+					{
+						_textBox.Text = "0";
+					}
 					if (IntegerChanged != null)
 					{
 						IntegerChanged.Invoke(this, null);

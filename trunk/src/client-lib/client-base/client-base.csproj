@@ -33,12 +33,16 @@
       <HintPath>..\..\dependencies\Castle.DynamicProxy2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractController.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Configuration\ClientConfiguration.cs" />
+    <Compile Include="Configuration\ClientSectionHandler.cs" />
+    <Compile Include="Configuration\LoggerConfiguration.cs" />
     <Compile Include="ControlsHelpers\DecimalTextBoxHelper.cs" />
     <Compile Include="ControlsHelpers\IntegerTextBoxHelper.cs" />
     <Compile Include="ControlsHelpers\SystemNameTextBoxHelper.cs" />

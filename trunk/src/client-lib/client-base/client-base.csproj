@@ -38,14 +38,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractController.cs" />
+    <Compile Include="MVC\AbstractController.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Configuration\ClientConfiguration.cs" />
     <Compile Include="Configuration\ClientSectionHandler.cs" />
     <Compile Include="Configuration\LoggerConfiguration.cs" />
-    <Compile Include="ControlsHelpers\DecimalTextBoxHelper.cs" />
-    <Compile Include="ControlsHelpers\IntegerTextBoxHelper.cs" />
-    <Compile Include="ControlsHelpers\SystemNameTextBoxHelper.cs" />
+    <Compile Include="CustomWidgets\WidgetsHelpers\DecimalTextBoxHelper.cs" />
+    <Compile Include="CustomWidgets\WidgetsHelpers\IntegerTextBoxHelper.cs" />
+    <Compile Include="CustomWidgets\WidgetsHelpers\SystemNameTextBoxHelper.cs" />
     <Compile Include="DataBinding\AbstractBindableWrapper.cs" />
     <Compile Include="DataBinding\AbstractDataBinder.cs" />
     <Compile Include="DataBinding\BbWithBindableCollection.cs" />
@@ -69,10 +69,10 @@
     <Compile Include="DataBinding\UIBinderBase.cs" />
     <Compile Include="DataBinding\XamlParser.cs" />
     <Compile Include="Delegates.cs" />
-    <Compile Include="IControl.cs" />
-    <Compile Include="IController.cs" />
-    <Compile Include="IUIData.cs" />
-    <Compile Include="MyClass.cs" />
+    <Compile Include="MVC\IControl.cs" />
+    <Compile Include="MVC\IController.cs" />
+    <Compile Include="MVC\IControlManager.cs" />
+    <Compile Include="MVC\IUIData.cs" />
     <Compile Include="RemotingHelper.cs" />
     <Compile Include="Responsiveness\AbstractResponsiveHelper.cs" />
     <Compile Include="Responsiveness\ConcurrencyMode.cs" />

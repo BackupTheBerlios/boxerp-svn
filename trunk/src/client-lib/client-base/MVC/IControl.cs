@@ -31,27 +31,14 @@ using System.Text;
 
 namespace Boxerp.Client
 {
-	public class IntegerTextBoxHelper 
+	/// <summary>
+	/// All GUI controls should implement this interface (windows or custom controls)
+	/// 
+	/// </summary>
+ 
+	public interface IControl
 	{
-		public static string CleanString(string val)
-		{
-			string currentStr = val;
-			string cleaned = String.Empty;
-			if (currentStr.Length > 0)
-			{
-				foreach (char c in currentStr)
-				{
-					if (Char.IsNumber(c))
-					{
-						cleaned += c.ToString();
-					}
-				}
-			}
-			/*if (cleaned.Length == 0)
-			{
-				cleaned = "0";
-			}*/
-			return cleaned;
-		}
+		void Close();
+		bool AnyDataChanges { get; set; }
 	}
 }

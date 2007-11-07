@@ -88,7 +88,7 @@ namespace Boxerp.Client.Configuration
 						config.GuiToolkit = node.Attributes["name"].Value;
 						break;
 					case "logger":
-						config.LoggerConfiguration = LoggerConfiguration.BuildFromXmlNode(node);
+						config.Logger = LoggerConfiguration.BuildFromXmlNode(node);
 						break;
 				}	
 			}

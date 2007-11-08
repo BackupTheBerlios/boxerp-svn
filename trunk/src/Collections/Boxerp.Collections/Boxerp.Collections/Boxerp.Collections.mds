@@ -1,0 +1,16 @@
+<Combine name="Boxerp.Collections" fileversion="2.0">
+  <Configurations active="Debug|Any CPU">
+    <Configuration name="Debug|Any CPU" ctype="CombineConfiguration">
+      <Entry build="True" name="Boxerp.Collections" configuration="Debug|Any CPU" />
+    </Configuration>
+    <Configuration name="Release|Any CPU" ctype="CombineConfiguration">
+      <Entry build="True" name="Boxerp.Collections" configuration="Release|Any CPU" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="Boxerp.Collections" single="True">
+    <Execute type="None" entry="Boxerp.Collections" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./Boxerp.Collections.csproj" />
+  </Entries>
+</Combine>

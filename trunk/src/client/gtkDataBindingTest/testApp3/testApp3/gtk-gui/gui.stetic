@@ -273,17 +273,17 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="testApp3.GroupsWindow" design-size="760 362">
+  <widget class="Gtk.Window" id="testApp3.GroupsWindow" undoId="148" design-size="760 362">
     <property name="MemberName" />
     <property name="Title" translatable="yes">ListView - No databinding</property>
     <property name="WindowPosition">CenterOnParent</property>
     <signal name="DeleteEvent" handler="OnDeleteEvent" />
-    <child>
-      <widget class="Gtk.VBox" id="vbox1">
+    <child undoId="106">
+      <widget class="Gtk.VBox" id="vbox1" undoId="149">
         <property name="MemberName" />
         <property name="Spacing">6</property>
-        <child>
-          <widget class="Gtk.Label" id="_label">
+        <child undoId="76">
+          <widget class="Gtk.Label" id="_label" undoId="150">
             <property name="MemberName" />
             <property name="LabelProp" translatable="yes">Users</property>
           </widget>
@@ -294,19 +294,19 @@
             <property name="Fill">False</property>
           </packing>
         </child>
-        <child>
-          <widget class="Gtk.ScrolledWindow" id="scrolledwindow1">
+        <child undoId="85">
+          <widget class="Gtk.ScrolledWindow" id="scrolledwindow1" undoId="152">
             <property name="MemberName" />
             <property name="CanFocus">True</property>
             <property name="VscrollbarPolicy">Automatic</property>
             <property name="HscrollbarPolicy">Automatic</property>
             <property name="ShadowType">In</property>
-            <child>
-              <widget class="Gtk.Viewport" id="GtkViewport">
+            <child undoId="84">
+              <widget class="Gtk.Viewport" id="GtkViewport" undoId="153">
                 <property name="MemberName" />
                 <property name="ShadowType">None</property>
-                <child>
-                  <widget class="Boxerp.Client.GtkSharp.Controls.ListView" id="_listView">
+                <child undoId="84">
+                  <widget class="Boxerp.Client.GtkSharp.Controls.ListView" id="_listView" undoId="154">
                     <property name="MemberName" />
                     <property name="Events">ButtonPressMask</property>
                   </widget>
@@ -319,12 +319,12 @@
             <property name="AutoSize">True</property>
           </packing>
         </child>
-        <child>
-          <widget class="Gtk.HBox" id="hbox1">
+        <child undoId="95">
+          <widget class="Gtk.HBox" id="hbox1" undoId="161">
             <property name="MemberName" />
             <property name="Spacing">6</property>
-            <child>
-              <widget class="Gtk.Button" id="button1">
+            <child undoId="88">
+              <widget class="Gtk.Button" id="button1" undoId="162">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -339,8 +339,8 @@
                 <property name="Fill">False</property>
               </packing>
             </child>
-            <child>
-              <widget class="Gtk.Button" id="button2">
+            <child undoId="90">
+              <widget class="Gtk.Button" id="button2" undoId="164">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -355,8 +355,8 @@
                 <property name="Fill">False</property>
               </packing>
             </child>
-            <child>
-              <widget class="Gtk.Button" id="button3">
+            <child undoId="92">
+              <widget class="Gtk.Button" id="button3" undoId="166">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -371,8 +371,8 @@
                 <property name="Fill">False</property>
               </packing>
             </child>
-            <child>
-              <widget class="Gtk.Button" id="button7">
+            <child undoId="94">
+              <widget class="Gtk.Button" id="button7" undoId="168">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -394,12 +394,12 @@
             <property name="Expand">False</property>
           </packing>
         </child>
-        <child>
-          <widget class="Gtk.HBox" id="hbox2">
+        <child undoId="105">
+          <widget class="Gtk.HBox" id="hbox2" undoId="171">
             <property name="MemberName" />
             <property name="Spacing">6</property>
-            <child>
-              <widget class="Gtk.Button" id="button6">
+            <child undoId="98">
+              <widget class="Gtk.Button" id="button6" undoId="172">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -414,8 +414,8 @@
                 <property name="Fill">False</property>
               </packing>
             </child>
-            <child>
-              <widget class="Gtk.Button" id="button4">
+            <child undoId="100">
+              <widget class="Gtk.Button" id="button4" undoId="174">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -430,8 +430,8 @@
                 <property name="Fill">False</property>
               </packing>
             </child>
-            <child>
-              <widget class="Gtk.Button" id="button5">
+            <child undoId="102">
+              <widget class="Gtk.Button" id="button5" undoId="176">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>
@@ -446,8 +446,8 @@
                 <property name="Fill">False</property>
               </packing>
             </child>
-            <child>
-              <widget class="Gtk.Button" id="button8">
+            <child undoId="104">
+              <widget class="Gtk.Button" id="button8" undoId="178">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextOnly</property>

@@ -39,6 +39,8 @@ namespace testApp3 {
         
         private Gtk.Button button5;
         
+        private Gtk.Button button8;
+        
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
             // Widget testApp3.GroupsWindow
@@ -166,10 +168,21 @@ namespace testApp3 {
             w13.Position = 2;
             w13.Expand = false;
             w13.Fill = false;
-            this.vbox1.Add(this.hbox2);
-            Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox2]));
+            // Container child hbox2.Gtk.Box+BoxChild
+            this.button8 = new Gtk.Button();
+            this.button8.CanFocus = true;
+            this.button8.Name = "button8";
+            this.button8.UseUnderline = true;
+            this.button8.Label = Mono.Unix.Catalog.GetString("Delete Multiple");
+            this.hbox2.Add(this.button8);
+            Gtk.Box.BoxChild w14 = ((Gtk.Box.BoxChild)(this.hbox2[this.button8]));
             w14.Position = 3;
             w14.Expand = false;
+            w14.Fill = false;
+            this.vbox1.Add(this.hbox2);
+            Gtk.Box.BoxChild w15 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbox2]));
+            w15.Position = 3;
+            w15.Expand = false;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();

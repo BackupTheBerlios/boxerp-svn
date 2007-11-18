@@ -61,6 +61,9 @@ namespace Boxerp.Client.GtkSharp.Controls
 		
 		public TreeModelWrapper()
 		{
+			//Stetic.Gui.Initialize(this);
+            //Stetic.BinContainer.Attach(this);
+            //this.Name = this.GetType().ToString();
 			_items.ItemAddedEvent += OnItemAdded;
 			_items.ClearEvent += OnItemsClear;
 			_items.ItemRemovedEvent += OnItemRemoved;
@@ -188,7 +191,15 @@ namespace Boxerp.Client.GtkSharp.Controls
 		
 		private void OnItemChanged(System.Object sender, PropertyChangedEventArgs args)
 		{
-			throw new NotImplementedException("to - do");
+			if (this._itersPointers.ContainsKey(sender))
+			{
+				Gtk.TreeIter iter = _itersPointers[sender];
+				refreshValueInStore(sender, getItemValues(sender), iter);
+			}
+			else
+			{
+				throw new NotSupportedException("wrong!");
+			}
 		}
 		
 		private void OnItemsClear(System.Object sender, EventArgs args)
@@ -289,10 +300,6 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		
-		
-		
-		
 		private void checkDataBindingIsNull()
 		{
 			if (BoundItems != null)
@@ -339,7 +346,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 
-		protected abstract void removeTreeModelWidgetColumns();
+		protected virtual void removeTreeModelWidgetColumns(){}
 				
 		protected virtual void initializeTreeModelWidget(object firstItem)
 		{
@@ -438,9 +445,30 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 			
-		protected abstract void addTreeViewColumn(T column, int colNumber);
+		protected virtual void addTreeViewColumn(T column, int colNumber){}
 		
+		protected abstract void setValueInStore(object item, ArrayList itemValues, Gtk.TreeIter iter);
+			
 		protected abstract Gtk.TreeIter appendValueToStore(object item, ArrayList itemValues);
+		
+		protected abstract void refreshValueInStore(object item, ArrayList itemValues, Gtk.TreeIter iter);
+		
+		protected ArrayList getItemValues(object item)
+		{
+			ArrayList itemValues;
+			    
+			if (_itemsDisplayMode == ItemsDisplayMode.ObjectToString)
+			{
+				itemValues = new ArrayList();
+				itemValues.Add(item.ToString());
+			}
+			else 
+			{
+				itemValues = getItemPropertiesValues(item);
+			}
+			
+			return itemValues;
+		}
 		
 		protected virtual TreeIter insertItem(object item)
 		{
@@ -460,18 +488,8 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 			
 			Logger.GetInstance().WriteLine("insert item:" + item);
-			ArrayList itemValues;
+			ArrayList itemValues = getItemValues(item);
 			    
-			if (_itemsDisplayMode == ItemsDisplayMode.ObjectToString)
-			{
-				itemValues = new ArrayList();
-				itemValues.Add(item.ToString());
-			}
-			else 
-			{
-				itemValues = getItemPropertiesValues(item);
-			}
-			
 			if (TreeModelWidget.Model != null)
 			{
 				TreeIter iter = appendValueToStore(item, itemValues);

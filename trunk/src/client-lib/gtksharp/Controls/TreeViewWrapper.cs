@@ -126,11 +126,10 @@ namespace Boxerp.Client.GtkSharp.Controls
 				TreeModelWidget.RemoveColumn(col);
 			}
 		}
-		
-		protected override Gtk.TreeIter appendValueToStore(object item, ArrayList itemValues)
+
+		protected override void setValueInStore(object item, ArrayList itemValues, Gtk.TreeIter iter)
 		{
-			Gtk.TreeIter iter = _store.Append();
-		    int i = 0;
+			int i = 0;
 			foreach (object itm in itemValues)
 			{
 				if (itm == null)
@@ -170,6 +169,17 @@ namespace Boxerp.Client.GtkSharp.Controls
 				}
 				i++;
 			}
+		}
+		
+		protected override void refreshValueInStore(object item, ArrayList itemValues, Gtk.TreeIter iter)
+		{
+			setValueInStore(item, itemValues, iter);
+		}
+		
+		protected override Gtk.TreeIter appendValueToStore(object item, ArrayList itemValues)
+		{
+			Gtk.TreeIter iter = _store.Append();
+			setValueInStore(item, itemValues, iter);
 			return iter;
 		}
 		

@@ -40,12 +40,14 @@ namespace testApp3
 	{
 		private Group _group;
 		private BindableWrapper<Group> _bindableGroup;
+		private ListView _listView;
 		
 		public GroupsWindow() : 
 				base(Gtk.WindowType.Toplevel)
 		{
 			this.Build();
-			
+			_listView = new ListView();
+			this.scrolledwindow1.AddWithViewport(_listView);
 			addUsers();
 		}
 		
@@ -83,6 +85,7 @@ namespace testApp3
 			user2.Email = "user2@user4.com";
 			user2.Password = "unsafe4";
 		
+			Logger.GetInstance().WriteLine("gonna insert:" + _listView.Items);
 			_listView.Items.Add(user1);
 			_listView.Items.Add(user2);
 
@@ -140,7 +143,7 @@ namespace testApp3
 		{
 			if (_listView.ItemsDisplayMode == ItemsDisplayMode.ObjectToString)
 			{
-				_listView.ItemsDisplayMode = ItemsDisplayMode.Reflection;
+				_listView.ItemsDisplayMode = ItemsDisplayMode.AutoCreateColumns;
 			}
 			else
 			{

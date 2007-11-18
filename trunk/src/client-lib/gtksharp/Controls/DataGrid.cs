@@ -46,7 +46,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		public DataGrid()
 		{
 			_treeview = new CustomTreeView();
-			// add widget
+			this.Add(_treeview);
 		}
 		
 		protected override CustomTreeView TreeModelWidget

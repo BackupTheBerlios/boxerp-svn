@@ -40,17 +40,16 @@ namespace Boxerp.Client.GtkSharp.Controls
 {
 	
 	
-	public partial class ComboBox : TreeModelWrapper<SimpleColumn, Boxerp.Client.GtkSharp.Controls.ComboBox>, 
+	public class ComboBox : TreeModelWrapper<SimpleColumn, Boxerp.Client.GtkSharp.Controls.ComboBox>, 
 	      IBindableWidget, ITreeModel
 	{
-		private object _selectedItem;
-		//private Gtk.ComboBox _combo;
+		private Gtk.ComboBox _combo;
 			
 		public ComboBox()
 			: base()
 		{
 			_combo = new Gtk.ComboBox();
-			// add widget;
+			this.Add(_combo);
 		}
 
 		protected override Boxerp.Client.GtkSharp.Controls.ComboBox TreeModelWidget 
@@ -60,26 +59,6 @@ namespace Boxerp.Client.GtkSharp.Controls
 				return this;
 			}
 		}
-		
-		/*List<object> ISelector.SelectedItems
-		{
-			get
-			{
-				throw new NotSupportedException("This is a combobox actually, not a treeview");
-			}
-			set
-			{
-				throw new NotSupportedException("This is a combobox actually, not a treeview");
-			}
-		}
-		
-		Gtk.TreeSelection ISelector.Selection
-		{
-			get
-			{
-				throw new NotSupportedException("This is a combobox actually, not a treeview");
-			}
-		}*/
 		
 		public Gtk.TreeModel Model 
 		{
@@ -98,8 +77,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			Logger.GetInstance().WriteLine("updateValue:" + property);
 			if (property.Equals("SelectedItem"))
 			{
-				_selectedItem = val;
-				selectCurrentItem();
+				SelectedItem = val;
 			}
 			else if (property.Equals("Items"))
 			{
@@ -107,13 +85,6 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 
-		private void selectCurrentItem()
-		{
-			Gtk.TreeIter iter;
-			_combo.Model.GetIterFirst(out iter);
-			
-		}
-		
 		protected override bool getSelectedIter(out Gtk.TreeIter iter)
 		{
 			bool isSelected = false;
@@ -147,27 +118,18 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		private void OnItemChanged(System.Object sender, PropertyChangedEventArgs args)
-		{
-			// refresh item in dropdown
-		}
-		
 		protected virtual void OnComboChanged (object sender, System.EventArgs e)
 		{
-			Gtk.TreeIter iter;
-			_combo.GetActiveIter(out iter);
-			_selectedItem = _combo.Model.GetValue(iter, 0);
-			WidgetCore.SetPropertyValue("SelectedItem", _selectedItem);
+			WidgetCore.SetPropertyValue("SelectedItem", SelectedItem);
 		}		
 		
-		protected override void addTreeViewColumn(SimpleColumn column, int number)
+		protected override void refreshValueInStore(object item, ArrayList itemValues, Gtk.TreeIter iter)
 		{
-			// nothing to do here
+			setValueInStore(item, itemValues, iter);
 		}
 		
-		protected override Gtk.TreeIter appendValueToStore(object item, ArrayList itemValues)
+		protected override void setValueInStore(object item, ArrayList itemValues, Gtk.TreeIter iter)
 		{
-			Gtk.TreeIter iter = _store.Append();
 			if (item == null)
 			{
 				_store.SetValue(iter, 0, String.Empty);
@@ -176,13 +138,13 @@ namespace Boxerp.Client.GtkSharp.Controls
 			{
 				_store.SetValue(iter, 0 , (string) item.ToString());
 			}
-			
-			return iter;
 		}
 		
-		protected override void removeTreeModelWidgetColumns()
+		protected override Gtk.TreeIter appendValueToStore(object item, ArrayList itemValues)
 		{
-			
+			Gtk.TreeIter iter = _store.Append();
+			setValueInStore(item, itemValues, iter);
+			return iter;
 		}
 		
 	}

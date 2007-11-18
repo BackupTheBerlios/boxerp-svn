@@ -28,12 +28,13 @@
 ////
 
 using System;
+using System.Collections;
 
 namespace Boxerp.Client
 {
 	
-	
 	public interface IUIData
 	{
+		Hashtable PropertyBag { get; }
 	}
 }

@@ -40,12 +40,14 @@ namespace testApp3
 	{
 		private GroupAwareUsers _group;
 		private BindableWrapper<GroupAwareUsers> _bindableGroup;
+		private ListView _listView;
 		
 		public ListViewTest2() : 
 				base(Gtk.WindowType.Toplevel)
 		{
 			this.Build();
-			
+			_listView = new ListView();
+			this.scrolledwindow1.Add(_listView);
 			tryDataBinding();
 			addUsers();
 		}
@@ -149,7 +151,7 @@ namespace testApp3
 		{
 			if (_listView.ItemsDisplayMode == ItemsDisplayMode.ObjectToString)
 			{
-				_listView.ItemsDisplayMode = ItemsDisplayMode.Reflection;
+				_listView.ItemsDisplayMode = ItemsDisplayMode.AutoCreateColumns;
 			}
 			else
 			{

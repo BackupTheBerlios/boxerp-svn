@@ -66,7 +66,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			: base()
 		{
 			_treeview = new CustomTreeView();
-			// add widget
+			this.Add(_treeview);
 		}
 		
 		protected override CustomTreeView TreeModelWidget 

@@ -33,49 +33,13 @@ namespace testApp3
 {
 	
 	
-	public partial class MenuWindow : Gtk.Window
+	public partial class ComboBoxTests : Gtk.Window
 	{
 		
-		public MenuWindow() : 
+		public ComboBoxTests() : 
 				base(Gtk.WindowType.Toplevel)
 		{
 			this.Build();
-		}
-
-		protected virtual void OnBasicDataBinding (object sender, System.EventArgs e)
-		{
-			MainWindow win = new MainWindow ();
-			win.Show ();
-		}
-
-		protected virtual void OnBasicListView (object sender, System.EventArgs e)
-		{
-			GroupsWindow gwin = new GroupsWindow();
-			gwin.ShowAll();
-			gwin.Child.ShowAll();
-		}
-
-		protected virtual void OnListViewDataBinding (object sender, System.EventArgs e)
-		{
-			ListViewTest2 lvt2 = new ListViewTest2();
-			lvt2.Show();
-		}
-
-		protected virtual void OnExit (object o, Gtk.DeleteEventArgs args)
-		{
-			Gtk.Application.Quit ();
-			args.RetVal = true;
-		}
-
-		protected virtual void OnComboBoxTests (object sender, System.EventArgs e)
-		{
-		}
-
-		protected virtual void OnDataGridTests (object sender, System.EventArgs e)
-		{
-			DataGridTests win = new DataGridTests();
-			win.Show();
-			win.Child.ShowAll();
 		}
 	}
 }

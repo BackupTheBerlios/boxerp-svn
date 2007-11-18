@@ -36,10 +36,13 @@ namespace Boxerp.Client.GtkSharp.Controls
 	public abstract class TreeViewWrapper<T> : TreeModelWrapper<T> 
 		where T : SimpleColumn, new ()
 	{
+		protected Gtk.TreeView _treeview;
+		
 		public TreeViewWrapper()
 			: base ()
 		{
-			
+			_treeview = new Gtk.TreeView();
+			this.Add(_treeview);
 		}
 
 		protected override Gtk.Widget InnerWidget
@@ -50,7 +53,25 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		protected abstract Gtk.TreeView TreeView { get; }
+		protected Gtk.TreeView TreeView
+		{
+			get
+			{
+				return _treeview;
+			}
+		}
+		
+		protected override Gtk.TreeModel Model 
+		{ 
+			get
+			{
+				return _treeview.Model;
+			}
+			set
+			{
+				_treeview.Model = value;
+			}
+		}
 		
 		public virtual Gtk.SelectionMode SelectionMode
 		{
@@ -67,7 +88,23 @@ namespace Boxerp.Client.GtkSharp.Controls
 		protected override bool getSelectedIter(out Gtk.TreeIter iter)
 		{
 			bool isSelected = false;
-			isSelected = TreeView.Selection.GetSelected(out iter);
+			if (SelectionMode == Gtk.SelectionMode.Single)
+			{
+				isSelected = TreeView.Selection.GetSelected(out iter);
+			}
+			else
+			{
+				isSelected = SelectedItems != null;
+				if (isSelected)
+				{
+					object firstSelected = SelectedItems[0];
+					iter = _itersPointers[firstSelected];
+				}
+				else
+				{
+					iter = Gtk.TreeIter.Zero;
+				}
+			}
 			return isSelected;
 		}
 		
@@ -143,6 +180,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			{
 				if (itm == null)
 				{
+					Logger.GetInstance().WriteLine("inserting empty value in column:" + i);
 					_store.SetValue(iter, i, String.Empty);
 				}
 				else

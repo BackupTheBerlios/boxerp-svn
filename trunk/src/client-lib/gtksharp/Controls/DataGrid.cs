@@ -42,33 +42,10 @@ namespace Boxerp.Client.GtkSharp.Controls
 {
 	public class DataGrid : TreeViewWrapper<EditableColumn>, IBindableWidget
 	{
-		private Gtk.TreeView _treeview;
 		public DataGrid()
 		{
-			_treeview = new TreeView();
-			this.Add(_treeview);
 		}
-		
-		protected override Gtk.TreeView TreeView
-		{
-			get
-			{
-				return _treeview;
-			}
-		}
-		
-		protected override Gtk.TreeModel Model 
-		{ 
-			get
-			{
-				return _treeview.Model;
-			}
-			set
-			{
-				_treeview.Model = value;
-			}
-		}
-		
+				
 		protected override void addTreeViewColumn(EditableColumn column, int colNumber)
 		{
 			Gtk.TreeViewColumn tvColumn = new Gtk.TreeViewColumn ();
@@ -89,7 +66,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 				renderer.Edited += OnComboBoxEdited;
 				tvColumn.PackStart(renderer, true);
 			}
-			else  // if (typeof(TextBox).IsAssignableFrom(column.Widget))
+			else  
 			{
 				Gtk.CellRendererText renderer = new CellRendererText();
 				renderer.Editable = column.Editable;
@@ -102,16 +79,35 @@ namespace Boxerp.Client.GtkSharp.Controls
 
 		private void OnTextCellEdited(System.Object sender, Gtk.EditedArgs args)
 		{
-			
+			CellRendererText renderer = (CellRendererText)sender;
+			renderer.Text = args.NewText;
+			Logger.GetInstance().WriteLine("OnTextCellEdited:" + 
+			                               sender.ToString() + "," + args.NewText + "," + 
+			                               args.Path + "," + 
+			                               args.RetVal);
+			Gtk.TreeIter iter;
+			Model.GetIterFromString(out iter, args.Path);
+			// now I have the iter so I have the item but how do I get the column
+			// -- if gtk does not help me with this I can keep a dictionary
+			// with the cellrenderer as the key and the column number as the value 
 		}
 		
 		private void OnCheckBoxChanged(System.Object sender, Gtk.ToggledArgs args)
 		{
-			
+			Gtk.CellRendererToggle renderer = (CellRendererToggle)sender;
+			renderer.Active = !renderer.Active;
+			Logger.GetInstance().WriteLine("OnCheckBoxChanged:" + 
+			                               sender.ToString() + "," +  
+			                               args.Path + "," + 
+			                               args.RetVal);
 		}
 		
-		private void OnComboBoxEdited(System.Object sender, Gtk.EditedArgs arg)
+		private void OnComboBoxEdited(System.Object sender, Gtk.EditedArgs args)
 		{
+			Logger.GetInstance().WriteLine("OnComboBoxEdited:" + 
+			                               sender.ToString() + "," + args.NewText + "," + 
+			                               args.Path + "," + 
+			                               args.RetVal);
 			
 		}
 	}

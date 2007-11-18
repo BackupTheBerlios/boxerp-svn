@@ -38,14 +38,4 @@
       <placeholder />
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="Boxerp.Client.GtkSharp.Controls.ComboBox" design-size="300 31">
-    <property name="MemberName" />
-    <child>
-      <widget class="Gtk.ComboBox" id="_combo">
-        <property name="MemberName" />
-        <property name="IsTextCombo">False</property>
-        <property name="Items" translatable="yes" />
-      </widget>
-    </child>
-  </widget>
 </stetic-interface>

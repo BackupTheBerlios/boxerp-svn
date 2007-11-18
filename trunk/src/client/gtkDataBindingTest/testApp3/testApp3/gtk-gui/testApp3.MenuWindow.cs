@@ -25,6 +25,10 @@ namespace testApp3 {
         
         private Gtk.Button button4;
         
+        private Gtk.Button button5;
+        
+        private Gtk.Button button6;
+        
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
             // Widget testApp3.MenuWindow
@@ -61,7 +65,7 @@ namespace testApp3 {
             this.button2.CanFocus = true;
             this.button2.Name = "button2";
             this.button2.UseUnderline = true;
-            this.button2.Label = Mono.Unix.Catalog.GetString("Basic ListView tests");
+            this.button2.Label = Mono.Unix.Catalog.GetString("ListView (using Items property + AutoCreateColumns) tests");
             this.vbox1.Add(this.button2);
             Gtk.Box.BoxChild w3 = ((Gtk.Box.BoxChild)(this.vbox1[this.button2]));
             w3.Position = 2;
@@ -72,7 +76,7 @@ namespace testApp3 {
             this.button3.CanFocus = true;
             this.button3.Name = "button3";
             this.button3.UseUnderline = true;
-            this.button3.Label = Mono.Unix.Catalog.GetString("ListView + Databinding tests");
+            this.button3.Label = Mono.Unix.Catalog.GetString("ListView (using BoundItems property + AutoCreateColumns) tests");
             this.vbox1.Add(this.button3);
             Gtk.Box.BoxChild w4 = ((Gtk.Box.BoxChild)(this.vbox1[this.button3]));
             w4.Position = 3;
@@ -83,23 +87,47 @@ namespace testApp3 {
             this.button4.CanFocus = true;
             this.button4.Name = "button4";
             this.button4.UseUnderline = true;
-            this.button4.Label = Mono.Unix.Catalog.GetString("DataGrid tests");
+            this.button4.Label = Mono.Unix.Catalog.GetString("DataGrid (using Items property + BindingDescriptor) tests");
             this.vbox1.Add(this.button4);
             Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.vbox1[this.button4]));
             w5.Position = 4;
             w5.Expand = false;
             w5.Fill = false;
+            // Container child vbox1.Gtk.Box+BoxChild
+            this.button5 = new Gtk.Button();
+            this.button5.CanFocus = true;
+            this.button5.Name = "button5";
+            this.button5.UseUnderline = true;
+            this.button5.Label = Mono.Unix.Catalog.GetString("DataGrid (using BoundItems property + AutoCreateColumns) tests");
+            this.vbox1.Add(this.button5);
+            Gtk.Box.BoxChild w6 = ((Gtk.Box.BoxChild)(this.vbox1[this.button5]));
+            w6.Position = 5;
+            w6.Expand = false;
+            w6.Fill = false;
+            // Container child vbox1.Gtk.Box+BoxChild
+            this.button6 = new Gtk.Button();
+            this.button6.CanFocus = true;
+            this.button6.Name = "button6";
+            this.button6.UseUnderline = true;
+            this.button6.Label = Mono.Unix.Catalog.GetString("ComboBox tests");
+            this.vbox1.Add(this.button6);
+            Gtk.Box.BoxChild w7 = ((Gtk.Box.BoxChild)(this.vbox1[this.button6]));
+            w7.Position = 6;
+            w7.Expand = false;
+            w7.Fill = false;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.DefaultWidth = 400;
-            this.DefaultHeight = 208;
+            this.DefaultWidth = 629;
+            this.DefaultHeight = 276;
             this.Show();
             this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnExit);
             this.button1.Clicked += new System.EventHandler(this.OnBasicDataBinding);
             this.button2.Clicked += new System.EventHandler(this.OnBasicListView);
             this.button3.Clicked += new System.EventHandler(this.OnListViewDataBinding);
+            this.button4.Clicked += new System.EventHandler(this.OnDataGridTests);
+            this.button6.Clicked += new System.EventHandler(this.OnComboBoxTests);
         }
     }
 }

@@ -51,15 +51,11 @@
   <GtkDesignInfo isWidgetLibrary="True" gtkVersion="2.10.2">
     <ExportedWidgets>
       <Widget>Controls.IntegerTextBoxControl</Widget>
-      <Widget>Boxerp.Client.GtkSharp.Controls.ComboBox</Widget>
       <Widget>Boxerp.Client.GtkSharp.Controls.IntegerTextBox</Widget>
       <Widget>Boxerp.Client.GtkSharp.Controls.TextBox</Widget>
       <Widget>Boxerp.Client.GtkSharp.Controls.DateControl</Widget>
-      <Widget>Boxerp.Client.GtkSharp.Controls.ListView</Widget>
-      <Widget>Boxerp.Client.GtkSharp.Controls.DataGrid</Widget>
       <Widget>Boxerp.Client.GtkSharp.Controls.TreeViewWrapper</Widget>
       <Widget>Boxerp.Client.GtkSharp.Controls.CheckBox</Widget>
-      <Widget>Boxerp.Client.GtkSharp.Controls.CustomTreeView</Widget>
     </ExportedWidgets>
   </GtkDesignInfo>
 </Project>

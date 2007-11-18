@@ -45,38 +45,11 @@ namespace Boxerp.Client.GtkSharp.Controls
 	///  2 - The user is using the Items properties. The items on it implement the INotifyPropertyChanged. What happen when an item changes? 
 	/// 
 	/// </summary>
-	public class ListView : TreeViewWrapper<SimpleColumn>, IBindableWidget, ITreeModel
+	public class ListView : TreeViewWrapper<SimpleColumn>, IBindableWidget
 	{
-		private Gtk.TreeView _treeview;
-		
 		public ListView()
 			: base()
 		{
-			_treeview = new TreeView();
-			this.Add(_treeview);
-		    //this.Child.ShowAll();
-            //this.Show();
-			//this.ShowAll();
-		}
-		
-		protected override Gtk.TreeView TreeView
-		{
-			get
-			{
-				return _treeview;
-			}
-		}
-		
-		protected override Gtk.TreeModel Model 
-		{ 
-			get
-			{
-				return _treeview.Model;
-			}
-			set
-			{
-				_treeview.Model = value;
-			}
 		}
 		
 		protected override void addTreeViewColumn(SimpleColumn column, int colNumber)
@@ -110,9 +83,5 @@ namespace Boxerp.Client.GtkSharp.Controls
 				}
         	}
 		}
-		
-		
-	
-		
 	}
 }

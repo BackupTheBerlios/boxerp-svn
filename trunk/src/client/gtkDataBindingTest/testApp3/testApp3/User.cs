@@ -40,6 +40,7 @@ namespace testApp3
 		private string _password;
 		private string _email;
 		private int    _desk;
+		private bool _isActive;
 		
 		public virtual int Desk 
 		{
@@ -86,6 +87,18 @@ namespace testApp3
 			set
 			{
 				_username = value;
+			}
+		}
+		
+		public virtual bool IsActive
+		{
+			get 
+			{
+				return _isActive;
+			}
+			set
+			{
+				_isActive = value;
 			}
 		}
 			

@@ -36,22 +36,66 @@ namespace testApp3
 {
 	
 	
-	public partial class GroupsWindow : Gtk.Window
+	public partial class DataGridTests : Gtk.Window
 	{
-		private ListView _listView;
+		private DataGrid _dataGrid;
 		private BindableWrapper<User> bindableUser2;
 		
-		public GroupsWindow() : 
+		public DataGridTests() : 
 				base(Gtk.WindowType.Toplevel)
 		{
 			this.Build();
-			_listView = new ListView();
-			_listView.ItemsDisplayMode = ItemsDisplayMode.AutoCreateColumns;
-			this.scrolledwindow1.AddWithViewport(_listView);
+			_dataGrid = new DataGrid();
+			_dataGrid.ItemsDisplayMode = ItemsDisplayMode.BindingDescriptor;
+			_dataGrid.BindingDescriptor = createUserBindingDescriptor();
+			this.scrolledwindow1.AddWithViewport(_dataGrid);
 			this.ReshowWithInitialSize();
 			this.Child.ShowAll();
-			Logger.GetInstance().WriteLine("*************         ******  widget added to scrolled window");
 			addUsers();
+		}
+		
+		private BindingDescriptor<EditableColumn> createUserBindingDescriptor()
+		{
+			BindingDescriptor<EditableColumn> bd = new BindingDescriptor<EditableColumn>();
+
+			EditableColumn column = new EditableColumn();
+			column.DataType = typeof(string);
+			column.Name = "Username";
+			column.ObjectPropertyName = column.Name;
+			column.Editable = true;
+			column.Widget = typeof(TextBox);
+			column.Visible = true;
+			
+			EditableColumn column2 = new EditableColumn();
+			column2.DataType = typeof(string);
+			column2.Name = "Email";
+			column.ObjectPropertyName = column.Name;
+			column2.Editable = true;
+			column2.Widget = typeof(TextBox);
+			column2.Visible = true;
+			
+			EditableColumn column3 = new EditableColumn();
+			column3.DataType = typeof(int);
+			column3.Name = "Desk";
+			column.ObjectPropertyName = column.Name;
+			column3.Editable = true;
+			column3.Widget = typeof(IntegerTextBox);
+			column3.Visible = true;
+				
+			EditableColumn column4 = new EditableColumn();
+			column4.DataType = typeof(bool);
+			column4.Name = "Is Active";
+			column4.ObjectPropertyName = "IsActive";
+			column4.Editable = true;
+			column4.Widget = typeof(CheckBox);
+			column4.Visible = true;		
+			
+			bd.BindingColumns.Add(column);
+			bd.BindingColumns.Add(column2);
+			bd.BindingColumns.Add(column3);
+			bd.BindingColumns.Add(column4);
+			
+			return bd;
 		}
 		
 		private void addUsers()
@@ -68,17 +112,17 @@ namespace testApp3
 			user2.Email = "user2@user4.com";
 			user2.Password = "unsafe4";
 			bindableUser2 = new BindableWrapper<User>(user2);
-			Logger.GetInstance().WriteLine("gonna insert:" + _listView.Items);
-			_listView.Items.Add(user1);
-			_listView.Items.Add(bindableUser2.Data.BusinessObj);
+			Logger.GetInstance().WriteLine("gonna insert:" + _dataGrid.Items);
+			_dataGrid.Items.Add(user1);
+			_dataGrid.Items.Add(bindableUser2.Data.BusinessObj);
 
 		}
 
 		protected virtual void OnShowItem (object sender, System.EventArgs e)
 		{
-			if (_listView.SelectedItem != null)
+			if (_dataGrid.SelectedItem != null)
 			{
-				object item = _listView.SelectedItem;
+				object item = _dataGrid.SelectedItem;
 				displayItem(item);
 			}
 		}
@@ -94,51 +138,51 @@ namespace testApp3
 		
 		protected virtual void OnDeleteItem (object sender, System.EventArgs e)
 		{
-			if (_listView.SelectedItem != null)
+			if (_dataGrid.SelectedItem != null)
 			{
-				_listView.Items.Remove(_listView.SelectedItem);
+				_dataGrid.Items.Remove(_dataGrid.SelectedItem);
 			}
 		}
 
 		protected virtual void OnAddItem (object sender, System.EventArgs e)
 		{
-			int i = _listView.Items.Count;
+			int i = _dataGrid.Items.Count;
 			User user = new User();
 			user.Username = "random" + DateTime.Now;
 			user.Password = "asdfsdf";
 			user.Desk = i;
-			_listView.Items.Add(user);
+			_dataGrid.Items.Add(user);
 		}
 		
 		protected virtual void OnToggleSelectionMode (object sender, System.EventArgs e)
 		{
-			if (_listView.SelectionMode == Gtk.SelectionMode.Single)
+			if (_dataGrid.SelectionMode == Gtk.SelectionMode.Single)
 			{
-				_listView.SelectionMode = Gtk.SelectionMode.Multiple;
+				_dataGrid.SelectionMode = Gtk.SelectionMode.Multiple;
 			}
 			else
 			{
-				_listView.SelectionMode = Gtk.SelectionMode.Single;
+				_dataGrid.SelectionMode = Gtk.SelectionMode.Single;
 			}
 		}
 		
 		protected virtual void OnToggleDisplayMode (object sender, System.EventArgs e)
 		{
-			if (_listView.ItemsDisplayMode == ItemsDisplayMode.ObjectToString)
+			if (_dataGrid.ItemsDisplayMode == ItemsDisplayMode.ObjectToString)
 			{
-				_listView.ItemsDisplayMode = ItemsDisplayMode.AutoCreateColumns;
+				_dataGrid.ItemsDisplayMode = ItemsDisplayMode.AutoCreateColumns;
 			}
 			else
 			{
-				_listView.ItemsDisplayMode = ItemsDisplayMode.ObjectToString;
+				_dataGrid.ItemsDisplayMode = ItemsDisplayMode.ObjectToString;
 			}
 		}
 
 		protected virtual void OnShowMultiple (object sender, System.EventArgs e)
 		{
-			if (_listView.SelectedItems != null)
+			if (_dataGrid.SelectedItems != null)
 			{
-				foreach (object item in _listView.SelectedItems)
+				foreach (object item in _dataGrid.SelectedItems)
 				{
 					displayItem(item);
 				}

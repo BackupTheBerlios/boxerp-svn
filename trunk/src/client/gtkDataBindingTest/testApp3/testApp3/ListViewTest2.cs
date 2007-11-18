@@ -47,7 +47,10 @@ namespace testApp3
 		{
 			this.Build();
 			_listView = new ListView();
-			this.scrolledwindow1.Add(_listView);
+			_listView.ItemsDisplayMode = ItemsDisplayMode.AutoCreateColumns;
+			this.scrolledwindow1.AddWithViewport(_listView);
+			this.ReshowWithInitialSize();
+			this.Child.ShowAll();
 			tryDataBinding();
 			addUsers();
 		}
@@ -59,7 +62,6 @@ namespace testApp3
 			Console.WriteLine("users:" + _bindableGroup.Data.BusinessObj.Users.Count);
 			_listView.BindObject(_bindableGroup, "Data.BusinessObj.Users", "BoundItems", BindingOptions.TwoWay);
 		}
-		
 		
 		private void createGroup()
 		{
@@ -121,7 +123,7 @@ namespace testApp3
 		{
 			if (_listView.SelectedItem != null)
 			{
-				_listView.BoundItems.Remove(_listView.SelectedItem);
+				_group.Users.Remove((User)_listView.SelectedItem);
 			}
 		}
 
@@ -132,7 +134,7 @@ namespace testApp3
 			user.Username = "random" + DateTime.Now;
 			user.Password = "asdfsdf";
 			user.Desk = i;
-			_listView.BoundItems.Add(user);
+			_group.Users.Add(user);
 		}
 		
 		protected virtual void OnToggleSelectionMode (object sender, System.EventArgs e)

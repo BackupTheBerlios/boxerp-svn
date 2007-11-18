@@ -107,7 +107,11 @@ namespace Boxerp.Client.GtkSharp.Controls
 					{
 						throw new NotSupportedException("Changing the items display mode when there are items bound to the list is not allow. Please call Unbind first");
 					}
-					_items.Clear();
+					if (_items.Count > 0)
+					{
+					   _items.Clear();
+					}
+					
 					_itemsDisplayMode = value;
 				}
 			}
@@ -209,7 +213,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 			else
 			{
-				throw new NotSupportedException("wrong!");
+				throw new NotSupportedException("Trying to refresh an item that seems to be not in the list of items");
 			}
 		}
 		
@@ -418,6 +422,10 @@ namespace Boxerp.Client.GtkSharp.Controls
 			{
 				if (BindingDescriptor != null)
 				{
+					if (_itemsTypeProperties == null)
+					{
+						_itemsTypeProperties = _itemsType.GetProperties();
+					}
 					columns = BindingDescriptor.BindingColumns;
 				}
 				else
@@ -494,12 +502,14 @@ namespace Boxerp.Client.GtkSharp.Controls
 			    ((_itemsTypeProperties == null) && 
 			     (ItemsDisplayMode != ItemsDisplayMode.ObjectToString)))
 			{
+				Logger.GetInstance().WriteLine("insert item, calling inializeTreeModelWidget");
 				_itemsDisplayModeChanged = false;
 				initializeTreeModelWidget(item);				
 			}
 			
 			Logger.GetInstance().WriteLine("insert item:" + item);
-			ArrayList itemValues = getItemValues(item);
+			
+			ArrayList itemValues = getItemValues(item);			
 			    
 			if (Model != null)
 			{
@@ -530,11 +540,30 @@ namespace Boxerp.Client.GtkSharp.Controls
 			ArrayList values = new ArrayList();
 			List<string> properties = new List<string>();
 			
+			Logger.GetInstance().WriteLine("itemsTypeProperties:" + _itemsTypeProperties);
 			foreach (PropertyInfo pInfo in _itemsTypeProperties)
             {
 				Logger.GetInstance().WriteLine("Reading object property:" + pInfo.Name);
                 if (!properties.Contains(pInfo.Name))
                 {
+					// if there is a binding descriptor, add only the properties described by it
+					if (ItemsDisplayMode == ItemsDisplayMode.BindingDescriptor)
+					{
+						bool descriptorContainsProperty = false;
+						foreach (T column in BindingDescriptor.BindingColumns)
+						{
+							if ((column.ObjectPropertyName != null) && 
+							    column.ObjectPropertyName.Equals(pInfo.Name))
+							{
+								descriptorContainsProperty = true;
+								break;
+							}
+						}
+						if (!descriptorContainsProperty)
+						{
+							continue;
+						}
+					}
                     if (pInfo.GetGetMethod().GetParameters().Length > 0)
 					{
 						// TODO : indexed property

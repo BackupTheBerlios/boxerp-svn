@@ -11,7 +11,7 @@
 namespace testApp3 {
     
     
-    public partial class GroupsWindow {
+    public partial class DataGridTests {
         
         private Gtk.VBox vbox1;
         
@@ -43,11 +43,11 @@ namespace testApp3 {
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
-            // Widget testApp3.GroupsWindow
-            this.Name = "testApp3.GroupsWindow";
-            this.Title = Mono.Unix.Catalog.GetString("ListView - No databinding");
+            // Widget testApp3.DataGridTests
+            this.Name = "testApp3.DataGridTests";
+            this.Title = Mono.Unix.Catalog.GetString("DataGridTests");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
-            // Container child testApp3.GroupsWindow.Gtk.Container+ContainerChild
+            // Container child testApp3.DataGridTests.Gtk.Container+ContainerChild
             this.vbox1 = new Gtk.VBox();
             this.vbox1.Name = "vbox1";
             this.vbox1.Spacing = 6;
@@ -189,18 +189,9 @@ namespace testApp3 {
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.DefaultWidth = 760;
-            this.DefaultHeight = 362;
+            this.DefaultWidth = 703;
+            this.DefaultHeight = 300;
             this.Show();
-            this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnDeleteEvent);
-            this.button1.Clicked += new System.EventHandler(this.OnShowItem);
-            this.button2.Clicked += new System.EventHandler(this.OnDeleteItem);
-            this.button3.Clicked += new System.EventHandler(this.OnAddItem);
-            this.button7.Clicked += new System.EventHandler(this.OnMemoryTest);
-            this.button9.Clicked += new System.EventHandler(this.OnChangeUser2);
-            this.button6.Clicked += new System.EventHandler(this.OnShowMultiple);
-            this.button4.Clicked += new System.EventHandler(this.OnToggleDisplayMode);
-            this.button5.Clicked += new System.EventHandler(this.OnToggleSelectionMode);
         }
     }
 }

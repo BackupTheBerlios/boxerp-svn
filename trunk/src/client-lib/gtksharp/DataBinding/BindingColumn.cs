@@ -35,6 +35,7 @@ namespace Boxerp.Client.GtkSharp
 	public class SimpleColumn
 	{
 		private string _name;
+		private string _objectPropertyName;
 		private bool _visible;
 		private Type _dataType;
 		private int _order;
@@ -51,6 +52,18 @@ namespace Boxerp.Client.GtkSharp
 			}
 		}
 
+		public string ObjectPropertyName 
+		{
+			get 
+			{
+				return _objectPropertyName;
+			}
+			set
+			{
+				_objectPropertyName = value;
+			}
+		}
+		
 		public bool Visible 
 		{
 			get 

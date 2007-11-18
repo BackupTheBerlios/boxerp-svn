@@ -58,13 +58,15 @@ namespace Boxerp.Client.GtkSharp.Controls
 	///  2 - The user is using the Items properties. The items on it implement the INotifyPropertyChanged. What happen when an item changes? 
 	/// 
 	/// </summary>
-	public partial class ListView : TreeViewWrapper<SimpleColumn>, IBindableWidget
+	public class ListView : TreeViewWrapper<SimpleColumn>, IBindableWidget
 	{
+		private CustomTreeView _treeview;
+		
 		public ListView()
 			: base()
 		{
-			this.Build();
-			
+			_treeview = new CustomTreeView();
+			// add widget
 		}
 		
 		protected override CustomTreeView TreeModelWidget 
@@ -79,7 +81,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		{
 	        if (column.DataType == typeof(Gdk.Pixbuf))
         	{
-	        	TreeViewColumn tc = TreeView.AppendColumn ("", new CellRendererPixbuf (), "pixbuf", colNumber);
+	        	TreeViewColumn tc = TreeModelWidget.AppendColumn ("", new CellRendererPixbuf (), "pixbuf", colNumber);
 		    	if (tc != null)
 				{
 			    	tc.Visible = column.Visible;
@@ -92,12 +94,12 @@ namespace Boxerp.Client.GtkSharp.Controls
 				Gtk.CellRendererText objCell = new Gtk.CellRendererText ();
 				objColumn.PackStart (objCell, true);
 				objColumn.SetCellDataFunc (objCell, new Gtk.TreeCellDataFunc (RenderObject));		
-				TreeView.AppendColumn(objColumn);
+				TreeModelWidget.AppendColumn(objColumn);
 			}
         	else
         	{
         		TreeViewColumn tc = 
-					TreeView.AppendColumn (column.Name, new CellRendererText (), "text", colNumber);
+					TreeModelWidget.AppendColumn (column.Name, new CellRendererText (), "text", colNumber);
 				Logger.GetInstance().WriteLine("appending column:" + column.Name + colNumber);
 				
 				if (tc != null)

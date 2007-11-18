@@ -34,33 +34,11 @@ namespace Boxerp.Client.GtkSharp.Controls
 {
 	
 	
-	public partial class CustomTreeView : Gtk.TreeView, ITreeModel
+	public class CustomTreeView : Gtk.TreeView, ITreeModel
 	{
-		private Gtk.TreeView _treeview; // FIXME, this has to be the designer treeview
-		
 		public CustomTreeView()
 		{
-			this.Build();
+		
 		}
-		
-		/*public Gtk.SelectionMode SelectionMode
-		{
-			get
-			{
-				_treeview.Selection.Mode;
-			}
-			set
-			{
-				_treeview.Selection.Mode = value;
-			}
-		}
-		
-		public List<object> SelectedItems
-		{
-			
-		}*/
-		
-		
-		
 	}
 }

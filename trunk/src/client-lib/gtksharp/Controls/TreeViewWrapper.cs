@@ -41,30 +41,30 @@ namespace Boxerp.Client.GtkSharp.Controls
 		{
 		}
 
-		protected abstract Gtk.TreeView TreeView { get; }
+		//protected abstract CustomTreeView TreeModelWidget { get; }
 		
 		public virtual Gtk.SelectionMode SelectionMode
 		{
 			get
 			{
-				return TreeView.Selection.Mode;
+				return TreeModelWidget.Selection.Mode;
 			}
 			set
 			{
-				TreeView.Selection.Mode = value;
+				TreeModelWidget.Selection.Mode = value;
 			}
 		}
 		
 		protected override bool getSelectedIter(out Gtk.TreeIter iter)
 		{
 			bool isSelected = false;
-			isSelected = TreeView.Selection.GetSelected(out iter);
+			isSelected = TreeModelWidget.Selection.GetSelected(out iter);
 			return isSelected;
 		}
 		
 		protected override void setSelectedIter(Gtk.TreeIter iter)
 		{
-			TreeView.Selection.SelectIter(iter);
+			TreeModelWidget.Selection.SelectIter(iter);
 		}
 		
 		public virtual List<object> SelectedItems
@@ -120,16 +120,16 @@ namespace Boxerp.Client.GtkSharp.Controls
 		
 		protected override void removeTreeModelWidgetColumns()
 		{
-			foreach (Gtk.TreeViewColumn col in TreeView.Columns)
+			foreach (Gtk.TreeViewColumn col in TreeModelWidget.Columns)
 			{
 				Logger.GetInstance().WriteLine("Removing column: " + col.Title);
-				TreeView.RemoveColumn(col);
+				TreeModelWidget.RemoveColumn(col);
 			}
 		}
 		
 		protected override Gtk.TreeIter appendValueToStore(object item, ArrayList itemValues)
 		{
-			TreeIter iter = _store.Append();
+			Gtk.TreeIter iter = _store.Append();
 		    int i = 0;
 			foreach (object itm in itemValues)
 			{

@@ -32,13 +32,11 @@ using System;
 namespace Boxerp.Client.GtkSharp.Controls
 {
 	
-	
-	public partial class CheckBox : Gtk.Bin
+	public class CheckBox : Gtk.ToggleButton
 	{
-		
 		public CheckBox()
 		{
-			this.Build();
+			
 		}
 	}
 }

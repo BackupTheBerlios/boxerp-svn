@@ -40,11 +40,13 @@ using Boxerp.Collections;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
-	public partial class DataGrid : TreeViewWrapper<EditableColumn>, IBindableWidget
+	public class DataGrid : TreeViewWrapper<EditableColumn>, IBindableWidget
 	{
+		private CustomTreeView _treeview;
 		public DataGrid()
 		{
-			this.Build();
+			_treeview = new CustomTreeView();
+			// add widget
 		}
 		
 		protected override CustomTreeView TreeModelWidget
@@ -83,7 +85,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 				tvColumn.PackStart(renderer, true);
 			}
 			
-			TreeView.AppendColumn(tvColumn);
+			TreeModelWidget.AppendColumn(tvColumn);
 		}
 
 		private void OnTextCellEdited(System.Object sender, Gtk.EditedArgs args)

@@ -44,11 +44,13 @@ namespace Boxerp.Client.GtkSharp.Controls
 	      IBindableWidget, ITreeModel
 	{
 		private object _selectedItem;
-		
+		//private Gtk.ComboBox _combo;
+			
 		public ComboBox()
 			: base()
 		{
-			this.Build();
+			_combo = new Gtk.ComboBox();
+			// add widget;
 		}
 
 		protected override Boxerp.Client.GtkSharp.Controls.ComboBox TreeModelWidget 

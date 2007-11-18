@@ -67,6 +67,8 @@ namespace Boxerp.Client.GtkSharp.Controls
 			_widgetCore = new BindableWidgetCore(this);
 		}
 
+		protected abstract C TreeModelWidget { get; }
+		
 		public BindableWidgetCore WidgetCore
 		{
 			get
@@ -289,7 +291,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		
 		
 		
-		protected abstract C TreeModelWidget { get; }
+		
 		
 		private void checkDataBindingIsNull()
 		{

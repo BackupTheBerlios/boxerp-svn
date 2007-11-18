@@ -28,11 +28,15 @@
     <itemgroups />
     <signals />
   </object>
-  <object type="Boxerp.Client.GtkSharp.Controls.TreeViewWrapper" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
+  <object type="Boxerp.Client.GtkSharp.Controls.DataGrid" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
     <itemgroups />
     <signals />
   </object>
-  <object type="Boxerp.Client.GtkSharp.Controls.DataGrid" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
+  <object type="Boxerp.Client.GtkSharp.Controls.CheckBox" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+  <object type="Boxerp.Client.GtkSharp.Controls.CustomTreeView" palette-category="Boxerp.Client.GtkSharp.Controls" allow-children="false" base-type="Gtk.Bin">
     <itemgroups />
     <signals />
   </object>

@@ -1,56 +1,49 @@
+// ////
+////// Copyright (c) 2007, Boxerp Project (www.boxerp.org)
+//////
+////// Redistribution and use in source and binary forms, with or
+////// without modification, are permitted provided that the following
+////// conditions are met:
+////// Redistributions of source code must retain the above
+////// copyright notice, this list of conditions and the following
+////// disclaimer.
+////// Redistributions in binary form must reproduce the above
+////// copyright notice, this list of conditions and the following
+////// disclaimer in the documentation and/or other materials
+////// provided with the distribution.
+//////
+////// THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY
+////// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+////// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+////// PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR
+////// BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+////// EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+////// TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+////// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+////// ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+////// LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+////// IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+////// THE POSSIBILITY OF SUCH DAMAGE.
 ////
-//// Copyright (c) 2007, Boxerp Project (www.boxerp.org)
 ////
-//// Redistribution and use in source and binary forms, with or
-//// without modification, are permitted provided that the following
-//// conditions are met:
-//// Redistributions of source code must retain the above
-//// copyright notice, this list of conditions and the following
-//// disclaimer.
-//// Redistributions in binary form must reproduce the above
-//// copyright notice, this list of conditions and the following
-//// disclaimer in the documentation and/or other materials
-//// provided with the distribution.
-////
-//// objectHIS SOFobjectWARE IS PROVIDED BY objectHE AUobjectHOR ``AS IS'' AND ANY
-//// EXPRESS OR IMPLIED WARRANobjectIES, INCLUDING, BUobject NOobject LIMIobjectED objectO,
-//// objectHE IMPLIED WARRANobjectIES OF MERCHANobjectABILIobjectY AND FIobjectNESS FOR A
-//// PARobjectICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENobject SHALL objectHE AUobjectHOR
-//// BE LIABLE FOR ANY DIRECobject, INDIRECobject, INCIDENobjectAL, SPECIAL,
-//// EXEMPLARY, OR CONSEQUENobjectIAL DAMAGES (INCLUDING, BUobject NOobject LIMIobjectED
-//// objectO, PROCUREMENobject OF SUBSobjectIobjectUobjectE GOODS OR SERVICES; LOSS OF USE,
-//// DAobjectA, OR PROFIobjectS; OR BUSINESS INobjectERRUPobjectION) HOWEVER CAUSED AND
-//// ON ANY objectHEORY OF LIABILIobjectY, WHEobjectHER IN CONobjectRACobject, SobjectRICobject
-//// LIABILIobjectY, OR objectORobject (INCLUDING NEGLIGENCE OR OobjectHERWISE) ARISING
-//// IN ANY WAY OUobject OF objectHE USE OF objectHIS SOFobjectWARE, EVEN IF ADVISED OF
-//// objectHE POSSIBILIobjectY OF SUCH DAMAGE.
-//
-//
 
 using System;
-using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
-using Boxerp.Client.GtkSharp;
-using System.Reflection;
-using Boxerp.Client;
-using Boxerp.Collections;
 
 namespace Boxerp.Client.GtkSharp.Controls
-{
-	
-	/// <summary>
-	/// </summary>
-	public abstract class TreeViewWrapper : Gtk.Bin
+{	
+	public abstract class TreeViewWrapper<T> : TreeModelWrapper<T, CustomTreeView> 
+		where T : SimpleColumn, new ()
 	{
-		protected Gtk.ListStore _store;
-		protected Type _itemsType = typeof(System.Object);		
-		protected PropertyInfo[] _itemsTypeProperties = null;
-		protected bool _columnsInitialized = false; 
-		protected Dictionary<int, object> _itemsPointers = new Dictionary<int, object>();
-		protected Dictionary<object, Gtk.TreeIter> _itersPointers = new Dictionary<object, Gtk.TreeIter>();
+		public TreeViewWrapper()
+			: base ()
+		{
+		}
+
+		protected abstract Gtk.TreeView TreeView { get; }
 		
-		public Gtk.SelectionMode SelectionMode
+		public virtual Gtk.SelectionMode SelectionMode
 		{
 			get
 			{
@@ -62,40 +55,19 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		/// <value>
-		/// If the SelectionMode is Multiple, this property will return null even if there are 
-		/// items selected. For that case use the SelectedItems property
-		/// </value>
-		public virtual object SelectedItem
+		protected override bool getSelectedIter(out Gtk.TreeIter iter)
 		{
-			get
-			{
-				if (SelectionMode != Gtk.SelectionMode.Single)
-				{
-					return null;
-				}
-				
-				Gtk.TreeIter iter;
-				if (TreeView.Selection.GetSelected(out iter))
-				{
-					Logger.GetInstance().WriteLine("Iter userData=" + iter.UserData.GetHashCode());
-					 return _itemsPointers[iter.UserData.GetHashCode()];
-				}
-				else
-				{
-					Logger.GetInstance().WriteLine("nothing selected");
-					Logger.GetInstance().WriteLine("nothing selected:" + iter.UserData.GetHashCode());
-				}
-				
-				return null;
-			}
-			set
-			{
-				
-			}
+			bool isSelected = false;
+			isSelected = TreeView.Selection.GetSelected(out iter);
+			return isSelected;
 		}
 		
-		public List<object> SelectedItems
+		protected override void setSelectedIter(Gtk.TreeIter iter)
+		{
+			TreeView.Selection.SelectIter(iter);
+		}
+		
+		public virtual List<object> SelectedItems
 		{
 			get
 			{
@@ -104,7 +76,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 					return null;
 				}
 				
-				Gtk.TreePath[] pathArray = TreeView.Selection.GetSelectedRows();
+				Gtk.TreePath[] pathArray = TreeModelWidget.Selection.GetSelectedRows();
 				if (pathArray.Length > 0)
 				{
 					List<object> selectedItems = new List<object>();
@@ -131,8 +103,6 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		protected abstract void removeItemFromCurrentCollection(object item);
-		
 		public void RemoveSelectedItems()
 		{
 			if (SelectedItems != null)
@@ -148,130 +118,60 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		protected abstract Gtk.TreeView TreeView { get; }
-		
-		public TreeViewWrapper()
+		protected override void removeTreeModelWidgetColumns()
 		{
-			
-		}
-				
-		protected virtual void clear()
-		 {
-			_store.Clear();
-			_itemsPointers.Clear();
-			_itersPointers.Clear();
-		}
-						
-		protected void removeAt(int rowNumber)
-		{
-			Gtk.TreeIter iter;
-			_store.GetIterFirst(out iter);
-			
-			int i = 0;
-			while (rowNumber > i)
-			{
-				if (_store.IterNext(ref iter))
-				{
-					i++;
-				}
-				else
-				{
-					break;
-				}
-			}
-			if (i == rowNumber)
-			{
-				_itersPointers.Remove(_itemsPointers[iter.UserData.GetHashCode()]);
-				_itemsPointers.Remove(iter.UserData.GetHashCode());
-				_store.Remove(ref iter);				
-			}
-		}
-		
-		protected virtual void initializeTreeView(object firstItem)
-		{
-			_itemsType = firstItem.GetType();
-			_itemsTypeProperties = null;
 			foreach (Gtk.TreeViewColumn col in TreeView.Columns)
 			{
 				Logger.GetInstance().WriteLine("Removing column: " + col.Title);
 				TreeView.RemoveColumn(col);
 			}
-			if (_store != null)
+		}
+		
+		protected override Gtk.TreeIter appendValueToStore(object item, ArrayList itemValues)
+		{
+			TreeIter iter = _store.Append();
+		    int i = 0;
+			foreach (object itm in itemValues)
 			{
-				TreeView.Model = null;
-				_store.Clear();
-				_store.Dispose();
-			}
-			Logger.GetInstance().WriteLine("initialize items:" + _itemsType);
-			createColumns();
-		}
-		
-		protected List<SimpleColumn> readObjectTypes()
-		{
-			List<SimpleColumn> columnTypes = new List<SimpleColumn>();
-			if (_itemsTypeProperties == null)
-			{
-				_itemsTypeProperties = _itemsType.GetProperties();
-			}
-			foreach (PropertyInfo pInfo in _itemsTypeProperties)
-            {
-				Logger.GetInstance().WriteLine("Reading property: " + pInfo.Name);
-				SimpleColumn scolumn = new SimpleColumn();
-				scolumn.Name = pInfo.Name;
-				scolumn.Type = pInfo.PropertyType;
-				scolumn.Visible = true;
-				columnTypes.Add(scolumn);
-			}
-			
-			return columnTypes;
-		}
-			
-		protected abstract void createColumns();
-			
-		protected void removeItem(object item)
-		{
-			Gtk.TreeIter iter = _itersPointers[item];
-			_itersPointers.Remove(item);
-			Logger.GetInstance().WriteLine("removing item:" + iter.UserData.GetHashCode());
-			_itemsPointers.Remove(iter.UserData.GetHashCode());
-			_store.Remove(ref iter);			
-		}
-		
-		protected abstract Gtk.TreeIter insertItem(object item);
-		
-		
-		protected ArrayList getItemPropertiesValues(object item)
-		{
-			Logger.GetInstance().WriteLine("item type properties initialized:" + item.ToString());
-			ArrayList values = new ArrayList();
-			List<string> properties = new List<string>();
-			
-			foreach (PropertyInfo pInfo in _itemsTypeProperties)
-            {
-				Logger.GetInstance().WriteLine("Reading object property:" + pInfo.Name);
-                if (!properties.Contains(pInfo.Name))
-                {
-                    if (pInfo.GetGetMethod().GetParameters().Length > 0)
+				if (itm == null)
+				{
+					_store.SetValue(iter, i, String.Empty);
+				}
+				else
+				{
+					Logger.GetInstance().WriteLine("inserting value:" + itm.GetType().ToString());
+				
+					switch (itm.GetType().ToString())
 					{
-						// TODO : indexed property
+					    case "System.Object":
+						            _store.SetValue(iter, i, (string) itm.ToString());
+						    break;
+						case "System.String" :
+							        _store.SetValue(iter, i, (string) itm);
+							break;
+						case "System.Int32" :
+									_store.SetValue(iter, i, (int) itm);
+							break;
+					    case "System.Double":
+						            _store.SetValue(iter, i, (double) itm);
+						    break;
+						case "System.Enum":
+						            _store.SetValue(iter, i, (string) itm.ToString());
+						    break;
+					    case "null" :
+						            Logger.GetInstance().WriteLine("Null column value");
+						            _store.SetValue(iter, i, String.Empty);
+						    break;
+						// objectODO: add more cases with the remaining types
+						default:
+									_store.SetValue(iter, i, (string) itm.ToString());		
+						    break;
 					}
-					else
-					{
-						Logger.GetInstance().WriteLine("trying to read value");
-						object val = pInfo.GetValue(item, null);
-						Logger.GetInstance().WriteLine("reading value " + val);
-						values.Add(val);
-					}
-					properties.Add(pInfo.Name);
-               }
+				}
+				i++;
 			}
-			return values;
+			return iter;
 		}
 		
-		protected void RenderObject (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-		{
-			//System.Object obj = model.GetValue(column. (iter, 0);
-			//(cell as Gtk.CelRendererText).objectext = model.GetValue(iter, 0).ToString();// .Data.ToString();
-		}
 	}
 }

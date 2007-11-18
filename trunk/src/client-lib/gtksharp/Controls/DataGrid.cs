@@ -40,17 +40,14 @@ using Boxerp.Collections;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
-	public partial class DataGrid : TreeViewWrapper, IBindableWidget
+	public partial class DataGrid : TreeViewWrapper<EditableColumn>, IBindableWidget
 	{
-		private BindableWidgetCore _widgetCore;
-		
 		public DataGrid()
 		{
 			this.Build();
-			_widgetCore = new BindableWidgetCore(this);
 		}
 		
-		protected override Gtk.TreeView TreeView 
+		protected override CustomTreeView TreeModelWidget
 		{ 
 			get
 			{
@@ -58,68 +55,50 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		public BindableWidgetCore WidgetCore
+		protected override void addTreeViewColumn(EditableColumn column, int colNumber)
 		{
-			get
+			Gtk.TreeViewColumn tvColumn = new Gtk.TreeViewColumn ();
+			tvColumn.Title = column.Name;
+			tvColumn.Visible = column.Visible;
+			
+			if (typeof(CheckBox).IsAssignableFrom(column.Widget))
 			{
-				return _widgetCore;
+				Gtk.CellRendererToggle renderer = new CellRendererToggle();
+				renderer.Activatable = column.Editable;
+				renderer.Toggled += OnCheckBoxChanged;
+				tvColumn.PackStart(renderer, true);
 			}
+			else if (typeof(ComboBox).IsAssignableFrom(column.Widget))
+			{
+				Gtk.CellRendererCombo renderer = new CellRendererCombo();
+				renderer.Editable = column.Editable;
+				renderer.Edited += OnComboBoxEdited;
+				tvColumn.PackStart(renderer, true);
+			}
+			else  // if (typeof(TextBox).IsAssignableFrom(column.Widget))
+			{
+				Gtk.CellRendererText renderer = new CellRendererText();
+				renderer.Editable = column.Editable;
+				renderer.Edited += OnTextCellEdited;
+				tvColumn.PackStart(renderer, true);
+			}
+			
+			TreeView.AppendColumn(tvColumn);
 		}
 
-		public void BindObject(IBindableWrapper wrapper, string path, string widgetProperty, BindingOptions options)
-		{
-			_widgetCore.BindObject(wrapper, path, widgetProperty, options);
-		}
-		
-		public void BindObject(IBindableWrapper wrapper, object owner, string path, string widgetProperty, BindingOptions options)
-		{
-			_widgetCore.BindObject(wrapper, owner, path, widgetProperty, options);
-		}
-		
-		// IBindableWidget
-		void IBindableWidget.OnBoundDataChanged(string property, object val)
-		{
-			/*Logger.GetInstance().WriteLine("updateValue:" + property);
-			if (property.Equals("BoundItems"))
-			{
-				_boundItems = (IBindingList)val;
-				_boundItems.ListChanged += OnBoundItemsListChanged;
-				updateCollection(_boundItems);
-			}
-			if (property.Equals("Items"))
-			{
-				if (WidgetCore.BindingOptions == BindingOptions.TwoWay)
-				{
-					throw new NotSupportedException("The Items property does not support two-way databinding. Please use the BoundItems property");
-				}
-				else
-				{
-					updateCollection((IList)val);
-				}
-			}
-			else
-			{
-				updateItem(val);
-			}
-			 */
-		}
-			 
-		protected override void createColumns ()
+		private void OnTextCellEdited(System.Object sender, Gtk.EditedArgs args)
 		{
 			
 		}
 		
-		protected override TreeIter insertItem (object item)
-		{
-			throw new NotImplementedException();
-		}
-		
-		protected override void removeItemFromCurrentCollection (object item)
+		private void OnCheckBoxChanged(System.Object sender, Gtk.ToggledArgs args)
 		{
 			
 		}
-
-
-
+		
+		private void OnComboBoxEdited(System.Object sender, Gtk.EditedArgs arg)
+		{
+			
+		}
 	}
 }

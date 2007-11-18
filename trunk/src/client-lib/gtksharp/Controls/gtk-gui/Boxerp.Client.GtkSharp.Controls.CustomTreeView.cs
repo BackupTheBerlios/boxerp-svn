@@ -11,19 +11,13 @@
 namespace Boxerp.Client.GtkSharp.Controls {
     
     
-    public partial class ComboBox {
-        
-        private Gtk.ComboBox _combo;
+    public partial class CustomTreeView {
         
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
-            // Widget Boxerp.Client.GtkSharp.Controls.ComboBox
+            // Widget Boxerp.Client.GtkSharp.Controls.CustomTreeView
             Stetic.BinContainer.Attach(this);
-            this.Name = "Boxerp.Client.GtkSharp.Controls.ComboBox";
-            // Container child Boxerp.Client.GtkSharp.Controls.ComboBox.Gtk.Container+ContainerChild
-            this._combo = new Gtk.ComboBox();
-            this._combo.Name = "_combo";
-            this.Add(this._combo);
+            this.Name = "Boxerp.Client.GtkSharp.Controls.CustomTreeView";
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }

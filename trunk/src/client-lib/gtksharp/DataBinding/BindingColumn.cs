@@ -32,12 +32,12 @@ using System;
 namespace Boxerp.Client.GtkSharp
 {
 	
-	public class BindingColumn
+	public class SimpleColumn
 	{
 		private string _name;
 		private bool _visible;
-		private bool _editable;
-		private Type _widget = typeof(Gtk.Entry);
+		private Type _dataType;
+		private int _order;
 		
 		public string Name 
 		{
@@ -63,6 +63,25 @@ namespace Boxerp.Client.GtkSharp
 			}
 		}
 
+		public System.Type DataType 
+		{
+			get 
+			{
+				return _dataType;
+			}
+			set
+			{
+				_dataType = value;
+			}
+		}
+	}
+	
+	public class EditableColumn : SimpleColumn
+	{
+		private bool _editable;
+		private Type _widget = typeof(Gtk.Entry);
+		
+		
 		public bool Editable 
 		{
 			get 
@@ -87,7 +106,7 @@ namespace Boxerp.Client.GtkSharp
 			}
 		}
 		
-		public BindingColumn()
+		public EditableColumn()
 		{
 		}
 	}

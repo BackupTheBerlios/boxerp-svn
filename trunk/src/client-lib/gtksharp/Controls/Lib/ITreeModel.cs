@@ -28,25 +28,12 @@
 ////
 
 using System;
-using System.Collections.Generic;
+using Gtk;
 
-namespace Boxerp.Client.GtkSharp
-{	
-	public class BindingDescriptor<T>
-		where T : SimpleColumn
-	{		
-		private List<T> _bindingColumns = new List<T>();
-		
-		public List<T> BindingColumns 
-		{
-			get 
-			{
-				return _bindingColumns;
-			}
-		}
-		
-		public BindingDescriptor()
-		{
-		}
+namespace Boxerp.Client.GtkSharp.Controls
+{
+	public interface ITreeModel
+	{
+		Gtk.TreeModel Model { get; set; }
 	}
 }

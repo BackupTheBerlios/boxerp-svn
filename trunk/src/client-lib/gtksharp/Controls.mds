@@ -1,5 +1,5 @@
 <Combine name="Controls" fileversion="2.0">
-  <Configurations active="Debug">
+  <Configurations active="Release">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="Controls" configuration="Debug" />
     </Configuration>
@@ -11,6 +11,6 @@
     <Execute type="None" entry="Controls" />
   </StartMode>
   <Entries>
-    <Entry filename="./Controls/Controls.mdp" />
+    <Entry filename="Controls/Controls.mdp" />
   </Entries>
 </Combine>

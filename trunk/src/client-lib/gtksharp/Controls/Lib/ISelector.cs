@@ -30,23 +30,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace Boxerp.Client.GtkSharp
-{	
-	public class BindingDescriptor<T>
-		where T : SimpleColumn
-	{		
-		private List<T> _bindingColumns = new List<T>();
+namespace Boxerp.Client.GtkSharp.Controls
+{
 		
-		public List<T> BindingColumns 
-		{
-			get 
-			{
-				return _bindingColumns;
-			}
-		}
-		
-		public BindingDescriptor()
-		{
-		}
+	public interface ISelector 
+	{
+		object SelectedItem { get; set; }
+		List<object> SelectedItems { get; set; }
+		Gtk.SelectionMode SelectionMode { get; }
+		Gtk.TreeSelection Selection { get; }
 	}
 }

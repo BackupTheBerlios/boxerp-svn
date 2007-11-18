@@ -30,76 +30,158 @@
 using System;
 using Gdk;
 using Boxerp.Client.GtkSharp;
+using Boxerp.Collections;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
 	
 	
-	public partial class ComboBox : Gtk.Bin, IBindableWidget
+	public partial class ComboBox : TreeModelWrapper<SimpleColumn, Boxerp.Client.GtkSharp.Controls.ComboBox>, 
+	      IBindableWidget, ITreeModel
 	{
-		private BindableWidgetCore _widgetCore;
-		private object _selectedItem = null;
-		private List<object> _items = new List<object>();
+		private object _selectedItem;
 		
 		public ComboBox()
+			: base()
 		{
 			this.Build();
-			_widgetCore = new BindableWidgetCore(this);
 		}
 
-		public BindableWidgetCore WidgetCore
+		protected override Boxerp.Client.GtkSharp.Controls.ComboBox TreeModelWidget 
+		{ 
+			get
+			{
+				return this;
+			}
+		}
+		
+		/*List<object> ISelector.SelectedItems
 		{
 			get
 			{
-				return _widgetCore;
+				throw new NotSupportedException("This is a combobox actually, not a treeview");
+			}
+			set
+			{
+				throw new NotSupportedException("This is a combobox actually, not a treeview");
 			}
 		}
-
-		public void BindObject(IBindableWrapper wrapper, string path, string widgetProperty, BindingOptions options)
-		{
-			_widgetCore.BindObject(wrapper, path, widgetProperty, options);
-		}
 		
-		public void BindObject(IBindableWrapper wrapper, object owner, string path, string widgetProperty, BindingOptions options)
+		Gtk.TreeSelection ISelector.Selection
 		{
-			_widgetCore.BindObject(wrapper, owner, path, widgetProperty, options);
-		}
-		
-		public object SelectedItem 
-		{
-			get 
+			get
 			{
-				return _selectedItem;
+				throw new NotSupportedException("This is a combobox actually, not a treeview");
 			}
-		}
-
-		public List<object> Items 
+		}*/
+		
+		public Gtk.TreeModel Model 
 		{
-			get 
+			get
 			{
-				return _items;
+				return _combo.Model;
+			}
+			set
+			{
+				_combo.Model = value;
 			}
 		}
 		
 		void IBindableWidget.OnBoundDataChanged(string property, object val)
 		{
-			_selectedItem = val;
-			// update the combo without calling again the SetPropertyValue
+			Logger.GetInstance().WriteLine("updateValue:" + property);
+			if (property.Equals("SelectedItem"))
+			{
+				_selectedItem = val;
+				selectCurrentItem();
+			}
+			else if (property.Equals("Items"))
+			{
+				updateCollection((IList)val);
+			}
 		}
 
+		private void selectCurrentItem()
+		{
+			Gtk.TreeIter iter;
+			_combo.Model.GetIterFirst(out iter);
+			
+		}
+		
+		protected override bool getSelectedIter(out Gtk.TreeIter iter)
+		{
+			bool isSelected = false;
+			isSelected = _combo.GetActiveIter(out iter);
+			return isSelected;
+		}
+		
+		protected override void setSelectedIter(Gtk.TreeIter iter)
+		{
+			_combo.SetActiveIter(iter);
+		}
+		
+		private void updateCollection(IList sourceItems)
+		{
+			Logger.GetInstance().WriteLine("updateCollection:" + sourceItems.Count);
+			if ((sourceItems != null) && (sourceItems.Count > 0))
+			{
+				foreach (object item in sourceItems)
+				{
+					insertItem((object)item);
+				}
+				Logger.GetInstance().WriteLine("items added");
+			}
+		}
+		
+		public override ItemsDisplayMode ItemsDisplayMode
+		{
+			get
+			{
+				return ItemsDisplayMode.ObjectToString;
+			}
+		}
+		
+		private void OnItemChanged(System.Object sender, PropertyChangedEventArgs args)
+		{
+			// refresh item in dropdown
+		}
+		
 		protected virtual void OnComboChanged (object sender, System.EventArgs e)
 		{
-			// Get the selected item 
-			//_selectedItem = _combo.Model.
-			WidgetCore.SetPropertyValue(_selectedItem);
+			Gtk.TreeIter iter;
+			_combo.GetActiveIter(out iter);
+			_selectedItem = _combo.Model.GetValue(iter, 0);
+			WidgetCore.SetPropertyValue("SelectedItem", _selectedItem);
 		}		
-				
-				
-				
-				
-				
+		
+		protected override void addTreeViewColumn(SimpleColumn column, int number)
+		{
+			// nothing to do here
+		}
+		
+		protected override Gtk.TreeIter appendValueToStore(object item, ArrayList itemValues)
+		{
+			Gtk.TreeIter iter = _store.Append();
+			if (item == null)
+			{
+				_store.SetValue(iter, 0, String.Empty);
+			}
+			else
+			{
+				_store.SetValue(iter, 0 , (string) item.ToString());
+			}
+			
+			return iter;
+		}
+		
+		protected override void removeTreeModelWidgetColumns()
+		{
+			
+		}
+		
 	}
 }

@@ -28,14 +28,39 @@
 ////
 
 using System;
+using Gtk;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
 	
 	
-	public enum ItemsDisplayMode
+	public partial class CustomTreeView : Gtk.TreeView, ITreeModel
 	{
-		ObjectToString,
-		Reflection
+		private Gtk.TreeView _treeview; // FIXME, this has to be the designer treeview
+		
+		public CustomTreeView()
+		{
+			this.Build();
+		}
+		
+		/*public Gtk.SelectionMode SelectionMode
+		{
+			get
+			{
+				_treeview.Selection.Mode;
+			}
+			set
+			{
+				_treeview.Selection.Mode = value;
+			}
+		}
+		
+		public List<object> SelectedItems
+		{
+			
+		}*/
+		
+		
+		
 	}
 }

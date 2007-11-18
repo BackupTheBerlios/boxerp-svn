@@ -1,17 +1,20 @@
-﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp_completo/trunk/src/client-lib/gtksharp/Controls.mds">
+﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp/trunk/src/client-lib/gtksharp/Controls.mds">
   <Files>
     <File name="Welcome" />
-    <File name="../../../../branches/branch_nov2006/src/client-gtksharp/lib/lib/SimpleListView.cs" line="158" column="4" />
     <File name="./Controls/TextBox.cs" line="66" column="42" />
     <File name="./Controls/ComboBox.cs" line="87" column="42" />
-    <File name="./Controls/ListView.cs" line="540" column="92" />
+    <File name="./Controls/ListView.cs" line="307" column="1" />
     <File name="./Controls/IntegerTextBox.cs" line="71" column="42" />
     <File name="./Controls/DateControl.cs" line="31" column="30" />
+    <File name="./Controls/TreeViewWrapper.cs" line="45" column="32" />
+    <File name="./Controls/DataGrid.cs" line="43" column="58" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="Boxerp.Client.GtkSharp.Controls" expanded="True" selected="True" />
+        <Node name="Boxerp.Client.GtkSharp.Controls" expanded="True">
+          <Node name="ListView.cs" selected="True" />
+        </Node>
       </Node>
     </ViewMemento>
     <ViewMemento id="ClassPad">
@@ -25,7 +28,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp_completo/trunk/src/client-lib/gtksharp/Controls/ListView.cs" />
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/gtksharp/Controls/ListView.cs" />
     <Property key="ActiveConfiguration" value="Release" />
   </Properties>
 </UserCombinePreferences>

@@ -28,25 +28,17 @@
 ////
 
 using System;
-using System.Collections.Generic;
 
-namespace Boxerp.Client.GtkSharp
-{	
-	public class BindingDescriptor<T>
-		where T : SimpleColumn
-	{		
-		private List<T> _bindingColumns = new List<T>();
+namespace Boxerp.Client.GtkSharp.Controls
+{
+	
+	
+	public partial class CheckBox : Gtk.Bin
+	{
 		
-		public List<T> BindingColumns 
+		public CheckBox()
 		{
-			get 
-			{
-				return _bindingColumns;
-			}
-		}
-		
-		public BindingDescriptor()
-		{
+			this.Build();
 		}
 	}
 }

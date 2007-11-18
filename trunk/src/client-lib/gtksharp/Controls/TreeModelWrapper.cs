@@ -42,8 +42,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 	
 	/// <summary>
 	/// </summary>
-	public abstract class TreeModelWrapper<T, C> : Gtk.Bin, IBindableWidget
-		where C : ITreeModel
+	public abstract class TreeModelWrapper<T> : Gtk.Bin, IBindableWidget
 		where T : SimpleColumn, new()		
 	{
 		protected BindableWidgetCore _widgetCore;
@@ -61,16 +60,28 @@ namespace Boxerp.Client.GtkSharp.Controls
 		
 		public TreeModelWrapper()
 		{
-			//Stetic.Gui.Initialize(this);
-            //Stetic.BinContainer.Attach(this);
-            //this.Name = this.GetType().ToString();
 			_items.ItemAddedEvent += OnItemAdded;
 			_items.ClearEvent += OnItemsClear;
 			_items.ItemRemovedEvent += OnItemRemoved;
 			_widgetCore = new BindableWidgetCore(this);
+			
+			this.SizeAllocated += OnSizeAllocated;
+			this.SizeRequested += OnSizeRequested;
 		}
 
-		protected abstract C TreeModelWidget { get; }
+		private void OnSizeAllocated(object sender, Gtk.SizeAllocatedArgs args)
+		{
+			Gdk.Rectangle rect = args.Allocation;
+			InnerWidget.SizeAllocate(rect);
+		}
+		
+		private void OnSizeRequested(object sender, Gtk.SizeRequestedArgs args)
+		{
+			SetSizeRequest(args.Requisition.Width, args.Requisition.Height);
+		}
+		
+		protected abstract Gtk.Widget InnerWidget { get; }
+		protected abstract Gtk.TreeModel Model { get; set; }
 		
 		public BindableWidgetCore WidgetCore
 		{
@@ -358,7 +369,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			
 			if (_store != null)
 			{
-				TreeModelWidget.Model = null;
+				Model = null;
 				_store.Clear();
 				_store.Dispose();
 			}
@@ -426,7 +437,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 					i++;
         	    }
         	    _store = new ListStore(columnsTypes);
-        	    TreeModelWidget.Model = _store;
+        	    Model = _store;
 				Logger.GetInstance().WriteLine("create columns 3" );
 								
 				i = 0;
@@ -490,7 +501,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			Logger.GetInstance().WriteLine("insert item:" + item);
 			ArrayList itemValues = getItemValues(item);
 			    
-			if (TreeModelWidget.Model != null)
+			if (Model != null)
 			{
 				TreeIter iter = appendValueToStore(item, itemValues);
 				_itersPointers[item] = iter;

@@ -38,42 +38,44 @@ using Boxerp.Collections;
 namespace Boxerp.Client.GtkSharp.Controls
 {
 
-	// TODO: strongly typed listview:
-	/*public class ListView<T> : ListView
-	{
-		private InterceptedList<T> _items = new InterceptedList<T>();
-		
-		public InterceptedList<T> Items
-		{
-			get
-			{
-				return _items;
-			}
-		}
-	}*/
-	
+	// TODO: strongly typed listview
 	/// <summary>
 	/// Use cases: 
 	///  1 - The user binds a collection: clean everything and initialize. If Items and BoundItems are used both, throw exception
 	///  2 - The user is using the Items properties. The items on it implement the INotifyPropertyChanged. What happen when an item changes? 
 	/// 
 	/// </summary>
-	public class ListView : TreeViewWrapper<SimpleColumn>, IBindableWidget
+	public class ListView : TreeViewWrapper<SimpleColumn>, IBindableWidget, ITreeModel
 	{
-		private CustomTreeView _treeview;
+		private Gtk.TreeView _treeview;
 		
 		public ListView()
 			: base()
 		{
-			_treeview = new CustomTreeView();
+			_treeview = new TreeView();
 			this.Add(_treeview);
+		    //this.Child.ShowAll();
+            //this.Show();
+			//this.ShowAll();
 		}
 		
-		protected override CustomTreeView TreeModelWidget 
-		{ 
+		protected override Gtk.TreeView TreeView
+		{
 			get
 			{
 				return _treeview;
+			}
+		}
+		
+		protected override Gtk.TreeModel Model 
+		{ 
+			get
+			{
+				return _treeview.Model;
+			}
+			set
+			{
+				_treeview.Model = value;
 			}
 		}
 		
@@ -81,7 +83,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		{
 	        if (column.DataType == typeof(Gdk.Pixbuf))
         	{
-	        	TreeViewColumn tc = TreeModelWidget.AppendColumn ("", new CellRendererPixbuf (), "pixbuf", colNumber);
+	        	TreeViewColumn tc = TreeView.AppendColumn ("", new CellRendererPixbuf (), "pixbuf", colNumber);
 		    	if (tc != null)
 				{
 			    	tc.Visible = column.Visible;
@@ -94,12 +96,12 @@ namespace Boxerp.Client.GtkSharp.Controls
 				Gtk.CellRendererText objCell = new Gtk.CellRendererText ();
 				objColumn.PackStart (objCell, true);
 				objColumn.SetCellDataFunc (objCell, new Gtk.TreeCellDataFunc (RenderObject));		
-				TreeModelWidget.AppendColumn(objColumn);
+				TreeView.AppendColumn(objColumn);
 			}
         	else
         	{
         		TreeViewColumn tc = 
-					TreeModelWidget.AppendColumn (column.Name, new CellRendererText (), "text", colNumber);
+					TreeView.AppendColumn (column.Name, new CellRendererText (), "text", colNumber);
 				Logger.GetInstance().WriteLine("appending column:" + column.Name + colNumber);
 				
 				if (tc != null)

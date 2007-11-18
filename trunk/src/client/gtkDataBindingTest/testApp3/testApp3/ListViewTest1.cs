@@ -47,7 +47,11 @@ namespace testApp3
 		{
 			this.Build();
 			_listView = new ListView();
+			_listView.ItemsDisplayMode = ItemsDisplayMode.AutoCreateColumns;
 			this.scrolledwindow1.AddWithViewport(_listView);
+			this.ReshowWithInitialSize();
+			this.Child.ShowAll();
+			Logger.GetInstance().WriteLine("*************         ******  widget added to scrolled window");
 			addUsers();
 		}
 		

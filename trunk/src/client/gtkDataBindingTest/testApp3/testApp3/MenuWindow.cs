@@ -51,7 +51,8 @@ namespace testApp3
 		protected virtual void OnBasicListView (object sender, System.EventArgs e)
 		{
 			GroupsWindow gwin = new GroupsWindow();
-			gwin.Show();
+			gwin.ShowAll();
+			gwin.Child.ShowAll();
 		}
 
 		protected virtual void OnListViewDataBinding (object sender, System.EventArgs e)

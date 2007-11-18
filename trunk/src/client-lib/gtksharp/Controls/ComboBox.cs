@@ -40,7 +40,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 {
 	
 	
-	public class ComboBox : TreeModelWrapper<SimpleColumn, Boxerp.Client.GtkSharp.Controls.ComboBox>, 
+	public class ComboBox : TreeModelWrapper<SimpleColumn>, 
 	      IBindableWidget, ITreeModel
 	{
 		private Gtk.ComboBox _combo;
@@ -52,16 +52,16 @@ namespace Boxerp.Client.GtkSharp.Controls
 			this.Add(_combo);
 		}
 
-		protected override Boxerp.Client.GtkSharp.Controls.ComboBox TreeModelWidget 
-		{ 
+		protected override Gtk.Widget InnerWidget
+		{
 			get
 			{
-				return this;
+				return _combo;
 			}
 		}
 		
-		public Gtk.TreeModel Model 
-		{
+		protected override Gtk.TreeModel Model 
+		{ 
 			get
 			{
 				return _combo.Model;

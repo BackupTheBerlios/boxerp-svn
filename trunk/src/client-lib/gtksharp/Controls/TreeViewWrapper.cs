@@ -33,38 +33,47 @@ using System.Collections.Generic;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {	
-	public abstract class TreeViewWrapper<T> : TreeModelWrapper<T, CustomTreeView> 
+	public abstract class TreeViewWrapper<T> : TreeModelWrapper<T> 
 		where T : SimpleColumn, new ()
 	{
 		public TreeViewWrapper()
 			: base ()
 		{
+			
 		}
 
-		//protected abstract CustomTreeView TreeModelWidget { get; }
+		protected override Gtk.Widget InnerWidget
+		{
+			get
+			{
+				return TreeView;
+			}
+		}
+		
+		protected abstract Gtk.TreeView TreeView { get; }
 		
 		public virtual Gtk.SelectionMode SelectionMode
 		{
 			get
 			{
-				return TreeModelWidget.Selection.Mode;
+				return TreeView.Selection.Mode;
 			}
 			set
 			{
-				TreeModelWidget.Selection.Mode = value;
+				TreeView.Selection.Mode = value;
 			}
 		}
 		
 		protected override bool getSelectedIter(out Gtk.TreeIter iter)
 		{
 			bool isSelected = false;
-			isSelected = TreeModelWidget.Selection.GetSelected(out iter);
+			isSelected = TreeView.Selection.GetSelected(out iter);
 			return isSelected;
 		}
 		
 		protected override void setSelectedIter(Gtk.TreeIter iter)
 		{
-			TreeModelWidget.Selection.SelectIter(iter);
+			TreeView.Selection.SelectIter(iter);
 		}
 		
 		public virtual List<object> SelectedItems
@@ -76,7 +85,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 					return null;
 				}
 				
-				Gtk.TreePath[] pathArray = TreeModelWidget.Selection.GetSelectedRows();
+				Gtk.TreePath[] pathArray = TreeView.Selection.GetSelectedRows();
 				if (pathArray.Length > 0)
 				{
 					List<object> selectedItems = new List<object>();
@@ -120,10 +129,10 @@ namespace Boxerp.Client.GtkSharp.Controls
 		
 		protected override void removeTreeModelWidgetColumns()
 		{
-			foreach (Gtk.TreeViewColumn col in TreeModelWidget.Columns)
+			foreach (Gtk.TreeViewColumn col in TreeView.Columns)
 			{
 				Logger.GetInstance().WriteLine("Removing column: " + col.Title);
-				TreeModelWidget.RemoveColumn(col);
+				TreeView.RemoveColumn(col);
 			}
 		}
 

@@ -42,18 +42,30 @@ namespace Boxerp.Client.GtkSharp.Controls
 {
 	public class DataGrid : TreeViewWrapper<EditableColumn>, IBindableWidget
 	{
-		private CustomTreeView _treeview;
+		private Gtk.TreeView _treeview;
 		public DataGrid()
 		{
-			_treeview = new CustomTreeView();
+			_treeview = new TreeView();
 			this.Add(_treeview);
 		}
 		
-		protected override CustomTreeView TreeModelWidget
-		{ 
+		protected override Gtk.TreeView TreeView
+		{
 			get
 			{
 				return _treeview;
+			}
+		}
+		
+		protected override Gtk.TreeModel Model 
+		{ 
+			get
+			{
+				return _treeview.Model;
+			}
+			set
+			{
+				_treeview.Model = value;
 			}
 		}
 		
@@ -85,7 +97,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 				tvColumn.PackStart(renderer, true);
 			}
 			
-			TreeModelWidget.AppendColumn(tvColumn);
+			TreeView.AppendColumn(tvColumn);
 		}
 
 		private void OnTextCellEdited(System.Object sender, Gtk.EditedArgs args)

@@ -86,6 +86,30 @@ namespace Boxerp.Client.WPF.Controls
 			}
 		}
 
+		public static DependencyProperty MinValueProperty = DependencyProperty.Register(
+			"MinValue",
+			typeof(int?),
+			typeof(IntegerTextBox),
+			new FrameworkPropertyMetadata(Int32.MinValue, FrameworkPropertyMetadataOptions.AffectsRender,
+				new PropertyChangedCallback(OnMinValueChanged), null));
+
+		private static void OnMinValueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		{
+
+		}
+
+		public int? MinValue
+		{
+			get
+			{
+				return (int?)GetValue(MinValueProperty);
+			}
+			set
+			{
+				SetValue(MinValueProperty, value);
+			}
+		}
+
 
 		public static DependencyProperty IntegerProperty = DependencyProperty.Register(
 			"Integer",
@@ -170,7 +194,7 @@ namespace Boxerp.Client.WPF.Controls
 
 		private void OnKeyUp(Object sender, KeyEventArgs args)
 		{
-			if (Helper.IsValidKey(args.Key))
+			if ((Helper.IsValidKey(args.Key) && (!Helper.ControlKeyIsPressed())))
 			{
 				string key = args.Key.ToString();
 				char character = key[key.Length - 1];
@@ -204,6 +228,11 @@ namespace Boxerp.Client.WPF.Controls
 				{
 					MessageBox.Show("The maximun value allowed is: " + MaxValue);
 					Integer = MaxValue;
+				}
+				if ((MinValue != null) && (Integer < MinValue))
+				{
+					MessageBox.Show("The minimun value allowed is: " + MinValue);
+					Integer = MinValue;
 				}
 			}
 		}

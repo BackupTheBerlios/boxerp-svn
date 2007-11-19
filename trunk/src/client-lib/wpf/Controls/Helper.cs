@@ -34,12 +34,18 @@ namespace Boxerp.Client.WPF.Controls
 {
 	public class Helper
 	{
+		public static bool ControlKeyIsPressed()
+		{
+			return (Keyboard.Modifiers == ModifierKeys.Control);
+		}
+
 		public static bool IsValidKey(Key key)
 		{
 			if ((key != Key.Tab) && (key != Key.Left) && (key != Key.Right) &&
 				(key != Key.Enter) && (key != Key.End) &&
 				(key != Key.Home) && (key != Key.Clear)
-				&& (key != Key.RightShift) && (key != Key.LeftShift))
+				&& (key != Key.RightShift) && (key != Key.LeftShift) && (key != Key.CapsLock)
+				&& (key != Key.LeftCtrl) && (key != Key.RightCtrl))
 			{
 				return true;
 			}

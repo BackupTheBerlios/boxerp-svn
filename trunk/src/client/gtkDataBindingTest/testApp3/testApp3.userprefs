@@ -2,18 +2,17 @@
   <Files>
     <File name="Welcome" />
     <File name="testApp3/MainWindow.cs" line="59" column="1" />
-    <File name="testApp3/User.cs" line="106" column="46" />
     <File name="testApp3/Group.cs" line="106" column="3" />
     <File name="testApp3/Main.cs" line="43" column="4" />
     <File name="testApp3/ListViewTest2.cs" line="180" column="26" />
-    <File name="testApp3/ListViewTest1.cs" line="161" column="4" />
+    <File name="testApp3/ListViewTest1.cs" line="42" column="47" />
+    <File name="testApp3/MenuWindow.cs" line="61" column="16" />
+    <File name="testApp3/DataGridTests.cs" line="78" column="33" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="testApp3" expanded="True">
-          <Node name="References" expanded="True" selected="True" />
-        </Node>
+        <Node name="testApp3" expanded="True" selected="True" />
       </Node>
     </ViewMemento>
     <ViewMemento id="ClassPad">
@@ -27,7 +26,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client/gtkDataBindingTest/testApp3/testApp3/ListViewTest1.cs" />
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client/gtkDataBindingTest/testApp3/testApp3/DataGridTests.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

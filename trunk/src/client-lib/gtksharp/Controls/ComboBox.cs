@@ -123,12 +123,12 @@ namespace Boxerp.Client.GtkSharp.Controls
 			WidgetCore.SetPropertyValue("SelectedItem", SelectedItem);
 		}		
 		
-		protected override void refreshValueInStore(object item, ArrayList itemValues, Gtk.TreeIter iter)
+		protected override void refreshValueInStore(object item, Hashtable itemValues, Gtk.TreeIter iter)
 		{
 			setValueInStore(item, itemValues, iter);
 		}
 		
-		protected override void setValueInStore(object item, ArrayList itemValues, Gtk.TreeIter iter)
+		protected override void setValueInStore(object item, Hashtable itemValues, Gtk.TreeIter iter)
 		{
 			if (item == null)
 			{
@@ -140,7 +140,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		protected override Gtk.TreeIter appendValueToStore(object item, ArrayList itemValues)
+		protected override Gtk.TreeIter appendValueToStore(object item, Hashtable itemValues)
 		{
 			Gtk.TreeIter iter = _store.Append();
 			setValueInStore(item, itemValues, iter);

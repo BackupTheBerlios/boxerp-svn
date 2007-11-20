@@ -173,57 +173,59 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 
-		protected override void setValueInStore(object item, ArrayList itemValues, Gtk.TreeIter iter)
+		protected override void setValueInStore(object item, Hashtable itemValues, Gtk.TreeIter iter)
 		{
-			int i = 0;
-			foreach (object itm in itemValues)
+			foreach (string key in itemValues.Keys)
 			{
+				int colNumber = _columnsOrder[key];
+				object itm = itemValues[key];
 				if (itm == null)
 				{
-					Logger.GetInstance().WriteLine("inserting empty value in column:" + i);
-					_store.SetValue(iter, i, String.Empty);
+					_store.SetValue(iter, colNumber, String.Empty);
 				}
 				else
 				{
-					Logger.GetInstance().WriteLine("inserting value:" + itm.GetType().ToString());
+					Logger.GetInstance().WriteLine("setValueInStore (" + colNumber + " ) - inserting value:" + itm);
 				
 					switch (itm.GetType().ToString())
 					{
 					    case "System.Object":
-						            _store.SetValue(iter, i, (string) itm.ToString());
+						            _store.SetValue(iter, colNumber, (string) itm.ToString());
 						    break;
 						case "System.String" :
-							        _store.SetValue(iter, i, (string) itm);
+							        _store.SetValue(iter, colNumber, (string) itm);
 							break;
 						case "System.Int32" :
-									_store.SetValue(iter, i, (int) itm);
+									_store.SetValue(iter, colNumber, (int) itm);
 							break;
 					    case "System.Double":
-						            _store.SetValue(iter, i, (double) itm);
+						            _store.SetValue(iter, colNumber, (double) itm);
 						    break;
 						case "System.Enum":
-						            _store.SetValue(iter, i, (string) itm.ToString());
+						            _store.SetValue(iter, colNumber, (string) itm.ToString());
+						    break;
+					    case "System.Boolean":
+						            _store.SetValue(iter, colNumber, (bool) itm);
 						    break;
 					    case "null" :
 						            Logger.GetInstance().WriteLine("Null column value");
-						            _store.SetValue(iter, i, String.Empty);
+						            _store.SetValue(iter, colNumber, String.Empty);
 						    break;
 						// objectODO: add more cases with the remaining types
 						default:
-									_store.SetValue(iter, i, (string) itm.ToString());		
+									_store.SetValue(iter, colNumber, (string) itm.ToString());		
 						    break;
 					}
 				}
-				i++;
 			}
 		}
 		
-		protected override void refreshValueInStore(object item, ArrayList itemValues, Gtk.TreeIter iter)
+		protected override void refreshValueInStore(object item, Hashtable itemValues, Gtk.TreeIter iter)
 		{
 			setValueInStore(item, itemValues, iter);
 		}
 		
-		protected override Gtk.TreeIter appendValueToStore(object item, ArrayList itemValues)
+		protected override Gtk.TreeIter appendValueToStore(object item, Hashtable itemValues)
 		{
 			Gtk.TreeIter iter = _store.Append();
 			setValueInStore(item, itemValues, iter);

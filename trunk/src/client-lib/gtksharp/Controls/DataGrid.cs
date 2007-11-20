@@ -42,6 +42,9 @@ namespace Boxerp.Client.GtkSharp.Controls
 {
 	public class DataGrid : TreeViewWrapper<EditableColumn>, IBindableWidget
 	{
+		// FIXME: It should be possible to get the column number when a renderer is edited without this dict
+		private Dictionary<object, int> _colNumbers = new Dictionary<object,int>();
+		
 		public DataGrid()
 		{
 		}
@@ -57,49 +60,85 @@ namespace Boxerp.Client.GtkSharp.Controls
 				Gtk.CellRendererToggle renderer = new CellRendererToggle();
 				renderer.Activatable = column.Editable;
 				renderer.Toggled += OnCheckBoxChanged;
+				_colNumbers.Add(renderer, colNumber);
 				tvColumn.PackStart(renderer, true);
+				tvColumn.AddAttribute(renderer, "active", colNumber);
 			}
 			else if (typeof(ComboBox).IsAssignableFrom(column.Widget))
 			{
 				Gtk.CellRendererCombo renderer = new CellRendererCombo();
 				renderer.Editable = column.Editable;
 				renderer.Edited += OnComboBoxEdited;
+				_colNumbers.Add(renderer, colNumber);
 				tvColumn.PackStart(renderer, true);
+				tvColumn.AddAttribute(renderer, "text", colNumber);
 			}
 			else  
 			{
 				Gtk.CellRendererText renderer = new CellRendererText();
 				renderer.Editable = column.Editable;
 				renderer.Edited += OnTextCellEdited;
+				_colNumbers.Add(renderer, colNumber);
 				tvColumn.PackStart(renderer, true);
+				tvColumn.AddAttribute(renderer, "text", colNumber);
 			}
 			
 			TreeView.AppendColumn(tvColumn);
 		}
 
+		/// <summary>
+		/// Refreshes the treeviewmodel (UI) and also the implicit item
+		/// </summary>
+		/// <param name="renderer">
+		/// A <see cref="System.Object"/>
+		/// </param>
+		/// <param name="path">
+		/// A <see cref="System.String"/>
+		/// </param>
+		/// <param name="newValue">
+		/// A <see cref="System.Object"/>
+		/// </param>
+		private void refreshModelAndItem(object renderer, string path, object newValue)
+		{
+			Gtk.TreeIter iter;
+			Model.GetIterFromString(out iter, path);
+			Model.SetValue(iter, _colNumbers[renderer], newValue);
+			
+			object item = _itemsPointers[iter.UserData.GetHashCode()];
+			// fixme: refactor this to avoid the loop
+			string propertyName = String.Empty;
+			foreach (KeyValuePair<string, int> pair in _columnsOrder)
+			{
+				if (pair.Value == _colNumbers[renderer])
+				{
+					propertyName = pair.Key;
+					break;
+				}
+			}
+			this._itemsType.GetProperty(propertyName).SetValue(item, newValue, null);
+		}
+		
 		private void OnTextCellEdited(System.Object sender, Gtk.EditedArgs args)
 		{
 			CellRendererText renderer = (CellRendererText)sender;
-			renderer.Text = args.NewText;
 			Logger.GetInstance().WriteLine("OnTextCellEdited:" + 
 			                               sender.ToString() + "," + args.NewText + "," + 
 			                               args.Path + "," + 
 			                               args.RetVal);
-			Gtk.TreeIter iter;
-			Model.GetIterFromString(out iter, args.Path);
-			// now I have the iter so I have the item but how do I get the column
-			// -- if gtk does not help me with this I can keep a dictionary
-			// with the cellrenderer as the key and the column number as the value 
+			refreshModelAndItem(renderer, args.Path, args.NewText);
 		}
 		
 		private void OnCheckBoxChanged(System.Object sender, Gtk.ToggledArgs args)
 		{
 			Gtk.CellRendererToggle renderer = (CellRendererToggle)sender;
-			renderer.Active = !renderer.Active;
 			Logger.GetInstance().WriteLine("OnCheckBoxChanged:" + 
 			                               sender.ToString() + "," +  
 			                               args.Path + "," + 
 			                               args.RetVal);
+			TreeIter iter;
+			Model.GetIterFromString(out iter, args.Path);
+			bool currentValue = (bool)Model.GetValue(iter, _colNumbers[renderer]);
+			refreshModelAndItem(iter, args.Path, !currentValue);
 		}
 		
 		private void OnComboBoxEdited(System.Object sender, Gtk.EditedArgs args)

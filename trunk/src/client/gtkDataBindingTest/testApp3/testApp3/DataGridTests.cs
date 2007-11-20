@@ -69,7 +69,7 @@ namespace testApp3
 			EditableColumn column2 = new EditableColumn();
 			column2.DataType = typeof(string);
 			column2.Name = "Email";
-			column.ObjectPropertyName = column.Name;
+			column2.ObjectPropertyName = column2.Name;
 			column2.Editable = true;
 			column2.Widget = typeof(TextBox);
 			column2.Visible = true;
@@ -77,7 +77,7 @@ namespace testApp3
 			EditableColumn column3 = new EditableColumn();
 			column3.DataType = typeof(int);
 			column3.Name = "Desk";
-			column.ObjectPropertyName = column.Name;
+			column3.ObjectPropertyName = column3.Name;
 			column3.Editable = true;
 			column3.Widget = typeof(IntegerTextBox);
 			column3.Visible = true;

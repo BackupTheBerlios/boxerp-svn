@@ -57,6 +57,8 @@ namespace Boxerp.Client.GtkSharp.Controls
 		protected bool _columnsInitialized = false; 
 		protected Dictionary<int, object> _itemsPointers = new Dictionary<int, object>();
 		protected Dictionary<object, Gtk.TreeIter> _itersPointers = new Dictionary<object, Gtk.TreeIter>();
+		private Hashtable _itemValues = new Hashtable();
+		protected Dictionary<string, int> _columnsOrder = new Dictionary<string, int>();
 		
 		public TreeModelWrapper()
 		{
@@ -167,6 +169,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 				if (getSelectedIter(out iter))
 				{
 					Logger.GetInstance().WriteLine("Iter userData=" + iter.UserData.GetHashCode());
+					Logger.GetInstance().WriteLine("value:" + _itemsPointers[iter.UserData.GetHashCode()]);
 					 return _itemsPointers[iter.UserData.GetHashCode()];
 				}
 				else
@@ -209,7 +212,8 @@ namespace Boxerp.Client.GtkSharp.Controls
 			if (this._itersPointers.ContainsKey(sender))
 			{
 				Gtk.TreeIter iter = _itersPointers[sender];
-				refreshValueInStore(sender, getItemValues(sender), iter);
+				getItemValues(sender);
+				refreshValueInStore(sender, _itemValues, iter);
 			}
 			else
 			{
@@ -393,6 +397,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 				Logger.GetInstance().WriteLine("Reading property: " + pInfo.Name);
 				T scolumn = new T();
 				scolumn.Name = pInfo.Name;
+				scolumn.ObjectPropertyName = pInfo.Name;
 				scolumn.DataType = pInfo.PropertyType;
 				scolumn.Visible = true;
 				columnTypes.Add(scolumn);
@@ -441,18 +446,17 @@ namespace Boxerp.Client.GtkSharp.Controls
 				foreach (T column in columns)
         	    {
         	    	columnsTypes[i] = column.DataType;
+					_columnsOrder.Add(column.ObjectPropertyName, i);
 					Logger.GetInstance().WriteLine("COLUMN objectYPE =" + column.DataType);
 					i++;
         	    }
         	    _store = new ListStore(columnsTypes);
-        	    Model = _store;
+				Model = _store;
 				Logger.GetInstance().WriteLine("create columns 3" );
 								
-				i = 0;
 				foreach (T column in columns)
 				{
-					addTreeViewColumn(column, i);
-					i++;
+					addTreeViewColumn(column, _columnsOrder[column.ObjectPropertyName]);
 				}
 				
 				_columnsInitialized = true;
@@ -466,27 +470,24 @@ namespace Boxerp.Client.GtkSharp.Controls
 			
 		protected virtual void addTreeViewColumn(T column, int colNumber){}
 		
-		protected abstract void setValueInStore(object item, ArrayList itemValues, Gtk.TreeIter iter);
+		protected abstract void setValueInStore(object item, Hashtable itemValues, Gtk.TreeIter iter);
 			
-		protected abstract Gtk.TreeIter appendValueToStore(object item, ArrayList itemValues);
+		protected abstract Gtk.TreeIter appendValueToStore(object item, Hashtable itemValues);
 		
-		protected abstract void refreshValueInStore(object item, ArrayList itemValues, Gtk.TreeIter iter);
+		protected abstract void refreshValueInStore(object item, Hashtable itemValues, Gtk.TreeIter iter);
 		
-		protected ArrayList getItemValues(object item)
+		protected void getItemValues(object item)
 		{
-			ArrayList itemValues;
+			_itemValues.Clear();
 			    
 			if (_itemsDisplayMode == ItemsDisplayMode.ObjectToString)
 			{
-				itemValues = new ArrayList();
-				itemValues.Add(item.ToString());
+				_itemValues.Add(item.ToString(), item.ToString());
 			}
 			else 
 			{
-				itemValues = getItemPropertiesValues(item);
+				getItemPropertiesValues(item);
 			}
-			
-			return itemValues;
 		}
 		
 		protected virtual TreeIter insertItem(object item)
@@ -509,11 +510,12 @@ namespace Boxerp.Client.GtkSharp.Controls
 			
 			Logger.GetInstance().WriteLine("insert item:" + item);
 			
-			ArrayList itemValues = getItemValues(item);			
+			_itemValues.Clear();
+			getItemValues(item);			
 			    
 			if (Model != null)
 			{
-				TreeIter iter = appendValueToStore(item, itemValues);
+				TreeIter iter = appendValueToStore(item, _itemValues);
 				_itersPointers[item] = iter;
 				_itemsPointers[iter.UserData.GetHashCode()] = item;
 				Logger.GetInstance().WriteLine("Iter userData=" + iter.UserData.GetHashCode());
@@ -534,10 +536,9 @@ namespace Boxerp.Client.GtkSharp.Controls
 			_store.Remove(ref iter);			
 		}
 		
-		protected ArrayList getItemPropertiesValues(object item)
+		protected void getItemPropertiesValues(object item)
 		{
 			Logger.GetInstance().WriteLine("item type properties initialized:" + item.ToString());
-			ArrayList values = new ArrayList();
 			List<string> properties = new List<string>();
 			
 			Logger.GetInstance().WriteLine("itemsTypeProperties:" + _itemsTypeProperties);
@@ -552,15 +553,22 @@ namespace Boxerp.Client.GtkSharp.Controls
 						bool descriptorContainsProperty = false;
 						foreach (T column in BindingDescriptor.BindingColumns)
 						{
+							Logger.GetInstance().WriteLine("binding column=" + column.Name + column.ObjectPropertyName);
 							if ((column.ObjectPropertyName != null) && 
 							    column.ObjectPropertyName.Equals(pInfo.Name))
 							{
+								Logger.GetInstance().WriteLine("descriptor contains property:" + pInfo.Name);
 								descriptorContainsProperty = true;
 								break;
+							}
+							else if (column.ObjectPropertyName == null) 
+							{
+								throw new NullReferenceException("The ObjectPropertyName of the column can not be null");
 							}
 						}
 						if (!descriptorContainsProperty)
 						{
+							Logger.GetInstance().WriteLine("descriptor NOT:" + pInfo.Name);
 							continue;
 						}
 					}
@@ -573,12 +581,11 @@ namespace Boxerp.Client.GtkSharp.Controls
 						Logger.GetInstance().WriteLine("trying to read value");
 						object val = pInfo.GetValue(item, null);
 						Logger.GetInstance().WriteLine("reading value " + val);
-						values.Add(val);
+						_itemValues.Add(pInfo.Name, val);
 					}
 					properties.Add(pInfo.Name);
                }
 			}
-			return values;
 		}
 		
 		protected void RenderObject (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)

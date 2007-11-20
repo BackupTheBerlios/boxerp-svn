@@ -1,25 +1,13 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib.mds">
   <Files>
     <File name="Welcome" />
-    <File name="gtksharp/DataBinding/DataBinder.cs" line="85" column="27" />
-    <File name="gtksharp/DataBinding/IBindableWidget.cs" line="43" column="3" />
-    <File name="gtksharp/DataBinding/BindableWidgetCore.cs" line="165" column="26" />
-    <File name="client-base/DataBinding/IBindableCore.cs" line="1" column="1" />
-    <File name="client-base/Responsiveness/ResponsivenessSingleton.cs" line="1" column="1" />
-    <File name="client-base/Logger.cs" line="74" column="1" />
-    <File name="gtksharp/DataBinding/BindingDescriptor.cs" line="16" column="10" />
-    <File name="gtksharp/DataBinding/BindingColumn.cs" line="80" column="3" />
-    <File name="client-base/MVC/IUIData.cs" line="29" column="1" />
-    <File name="client-base/DataBinding/AbstractBindableWrapper.cs" line="1" column="1" />
+    <File name="client-base/Responsiveness/ResponsiveAttribute.cs" line="52" column="2" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="Boxerp.Client" expanded="True" />
-        <Node name="Boxerp.Client.GtkSharp" expanded="True">
-          <Node name="DataBinding" expanded="True">
-            <Node name="BindingColumn.cs" selected="True" />
-          </Node>
+        <Node name="Boxerp.Client" expanded="True" selected="True">
+          <Node name="Responsiveness" expanded="True" />
         </Node>
       </Node>
     </ViewMemento>
@@ -34,7 +22,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/gtksharp/DataBinding/BindingColumn.cs" />
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-base/Responsiveness/ResponsiveAttribute.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

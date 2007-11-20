@@ -31,6 +31,8 @@
 using Boxerp.Client;
 using System;
 
+namespace Boxerp.Client
+{
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple=false)]
 	public class ResponsiveAttribute : Attribute
 	{
@@ -47,3 +49,4 @@ using System;
 			respType = rType;
 		}
 	}
+}

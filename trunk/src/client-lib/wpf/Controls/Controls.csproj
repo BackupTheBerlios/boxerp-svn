@@ -30,9 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Boxerp.Client, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Boxerp.Client, Version=0.2.0.0, Culture=neutral, PublicKeyToken=c81f1d62693cb1b8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\client-base\bin\Debug\Boxerp.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Boxerp.Client.WPF, Version=0.2.0.0, Culture=neutral, PublicKeyToken=c81f1d62693cb1b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\Debug\Boxerp.Client.WPF.dll</HintPath>
     </Reference>
     <Reference Include="Boxerp.Collections, Version=0.2.0.0, Culture=neutral, PublicKeyToken=c81f1d62693cb1b8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -66,7 +70,7 @@
       <SubType>Code</SubType>
       <DependentUpon>GenericComboBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helper.cs" />
+    <Compile Include="Lib\Helper.cs" />
     <Compile Include="IntegerTextBoxControl.xaml.cs">
       <DependentUpon>IntegerTextBoxControl.xaml</DependentUpon>
     </Compile>

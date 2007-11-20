@@ -52,6 +52,28 @@ namespace Boxerp.Client.WPF.Controls
 			}
 		}
 
+		public static DependencyProperty MaxDateProperty = DependencyProperty.Register(
+			"MaxDate",
+			typeof(DateTime?),
+			typeof(DateControl),
+			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender,
+				new PropertyChangedCallback(OnMaxDateChanged), null));
+
+		private static void OnMaxDateChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		{ }
+
+		public DateTime? MaxDate
+		{
+			get
+			{
+				return (DateTime?)GetValue(MaxDateProperty);
+			}
+			set
+			{
+				SetValue(MaxDateProperty, value);
+			}
+		}
+
 		public static DependencyProperty MinAgeProperty = DependencyProperty.Register(
 			"MinAge",
 			typeof(int?),
@@ -91,7 +113,6 @@ namespace Boxerp.Client.WPF.Controls
 				SetValue(YearsOffsetProperty, value);
 			}
 		}
-
 
 		public static DependencyProperty IsDateOfBirthProperty = DependencyProperty.Register(
 			"IsDateOfBirth",
@@ -247,6 +268,11 @@ namespace Boxerp.Client.WPF.Controls
         {
 			if ((date != DateTime.MinValue) && (date != null))
 			{
+				if (MaxDate.HasValue)
+				{
+					date = MaxDate.Value;
+				}
+
 				_populatingCombo = true;
 				// I wonder why ItemsSource and Items properties are null because I've defined the ItemsSource in XAML!!!
 				// I can't loop through them programmatically !!!
@@ -257,7 +283,6 @@ namespace Boxerp.Client.WPF.Controls
 				_days.Items.Clear();
 				_months.ItemsSource = null;
 				_months.Items.Clear();
-
 
 				for (int i = 1; i <= DAYS_MONTH; i++)
 				{
@@ -285,7 +310,7 @@ namespace Boxerp.Client.WPF.Controls
 				}
 				else
 				{
-					PopulateYears(date.Year, DateTime.Now.Year + YearsOffset);
+					PopulateYears(date.Year - YearsOffset, DateTime.Now.Year + YearsOffset);
 				}
 
 				_years.SelectedItem = date.Year;
@@ -314,6 +339,10 @@ namespace Boxerp.Client.WPF.Controls
 		public void PopulateYears(int startYear, int endYear)
 		{
 			_populatingCombo = true;
+			if (endYear <= startYear)
+			{
+				endYear = startYear + YearsOffset;
+			}
 
 			for (int y = startYear; y < endYear; y++)
 			{

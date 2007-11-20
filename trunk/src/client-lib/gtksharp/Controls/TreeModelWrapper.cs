@@ -57,7 +57,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		protected bool _columnsInitialized = false; 
 		protected Dictionary<int, object> _itemsPointers = new Dictionary<int, object>();
 		protected Dictionary<object, Gtk.TreeIter> _itersPointers = new Dictionary<object, Gtk.TreeIter>();
-		private Hashtable _itemValues = new Hashtable();
+		protected Hashtable _itemValues = new Hashtable();
 		protected Dictionary<string, int> _columnsOrder = new Dictionary<string, int>();
 		
 		public TreeModelWrapper()
@@ -90,6 +90,18 @@ namespace Boxerp.Client.GtkSharp.Controls
 			get
 			{
 				return _widgetCore;
+			}
+		}
+
+		public bool ModelIsInitialized 
+		{
+			get
+			{
+				return _itemsDisplayModeChanged;
+			}
+			set
+			{
+				_itemsDisplayModeChanged = value;
 			}
 		}
 		
@@ -410,7 +422,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		{
 			List<T> columns = null;
 			
-			if (_itemsDisplayMode == ItemsDisplayMode.ObjectToString)
+			if (ItemsDisplayMode == ItemsDisplayMode.ObjectToString)
 			{
 				columns = new List<T>();
 				T column = new T();
@@ -419,11 +431,11 @@ namespace Boxerp.Client.GtkSharp.Controls
 				column.Visible = true;
 				columns.Add(column);				
 			}
-			else if (_itemsDisplayMode == ItemsDisplayMode.AutoCreateColumns)
+			else if (ItemsDisplayMode == ItemsDisplayMode.AutoCreateColumns)
 			{
 				columns = readObjectTypes();
 			}
-			else if (_itemsDisplayMode == ItemsDisplayMode.BindingDescriptor)
+			else if (ItemsDisplayMode == ItemsDisplayMode.BindingDescriptor)
 			{
 				if (BindingDescriptor != null)
 				{
@@ -480,7 +492,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		{
 			_itemValues.Clear();
 			    
-			if (_itemsDisplayMode == ItemsDisplayMode.ObjectToString)
+			if (ItemsDisplayMode == ItemsDisplayMode.ObjectToString)
 			{
 				_itemValues.Add(item.ToString(), item.ToString());
 			}
@@ -536,7 +548,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			_store.Remove(ref iter);			
 		}
 		
-		protected void getItemPropertiesValues(object item)
+		protected virtual void getItemPropertiesValues(object item)
 		{
 			Logger.GetInstance().WriteLine("item type properties initialized:" + item.ToString());
 			List<string> properties = new List<string>();

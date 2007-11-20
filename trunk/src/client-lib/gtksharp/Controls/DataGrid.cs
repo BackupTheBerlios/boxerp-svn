@@ -37,6 +37,7 @@ using Boxerp.Client.GtkSharp;
 using System.Reflection;
 using Boxerp.Client;
 using Boxerp.Collections;
+using System.Data;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
@@ -48,7 +49,8 @@ namespace Boxerp.Client.GtkSharp.Controls
 		public DataGrid()
 		{
 		}
-				
+			
+		
 		protected override void addTreeViewColumn(EditableColumn column, int colNumber)
 		{
 			Gtk.TreeViewColumn tvColumn = new Gtk.TreeViewColumn ();
@@ -69,6 +71,15 @@ namespace Boxerp.Client.GtkSharp.Controls
 				Gtk.CellRendererCombo renderer = new CellRendererCombo();
 				renderer.Editable = column.Editable;
 				renderer.Edited += OnComboBoxEdited;
+				_colNumbers.Add(renderer, colNumber);
+				tvColumn.PackStart(renderer, true);
+				tvColumn.AddAttribute(renderer, "text", colNumber);
+			}
+			else if (typeof(IntegerTextBox).IsAssignableFrom(column.Widget))
+			{
+				CellRendererInteger renderer = new CellRendererInteger();
+				renderer.Editable = column.Editable;
+				renderer.Edited += OnIntegerCellEdited;
 				_colNumbers.Add(renderer, colNumber);
 				tvColumn.PackStart(renderer, true);
 				tvColumn.AddAttribute(renderer, "text", colNumber);
@@ -98,7 +109,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		/// <param name="newValue">
 		/// A <see cref="System.Object"/>
 		/// </param>
-		private void refreshModelAndItem(object renderer, string path, object newValue)
+		protected void refreshModelAndItem(object renderer, string path, object newValue)
 		{
 			Gtk.TreeIter iter;
 			Model.GetIterFromString(out iter, path);
@@ -115,7 +126,12 @@ namespace Boxerp.Client.GtkSharp.Controls
 					break;
 				}
 			}
-			this._itemsType.GetProperty(propertyName).SetValue(item, newValue, null);
+			updateItem(item, newValue, _colNumbers[renderer], propertyName);
+		}
+		
+		protected virtual void updateItem(object item, object val, int colNumber, string propertyName)
+		{
+			_itemsType.GetProperty(propertyName).SetValue(item, val, null);
 		}
 		
 		private void OnTextCellEdited(System.Object sender, Gtk.EditedArgs args)
@@ -128,6 +144,29 @@ namespace Boxerp.Client.GtkSharp.Controls
 			refreshModelAndItem(renderer, args.Path, args.NewText);
 		}
 		
+		private void OnIntegerCellEdited(System.Object sender, Gtk.EditedArgs args)
+		{
+			CellRendererInteger renderer = (CellRendererInteger)sender;
+			Logger.GetInstance().WriteLine("OnIntegerCellEdited:" + 
+			                               sender.ToString() + "," + args.NewText + "," + 
+			                               args.Path + "," + 
+			                               args.RetVal);
+			try
+			{
+				int newValue = Convert.ToInt32(args.NewText);
+				refreshModelAndItem(renderer, args.Path, newValue);
+			}
+			catch (System.FormatException)
+			{
+				Logger.GetInstance().WriteLine("User is entering letter on an integer text box:" + args.NewText);
+			}
+			catch (System.OverflowException)
+			{
+				Logger.GetInstance().WriteLine("User has entered a number bigger than an integer:" + args.NewText);
+				refreshModelAndItem(renderer, args.Path, Int32.MaxValue);
+			}
+		}
+		
 		private void OnCheckBoxChanged(System.Object sender, Gtk.ToggledArgs args)
 		{
 			Gtk.CellRendererToggle renderer = (CellRendererToggle)sender;
@@ -138,7 +177,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			TreeIter iter;
 			Model.GetIterFromString(out iter, args.Path);
 			bool currentValue = (bool)Model.GetValue(iter, _colNumbers[renderer]);
-			refreshModelAndItem(iter, args.Path, !currentValue);
+			refreshModelAndItem(renderer, args.Path, !currentValue);
 		}
 		
 		private void OnComboBoxEdited(System.Object sender, Gtk.EditedArgs args)

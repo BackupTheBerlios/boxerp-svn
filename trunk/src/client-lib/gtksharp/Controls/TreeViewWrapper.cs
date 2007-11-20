@@ -177,6 +177,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		{
 			foreach (string key in itemValues.Keys)
 			{
+				Logger.GetInstance().WriteLine("key=" + key);
 				int colNumber = _columnsOrder[key];
 				object itm = itemValues[key];
 				if (itm == null)

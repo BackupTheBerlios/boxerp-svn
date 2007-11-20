@@ -1,11 +1,11 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp/trunk/src/client-lib/gtksharp/Controls.mds">
   <Files>
     <File name="Welcome" />
-    <File name="Controls/ComboBox.cs" line="15" column="61" />
-    <File name="Controls/ListView.cs" line="73" column="5" />
-    <File name="Controls/TreeViewWrapper.cs" line="191" column="7" />
-    <File name="Controls/DataGrid.cs" line="98" column="23" />
-    <File name="Controls/TreeModelWrapper.cs" line="492" column="1" />
+    <File name="Controls/ComboBox.cs" line="131" column="66" />
+    <File name="Controls/ListView.cs" line="51" column="1" />
+    <File name="Controls/TreeViewWrapper.cs" line="180" column="23" />
+    <File name="Controls/DataGrid.cs" line="69" column="1" />
+    <File name="Controls/TreeModelWrapper.cs" line="172" column="93" />
     <File name="Controls/Lib/ITreeModel.cs" line="37" column="36" />
     <File name="Controls/CustomTreeView.cs" line="43" column="1" />
     <File name="Controls/Lib/ISelector.cs" line="31" column="18" />
@@ -15,9 +15,7 @@
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="Boxerp.Client.GtkSharp.Controls" expanded="True" selected="True">
-          <Node name="UserInterface" expanded="True" />
-        </Node>
+        <Node name="Boxerp.Client.GtkSharp.Controls" expanded="True" selected="True" />
       </Node>
     </ViewMemento>
     <ViewMemento id="ClassPad">
@@ -31,7 +29,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/gtksharp/Controls/DataGrid.cs" />
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/gtksharp/Controls/TreeModelWrapper.cs" />
     <Property key="ActiveConfiguration" value="Release" />
   </Properties>
 </UserCombinePreferences>

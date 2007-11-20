@@ -74,7 +74,10 @@ namespace Boxerp.Client
 		{
 			get
 			{
-				return _threadDictionariesQueue.Count;
+				lock (_threadDictionariesQueue)
+				{
+					return _threadDictionariesQueue.Count;
+				}
 			}
 		}
 		
@@ -104,15 +107,18 @@ namespace Boxerp.Client
 		
 		private bool canGoAhead()
 		{
-			if (_threadDictionariesQueue.Count != 0)
+			lock (_threadDictionariesQueue)
 			{
-				if (_concurrencyMode != ConcurrencyMode.Parallel)
+				if (_threadDictionariesQueue.Count != 0)
 				{
-					return false;
+					if (_concurrencyMode != ConcurrencyMode.Parallel)
+					{
+						return false;
+					}
 				}
-			}
 
-			return true;
+				return true;
+			}
 		}
 
 		/// <summary>
@@ -130,12 +136,12 @@ namespace Boxerp.Client
 
 					ThreadStart methodStart = new SimpleInvoker(method).Invoke;
 					Thread methodThread = new Thread(methodStart);
-					methodThread.Start();
-
-					threadsBlock[methodThread.ManagedThreadId] = methodThread;
-
-					lock (this)
+					lock(this)
 					{
+						methodThread.Start();
+
+						threadsBlock[methodThread.ManagedThreadId] = methodThread;
+
 						_threadDictionariesQueue.Enqueue(threadsBlock);
 						_operationSuccessQueue.Enqueue(true);
 						_exceptionQueue.Enqueue(null);
@@ -146,7 +152,7 @@ namespace Boxerp.Client
 			}
 			catch (TargetInvocationException ex)
 			{
-				Console.WriteLine("responsive method raises exception:" + ex.Message + ex.StackTrace);
+				Console.WriteLine("User responsive method raises exception:" + ex.Message + ex.StackTrace);
 				throw ex;
 			}
 			catch (Exception ex)

@@ -38,6 +38,7 @@ namespace Boxerp.Client
 		void ShowControl();
 		void CloseControl();
 		bool IsModal { get; set; }
+		int AssociatedThreadId { get; set; }
 		bool IsProgressDiscrete { get; set; }
 		void UpdateProgress(int amount, int total);
 	}

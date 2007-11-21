@@ -69,7 +69,8 @@
     <Compile Include="DataBinding\UIBinderBase.cs" />
     <Compile Include="DataBinding\XamlParser.cs" />
     <Compile Include="Delegates.cs" />
-    <Compile Include="MVC\IControl.cs" />
+    <Compile Include="MVC\ICloseView.cs" />
+    <Compile Include="MVC\IView.cs" />
     <Compile Include="MVC\IController.cs" />
     <Compile Include="MVC\IControlManager.cs" />
     <Compile Include="MVC\IUIData.cs" />

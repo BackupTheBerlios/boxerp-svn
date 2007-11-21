@@ -33,18 +33,51 @@ using System.Reflection;
 namespace Boxerp.Client
 {
 
-	public abstract class AbstractController<T> : AbstractController
+	public abstract class AbstractController<V> : AbstractController
+		where V : IView
+	{
+		private V _view = default(V);
+
+		public AbstractController(IResponsiveClient helper, V view)
+			: base(helper)
+		{
+			_view = view;
+		}
+
+		public V View
+		{
+			get
+			{
+				return _view;
+			}
+			set
+			{
+				_view = value;
+			}
+		}
+	}
+
+	public abstract class AbstractController<V, T> : AbstractController<V>
+		where V : IView
 		where T : IUIData
 	{
-		public AbstractController(IResponsiveClient helper)
-			: base (helper)
-	{}
+		private T _data;
 
-		public abstract T Data { get; set; }
-		
-		public void Initialize(T data)
+		public AbstractController(IResponsiveClient helper, V view)
+			: base (helper, view)
+		{}
+
+		public T Data
 		{
-			Data = data;
+			get
+			{
+				return _data;
+			}
+		}
+		
+		public virtual void Initialize(T data)
+		{
+			_data = data;
 		}
 	}
 

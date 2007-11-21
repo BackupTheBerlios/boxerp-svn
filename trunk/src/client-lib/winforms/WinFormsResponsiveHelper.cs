@@ -29,7 +29,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-
+using System.Threading;
 using Boxerp.Client;
 
 namespace Boxerp.Client.WindowsForms
@@ -77,12 +77,12 @@ namespace Boxerp.Client.WindowsForms
 			_userWaitDialogInstance = _waitDialog == null ? false : true;
 		}
 
-		public override void StartAsyncCallList(ResponsiveEnum trType, IController controller)
+		public override List<Thread> StartAsyncCallList(ResponsiveEnum trType, IController controller)
 		{
-			StartAsyncCallList(trType, controller, true);
+			return StartAsyncCallList(trType, controller, true);
 		}
 
-        public override void StartAsyncCallList(ResponsiveEnum trType, IController controller, bool showWaitControl)
+        public override List<Thread> StartAsyncCallList(ResponsiveEnum trType, IController controller, bool showWaitControl)
         {
             if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
                 || (RunningThreads == 0))
@@ -96,7 +96,7 @@ namespace Boxerp.Client.WindowsForms
                 
             }
 
-			base.StartAsyncCallList(trType, controller);
+			List<Thread> threads = base.StartAsyncCallList(trType, controller);
 
 			if (showWaitControl)
 			{
@@ -115,14 +115,16 @@ namespace Boxerp.Client.WindowsForms
                     throw;
                 }
             }
+
+			return threads;
         }
 
-		public override void StartAsyncCall(SimpleDelegate method)
+		public override Thread StartAsyncCall(SimpleDelegate method)
 		{
-			StartAsyncCall(method, true);
+			return StartAsyncCall(method, true);
 		}
 
-        public override void StartAsyncCall(SimpleDelegate method, bool showWaitControl)
+        public override Thread StartAsyncCall(SimpleDelegate method, bool showWaitControl)
         {
             if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
                 || (RunningThreads == 0))
@@ -136,14 +138,17 @@ namespace Boxerp.Client.WindowsForms
 				
             }
 
-            base.StartAsyncCall(method);
+			Thread thread = base.StartAsyncCall(method);
 
 			if (showWaitControl)
 			{
 				try
 				{
 					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
-					_waitDialog.ShowControl();
+					if ((thread != null) && (thread.IsAlive))
+					{
+						_waitDialog.ShowControl();
+					}
 				}
 				catch (System.Reflection.TargetInvocationException ex)
 				{
@@ -154,7 +159,9 @@ namespace Boxerp.Client.WindowsForms
 					throw ex;
 				}
 			}
-        }
+
+			return thread;
+		}
 
 
         public override void OnCancel(object sender, EventArgs e)
@@ -226,7 +233,17 @@ namespace Boxerp.Client.WindowsForms
         {
 			if (_waitDialog != null)
 			{
-				_waitDialog.BeginInvoke(new EventHandler(TransferCompleted), new object[] { this, e });
+				try
+				{
+					_waitDialog.BeginInvoke(new EventHandler(TransferCompleted), new object[] { this, e });
+				}
+				catch (InvalidOperationException ex)
+				{
+					if (ex.Message.Contains("Invoke or BeginInvoke cannot be called on a control until the window handle has been created."))
+					{
+						Console.Out.WriteLine("The thread finished before the wait window was open. Close this dirty hack ASAP");
+					}
+				}
 			}
 		}
     }

@@ -41,7 +41,7 @@ namespace Boxerp.Client
 		SimpleDelegate _method;
 		object _returnValue;
 		int _threadId;
-		bool _success;
+		bool _success = true;
 		ResponsiveEnum _operationType;
 		string _exceptionMsg;
 

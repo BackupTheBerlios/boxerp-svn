@@ -9,6 +9,7 @@ namespace winformsResponsivenessTest
 	public class Controller : AbstractController<ISampleView>
 	{
 		Random _random = new Random();
+		int _randomMax;
 
 		public Controller(IResponsiveClient helper, ISampleView view)
 			: base (helper, view)
@@ -16,8 +17,9 @@ namespace winformsResponsivenessTest
 
 		}
 
-		public void DoAsyncOperation()
+		public void DoAsyncOperation(int randonMax)
 		{
+			_randomMax = randonMax;
 			ResponsiveHelper.StartAsyncCall(doAsyncOperation);
 		}
 
@@ -25,7 +27,7 @@ namespace winformsResponsivenessTest
 		{
 			try
 			{
-				System.Threading.Thread.Sleep(_random.Next(1000));
+				System.Threading.Thread.Sleep(_random.Next(_randomMax));
 			}
 			catch (ThreadAbortException ex)
 			{
@@ -37,6 +39,7 @@ namespace winformsResponsivenessTest
 			}
 			finally
 			{
+				Console.Out.WriteLine("doAsyncOperation finishing on thread:" + Thread.CurrentThread.ManagedThreadId);
 				StopAsyncCall();
 			}
 		}

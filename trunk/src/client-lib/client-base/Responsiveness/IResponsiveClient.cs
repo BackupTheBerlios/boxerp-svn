@@ -30,6 +30,8 @@
 
 using System;
 using System.Reflection;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Boxerp.Client
 {
@@ -37,10 +39,10 @@ namespace Boxerp.Client
 	public interface IResponsiveClient
 	{
 		/* Implemented in the abstract class */
-		void StartAsyncCallList(ResponsiveEnum trType, IController controller);
+		List<Thread> StartAsyncCallList(ResponsiveEnum trType, IController controller);
 		void StopAsyncMethod(int threadId, MethodBase MethodBase, object output);
 		void StopAsyncMethod(int threadId, SimpleDelegate method, object output);
-		void StartAsyncCall(SimpleDelegate method);
+		Thread StartAsyncCall(SimpleDelegate method);
 		void OnAsyncException(Exception ex);
 		void OnAbortAsyncCall(Exception ex);
 		bool CancelRequested { get; }

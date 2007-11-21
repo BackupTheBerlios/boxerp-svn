@@ -36,9 +36,7 @@ namespace Boxerp.Client
 	/// 
 	/// </summary>
  
-	public interface IControl
+	public interface IView
 	{
-		void Close();
-		bool AnyDataChanges { get; set; }
 	}
 }

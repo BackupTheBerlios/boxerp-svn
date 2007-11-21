@@ -42,11 +42,11 @@ namespace Boxerp.Client
 	{
 		// All threads launched at a time are kept in a queue, trying to have a single unit for every client async call.
 		// Along with the threads there should be queues for success messages, exceptions, cancelling requests and type of async operations:
-		private  Queue<Dictionary<int, Thread>> _threadDictionariesQueue = new Queue<Dictionary<int, Thread>>();
-		private  Queue<bool> _operationSuccessQueue = new Queue<bool>();
-		private  Queue<string> _exceptionQueue = new Queue<string>();
-		private  Queue<ResponsiveEnum> _operationTypeQueue = new Queue<ResponsiveEnum>();
-		private  Queue<bool> _cancelRequestQueue = new Queue<bool>(); 
+		private List<Dictionary<int, Thread>> _threadDictionariesList = new List<Dictionary<int, Thread>>();
+		private Dictionary<int, bool> _operationSucess = new Dictionary<int, bool>();
+		private Dictionary<int, string> _exceptions = new Dictionary<int, string>();
+		private Dictionary<int, ResponsiveEnum> _operationTypes = new Dictionary<int, ResponsiveEnum>();
+		private Dictionary<int, bool> _cancelRequests = new Dictionary<int, bool>();
 		        
 		protected ConcurrencyMode _concurrencyMode;
 				
@@ -74,9 +74,9 @@ namespace Boxerp.Client
 		{
 			get
 			{
-				lock (_threadDictionariesQueue)
+				lock (_threadDictionariesList)
 				{
-					return _threadDictionariesQueue.Count;
+					return _threadDictionariesList.Count;
 				}
 			}
 		}
@@ -85,9 +85,9 @@ namespace Boxerp.Client
 		{
 			get
 			{
-				if (_cancelRequestQueue.Count > 0)
+				if (_cancelRequests.Count > 0)
 				{
-					return _cancelRequestQueue.Peek();
+					return _cancelRequests[Thread.CurrentThread.ManagedThreadId];
 				}
 				else
 				{
@@ -96,20 +96,18 @@ namespace Boxerp.Client
 			}
 			protected set
 			{
-				lock (_cancelRequestQueue)
+				lock (_cancelRequests)
 				{
-					_cancelRequestQueue.Dequeue();
-					bool isCancel = value;
-					_cancelRequestQueue.Enqueue(isCancel);
+					_cancelRequests[Thread.CurrentThread.ManagedThreadId] = value;
 				}
 			}
 		}
 		
 		private bool canGoAhead()
 		{
-			lock (_threadDictionariesQueue)
+			lock (_threadDictionariesList)
 			{
-				if (_threadDictionariesQueue.Count != 0)
+				if (_threadDictionariesList.Count != 0)
 				{
 					if (_concurrencyMode != ConcurrencyMode.Parallel)
 					{
@@ -126,29 +124,31 @@ namespace Boxerp.Client
 		/// (as long as there are no more running threads and the mode is not parallel)
 		/// </summary>
 		/// <param name="method"></param>
-      	public virtual void StartAsyncCall(SimpleDelegate method)
+      	public virtual Thread StartAsyncCall(SimpleDelegate method)
 		{
 			try
 			{
+				Thread methodThread = null;
 				if (canGoAhead())
 				{
 					Dictionary<int, Thread> threadsBlock = new Dictionary<int, Thread>();
 
 					ThreadStart methodStart = new SimpleInvoker(method).Invoke;
-					Thread methodThread = new Thread(methodStart);
-					lock(this)
+					methodThread = new Thread(methodStart);
+					lock(_threadDictionariesList)
 					{
 						methodThread.Start();
 
 						threadsBlock[methodThread.ManagedThreadId] = methodThread;
-
-						_threadDictionariesQueue.Enqueue(threadsBlock);
-						_operationSuccessQueue.Enqueue(true);
-						_exceptionQueue.Enqueue(null);
-						_operationTypeQueue.Enqueue(ResponsiveEnum.Other);
-						_cancelRequestQueue.Enqueue(false);
+						Console.Out.WriteLine("thread is in queue now:" + methodThread.ManagedThreadId);
+						_threadDictionariesList.Add(threadsBlock);
+						_operationSucess[methodThread.ManagedThreadId] = true;
+						_exceptions[methodThread.ManagedThreadId] = null;
+						_operationTypes[methodThread.ManagedThreadId] = ResponsiveEnum.Other;
+						_cancelRequests[methodThread.ManagedThreadId] = false;
 					}
 				}
+				return methodThread;
 			}
 			catch (TargetInvocationException ex)
 			{
@@ -161,7 +161,7 @@ namespace Boxerp.Client
 			}
 		}
 
-		public abstract void StartAsyncCall(SimpleDelegate method, bool showWaitControl);
+		public abstract Thread StartAsyncCall(SimpleDelegate method, bool showWaitControl);
 		
 
 
@@ -170,10 +170,11 @@ namespace Boxerp.Client
 		/// </summary>
 		/// <param name="trType"></param>
 		/// <param name="controller"></param>
-		public virtual void StartAsyncCallList(Boxerp.Client.ResponsiveEnum trType, IController controller)
+		public virtual List<Thread> StartAsyncCallList(Boxerp.Client.ResponsiveEnum trType, IController controller)
 		{
 			try
 			{
+				List<Thread> threads = new List<Thread>();
 				if (canGoAhead())
 				{
 					List<MethodInfo> methods = this.GetResponsiveMethods(trType, controller);
@@ -190,16 +191,18 @@ namespace Boxerp.Client
 							ThreadStart methodStart = new SimpleInvoker(method, controller).Invoke;
 							Thread methodThread = new Thread(methodStart);
 							methodThread.Start();
-
-							threadsBlock[methodThread.ManagedThreadId] = methodThread;
+							int id = methodThread.ManagedThreadId;
+							threads.Add(methodThread);
+							threadsBlock[id] = methodThread;
+							_operationSucess[id] = true;
+							_exceptions[id] = null;
+							_operationTypes[id] = trType;
+							_cancelRequests[id] = false;
 						}
-						_threadDictionariesQueue.Enqueue(threadsBlock);
-						_operationSuccessQueue.Enqueue(true);
-						_exceptionQueue.Enqueue(null);
-						_operationTypeQueue.Enqueue(trType);
-						_cancelRequestQueue.Enqueue(false);
+						_threadDictionariesList.Add(threadsBlock);
 					}
 				}
+				return threads;
 			}
 			catch (TargetInvocationException ex)
 			{
@@ -212,7 +215,7 @@ namespace Boxerp.Client
 			}
 		}
 
-		public abstract void StartAsyncCallList(Boxerp.Client.ResponsiveEnum trType, IController controller, bool showWaitControl);
+		public abstract List<Thread> StartAsyncCallList(Boxerp.Client.ResponsiveEnum trType, IController controller, bool showWaitControl);
 
 		/// <summary>
 		/// Stops the current thread passing in information about the thread itself, and any outcome information
@@ -249,24 +252,41 @@ namespace Boxerp.Client
 		{
 			lock (this)
 			{
-				if (_threadDictionariesQueue.Count == 0)
+				if (_threadDictionariesList.Count == 0)
 				{
 					throw new Exception("Error trying to stop asynchronous call. You are most likely calling StopAsyncMethod more than once");
 				}
 				else
 				{
-					Dictionary<int, Thread> firstThreadBlock = _threadDictionariesQueue.Peek();
-					if (firstThreadBlock.Count > 0)
+					for (int i = 0; i < _threadDictionariesList.Count; i++)
 					{
-						firstThreadBlock.Remove(args.ThreadId);
-						if (firstThreadBlock.Count == 0)
+						Dictionary<int, Thread> threadBlock = _threadDictionariesList[i];
+						if (threadBlock.ContainsKey(args.ThreadId))
 						{
-							_threadDictionariesQueue.Dequeue();
-							_cancelRequestQueue.Dequeue();
-							args.Success = _operationSuccessQueue.Dequeue();
-							args.OperationType = _operationTypeQueue.Dequeue();
-							args.ExceptionMsg = _exceptionQueue.Dequeue();
-							OnTransferCompleted(args.OperationType, args);
+							Console.Out.WriteLine("threadBlog count:" + threadBlock.Count + "," + Thread.CurrentThread.ManagedThreadId);
+							if (threadBlock.Count > 0)
+							{
+								threadBlock.Remove(args.ThreadId);
+								_cancelRequests.Remove(args.ThreadId);
+								// FIXME: doing this, the args is populated with the last thread results, 
+								// loosing the previous ones if the operation launched a group of threads 
+								// in parallell
+								args.Success = args.Success && _operationSucess[args.ThreadId];
+								_operationSucess.Remove(args.ThreadId); ;
+								args.OperationType = _operationTypes[args.ThreadId];
+								_operationTypes.Remove(args.ThreadId); ;
+								args.ExceptionMsg += _exceptions[args.ThreadId];
+								_exceptions.Remove(args.ThreadId);
+
+								Console.Out.WriteLine("  now after removing:" + threadBlock.Count);
+								if (threadBlock.Count == 0)
+								{
+									Console.Out.WriteLine("DEQUEUING DATA FROM STORAGE:" + Thread.CurrentThread.ManagedThreadId);
+									_threadDictionariesList.RemoveAt(i);
+									OnTransferCompleted(args.OperationType, args);
+									break;
+								}
+							}
 						}
 					}
 				}
@@ -274,21 +294,29 @@ namespace Boxerp.Client
 		}
 		
 		/// <summary>
-		///  Take the first block of threads in the queue and abort all of them
+		///  
 		/// </summary>
-		protected void ForceAbort()
+		protected void ForceAbort(int threadId)
 		{
 			lock (this)
 			{
-				if (_threadDictionariesQueue.Count > 0)
+				if (_threadDictionariesList.Count > 0)
 				{
-					Dictionary<int, Thread> threadsBlock = _threadDictionariesQueue.Peek();
-					foreach (Thread thread in threadsBlock.Values)
+					for (int i = 0; i < _threadDictionariesList.Count; i++)
 					{
-						Console.WriteLine("state: " + thread.IsAlive + "," + thread.ThreadState); 
-						if ((thread.IsAlive) && (thread.ThreadState != ThreadState.Stopped))
+						Dictionary<int, Thread> threadsBlock = _threadDictionariesList[i];
+						if (threadsBlock.ContainsKey(threadId))
 						{
-							thread.Abort();
+							foreach (Thread thread in threadsBlock.Values)
+							{
+
+								Console.WriteLine("state: " + thread.IsAlive + "," + thread.ThreadState);
+								if ((thread.IsAlive) && (thread.ThreadState != ThreadState.Stopped))
+								{
+									thread.Abort();
+								}
+							}
+							break;
 						}
 					}
 				}
@@ -323,17 +351,15 @@ namespace Boxerp.Client
 
 		public void OnAsyncException(Exception ex)
 		{
-			lock (_exceptionQueue)
+			lock (_exceptions)
 			{
-				string exceptions = _exceptionQueue.Dequeue();
-				exceptions += ex.Message + ", " + ex.StackTrace + "\n";	// FIXME, _exceptionQueue should be a Queue<Exception> to be able to separate the message from the stacktrace
-				_exceptionQueue.Enqueue(exceptions);
+					// FIXME, _exceptions should be a Queue<Exception> to be able to separate the message from the stacktrace
+				_exceptions[Thread.CurrentThread.ManagedThreadId] += ex.Message + ", " + ex.StackTrace + "\n";
 			}
 
-			lock (_operationSuccessQueue)
+			lock (_operationSucess)
 			{
-				_operationSuccessQueue.Dequeue();
-				_operationSuccessQueue.Enqueue(false);
+				_operationSucess[Thread.CurrentThread.ManagedThreadId] = false;
 			}
 		}
 
@@ -343,17 +369,14 @@ namespace Boxerp.Client
 			if ((ex.StackTrace.IndexOf("WebAsyncResult.WaitUntilComplete") > 0) || (ex.StackTrace.IndexOf("WebConnection.EndWrite") > 0))
 			{
 				message += "Warning!, the operation seems to have been succeded at the server side";
-				lock (_exceptionQueue)
+				lock (_exceptions)
 				{
-					string exceptions = _exceptionQueue.Dequeue();
-					exceptions += message;
-					_exceptionQueue.Enqueue(exceptions);
+					_exceptions[Thread.CurrentThread.ManagedThreadId] += message;
 				}
 			}
-			lock (_operationSuccessQueue)
+			lock (_operationSucess)
 			{
-				_operationSuccessQueue.Dequeue();
-				_operationSuccessQueue.Enqueue(false);
+				_operationSucess[Thread.CurrentThread.ManagedThreadId] = false;
 			}
 		}
 

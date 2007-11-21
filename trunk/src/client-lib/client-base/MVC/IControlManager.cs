@@ -5,7 +5,7 @@ using System.Text;
 namespace Boxerp.Client
 {
 	public interface IControlManager<T> 
-		where T : IControl
+		where T : IView
 	{
 		void ShowControl(T control);
 		void ShowControl(T control, string title);
@@ -13,7 +13,7 @@ namespace Boxerp.Client
 
 	public interface IControlManager
 	{
-		void ShowControl(IControl control);
-		void ShowControl(IControl control, string title);
+		void ShowControl(IView control);
+		void ShowControl(IView control, string title);
 	}
 }

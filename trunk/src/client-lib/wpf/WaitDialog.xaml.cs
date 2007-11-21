@@ -48,6 +48,13 @@ namespace Boxerp.Client.WPF
 		private EventHandler _cancelEventHandler;
 		private bool _isProgressDiscrete;
 		private bool _isModal;
+		private int _associatedThreadId = -1;
+
+		public int AssociatedThreadId
+		{
+			get { return _associatedThreadId; }
+			set { _associatedThreadId = value; }
+		}
 
 		public event EventHandler CancelEvent
 		{
@@ -128,6 +135,7 @@ namespace Boxerp.Client.WPF
 
 		public void CloseControl()
 		{
+			Console.Out.WriteLine("window is closing:" + GetHashCode());
 			Close();
 		}
 

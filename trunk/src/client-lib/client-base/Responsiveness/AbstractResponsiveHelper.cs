@@ -42,6 +42,7 @@ namespace Boxerp.Client
 	{
 		// All threads launched at a time are kept in a queue, trying to have a single unit for every client async call.
 		// Along with the threads there should be queues for success messages, exceptions, cancelling requests and type of async operations:
+		object _innerLock;
 		private List<Dictionary<int, Thread>> _threadDictionariesList = new List<Dictionary<int, Thread>>();
 		private Dictionary<int, bool> _operationSucess = new Dictionary<int, bool>();
 		private Dictionary<int, string> _exceptions = new Dictionary<int, string>();
@@ -68,13 +69,14 @@ namespace Boxerp.Client
 		public AbstractResponsiveHelper(ConcurrencyMode mode)
 		{
 			_concurrencyMode = mode;
+			_innerLock = _threadDictionariesList;
 		}
 
 		protected int RunningThreads
 		{
 			get
 			{
-				lock (_threadDictionariesList)
+				lock(_innerLock)
 				{
 					return _threadDictionariesList.Count;
 				}
@@ -96,7 +98,7 @@ namespace Boxerp.Client
 			}
 			protected set
 			{
-				lock (_cancelRequests)
+				lock(_innerLock)
 				{
 					_cancelRequests[Thread.CurrentThread.ManagedThreadId] = value;
 				}
@@ -105,7 +107,7 @@ namespace Boxerp.Client
 		
 		private bool canGoAhead()
 		{
-			lock (_threadDictionariesList)
+			lock(_innerLock)
 			{
 				if (_threadDictionariesList.Count != 0)
 				{
@@ -138,14 +140,16 @@ namespace Boxerp.Client
 					lock(_threadDictionariesList)
 					{
 						methodThread.Start();
+						int id = methodThread.ManagedThreadId;
+						threadsBlock[id] = methodThread;
+						_operationSucess[id] = true;
+						_exceptions[id] = null;
+						_operationTypes[id] = ResponsiveEnum.Other;
+						_cancelRequests[id] = false;
 
-						threadsBlock[methodThread.ManagedThreadId] = methodThread;
-						Console.Out.WriteLine("thread is in queue now:" + methodThread.ManagedThreadId);
 						_threadDictionariesList.Add(threadsBlock);
-						_operationSucess[methodThread.ManagedThreadId] = true;
-						_exceptions[methodThread.ManagedThreadId] = null;
-						_operationTypes[methodThread.ManagedThreadId] = ResponsiveEnum.Other;
-						_cancelRequests[methodThread.ManagedThreadId] = false;
+						
+						Console.Out.WriteLine("*** *** *** thread is in queue now:" + id + "," + _threadDictionariesList.Count);
 					}
 				}
 				return methodThread;
@@ -184,7 +188,7 @@ namespace Boxerp.Client
 					}
 
 					Dictionary<int, Thread> threadsBlock = new Dictionary<int, Thread>();
-					lock (this)
+					lock(_innerLock)
 					{
 						foreach (MethodInfo method in methods)
 						{
@@ -250,7 +254,7 @@ namespace Boxerp.Client
 		/// <param name="output"></param>
 		private void StopAsyncMethod(ThreadEventArgs args, object output)
 		{
-			lock (this)
+			lock(_innerLock)
 			{
 				if (_threadDictionariesList.Count == 0)
 				{
@@ -258,6 +262,7 @@ namespace Boxerp.Client
 				}
 				else
 				{
+					Console.Out.WriteLine("*** stopping: " + _threadDictionariesList.Count);
 					for (int i = 0; i < _threadDictionariesList.Count; i++)
 					{
 						Dictionary<int, Thread> threadBlock = _threadDictionariesList[i];
@@ -289,6 +294,7 @@ namespace Boxerp.Client
 							}
 						}
 					}
+					
 				}
 			}
 		}
@@ -298,7 +304,7 @@ namespace Boxerp.Client
 		/// </summary>
 		protected void ForceAbort(int threadId)
 		{
-			lock (this)
+			lock(_innerLock)
 			{
 				if (_threadDictionariesList.Count > 0)
 				{
@@ -351,13 +357,13 @@ namespace Boxerp.Client
 
 		public void OnAsyncException(Exception ex)
 		{
-			lock (_exceptions)
+			lock(_innerLock)
 			{
 					// FIXME, _exceptions should be a Queue<Exception> to be able to separate the message from the stacktrace
 				_exceptions[Thread.CurrentThread.ManagedThreadId] += ex.Message + ", " + ex.StackTrace + "\n";
 			}
 
-			lock (_operationSucess)
+			lock(_innerLock)
 			{
 				_operationSucess[Thread.CurrentThread.ManagedThreadId] = false;
 			}
@@ -369,12 +375,12 @@ namespace Boxerp.Client
 			if ((ex.StackTrace.IndexOf("WebAsyncResult.WaitUntilComplete") > 0) || (ex.StackTrace.IndexOf("WebConnection.EndWrite") > 0))
 			{
 				message += "Warning!, the operation seems to have been succeded at the server side";
-				lock (_exceptions)
+				lock(_innerLock)
 				{
 					_exceptions[Thread.CurrentThread.ManagedThreadId] += message;
 				}
 			}
-			lock (_operationSucess)
+			lock(_innerLock)
 			{
 				_operationSucess[Thread.CurrentThread.ManagedThreadId] = false;
 			}

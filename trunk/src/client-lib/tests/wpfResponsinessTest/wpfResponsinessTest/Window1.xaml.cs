@@ -38,9 +38,9 @@ namespace wpfResponsinessTest
 			Random random = new Random();
 			for (int i = 0; i < 100; i++)
 			{
-				_modalController.DoAsyncOperation(i * 10);
-				_singletonController.DoAsyncOperation(i * 10);
-				_parallelController.DoAsyncOperation(i * 10);
+				_modalController.DoAsyncOperation(i * 100);
+				_singletonController.DoAsyncOperation(i * 100);
+				_parallelController.DoAsyncOperation(i * 100);
 				System.Threading.Thread.Sleep(random.Next(3));
 				Console.Out.WriteLine("Iteration:" + i);
 			}

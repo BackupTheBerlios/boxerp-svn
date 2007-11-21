@@ -213,6 +213,7 @@ namespace Boxerp.Client.WPF
 						// it is important to check it before opening the window
 						if (_dialogs.ContainsKey(newDialogGuid))
 						{
+							_waitDialog.AssociatedThreadId = threadId;
 							_waitDialog.ShowControl();
 						}
 					}

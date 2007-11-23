@@ -127,7 +127,7 @@ namespace Boxerp.Client
 		/// <param name="constructorParams">The parameters to the wrapper class constructor</param>
 		/// <param name="disableBusinessObjectInterception">Whether enable or disable BO interception, it means Undo and Redo capability for the BO</param>
 		/// <param name="disableUndoRedo">If disableWrapperInterception is false and disableBusinessObjectInterception is false the Undo-Redo feature is enable by default unless you set the disableUndoRedo to true</param>
-		public AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, 
+		protected AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, 
 			bool disableBusinessObjectInterception, bool disableUndoRedo, object[] constructorParams)
 		{
 			lock (this)
@@ -186,7 +186,7 @@ namespace Boxerp.Client
 		/// <param name="businessObj">The business object to wrap</param>
 		/// <param name="wrapper">The wrapper class type</param>
 		/// <param name="constructorParams">The parameters to the wrapper class constructor</param>
-		public AbstractBindableWrapper(T businessObj, object[] constructorParams)
+		protected AbstractBindableWrapper(T businessObj, object[] constructorParams)
 			: this(businessObj, false, false, false, constructorParams)
 		{
 			
@@ -200,25 +200,25 @@ namespace Boxerp.Client
 		/// <param name="wrapper">The wrapper class type</param>
 		/// <param name="disableBusinessObjectInterception">Whether enable or disable BO interception, it means Undo and Redo capability for the BO</param>
 		/// <param name="disableWrapperInterception">Whether disable Undo and Redo capability for the wrapper</param>
-		public AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, bool disableBusinessObjectInterception)
+		protected AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, bool disableBusinessObjectInterception)
 			: this (businessObj, disableWrapperInterception, disableBusinessObjectInterception, false, null)
 		{
 			
 		}
 
-		public AbstractBindableWrapper(T businessObj, bool disableInterception, object[] constructorParams)
+		protected AbstractBindableWrapper(T businessObj, bool disableInterception, object[] constructorParams)
 			: this(businessObj, disableInterception, disableInterception, false, constructorParams)
 		{
 
 		}
 
-		public AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, bool disableBOInterception, bool disableUndoRedo)
+		protected AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, bool disableBOInterception, bool disableUndoRedo)
 			: this(businessObj, disableWrapperInterception, disableBOInterception, disableUndoRedo, null)
 		{
 
 		}
 
-		public AbstractBindableWrapper(T businessObj, bool disableInterception)
+		protected AbstractBindableWrapper(T businessObj, bool disableInterception)
 			: this(businessObj, disableInterception, disableInterception, true, null)
 		{
 
@@ -229,7 +229,7 @@ namespace Boxerp.Client
 		/// </summary>
 		/// <param name="businessObj">The business object to wrap</param>
 		/// <param name="wrapper">The wrapper class type</param>
-		public AbstractBindableWrapper(T businessObj)
+		protected AbstractBindableWrapper(T businessObj)
 			: this(businessObj, false, false, false, null)
 		{
 	

@@ -69,6 +69,9 @@
     <Compile Include="DataBinding\UIBinderBase.cs" />
     <Compile Include="DataBinding\XamlParser.cs" />
     <Compile Include="Delegates.cs" />
+    <Compile Include="MVC\AbstractData.cs" />
+    <Compile Include="MVC\AbstractTestView.cs" />
+    <Compile Include="MVC\ControllerFactory.cs" />
     <Compile Include="MVC\ICloseView.cs" />
     <Compile Include="MVC\IView.cs" />
     <Compile Include="MVC\IController.cs" />
@@ -77,6 +80,8 @@
     <Compile Include="RemotingHelper.cs" />
     <Compile Include="Responsiveness\AbstractResponsiveHelper.cs" />
     <Compile Include="Responsiveness\ConcurrencyMode.cs" />
+    <Compile Include="Responsiveness\ConsoleResponsiveHelper.cs" />
+    <Compile Include="Responsiveness\ConsoleWaitDialog.cs" />
     <Compile Include="Responsiveness\IResponsiveClient.cs" />
     <Compile Include="Responsiveness\IWaitControl.cs" />
     <Compile Include="Responsiveness\ResponsiveAttribute.cs" />

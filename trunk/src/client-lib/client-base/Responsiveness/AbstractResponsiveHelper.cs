@@ -66,7 +66,7 @@ namespace Boxerp.Client
          	}
       	}
 		
-		public AbstractResponsiveHelper(ConcurrencyMode mode)
+		protected AbstractResponsiveHelper(ConcurrencyMode mode)
 		{
 			_concurrencyMode = mode;
 			_innerLock = _threadDictionariesList;

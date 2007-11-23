@@ -33,16 +33,48 @@ using System.Reflection;
 namespace Boxerp.Client
 {
 
+	public abstract class AbstractController<V, T> : AbstractController<V>
+		where V : IView
+		where T : IUIData
+	{
+		private T _data;
+
+		protected AbstractController(IResponsiveClient helper, V view)
+			: base(helper, view)
+		{ }
+
+		protected AbstractController(IResponsiveClient helper)
+			: base(helper)
+		{ }
+
+		public T Data
+		{
+			get
+			{
+				return _data;
+			}
+		}
+
+		public virtual void Initialize(T data)
+		{
+			_data = data;
+		}
+	}
+
 	public abstract class AbstractController<V> : AbstractController
 		where V : IView
 	{
 		private V _view = default(V);
 
-		public AbstractController(IResponsiveClient helper, V view)
+		protected AbstractController(IResponsiveClient helper, V view)
 			: base(helper)
 		{
 			_view = view;
 		}
+
+		protected AbstractController(IResponsiveClient helper)
+			: base(helper)
+		{}
 
 		public V View
 		{
@@ -57,30 +89,6 @@ namespace Boxerp.Client
 		}
 	}
 
-	public abstract class AbstractController<V, T> : AbstractController<V>
-		where V : IView
-		where T : IUIData
-	{
-		private T _data;
-
-		public AbstractController(IResponsiveClient helper, V view)
-			: base (helper, view)
-		{}
-
-		public T Data
-		{
-			get
-			{
-				return _data;
-			}
-		}
-		
-		public virtual void Initialize(T data)
-		{
-			_data = data;
-		}
-	}
-
 	/// <summary>
 	/// All the controllers should extend this class, which enforce the responsive helper to be protected
 	/// and binds the complete event to the operation finish method
@@ -88,6 +96,12 @@ namespace Boxerp.Client
 	public abstract class AbstractController : IController
 	{
 		protected IResponsiveClient _responsiveHelper;
+
+		protected AbstractController(IResponsiveClient helper)
+		{
+			_responsiveHelper = helper;
+			_responsiveHelper.TransferCompleteEvent += OnAsyncOperationFinish;
+		}
 
 		protected IResponsiveClient ResponsiveHelper
 		{
@@ -101,18 +115,17 @@ namespace Boxerp.Client
 			}
 		}
 
+		internal void setResponsiveHelper(IResponsiveClient helper)
+		{
+			_responsiveHelper = helper;
+		}
+
 		public int CurrentThread
 		{
 			get
 			{
 				return System.Threading.Thread.CurrentThread.ManagedThreadId;
 			}
-		}
-
-		public AbstractController(IResponsiveClient helper)
-		{
-			_responsiveHelper = helper;
-			_responsiveHelper.TransferCompleteEvent += OnAsyncOperationFinish;
 		}
 
 		protected abstract void OnAsyncOperationFinish(Object sender, ThreadEventArgs args);

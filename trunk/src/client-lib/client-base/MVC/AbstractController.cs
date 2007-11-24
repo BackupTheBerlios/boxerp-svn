@@ -33,43 +33,92 @@ using System.Reflection;
 namespace Boxerp.Client
 {
 
-	public abstract class AbstractController<V, T> : AbstractController<V>
-		where V : IView
-		where T : IUIData
+	/// <summary>
+	/// This class shoulb be used by the framework only
+	/// </summary>
+	public abstract class InternalAbstractController<V, TData, TSelf> : InternalAbstractController<V, TSelf>
+		where TSelf: InternalAbstractController<V, TData, TSelf>
+		where V : IView<TSelf, TData> 
+		where TData : IUIData
 	{
-		private T _data;
+		private TData _data;
+
+		protected InternalAbstractController(IResponsiveClient helper, V view)
+			: base(helper, view)
+		{ }
+
+		protected InternalAbstractController(IResponsiveClient helper)
+			: base(helper)
+		{ }
+	}
+
+	
+	public abstract class AbstractController<V, TData> : InternalAbstractController<V, TData, AbstractController<V, TData>>
+		where V : IView<AbstractController<V, TData>, TData>
+		where TData : IUIData
+	{
+		private TData _data;
 
 		protected AbstractController(IResponsiveClient helper, V view)
 			: base(helper, view)
-		{ }
+		{ 
+			_data = view.SharedData;		
+		}
 
 		protected AbstractController(IResponsiveClient helper)
 			: base(helper)
 		{ }
 
-		public T Data
+		public TData SharedData
 		{
 			get
 			{
 				return _data;
 			}
 		}
-
-		public virtual void Initialize(T data)
-		{
-			_data = data;
-		}
 	}
 
-	public abstract class AbstractController<V> : AbstractController
-		where V : IView
+	/// <summary>
+	/// This should be used only by the framework
+	/// </summary>
+	public abstract class InternalAbstractController<V, TSelf> : AbstractController
+		where TSelf: InternalAbstractController<V, TSelf>
+		where V : IView<TSelf>
+	{
+		private V _view = default(V);
+
+		protected InternalAbstractController(IResponsiveClient helper, V view)
+			: base(helper)
+		{
+			_view = view;
+			_view.Controller = this;
+		}
+
+		protected InternalAbstractController(IResponsiveClient helper)
+			: base(helper)
+		{}
+
+		public V View
+		{
+			get
+			{
+				return _view;
+			}
+			set
+			{
+				_view = value;
+			}
+		}
+	}
+	
+	public abstract class AbstractController<V> : InternalAbstractController<V, AbstractController<V>>
+		where V : IView<AbstractController<V>>
 	{
 		private V _view = default(V);
 
 		protected AbstractController(IResponsiveClient helper, V view)
 			: base(helper)
 		{
-			_view = view;
 		}
 
 		protected AbstractController(IResponsiveClient helper)

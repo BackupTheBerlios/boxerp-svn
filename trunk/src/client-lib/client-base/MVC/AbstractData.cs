@@ -8,7 +8,7 @@ namespace Boxerp.Client
 	public abstract class AbstractData<TBaseView, C, TFinalView> : IUIData
 		where TBaseView : IView
 		where C : AbstractController
-		where TFinalView : IView<TBaseView, C>
+		where TFinalView : TBaseView
 	{
 		private TFinalView _view;
 		private Hashtable _propertyBag = new Hashtable();

@@ -8,7 +8,7 @@ namespace Boxerp.Client
 {
 	public class ControllerFactory<C, I>
 		where C : AbstractController<I>
-		where I : IView
+		where I : IView<AbstractController<I>>
 	{
 		public static C CreateTestController(ConcurrencyMode mode)
 		{

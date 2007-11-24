@@ -6,9 +6,6 @@ namespace Boxerp.Client
 { 
 	/// <summary>
 	/// C = controller
-	/// D = First IUIData interface
-	/// Z = Concrete implementation of D
-	/// I = IView interface
 	/// </summary>
 	/// <typeparam name="C"></typeparam>
 	/// <typeparam name="D"></typeparam>
@@ -27,7 +24,7 @@ namespace Boxerp.Client
 			_data = new TFinalDataIface();
 		}
 
-		TBaseDataIface IView<C, TBaseDataIface>.Data
+		TBaseDataIface IView<C, TBaseDataIface>.SharedData
 		{
 			get
 			{
@@ -55,4 +52,26 @@ namespace Boxerp.Client
 			}
 		}
 	}
+	
+	
+	
+	public class AbstractTestView<C> : IView<C>
+		where C : AbstractController
+	{
+		private C _controller;
+
+		public C Controller
+		{
+			get
+			{
+				return _controller;
+			}
+			set
+			{
+				_controller = value;
+			}
+		}
+	}
+	
+    	
 }

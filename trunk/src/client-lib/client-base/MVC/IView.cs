@@ -44,12 +44,12 @@ namespace Boxerp.Client
 		where C : AbstractController
 		where D : IUIData
 	{
-		D Data { get; }
+		D SharedData { get; }
 	}
 
 	public interface IView<C> : IView
 		where C : AbstractController
 	{
-		C Controller { get; }
+		C Controller { get; set;}
 	}
 }

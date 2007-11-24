@@ -28,6 +28,7 @@
 ////
 
 using System;
+using System.Data;
 
 namespace testApp3
 {
@@ -74,6 +75,13 @@ namespace testApp3
 		protected virtual void OnDataGridTests (object sender, System.EventArgs e)
 		{
 			DataGridTests win = new DataGridTests();
+			win.Show();
+			win.Child.ShowAll();
+		}
+
+		protected virtual void OnDataGridDataTable (object sender, System.EventArgs e)
+		{
+			DataGridDataTable win = new DataGridDataTable();
 			win.Show();
 			win.Child.ShowAll();
 		}

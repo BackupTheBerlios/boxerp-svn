@@ -40,16 +40,14 @@ namespace Boxerp.Client
 	{
 	}
 
-	public interface IView<T, C, D> : IView<T, C>
-		where T : IView
+	public interface IView<C, D> : IView<C>
 		where C : AbstractController
 		where D : IUIData
 	{
 		D Data { get; }
 	}
 
-	public interface IView<T, C> : IView
-		where T : IView
+	public interface IView<C> : IView
 		where C : AbstractController
 	{
 		C Controller { get; }

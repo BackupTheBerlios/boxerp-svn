@@ -5,15 +5,15 @@ using System.Collections;
 
 namespace Boxerp.Client
 {
-	public abstract class AbstractData<BaseView, C, FinalView> : IUIData
-		where BaseView : IView
+	public abstract class AbstractData<TBaseView, C, TFinalView> : IUIData
+		where TBaseView : IView
 		where C : AbstractController
-		where FinalView : IView<BaseView, C>
+		where TFinalView : IView<TBaseView, C>
 	{
-		private FinalView _view;
+		private TFinalView _view;
 		private Hashtable _propertyBag = new Hashtable();
 
-		public FinalView View
+		public TFinalView View
 		{
 			get { return _view; }
 			set { _view = value; }

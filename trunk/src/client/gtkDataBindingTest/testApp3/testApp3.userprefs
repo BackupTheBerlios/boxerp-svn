@@ -5,9 +5,10 @@
     <File name="testApp3/Group.cs" line="106" column="3" />
     <File name="testApp3/Main.cs" line="43" column="4" />
     <File name="testApp3/ListViewTest2.cs" line="180" column="26" />
-    <File name="testApp3/ListViewTest1.cs" line="42" column="47" />
-    <File name="testApp3/MenuWindow.cs" line="61" column="16" />
-    <File name="testApp3/DataGridTests.cs" line="78" column="33" />
+    <File name="testApp3/ListViewTest1.cs" line="164" column="4" />
+    <File name="testApp3/MenuWindow.cs" line="87" column="3" />
+    <File name="testApp3/DataGridDataTable.cs" line="49" column="31" />
+    <File name="testApp3/DataGridTests.cs" line="54" column="15" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
@@ -26,7 +27,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client/gtkDataBindingTest/testApp3/testApp3/DataGridTests.cs" />
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client/gtkDataBindingTest/testApp3/testApp3/DataGridDataTable.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

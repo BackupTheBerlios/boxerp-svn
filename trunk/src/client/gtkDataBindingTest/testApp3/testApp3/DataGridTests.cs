@@ -204,9 +204,10 @@ namespace testApp3
 			}
 		}
 
-		protected virtual void OnChangeUser2 (object sender, System.EventArgs e)
+		protected virtual void OnChangeUser (object sender, System.EventArgs e)
 		{
 			bindableUser2.Data.BusinessObj.Username = "changed from code";
 		}
+
 	}
 }

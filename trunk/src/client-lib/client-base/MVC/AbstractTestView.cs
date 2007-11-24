@@ -14,21 +14,20 @@ namespace Boxerp.Client
 	/// <typeparam name="D"></typeparam>
 	/// <typeparam name="Z"></typeparam>
 	/// <typeparam name="I"></typeparam>
-	public class AbstractTestView<ViewIface, C, D, DataIface> : IView<ViewIface, C, DataIface>
-		where C : AbstractController<ViewIface, DataIface>
-		where DataIface : IUIData
-		where D : DataIface, new()
-		where ViewIface : IView<ViewIface, C, DataIface>
+	public class AbstractTestView<C, TFinalDataIface, TBaseDataIface> : IView<C, TBaseDataIface>
+		where C : AbstractController
+		where TBaseDataIface : IUIData
+		where TFinalDataIface : TBaseDataIface, new()
 	{
-		private D _data ;
+		private TFinalDataIface _data ;
 		private C _controller;
 
 		protected AbstractTestView()
 		{
-			_data = new D();
+			_data = new TFinalDataIface();
 		}
 
-		DataIface IView<ViewIface, C, DataIface>.Data
+		TBaseDataIface IView<C, TBaseDataIface>.Data
 		{
 			get
 			{
@@ -36,7 +35,7 @@ namespace Boxerp.Client
 			}
 		}
 
-		public D Data
+		public TFinalDataIface Data
 		{
 			get
 			{

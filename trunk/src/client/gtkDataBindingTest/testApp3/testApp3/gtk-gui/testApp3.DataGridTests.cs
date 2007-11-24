@@ -193,6 +193,7 @@ namespace testApp3 {
             this.DefaultHeight = 300;
             this.Show();
             this.button1.Clicked += new System.EventHandler(this.OnShowItem);
+            this.button9.Clicked += new System.EventHandler(this.OnChangeUser);
         }
     }
 }

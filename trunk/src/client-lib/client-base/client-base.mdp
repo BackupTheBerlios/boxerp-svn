@@ -1,65 +1,71 @@
 <Project name="Boxerp.Client" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="./bin/Debug" assembly="Boxerp.Client" />
+      <Output directory="bin/Debug" assembly="Boxerp.Client" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
-      <Output directory="./bin/Release" assembly="client-base" />
+      <Output directory="bin/Release" assembly="client-base" />
       <Build debugmode="False" target="Library" />
       <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
   </Configurations>
   <Contents>
-    <File name="./AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="./SessionSingleton.cs" subtype="Code" buildaction="Compile" />
-    <File name="./RemotingHelper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Delegates.cs" subtype="Code" buildaction="Compile" />
-    <File name="./SimpleInvoker.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding" subtype="Directory" buildaction="Compile" />
-    <File name="./DataBinding/AbstractBindableWrapper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/BbWithBindableCollection.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/BdWithNestedWrapper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/BindableWithCollection.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/BindableWrapper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/IBindableWrapper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/UIBinderBase.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/IUIBinder.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Responsiveness" subtype="Directory" buildaction="Compile" />
-    <File name="./Responsiveness/AbstractResponsiveHelper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Responsiveness/ConcurrencyMode.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Responsiveness/IResponsiveClient.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Responsiveness/ResponsiveAttribute.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Responsiveness/ResponsiveEnum.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Responsiveness/ThreadEventArgs.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/IBindableCore.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/BindingOptions.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/Cloner.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/DynamicPropertyChangedProxy.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/ICustomNotifyPropertyChanged.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Responsiveness/IWaitControl.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/BindableCollection.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/PropertyComparer.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/AbstractDataBinder.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/BindingMetadata.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/DynamicPropertyChangedProxy_Generation.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/IChildObject.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/IDataBinder.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/XamlParser.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Responsiveness/ResponsivenessSingleton.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Logger.cs" subtype="Code" buildaction="Compile" />
-    <File name="./DataBinding/DynamicProxyHelper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./MVC/AbstractController.cs" subtype="Code" buildaction="Compile" />
-    <File name="./MVC/IControl.cs" subtype="Code" buildaction="Compile" />
-    <File name="./MVC/IController.cs" subtype="Code" buildaction="Compile" />
-    <File name="./MVC/IControlManager.cs" subtype="Code" buildaction="Compile" />
-    <File name="./MVC/IUIData.cs" subtype="Code" buildaction="Compile" />
-    <File name="./CustomWidgets/WidgetsHelpers/DecimalTextBoxHelper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./CustomWidgets/WidgetsHelpers/IntegerTextBoxHelper.cs" subtype="Code" buildaction="Compile" />
-    <File name="./CustomWidgets/WidgetsHelpers/SystemNameTextBoxHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="SessionSingleton.cs" subtype="Code" buildaction="Compile" />
+    <File name="RemotingHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="Delegates.cs" subtype="Code" buildaction="Compile" />
+    <File name="SimpleInvoker.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding" subtype="Directory" buildaction="Compile" />
+    <File name="DataBinding/AbstractBindableWrapper.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/BbWithBindableCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/BdWithNestedWrapper.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/BindableWithCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/BindableWrapper.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/IBindableWrapper.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/UIBinderBase.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/IUIBinder.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness" subtype="Directory" buildaction="Compile" />
+    <File name="Responsiveness/AbstractResponsiveHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness/ConcurrencyMode.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness/IResponsiveClient.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness/ResponsiveAttribute.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness/ResponsiveEnum.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness/ThreadEventArgs.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/IBindableCore.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/BindingOptions.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/Cloner.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/DynamicPropertyChangedProxy.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/ICustomNotifyPropertyChanged.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness/IWaitControl.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/BindableCollection.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/PropertyComparer.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/AbstractDataBinder.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/BindingMetadata.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/DynamicPropertyChangedProxy_Generation.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/IChildObject.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/IDataBinder.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/XamlParser.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness/ResponsivenessSingleton.cs" subtype="Code" buildaction="Compile" />
+    <File name="Logger.cs" subtype="Code" buildaction="Compile" />
+    <File name="DataBinding/DynamicProxyHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="MVC/AbstractController.cs" subtype="Code" buildaction="Compile" />
+    <File name="MVC/IController.cs" subtype="Code" buildaction="Compile" />
+    <File name="MVC/IControlManager.cs" subtype="Code" buildaction="Compile" />
+    <File name="MVC/IUIData.cs" subtype="Code" buildaction="Compile" />
+    <File name="CustomWidgets/WidgetsHelpers/DecimalTextBoxHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="CustomWidgets/WidgetsHelpers/IntegerTextBoxHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="CustomWidgets/WidgetsHelpers/SystemNameTextBoxHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="MVC/AbstractData.cs" subtype="Code" buildaction="Compile" />
+    <File name="MVC/AbstractTestView.cs" subtype="Code" buildaction="Compile" />
+    <File name="MVC/ControllerFactory.cs" subtype="Code" buildaction="Compile" />
+    <File name="MVC/ICloseView.cs" subtype="Code" buildaction="Compile" />
+    <File name="MVC/IView.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness/ConsoleResponsiveHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness/ConsoleWaitDialog.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Assembly" localcopy="True" refto="../../dependencies/Castle.Core.dll" />

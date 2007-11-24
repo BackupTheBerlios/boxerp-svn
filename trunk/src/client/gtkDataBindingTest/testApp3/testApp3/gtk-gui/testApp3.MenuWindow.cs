@@ -29,6 +29,8 @@ namespace testApp3 {
         
         private Gtk.Button button6;
         
+        private Gtk.Button button7;
+        
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
             // Widget testApp3.MenuWindow
@@ -109,25 +111,37 @@ namespace testApp3 {
             this.button6.CanFocus = true;
             this.button6.Name = "button6";
             this.button6.UseUnderline = true;
-            this.button6.Label = Mono.Unix.Catalog.GetString("ComboBox tests");
+            this.button6.Label = Mono.Unix.Catalog.GetString("DataGrid (using BindDataTable) tests");
             this.vbox1.Add(this.button6);
             Gtk.Box.BoxChild w7 = ((Gtk.Box.BoxChild)(this.vbox1[this.button6]));
             w7.Position = 6;
             w7.Expand = false;
             w7.Fill = false;
+            // Container child vbox1.Gtk.Box+BoxChild
+            this.button7 = new Gtk.Button();
+            this.button7.CanFocus = true;
+            this.button7.Name = "button7";
+            this.button7.UseUnderline = true;
+            this.button7.Label = Mono.Unix.Catalog.GetString("ComboBox tests");
+            this.vbox1.Add(this.button7);
+            Gtk.Box.BoxChild w8 = ((Gtk.Box.BoxChild)(this.vbox1[this.button7]));
+            w8.Position = 7;
+            w8.Expand = false;
+            w8.Fill = false;
             this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
             this.DefaultWidth = 629;
-            this.DefaultHeight = 276;
+            this.DefaultHeight = 330;
             this.Show();
             this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnExit);
             this.button1.Clicked += new System.EventHandler(this.OnBasicDataBinding);
             this.button2.Clicked += new System.EventHandler(this.OnBasicListView);
             this.button3.Clicked += new System.EventHandler(this.OnListViewDataBinding);
             this.button4.Clicked += new System.EventHandler(this.OnDataGridTests);
-            this.button6.Clicked += new System.EventHandler(this.OnComboBoxTests);
+            this.button6.Clicked += new System.EventHandler(this.OnDataGridDataTable);
+            this.button7.Clicked += new System.EventHandler(this.OnComboBoxTests);
         }
     }
 }

@@ -1,0 +1,10 @@
+<objects>
+  <object type="mvcSample1.UsersListView" palette-category="mvcSample1" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+  <object type="mvcSample1.UserEditView" palette-category="mvcSample1" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+</objects>

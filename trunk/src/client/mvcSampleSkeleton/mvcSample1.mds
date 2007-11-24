@@ -1,0 +1,16 @@
+<Combine name="mvcSample1" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="mvcSample1" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="mvcSample1" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="mvcSample1" single="True">
+    <Execute type="None" entry="mvcSample1" />
+  </StartMode>
+  <Entries>
+    <Entry filename="mvcSample1/mvcSample1.mdp" />
+  </Entries>
+</Combine>

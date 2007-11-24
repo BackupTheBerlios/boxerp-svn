@@ -1,0 +1,70 @@
+<Project name="mvcSample1" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="mvcSample1" />
+      <Build debugmode="True" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="mvcSample1" />
+      <Build debugmode="False" target="Exe" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="gtk-gui/gui.stetic" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="gtk-gui/generated.cs" subtype="Code" buildaction="Compile" />
+    <File name="MainWindow.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/MainWindow.cs" subtype="Code" buildaction="Compile" />
+    <File name="Main.cs" subtype="Code" buildaction="Compile" />
+    <File name="AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/mvcSample1.UsersListView.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/objects.xml" subtype="Code" buildaction="EmbedAsResource" />
+    <File name="Controllers" subtype="Directory" buildaction="Compile" />
+    <File name="GtkViews" subtype="Directory" buildaction="Compile" />
+    <File name="Models" subtype="Directory" buildaction="Compile" />
+    <File name="Models/User.cs" subtype="Code" buildaction="Compile" />
+    <File name="Models/Group.cs" subtype="Code" buildaction="Compile" />
+    <File name="GtkViews/UsersListView.cs" subtype="Code" buildaction="Compile" />
+    <File name="Interfaces" subtype="Directory" buildaction="Compile" />
+    <File name="SharedData" subtype="Directory" buildaction="Compile" />
+    <File name="Controllers/UsersListController.cs" subtype="Code" buildaction="Compile" />
+    <File name="Controllers/UserEditController.cs" subtype="Code" buildaction="Compile" />
+    <File name="GtkViews/UserEditView.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/mvcSample1.UserEditView.cs" subtype="Code" buildaction="Compile" />
+    <File name="Interfaces/IUsersListView.cs" subtype="Code" buildaction="Compile" />
+    <File name="Interfaces/IUserEditView.cs" subtype="Code" buildaction="Compile" />
+    <File name="Interfaces/IUsersListData.cs" subtype="Code" buildaction="Compile" />
+    <File name="TestViews" subtype="Directory" buildaction="Compile" />
+    <File name="TestViews/TestUserEditView.cs" subtype="Code" buildaction="Compile" />
+    <File name="TestViews/TestUsersListView.cs" subtype="Code" buildaction="Compile" />
+    <File name="SharedData/AbstractUsersListData.cs" subtype="Code" buildaction="Compile" />
+    <File name="SharedData/GtkUsersListData.cs" subtype="Code" buildaction="Compile" />
+    <File name="SharedData/TestUsersListData.cs" subtype="Code" buildaction="Compile" />
+    <File name="WinFormsViews" subtype="Directory" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.10.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="gdk-sharp, Version=2.10.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="glib-sharp, Version=2.10.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="glade-sharp, Version=2.10.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Gac" localcopy="True" refto="pango-sharp, Version=2.10.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../client-lib/client-base/bin/Debug/Boxerp.Client.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../client-lib/client-base/bin/Debug/Castle.Core.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../client-lib/client-base/bin/Debug/Castle.DynamicProxy2.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../client-lib/gtksharp/bin/Debug/Boxerp.Client.GtkSharp.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../Collections/Boxerp.Collections/Boxerp.Collections/bin/Debug/Boxerp.Collections.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../../../client-lib/gtksharp/Controls/bin/Debug/Boxerp.Client.GtkSharp.Controls.dll" />
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+  </References>
+  <GtkDesignInfo gtkVersion="2.10.2">
+    <ExportedWidgets>
+      <Widget>mvcSample1.UsersListView</Widget>
+      <Widget>mvcSample1.UserEditionView</Widget>
+      <Widget>mvcSample1.UserEditView</Widget>
+    </ExportedWidgets>
+  </GtkDesignInfo>
+</Project>

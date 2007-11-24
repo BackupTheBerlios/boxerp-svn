@@ -41,8 +41,6 @@ namespace Boxerp.Client
 		where V : IView<TSelf, TData> 
 		where TData : IUIData
 	{
-		private TData _data;
-
 		protected InternalAbstractController(IResponsiveClient helper, V view)
 			: base(helper, view)
 		{ }
@@ -85,29 +83,14 @@ namespace Boxerp.Client
 		where TSelf: InternalAbstractController<V, TSelf>
 		where V : IView<TSelf>
 	{
-		private V _view = default(V);
-
 		protected InternalAbstractController(IResponsiveClient helper, V view)
 			: base(helper)
-		{
-			_view = view;
-		}
+		{}
 
 		protected InternalAbstractController(IResponsiveClient helper)
 			: base(helper)
 		{}
 
-		public V View
-		{
-			get
-			{
-				return _view;
-			}
-			set
-			{
-				_view = value;
-			}
-		}
 	}
 	
 	public abstract class AbstractController<V> : InternalAbstractController<V, AbstractController<V>>
@@ -118,6 +101,7 @@ namespace Boxerp.Client
 		protected AbstractController(IResponsiveClient helper, V view)
 			: base(helper)
 		{
+			_view = view;
 			_view.Controller = this;
 		}
 

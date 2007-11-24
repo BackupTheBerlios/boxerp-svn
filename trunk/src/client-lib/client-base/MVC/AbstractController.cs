@@ -33,26 +33,9 @@ using System.Reflection;
 namespace Boxerp.Client
 {
 
-	/// <summary>
-	/// This class shoulb be used by the framework only
-	/// </summary>
-	public abstract class InternalAbstractController<V, TData, TSelf> : InternalAbstractController<V, TSelf>
-		where TSelf: InternalAbstractController<V, TData, TSelf>
-		where V : IView<TSelf, TData> 
-		where TData : IUIData
-	{
-		protected InternalAbstractController(IResponsiveClient helper, V view)
-			: base(helper, view)
-		{ }
-
-		protected InternalAbstractController(IResponsiveClient helper)
-			: base(helper)
-		{ }
-	}
-
-	
-	public abstract class AbstractController<V, TData> : InternalAbstractController<V, TData, AbstractController<V, TData>>
-		where V : IView<AbstractController<V, TData>, TData>
+    public abstract class AbstractController<V, TData, C> : AbstractController<V, C>
+		where V : IView<C, TData>
+		where C : AbstractController<V, TData, C>
 		where TData : IUIData
 	{
 		private TData _data;
@@ -76,25 +59,9 @@ namespace Boxerp.Client
 		}
 	}
 
-	/// <summary>
-	/// This should be used only by the framework
-	/// </summary>
-	public abstract class InternalAbstractController<V, TSelf> : AbstractController
-		where TSelf: InternalAbstractController<V, TSelf>
-		where V : IView<TSelf>
-	{
-		protected InternalAbstractController(IResponsiveClient helper, V view)
-			: base(helper)
-		{}
-
-		protected InternalAbstractController(IResponsiveClient helper)
-			: base(helper)
-		{}
-
-	}
-	
-	public abstract class AbstractController<V> : InternalAbstractController<V, AbstractController<V>>
-		where V : IView<AbstractController<V>>
+	public abstract class AbstractController<V, C> : AbstractController
+		where C : AbstractController<V, C>
+		where V : IView<C>
 	{
 		private V _view = default(V);
 
@@ -102,7 +69,7 @@ namespace Boxerp.Client
 			: base(helper)
 		{
 			_view = view;
-			_view.Controller = this;
+			_view.Controller = (C)this;
 		}
 
 		protected AbstractController(IResponsiveClient helper)

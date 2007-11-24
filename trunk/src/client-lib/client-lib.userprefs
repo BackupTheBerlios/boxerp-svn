@@ -1,18 +1,19 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib.mds">
   <Files>
     <File name="Welcome" />
-    <File name="client-base/MVC/AbstractController.cs" line="1" column="1" />
-    <File name="client-base/MVC/IView.cs" line="43" column="26" />
-    <File name="client-base/MVC/AbstractData.cs" line="21" column="1" />
-    <File name="client-base/MVC/AbstractTestView.cs" line="31" column="24" />
+    <File name="client-base/MVC/AbstractController.cs" line="67" column="10" />
+    <File name="client-base/MVC/IView.cs" line="1" column="1" />
+    <File name="client-base/Responsiveness/ResponsiveAttribute.cs" line="1" column="1" />
+    <File name="client-base/Responsiveness/ResponsiveEnum.cs" line="1" column="1" />
+    <File name="client-base/Responsiveness/ResponsivenessSingleton.cs" line="1" column="1" />
+    <File name="client-base/Responsiveness/ThreadEventArgs.cs" line="83" column="17" />
+    <File name="client-base/MVC/AbstractTestView.cs" line="75" column="5" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="Boxerp.Client" expanded="True">
-          <Node name="MVC" expanded="True">
-            <Node name="IView.cs" selected="True" />
-          </Node>
+        <Node name="Boxerp.Client" expanded="True" selected="True">
+          <Node name="MVC" expanded="True" />
         </Node>
       </Node>
     </ViewMemento>
@@ -27,7 +28,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-base/MVC/IView.cs" />
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-base/MVC/AbstractController.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

@@ -7,8 +7,8 @@ using System.Reflection.Emit;
 namespace Boxerp.Client
 {
 	public class ControllerFactory<C, I>
-		where C : AbstractController<I>
-		where I : IView<AbstractController<I>>
+		where C : AbstractController<I, C>
+		where I : IView<C>
 	{
 		public static C CreateTestController(ConcurrencyMode mode)
 		{

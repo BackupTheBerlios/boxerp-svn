@@ -50,9 +50,11 @@ namespace Boxerp.Client.WindowsForms
 		where T : class, IWinFormsWaitControl, new()
     {
 		private T _waitDialog;
+
 		private bool _userWaitDialogInstance = false;
-		private Queue<T> _dialogs = new Queue<T>();
-        private Queue<QuestionDialog> _questionWindows = new Queue<QuestionDialog>();
+        private Dictionary<int, QuestionDialog> _questionWindows = new Dictionary<int, QuestionDialog>();
+        private Dictionary<Guid, T> _dialogs = new Dictionary<Guid, T>();
+        private Dictionary<int, Guid> _storagePointers = new Dictionary<int, Guid>();
 
         /// <summary>
         /// 
@@ -62,6 +64,7 @@ namespace Boxerp.Client.WindowsForms
             : base(mode)
         {
         }
+
 
 		/// <summary>
 		/// You might want your custom waitDialog to manage the wait process. For example you might 
@@ -84,26 +87,54 @@ namespace Boxerp.Client.WindowsForms
 
         public override List<Thread> StartAsyncCallList(ResponsiveEnum trType, IController controller, bool showWaitControl)
         {
+            Guid newDialogGuid = Guid.NewGuid();
             if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
                 || (RunningThreads == 0))
             {
 				if (!_userWaitDialogInstance)
 				{
 					_waitDialog = new T();
-					_dialogs.Enqueue(_waitDialog);
+                    _dialogs[newDialogGuid] = _waitDialog;
 				}
                 _waitDialog.CancelEvent += OnCancel;
                 
             }
 
-			List<Thread> threads = base.StartAsyncCallList(trType, controller);
+            int threadId = -1;
+            List<Thread> threads;
+            // before adding the dialog to the dialogs storage, we have to make sure the thread lasts 
+            // enough. if it is over, then we don't add it to the dialogs nor show the dialog
+            lock(_storagePointers)
+            {
 
+			    threads = base.StartAsyncCallList(trType, controller);
+                try
+                {
+                    // if the thread finishes between these lines of code, we get an exception
+                    threadId = threads[0].ManagedThreadId;
+                    _storagePointers[threadId] = newDialogGuid;
+                }
+                catch
+                {
+                    // and the dialog should be removed
+                    _dialogs.Remove(newDialogGuid);  
+                }
+            }
 			if (showWaitControl)
 			{
                 try
                 {
 					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
-                    _waitDialog.ShowControl();
+                    lock (_dialogs)
+                    {
+                        // the Transfer completed method removes the dialog from the dialogs so 
+                        // it is important to check it before opening the window
+                        if (_dialogs.ContainsKey(newDialogGuid))
+                        {
+                            _waitDialog.AssociatedThreadId = threadId;
+                            _waitDialog.ShowControl();
+                        }
+                    }
                 }
 
                 catch (System.Reflection.TargetInvocationException ex)
@@ -126,38 +157,60 @@ namespace Boxerp.Client.WindowsForms
 
         public override Thread StartAsyncCall(SimpleDelegate method, bool showWaitControl)
         {
+            Guid newDialogGuid = Guid.NewGuid();
             if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
                 || (RunningThreads == 0))
             {
 				if (!_userWaitDialogInstance)
 				{
 					_waitDialog = new T();
-					_dialogs.Enqueue(_waitDialog);
+                    Console.Out.WriteLine("Creating window: " + _waitDialog.GetHashCode());
+                    _dialogs[newDialogGuid] = _waitDialog;
 				}
 				_waitDialog.CancelEvent += OnCancel;
 				
             }
 
-			Thread thread = base.StartAsyncCall(method);
-
+            int threadId = -1;
+			Thread thread;
+            // before adding the dialog to the dialogs storage, we have to make sure the thread lasts 
+            // enough. if it is over, then we don't add it to the dialogs nor show the dialog
+            lock(_storagePointers) {
+                thread  = base.StartAsyncCall(method);
+                try
+                {
+                    // if the thread finishes between this lines of code, we get an exception
+                    threadId = thread.ManagedThreadId;
+                    _storagePointers[threadId] = newDialogGuid;
+                }
+                catch
+                {
+                    // and the dialog should be removed
+                    _dialogs.Remove(newDialogGuid);
+                }
+            }
 			if (showWaitControl)
 			{
 				try
 				{
 					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
-					if ((thread != null) && (thread.IsAlive))
-					{
-						_waitDialog.ShowControl();
-					}
+                    lock (_dialogs)
+                    {
+                        if (_dialogs.ContainsKey(newDialogGuid))
+                        {
+                            _waitDialog.AssociatedThreadId = threadId;
+                            _waitDialog.ShowControl();
+                        }
+                    }
 				}
-				catch (System.Reflection.TargetInvocationException ex)
-				{
-					throw ex.InnerException;
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
+                catch (System.Reflection.TargetInvocationException ex)
+                {
+                    throw ex.InnerException;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
 			}
 
 			return thread;
@@ -166,45 +219,84 @@ namespace Boxerp.Client.WindowsForms
 
         public override void OnCancel(object sender, EventArgs e)
         {
+            IWinFormsWaitControl senderDialog = sender as IWinFormsWaitControl;
             CancelRequested = true;
 
             QuestionDialog ques = new QuestionDialog(true);
             ques.Message = "The process is being cancelled, please wait.  Do you want to force abort right now?";
-            _questionWindows.Enqueue(ques);
+            _questionWindows[senderDialog.AssociatedThreadId] = ques;
             if (RunningThreads > 0)
             {
                 ResponseType resp = ques.Run();
                 if ((resp == ResponseType.Ok) && (RunningThreads > 0))
                 {
-                    ForceAbort();
+                    ForceAbort(senderDialog.AssociatedThreadId);
                 }
                 if (_questionWindows.Count > 0)
                 {
-                    _questionWindows.Dequeue();
+                    _questionWindows.Remove(senderDialog.AssociatedThreadId);
                 }
             }
         }
 
-        private void TransferCompleted(object sender, EventArgs e)
+        private void TransferCompleted(object sender, ThreadEventArgs e)
         {
             ThreadEventArgs evArgs = (ThreadEventArgs)e;
-            T dia;
+            ResponsiveEnum operationType = e.OperationType;
+            T wDialog = null;
 			if (!_userWaitDialogInstance)
 			{
-				dia = _dialogs.Dequeue();
+                int id = e.ThreadId;
+                if (_storagePointers.ContainsKey(id))
+                {
+                    wDialog = _dialogs[_storagePointers[id]];
+                    _dialogs.Remove(_storagePointers[id]);
+                    _storagePointers.Remove(id);
+                }
+                else
+                {
+                    //the thread died before proper intialization
+                    Guid dialogGuid = Guid.NewGuid();
+                    foreach (Guid guid in _dialogs.Keys)
+                    {
+                        bool isInStorage = false;
+                        foreach (Guid storedGuid in _storagePointers.Values)
+                        {
+                            if (guid == storedGuid)
+                            {
+                                isInStorage = true;
+                                break;
+                            }
+                        }
+                        if (!isInStorage)
+                        {
+                            //just take whatever dialog that was not intialized properly and close.
+                            wDialog = _dialogs[guid];
+                            dialogGuid = guid;
+                            break;
+                        }
+                        else
+                        {
+                            throw new NotSupportedException("This is a bug in Boxerp responsiveness engine, this should not happend ever");
+                        }
+                    }
+                    _dialogs.Remove(dialogGuid);
+                }
 			}
 			else
 			{
-				dia = _waitDialog;
-				dia.CancelEvent -= OnCancel;
+				wDialog = _waitDialog;
+				wDialog.CancelEvent -= OnCancel;
 			}
 
-            dia.Invoke(new MethodInvoker(dia.CloseControl));
+            Console.Out.WriteLine("closing teh stuffs");
+            wDialog.Invoke(new MethodInvoker(wDialog.CloseControl));
             
 			if (_questionWindows.Count > 0)
             {
-                QuestionDialog qdia = _questionWindows.Dequeue();
-                qdia.Invoke(new MethodInvoker(dia.CloseControl));
+                QuestionDialog qdia = _questionWindows[e.ThreadId]; //todo: check this
+                qdia.Invoke(new MethodInvoker(qdia.Close));
+                _questionWindows.Remove(e.ThreadId);
             }
 
             if (!evArgs.Success)
@@ -235,7 +327,7 @@ namespace Boxerp.Client.WindowsForms
 			{
 				try
 				{
-					_waitDialog.BeginInvoke(new EventHandler(TransferCompleted), new object[] { this, e });
+					_waitDialog.BeginInvoke(new ThreadEventHandler(TransferCompleted), new object[] { sender, e });
 				}
 				catch (InvalidOperationException ex)
 				{

@@ -42,6 +42,13 @@ namespace Boxerp.Client.WindowsForms
         private EventHandler cancelEventHandler;
         protected bool _isModal;
 		private bool _isProgressDiscrete;
+        private int _associatedThreadId = -1;
+
+        public int AssociatedThreadId
+        {
+            get { return _associatedThreadId; }
+            set { _associatedThreadId = value; }
+        }
 
         public bool IsModal
         {

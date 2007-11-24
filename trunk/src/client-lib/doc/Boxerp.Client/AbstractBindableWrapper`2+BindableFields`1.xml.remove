@@ -1,0 +1,74 @@
+<Type Name="AbstractBindableWrapper&lt;T,Y&gt;+BindableFields&lt;D&gt;" FullName="Boxerp.Client.AbstractBindableWrapper&lt;T,Y&gt;+BindableFields&lt;D&gt;">
+  <TypeSignature Language="C#" Value="public abstract class AbstractBindableWrapper&lt;T,Y&gt;.BindableFields&lt;D&gt; : Boxerp.Client.ISimpleWrapper&lt;D&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter>T</TypeParameter>
+    <TypeParameter>Y</TypeParameter>
+    <TypeParameter>D</TypeParameter>
+  </TypeParameters>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Boxerp.Client.ISimpleWrapper&lt;D&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <typeparam name="D">To be added.</typeparam>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BindableFields (Castle.Core.Interceptor.IInterceptor interceptor);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="interceptor" Type="Castle.Core.Interceptor.IInterceptor" />
+      </Parameters>
+      <Docs>
+        <param name="interceptor">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="_interceptor">
+      <MemberSignature Language="C#" Value="protected Castle.Core.Interceptor.IInterceptor _interceptor;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Castle.Core.Interceptor.IInterceptor</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BusinessObj">
+      <MemberSignature Language="C#" Value="public D BusinessObj { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>D</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BusinessObjBinding">
+      <MemberSignature Language="C#" Value="public System.ComponentModel.INotifyPropertyChanged BusinessObjBinding { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.ComponentModel.INotifyPropertyChanged</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

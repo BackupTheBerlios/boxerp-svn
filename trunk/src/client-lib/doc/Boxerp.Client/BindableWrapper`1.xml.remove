@@ -1,0 +1,67 @@
+<Type Name="BindableWrapper&lt;T&gt;" FullName="Boxerp.Client.BindableWrapper&lt;T&gt;">
+  <TypeSignature Language="C#" Value="public class BindableWrapper&lt;T&gt; : Boxerp.Client.AbstractBindableWrapper&lt;T,Boxerp.Client.BindableWrapper&lt;T&gt;.WrapObject&lt;T&gt;&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter>T</TypeParameter>
+  </TypeParameters>
+  <Base>
+    <BaseTypeName>Boxerp.Client.AbstractBindableWrapper&lt;T,Boxerp.Client.BindableWrapper&lt;T&gt;+WrapObject&lt;T&gt;&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="T">T</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="Y">Boxerp.Client.BindableWrapper&lt;T&gt;+WrapObject&lt;T&gt;</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <typeparam name="T">To be added.</typeparam>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BindableWrapper (T businessObj);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="businessObj" Type="T" />
+      </Parameters>
+      <Docs>
+        <param name="businessObj">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BindableWrapper (T businessObj, bool disableInterception);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="businessObj" Type="T" />
+        <Parameter Name="disableInterception" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="businessObj">To be added.</param>
+        <param name="disableInterception">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BindableWrapper (T businessObj, bool disableInterception, bool disableUndoRedo);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="businessObj" Type="T" />
+        <Parameter Name="disableInterception" Type="System.Boolean" />
+        <Parameter Name="disableUndoRedo" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="businessObj">To be added.</param>
+        <param name="disableInterception">To be added.</param>
+        <param name="disableUndoRedo">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

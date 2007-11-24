@@ -1,0 +1,127 @@
+<Overview>
+  <Assemblies>
+    <Assembly Name="Boxerp.Client.GtkSharp" Version="0.2.0.0">
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyFileVersion("0.2.0.0")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyTrademark("BSD License")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyCopyright("Carlos Ble")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyProduct("Boxerp")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyCompany("Boxerp")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyConfiguration("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyDescription("Boxerp Framework")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyTitle("Boxerp.Client.WPF")</AttributeName>
+        </Attribute>
+      </Attributes>
+    </Assembly>
+  </Assemblies>
+  <Remarks>To be added.</Remarks>
+  <Copyright>To be added.</Copyright>
+  <Types>
+    <Namespace Name="Boxerp.Client">
+      <Type Name="AbstractBindableWrapper`2+BindableFields`1" DisplayName="AbstractBindableWrapper&lt;T,Y&gt;+BindableFields&lt;D&gt;" />
+      <Type Name="AbstractController" />
+      <Type Name="AbstractController`1" DisplayName="AbstractController&lt;V&gt;" />
+      <Type Name="AbstractController`2" DisplayName="AbstractController&lt;V,TData&gt;" />
+      <Type Name="AbstractData`3" DisplayName="AbstractData&lt;TBaseView,C,TFinalView&gt;" />
+      <Type Name="AbstractDataBinder" />
+      <Type Name="AbstractResponsiveHelper" />
+      <Type Name="AbstractTestView`1" DisplayName="AbstractTestView&lt;C&gt;" />
+      <Type Name="AbstractTestView`3" DisplayName="AbstractTestView&lt;C,TFinalDataIface,TBaseDataIface&gt;" />
+      <Type Name="BdWithBindableCollection`2" DisplayName="BdWithBindableCollection&lt;T,Y&gt;" />
+      <Type Name="BdWithBindableCollection`2+WrapObject`2" DisplayName="BdWithBindableCollection&lt;T,Y&gt;+WrapObject&lt;D,Z&gt;" />
+      <Type Name="BdWithNestedWrapper`2" DisplayName="BdWithNestedWrapper&lt;T,Y&gt;" />
+      <Type Name="BdWithNestedWrapper`2+WrapObject`2" DisplayName="BdWithNestedWrapper&lt;T,Y&gt;+WrapObject&lt;D,Z&gt;" />
+      <Type Name="BindableCollection`1" DisplayName="BindableCollection&lt;T&gt;" />
+      <Type Name="BindableWithCollection`2" DisplayName="BindableWithCollection&lt;T,Y&gt;" />
+      <Type Name="BindableWithCollection`2+WrapObject`2" DisplayName="BindableWithCollection&lt;T,Y&gt;+WrapObject&lt;D,Z&gt;" />
+      <Type Name="BindableWrapper`1" DisplayName="BindableWrapper&lt;T&gt;" />
+      <Type Name="BindableWrapper`1+WrapObject`1" DisplayName="BindableWrapper&lt;T&gt;+WrapObject&lt;D&gt;" />
+      <Type Name="BindingMetadata" />
+      <Type Name="BindingOptions" />
+      <Type Name="Cloner" />
+      <Type Name="ConcurrencyMode" />
+      <Type Name="ConsoleResponsiveHelper" />
+      <Type Name="ConsoleResponsiveHelper`1" DisplayName="ConsoleResponsiveHelper&lt;T&gt;" />
+      <Type Name="ConsoleWaitDialog" />
+      <Type Name="ControllerFactory`2" DisplayName="ControllerFactory&lt;C,I&gt;" />
+      <Type Name="DecimalTextBoxHelper" />
+      <Type Name="DynamicPropertyChangedProxy" />
+      <Type Name="DynamicProxyHelper" />
+      <Type Name="IBindableCore" />
+      <Type Name="IBindableWrapper" />
+      <Type Name="IBindableWrapper`2" DisplayName="IBindableWrapper&lt;T,Y&gt;" />
+      <Type Name="IChildObject" />
+      <Type Name="ICloseView" />
+      <Type Name="IController" />
+      <Type Name="IControlManager" />
+      <Type Name="IControlManager`1" DisplayName="IControlManager&lt;T&gt;" />
+      <Type Name="ICustomNotifyPropertyChanged" />
+      <Type Name="IDataBinder" />
+      <Type Name="IDataBinder`1" DisplayName="IDataBinder&lt;X&gt;" />
+      <Type Name="IDataBinder`3" DisplayName="IDataBinder&lt;A,T,Y&gt;" />
+      <Type Name="IntegerTextBoxHelper" />
+      <Type Name="InternalAbstractController`2" DisplayName="InternalAbstractController&lt;V,TSelf&gt;" />
+      <Type Name="InternalAbstractController`3" DisplayName="InternalAbstractController&lt;V,TData,TSelf&gt;" />
+      <Type Name="IResponsiveClient" />
+      <Type Name="ISimpleWrapper`1" DisplayName="ISimpleWrapper&lt;T&gt;" />
+      <Type Name="ItemRemovedEventArgs" />
+      <Type Name="IUIData" />
+      <Type Name="IView" />
+      <Type Name="IView`1" DisplayName="IView&lt;C&gt;" />
+      <Type Name="IView`2" DisplayName="IView&lt;C,D&gt;" />
+      <Type Name="IWaitControl" />
+      <Type Name="PropertyComparer`1" DisplayName="PropertyComparer&lt;T&gt;" />
+      <Type Name="RemotingHelper" />
+      <Type Name="ResponsiveAttribute" />
+      <Type Name="ResponsiveEnum" />
+      <Type Name="ResponsivenessSingleton" />
+      <Type Name="SessionSingleton" />
+      <Type Name="SimpleDelegate" />
+      <Type Name="SimpleInvoker" />
+      <Type Name="SystemNameTextBoxHelper" />
+      <Type Name="ThreadEventArgs" />
+      <Type Name="ThreadEventHandler" />
+      <Type Name="UIBinderBase" />
+      <Type Name="XamlParser" />
+    </Namespace>
+    <Namespace Name="Boxerp.Client.Configuration">
+      <Type Name="ClientSectionHandler" />
+      <Type Name="LoggerConfiguration" />
+    </Namespace>
+    <Namespace Name="Boxerp.Client.GtkSharp">
+      <Type Name="BindableWidgetCore" />
+      <Type Name="BindingDescriptor`1" DisplayName="BindingDescriptor&lt;T&gt;" />
+      <Type Name="DataBinder" />
+      <Type Name="EditableColumn" />
+      <Type Name="GtkResponsiveHelper" />
+      <Type Name="GtkResponsiveHelper`2" DisplayName="GtkResponsiveHelper&lt;T,Y&gt;" />
+      <Type Name="IBindableWidget" />
+      <Type Name="IGtkWaitControl" />
+      <Type Name="InfoDialog" />
+      <Type Name="QuestionDialog" />
+      <Type Name="SimpleColumn" />
+      <Type Name="WaitDialog" />
+      <Type Name="WaitWindow" />
+      <Type Name="WarningDialog" />
+    </Namespace>
+  </Types>
+  <Title>Boxerp.Client</Title>
+</Overview>

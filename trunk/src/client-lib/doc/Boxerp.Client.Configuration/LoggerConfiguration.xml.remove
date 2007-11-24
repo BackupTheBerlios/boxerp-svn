@@ -1,0 +1,16 @@
+<Type Name="LoggerConfiguration" FullName="Boxerp.Client.Configuration.LoggerConfiguration">
+  <TypeSignature Language="C#" Value="public class LoggerConfiguration" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members />
+</Type>

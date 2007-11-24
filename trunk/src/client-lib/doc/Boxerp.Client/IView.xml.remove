@@ -1,0 +1,13 @@
+<Type Name="IView" FullName="Boxerp.Client.IView">
+  <TypeSignature Language="C#" Value="public interface IView" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members />
+</Type>

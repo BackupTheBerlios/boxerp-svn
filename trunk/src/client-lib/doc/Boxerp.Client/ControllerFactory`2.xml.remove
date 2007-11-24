@@ -1,0 +1,48 @@
+<Type Name="ControllerFactory&lt;C,I&gt;" FullName="Boxerp.Client.ControllerFactory&lt;C,I&gt;">
+  <TypeSignature Language="C#" Value="public class ControllerFactory&lt;C,I&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter>C</TypeParameter>
+    <TypeParameter>I</TypeParameter>
+  </TypeParameters>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <typeparam name="C">To be added.</typeparam>
+    <typeparam name="I">To be added.</typeparam>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ControllerFactory ();" />
+      <MemberType>Constructor</MemberType>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateTestController">
+      <MemberSignature Language="C#" Value="public static C CreateTestController (Boxerp.Client.ConcurrencyMode mode);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>C</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="mode" Type="Boxerp.Client.ConcurrencyMode" />
+      </Parameters>
+      <Docs>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

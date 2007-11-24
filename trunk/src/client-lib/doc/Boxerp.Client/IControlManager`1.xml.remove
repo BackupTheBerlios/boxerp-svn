@@ -1,0 +1,50 @@
+<Type Name="IControlManager&lt;T&gt;" FullName="Boxerp.Client.IControlManager&lt;T&gt;">
+  <TypeSignature Language="C#" Value="public interface IControlManager&lt;T&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter>T</TypeParameter>
+  </TypeParameters>
+  <Interfaces />
+  <Docs>
+    <typeparam name="T">To be added.</typeparam>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="ShowControl">
+      <MemberSignature Language="C#" Value="public void ShowControl (T control);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="control" Type="T" />
+      </Parameters>
+      <Docs>
+        <param name="control">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowControl">
+      <MemberSignature Language="C#" Value="public void ShowControl (T control, string title);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="control" Type="T" />
+        <Parameter Name="title" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="control">To be added.</param>
+        <param name="title">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

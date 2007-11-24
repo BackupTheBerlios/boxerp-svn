@@ -1,0 +1,39 @@
+<Type Name="BindableWrapper&lt;T&gt;+WrapObject&lt;D&gt;" FullName="Boxerp.Client.BindableWrapper&lt;T&gt;+WrapObject&lt;D&gt;">
+  <TypeSignature Language="C#" Value="public class BindableWrapper&lt;T&gt;.WrapObject&lt;D&gt; : Boxerp.Client.AbstractBindableWrapper&lt;D,Boxerp.Client.BindableWrapper&lt;D&gt;.WrapObject&lt;D&gt;&gt;.BindableFields&lt;D&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter>T</TypeParameter>
+    <TypeParameter>D</TypeParameter>
+  </TypeParameters>
+  <Base>
+    <BaseTypeName>Boxerp.Client.AbstractBindableWrapper&lt;D,Boxerp.Client.BindableWrapper&lt;D&gt;+WrapObject&lt;D&gt;&gt;+BindableFields&lt;D&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="T">D</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="Y">Boxerp.Client.BindableWrapper&lt;D&gt;+WrapObject&lt;D&gt;</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="D">D</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <typeparam name="D">To be added.</typeparam>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public WrapObject (Castle.Core.Interceptor.IInterceptor interceptor);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="interceptor" Type="Castle.Core.Interceptor.IInterceptor" />
+      </Parameters>
+      <Docs>
+        <param name="interceptor">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

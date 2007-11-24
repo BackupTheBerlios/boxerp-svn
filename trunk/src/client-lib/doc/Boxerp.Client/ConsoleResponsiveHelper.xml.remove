@@ -1,0 +1,46 @@
+<Type Name="ConsoleResponsiveHelper" FullName="Boxerp.Client.ConsoleResponsiveHelper">
+  <TypeSignature Language="C#" Value="public class ConsoleResponsiveHelper : Boxerp.Client.ConsoleResponsiveHelper&lt;Boxerp.Client.ConsoleWaitDialog&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Boxerp.Client.ConsoleResponsiveHelper&lt;Boxerp.Client.ConsoleWaitDialog&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="T">Boxerp.Client.ConsoleWaitDialog</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ConsoleResponsiveHelper (Boxerp.Client.ConcurrencyMode mode);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="mode" Type="Boxerp.Client.ConcurrencyMode" />
+      </Parameters>
+      <Docs>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ConsoleResponsiveHelper (Boxerp.Client.ConcurrencyMode mode, bool displayExceptions);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="mode" Type="Boxerp.Client.ConcurrencyMode" />
+        <Parameter Name="displayExceptions" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="mode">To be added.</param>
+        <param name="displayExceptions">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

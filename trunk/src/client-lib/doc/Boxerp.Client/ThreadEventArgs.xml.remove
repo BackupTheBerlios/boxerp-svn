@@ -1,0 +1,133 @@
+<Type Name="ThreadEventArgs" FullName="Boxerp.Client.ThreadEventArgs">
+  <TypeSignature Language="C#" Value="public class ThreadEventArgs : EventArgs" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.EventArgs</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ThreadEventArgs (int t, Boxerp.Client.SimpleDelegate m, object o);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="t" Type="System.Int32" />
+        <Parameter Name="m" Type="Boxerp.Client.SimpleDelegate" />
+        <Parameter Name="o" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="t">To be added.</param>
+        <param name="m">To be added.</param>
+        <param name="o">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ThreadEventArgs (int t, System.Reflection.MethodBase m, object o);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="t" Type="System.Int32" />
+        <Parameter Name="m" Type="System.Reflection.MethodBase" />
+        <Parameter Name="o" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="t">To be added.</param>
+        <param name="m">To be added.</param>
+        <param name="o">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExceptionMsg">
+      <MemberSignature Language="C#" Value="public string ExceptionMsg { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Method">
+      <MemberSignature Language="C#" Value="public Boxerp.Client.SimpleDelegate Method { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>Boxerp.Client.SimpleDelegate</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MethodBase">
+      <MemberSignature Language="C#" Value="public System.Reflection.MethodBase MethodBase { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Reflection.MethodBase</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OperationType">
+      <MemberSignature Language="C#" Value="public Boxerp.Client.ResponsiveEnum OperationType { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>Boxerp.Client.ResponsiveEnum</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ReturnValue">
+      <MemberSignature Language="C#" Value="public object ReturnValue { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Success">
+      <MemberSignature Language="C#" Value="public bool Success { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ThreadId">
+      <MemberSignature Language="C#" Value="public int ThreadId { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

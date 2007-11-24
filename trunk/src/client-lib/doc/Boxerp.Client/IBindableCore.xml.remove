@@ -1,0 +1,58 @@
+<Type Name="IBindableCore" FullName="Boxerp.Client.IBindableCore">
+  <TypeSignature Language="C#" Value="public interface IBindableCore" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="BindObject">
+      <MemberSignature Language="C#" Value="public void BindObject (Boxerp.Client.IBindableWrapper bObject, string path, string widgetProperty, Boxerp.Client.BindingOptions options);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="bObject" Type="Boxerp.Client.IBindableWrapper" />
+        <Parameter Name="path" Type="System.String" />
+        <Parameter Name="widgetProperty" Type="System.String" />
+        <Parameter Name="options" Type="Boxerp.Client.BindingOptions" />
+      </Parameters>
+      <Docs>
+        <param name="bObject">To be added.</param>
+        <param name="path">To be added.</param>
+        <param name="widgetProperty">To be added.</param>
+        <param name="options">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BindObject">
+      <MemberSignature Language="C#" Value="public void BindObject (Boxerp.Client.IBindableWrapper bObject, object propertyOwner, string bindingProperty, string widgetProperty, Boxerp.Client.BindingOptions options);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="bObject" Type="Boxerp.Client.IBindableWrapper" />
+        <Parameter Name="propertyOwner" Type="System.Object" />
+        <Parameter Name="bindingProperty" Type="System.String" />
+        <Parameter Name="widgetProperty" Type="System.String" />
+        <Parameter Name="options" Type="Boxerp.Client.BindingOptions" />
+      </Parameters>
+      <Docs>
+        <param name="bObject">To be added.</param>
+        <param name="propertyOwner">To be added.</param>
+        <param name="bindingProperty">To be added.</param>
+        <param name="widgetProperty">To be added.</param>
+        <param name="options">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

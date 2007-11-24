@@ -1,0 +1,50 @@
+<Type Name="ClientSectionHandler" FullName="Boxerp.Client.Configuration.ClientSectionHandler">
+  <TypeSignature Language="C#" Value="public class ClientSectionHandler : System.Configuration.IConfigurationSectionHandler" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Configuration.IConfigurationSectionHandler</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ClientSectionHandler ();" />
+      <MemberType>Constructor</MemberType>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public object Create (object parent, object configContext, System.Xml.XmlNode section);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parent" Type="System.Object" />
+        <Parameter Name="configContext" Type="System.Object" />
+        <Parameter Name="section" Type="System.Xml.XmlNode" />
+      </Parameters>
+      <Docs>
+        <param name="parent">To be added.</param>
+        <param name="configContext">To be added.</param>
+        <param name="section">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

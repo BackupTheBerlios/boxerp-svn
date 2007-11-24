@@ -1,0 +1,68 @@
+<Type Name="BdWithNestedWrapper&lt;T,Y&gt;+WrapObject&lt;D,Z&gt;" FullName="Boxerp.Client.BdWithNestedWrapper&lt;T,Y&gt;+WrapObject&lt;D,Z&gt;">
+  <TypeSignature Language="C#" Value="public class BdWithNestedWrapper&lt;T,Y&gt;.WrapObject&lt;D,Z&gt; : Boxerp.Client.AbstractBindableWrapper&lt;D,Boxerp.Client.BdWithNestedWrapper&lt;D,Z&gt;.WrapObject&lt;D,Z&gt;&gt;.BindableFields&lt;D&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter>T</TypeParameter>
+    <TypeParameter>Y</TypeParameter>
+    <TypeParameter>D</TypeParameter>
+    <TypeParameter>Z</TypeParameter>
+  </TypeParameters>
+  <Base>
+    <BaseTypeName>Boxerp.Client.AbstractBindableWrapper&lt;D,Boxerp.Client.BdWithNestedWrapper&lt;D,Z&gt;+WrapObject&lt;D,Z&gt;&gt;+BindableFields&lt;D&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="T">D</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="Y">Boxerp.Client.BdWithNestedWrapper&lt;D,Z&gt;+WrapObject&lt;D,Z&gt;</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="D">D</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <typeparam name="D">To be added.</typeparam>
+    <typeparam name="Z">To be added.</typeparam>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public WrapObject (Castle.Core.Interceptor.IInterceptor interceptor);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="interceptor" Type="Castle.Core.Interceptor.IInterceptor" />
+      </Parameters>
+      <Docs>
+        <param name="interceptor">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public WrapObject (Castle.Core.Interceptor.IInterceptor interceptor, Z nestedWrapper);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="interceptor" Type="Castle.Core.Interceptor.IInterceptor" />
+        <Parameter Name="nestedWrapper" Type="Z" />
+      </Parameters>
+      <Docs>
+        <param name="interceptor">To be added.</param>
+        <param name="nestedWrapper">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NestedWrapper">
+      <MemberSignature Language="C#" Value="public virtual Z NestedWrapper { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>Z</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

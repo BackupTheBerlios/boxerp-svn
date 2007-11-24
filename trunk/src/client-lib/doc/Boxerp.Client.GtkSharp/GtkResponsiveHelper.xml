@@ -1,0 +1,47 @@
+<Type Name="GtkResponsiveHelper" FullName="Boxerp.Client.GtkSharp.GtkResponsiveHelper">
+  <TypeSignature Language="C#" Value="public class GtkResponsiveHelper : Boxerp.Client.GtkSharp.GtkResponsiveHelper&lt;Boxerp.Client.GtkSharp.WaitDialog,Boxerp.Client.GtkSharp.WaitWindow&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client.GtkSharp</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Boxerp.Client.GtkSharp.GtkResponsiveHelper&lt;Boxerp.Client.GtkSharp.WaitDialog,Boxerp.Client.GtkSharp.WaitWindow&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="T">Boxerp.Client.GtkSharp.WaitDialog</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="Y">Boxerp.Client.GtkSharp.WaitWindow</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public GtkResponsiveHelper (Boxerp.Client.ConcurrencyMode mode);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="mode" Type="Boxerp.Client.ConcurrencyMode" />
+      </Parameters>
+      <Docs>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public GtkResponsiveHelper (Boxerp.Client.ConcurrencyMode mode, bool displayExceptions);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="mode" Type="Boxerp.Client.ConcurrencyMode" />
+        <Parameter Name="displayExceptions" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="mode">To be added.</param>
+        <param name="displayExceptions">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

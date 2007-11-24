@@ -1,0 +1,79 @@
+<Type Name="BdWithBindableCollection&lt;T,Y&gt;" FullName="Boxerp.Client.BdWithBindableCollection&lt;T,Y&gt;">
+  <TypeSignature Language="C#" Value="public class BdWithBindableCollection&lt;T,Y&gt; : Boxerp.Client.AbstractBindableWrapper&lt;T,Boxerp.Client.BdWithBindableCollection&lt;T,Y&gt;.WrapObject&lt;T,Y&gt;&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter>T</TypeParameter>
+    <TypeParameter>Y</TypeParameter>
+  </TypeParameters>
+  <Base>
+    <BaseTypeName>Boxerp.Client.AbstractBindableWrapper&lt;T,Boxerp.Client.BdWithBindableCollection&lt;T,Y&gt;+WrapObject&lt;T,Y&gt;&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="T">T</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="Y">Boxerp.Client.BdWithBindableCollection&lt;T,Y&gt;+WrapObject&lt;T,Y&gt;</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <typeparam name="T">To be added.</typeparam>
+    <typeparam name="Y">To be added.</typeparam>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BdWithBindableCollection (T businessObj);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="businessObj" Type="T" />
+      </Parameters>
+      <Docs>
+        <param name="businessObj">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public BdWithBindableCollection (T businessObj, System.Collections.Generic.List&lt;Y&gt; sourceList);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="businessObj" Type="T" />
+        <Parameter Name="sourceList" Type="System.Collections.Generic.List&lt;Y&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="businessObj">To be added.</param>
+        <param name="sourceList">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCollectionType">
+      <MemberSignature Language="C#" Value="public virtual Type GetCollectionType ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Type</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetRelatedObjectType">
+      <MemberSignature Language="C#" Value="public Type GetRelatedObjectType ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Type</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

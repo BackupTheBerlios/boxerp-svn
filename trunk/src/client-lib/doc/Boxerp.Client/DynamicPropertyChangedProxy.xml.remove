@@ -1,0 +1,168 @@
+<Type Name="DynamicPropertyChangedProxy" FullName="Boxerp.Client.DynamicPropertyChangedProxy">
+  <TypeSignature Language="C#" Value="public static class DynamicPropertyChangedProxy" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="ARGUMENTS_TYPES4CONSTRUCTOR">
+      <MemberSignature Language="C#" Value="public static string ARGUMENTS_TYPES4CONSTRUCTOR;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConsolePrint">
+      <MemberSignature Language="C#" Value="public static void ConsolePrint (System.Reflection.Emit.ILGenerator generator, string msg);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="generator" Type="System.Reflection.Emit.ILGenerator" />
+        <Parameter Name="msg" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="generator">To be added.</param>
+        <param name="msg">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateBindableWrapperProxy">
+      <MemberSignature Language="C#" Value="public static Type CreateBindableWrapperProxy (Type baseType, Type[] constructorParamsTypes, object[] valuesForConstructor);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Type</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="baseType" Type="System.Type" />
+        <Parameter Name="constructorParamsTypes" Type="System.Type[]" />
+        <Parameter Name="valuesForConstructor" Type="System.Object[]" />
+      </Parameters>
+      <Docs>
+        <param name="baseType">To be added.</param>
+        <param name="constructorParamsTypes">To be added.</param>
+        <param name="valuesForConstructor">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateBusinessObjectProxy">
+      <MemberSignature Language="C#" Value="public static Type CreateBusinessObjectProxy (Type baseType, Type[] constructorParamsTypes);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Type</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="baseType" Type="System.Type" />
+        <Parameter Name="constructorParamsTypes" Type="System.Type[]" />
+      </Parameters>
+      <Docs>
+        <param name="baseType">To be added.</param>
+        <param name="constructorParamsTypes">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateBusinessObjectProxy">
+      <MemberSignature Language="C#" Value="public static Type CreateBusinessObjectProxy (Type baseType, Type[] constructorParamsTypes, object[] values4Constructor, string className);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Type</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="baseType" Type="System.Type" />
+        <Parameter Name="constructorParamsTypes" Type="System.Type[]" />
+        <Parameter Name="values4Constructor" Type="System.Object[]" />
+        <Parameter Name="className" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="baseType">To be added.</param>
+        <param name="constructorParamsTypes">To be added.</param>
+        <param name="values4Constructor">To be added.</param>
+        <param name="className">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="createDeserializationConstructor">
+      <MemberSignature Language="C#" Value="public static void createDeserializationConstructor (System.Reflection.Emit.TypeBuilder builder, Type baseType, Type[] constructorParamsTypes);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="builder" Type="System.Reflection.Emit.TypeBuilder" />
+        <Parameter Name="baseType" Type="System.Type" />
+        <Parameter Name="constructorParamsTypes" Type="System.Type[]" />
+      </Parameters>
+      <Docs>
+        <param name="builder">To be added.</param>
+        <param name="baseType">To be added.</param>
+        <param name="constructorParamsTypes">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IS_BUSINESS_OBJECT">
+      <MemberSignature Language="C#" Value="public static string IS_BUSINESS_OBJECT;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OBJECT_BASE_TYPE">
+      <MemberSignature Language="C#" Value="public static string OBJECT_BASE_TYPE;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SERIALIZED_DATA">
+      <MemberSignature Language="C#" Value="public static string SERIALIZED_DATA;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="VALUES4CONSTRUCTOR">
+      <MemberSignature Language="C#" Value="public static string VALUES4CONSTRUCTOR;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

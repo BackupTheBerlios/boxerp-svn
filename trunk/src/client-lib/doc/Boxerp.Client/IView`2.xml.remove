@@ -1,0 +1,36 @@
+<Type Name="IView&lt;C,D&gt;" FullName="Boxerp.Client.IView&lt;C,D&gt;">
+  <TypeSignature Language="C#" Value="public interface IView&lt;C,D&gt; : Boxerp.Client.IView&lt;C&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter>C</TypeParameter>
+    <TypeParameter>D</TypeParameter>
+  </TypeParameters>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Boxerp.Client.IView&lt;C&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <typeparam name="C">To be added.</typeparam>
+    <typeparam name="D">To be added.</typeparam>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="SharedData">
+      <MemberSignature Language="C#" Value="public D SharedData { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>D</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,113 @@
+<Type Name="AbstractController" FullName="Boxerp.Client.AbstractController">
+  <TypeSignature Language="C#" Value="public abstract class AbstractController : Boxerp.Client.IController" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Boxerp.Client.IController</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected AbstractController (Boxerp.Client.IResponsiveClient helper);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="helper" Type="Boxerp.Client.IResponsiveClient" />
+      </Parameters>
+      <Docs>
+        <param name="helper">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="_responsiveHelper">
+      <MemberSignature Language="C#" Value="protected Boxerp.Client.IResponsiveClient _responsiveHelper;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Boxerp.Client.IResponsiveClient</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentThread">
+      <MemberSignature Language="C#" Value="public int CurrentThread { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MethodBase">
+      <MemberSignature Language="C#" Value="protected System.Reflection.MethodBase MethodBase (Boxerp.Client.SimpleDelegate del);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Reflection.MethodBase</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="del" Type="Boxerp.Client.SimpleDelegate" />
+      </Parameters>
+      <Docs>
+        <param name="del">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnAsyncOperationFinish">
+      <MemberSignature Language="C#" Value="protected abstract void OnAsyncOperationFinish (object sender, Boxerp.Client.ThreadEventArgs args);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Boxerp.Client.ThreadEventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="sender">To be added.</param>
+        <param name="args">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ResponsiveHelper">
+      <MemberSignature Language="C#" Value="protected Boxerp.Client.IResponsiveClient ResponsiveHelper { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>Boxerp.Client.IResponsiveClient</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="StopAsyncCall">
+      <MemberSignature Language="C#" Value="protected void StopAsyncCall ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

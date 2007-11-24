@@ -1,0 +1,74 @@
+<Type Name="AbstractTestView&lt;C,TFinalDataIface,TBaseDataIface&gt;" FullName="Boxerp.Client.AbstractTestView&lt;C,TFinalDataIface,TBaseDataIface&gt;">
+  <TypeSignature Language="C#" Value="public class AbstractTestView&lt;C,TFinalDataIface,TBaseDataIface&gt; : Boxerp.Client.IView&lt;C,TBaseDataIface&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter>C</TypeParameter>
+    <TypeParameter>TFinalDataIface</TypeParameter>
+    <TypeParameter>TBaseDataIface</TypeParameter>
+  </TypeParameters>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Boxerp.Client.IView&lt;C,TBaseDataIface&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <typeparam name="C">To be added.</typeparam>
+    <typeparam name="TFinalDataIface">To be added.</typeparam>
+    <typeparam name="TBaseDataIface">To be added.</typeparam>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected AbstractTestView ();" />
+      <MemberType>Constructor</MemberType>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Boxerp.Client.IView&lt;C,TBaseDataIface&gt;.SharedData">
+      <MemberSignature Language="C#" Value="TBaseDataIface Boxerp.Client.IView&lt;C,TBaseDataIface&gt;.SharedData { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>TBaseDataIface</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Controller">
+      <MemberSignature Language="C#" Value="public C Controller { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>C</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Data">
+      <MemberSignature Language="C#" Value="public TFinalDataIface Data { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>TFinalDataIface</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

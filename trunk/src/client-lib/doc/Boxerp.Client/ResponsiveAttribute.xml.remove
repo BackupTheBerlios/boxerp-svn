@@ -1,0 +1,46 @@
+<Type Name="ResponsiveAttribute" FullName="Boxerp.Client.ResponsiveAttribute">
+  <TypeSignature Language="C#" Value="public class ResponsiveAttribute : Attribute" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Attribute</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.AttributeUsage(System.AttributeTargets.Method, AllowMultiple=false)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ResponsiveAttribute (Boxerp.Client.ResponsiveEnum rType);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="rType" Type="Boxerp.Client.ResponsiveEnum" />
+      </Parameters>
+      <Docs>
+        <param name="rType">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RespType">
+      <MemberSignature Language="C#" Value="public Boxerp.Client.ResponsiveEnum RespType { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>Boxerp.Client.ResponsiveEnum</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

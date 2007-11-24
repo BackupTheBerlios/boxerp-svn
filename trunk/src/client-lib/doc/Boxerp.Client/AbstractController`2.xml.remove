@@ -1,0 +1,66 @@
+<Type Name="AbstractController&lt;V,TData&gt;" FullName="Boxerp.Client.AbstractController&lt;V,TData&gt;">
+  <TypeSignature Language="C#" Value="public abstract class AbstractController&lt;V,TData&gt; : Boxerp.Client.InternalAbstractController&lt;V,TData,Boxerp.Client.AbstractController&lt;V,TData&gt;&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter>V</TypeParameter>
+    <TypeParameter>TData</TypeParameter>
+  </TypeParameters>
+  <Base>
+    <BaseTypeName>Boxerp.Client.InternalAbstractController&lt;V,TData,Boxerp.Client.AbstractController&lt;V,TData&gt;&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="V">V</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="TData">TData</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="TSelf">Boxerp.Client.AbstractController&lt;V,TData&gt;</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <typeparam name="V">To be added.</typeparam>
+    <typeparam name="TData">To be added.</typeparam>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected AbstractController (Boxerp.Client.IResponsiveClient helper);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="helper" Type="Boxerp.Client.IResponsiveClient" />
+      </Parameters>
+      <Docs>
+        <param name="helper">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected AbstractController (Boxerp.Client.IResponsiveClient helper, V view);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="helper" Type="Boxerp.Client.IResponsiveClient" />
+        <Parameter Name="view" Type="V" />
+      </Parameters>
+      <Docs>
+        <param name="helper">To be added.</param>
+        <param name="view">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SharedData">
+      <MemberSignature Language="C#" Value="public TData SharedData { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>TData</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,66 @@
+<Type Name="ClientConfiguration" FullName="Boxerp.Client.Configuration.ClientConfiguration">
+  <TypeSignature Language="C#" Value="public class ClientConfiguration" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="BindableWidgetsPrefix">
+      <MemberSignature Language="C#" Value="public string BindableWidgetsPrefix { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetInstance">
+      <MemberSignature Language="C#" Value="public static Boxerp.Client.Configuration.ClientConfiguration GetInstance ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>Boxerp.Client.Configuration.ClientConfiguration</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GuiToolkit">
+      <MemberSignature Language="C#" Value="public string GuiToolkit { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Logger">
+      <MemberSignature Language="C#" Value="public Boxerp.Client.Configuration.LoggerConfiguration Logger { set; get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>Boxerp.Client.Configuration.LoggerConfiguration</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,36 @@
+<Type Name="BindingOptions" FullName="Boxerp.Client.BindingOptions">
+  <TypeSignature Language="C#" Value="public enum BindingOptions" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="OneWay">
+      <MemberSignature Language="C#" Value="OneWay" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Boxerp.Client.BindingOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="TwoWay">
+      <MemberSignature Language="C#" Value="TwoWay" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Boxerp.Client.BindingOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

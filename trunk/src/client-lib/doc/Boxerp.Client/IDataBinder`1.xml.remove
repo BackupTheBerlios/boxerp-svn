@@ -1,0 +1,21 @@
+<Type Name="IDataBinder&lt;X&gt;" FullName="Boxerp.Client.IDataBinder&lt;X&gt;">
+  <TypeSignature Language="C#" Value="public interface IDataBinder&lt;X&gt; : Boxerp.Client.IDataBinder&lt;Boxerp.Client.BindableWrapper&lt;X&gt;,X,Boxerp.Client.BindableWrapper&lt;X&gt;.WrapObject&lt;X&gt;&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter>X</TypeParameter>
+  </TypeParameters>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Boxerp.Client.IDataBinder&lt;Boxerp.Client.BindableWrapper&lt;X&gt;,X,Boxerp.Client.BindableWrapper&lt;X&gt;+WrapObject&lt;X&gt;&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <typeparam name="X">To be added.</typeparam>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members />
+</Type>

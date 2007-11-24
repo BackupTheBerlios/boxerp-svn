@@ -1,0 +1,30 @@
+<Type Name="ISimpleWrapper&lt;T&gt;" FullName="Boxerp.Client.ISimpleWrapper&lt;T&gt;">
+  <TypeSignature Language="C#" Value="public interface ISimpleWrapper&lt;T&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Boxerp.Client</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter>T</TypeParameter>
+  </TypeParameters>
+  <Interfaces />
+  <Docs>
+    <typeparam name="T">To be added.</typeparam>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="BusinessObj">
+      <MemberSignature Language="C#" Value="public T BusinessObj { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>T</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

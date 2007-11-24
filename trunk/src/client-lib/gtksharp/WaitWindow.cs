@@ -37,6 +37,19 @@ namespace Boxerp.Client.GtkSharp
 		protected bool firstInstant = true;
 		private EventHandler cancelEventHandler;
 		private bool exitOnCancel = true;
+		private int _assocThread;
+		
+		public int AssociatedThreadId
+		{
+			get
+			{
+				return _assocThread;
+			}
+			set
+			{
+				_assocThread = value;
+			}
+		}
 		
 		public WaitWindow() : 
 				base(Gtk.WindowType.Toplevel)

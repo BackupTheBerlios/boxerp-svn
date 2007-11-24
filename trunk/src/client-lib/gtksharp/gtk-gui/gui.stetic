@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <stetic-interface>
   <configuration>
-    <images-root-path>../</images-root-path>
+    <images-root-path>..</images-root-path>
     <target-gtk-version>2.10.2</target-gtk-version>
   </configuration>
   <import>
     <widget-library name="../bin/Debug/Boxerp.Client.GtkSharp.dll" internal="true" />
   </import>
-  <widget class="Gtk.Dialog" id="Boxerp.Client.GtkSharp.QuestionDialog" undoId="34" design-size="400 99">
+  <widget class="Gtk.Dialog" id="Boxerp.Client.GtkSharp.QuestionDialog" design-size="400 99">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Question</property>
     <property name="WindowPosition">CenterOnParent</property>
@@ -15,15 +15,15 @@
     <property name="Buttons">2</property>
     <property name="HelpButton">False</property>
     <property name="HasSeparator">False</property>
-    <child internal-child="VBox" undoId="VBox">
-      <widget class="Gtk.VBox" id="dialog1_VBox" undoId="35">
+    <child internal-child="VBox">
+      <widget class="Gtk.VBox" id="dialog1_VBox">
         <property name="MemberName" />
         <property name="BorderWidth">2</property>
-        <child undoId="46">
-          <widget class="Gtk.HBox" id="hbox1" undoId="41">
+        <child>
+          <widget class="Gtk.HBox" id="hbox1">
             <property name="MemberName" />
-            <child undoId="43">
-              <widget class="Gtk.Image" id="image" undoId="42">
+            <child>
+              <widget class="Gtk.Image" id="image">
                 <property name="MemberName" />
                 <property name="Pixbuf">stock:gtk-dialog-info Menu</property>
               </widget>
@@ -35,8 +35,8 @@
                 <property name="Padding">5</property>
               </packing>
             </child>
-            <child undoId="45">
-              <widget class="Gtk.Label" id="label" undoId="44">
+            <child>
+              <widget class="Gtk.Label" id="label">
                 <property name="MemberName">label</property>
                 <property name="LabelProp">Info</property>
               </widget>
@@ -55,15 +55,15 @@
         </child>
       </widget>
     </child>
-    <child internal-child="ActionArea" undoId="ActionArea">
-      <widget class="Gtk.HButtonBox" id="dialog1_ActionArea" undoId="36">
+    <child internal-child="ActionArea">
+      <widget class="Gtk.HButtonBox" id="dialog1_ActionArea">
         <property name="MemberName" />
         <property name="Spacing">6</property>
         <property name="BorderWidth">5</property>
         <property name="Size">2</property>
         <property name="LayoutStyle">End</property>
-        <child undoId="53">
-          <widget class="Gtk.Button" id="buttonCancel" undoId="52">
+        <child>
+          <widget class="Gtk.Button" id="buttonCancel">
             <property name="MemberName" />
             <property name="CanDefault">True</property>
             <property name="CanFocus">True</property>
@@ -79,8 +79,8 @@
             <property name="Fill">False</property>
           </packing>
         </child>
-        <child undoId="55">
-          <widget class="Gtk.Button" id="buttonOk" undoId="54">
+        <child>
+          <widget class="Gtk.Button" id="buttonOk">
             <property name="MemberName" />
             <property name="CanDefault">True</property>
             <property name="CanFocus">True</property>
@@ -166,7 +166,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="Boxerp.Client.GtkSharp.InfoDialog" undoId="74" design-size="400 99">
+  <widget class="Gtk.Dialog" id="Boxerp.Client.GtkSharp.InfoDialog" design-size="400 99">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Info</property>
     <property name="WindowPosition">CenterOnParent</property>
@@ -174,17 +174,17 @@
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
     <property name="HasSeparator">False</property>
-    <child internal-child="VBox" undoId="VBox">
-      <widget class="Gtk.VBox" id="dialog1_VBox" undoId="75">
+    <child internal-child="VBox">
+      <widget class="Gtk.VBox" id="dialog1_VBox">
         <property name="MemberName" />
         <property name="BorderWidth">2</property>
-        <child undoId="84">
-          <widget class="Gtk.HBox" id="hbox1" undoId="79">
+        <child>
+          <widget class="Gtk.HBox" id="hbox1">
             <property name="MemberName" />
             <property name="Spacing">5</property>
             <property name="BorderWidth">5</property>
-            <child undoId="81">
-              <widget class="Gtk.Image" id="image" undoId="80">
+            <child>
+              <widget class="Gtk.Image" id="image">
                 <property name="MemberName" />
                 <property name="Pixbuf">stock:gtk-dialog-info Menu</property>
               </widget>
@@ -195,8 +195,8 @@
                 <property name="Fill">False</property>
               </packing>
             </child>
-            <child undoId="83">
-              <widget class="Gtk.Label" id="label" undoId="82">
+            <child>
+              <widget class="Gtk.Label" id="label">
                 <property name="MemberName">label</property>
                 <property name="LabelProp">Info</property>
               </widget>
@@ -215,15 +215,15 @@
         </child>
       </widget>
     </child>
-    <child internal-child="ActionArea" undoId="ActionArea">
-      <widget class="Gtk.HButtonBox" id="dialog1_ActionArea" undoId="76">
+    <child internal-child="ActionArea">
+      <widget class="Gtk.HButtonBox" id="dialog1_ActionArea">
         <property name="MemberName" />
         <property name="Spacing">6</property>
         <property name="BorderWidth">5</property>
         <property name="Size">1</property>
         <property name="LayoutStyle">End</property>
-        <child undoId="89">
-          <widget class="Gtk.Button" id="buttonOk" undoId="88">
+        <child>
+          <widget class="Gtk.Button" id="buttonOk">
             <property name="MemberName" />
             <property name="CanDefault">True</property>
             <property name="CanFocus">True</property>
@@ -242,7 +242,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="Boxerp.Client.GtkSharp.WarningDialog" undoId="91" design-size="400 106">
+  <widget class="Gtk.Dialog" id="Boxerp.Client.GtkSharp.WarningDialog" design-size="400 106">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Warning</property>
     <property name="WindowPosition">CenterOnParent</property>
@@ -250,17 +250,17 @@
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
     <property name="HasSeparator">False</property>
-    <child internal-child="VBox" undoId="VBox">
-      <widget class="Gtk.VBox" id="dialog1_VBox" undoId="92">
+    <child internal-child="VBox">
+      <widget class="Gtk.VBox" id="dialog1_VBox">
         <property name="MemberName" />
         <property name="BorderWidth">2</property>
-        <child undoId="101">
-          <widget class="Gtk.HBox" id="hbox1" undoId="96">
+        <child>
+          <widget class="Gtk.HBox" id="hbox1">
             <property name="MemberName" />
             <property name="Spacing">5</property>
             <property name="BorderWidth">5</property>
-            <child undoId="98">
-              <widget class="Gtk.Image" id="image" undoId="97">
+            <child>
+              <widget class="Gtk.Image" id="image">
                 <property name="MemberName" />
                 <property name="Pixbuf">stock:stock_dialog-warning Menu</property>
               </widget>
@@ -271,8 +271,8 @@
                 <property name="Fill">False</property>
               </packing>
             </child>
-            <child undoId="100">
-              <widget class="Gtk.Label" id="label" undoId="99">
+            <child>
+              <widget class="Gtk.Label" id="label">
                 <property name="MemberName">label</property>
                 <property name="LabelProp">Warning</property>
               </widget>
@@ -291,15 +291,15 @@
         </child>
       </widget>
     </child>
-    <child internal-child="ActionArea" undoId="ActionArea">
-      <widget class="Gtk.HButtonBox" id="dialog1_ActionArea" undoId="93">
+    <child internal-child="ActionArea">
+      <widget class="Gtk.HButtonBox" id="dialog1_ActionArea">
         <property name="MemberName" />
         <property name="Spacing">6</property>
         <property name="BorderWidth">5</property>
         <property name="Size">1</property>
         <property name="LayoutStyle">Edge</property>
-        <child undoId="106">
-          <widget class="Gtk.Button" id="buttonOk" undoId="105">
+        <child>
+          <widget class="Gtk.Button" id="buttonOk">
             <property name="MemberName" />
             <property name="CanDefault">True</property>
             <property name="CanFocus">True</property>

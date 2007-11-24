@@ -31,6 +31,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading;
 using System.Reflection;
 using Gtk;
 
@@ -78,12 +79,12 @@ namespace Boxerp.Client.GtkSharp
 			_displayExceptions = displayExceptions;
 		}
 
-		public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller)
+		public override List<Thread> StartAsyncCallList(ResponsiveEnum transferType, IController controller)
 		{
-			StartAsyncCallList(transferType, controller, true);
+			return StartAsyncCallList(transferType, controller, true);
 		}
 		
-		public override void StartAsyncCallList(ResponsiveEnum transferType, IController controller, bool showWaitDialog)
+		public override List<Thread> StartAsyncCallList(ResponsiveEnum transferType, IController controller, bool showWaitDialog)
 		{
 			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
 				|| (RunningThreads == 0))
@@ -109,7 +110,7 @@ namespace Boxerp.Client.GtkSharp
 				}
 			}
 
-			base.StartAsyncCallList(transferType, controller);
+			List<Thread> threads = base.StartAsyncCallList(transferType, controller);
 
 			try
 			{
@@ -134,15 +135,17 @@ namespace Boxerp.Client.GtkSharp
 			{
 				throw ex;
 			}
+			
+			return threads;
 		}
 
 		
-		public override void StartAsyncCall(SimpleDelegate method)
+		public override Thread StartAsyncCall(SimpleDelegate method)
 		{
-			StartAsyncCall(method, true);	
+			return StartAsyncCall(method, true);	
 		}
 		
-		public override void StartAsyncCall(SimpleDelegate method, bool showWaitDialog)
+		public override Thread StartAsyncCall(SimpleDelegate method, bool showWaitDialog)
 		{
 			
 			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
@@ -169,7 +172,7 @@ namespace Boxerp.Client.GtkSharp
 				}
 			}
 
-			base.StartAsyncCall(method);
+			Thread thread = base.StartAsyncCall(method);
 
 			try
 			{
@@ -195,6 +198,8 @@ namespace Boxerp.Client.GtkSharp
 			{
 				throw ex;
 			}
+			
+			return thread;
 		}
 
 		public override void OnCancel(object sender, EventArgs e)
@@ -209,7 +214,7 @@ namespace Boxerp.Client.GtkSharp
 				int rType = qdialog.Run();
 				if ((rType == (int)ResponseType.Ok) && (RunningThreads > 0))
 				{
-					ForceAbort();
+					ForceAbort(0); // fix this
 				}
 				if (_questionWindows.Count > 0)
 				{

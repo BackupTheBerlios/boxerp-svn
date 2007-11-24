@@ -41,6 +41,19 @@ namespace Boxerp.Client.GtkSharp
 		protected bool nonstop = true;
 		protected bool firstInstant = true;
 		private EventHandler cancelEventHandler;
+		private int _assocThread;
+		
+		public int AssociatedThreadId
+		{
+			get
+			{
+				return _assocThread;
+			}
+			set
+			{
+				_assocThread = value;
+			}
+		}
 		
 		public bool IsModal 
 		{

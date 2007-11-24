@@ -91,7 +91,6 @@ namespace Boxerp.Client
 			: base(helper)
 		{
 			_view = view;
-			_view.Controller = this;
 		}
 
 		protected InternalAbstractController(IResponsiveClient helper)
@@ -119,6 +118,7 @@ namespace Boxerp.Client
 		protected AbstractController(IResponsiveClient helper, V view)
 			: base(helper)
 		{
+			_view.Controller = this;
 		}
 
 		protected AbstractController(IResponsiveClient helper)

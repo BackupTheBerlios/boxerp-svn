@@ -66,12 +66,17 @@
     <File name="MVC/IView.cs" subtype="Code" buildaction="Compile" />
     <File name="Responsiveness/ConsoleResponsiveHelper.cs" subtype="Code" buildaction="Compile" />
     <File name="Responsiveness/ConsoleWaitDialog.cs" subtype="Code" buildaction="Compile" />
+    <File name="Configuration/ClientConfiguration.cs" subtype="Code" buildaction="Compile" />
+    <File name="Configuration/ClientSectionHandler.cs" subtype="Code" buildaction="Compile" />
+    <File name="Configuration/LoggerConfiguration.cs" subtype="Code" buildaction="Compile" />
+    <File name="SupportedGuiToolkits.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Assembly" localcopy="True" refto="../../dependencies/Castle.Core.dll" />
     <ProjectReference type="Assembly" localcopy="True" refto="../../dependencies/Castle.DynamicProxy2.dll" />
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Gac" localcopy="True" refto="System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </References>
   <DeployTargets />
 </Project>

@@ -18,7 +18,7 @@
   </StartMode>
   <DeployTargets />
   <Entries>
-    <Entry filename="./client-base/client-base.mdp" />
-    <Entry filename="./gtksharp/gtksharp.mdp" />
+    <Entry filename="client-base/client-base.mdp" />
+    <Entry filename="gtksharp/gtksharp.mdp" />
   </Entries>
 </Combine>

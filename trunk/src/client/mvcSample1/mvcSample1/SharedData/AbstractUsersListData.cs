@@ -29,12 +29,42 @@
 
 using System;
 using Boxerp.Client;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace mvcSample1
 {
 	public abstract class AbstractUsersListData<T> : AbstractData<IUsersListView, UsersListController, T>, IUsersListData
 		where T : IUsersListView
 	{
+		private Hashtable _propertyBag = new Hashtable();
+		
+		public System.Collections.Hashtable PropertyBag 
+		{
+			get 
+			{
+				return _propertyBag;
+			}
+		}
+
+		public abstract System.Collections.Generic.List<Group> Groups 
+		{
+			get ;
+			set ;
+		}
+
+		public abstract System.Collections.Generic.List<User> Users 
+		{
+			get ;
+			set ;
+		}
+
+		public abstract Group SelectedGroup 
+		{
+			get ;
+			set ;
+		}
+
 		public AbstractUsersListData()
 		{
 		}

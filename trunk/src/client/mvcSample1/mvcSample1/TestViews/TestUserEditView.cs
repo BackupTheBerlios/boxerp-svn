@@ -34,9 +34,13 @@ namespace mvcSample1
 {	
 	public class TestUserEditView : AbstractTestView<UserEditController>, IUserEditView
 	{
-		
 		public TestUserEditView()
 		{
+		}
+		
+		public void DataBindUser(User user)
+		{
+			
 		}
 	}
 }

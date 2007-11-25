@@ -34,8 +34,54 @@ namespace mvcSample1
 	public class TestUsersListView : AbstractTestView<UsersListController, TestUsersListData, IUsersListData>, IUsersListView
 	{
 		
+		public UsersListController Controller {
+			get {
+				throw new NotImplementedException();
+			}
+			set {
+				throw new NotImplementedException();
+			}
+		}
+
+		public IUsersListData SharedData {
+			get {
+				throw new NotImplementedException();
+			}
+		}
+
+		
 		public TestUsersListView()
 		{
+		}
+
+		public void OnSelectionChanged ()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void OnDeleteUser ()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void OnEditUser ()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void OnAddUser ()
+		{
+			throw new NotImplementedException();
+		}
+
+		public IUserEditView GetUserEditView ()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void DisplayView (IUserEditView view)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

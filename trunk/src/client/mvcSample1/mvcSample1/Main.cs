@@ -23,7 +23,7 @@ namespace mvcSample1
 				new UsersListController(new GtkResponsiveHelper(ConcurrencyMode.Modal), view);
 			
 			MainWindow win = new MainWindow ();
-			win.Add(view);
+			win.Add((Gtk.Widget)view);
 			win.Show ();
 			win.ReshowWithInitialSize();
 			win.Child.ShowAll();

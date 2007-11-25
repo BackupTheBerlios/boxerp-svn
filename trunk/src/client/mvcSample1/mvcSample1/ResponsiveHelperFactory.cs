@@ -44,18 +44,18 @@ namespace mvcSample1
 			{
 				config = ClientConfiguration.GetInstance();
 			}
-			if (config.GuiToolkit == SupportedGuiToolkits.GtkSharp)
+			if (config.GuiToolkit == SupportedGuiToolkits.GtkSharp.ToString())
 			{
 				return new GtkResponsiveHelper(mode);
 			}
-			else if (config.GuiToolkit == SupportedGuiToolkits.WinForms)
+			/*else if (config.GuiToolkit == SupportedGuiToolkits.WinForms.ToString())
 			{
 				
 			}
-			else if (config.GuiToolkit == SupportedGuiToolkits.WPF)
+			else if (config.GuiToolkit == SupportedGuiToolkits.WPF.ToString())
 			{
 				
-			}
+			}*/
 			else
 			{
 				return new ConsoleResponsiveHelper(mode);

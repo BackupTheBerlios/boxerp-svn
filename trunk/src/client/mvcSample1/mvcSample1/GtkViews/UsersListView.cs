@@ -59,6 +59,18 @@ namespace mvcSample1
 				return _data;
 			}
 		}
+
+		public ComboBox GroupsCombo {
+			get {
+				return _groupsCombo;
+			}
+		}
+
+		public ListView UsersList {
+			get {
+				return _usersList;
+			}
+		}
 		
 		public UsersListView()
 		{
@@ -137,7 +149,9 @@ namespace mvcSample1
 		public void DisplayView(IUserEditView view) 
 		{
 			MainWindow win = new MainWindow();
-			win.Add(view);
+			Gtk.HBox hbox = new Gtk.HBox();
+			hbox.PackStart((Gtk.Widget)view);
+			win.Add(hbox);
 			win.ShowAll();
 		}
 	}

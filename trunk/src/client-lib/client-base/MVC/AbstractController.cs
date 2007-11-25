@@ -43,7 +43,8 @@ namespace Boxerp.Client
 		protected AbstractController(IResponsiveClient helper, V view)
 			: base(helper, view)
 		{ 
-			_data = view.SharedData;		
+			Console.Out.WriteLine ("assigning data:" + typeof(TData));
+			_data = view.SharedData;
 		}
 
 		protected AbstractController(IResponsiveClient helper)
@@ -69,6 +70,7 @@ namespace Boxerp.Client
 			: base(helper)
 		{
 			_view = view;
+			Console.Out.WriteLine ("assigning controller to view:" + typeof(C));
 			_view.Controller = (C)this;
 		}
 

@@ -13,18 +13,92 @@ namespace testApp3 {
     
     public partial class ComboBoxTests {
         
+        private Gtk.VBox vbox1;
+        
+        private Gtk.HButtonBox hbuttonbox1;
+        
+        private Gtk.Button button1;
+        
+        private Gtk.Button button2;
+        
+        private Gtk.Button button4;
+        
+        private Gtk.Button button3;
+        
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
             // Widget testApp3.ComboBoxTests
             this.Name = "testApp3.ComboBoxTests";
             this.Title = Mono.Unix.Catalog.GetString("ComboBoxTests");
             this.WindowPosition = ((Gtk.WindowPosition)(4));
+            // Container child testApp3.ComboBoxTests.Gtk.Container+ContainerChild
+            this.vbox1 = new Gtk.VBox();
+            this.vbox1.Name = "vbox1";
+            this.vbox1.Spacing = 6;
+            // Container child vbox1.Gtk.Box+BoxChild
+            this.hbuttonbox1 = new Gtk.HButtonBox();
+            this.hbuttonbox1.Name = "hbuttonbox1";
+            this.hbuttonbox1.Spacing = 6;
+            this.hbuttonbox1.LayoutStyle = ((Gtk.ButtonBoxStyle)(4));
+            // Container child hbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
+            this.button1 = new Gtk.Button();
+            this.button1.CanFocus = true;
+            this.button1.Name = "button1";
+            this.button1.UseUnderline = true;
+            this.button1.Label = Mono.Unix.Catalog.GetString("Show");
+            this.hbuttonbox1.Add(this.button1);
+            Gtk.ButtonBox.ButtonBoxChild w1 = ((Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox1[this.button1]));
+            w1.Expand = false;
+            w1.Fill = false;
+            // Container child hbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
+            this.button2 = new Gtk.Button();
+            this.button2.CanFocus = true;
+            this.button2.Name = "button2";
+            this.button2.UseUnderline = true;
+            this.button2.Label = Mono.Unix.Catalog.GetString("Edit from code");
+            this.hbuttonbox1.Add(this.button2);
+            Gtk.ButtonBox.ButtonBoxChild w2 = ((Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox1[this.button2]));
+            w2.Position = 1;
+            w2.Expand = false;
+            w2.Fill = false;
+            // Container child hbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
+            this.button4 = new Gtk.Button();
+            this.button4.CanFocus = true;
+            this.button4.Name = "button4";
+            this.button4.UseUnderline = true;
+            this.button4.Label = Mono.Unix.Catalog.GetString("Add item");
+            this.hbuttonbox1.Add(this.button4);
+            Gtk.ButtonBox.ButtonBoxChild w3 = ((Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox1[this.button4]));
+            w3.Position = 2;
+            w3.Expand = false;
+            w3.Fill = false;
+            // Container child hbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
+            this.button3 = new Gtk.Button();
+            this.button3.CanFocus = true;
+            this.button3.Name = "button3";
+            this.button3.UseUnderline = true;
+            this.button3.Label = Mono.Unix.Catalog.GetString("Delete Selected");
+            this.hbuttonbox1.Add(this.button3);
+            Gtk.ButtonBox.ButtonBoxChild w4 = ((Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox1[this.button3]));
+            w4.Position = 3;
+            w4.Expand = false;
+            w4.Fill = false;
+            this.vbox1.Add(this.hbuttonbox1);
+            Gtk.Box.BoxChild w5 = ((Gtk.Box.BoxChild)(this.vbox1[this.hbuttonbox1]));
+            w5.Position = 1;
+            w5.Expand = false;
+            w5.Fill = false;
+            this.Add(this.vbox1);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.DefaultWidth = 400;
-            this.DefaultHeight = 300;
+            this.DefaultWidth = 516;
+            this.DefaultHeight = 108;
             this.Show();
+            this.button1.Clicked += new System.EventHandler(this.OnShow);
+            this.button2.Clicked += new System.EventHandler(this.OnEdit);
+            this.button4.Clicked += new System.EventHandler(this.OnAdd);
+            this.button3.Clicked += new System.EventHandler(this.OnDelete);
         }
     }
 }

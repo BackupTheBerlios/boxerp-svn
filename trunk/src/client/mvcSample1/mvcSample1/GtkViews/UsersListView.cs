@@ -36,7 +36,7 @@ namespace mvcSample1
 	public partial class UsersListView : Gtk.Bin, IUsersListView
 	{
 		private UsersListController _controller;
-		private GtkUsersListData _data;
+		private GtkUsersListData _data = new GtkUsersListData();
 		private Boxerp.Client.GtkSharp.Controls.ComboBox _groupsCombo;
 		private Boxerp.Client.GtkSharp.Controls.ListView _usersList;
 		
@@ -76,7 +76,10 @@ namespace mvcSample1
 		{
 			this.Build();
 			addBoxerpWidgets();
-			Controller.RetrieveGroups();
+			if (Controller == null)
+			{
+				Console.Out.WriteLine("facu");
+			}
 		}
 
 		private void addBoxerpWidgets()
@@ -138,6 +141,22 @@ namespace mvcSample1
 			{
 				Controller.DeleteUser(_usersList.SelectedItem as User);
 			}
+		}
+		
+		public void UpdateWidgets()
+		{
+			_activeUsers.Text = SharedData.PropertyBag["ActiveUsers"].ToString();
+			_usersList.Items.Clear();
+			foreach (User user in SharedData.Users)
+			{
+				_usersList.Items.Add(user);
+			}
+			_groupsCombo.Items.Clear();
+			foreach (Group group in SharedData.Groups)
+			{
+				_groupsCombo.Items.Add(group);
+			}
+			_groupsCombo.SelectedItem = SharedData.SelectedGroup;
 		}
 		
 		public IUserEditView GetUserEditView()

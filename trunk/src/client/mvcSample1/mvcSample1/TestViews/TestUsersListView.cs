@@ -34,15 +34,7 @@ namespace mvcSample1
 	public class TestUsersListView : AbstractTestView<UsersListController, TestUsersListData, IUsersListData>, IUsersListView
 	{
 		
-		public UsersListController Controller {
-			get {
-				throw new NotImplementedException();
-			}
-			set {
-				throw new NotImplementedException();
-			}
-		}
-
+		
 		public IUsersListData SharedData {
 			get {
 				throw new NotImplementedException();
@@ -50,8 +42,9 @@ namespace mvcSample1
 		}
 
 		
-		public TestUsersListView()
+		public void UpdateWidgets()
 		{
+			
 		}
 
 		public void OnSelectionChanged ()

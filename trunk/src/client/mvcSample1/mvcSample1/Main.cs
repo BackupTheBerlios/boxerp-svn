@@ -21,7 +21,7 @@ namespace mvcSample1
 			UsersListView view = new UsersListView();
 			UsersListController controller = 
 				new UsersListController(new GtkResponsiveHelper(ConcurrencyMode.Modal), view);
-			
+			controller.RetrieveGroups();
 			MainWindow win = new MainWindow ();
 			win.Add((Gtk.Widget)view);
 			win.Show ();

@@ -34,36 +34,6 @@ namespace mvcSample1
 {	
 	public class GtkUsersListData : AbstractUsersListData<UsersListView>
 	{
-		public override System.Collections.Generic.List<Group> Groups 
-		{
-			get 
-			{ 
-				return null; //View.GroupsCombo.Items; 
-			}
-			set 
-			{ 
-				foreach (Group group in value)
-				{
-					View.GroupsCombo.Items.Add(group);
-				}
-			}
-		}
-
-		public override System.Collections.Generic.List<User> Users 
-		{
-			get 
-			{ 
-				return null;//View.UsersList.Items;
-			}
-			set 
-			{ 
-				foreach (User user in value)
-				{
-					View.UsersList.Items.Add(user);
-				}
-			}
-		}
-
 		public override Group SelectedGroup 
 		{
 			get 
@@ -74,10 +44,6 @@ namespace mvcSample1
 			{ 
 				View.GroupsCombo.SelectedItem = value; 
 			}
-		}
-		
-		public GtkUsersListData()
-		{
 		}
 	}
 }

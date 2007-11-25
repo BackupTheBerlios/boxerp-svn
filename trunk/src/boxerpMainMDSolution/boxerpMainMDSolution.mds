@@ -1,0 +1,24 @@
+<Combine name="boxerpMainMDSolution" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="client-lib" configuration="Debug" />
+      <Entry build="True" name="Boxerp.Collections" configuration="Debug|Any CPU" />
+      <Entry build="True" name="Controls" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="client-lib" configuration="Release" />
+      <Entry build="True" name="Boxerp.Collections" configuration="Debug|Any CPU" />
+      <Entry build="True" name="Controls" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="client-lib" single="True">
+    <Execute type="None" entry="client-lib" />
+    <Execute type="None" entry="Boxerp.Collections" />
+    <Execute type="None" entry="Controls" />
+  </StartMode>
+  <Entries>
+    <Entry filename="../client-lib/client-lib.mds" />
+    <Entry filename="../Collections/Boxerp.Collections/Boxerp.Collections/Boxerp.Collections.mds" />
+    <Entry filename="../client-lib/gtksharp/Controls.mds" />
+  </Entries>
+</Combine>

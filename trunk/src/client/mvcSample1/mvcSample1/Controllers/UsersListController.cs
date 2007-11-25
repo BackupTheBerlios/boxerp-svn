@@ -41,6 +41,10 @@ namespace mvcSample1
 		
 		public void RetrieveGroups()
 		{
+			if (SharedData == null)
+			{
+				Console.Out.WriteLine("fack");
+			}
 			SharedData.Groups = Database.GetAllGroups();
 			SharedData.SelectedGroup = SharedData.Groups[0];
 			RetrieveUsers(SharedData.SelectedGroup);
@@ -55,6 +59,8 @@ namespace mvcSample1
 				count = user.IsActive ? count +1 : count;
 			}
 			SharedData.PropertyBag["ActiveUsers"] = count;
+			
+			View.UpdateWidgets();
 		}
 		
 		public void DeleteUser(User user)

@@ -35,30 +35,14 @@ namespace mvcSample1
 {
 	public class TestUsersListData : AbstractUsersListData<TestUsersListView>
 	{		
-		private List<Group> _groups = new List<Group>();
-		private List<User> _users = new List<User>();
 		private Group _selectedGroup;
+
+		public TestUsersListData() {}
 		
-		public override System.Collections.Generic.List<Group> Groups 
-		{
-			get { return _groups; }
-			set { _groups = value; }
-		}
-
-		public override System.Collections.Generic.List<User> Users 
-		{
-			get { return _users;}
-			set { _users = value;}
-		}
-
 		public override Group SelectedGroup 
 		{
 			get { return _selectedGroup; }
 			set { _selectedGroup = value; }
-		}
-		
-		public TestUsersListData()
-		{
 		}
 	}
 }

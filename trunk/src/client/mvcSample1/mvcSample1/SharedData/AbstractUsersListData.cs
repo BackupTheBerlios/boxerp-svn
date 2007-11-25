@@ -37,36 +37,25 @@ namespace mvcSample1
 	public abstract class AbstractUsersListData<T> : AbstractData<IUsersListView, UsersListController, T>, IUsersListData
 		where T : IUsersListView
 	{
-		private Hashtable _propertyBag = new Hashtable();
+		private List<Group> _groups = new List<Group>();
+		private List<User> _users = new List<User>();
 		
-		public System.Collections.Hashtable PropertyBag 
+		public System.Collections.Generic.List<Group> Groups 
 		{
-			get 
-			{
-				return _propertyBag;
-			}
+			get { return _groups; }
+			set { _groups = value; }
 		}
 
-		public abstract System.Collections.Generic.List<Group> Groups 
+		public System.Collections.Generic.List<User> Users 
 		{
-			get ;
-			set ;
+			get { return _users;}
+			set { _users = value;}
 		}
-
-		public abstract System.Collections.Generic.List<User> Users 
-		{
-			get ;
-			set ;
-		}
-
+		
 		public abstract Group SelectedGroup 
 		{
 			get ;
 			set ;
-		}
-
-		public AbstractUsersListData()
-		{
 		}
 	}
 }

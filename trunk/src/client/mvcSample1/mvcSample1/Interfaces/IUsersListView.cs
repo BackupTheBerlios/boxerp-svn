@@ -42,6 +42,8 @@ namespace mvcSample1
 		
 		void OnAddUser ();
 		
+		void UpdateWidgets();
+		
 		IUserEditView GetUserEditView();
 		
 		void DisplayView(IUserEditView view);

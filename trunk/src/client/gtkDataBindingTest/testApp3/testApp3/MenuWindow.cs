@@ -70,6 +70,9 @@ namespace testApp3
 
 		protected virtual void OnComboBoxTests (object sender, System.EventArgs e)
 		{
+			ComboBoxTests win = new ComboBoxTests();
+			win.Show();
+			win.Child.ShowAll();
 		}
 
 		protected virtual void OnDataGridTests (object sender, System.EventArgs e)

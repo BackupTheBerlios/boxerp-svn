@@ -38,8 +38,6 @@ using System.ComponentModel;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
-	
-	
 	public class ComboBox : TreeModelWrapper<SimpleColumn>, 
 	      IBindableWidget, ITreeModel
 	{
@@ -130,6 +128,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		
 		protected override void setValueInStore(object item, Hashtable itemValues, Gtk.TreeIter iter)
 		{
+			Logger.GetInstance().WriteLine("Setting value of item in combo:" + item.ToString());
 			if (item == null)
 			{
 				_store.SetValue(iter, 0, String.Empty);

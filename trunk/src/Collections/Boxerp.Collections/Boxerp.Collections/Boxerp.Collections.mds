@@ -11,6 +11,6 @@
     <Execute type="None" entry="Boxerp.Collections" />
   </StartMode>
   <Entries>
-    <Entry filename="./Boxerp.Collections.csproj" />
+    <Entry filename="Boxerp.Collections.csproj" />
   </Entries>
 </Combine>

@@ -28,18 +28,58 @@
 ////
 
 using System;
+using Boxerp.Client.GtkSharp;
+using Boxerp.Client;
 
 namespace testApp3
-{
-	
-	
+{	
 	public partial class ComboBoxTests : Gtk.Window
 	{
+		private Boxerp.Client.GtkSharp.Controls.ComboBox _combo = new Boxerp.Client.GtkSharp.Controls.ComboBox();
+		private BindableWrapper<User> bindableUser2;
+		
 		
 		public ComboBoxTests() : 
 				base(Gtk.WindowType.Toplevel)
 		{
 			this.Build();
+			
+			this.vbox1.PackStart(_combo);
+			addUsers();
+		}
+
+		private void addUsers()
+		{
+			User user1 = new User();
+			user1.Username = "test3";
+			user1.Desk = 540;
+			user1.Email = "user1@user3.com";
+			user1.Password = "unsafe3";
+			
+			User user2 = new User();
+			user2.Username = "test4";
+			user2.Desk = 143;
+			user2.Email = "user2@user4.com";
+			user2.Password = "unsafe4";
+			bindableUser2 = new BindableWrapper<User>(user2);
+			_combo.Items.Add(user1);
+			_combo.Items.Add(bindableUser2.Data.BusinessObj);
+		}
+
+		protected virtual void OnDelete (object sender, System.EventArgs e)
+		{
+		}
+
+		protected virtual void OnAdd (object sender, System.EventArgs e)
+		{
+		}
+
+		protected virtual void OnEdit (object sender, System.EventArgs e)
+		{
+		}
+
+		protected virtual void OnShow (object sender, System.EventArgs e)
+		{
 		}
 	}
 }

@@ -17,7 +17,7 @@ namespace mvcSample1 {
         
         private Gtk.HBox hbox1;
         
-        private Gtk.ComboBox _groups;
+        private Gtk.HBox hbox2;
         
         private Gtk.Label label1;
         
@@ -47,13 +47,12 @@ namespace mvcSample1 {
             this.hbox1.Name = "hbox1";
             this.hbox1.Spacing = 6;
             // Container child hbox1.Gtk.Box+BoxChild
-            this._groups = Gtk.ComboBox.NewText();
-            this._groups.Name = "_groups";
-            this.hbox1.Add(this._groups);
-            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.hbox1[this._groups]));
+            this.hbox2 = new Gtk.HBox();
+            this.hbox2.Name = "hbox2";
+            this.hbox2.Spacing = 6;
+            this.hbox1.Add(this.hbox2);
+            Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.hbox1[this.hbox2]));
             w1.Position = 0;
-            w1.Expand = false;
-            w1.Fill = false;
             // Container child hbox1.Gtk.Box+BoxChild
             this.label1 = new Gtk.Label();
             this.label1.Name = "label1";

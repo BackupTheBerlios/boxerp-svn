@@ -28,11 +28,72 @@
 ////
 
 using System;
-using Boxerp.Client;
+using System.Collections.Generic;
 
 namespace mvcSample1
-{	
-	public interface IUsersListData : IUIData
-	{
+{
+	public static class Database
+	{		
+		public static List<User> GetUsers(Group group)
+		{
+			User u1 = new User();
+			u1.Group = group;
+			u1.Username = "Allan";
+			u1.Desk = 1;
+			u1.Email = "admin@testing.com";
+			u1.IsActive = true;
+
+			User u2 = new User();
+			u2.Group = group;
+			u2.Username = "Dave";
+			u2.Desk = 2;
+			u2.Email = "dave@testing.com";
+			u2.IsActive = false;
+
+			User u3 = new User();
+			u3.Group = group;
+			u3.Username = "Carlos";
+			u3.Desk = 3;
+			u3.Email = "carlos@testing.com";
+			u3.IsActive = true;
+
+			User u4 = new User();
+			u4.Group = group;
+			u4.Username = "Jeremy";
+			u4.Desk = 4;
+			u4.Email = "jwormy@testing.com";
+			u4.IsActive = false;
+
+			List<User> users = new List<User>();
+			if (group.Id == 1)
+			{
+				users.Add(u1);
+				users.Add(u2);
+			}
+			else
+			{
+				users.Add(u3);
+				users.Add(u4);
+			}
+			
+			return users;
+		}
+		
+		public static List<Group> GetAllGroups()
+		{
+			Group g1 = new Group();
+			g1.Id = 1;
+			g1.Name = "Admins";
+			
+			Group g2 = new Group();
+			g2.Id = 2;
+			g2.Name = "Developers";
+			
+			List<Group> groups = new List<Group>();
+			groups.Add(g1);
+			groups.Add(g2);
+			
+			return groups;
+		}
 	}
 }

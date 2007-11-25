@@ -53,8 +53,14 @@ namespace mvcSample1
 			this.Build();
 		}
 
+		public void DataBindUser(User user)
+		{
+			
+		}
+		
 		protected virtual void OnClose (object sender, System.EventArgs e)
 		{
+			((Gtk.Window)this.Parent).Destroy();
 		}
 	}
 }

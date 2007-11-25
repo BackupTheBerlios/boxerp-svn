@@ -28,21 +28,29 @@
 ////
 
 using System;
-using Boxerp.Client;
 
 namespace mvcSample1
-{	
-	public class UserEditController : AbstractController<IUserEditView>
+{
+	
+	
+	public partial class UsersListView : Gtk.Bin
 	{
-		public UserEditController(IResponsiveClient helper, IUserEditView view)
-			: base (helper, view)
-		{
-			View.Controller = this;
-		}
 		
-		protected override  void OnAsyncOperationFinish(Object sender, ThreadEventArgs args)
+		public UsersListView()
 		{
-			
+			this.Build();
+		}
+
+		protected virtual void OnDeleteUser (object sender, System.EventArgs e)
+		{
+		}
+
+		protected virtual void OnEditUser (object sender, System.EventArgs e)
+		{
+		}
+
+		protected virtual void OnAddUser (object sender, System.EventArgs e)
+		{
 		}
 	}
 }

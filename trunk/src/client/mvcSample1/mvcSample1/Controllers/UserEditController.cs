@@ -28,28 +28,24 @@
 ////
 
 using System;
-using System.Collections.Generic;
 using Boxerp.Client;
-using Boxerp.Collections;
 
 namespace mvcSample1
-{
-	
-	[Serializable]
-	public class Group
+{	
+	public class UserEditController : AbstractController<IUserEditView, UserEditController>
 	{
-		private string _name;
+		public UserEditController(IResponsiveClient helper, IUserEditView view)
+			: base (helper, view)
+		{}
 		
-		public string Name 
+		public void PopulateGui(User user)
 		{
-			get 
-			{
-				return _name;
-			}
-			set
-			{
-				_name = value;
-			}
+			View.DataBindUser(user);
+		}
+		
+		protected override  void OnAsyncOperationFinish(Object sender, ThreadEventArgs args)
+		{
+			
 		}
 	}
 }

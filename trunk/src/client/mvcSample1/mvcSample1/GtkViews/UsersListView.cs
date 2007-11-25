@@ -29,12 +29,16 @@
 
 using System;
 using Boxerp.Client;
+using Boxerp.Client.GtkSharp.Controls;
+
 namespace mvcSample1
 {
 	public partial class UsersListView : Gtk.Bin, IUsersListView
 	{
 		private UsersListController _controller;
 		private GtkUsersListData _data;
+		private Boxerp.Client.GtkSharp.Controls.ComboBox _groupsCombo;
+		private Boxerp.Client.GtkSharp.Controls.ListView _usersList;
 		
 		public UsersListController Controller 
 		{
@@ -59,18 +63,82 @@ namespace mvcSample1
 		public UsersListView()
 		{
 			this.Build();
+			addBoxerpWidgets();
+			Controller.RetrieveGroups();
 		}
 
+		private void addBoxerpWidgets()
+		{
+			_groupsCombo = new Boxerp.Client.GtkSharp.Controls.ComboBox();
+			_usersList = new ListView();
+			
+			hbox2.PackStart(_groupsCombo);
+			_usersScrollWin.AddWithViewport(_usersList);
+			_usersList.ItemsDisplayMode = ItemsDisplayMode.AutoCreateColumns;
+			_groupsCombo.SelectionNotifyEvent += OnSelectionChanged;
+		}
+		
+		private void OnSelectionChanged(object sender, Gtk.SelectionNotifyEventArgs args)
+		{
+			OnSelectionChanged();
+		}
+		
+		public void OnSelectionChanged()
+		{
+			Group group = _groupsCombo.SelectedItem as Group;
+			Controller.RetrieveUsers(group);
+		}
+		
+		public void OnDeleteUser()
+		{
+			if (_usersList.SelectedItem != null)
+			{
+				Controller.DeleteUser(_usersList.SelectedItem as User);
+			}			
+		}
+		
 		protected virtual void OnDeleteUser (object sender, System.EventArgs e)
 		{
+			OnDeleteUser();
 		}
 
 		protected virtual void OnEditUser (object sender, System.EventArgs e)
 		{
+			OnEditUser();
 		}
 
+		public void OnEditUser()
+		{
+			if (_usersList.SelectedItem != null)
+			{
+				Controller.DeleteUser(_usersList.SelectedItem as User);
+			}			
+		}
+		
 		protected virtual void OnAddUser (object sender, System.EventArgs e)
 		{
+			OnAddUser();
+		}
+		
+		public void OnAddUser()
+		{
+			if (_usersList.SelectedItem != null)
+			{
+				Controller.DeleteUser(_usersList.SelectedItem as User);
+			}
+		}
+		
+		public IUserEditView GetUserEditView()
+		{
+			UserEditView ueView = new UserEditView();
+			return ueView;
+		}
+		
+		public void DisplayView(IUserEditView view) 
+		{
+			MainWindow win = new MainWindow();
+			win.Add(view);
+			win.ShowAll();
 		}
 	}
 }

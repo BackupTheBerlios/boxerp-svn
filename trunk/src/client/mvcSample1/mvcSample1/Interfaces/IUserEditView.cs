@@ -34,5 +34,6 @@ namespace mvcSample1
 {	
 	public interface IUserEditView : IView<UserEditController> 
 	{
+		void DataBindUser(User user);
 	}
 }

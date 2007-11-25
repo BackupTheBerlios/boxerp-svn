@@ -29,21 +29,13 @@
 
 using System;
 using Boxerp.Client;
-
+using System.Collections.Generic;
 namespace mvcSample1
-{
-		
-	public class UsersListController : AbstractController<IUsersListView, IUsersListData>
+{	
+	public interface IUsersListData : IUIData
 	{
-		public UsersListController(IResponsiveClient helper, IUsersListView view)
-			: base (helper, view)
-		{
-			View.Controller = this;
-		}
-		
-		protected override  void OnAsyncOperationFinish(Object sender, ThreadEventArgs args)
-		{
-			
-		}
+		List<Group> Groups { get; set; }
+		List<User> Users { get; set ; }
+		Group SelectedGroup { get; set; }
 	}
 }

@@ -34,6 +34,16 @@ namespace mvcSample1
 {	
 	public interface IUsersListView : IView<UsersListController, IUsersListData>
 	{
+		void OnSelectionChanged();
 		
+		void OnDeleteUser ();
+		
+		void OnEditUser ();
+		
+		void OnAddUser ();
+		
+		IUserEditView GetUserEditView();
+		
+		void DisplayView(IUserEditView view);
 	}
 }

@@ -51,7 +51,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		}
 			
 		
-		protected override void addTreeViewColumn(EditableColumn column, int colNumber)
+		protected override void addTreeViewColumnOrRenderer(EditableColumn column, int colNumber)
 		{
 			Gtk.TreeViewColumn tvColumn = new Gtk.TreeViewColumn ();
 			tvColumn.Title = column.Name;

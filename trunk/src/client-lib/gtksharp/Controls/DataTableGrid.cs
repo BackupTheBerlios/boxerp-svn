@@ -57,6 +57,14 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 
+		public DataTable DataTable 
+		{
+			get 
+			{
+				return _dataTable;
+			}
+		}
+
 		public DataTableGrid()
 		{
 		}

@@ -93,7 +93,7 @@ namespace testApp3 {
                 this.Child.ShowAll();
             }
             this.DefaultWidth = 516;
-            this.DefaultHeight = 108;
+            this.DefaultHeight = 93;
             this.Show();
             this.button1.Clicked += new System.EventHandler(this.OnShow);
             this.button2.Clicked += new System.EventHandler(this.OnEdit);

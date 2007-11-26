@@ -51,7 +51,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		protected InterceptedList<object> _items = new InterceptedList<object>();
 		protected IBindingList _boundItems;
 		protected ItemsDisplayMode _itemsDisplayMode = ItemsDisplayMode.AutoCreateColumns;
-		protected bool _itemsDisplayModeChanged = false;
+		protected bool _itemsDisplayModeChanged = true;
 		protected Type _itemsType = typeof(System.Object);		
 		protected PropertyInfo[] _itemsTypeProperties = null;
 		protected bool _columnsInitialized = false; 
@@ -59,9 +59,22 @@ namespace Boxerp.Client.GtkSharp.Controls
 		protected Dictionary<object, Gtk.TreeIter> _itersPointers = new Dictionary<object, Gtk.TreeIter>();
 		protected Hashtable _itemValues = new Hashtable();
 		protected Dictionary<string, int> _columnsOrder = new Dictionary<string, int>();
+		protected System.Type[] _supportedDataTypes = 
+		          new System.Type[] 
+		          {
+			            typeof(string),
+			            typeof(int),
+			            typeof(bool),
+			            typeof(double)
+		          };
+		protected List<System.Type> _supportedTypes = new List<Type>();
 		
 		public TreeModelWrapper()
 		{
+			foreach (Type type in _supportedDataTypes)
+			{
+				_supportedTypes.Add(type);
+			}
 			_items.ItemAddedEvent += OnItemAdded;
 			_items.ClearEvent += OnItemsClear;
 			_items.ItemRemovedEvent += OnItemRemoved;
@@ -82,7 +95,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			SetSizeRequest(args.Requisition.Width, args.Requisition.Height);
 		}
 		
-		protected abstract Gtk.Widget InnerWidget { get; }
+		public abstract Gtk.Widget InnerWidget { get; }
 		protected abstract Gtk.TreeModel Model { get; set; }
 		
 		public BindableWidgetCore WidgetCore
@@ -97,11 +110,11 @@ namespace Boxerp.Client.GtkSharp.Controls
 		{
 			get
 			{
-				return _itemsDisplayModeChanged;
+				return !_itemsDisplayModeChanged;
 			}
 			set
 			{
-				_itemsDisplayModeChanged = value;
+				_itemsDisplayModeChanged = !value;
 			}
 		}
 		
@@ -256,7 +269,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		}
 		
 		// IBindableWidget
-		void IBindableWidget.OnBoundDataChanged(string property, object val)
+	void IBindableWidget.OnBoundDataChanged(string property, object val)
 		{
 			Logger.GetInstance().WriteLine("updateValue:" + property);
 			if (property.Equals("BoundItems"))
@@ -347,9 +360,12 @@ namespace Boxerp.Client.GtkSharp.Controls
 		protected virtual void clear()
 		 {
 			checkDataBindingIsNull();
-			_store.Clear();
-			_itemsPointers.Clear();
-			_itersPointers.Clear();
+			if (_store != null)
+			{
+				_store.Clear();
+				_itemsPointers.Clear();
+				_itersPointers.Clear();
+			}
 		}
 						
 		protected void removeAt(int rowNumber)
@@ -393,8 +409,8 @@ namespace Boxerp.Client.GtkSharp.Controls
 				_store.Clear();
 				_store.Dispose();
 			}
-			Logger.GetInstance().WriteLine("initialize items:" + _itemsType);
 			createColumns();
+			this.ModelIsInitialized = true;
 		}
 		
 		protected List<T> readObjectTypes()
@@ -410,7 +426,14 @@ namespace Boxerp.Client.GtkSharp.Controls
 				T scolumn = new T();
 				scolumn.Name = pInfo.Name;
 				scolumn.ObjectPropertyName = pInfo.Name;
-				scolumn.DataType = pInfo.PropertyType;
+				if (_supportedTypes.Contains(pInfo.PropertyType))
+				{
+					scolumn.DataType = pInfo.PropertyType;
+				}
+				else
+				{
+					scolumn.DataType = typeof(string);
+				}
 				scolumn.Visible = true;
 				columnTypes.Add(scolumn);
 			}
@@ -428,6 +451,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 				T column = new T();
 				column.DataType = typeof(string);
 				column.Name = this._itemsType.ToString();
+				column.ObjectPropertyName = column.Name;
 				column.Visible = true;
 				columns.Add(column);				
 			}
@@ -454,21 +478,22 @@ namespace Boxerp.Client.GtkSharp.Controls
 			try
 			{
 				System.Type[] columnsTypes = new Type[columns.Count];
+				_columnsOrder.Clear();
 				int i = 0;
 				foreach (T column in columns)
         	    {
         	    	columnsTypes[i] = column.DataType;
 					_columnsOrder.Add(column.ObjectPropertyName, i);
 					Logger.GetInstance().WriteLine("COLUMN objectYPE =" + column.DataType);
+					Logger.GetInstance().WriteLine("Column name:" + column.ObjectPropertyName);
 					i++;
         	    }
         	    _store = new ListStore(columnsTypes);
 				Model = _store;
-				Logger.GetInstance().WriteLine("create columns 3" );
-								
+												
 				foreach (T column in columns)
 				{
-					addTreeViewColumn(column, _columnsOrder[column.ObjectPropertyName]);
+					addTreeViewColumnOrRenderer(column, _columnsOrder[column.ObjectPropertyName]);
 				}
 				
 				_columnsInitialized = true;
@@ -480,7 +505,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 			
-		protected virtual void addTreeViewColumn(T column, int colNumber){}
+		protected virtual void addTreeViewColumnOrRenderer(T column, int colNumber){}
 		
 		protected abstract void setValueInStore(object item, Hashtable itemValues, Gtk.TreeIter iter);
 			
@@ -494,7 +519,8 @@ namespace Boxerp.Client.GtkSharp.Controls
 			    
 			if (ItemsDisplayMode == ItemsDisplayMode.ObjectToString)
 			{
-				_itemValues.Add(item.ToString(), item.ToString());
+				Logger.GetInstance().WriteLine("getItemValues - _itemsType:" + _itemsType.ToString());
+				_itemValues.Add(_itemsType.ToString(), item.ToString());
 			}
 			else 
 			{
@@ -511,12 +537,9 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 			
 			Logger.GetInstance().WriteLine("insert item: " + item);
-			if (_itemsDisplayModeChanged || 
-			    ((_itemsTypeProperties == null) && 
-			     (ItemsDisplayMode != ItemsDisplayMode.ObjectToString)))
+			if (!ModelIsInitialized)
 			{
 				Logger.GetInstance().WriteLine("insert item, calling inializeTreeModelWidget");
-				_itemsDisplayModeChanged = false;
 				initializeTreeModelWidget(item);				
 			}
 			

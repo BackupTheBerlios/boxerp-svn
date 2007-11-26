@@ -1004,7 +1004,7 @@ Some cases don't include databinding but basic widget tests</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="testApp3.ComboBoxTests" design-size="516 108">
+  <widget class="Gtk.Window" id="testApp3.ComboBoxTests" design-size="516 93">
     <property name="MemberName" />
     <property name="Title" translatable="yes">ComboBoxTests</property>
     <property name="WindowPosition">CenterOnParent</property>

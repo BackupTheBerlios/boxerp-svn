@@ -45,7 +45,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 			this.Add(_treeview);
 		}
 
-		protected override Gtk.Widget InnerWidget
+		public override Gtk.Widget InnerWidget
 		{
 			get
 			{
@@ -214,6 +214,8 @@ namespace Boxerp.Client.GtkSharp.Controls
 						    break;
 						// objectODO: add more cases with the remaining types
 						default:
+						            Logger.GetInstance().WriteLine("storing string:" + itm.ToString());
+						            Logger.GetInstance().WriteLine("iter:" + iter.ToString());
 									_store.SetValue(iter, colNumber, (string) itm.ToString());		
 						    break;
 					}

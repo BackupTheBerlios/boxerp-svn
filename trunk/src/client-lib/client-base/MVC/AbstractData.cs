@@ -26,5 +26,10 @@ namespace Boxerp.Client
 				return _propertyBag;
 			}
 		}
+		
+		protected AbstractData(TFinalView view)
+		{
+			View = view;
+		}
 	}
 }

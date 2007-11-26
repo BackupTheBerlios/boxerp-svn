@@ -42,15 +42,25 @@ namespace Boxerp.Client.GtkSharp.Controls
 	      IBindableWidget, ITreeModel
 	{
 		private Gtk.ComboBox _combo;
-			
+		public event EventHandler SelectionChanged;
+		
 		public ComboBox()
 			: base()
 		{
 			_combo = new Gtk.ComboBox();
 			this.Add(_combo);
+			_combo.Changed += OnSelectionChanged;
 		}
 
-		protected override Gtk.Widget InnerWidget
+		protected void OnSelectionChanged(Object sender, EventArgs args)
+		{
+			if (SelectionChanged != null)
+			{
+				SelectionChanged(this, args);
+			}
+		}
+			
+		public override Gtk.Widget InnerWidget
 		{
 			get
 			{
@@ -139,6 +149,21 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
+		protected override void addTreeViewColumnOrRenderer(SimpleColumn column, int colNumber)
+		{
+			if (colNumber == 0)
+			{
+				_combo.Clear();
+				Gtk.CellRendererText cell = new Gtk.CellRendererText();
+				_combo.PackStart(cell, false);
+				_combo.AddAttribute(cell, "text", 0);
+			}
+			else
+			{
+				throw new NotSupportedException("ComboBox can only have one column");
+			}
+		}
+			
 		protected override Gtk.TreeIter appendValueToStore(object item, Hashtable itemValues)
 		{
 			Gtk.TreeIter iter = _store.Append();

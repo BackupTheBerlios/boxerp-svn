@@ -66,20 +66,41 @@ namespace testApp3
 			_combo.Items.Add(bindableUser2.Data.BusinessObj);
 		}
 
+		private void displayItem(object item)
+		{
+			InfoDialog id = new InfoDialog();
+			id.Message = item.ToString();
+			User selectedUser = (User)item;
+			string userProperties = ", " + selectedUser.Desk + ", " + selectedUser.Email  + ", "+ selectedUser.Password  + ", "+ selectedUser.Username;
+			id.Message += userProperties;
+		}
+		
 		protected virtual void OnDelete (object sender, System.EventArgs e)
 		{
+			if (_combo.SelectedItem != null)
+			{
+				_combo.Items.Remove(_combo.SelectedItem);
+			}
 		}
 
 		protected virtual void OnAdd (object sender, System.EventArgs e)
 		{
+			User user = new User();
+			user.Username = "adding user";
+			_combo.Items.Add(user);
 		}
 
 		protected virtual void OnEdit (object sender, System.EventArgs e)
 		{
+			this.bindableUser2.Data.BusinessObj.Username = "changing from code";
 		}
 
 		protected virtual void OnShow (object sender, System.EventArgs e)
 		{
+			if (_combo.SelectedItem != null)
+			{
+				displayItem(_combo.SelectedItem);
+			}
 		}
 	}
 }

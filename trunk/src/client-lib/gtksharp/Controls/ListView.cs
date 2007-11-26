@@ -52,7 +52,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		{
 		}
 		
-		protected override void addTreeViewColumn(SimpleColumn column, int colNumber)
+		protected override void addTreeViewColumnOrRenderer(SimpleColumn column, int colNumber)
 		{
 	        if (column.DataType == typeof(Gdk.Pixbuf))
         	{

@@ -36,6 +36,5 @@ namespace mvcSample1
 	{
 		List<Group> Groups { get; set; }
 		List<User> Users { get; set ; }
-		Group SelectedGroup { get; set; }
 	}
 }

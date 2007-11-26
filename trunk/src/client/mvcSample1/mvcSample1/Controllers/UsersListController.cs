@@ -46,8 +46,7 @@ namespace mvcSample1
 				Console.Out.WriteLine("fack");
 			}
 			SharedData.Groups = Database.GetAllGroups();
-			SharedData.SelectedGroup = SharedData.Groups[0];
-			RetrieveUsers(SharedData.SelectedGroup);
+			View.UpdateGroups();
 		}
 		
 		public void RetrieveUsers(Group group)
@@ -60,7 +59,7 @@ namespace mvcSample1
 			}
 			SharedData.PropertyBag["ActiveUsers"] = count;
 			
-			View.UpdateWidgets();
+			View.UpdateUsers();
 		}
 		
 		public void DeleteUser(User user)
@@ -72,14 +71,16 @@ namespace mvcSample1
 		{
 			UserEditController controller = getUserEditController();
 			controller.PopulateGui(user);
+			ViewsManager.DisplayView(controller.View);
 		}
 
-		public void AddUser(User user)
+		public void AddUser(User user, Group group)
 		{
 			UserEditController controller = getUserEditController();
 			User newUser = new User();
-			newUser.Group = SharedData.SelectedGroup;
+			newUser.Group = group;
 			controller.PopulateGui(newUser);
+			ViewsManager.DisplayView(controller.View);
 		}
 
 		private UserEditController getUserEditController()

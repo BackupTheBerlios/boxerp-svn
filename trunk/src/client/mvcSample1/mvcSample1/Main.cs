@@ -11,6 +11,7 @@ namespace mvcSample1
 		public static void Main (string[] args)
 		{
 			Application.Init ();
+			Logger.GetInstance().ShowDebugInfo = true;
 			startFirstController();
 			Application.Run ();
 		}

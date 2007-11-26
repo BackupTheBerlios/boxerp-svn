@@ -36,9 +36,10 @@ namespace mvcSample1
 	public partial class UsersListView : Gtk.Bin, IUsersListView
 	{
 		private UsersListController _controller;
-		private GtkUsersListData _data = new GtkUsersListData();
+		private GtkUsersListData _data;
 		private Boxerp.Client.GtkSharp.Controls.ComboBox _groupsCombo;
 		private Boxerp.Client.GtkSharp.Controls.ListView _usersList;
+		private bool _isPopulatingCombo = false;
 		
 		public UsersListController Controller 
 		{
@@ -75,6 +76,7 @@ namespace mvcSample1
 		public UsersListView()
 		{
 			this.Build();
+			_data = new GtkUsersListData(this);
 			addBoxerpWidgets();
 			if (Controller == null)
 			{
@@ -90,18 +92,22 @@ namespace mvcSample1
 			hbox2.PackStart(_groupsCombo);
 			_usersScrollWin.AddWithViewport(_usersList);
 			_usersList.ItemsDisplayMode = ItemsDisplayMode.AutoCreateColumns;
-			_groupsCombo.SelectionNotifyEvent += OnSelectionChanged;
+			_groupsCombo.SelectionChanged += OnSelectionChanged;
 		}
 		
-		private void OnSelectionChanged(object sender, Gtk.SelectionNotifyEventArgs args)
+		private void OnSelectionChanged(object sender, EventArgs args)
 		{
 			OnSelectionChanged();
 		}
 		
 		public void OnSelectionChanged()
 		{
-			Group group = _groupsCombo.SelectedItem as Group;
-			Controller.RetrieveUsers(group);
+			if ((!_isPopulatingCombo) && (_groupsCombo.SelectedItem != null))
+			{
+				Logger.GetInstance().WriteLine("Selection changed");
+				Group group = _groupsCombo.SelectedItem as Group;
+				Controller.RetrieveUsers(group);
+			}
 		}
 		
 		public void OnDeleteUser()
@@ -126,7 +132,7 @@ namespace mvcSample1
 		{
 			if (_usersList.SelectedItem != null)
 			{
-				Controller.DeleteUser(_usersList.SelectedItem as User);
+				Controller.EditUser(_usersList.SelectedItem as User);
 			}			
 		}
 		
@@ -139,11 +145,22 @@ namespace mvcSample1
 		{
 			if (_usersList.SelectedItem != null)
 			{
-				Controller.DeleteUser(_usersList.SelectedItem as User);
+				Controller.AddUser(new User(), _groupsCombo.SelectedItem as Group);
 			}
 		}
 		
-		public void UpdateWidgets()
+		public void UpdateGroups()
+		{
+			_isPopulatingCombo = true;
+			_groupsCombo.Items.Clear();
+			foreach (Group group in SharedData.Groups)
+			{
+				_groupsCombo.Items.Add(group);
+			}
+			_isPopulatingCombo = false;
+		}
+		
+		public void UpdateUsers()
 		{
 			_activeUsers.Text = SharedData.PropertyBag["ActiveUsers"].ToString();
 			_usersList.Items.Clear();
@@ -151,12 +168,6 @@ namespace mvcSample1
 			{
 				_usersList.Items.Add(user);
 			}
-			_groupsCombo.Items.Clear();
-			foreach (Group group in SharedData.Groups)
-			{
-				_groupsCombo.Items.Add(group);
-			}
-			_groupsCombo.SelectedItem = SharedData.SelectedGroup;
 		}
 		
 		public IUserEditView GetUserEditView()
@@ -165,13 +176,6 @@ namespace mvcSample1
 			return ueView;
 		}
 		
-		public void DisplayView(IUserEditView view) 
-		{
-			MainWindow win = new MainWindow();
-			Gtk.HBox hbox = new Gtk.HBox();
-			hbox.PackStart((Gtk.Widget)view);
-			win.Add(hbox);
-			win.ShowAll();
-		}
+		
 	}
 }

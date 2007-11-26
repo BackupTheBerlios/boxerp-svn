@@ -31,21 +31,17 @@ using System;
 using Boxerp.Client;
 
 namespace mvcSample1
-{	
-	public interface IUsersListView : IView<UsersListController, IUsersListData>
+{
+	public class ViewsManager
 	{
-		void OnSelectionChanged();
-		
-		void OnDeleteUser ();
-		
-		void OnEditUser ();
-		
-		void OnAddUser ();
-		
-		void UpdateGroups();
-		
-		void UpdateUsers();
-		
-		IUserEditView GetUserEditView();
+		public static void DisplayView(IView view) 
+		{
+			MainWindow win = new MainWindow();
+			win.Title = "whatever";
+			Gtk.HBox hbox = new Gtk.HBox();
+			hbox.PackStart((Gtk.Widget)view);
+			win.Add(hbox);
+			win.ShowAll();
+		}
 	}
 }

@@ -48,6 +48,7 @@ namespace mvcSample1 {
             this.hbox1.Spacing = 6;
             // Container child hbox1.Gtk.Box+BoxChild
             this.hbox2 = new Gtk.HBox();
+            this.hbox2.HeightRequest = 30;
             this.hbox2.Name = "hbox2";
             this.hbox2.Spacing = 6;
             this.hbox1.Add(this.hbox2);

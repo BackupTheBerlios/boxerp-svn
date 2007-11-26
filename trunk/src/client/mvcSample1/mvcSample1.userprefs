@@ -1,24 +1,30 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp/trunk/src/client/mvcSample1/mvcSample1.mds">
   <Files>
     <File name="Welcome" />
-    <File name="mvcSample1/GtkViews/UsersListView.cs" line="41" column="56" />
+    <File name="mvcSample1/GtkViews/UsersListView.cs" line="135" column="25" />
     <File name="mvcSample1/Controllers/UserEditController.cs" line="43" column="28" />
     <File name="mvcSample1/Interfaces/IUserEditView.cs" line="37" column="32" />
-    <File name="mvcSample1/SharedData/AbstractUsersListData.cs" line="66" column="4" />
-    <File name="mvcSample1/Controllers/UsersListController.cs" line="87" column="22" />
-    <File name="mvcSample1/Database.cs" line="82" column="17" />
+    <File name="mvcSample1/SharedData/AbstractUsersListData.cs" line="37" column="31" />
+    <File name="mvcSample1/Controllers/UsersListController.cs" line="81" column="21" />
+    <File name="mvcSample1/Database.cs" line="47" column="21" />
     <File name="mvcSample1/ResponsiveHelperFactory.cs" line="40" column="3" />
-    <File name="mvcSample1/GtkViews/UserEditView.cs" line="60" column="3" />
-    <File name="mvcSample1/Main.cs" line="27" column="16" />
+    <File name="mvcSample1/GtkViews/UserEditView.cs" line="53" column="4" />
+    <File name="mvcSample1/Main.cs" line="20" column="4" />
     <File name="mvcSample1/TestViews/TestUserEditView.cs" line="47" column="1" />
-    <File name="mvcSample1/SharedData/TestUsersListData.cs" line="58" column="4" />
-    <File name="mvcSample1/TestViews/TestUsersListView.cs" line="64" column="15" />
-    <File name="mvcSample1/SharedData/GtkUsersListData.cs" line="56" column="19" />
+    <File name="mvcSample1/SharedData/TestUsersListData.cs" line="37" column="5" />
+    <File name="mvcSample1/TestViews/TestUsersListView.cs" line="53" column="27" />
+    <File name="mvcSample1/SharedData/GtkUsersListData.cs" line="37" column="3" />
+    <File name="mvcSample1/Interfaces/IUsersListView.cs" line="47" column="22" />
+    <File name="mvcSample1/Models/Group.cs" line="59" column="5" />
+    <File name="mvcSample1/Interfaces/IUsersListData.cs" line="38" column="34" />
+    <File name="mvcSample1/App.config" line="2" column="16" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="mvcSample1" expanded="True" />
+        <Node name="mvcSample1" expanded="True" selected="True">
+          <Node name="References" expanded="True" />
+        </Node>
       </Node>
     </ViewMemento>
     <ViewMemento id="ClassPad">
@@ -32,7 +38,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client/mvcSample1/mvcSample1/GtkViews/UsersListView.cs" />
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client/mvcSample1/mvcSample1/App.config" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

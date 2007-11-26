@@ -18,7 +18,7 @@
       <placeholder />
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="mvcSample1.UsersListView" design-size="599 325">
+  <widget class="Gtk.Bin" id="mvcSample1.UsersListView" design-size="795 361">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox1">
@@ -31,6 +31,7 @@
             <child>
               <widget class="Gtk.HBox" id="hbox2">
                 <property name="MemberName" />
+                <property name="HeightRequest">30</property>
                 <property name="Spacing">6</property>
                 <child>
                   <placeholder />

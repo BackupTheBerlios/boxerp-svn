@@ -34,16 +34,8 @@ namespace mvcSample1
 {	
 	public class GtkUsersListData : AbstractUsersListData<UsersListView>
 	{
-		public override Group SelectedGroup 
-		{
-			get 
-			{ 
-				return View.GroupsCombo.SelectedItem as Group; 
-			}
-			set 
-			{ 
-				View.GroupsCombo.SelectedItem = value; 
-			}
-		}
+		public GtkUsersListData(UsersListView view)
+			: base(view)
+		{}
 	}
 }

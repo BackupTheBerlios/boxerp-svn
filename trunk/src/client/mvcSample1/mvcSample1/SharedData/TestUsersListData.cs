@@ -35,14 +35,8 @@ namespace mvcSample1
 {
 	public class TestUsersListData : AbstractUsersListData<TestUsersListView>
 	{		
-		private Group _selectedGroup;
-
-		public TestUsersListData() {}
-		
-		public override Group SelectedGroup 
-		{
-			get { return _selectedGroup; }
-			set { _selectedGroup = value; }
-		}
+		public TestUsersListData(TestUsersListView view)
+			: base(view)
+		{}
 	}
 }

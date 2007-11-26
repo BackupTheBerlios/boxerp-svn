@@ -64,5 +64,11 @@ namespace mvcSample1
 				_id = value;
 			}
 		}
+		
+		public override string ToString ()
+		{
+			return Name;
+		}
+
 	}
 }

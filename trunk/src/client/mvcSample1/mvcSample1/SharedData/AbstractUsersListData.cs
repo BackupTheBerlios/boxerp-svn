@@ -52,10 +52,10 @@ namespace mvcSample1
 			set { _users = value;}
 		}
 		
-		public abstract Group SelectedGroup 
+		public AbstractUsersListData(T view)
+			: base(view)
 		{
-			get ;
-			set ;
+			
 		}
 	}
 }

@@ -1,16 +1,16 @@
 <Project name="mvcSample1" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="bin/Debug" assembly="mvcSample1" />
+      <Output directory="bin/Debug" assemblyKeyFile="." assembly="mvcSample1" />
       <Build debugmode="True" target="Exe" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
-      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="False" win32Icon="." ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
       <Output directory="bin/Release" assembly="mvcSample1" />
       <Build debugmode="False" target="Exe" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
-      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="False" win32Icon="." ctype="CSharpCompilerParameters" />
     </Configuration>
   </Configurations>
   <Contents>
@@ -46,6 +46,8 @@
     <File name="WinFormsViews" subtype="Directory" buildaction="Compile" />
     <File name="Database.cs" subtype="Code" buildaction="Compile" />
     <File name="ResponsiveHelperFactory.cs" subtype="Code" buildaction="Compile" />
+    <File name="App.config" subtype="Code" buildaction="Nothing" />
+    <File name="ViewsManager.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="gtk-sharp, Version=2.10.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
@@ -63,10 +65,9 @@
     <ProjectReference type="Gac" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </References>
-  <GtkDesignInfo gtkVersion="2.10.2">
+  <GtkDesignInfo isWidgetLibrary="True" gtkVersion="2.10.2">
     <ExportedWidgets>
       <Widget>mvcSample1.UsersListView</Widget>
-      <Widget>mvcSample1.UserEditionView</Widget>
       <Widget>mvcSample1.UserEditView</Widget>
     </ExportedWidgets>
   </GtkDesignInfo>

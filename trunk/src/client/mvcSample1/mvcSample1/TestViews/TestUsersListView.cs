@@ -34,19 +34,25 @@ namespace mvcSample1
 	public class TestUsersListView : AbstractTestView<UsersListController, TestUsersListData, IUsersListData>, IUsersListView
 	{
 		
+		protected override void CreateData()
+		{
+			_data = new TestUsersListData(this);
+		}
 		
-		public IUsersListData SharedData {
-			get {
-				throw new NotImplementedException();
+		public IUsersListData SharedData 
+		{	
+			get 
+			{
+				return Data;
 			}
 		}
 
-		
-		public void UpdateWidgets()
-		{
-			
-		}
+		public void UpdateUsers()
+		{}
 
+		public void UpdateGroups()
+		{}
+		
 		public void OnSelectionChanged ()
 		{
 			throw new NotImplementedException();

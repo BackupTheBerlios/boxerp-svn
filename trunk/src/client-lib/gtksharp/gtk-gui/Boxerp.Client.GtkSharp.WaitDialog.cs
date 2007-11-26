@@ -84,6 +84,7 @@ namespace Boxerp.Client.GtkSharp {
             this.DefaultWidth = 400;
             this.DefaultHeight = 114;
             this.Show();
+            this.button140.Clicked += new System.EventHandler(this.OnCancel);
         }
     }
 }

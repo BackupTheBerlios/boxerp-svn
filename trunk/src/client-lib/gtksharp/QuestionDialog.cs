@@ -53,6 +53,29 @@ namespace Boxerp.Client.GtkSharp
 		public bool IsAfirmative
 		{
 		    get { return answer; }
+			set { answer = value; }
+		}
+
+		public string AfirmativeOption 
+		{
+			get 
+			{
+				return String.Empty;
+			}
+			set 
+			{
+			}
+		}
+
+		public string NegativeOption 
+		{
+			get 
+			{
+				return String.Empty;
+			}
+			set 
+			{
+			}
 		}
 		
 		protected virtual void OnCancel(object sender, System.EventArgs e)
@@ -65,6 +88,16 @@ namespace Boxerp.Client.GtkSharp
 		{
 		    answer = true;
 		    this.Hide();		    
+		}
+
+		public void ShowDialog ()
+		{
+			this.Run();
+		}
+
+		public new void Close ()
+		{
+			this.Destroy();
 		}
 	}
 }

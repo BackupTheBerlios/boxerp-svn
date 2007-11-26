@@ -31,13 +31,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading;
 using System.Reflection;
 using Gtk;
 
 namespace Boxerp.Client.GtkSharp
 {
-	public class GtkResponsiveHelper : GtkResponsiveHelper<WaitDialog, WaitWindow>
+	public class GtkResponsiveHelper : GtkResponsiveHelper<WaitControl>
 	{
 		public GtkResponsiveHelper(ConcurrencyMode mode) : this(mode, true) { }
 
@@ -46,21 +45,17 @@ namespace Boxerp.Client.GtkSharp
 	}
 
 	public class GtkResponsiveHelper<T> : GenericResponsiveHelper<T, QuestionDialog>
-		where T : class, IGtkWaitControl, new()
+		where T : class, IWaitControl, new()
 	{
-		public GtkResponsiveHelper(ConcurrencyMode mode)
-			: this(mode, true, null, null)
-		{
-		}
+		public GtkResponsiveHelper(ConcurrencyMode mode) : this (mode, true, null){ }
 
 		public GtkResponsiveHelper(ConcurrencyMode mode, bool displayExceptions)
-			: this(mode, displayExceptions, null, null)
-		{
-		}
+			: this(mode, true, null)
+		{}
 
 		public GtkResponsiveHelper(ConcurrencyMode mode, bool displayExceptions, T waitDialogInstance)
 			: base(mode)
-		{ }
+		{}
 
 		public override List<Thread> StartAsyncCallList(ResponsiveEnum transferType, IController controller)
 		{
@@ -69,7 +64,26 @@ namespace Boxerp.Client.GtkSharp
 		
 		public override void OnTransferCompleted(object sender, ThreadEventArgs e)
 		{
-			Application.Invoke(sender, (EventArgs)e, TransferCompleted);
+			Application.Invoke(sender, (EventArgs)e, gtkTransferCompleted);
+		}
+		
+		protected void gtkTransferCompleted(object sender, EventArgs e)
+		{
+			base.TransferCompleted(sender, (ThreadEventArgs) e);
+		}
+		
+		protected override void showException(string msg)
+		{
+			WarningDialog win = new WarningDialog();
+			win.Message = msg;
+			win.Run();
+		}
+
+		protected override void showMessage(string msg)
+		{
+			InfoDialog win = new InfoDialog();
+			win.Message = msg;
+			win.Run();
 		}
 	}
 }

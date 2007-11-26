@@ -370,6 +370,7 @@
             <property name="Label" translatable="yes">Cancel</property>
             <property name="UseUnderline">True</property>
             <property name="ResponseId">0</property>
+            <signal name="Clicked" handler="OnCancel" />
           </widget>
           <packing>
             <property name="Expand">False</property>

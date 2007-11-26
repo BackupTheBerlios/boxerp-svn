@@ -45,20 +45,9 @@ namespace Boxerp.Client.GtkSharp
 			: base(mode, displayExceptions)	{}
 	}
 
-	public class GtkResponsiveHelper<T, Y> : AbstractResponsiveHelper
+	public class GtkResponsiveHelper<T> : GenericResponsiveHelper<T, QuestionDialog>
 		where T : class, IGtkWaitControl, new()
-		where Y : class, IGtkWaitControl, new()
 	{
-		private T _waitDialog;
-		private Y _waitWindow;
-		
-		private bool _userWaitDialogInstance = false;
-		private bool _userWaitWindowInstance = false;
-		private bool _displayExceptions = true;
-		private Queue<T> _dialogs = new Queue<T>();
-		private Queue<Y> _windows = new Queue<Y>();
-		private Queue<QuestionDialog> _questionWindows = new Queue<QuestionDialog>();
-
 		public GtkResponsiveHelper(ConcurrencyMode mode)
 			: this(mode, true, null, null)
 		{
@@ -69,215 +58,15 @@ namespace Boxerp.Client.GtkSharp
 		{
 		}
 
-		public GtkResponsiveHelper(ConcurrencyMode mode, bool displayExceptions, T waitDialogInstance, Y waitWindowInstance)
+		public GtkResponsiveHelper(ConcurrencyMode mode, bool displayExceptions, T waitDialogInstance)
 			: base(mode)
-		{
-			_waitDialog = waitDialogInstance;
-			_waitWindow = waitWindowInstance;
-			_userWaitDialogInstance = _waitDialog == null ? false : true;
-			_userWaitWindowInstance = _waitWindow == null ? false : true;
-			_displayExceptions = displayExceptions;
-		}
+		{ }
 
 		public override List<Thread> StartAsyncCallList(ResponsiveEnum transferType, IController controller)
 		{
 			return StartAsyncCallList(transferType, controller, true);
 		}
 		
-		public override List<Thread> StartAsyncCallList(ResponsiveEnum transferType, IController controller, bool showWaitDialog)
-		{
-			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
-				|| (RunningThreads == 0))
-			{
-				if (_concurrencyMode == ConcurrencyMode.Modal)
-				{
-					if (!_userWaitDialogInstance)
-					{
-						_waitDialog = new T();
-						_dialogs.Enqueue(_waitDialog);
-					}
-					_waitDialog.CancelEvent += OnCancel;
-				}
-				else
-				{
-					if (!_userWaitWindowInstance)
-					{
-						_waitWindow = new Y();
-						_windows.Enqueue(_waitWindow);
-					}
-					_waitWindow.IsModal = false;
-					_waitWindow.CancelEvent += OnCancel;
-				}
-			}
-
-			List<Thread> threads = base.StartAsyncCallList(transferType, controller);
-
-			try
-			{
-				if (showWaitDialog)
-				{
-					if (_concurrencyMode == ConcurrencyMode.Modal)
-					{
-						_waitDialog.ShowControl();
-					}
-					else
-					{
-						_waitWindow.ShowControl();
-						// TODO : if the window is minimized show it in the middle of the screen
-					}
-				}
-			}
-			catch (System.Reflection.TargetInvocationException ex)
-			{
-				throw ex.InnerException;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-			
-			return threads;
-		}
-
-		
-		public override Thread StartAsyncCall(SimpleDelegate method)
-		{
-			return StartAsyncCall(method, true);	
-		}
-		
-		public override Thread StartAsyncCall(SimpleDelegate method, bool showWaitDialog)
-		{
-			
-			if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
-				|| (RunningThreads == 0))
-			{
-				if (_concurrencyMode == ConcurrencyMode.Modal)
-				{
-					if (!_userWaitDialogInstance)
-					{
-						_waitDialog = new T();
-						_dialogs.Enqueue(_waitDialog);
-					}
-					_waitDialog.CancelEvent += OnCancel;
-				}
-				else
-				{
-					if (!_userWaitWindowInstance)
-					{
-						_waitWindow = new Y();
-						_windows.Enqueue(_waitWindow);
-					}
-					_waitWindow.IsModal = false;
-					_waitWindow.CancelEvent += OnCancel;
-				}
-			}
-
-			Thread thread = base.StartAsyncCall(method);
-
-			try
-			{
-				if (showWaitDialog)
-				{
-					if (_concurrencyMode == ConcurrencyMode.Modal)
-					{
-						_waitDialog.ShowControl();
-					}
-					else
-					{
-						_waitWindow.ShowControl();
-					
-						// TODO : if the window is minimized show it in the middle of the screen
-					}
-				}
-			}
-			catch (System.Reflection.TargetInvocationException ex)
-			{
-				throw ex.InnerException;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-			
-			return thread;
-		}
-
-		public override void OnCancel(object sender, EventArgs e)
-		{
-			CancelRequested = true;
-			QuestionDialog qdialog = new QuestionDialog();
-			qdialog.Modal = true;
-			qdialog.Message = "The process is being cancelled, please wait. Do you want to force abort right now?";
-			_questionWindows.Enqueue(qdialog);
-			if (RunningThreads > 0)
-			{
-				int rType = qdialog.Run();
-				if ((rType == (int)ResponseType.Ok) && (RunningThreads > 0))
-				{
-					ForceAbort(0); // fix this
-				}
-				if (_questionWindows.Count > 0)
-				{
-					_questionWindows.Dequeue();
-				}
-			}
-		}
-
-		private void TransferCompleted(object sender, EventArgs e)
-		{
-			ThreadEventArgs evArgs = (ThreadEventArgs)e;
-			if (_concurrencyMode == ConcurrencyMode.Modal)
-			{
-				T wDialog;
-				if (!_userWaitDialogInstance)
-				{
-					wDialog = _dialogs.Dequeue();
-					wDialog.CloseControl();
-					wDialog.DestroyWidget();
-				}
-				else
-				{
-					wDialog = _waitDialog;
-					wDialog.CloseControl();
-				}
-			}
-			else
-			{
-				Y wWindow;
-				if (!_userWaitWindowInstance)
-				{
-					wWindow = _windows.Dequeue();
-					wWindow.CloseControl();
-					wWindow.DestroyWidget();
-				}
-				else
-				{
-					wWindow = _waitWindow;
-					wWindow.CloseControl();
-				}
-			}
-			if (_questionWindows.Count > 0)
-			{
-				QuestionDialog qd = _questionWindows.Dequeue();
-				qd.Hide();
-				qd.Destroy();
-			}
-
-			if (!evArgs.Success)
-			{
-				string msg = "Operation Aborted \n";
-				WarningDialog warning = new WarningDialog();
-				warning.Message = msg + evArgs.ExceptionMsg;
-				warning.QuitOnOk = false;
-				warning.Present();
-			}
-
-			if (this.transferCompleteEventHandler != null)
-			{
-				transferCompleteEventHandler(sender, evArgs);
-			}
-		}
-
 		public override void OnTransferCompleted(object sender, ThreadEventArgs e)
 		{
 			Application.Invoke(sender, (EventArgs)e, TransferCompleted);

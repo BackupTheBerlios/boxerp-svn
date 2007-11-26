@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace winformsResponsivenessTest
 {
-	public class Controller : AbstractController<ISampleView>
+	public class Controller : AbstractController<ISampleView, Controller>
 	{
 		Random _random = new Random();
 		int _randomMax;

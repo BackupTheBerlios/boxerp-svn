@@ -46,200 +46,21 @@ namespace Boxerp.Client.WindowsForms
     /// <summary>
     /// This class helps to keep winform applications responsive 
     /// </summary>
-    public class WinFormsResponsiveHelper<T> : AbstractResponsiveHelper
+    public class WinFormsResponsiveHelper<T> : GenericResponsiveHelper<T, QuestionDialog>
 		where T : class, IWinFormsWaitControl, new()
     {
-		private T _waitDialog;
-
-		private bool _userWaitDialogInstance = false;
-        private Dictionary<int, QuestionDialog> _questionWindows = new Dictionary<int, QuestionDialog>();
-        private Dictionary<Guid, T> _dialogs = new Dictionary<Guid, T>();
-        private Dictionary<int, Guid> _storagePointers = new Dictionary<int, Guid>();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="mode"></param>
+		
         public WinFormsResponsiveHelper(ConcurrencyMode mode)
             : base(mode)
         {
         }
 
-
-		/// <summary>
-		/// You might want your custom waitDialog to manage the wait process. For example you might 
-		/// want to have a status bar rather than a window. You can pass an instance of it in order
-		/// for the application to use it
-		/// </summary>
-		/// <param name="mode"></param>
-		/// <param name="waitDialogInstance">An instance of your WaitDialog class</param>
 		public WinFormsResponsiveHelper(ConcurrencyMode mode, T waitDialogInstance)
 			: base(mode)
 		{
-			_waitDialog = waitDialogInstance;
-			_userWaitDialogInstance = _waitDialog == null ? false : true;
 		}
 
-		public override List<Thread> StartAsyncCallList(ResponsiveEnum trType, IController controller)
-		{
-			return StartAsyncCallList(trType, controller, true);
-		}
-
-        public override List<Thread> StartAsyncCallList(ResponsiveEnum trType, IController controller, bool showWaitControl)
-        {
-            Guid newDialogGuid = Guid.NewGuid();
-            if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
-                || (RunningThreads == 0))
-            {
-				if (!_userWaitDialogInstance)
-				{
-					_waitDialog = new T();
-                    _dialogs[newDialogGuid] = _waitDialog;
-				}
-                _waitDialog.CancelEvent += OnCancel;
-                
-            }
-
-            int threadId = -1;
-            List<Thread> threads;
-            // before adding the dialog to the dialogs storage, we have to make sure the thread lasts 
-            // enough. if it is over, then we don't add it to the dialogs nor show the dialog
-            lock(_storagePointers)
-            {
-
-			    threads = base.StartAsyncCallList(trType, controller);
-                try
-                {
-                    // if the thread finishes between these lines of code, we get an exception
-                    threadId = threads[0].ManagedThreadId;
-                    _storagePointers[threadId] = newDialogGuid;
-                }
-                catch
-                {
-                    // and the dialog should be removed
-                    _dialogs.Remove(newDialogGuid);  
-                }
-            }
-			if (showWaitControl)
-			{
-                try
-                {
-					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
-                    lock (_dialogs)
-                    {
-                        // the Transfer completed method removes the dialog from the dialogs so 
-                        // it is important to check it before opening the window
-                        if (_dialogs.ContainsKey(newDialogGuid))
-                        {
-                            _waitDialog.AssociatedThreadId = threadId;
-                            _waitDialog.ShowControl();
-                        }
-                    }
-                }
-
-                catch (System.Reflection.TargetInvocationException ex)
-                {
-                    throw ex.InnerException;
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-
-			return threads;
-        }
-
-		public override Thread StartAsyncCall(SimpleDelegate method)
-		{
-			return StartAsyncCall(method, true);
-		}
-
-        public override Thread StartAsyncCall(SimpleDelegate method, bool showWaitControl)
-        {
-            Guid newDialogGuid = Guid.NewGuid();
-            if ((_concurrencyMode == ConcurrencyMode.Modal) || (_concurrencyMode == ConcurrencyMode.Parallel)
-                || (RunningThreads == 0))
-            {
-				if (!_userWaitDialogInstance)
-				{
-					_waitDialog = new T();
-                    Console.Out.WriteLine("Creating window: " + _waitDialog.GetHashCode());
-                    _dialogs[newDialogGuid] = _waitDialog;
-				}
-				_waitDialog.CancelEvent += OnCancel;
-				
-            }
-
-            int threadId = -1;
-			Thread thread;
-            // before adding the dialog to the dialogs storage, we have to make sure the thread lasts 
-            // enough. if it is over, then we don't add it to the dialogs nor show the dialog
-            lock(_storagePointers) {
-                thread  = base.StartAsyncCall(method);
-                try
-                {
-                    // if the thread finishes between this lines of code, we get an exception
-                    threadId = thread.ManagedThreadId;
-                    _storagePointers[threadId] = newDialogGuid;
-                }
-                catch
-                {
-                    // and the dialog should be removed
-                    _dialogs.Remove(newDialogGuid);
-                }
-            }
-			if (showWaitControl)
-			{
-				try
-				{
-					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
-                    lock (_dialogs)
-                    {
-                        if (_dialogs.ContainsKey(newDialogGuid))
-                        {
-                            _waitDialog.AssociatedThreadId = threadId;
-                            _waitDialog.ShowControl();
-                        }
-                    }
-				}
-                catch (System.Reflection.TargetInvocationException ex)
-                {
-                    throw ex.InnerException;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-			}
-
-			return thread;
-		}
-
-
-        public override void OnCancel(object sender, EventArgs e)
-        {
-            IWinFormsWaitControl senderDialog = sender as IWinFormsWaitControl;
-            CancelRequested = true;
-
-            QuestionDialog ques = new QuestionDialog(true);
-            ques.Message = "The process is being cancelled, please wait.  Do you want to force abort right now?";
-            _questionWindows[senderDialog.AssociatedThreadId] = ques;
-            if (RunningThreads > 0)
-            {
-                ResponseType resp = ques.Run();
-                if ((resp == ResponseType.Ok) && (RunningThreads > 0))
-                {
-                    ForceAbort(senderDialog.AssociatedThreadId);
-                }
-                if (_questionWindows.Count > 0)
-                {
-                    _questionWindows.Remove(senderDialog.AssociatedThreadId);
-                }
-            }
-        }
-
-        private void TransferCompleted(object sender, ThreadEventArgs e)
+		protected override void TransferCompleted(object sender, ThreadEventArgs e)
         {
             ThreadEventArgs evArgs = (ThreadEventArgs)e;
             ResponsiveEnum operationType = e.OperationType;
@@ -337,6 +158,16 @@ namespace Boxerp.Client.WindowsForms
 					}
 				}
 			}
+		}
+
+		protected override void showException(string msg)
+		{
+			MessageBox.Show(msg);
+		}
+
+		protected override void showMessage(string msg)
+		{
+			MessageBox.Show(msg);
 		}
     }
 }

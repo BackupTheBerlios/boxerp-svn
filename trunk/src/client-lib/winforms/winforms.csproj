@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.20706</ProductVersion>
+    <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{323C228A-8F9B-4A89-9E8D-912FE7E297CE}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -67,7 +67,7 @@
   <ItemGroup>
     <ProjectReference Include="..\client-base\client-base.csproj">
       <Project>{701CF3A1-60F3-4938-B0DD-CBFBC6DEF7D5}</Project>
-      <Name>client-base2008</Name>
+      <Name>client-base</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -38,6 +38,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logger.cs" />
     <Compile Include="MVC\AbstractController.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Configuration\ClientConfiguration.cs" />
@@ -82,6 +83,9 @@
     <Compile Include="Responsiveness\ConcurrencyMode.cs" />
     <Compile Include="Responsiveness\ConsoleResponsiveHelper.cs" />
     <Compile Include="Responsiveness\ConsoleWaitDialog.cs" />
+    <Compile Include="Responsiveness\GenericResponsiveHelper.cs" />
+    <Compile Include="Responsiveness\IErrorWindow.cs" />
+    <Compile Include="Responsiveness\IQuestionWindow.cs" />
     <Compile Include="Responsiveness\IResponsiveClient.cs" />
     <Compile Include="Responsiveness\IWaitControl.cs" />
     <Compile Include="Responsiveness\ResponsiveAttribute.cs" />

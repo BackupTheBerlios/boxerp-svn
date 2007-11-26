@@ -16,6 +16,17 @@ namespace winformsResponsivenessTest
 		private Controller _singletonController;
 		private Controller _parallelController;
 
+		public Controller Controller
+		{
+			get
+			{
+				return _modalController;
+			}
+			set
+			{
+			}
+		}
+
 		public Form1()
 		{
 			InitializeComponent();

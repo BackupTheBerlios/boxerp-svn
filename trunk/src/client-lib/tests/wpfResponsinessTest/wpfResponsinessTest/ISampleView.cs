@@ -5,7 +5,7 @@ using Boxerp.Client;
 
 namespace winformsResponsivenessTest
 {
-	public interface ISampleView : IView
+	public interface ISampleView : IView<Controller>
 	{
 
 	}

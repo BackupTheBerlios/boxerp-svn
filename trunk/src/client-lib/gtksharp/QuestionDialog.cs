@@ -29,12 +29,13 @@
 //
 
 using System;
+using Boxerp.Client;
 
 namespace Boxerp.Client.GtkSharp
 {
 	
 	
-	public partial class QuestionDialog : Gtk.Dialog
+	public partial class QuestionDialog : Gtk.Dialog, IQuestionWindow
 	{
 		private bool answer;
 		
@@ -43,13 +44,13 @@ namespace Boxerp.Client.GtkSharp
 			this.Build();
 		}
 		
-		public string Message 
+		public string Msg 
 		{
 			get { return label.Text; }
 			set { label.Text = value; } 
 		}
 		
-		public bool Answer
+		public bool IsAfirmative
 		{
 		    get { return answer; }
 		}

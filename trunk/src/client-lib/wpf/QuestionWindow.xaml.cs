@@ -16,11 +16,11 @@ namespace Boxerp.Client.WPF
 	/// Interaction logic for QuestionWindow.xaml
 	/// </summary>
 
-	public partial class QuestionWindow : System.Windows.Window
+	public partial class QuestionWindow : System.Windows.Window, IQuestionWindow
 	{
 		private bool _yes = true;
 
-		public bool Yes
+		public bool IsAfirmative
 		{
 			get { return _yes; }
 			set { _yes = value; }
@@ -43,7 +43,7 @@ namespace Boxerp.Client.WPF
 			}
 		}
 
-		public string YesButtonLabel
+		public string AfirmativeOption
 		{
 			get
 			{
@@ -55,7 +55,7 @@ namespace Boxerp.Client.WPF
 			}
 		}
 
-		public string NoButtonLabel
+		public string NegativeOption
 		{
 			get
 			{
@@ -78,5 +78,14 @@ namespace Boxerp.Client.WPF
 			_yes = false;
 			Close();
 		}
+
+		
+
+		void IQuestionWindow.ShowDialog()
+		{
+			base.ShowDialog();
+		}
+
+		
 	}
 }

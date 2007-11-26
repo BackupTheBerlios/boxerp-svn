@@ -44,10 +44,14 @@ namespace Boxerp.Client.WindowsForms
         Cancel
     }
 
-    public partial class QuestionDialog : Form
+    public partial class QuestionDialog : Form, IQuestionWindow
     {
         protected readonly bool _isModal;
         private ResponseType _answer;
+
+		public QuestionDialog() 
+			: this (true)
+		{ }
 
         public QuestionDialog(bool isModal)
         {
@@ -74,7 +78,7 @@ namespace Boxerp.Client.WindowsForms
             return _answer;
         }
 
-        public string Message
+        public string Msg
         {
             get
             {
@@ -106,5 +110,51 @@ namespace Boxerp.Client.WindowsForms
             this.Hide();
         }
 
-    }
+
+		#region IQuestionWindow Members
+
+
+		public string AfirmativeOption
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public string NegativeOption
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public new void ShowDialog()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public bool IsAfirmative
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		#endregion
+	}
 }

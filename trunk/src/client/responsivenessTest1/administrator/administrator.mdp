@@ -1,30 +1,30 @@
 <Project name="Admin" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
-      <Output directory="./bin/Debug" assembly="Admin" />
+      <Output directory="bin/Debug" assembly="Admin" />
       <Build debugmode="True" target="Exe" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
-      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" definesymbols="GTK" generatexmldocumentation="False" win32Icon="./" ctype="CSharpCompilerParameters" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" definesymbols="GTK" generatexmldocumentation="False" win32Icon="." ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
-      <Output directory="./bin/Release" assembly="administrator" />
+      <Output directory="bin/Release" assembly="administrator" />
       <Build debugmode="False" target="Exe" />
       <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
     </Configuration>
   </Configurations>
   <Contents>
-    <File name="./gtk-gui/gui.stetic" subtype="Code" buildaction="Exclude" />
-    <File name="./gtk-gui/generated.cs" subtype="Code" buildaction="Compile" />
-    <File name="./AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
-    <File name="./GtkSharp" subtype="Directory" buildaction="Compile" />
-    <File name="./GtkSharp/TestWindow.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Admin.TestWindow.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Main.cs" subtype="Code" buildaction="Compile" />
-    <File name="./GtkSharp/TestWindow2.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Admin.TestWindow2.cs" subtype="Code" buildaction="Compile" />
-    <File name="./GtkSharp/TestWindow3.cs" subtype="Code" buildaction="Compile" />
-    <File name="./gtk-gui/Admin.TestWindow3.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/gui.stetic" subtype="Code" buildaction="Exclude" />
+    <File name="gtk-gui/generated.cs" subtype="Code" buildaction="Compile" />
+    <File name="AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="GtkSharp" subtype="Directory" buildaction="Compile" />
+    <File name="GtkSharp/TestWindow.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/Admin.TestWindow.cs" subtype="Code" buildaction="Compile" />
+    <File name="Main.cs" subtype="Code" buildaction="Compile" />
+    <File name="GtkSharp/TestWindow2.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/Admin.TestWindow2.cs" subtype="Code" buildaction="Compile" />
+    <File name="GtkSharp/TestWindow3.cs" subtype="Code" buildaction="Compile" />
+    <File name="gtk-gui/Admin.TestWindow3.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

@@ -13,7 +13,9 @@
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="testApp3" expanded="True" selected="True" />
+        <Node name="testApp3" expanded="True">
+          <Node name="DataGridDataTable.cs" selected="True" />
+        </Node>
       </Node>
     </ViewMemento>
     <ViewMemento id="ClassPad">

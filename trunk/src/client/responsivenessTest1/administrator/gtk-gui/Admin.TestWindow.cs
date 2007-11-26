@@ -22,7 +22,7 @@ namespace Admin {
         private Gtk.Button button4;
         
         protected virtual void Build() {
-            Stetic.Gui.Initialize();
+            Stetic.Gui.Initialize(this);
             // Widget Admin.TestWindow
             this.Name = "Admin.TestWindow";
             this.Title = Mono.Unix.Catalog.GetString("TestWindow");

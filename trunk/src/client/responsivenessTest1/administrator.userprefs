@@ -1,16 +1,16 @@
-﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp_completo/trunk/src/client/responsivenessTest1/administrator.mds">
+﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp/trunk/src/client/responsivenessTest1/administrator.mds">
   <Files>
     <File name="Welcome" />
+    <File name="administrator/Controllers/TestController.cs" line="79" column="5" />
+    <File name="administrator/Main.cs" line="16" column="46" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="Admin" expanded="True">
-          <Node name="References" expanded="True" />
+        <Node name="Admin" expanded="True" selected="True">
+          <Node name="GtkSharp" expanded="True" />
         </Node>
-        <Node name="Admin.Controllers" expanded="True" selected="True">
-          <Node name="References" expanded="True" />
-        </Node>
+        <Node name="Admin.Controllers" expanded="True" />
       </Node>
     </ViewMemento>
     <ViewMemento id="ClassPad">
@@ -24,7 +24,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="Welcome" />
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client/responsivenessTest1/administrator/Main.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

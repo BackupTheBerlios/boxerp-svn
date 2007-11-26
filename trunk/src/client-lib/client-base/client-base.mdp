@@ -70,6 +70,9 @@
     <File name="Configuration/ClientSectionHandler.cs" subtype="Code" buildaction="Compile" />
     <File name="Configuration/LoggerConfiguration.cs" subtype="Code" buildaction="Compile" />
     <File name="SupportedGuiToolkits.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness/GenericResponsiveHelper.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness/IErrorWindow.cs" subtype="Code" buildaction="Compile" />
+    <File name="Responsiveness/IQuestionWindow.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Assembly" localcopy="True" refto="../../dependencies/Castle.Core.dll" />

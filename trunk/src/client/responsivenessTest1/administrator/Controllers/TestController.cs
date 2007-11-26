@@ -14,12 +14,12 @@ namespace Admin.Controllers
 	
 	public class TestController : AbstractController
 	{
-		ITestWindow _control;
+		ITestWindow _view;
 		
-		public TestController(IResponsiveClient helper, ITestWindow control)
+		public TestController(IResponsiveClient helper, ITestWindow view)
 			: base (helper)
 		{
-			_control = control;
+			_view = view;
 		}
 		
 		public void RunMethod()
@@ -86,11 +86,11 @@ namespace Admin.Controllers
 		{
 			if ((args.Success) && (args.MethodBase == MethodBase(runMethod)))
 			{
-				_control.ShowSomething();
+				_view.ShowSomething();
 			}
 			if ((args.Success) && (args.MethodBase == MethodBase(runMethodWithCancellationLogic)))
 			{
-				_control.ShowSomething();
+				_view.ShowSomething();
 			}
 		}
 	}

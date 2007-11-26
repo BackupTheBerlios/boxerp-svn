@@ -1,14 +1,10 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp/trunk/src/client-lib/client-lib.mds">
-  <Files />
+  <Files>
+    <File name="Welcome" />
+  </Files>
   <Views>
     <ViewMemento id="ProjectPad">
-      <Node expanded="True">
-        <Node name="Boxerp.Client" expanded="True">
-          <Node name="MVC" expanded="True">
-            <Node name="AbstractController.cs" selected="True" />
-          </Node>
-        </Node>
-      </Node>
+      <Node expanded="True" />
     </ViewMemento>
     <ViewMemento id="ClassPad">
       <Node expanded="True" selected="True" />
@@ -21,7 +17,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="" />
+    <Property key="ActiveWindow" value="Welcome" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

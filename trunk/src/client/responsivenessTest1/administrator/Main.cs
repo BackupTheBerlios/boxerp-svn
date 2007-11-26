@@ -13,7 +13,7 @@ namespace Admin
 		public static void Main (string[] args)
 		{
 			
-
+			Logger.GetInstance().ShowDebugInfo = true;
 			Application.Init ();
 			TestWindow test = new TestWindow();
 			test.Show();

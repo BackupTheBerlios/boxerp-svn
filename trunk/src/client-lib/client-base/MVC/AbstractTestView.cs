@@ -35,6 +35,10 @@ namespace Boxerp.Client
 			{
 				return _data;
 			}
+			protected set
+			{
+				_data = value;
+			}
 		}
 
 		public C Controller

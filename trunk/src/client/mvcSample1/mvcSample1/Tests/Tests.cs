@@ -29,71 +29,25 @@
 
 using System;
 using Boxerp.Client;
+using NUnit.Framework;
+
 namespace mvcSample1
 {
-	public class TestUsersListView : AbstractTestView<UsersListController, TestUsersListData, IUsersListData>, IUsersListView
+	[TextFixture]
+	public class Tests
 	{
-		private Group _selectedGroup;
-		private User _selectedUser;
-
-		protected override void CreateData()
+		[Test]
+		public void RetrieveGroups()
 		{
-			_data = new TestUsersListData(this);
-		}
-		
-		public IUsersListData SharedData 
-		{	
-			get 
-			{
-				return Data;
-			}
+
 		}
 
-		public void UpdateUsers()
+		[Test]
+		public void SelectGroup()
 		{
-			foreach (User user in SharedData.Users)
-			{
-				Console.Out.WriteLine("Reading User:" + user.Username);
-			}
+
 		}
 
-		public void UpdateGroups()
-		{
-			foreach (Group group in SharedData.Groups)
-			{
-				Console.Out.WriteLine("Reading Group:" + group.Name);
-			}
-		}
-		
-		public void OnSelectionChanged ()
-		{
-			Controller.RetrieveUsers(_selectedGroup);
-		}
 
-		public void OnDeleteUser ()
-		{
-			Controller.DeleteUser(_selectedUser);
-		}
-
-		public void OnEditUser ()
-		{
-			Controller.EditUser(_selectedUser);
-		}
-
-		public void OnAddUser ()
-		{
-			Controller.AddUser(new User(), _selectedGroup);
-		}
-
-		public IUserEditView GetUserEditView ()
-		{
-			TestUserEditView view = new TestUserEditView();
-			return view;
-		}
-
-		public void DisplayView (IUserEditView view)
-		{
-			Console.Out.WriteLine("Displaying view");
-		}
 	}
 }

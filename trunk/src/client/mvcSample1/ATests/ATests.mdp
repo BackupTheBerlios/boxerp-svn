@@ -1,0 +1,34 @@
+<Project name="ATests" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Debug" assembly="ATests" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" codepage="28591" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin/Release" assembly="ATests" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="True" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" codepage="28591" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="Main.cs" subtype="Code" buildaction="Compile" />
+    <File name="AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="Tests/Tests.cs" subtype="Code" buildaction="Compile" />
+    <File name="app.config" subtype="Code" buildaction="Nothing" />
+  </Contents>
+  <References>
+    <ProjectReference type="Project" localcopy="True" refto="mvcSample1" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../BoxerpAssemblies/Boxerp.Client.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../BoxerpAssemblies/Boxerp.Client.GtkSharp.Controls.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../BoxerpAssemblies/Boxerp.Client.GtkSharp.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../BoxerpAssemblies/Boxerp.Collections.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../BoxerpAssemblies/Castle.Core.dll" />
+    <ProjectReference type="Assembly" localcopy="True" refto="../BoxerpAssemblies/Castle.DynamicProxy2.dll" />
+    <ProjectReference type="Gac" localcopy="True" refto="nunit.framework, Version=2.2.0.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77" />
+    <ProjectReference type="Gac" localcopy="True" refto="nunit.core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77" />
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  </References>
+</Project>

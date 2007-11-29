@@ -29,6 +29,7 @@
 
 using System;
 using Boxerp.Client;
+using Boxerp.Client.Configuration;
 
 namespace mvcSample1
 {
@@ -36,12 +37,16 @@ namespace mvcSample1
 	{
 		public static void DisplayView(IView view) 
 		{
-			MainWindow win = new MainWindow();
-			win.Title = "whatever";
-			Gtk.HBox hbox = new Gtk.HBox();
-			hbox.PackStart((Gtk.Widget)view);
-			win.Add(hbox);
-			win.ShowAll();
+			if (ClientConfiguration.GetInstance().GuiToolkit ==
+			     SupportedGuiToolkits.GtkSharp.ToString())
+			{
+				MainWindow win = new MainWindow();
+				win.Title = "User Edition";
+				Gtk.HBox hbox = new Gtk.HBox();
+				hbox.PackStart((Gtk.Widget)view);
+				win.Add(hbox);
+				win.ShowAll();
+			}
 		}
 	}
 }

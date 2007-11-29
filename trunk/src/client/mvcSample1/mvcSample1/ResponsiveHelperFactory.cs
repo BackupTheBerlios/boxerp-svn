@@ -40,14 +40,15 @@ namespace mvcSample1
 		
 		public static IResponsiveClient GetRunningToolkitTypeHelper(ConcurrencyMode mode)
 		{
-			/*if (config == null)
+			if (config == null)
 			{
-				config = ClientConfiguration.GetInstance();
+				config = ClientConfiguration.GetInstanceFromFile();
+				Console.Out.WriteLine(config.GuiToolkit);
 			}
 			if (config.GuiToolkit == SupportedGuiToolkits.GtkSharp.ToString())
-			{*/
+			{
 				return new GtkResponsiveHelper(mode);
-			//}
+			}
 			/*else if (config.GuiToolkit == SupportedGuiToolkits.WinForms.ToString())
 			{
 				
@@ -56,10 +57,10 @@ namespace mvcSample1
 			{
 				
 			}*/
-			/*else
+			else
 			{
 				return new ConsoleResponsiveHelper(mode);
-			}*/
+			}
 		}
 	}
 }

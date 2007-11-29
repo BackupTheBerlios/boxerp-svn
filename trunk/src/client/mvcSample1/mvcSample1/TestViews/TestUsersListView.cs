@@ -36,6 +36,11 @@ namespace mvcSample1
 		private Group _selectedGroup;
 		private User _selectedUser;
 
+		public TestUsersListView()
+		{
+			CreateData();
+		}
+		
 		protected override void CreateData()
 		{
 			_data = new TestUsersListData(this);
@@ -46,6 +51,30 @@ namespace mvcSample1
 			get 
 			{
 				return Data;
+			}
+		}
+
+		public Group SelectedGroup 
+		{
+			get 
+			{
+				return _selectedGroup;
+			}
+			set
+			{
+				_selectedGroup = value;
+			}
+		}
+
+		public User SelectedUser 
+		{
+			get 
+			{
+				return _selectedUser;
+			}
+			set
+			{
+				_selectedUser = value;
 			}
 		}
 
@@ -89,11 +118,6 @@ namespace mvcSample1
 		{
 			TestUserEditView view = new TestUserEditView();
 			return view;
-		}
-
-		public void DisplayView (IUserEditView view)
-		{
-			Console.Out.WriteLine("Displaying view");
 		}
 	}
 }

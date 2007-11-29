@@ -2,15 +2,19 @@
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="mvcSample1" configuration="Debug" />
+      <Entry build="True" name="ATests" configuration="Debug" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="mvcSample1" configuration="Release" />
+      <Entry build="True" name="ATests" configuration="Release" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="mvcSample1" single="True">
     <Execute type="None" entry="mvcSample1" />
+    <Execute type="None" entry="ATests" />
   </StartMode>
   <Entries>
     <Entry filename="mvcSample1/mvcSample1.mdp" />
+    <Entry filename="ATests/ATests.mdp" />
   </Entries>
 </Combine>

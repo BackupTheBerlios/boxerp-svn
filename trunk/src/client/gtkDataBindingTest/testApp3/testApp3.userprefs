@@ -1,7 +1,7 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/carlosble/svns/boxerp/trunk/src/client/gtkDataBindingTest/testApp3/testApp3.mds">
   <Files>
     <File name="Welcome" />
-    <File name="testApp3/MainWindow.cs" line="59" column="1" />
+    <File name="testApp3/MainWindow.cs" line="27" column="3" />
     <File name="testApp3/Group.cs" line="106" column="3" />
     <File name="testApp3/Main.cs" line="43" column="4" />
     <File name="testApp3/ListViewTest2.cs" line="180" column="26" />
@@ -13,8 +13,8 @@
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="testApp3" expanded="True">
-          <Node name="DataGridDataTable.cs" selected="True" />
+        <Node name="testApp3" expanded="True" selected="True">
+          <Node name="References" expanded="True" />
         </Node>
       </Node>
     </ViewMemento>
@@ -29,7 +29,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client/gtkDataBindingTest/testApp3/testApp3/DataGridDataTable.cs" />
+    <Property key="ActiveWindow" value="/home/carlosble/svns/boxerp/trunk/src/client/gtkDataBindingTest/testApp3/testApp3/MainWindow.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

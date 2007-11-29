@@ -37,6 +37,7 @@ namespace Boxerp.Client
 	{
 		GtkSharp,
 		WPF,
-		WinForms
+		WinForms,
+		Console
 	}
 }

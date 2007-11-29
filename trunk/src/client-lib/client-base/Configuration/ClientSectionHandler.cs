@@ -40,6 +40,8 @@ namespace Boxerp.Client.Configuration
 		{
 			return ClientConfiguration.BuildFromXmlNode(section);
 		}
+		
+		
 
 		#endregion
 	}

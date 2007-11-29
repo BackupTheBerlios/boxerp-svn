@@ -26,6 +26,7 @@
 // THE POSSIBILITY OF SUCH DAMAGE.
 
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
@@ -71,6 +72,33 @@ namespace Boxerp.Client.Configuration
 			}
 
 			return _instance;
+		}
+		
+		[Obsolete]
+		public static ClientConfiguration GetInstanceFromFile()
+		{
+			return GetInstanceFromFile(Path.Combine(
+				Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName,
+			    "app.config"));
+		}
+		
+		[Obsolete]
+		public static ClientConfiguration GetInstanceFromFile(string path)
+		{
+			Boxerp.Client.Logger.GetInstance().WriteLine("path:" + path);
+			if (_instance == null)
+			{
+				XmlDocument doc = new XmlDocument();
+				doc.Load(path);
+				
+				foreach (XmlNode node in doc.GetElementsByTagName("boxerp.client"))
+				{
+					Boxerp.Client.Logger.GetInstance().WriteLine("found boxerp.client");
+					_instance = BuildFromXmlNode(node);
+					break;
+				}
+			}
+			return _instance; 
 		}
 
 		internal static ClientConfiguration BuildFromXmlNode(XmlNode sectionNode)

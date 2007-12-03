@@ -32,17 +32,34 @@
 import Boobs.Engine.Builder
 import Boobs.IO.Extensions
 import Boobs.Compiler.Extensions
+import System.IO
+
+buildBaseDir = "C:\\builds"
 		
-Task "default", ["build Boxerp.Client"]
+Task "default", ["build Boxerp.Client", "build Boxerp.Client.Winforms"]
 	
 Task "build Boxerp.Client":
-	print "building Boxerp.Client"
+	finalPath = Path.Combine(buildBaseDir,"Boxerp.Client.dll")
+	print "building Boxerp.Client at ${finalPath}"
 	cc = Csc(
-			SourcesSet : FileSet("src/client-lib/client-base/**/*.cs"),
-			OutputFile : "C:\\builds\\Boxerp.Client.dll",
-			OutputTarget : TargetType.Library
-			 )
+		SourcesSet : FileSet("src/client-lib/client-base/**/*.cs"),
+		OutputFile : finalPath,
+		OutputTarget : TargetType.Library
+		)
 	cc.ReferencesSet.Include("src/dependencies/Castle.Core.dll")
 	cc.ReferencesSet.Include("src/dependencies/Castle.DynamicProxy2.dll")
 	cc.Execute()
 	print "done building Boxerp.Client"
+	
+Task "build Boxerp.Client.Winforms":
+	finalPath = Path.Combine(buildBaseDir,"Boxerp.Client.Winforms.dll")
+	print "building Boxerp.Client.Winforms at ${finalPath}"
+	cc = Csc(
+		SourcesSet : FileSet("src/client-lib/winforms/**/*.cs"),
+		OutputFile : finalPath,
+		OutputTarget : TargetType.Library
+		)
+	cc.ReferencesSet.Include("src/dependencies/Castle.Core.dll")
+	cc.ReferencesSet.Include("C:\\builds\\Boxerp.Client.dll")
+	cc.Execute()
+	print "done building Boxerp.Client.Winforms"

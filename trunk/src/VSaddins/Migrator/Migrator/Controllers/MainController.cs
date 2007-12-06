@@ -135,8 +135,45 @@ namespace Migrator
 			_sharedDataFolder = sharedDataFolder;
 			_selectedFiles = files;
 			//ResponsiveHelper.StartAsyncCall(migrate);
-			_viewMethods.Clear();
 			migrate();
+		}
+
+		private bool alreadyExists(SelectedFile sfile)
+		{
+			bool alreadyMigrated = false;
+			bool alreadyAsked = false;
+			foreach (ProjectItem item in _controllersFolder.ProjectItems)
+			{
+				if (item.Name.ToString().Equals(CodeGenerator.CreateControllerName(_className) + ".cs"))
+				{
+					alreadyMigrated = true;
+					if (View.AskUser(String.Format(
+						"{0}: This file seems to be migrated already. Are you sure you want to overwrite the files?",
+						sfile.File.Name)))
+					{
+						alreadyAsked = true;
+						alreadyMigrated = false;
+					}
+				}
+			}
+			if (!alreadyAsked)
+			{
+				foreach (ProjectItem item in _interfacesFolder.ProjectItems)
+				{
+					if (item.Name.ToString().Equals(CodeGenerator.CreateViewIfaceName(_className) + ".cs"))
+					{
+						alreadyMigrated = true;
+						if (View.AskUser(String.Format(
+							"{0}: This file seems to be migrated already. Are you sure you want to overwrite the files?",
+							sfile.File.Name)))
+						{
+							alreadyMigrated = false;
+						}
+					}
+				}
+			}
+
+			return alreadyMigrated;
 		}
 
 		private void migrate()
@@ -146,20 +183,11 @@ namespace Migrator
 				System.Diagnostics.Debug.WriteLine(sfile.File.Name);
 				_className = sfile.File.Name.Split('.')[0];
 				_createSharedData = sfile.NeedsSharedData;
-				bool alreadyMigrated = false;
-				foreach (ProjectItem item in _interfacesFolder.ProjectItems)
+				
+				if (!alreadyExists(sfile))
 				{
-					if (item.Name.ToString().Equals(CodeGenerator.CreateViewIfaceName(_className) + ".cs"))
-					{
-						alreadyMigrated = true;
-						if (View.AskUser("This file seems to be migrated already. Are you sure you want to overwrite the files?"))
-						{
-							alreadyMigrated = false;
-						}
-					}
-				}
-				if (!alreadyMigrated)
-				{
+					_viewMethods.Clear();
+					View.SetStatus("Processing file: " + sfile.File.Name);
 					processView(getFilePath(sfile.File));
 				}
 			}
@@ -223,7 +251,10 @@ namespace Migrator
 			}
 			if (Parser.IsPublicMethodDefinition(line))
 			{
-				_viewMethods.Add(line);
+				if (!_viewMethods.Contains(line))
+				{
+					_viewMethods.Add(line);
+				}
 				CodeGenerator.AddMethodToInterface(line, viewIfaceWriter);
 			}
 			if (Parser.IsNamesSpaceDefinition(line))

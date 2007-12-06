@@ -59,6 +59,9 @@ namespace Migrator
 			if (validate())
 			{
 				_statusLabel.Text = "Generating code...";
+				this.UseWaitCursor = true;
+				this.Cursor = Cursors.WaitCursor;
+				this.Refresh();
 				Singleton.Instance.SourcesHeader = _header.Text;
 				Controller.IsWinForms = _winForms.Checked;
 				Controller.IsWPF = _wpf.Checked;
@@ -68,6 +71,8 @@ namespace Migrator
 					_foldersDict[_interfaces.SelectedItem.ToString()],
 					_foldersDict[_sharedData.SelectedItem.ToString()]);
 				_statusLabel.Text = "Done";
+				this.UseWaitCursor = false;
+				this.Cursor = Cursors.Default;
 			}
 			else
 			{
@@ -116,6 +121,12 @@ namespace Migrator
 		public bool AskUser(string msg)
 		{
 			return (MessageBox.Show(msg, "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes);
+		}
+
+		public void SetStatus(string msg)
+		{
+			_statusLabel.Text = msg;
+			this.Refresh();
 		}
 
 		#endregion

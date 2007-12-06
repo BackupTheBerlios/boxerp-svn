@@ -209,8 +209,7 @@ namespace Boxerp.Client.WPF.Controls
 				string maxIntValue = Int32.MaxValue.ToString();
 				if ((text.Length > maxIntValue.Length) || ((text.Length == maxIntValue.Length) && (text.CompareTo(maxIntValue) > 0)))
 				{
-					MessageBox.Show("Error: The value is too big");
-					_textBox.Text = maxIntValue;
+					_textBox.Text = MaxValue.ToString();
 				}
 
 				string cleaned = CleanString();

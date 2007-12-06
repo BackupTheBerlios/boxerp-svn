@@ -197,7 +197,7 @@ namespace Boxerp.Client.WPF.Controls
 
 		private void OnKeyUp(Object sender, KeyEventArgs args)
 		{
-			if (Helper.IsValidKey(args.Key))
+			if ((Helper.IsValidKey(args.Key) && (!Helper.ControlKeyIsPressed())))
 			{
 				string key = args.Key.ToString();
 				char character = key[key.Length - 1];
@@ -232,13 +232,22 @@ namespace Boxerp.Client.WPF.Controls
 				}
 
 				Text = _textBox.Text;
-				decimal val = Convert.ToDecimal(Text);
-
-				if ((MaxValue != null) && (val > MaxValue))
+				try
 				{
-					MessageBox.Show("The maximun value allowed is: " + MaxValue);
-					_textBox.Text = MaxValue.ToString();
-					Text = _textBox.Text;
+					decimal val = Convert.ToDecimal(Text);
+
+					if ((MaxValue != null) && (val > MaxValue))
+					{
+						MessageBox.Show("The maximun value allowed is: " + MaxValue);
+						_textBox.Text = MaxValue.ToString();
+						Text = _textBox.Text;
+					}
+				}
+				catch (OverflowException)
+				{
+					MessageBox.Show("The number is too big");
+					_textBox.Text = "0";
+					Text = "0";
 				}
 			}
 		}

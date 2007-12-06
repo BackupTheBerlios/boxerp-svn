@@ -13,5 +13,6 @@ namespace Migrator
 		void PopulateProjects(Dictionary<string, Project> items);
 		void PopulateFiles(Dictionary<string, ProjectItem> items);
 		bool AskUser(string msg);
+		void SetStatus(string msg);
 	}
 }

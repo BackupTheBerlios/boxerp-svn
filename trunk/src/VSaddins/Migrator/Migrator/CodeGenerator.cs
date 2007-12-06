@@ -174,7 +174,7 @@ namespace Migrator
 			{
 				writer.AppendLine(method);
 				writer.AppendLine("\t\t{");
-				writer.AppendLine("throw new Exception(\"The method or operation is not implemented.\");");
+				writer.AppendLine("\t\t\tthrow new Exception(\"The method or operation is not implemented.\");");
 				writer.AppendLine("\t\t}");
 			}
 

@@ -303,5 +303,15 @@ namespace Boxerp.Client
 			Console.Out.WriteLine("thread completed:" + Thread.CurrentThread.ManagedThreadId);
 			TransferCompleted(sender, e);
 		}
+
+		public override void CallUIfromAsyncThread(SimpleDelegate anonymousMethod)
+		{
+			anonymousMethod.Invoke();
+		}
+
+		public override void UpdateWaitMessage(string msg)
+		{
+			Console.Out.WriteLine(msg);
+		}
 	}
 }

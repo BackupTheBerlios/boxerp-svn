@@ -85,5 +85,10 @@ namespace Boxerp.Client.GtkSharp
 			win.Message = msg;
 			win.Run();
 		}
+
+		public override void CallUIfromAsyncThread(SimpleDelegate anonymousMethod)
+		{
+			Application.Invoke(this, new object[0], anonymousMethod);
+		}
 	}
 }

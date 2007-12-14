@@ -48,6 +48,7 @@ namespace Boxerp.Client.WPF
 		private EventHandler _cancelEventHandler;
 		private bool _isProgressDiscrete;
 		private bool _isModal;
+		private bool _isBeingDisplayed;
 		private int _associatedThreadId = -1;
 
 		public int AssociatedThreadId
@@ -120,6 +121,11 @@ namespace Boxerp.Client.WPF
 			}
 		}
 
+		public void UpdateStatus(string msg)
+		{
+			_infoLabel.Content = msg;
+		}
+
 		public void ShowControl()
 		{
 			if (_isModal)
@@ -131,14 +137,22 @@ namespace Boxerp.Client.WPF
 				Show(); 
 				WindowState = WindowState.Normal;
 			}
+			_isBeingDisplayed = true;
 		}
 
 		public void CloseControl()
 		{
 			Console.Out.WriteLine("window is closing:" + GetHashCode());
 			Close();
+			_isBeingDisplayed = false;
 		}
 
-
+		public bool IsBeingDisplayed
+		{
+			get
+			{
+				return _isBeingDisplayed;
+			}
+		}
 	}
 }

@@ -36,10 +36,12 @@ namespace Boxerp.Client
 	{
 		event EventHandler CancelEvent;
 		void ShowControl();
+		bool IsBeingDisplayed { get; }
 		void CloseControl();
 		bool IsModal { get; set; }
 		int AssociatedThreadId { get; set; }
 		bool IsProgressDiscrete { get; set; }
 		void UpdateProgress(int amount, int total);
+		void UpdateStatus(string msg);
 	}
 }

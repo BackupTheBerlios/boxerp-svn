@@ -51,5 +51,7 @@ namespace Boxerp.Client
 		void OnCancel(object sender, EventArgs e);
 		void OnTransferCompleted(object sender, ThreadEventArgs e);
 		event ThreadEventHandler TransferCompleteEvent;
+		void CallUIfromAsyncThread(SimpleDelegate anonymousMethod);
+		void UpdateWaitMessage(string msg);
 	}
 }

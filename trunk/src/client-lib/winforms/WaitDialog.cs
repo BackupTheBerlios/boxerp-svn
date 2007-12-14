@@ -38,11 +38,17 @@ namespace Boxerp.Client.WindowsForms
     /// </summary>
 	public partial class WaitDialog : Form, IWinFormsWaitControl
 	{
-
-        private EventHandler cancelEventHandler;
+		private EventHandler cancelEventHandler;
         protected bool _isModal;
+		private bool _isBeingDisplayed;
 		private bool _isProgressDiscrete;
         private int _associatedThreadId = -1;
+
+		public WaitDialog()
+		{
+			InitializeComponent();
+		}
+
 
         public int AssociatedThreadId
         {
@@ -77,6 +83,7 @@ namespace Boxerp.Client.WindowsForms
 
         public void Run()
         {
+			_isBeingDisplayed = true;
             if (_isModal)
             {
                 this.ShowDialog();
@@ -148,10 +155,29 @@ namespace Boxerp.Client.WindowsForms
 			}
 		}
 
+		public void UpdateStatus(string msg)
+		{
+			_infoLabel.Text = msg;
+		}
+
 		public void CloseControl()
 		{
 			Close();
+			_isBeingDisplayed = false;
 		}
+		#endregion
+
+		#region IWaitControl Members
+
+
+		public bool IsBeingDisplayed
+		{
+			get
+			{
+				return _isBeingDisplayed;
+			}
+		}
+
 		#endregion
 	}
 }

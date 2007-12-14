@@ -9,6 +9,7 @@ namespace Boxerp.Client
 		#region IWaitControl Members
 		private EventHandler _cancelEventHandler;
 		private bool _isModal;
+		private bool _isBeingDisplayed;
 		private int _assocThreadId;
 
 		public event EventHandler CancelEvent
@@ -26,11 +27,13 @@ namespace Boxerp.Client
 		public void ShowControl()
 		{
 			Console.Out.WriteLine("Showing wait control");
+			_isBeingDisplayed = true;
 		}
 
 		public void CloseControl()
 		{
 			Console.Out.WriteLine("Closing wait control");
+			_isBeingDisplayed = false;
 		}
 
 		public void OnCancel(Object sender)
@@ -77,6 +80,24 @@ namespace Boxerp.Client
 		public void UpdateProgress(int amount, int total)
 		{
 			
+		}
+
+		public void UpdateStatus(string msg)
+		{
+
+		}
+
+		#endregion
+
+		#region IWaitControl Members
+
+
+		public bool IsBeingDisplayed
+		{
+			get 
+			{ 
+				return _isBeingDisplayed; 
+			}
 		}
 
 		#endregion

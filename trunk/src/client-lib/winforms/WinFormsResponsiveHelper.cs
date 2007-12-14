@@ -169,5 +169,10 @@ namespace Boxerp.Client.WindowsForms
 		{
 			MessageBox.Show(msg);
 		}
+
+		public override void CallUIfromAsyncThread(SimpleDelegate anonymousMethod)
+		{
+			_waitDialog.Invoke(anonymousMethod, new object[0]);
+		}
     }
 }

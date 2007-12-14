@@ -276,5 +276,19 @@ namespace Boxerp.Client
 
 		protected abstract void showException(string msg);
 
+		public override void UpdateWaitMessage(string msg)
+		{
+			if (_waitDialog.IsBeingDisplayed)
+			{
+				CallUIfromAsyncThread(new SimpleDelegate
+					(
+						delegate()
+						{
+							_waitDialog.UpdateStatus(msg);
+						}
+					));
+			}
+		}
+
 	}
 }

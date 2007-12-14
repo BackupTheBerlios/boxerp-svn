@@ -390,8 +390,8 @@ namespace Boxerp.Client
 
 		public abstract void OnCancel(object sender, EventArgs e);
 		public abstract void OnTransferCompleted(object sender, ThreadEventArgs e);
-		
-
+		public abstract void CallUIfromAsyncThread(SimpleDelegate anonymousMethod);
+		public abstract void UpdateWaitMessage(string msg);
 		#endregion
 	}
 }

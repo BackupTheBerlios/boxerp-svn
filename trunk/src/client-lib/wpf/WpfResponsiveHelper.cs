@@ -92,5 +92,12 @@ namespace Boxerp.Client.WPF
 		{
 			MessageBox.Show(msg);
 		}
+
+		public override void CallUIfromAsyncThread(SimpleDelegate anonymousMethod)
+		{
+			_waitDialog.Dispatcher.Invoke(
+				System.Windows.Threading.DispatcherPriority.Normal,
+				anonymousMethod);
+		}
 	}
 }

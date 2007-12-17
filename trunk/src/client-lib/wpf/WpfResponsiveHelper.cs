@@ -72,8 +72,8 @@ namespace Boxerp.Client.WPF
 		public override void OnTransferCompleted(object sender, ThreadEventArgs e)
 		{
 			Console.Out.WriteLine("thread completed:" + Thread.CurrentThread.ManagedThreadId);
-			
-			_waitDialog.Dispatcher.BeginInvoke(
+			T wDialog = GetDialog(e.ThreadId);
+			wDialog.Dispatcher.BeginInvoke(
 				System.Windows.Threading.DispatcherPriority.Normal, 
 				new ThreadEventHandler(TransferCompleted),
 				sender,

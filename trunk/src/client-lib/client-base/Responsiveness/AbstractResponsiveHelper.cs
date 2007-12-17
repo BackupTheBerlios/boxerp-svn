@@ -127,42 +127,30 @@ namespace Boxerp.Client
 		/// </summary>
 		/// <param name="method"></param>
       	public virtual Thread StartAsyncCall(SimpleDelegate method)
-		{
-			try
+		{	
+			Thread methodThread = null;
+			if (canGoAhead())
 			{
-				Thread methodThread = null;
-				if (canGoAhead())
+				Dictionary<int, Thread> threadsBlock = new Dictionary<int, Thread>();
+
+				ThreadStart methodStart = new SimpleInvoker(method).Invoke;
+				methodThread = new Thread(methodStart);
+				lock(_threadDictionariesList)
 				{
-					Dictionary<int, Thread> threadsBlock = new Dictionary<int, Thread>();
+					methodThread.Start();
+					int id = methodThread.ManagedThreadId;
+					threadsBlock[id] = methodThread;
+					_operationSucess[id] = true;
+					_exceptions[id] = null;
+					_operationTypes[id] = ResponsiveEnum.Other;
+					_cancelRequests[id] = false;
 
-					ThreadStart methodStart = new SimpleInvoker(method).Invoke;
-					methodThread = new Thread(methodStart);
-					lock(_threadDictionariesList)
-					{
-						methodThread.Start();
-						int id = methodThread.ManagedThreadId;
-						threadsBlock[id] = methodThread;
-						_operationSucess[id] = true;
-						_exceptions[id] = null;
-						_operationTypes[id] = ResponsiveEnum.Other;
-						_cancelRequests[id] = false;
-
-						_threadDictionariesList.Add(threadsBlock);
-						
-						Console.Out.WriteLine("*** *** *** thread is in queue now:" + id + "," + _threadDictionariesList.Count);
-					}
+					_threadDictionariesList.Add(threadsBlock);
+					
+					Console.Out.WriteLine("*** *** *** thread is in queue now:" + id + "," + _threadDictionariesList.Count);
 				}
-				return methodThread;
 			}
-			catch (TargetInvocationException ex)
-			{
-				Console.WriteLine("User responsive method raises exception:" + ex.Message + ex.StackTrace);
-				throw ex;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
+			return methodThread;
 		}
 
 		public abstract Thread StartAsyncCall(SimpleDelegate method, bool showWaitControl);
@@ -176,47 +164,35 @@ namespace Boxerp.Client
 		/// <param name="controller"></param>
 		public virtual List<Thread> StartAsyncCallList(Boxerp.Client.ResponsiveEnum trType, IController controller)
 		{
-			try
+			List<Thread> threads = new List<Thread>();
+			if (canGoAhead())
 			{
-				List<Thread> threads = new List<Thread>();
-				if (canGoAhead())
+				List<MethodInfo> methods = this.GetResponsiveMethods(trType, controller);
+				if (methods.Count == 0)
 				{
-					List<MethodInfo> methods = this.GetResponsiveMethods(trType, controller);
-					if (methods.Count == 0)
-					{
-						throw new NullReferenceException("No private/protected responsive methods found");
-					}
-
-					Dictionary<int, Thread> threadsBlock = new Dictionary<int, Thread>();
-					lock(_innerLock)
-					{
-						foreach (MethodInfo method in methods)
-						{
-							ThreadStart methodStart = new SimpleInvoker(method, controller).Invoke;
-							Thread methodThread = new Thread(methodStart);
-							methodThread.Start();
-							int id = methodThread.ManagedThreadId;
-							threads.Add(methodThread);
-							threadsBlock[id] = methodThread;
-							_operationSucess[id] = true;
-							_exceptions[id] = null;
-							_operationTypes[id] = trType;
-							_cancelRequests[id] = false;
-						}
-						_threadDictionariesList.Add(threadsBlock);
-					}
+					throw new NullReferenceException("No private/protected responsive methods found");
 				}
-				return threads;
+
+				Dictionary<int, Thread> threadsBlock = new Dictionary<int, Thread>();
+				lock(_innerLock)
+				{
+					foreach (MethodInfo method in methods)
+					{
+						ThreadStart methodStart = new SimpleInvoker(method, controller).Invoke;
+						Thread methodThread = new Thread(methodStart);
+						methodThread.Start();
+						int id = methodThread.ManagedThreadId;
+						threads.Add(methodThread);
+						threadsBlock[id] = methodThread;
+						_operationSucess[id] = true;
+						_exceptions[id] = null;
+						_operationTypes[id] = trType;
+						_cancelRequests[id] = false;
+					}
+					_threadDictionariesList.Add(threadsBlock);
+				}
 			}
-			catch (TargetInvocationException ex)
-			{
-				Console.WriteLine("One responsive method raises exception:" + ex.Message + ex.StackTrace);
-				throw ex;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
+			return threads;
 		}
 
 		public abstract List<Thread> StartAsyncCallList(Boxerp.Client.ResponsiveEnum trType, IController controller, bool showWaitControl);

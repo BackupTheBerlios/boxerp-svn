@@ -16,7 +16,6 @@ namespace Boxerp.Client
 		protected Dictionary<int, TQuestion> _questionWindows = new Dictionary<int, TQuestion>();
 		protected Dictionary<int, Guid> _storagePointers = new Dictionary<int, Guid>();
 		
-
 		public GenericResponsiveHelper(ConcurrencyMode mode) : this (mode, true, default(T)){ }
 
 		public GenericResponsiveHelper(ConcurrencyMode mode, bool displayExceptions)
@@ -37,6 +36,11 @@ namespace Boxerp.Client
 			_waitDialog = waitDialogInstance;
 			_userWaitDialogInstance = _waitDialog == null ? false : true;
 			_displayExceptions = displayExceptions;
+		}
+
+		protected T GetDialog(int threadId)
+		{
+			return _dialogs[_storagePointers[threadId]];
 		}
 
 		public override Thread StartAsyncCall(SimpleDelegate method)
@@ -69,38 +73,36 @@ namespace Boxerp.Client
 				try
 				{
 					// if the thread finishes between this lines of code, we get an exception
-					threadId = thread.ManagedThreadId;
-					_storagePointers[threadId] = newDialogGuid;
+					if (thread != null)
+					{
+						threadId = thread.ManagedThreadId;
+						_storagePointers[threadId] = newDialogGuid;
+					}
+					else
+					{
+						_dialogs.Remove(newDialogGuid);
+					}
 				}
-				catch
+				catch (Exception ex)
 				{
 					// and the dialog should be removed
+					Console.Out.WriteLine("Exception (GenericResponsiveHelper, line 77:" + ex.Message);
 					_dialogs.Remove(newDialogGuid);
 				}
 			}
 			if (showWaitControl)
 			{
-				try
+				
+				_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
+				lock (_dialogs)
 				{
-					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
-					lock (_dialogs)
+					// the Transfer completed method removes the dialog from the dialogs so 
+					// it is important to check it before opening the window
+					if (_dialogs.ContainsKey(newDialogGuid))
 					{
-						// the Transfer completed method removes the dialog from the dialogs so 
-						// it is important to check it before opening the window
-						if (_dialogs.ContainsKey(newDialogGuid))
-						{
-							_waitDialog.AssociatedThreadId = threadId;
-							_waitDialog.ShowControl();
-						}
+						_waitDialog.AssociatedThreadId = threadId;
+						_waitDialog.ShowControl();
 					}
-				}
-				catch (System.Reflection.TargetInvocationException ex)
-				{
-					throw ex.InnerException;
-				}
-				catch (Exception ex)
-				{
-					throw ex;
 				}
 			}
 			return thread;
@@ -146,27 +148,16 @@ namespace Boxerp.Client
 			}
 			if (showWaitControl)
 			{
-				try
+				_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
+				lock (_dialogs)
 				{
-					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
-					lock (_dialogs)
+					// the Transfer completed method removes the dialog from the dialogs so 
+					// it is important to check it before opening the window
+					if (_dialogs.ContainsKey(newDialogGuid))
 					{
-						// the Transfer completed method removes the dialog from the dialogs so 
-						// it is important to check it before opening the window
-						if (_dialogs.ContainsKey(newDialogGuid))
-						{
-							_waitDialog.AssociatedThreadId = threadId;
-							_waitDialog.ShowControl();
-						}
+						_waitDialog.AssociatedThreadId = threadId;
+						_waitDialog.ShowControl();
 					}
-				}
-				catch (System.Reflection.TargetInvocationException ex)
-				{
-					throw ex.InnerException;
-				}
-				catch (Exception ex)
-				{
-					throw ex;
 				}
 			}
 

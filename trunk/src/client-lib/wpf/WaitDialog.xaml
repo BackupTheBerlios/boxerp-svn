@@ -1,9 +1,10 @@
-﻿<Window
+﻿<Window Activated="OnActivated"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     x:Class="Boxerp.Client.WPF.WaitDialog"
     Title="Operation in Progress" Height="165" Width="300"
     ResizeMode="CanMinimize" Topmost="True" WindowStartupLocation="CenterScreen"
+    
     >
     <Grid>
         

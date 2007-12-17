@@ -122,29 +122,18 @@ namespace Boxerp.Client
 				}
 			}
 			if (showWaitControl)
-			{
-				try
+			{	
+				_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
+				lock (_dialogs)
 				{
-					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
-					lock (_dialogs)
+					// the Transfer completed method removes the dialog from the dialogs so 
+					// it is important to check it before opening the window
+					if (_dialogs.ContainsKey(newDialogGuid))
 					{
-						// the Transfer completed method removes the dialog from the dialogs so 
-						// it is important to check it before opening the window
-						if (_dialogs.ContainsKey(newDialogGuid))
-						{
-							_waitDialog.AssociatedThreadId = threadId;
-							_waitDialog.ShowControl();
-						}
+						_waitDialog.AssociatedThreadId = threadId;
+						_waitDialog.ShowControl();
 					}
-				}
-				catch (System.Reflection.TargetInvocationException ex)
-				{
-					throw ex.InnerException;
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
+				}	
 			}
 
 			return threads;
@@ -191,29 +180,18 @@ namespace Boxerp.Client
 				}
 			}
 			if (showWaitControl)
-			{
-				try
+			{	
+				_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
+				lock (_dialogs)
 				{
-					_waitDialog.IsModal = _concurrencyMode == ConcurrencyMode.Modal;
-					lock (_dialogs)
+					// the Transfer completed method removes the dialog from the dialogs so 
+					// it is important to check it before opening the window
+					if (_dialogs.ContainsKey(newDialogGuid))
 					{
-						// the Transfer completed method removes the dialog from the dialogs so 
-						// it is important to check it before opening the window
-						if (_dialogs.ContainsKey(newDialogGuid))
-						{
-							_waitDialog.AssociatedThreadId = threadId;
-							_waitDialog.ShowControl();
-						}
+						_waitDialog.AssociatedThreadId = threadId;
+						_waitDialog.ShowControl();
 					}
-				}
-				catch (System.Reflection.TargetInvocationException ex)
-				{
-					throw ex.InnerException;
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
+				}	
 			}
 			return thread;
 		}

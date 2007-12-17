@@ -87,7 +87,6 @@ namespace Boxerp.Client.WindowsForms
 			// 
 			// button1
 			// 
-			this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.button1.Location = new System.Drawing.Point(103, 64);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 23);
@@ -100,7 +99,6 @@ namespace Boxerp.Client.WindowsForms
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.CancelButton = this.button1;
 			this.ClientSize = new System.Drawing.Size(292, 99);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this._infoLabel);
@@ -109,6 +107,7 @@ namespace Boxerp.Client.WindowsForms
 			this.Text = "Work in progress...";
 			this.TopMost = true;
 			this.Load += new System.EventHandler(this.WaitDialog_Load);
+			this.Shown += new System.EventHandler(this.OnShown);
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WaitDialogForm_FormClosed);
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WaitDialogForm_FormClosing);
 			this.ResumeLayout(false);

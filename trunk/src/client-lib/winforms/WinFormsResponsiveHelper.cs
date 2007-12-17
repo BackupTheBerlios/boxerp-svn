@@ -144,17 +144,22 @@ namespace Boxerp.Client.WindowsForms
 
         public override void OnTransferCompleted(object sender, ThreadEventArgs e)
         {
-			if (_waitDialog != null)
+			T wDialog = GetDialog(e.ThreadId);
+			if (wDialog != null)
 			{
-				try
+				if (wDialog.IsBeingDisplayed)
 				{
-					_waitDialog.BeginInvoke(new ThreadEventHandler(TransferCompleted), new object[] { sender, e });
-				}
-				catch (InvalidOperationException ex)
-				{
-					if (ex.Message.Contains("Invoke or BeginInvoke cannot be called on a control until the window handle has been created."))
+					if (typeof(Form).IsAssignableFrom(typeof(T)))
 					{
-						Console.Out.WriteLine("The thread finished before the wait window was open. Close this dirty hack ASAP");
+						Form wDialogForm = wDialog as Form;
+						if (wDialogForm.IsHandleCreated)
+						{
+							wDialog.BeginInvoke(new ThreadEventHandler(TransferCompleted), new object[] { sender, e });
+						}
+					}
+					else
+					{
+						wDialog.BeginInvoke(new ThreadEventHandler(TransferCompleted), new object[] { sender, e });
 					}
 				}
 			}
@@ -172,7 +177,10 @@ namespace Boxerp.Client.WindowsForms
 
 		public override void CallUIfromAsyncThread(SimpleDelegate anonymousMethod)
 		{
-			_waitDialog.Invoke(anonymousMethod, new object[0]);
+			if (_waitDialog.IsBeingDisplayed)
+			{
+				_waitDialog.Invoke(anonymousMethod, new object[0]);
+			}
 		}
     }
 }

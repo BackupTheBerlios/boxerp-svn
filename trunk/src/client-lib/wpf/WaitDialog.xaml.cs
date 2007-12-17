@@ -48,7 +48,7 @@ namespace Boxerp.Client.WPF
 		private EventHandler _cancelEventHandler;
 		private bool _isProgressDiscrete;
 		private bool _isModal;
-		private bool _isBeingDisplayed;
+		private bool _isBeingDisplayed = false;
 		private int _associatedThreadId = -1;
 
 		public int AssociatedThreadId
@@ -153,6 +153,11 @@ namespace Boxerp.Client.WPF
 			{
 				return _isBeingDisplayed;
 			}
+		}
+
+		private void OnActivated(Object sender, EventArgs args)
+		{
+			_isBeingDisplayed = true;
 		}
 	}
 }

@@ -47,7 +47,7 @@ namespace wpfResponsinessTest
 		private void stressTheEngine()
 		{
 			Random random = new Random();
-			for (int i = 0; i < 100; i++)
+			for (int i = 0; i < 20; i++)
 			{
 				_modalController.DoAsyncOperation(i * 100);
 				_singletonController.DoAsyncOperation(i * 100);

@@ -40,7 +40,7 @@ namespace Boxerp.Client.WindowsForms
 	{
 		private EventHandler cancelEventHandler;
         protected bool _isModal;
-		private bool _isBeingDisplayed;
+		private bool _isBeingDisplayed = false;
 		private bool _isProgressDiscrete;
         private int _associatedThreadId = -1;
 
@@ -179,5 +179,10 @@ namespace Boxerp.Client.WindowsForms
 		}
 
 		#endregion
+
+		private void OnShown(object sender, EventArgs e)
+		{
+			_isBeingDisplayed = true;
+		}
 	}
 }

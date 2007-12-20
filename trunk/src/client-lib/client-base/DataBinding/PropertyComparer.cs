@@ -7,8 +7,9 @@ namespace Boxerp.Client
 {
 	/// <summary>
 	/// It compares the ToString() object of the given object property.
+	/// It is used in the BindableCollection.
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
+	/// <param name="T"></param>
 	/// 
 	public class PropertyComparer<T> : IComparer<T>
 	{

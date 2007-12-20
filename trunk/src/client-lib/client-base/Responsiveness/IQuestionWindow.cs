@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// Interface for any question dialog
+	/// </summary>
 	public interface IQuestionWindow
 	{
 		string Msg { get; set; }

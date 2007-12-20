@@ -5,6 +5,12 @@ using System.Threading;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// All the GUI Responsive Helpers extend this class. Manages the wait controls and collaborate
+	/// with the base class to run operations in background.
+	/// </summary>
+	/// <param name="T">The type of Wait Control</param>
+	/// <param name="TQuestion">Tye type of Question Dialog</param>
 	public abstract class GenericResponsiveHelper<T, TQuestion> : AbstractResponsiveHelper
 		where T : IWaitControl, new()
 		where TQuestion : IQuestionWindow, new()
@@ -267,6 +273,11 @@ namespace Boxerp.Client
 
 		protected abstract void showException(string msg);
 
+		/// <summary>
+		/// It is possible to update the wait message from the body of a method that is 
+		/// intended to run asyncrhonously. Just call this method passin in the message.
+		/// </summary>
+		/// <param name="msg">The message to display in the wait control or dialog</param>
 		public override void UpdateWaitMessage(string msg)
 		{
 			if (_waitDialog.IsBeingDisplayed)

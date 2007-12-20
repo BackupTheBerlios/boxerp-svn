@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// Base interface for the Data Binders
+	/// </summary>
 	public interface IDataBinder
 	{
 		void BindWithXml();
@@ -11,6 +14,12 @@ namespace Boxerp.Client
 		void BindWithXml(string xml);
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="A"></param>
+	/// <param name="T"></param>
+	/// <param name="Y"></param>
 	public interface IDataBinder<A, T, Y>
 		where A : IBindableWrapper<T, Y>
 		where Y : ISimpleWrapper<T>

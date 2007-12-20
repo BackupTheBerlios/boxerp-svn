@@ -6,6 +6,9 @@ using System.ComponentModel;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// Boxerp internal interface
+	/// </summary>
 	public interface ICustomNotifyPropertyChanged :  INotifyPropertyChanged
 	{
 		bool HasSubscribers();

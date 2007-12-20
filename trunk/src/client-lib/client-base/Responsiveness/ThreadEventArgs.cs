@@ -33,8 +33,9 @@ using System.Reflection;
 
 namespace Boxerp.Client
 {
-	
-	
+	/// <summary>
+	/// An instance of this class is created when a background method is done.
+	/// </summary>
 	public class ThreadEventArgs : EventArgs
 	{
 		MethodBase _methodBase;
@@ -59,27 +60,42 @@ namespace Boxerp.Client
 			_threadId = t;
 		}
 		
+		/// <summary>
+		/// The method that run in the background.
+		/// </summary>
 		public MethodBase MethodBase
 		{
 		    get { return _methodBase; }
 		}
 		
+		/// <summary>
+		/// If the method returned anything you get it in this property.
+		/// </summary>
 		public object ReturnValue
 		{
 		    get { return _returnValue; }
 		}
 
+		/// <summary>
+		/// In case of any exception, this is the message.
+		/// </summary>
 		public string ExceptionMsg
 		{
 			get { return _exceptionMsg; }
 			set { _exceptionMsg = value; }
 		}
 
+		/// <summary>
+		/// The Id of the managed thread that is running the method
+		/// </summary>
 		public int ThreadId
 		{
 		    get { return _threadId; }
 		}
 
+		/// <summary>
+		/// Another way to get the method that run in the background.
+		/// </summary>
 		public SimpleDelegate Method
 		{
 			get
@@ -88,6 +104,9 @@ namespace Boxerp.Client
 			}
 		}
 
+		/// <summary>
+		/// If the method finished successfully.
+		/// </summary>
 		public bool Success
 		{
 			get
@@ -100,6 +119,9 @@ namespace Boxerp.Client
 			}
 		}
 
+		/// <summary>
+		/// Which kind or operation was the method performing.
+		/// </summary>
 		public ResponsiveEnum OperationType
 		{
 			get

@@ -31,6 +31,9 @@ using System.Text;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// The behaviour of the ResponsiveHelper changes depending on this enum
+	/// </summary>
 	public enum ConcurrencyMode
 	{
 		Modal,

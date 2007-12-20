@@ -32,6 +32,9 @@ using System.Text;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// Interface for any Wait Control
+	/// </summary>
 	public interface IWaitControl
 	{
 		event EventHandler CancelEvent;

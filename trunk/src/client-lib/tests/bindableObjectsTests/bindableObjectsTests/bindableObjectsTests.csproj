@@ -73,12 +73,6 @@
     <Compile Include="SimpleBusinessObjTests.cs" />
     <Compile Include="Classes\SimpleExplicitPropChanged.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\client-base\client-base2008.csproj">
-      <Project>{701CF3A1-60F3-4938-B0DD-CBFBC6DEF7D5}</Project>
-      <Name>client-base2008</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

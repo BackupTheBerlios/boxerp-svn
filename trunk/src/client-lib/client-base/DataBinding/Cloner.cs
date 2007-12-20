@@ -7,6 +7,9 @@ using System.Runtime.Serialization;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// Clones an object by serializing and deserializing it
+	/// </summary>
 	public static class Cloner
 	{
 		public static object GetSerializedClone(object source)

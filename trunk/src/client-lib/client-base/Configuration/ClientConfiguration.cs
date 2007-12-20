@@ -34,6 +34,9 @@ using System.Xml;
 
 namespace Boxerp.Client.Configuration
 {
+	/// <summary>
+	/// This class gives access to the Boxerp config section within the App.config
+	/// </summary>
 	public class ClientConfiguration
 	{
 		private static ClientConfiguration _instance = null;
@@ -64,6 +67,10 @@ namespace Boxerp.Client.Configuration
 		}
 		#endregion
 
+		/// <summary>
+		/// The class is a Singleton and this is the way to access it
+		/// </summary>
+		/// <returns></returns>
 		public static ClientConfiguration GetInstance()
 		{
 			if (_instance == null)
@@ -74,6 +81,12 @@ namespace Boxerp.Client.Configuration
 			return _instance;
 		}
 		
+		/// <summary>
+		/// This is a work around the bug that I've found in Mono regarding the App.config.
+		/// If you can't build your app because the compiler complains about the app.config,
+		/// you can exclude the file from the config and use this hack
+		/// </summary>
+		/// <returns></returns>
 		[Obsolete]
 		public static ClientConfiguration GetInstanceFromFile()
 		{
@@ -81,7 +94,13 @@ namespace Boxerp.Client.Configuration
 				Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName,
 			    "app.config"));
 		}
-		
+
+		/// <summary>
+		/// This is a work around the bug that I've found in Mono regarding the App.config.
+		/// If you can't build your app because the compiler complains about the app.config,
+		/// you can exclude the file from the config and use this hack
+		/// </summary>
+		/// <returns></returns>
 		[Obsolete]
 		public static ClientConfiguration GetInstanceFromFile(string path)
 		{

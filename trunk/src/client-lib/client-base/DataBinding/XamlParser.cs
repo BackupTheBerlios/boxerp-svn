@@ -34,8 +34,9 @@ using System.IO;
 
 namespace Boxerp.Client
 {
-	
-	
+	/// <summary>
+	/// Reads XAML to extract data binding information
+	/// </summary>
 	public class XamlParser
 	{
 		private const string BOXERP_ASSEMBLY = "assembly=Boxerp.Client.";

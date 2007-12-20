@@ -32,7 +32,13 @@ using System.Reflection;
 
 namespace Boxerp.Client
 {
-
+	/// <summary>
+	/// Extend this class when you need a controller with SharedData in addition to the reference to the View.
+	/// Read about the base class (AbstractController) for more information.
+	/// </summary>
+	/// <param name="V">The View Interface</param>
+	/// <param name="TData">The SharedData Interface</param>
+	/// <param name="C">The name of Controller itself</param>
     public abstract class AbstractController<V, TData, C> : AbstractController<V, C>
 		where V : IView<C, TData>
 		where C : AbstractController<V, TData, C>
@@ -51,6 +57,9 @@ namespace Boxerp.Client
 			: base(helper)
 		{ }
 
+		/// <summary>
+		/// Access to the SharedData instance
+		/// </summary>
 		public TData SharedData
 		{
 			get
@@ -60,17 +69,30 @@ namespace Boxerp.Client
 		}
 	}
 
+	/// <summary>
+	/// Extend this class when you are going to create a Controller that does not need SharedData but 
+	/// just a View:
+	/// public class MyController : AbstractController<MyView, MyController>
+	/// 
+	/// Read about the base class (AbstractController) for more information.
+	/// </summary>
+	/// <param name="V">The View Interface</param>
+	/// <param name="C">The name of the Controller itself</param>
 	public abstract class AbstractController<V, C> : AbstractController
 		where C : AbstractController<V, C>
 		where V : IView<C>
 	{
 		private V _view = default(V);
 
+		/// <summary>
+		/// Use this constructor to get the controller fully initialized
+		/// </summary>
+		/// <param name="helper">One of the implementations of the IResponsiveClient: WpfResponsiveHelper, GtkResponsiveHelper, WinFormsResponsiveHelper</param>
+		/// <param name="view">The instance of the view</param>
 		protected AbstractController(IResponsiveClient helper, V view)
 			: base(helper)
 		{
 			_view = view;
-			Console.Out.WriteLine ("assigning controller to view:" + typeof(C));
 			_view.Controller = (C)this;
 		}
 
@@ -78,6 +100,9 @@ namespace Boxerp.Client
 			: base(helper)
 		{}
 
+		/// <summary>
+		/// Access to the View instance
+		/// </summary>
 		public V View
 		{
 			get
@@ -92,8 +117,11 @@ namespace Boxerp.Client
 	}
 
 	/// <summary>
-	/// All the controllers should extend this class, which enforce the responsive helper to be protected
-	/// and binds the complete event to the operation finish method
+	/// Base class for Controllers. Although a Controller can extend this class, you should 
+	/// extend one of the generic versions, AbstractController<V,C> or 
+	/// AbstractController<V,TData,C>. 
+	/// 
+	/// Read more about the Controller in the boxerp.org wiki
 	/// </summary>
 	public abstract class AbstractController : IController
 	{
@@ -130,6 +158,13 @@ namespace Boxerp.Client
 			}
 		}
 
+		/// <summary>
+		/// This method is called whenever a background operation finishes.
+		/// 
+		/// Implementation example: .doc/Examples/OnAsyncOperationFinish.cs
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
 		protected abstract void OnAsyncOperationFinish(Object sender, ThreadEventArgs args);
 
 		/// <summary>
@@ -143,9 +178,19 @@ namespace Boxerp.Client
 			_responsiveHelper.StopAsyncMethod(System.Threading.Thread.CurrentThread.ManagedThreadId, mb, null);
 		}
 
+		/// <summary>
+		/// Use this to compare the ThreadEventArgs.MethodBase property with a method so that you figure out 
+		/// which background method has finished. See the implementation of the OnAsyncOperationFinish
+		/// </summary>
+		/// <param name="del"></param>
+		/// <returns></returns>
 		protected MethodBase MethodBase(SimpleDelegate del)
 		{
 			return (MethodBase)del.Method;
 		}
+
+		/** \example OnAsyncOperationFinish.cs
+		* 
+		*/
 	}
 }

@@ -34,6 +34,12 @@ using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// The business object T becomes bindable and its nested object Y too.
+	/// </summary>
+	/// <param name="T">The business object</param>
+	/// 
+	/// <param name="Y">The nested business object</param>
 	[Serializable]
 	public class BdWithNestedWrapper<T, Y> : AbstractBindableWrapper<T, BdWithNestedWrapper<T, Y>.WrapObject<T, Y>>
 		where Y : IBindableWrapper

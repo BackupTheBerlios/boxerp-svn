@@ -32,8 +32,8 @@ using System.Text;
 namespace Boxerp.Client
 {
 	/// <summary>
-	/// Every GUI (window or user control; screen) must have a controller
-	/// 
+	/// Every GUI (window or user control; screen) must have a controller.
+	/// The AbstractController implements this.
 	/// </summary>
 	public interface IController
 	{

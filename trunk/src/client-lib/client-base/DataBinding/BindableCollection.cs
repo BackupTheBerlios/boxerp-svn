@@ -30,7 +30,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
 using System.Collections;
-
 // Documentation: 
 // Michael Weinhardt - http://msdn2.microsoft.com/en-us/library/ms993236.aspx
 //
@@ -38,9 +37,11 @@ using System.Collections;
 namespace Boxerp.Client
 {
 	/// <summary>
-	/// Provides a generic collection that supports databinding.
+	/// Provides a generic collection that supports databinding. This class implements the IBindingList.
+	/// If you bind a BindableCollection to a list control and then add, remove or change any of its 
+	/// elements from code, the UI will get refreshed.
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
+	/// <param name="T"></param>
 	[Serializable]
 	public class BindableCollection<T> : BindingList<T>
 	{
@@ -134,8 +135,6 @@ namespace Boxerp.Client
 				OnItemRemovedEvent(new ItemRemovedEventArgs(e.NewIndex));
 			}
 		}
-
-
 
 		private void OnItemChanged(Object sender, PropertyChangedEventArgs args)
 		{

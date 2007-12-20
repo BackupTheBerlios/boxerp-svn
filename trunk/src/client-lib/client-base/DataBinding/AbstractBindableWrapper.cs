@@ -36,46 +36,11 @@ using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
-	/*[Serializable]
-	public abstract class AbstractBindableWrapper<T> : 
-		AbstractBindableWrapper<T, AbstractBindableWrapper<T>.WrapObject<T>>
-	{
-		public AbstractBindableWrapper(T businessObj, bool disableWrapperInterception,
-			bool disableBusinessObjectInterception, bool disableUndoRedo, object[] constructorParams)
-			: base (businessObj, disableWrapperInterception, disableBusinessObjectInterception, disableUndoRedo, constructorParams)
-		{}
-
-		public AbstractBindableWrapper(T businessObj, object[] constructorParams)
-			: this(businessObj, false, false, false, constructorParams)	{}
-
-		public AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, bool disableBusinessObjectInterception)
-			: this(businessObj, disableWrapperInterception, disableBusinessObjectInterception, false, null)	{}
-
-		public AbstractBindableWrapper(T businessObj, bool disableInterception, object[] constructorParams)
-			: this(businessObj, disableInterception, disableInterception, false, constructorParams)	{}
-
-		public AbstractBindableWrapper(T businessObj, bool disableWrapperInterception, bool disableBOInterception, bool disableUndoRedo)
-			: this(businessObj, disableWrapperInterception, disableBOInterception, disableUndoRedo, null){}
-
-		public AbstractBindableWrapper(T businessObj, bool disableInterception)
-			: this(businessObj, disableInterception, disableInterception, true, null){}
-
-		public AbstractBindableWrapper(T businessObj)
-			: this(businessObj, false, false, false, null){	}
-
-
-		[Serializable]
-		public abstract class WrapObject<D> : 
-			AbstractBindableWrapper<D, AbstractBindableWrapper<D>.WrapObject<D>>.BindableFields<D>
-		{
-			public WrapObject(IInterceptor interceptor)
-				: base(interceptor)
-			{
-
-			}
-		}
-	}*/
-		
+	/// <summary>
+	/// Base class for all the Bindable Wrapper architecture
+	/// </summary>
+	/// <param name="T">The business object to wrap</param>
+	/// <param name="Y">The nested class that wraps the object</param>
 	[Serializable]
 	public abstract class AbstractBindableWrapper<T, Y> : IInterceptor, INotifyPropertyChanged,
 		IBindableWrapper<T, Y> where Y : AbstractBindableWrapper<T, Y>.BindableFields<T>
@@ -103,6 +68,12 @@ namespace Boxerp.Client
 		private bool _disableWrapperInterception = false;
 		private bool _disableUndoRedo = false;
 
+		/// <summary>
+		/// Access the class that wraps the business object. 
+		/// You can access the business object or any extra property like this:
+		/// myBindable.Data.BusinessObject ... 
+		/// myBindable.Data.MyPropertyWhatever ...
+		/// </summary>
 		public Y Data
         {
             get
@@ -111,6 +82,9 @@ namespace Boxerp.Client
             }
         }
 
+		/// <summary>
+		/// Is anyone subscribing the PropertyChanged event?
+		/// </summary>
         public bool HasSubscribers
         {
             get
@@ -258,6 +232,11 @@ namespace Boxerp.Client
 			}
 		}*/
 
+		/// <summary>
+		/// The Data.BusinessObject property is read-only. The way to set the business object is either,
+		/// thru the constructor or thru this method.
+		/// </summary>
+		/// <param name="businessObj"></param>
 		public void RefreshBusinessObj(T businessObj)
 		{
 			if (_disableBusinessObjInterception)
@@ -294,13 +273,18 @@ namespace Boxerp.Client
 			return (T)_generator.CreateClassProxy(notifiableType, new IInterceptor[] { this });
 		}
 
-		
-
+		/// <summary>
+		/// Just a helper to get the type of the type parameter, that is, the type of the business object
+		/// </summary>
+		/// <returns></returns>
 		public Type GetWrappedObjectType()
 		{
 			return typeof(T);
 		}
 
+		/// <summary>
+		/// Call Undo to get a previous snapshot of the Data.
+		/// </summary>
 		public virtual void Undo()
 		{
 			if ((!_disableUndoRedo) && (_undoStack.Count > 0))
@@ -315,6 +299,9 @@ namespace Boxerp.Client
 			}
 		}
 
+		/// <summary>
+		/// Call Redo to go back to the Data snapshot before you called Undo.
+		/// </summary>
 		public virtual void Redo()
 		{
 			if ((!_disableUndoRedo) && (_redoStack.Count > 0))
@@ -577,6 +564,11 @@ namespace Boxerp.Client
 			}
 		}
 
+		/// <summary>
+		/// This is the class mapped to the Data property in the Bindable Wrapper class.
+		/// You can define any extra property on it or just wrap the business object
+		/// </summary>
+		/// <param name="D"></param>
 		[Serializable]
 		public abstract class BindableFields<D> : ISimpleWrapper<D>
 		{
@@ -602,6 +594,9 @@ namespace Boxerp.Client
 				_interceptor = interceptor;
 			}
 
+			/// <summary>
+			/// The business object instace that is being wrapped.
+			/// </summary>
 			public D BusinessObj
 			{
 				get
@@ -622,7 +617,5 @@ namespace Boxerp.Client
 				}
 			}
 		}
-
-		
 	}
 }

@@ -34,6 +34,9 @@ using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// Base Interface for the Bindable Wrapper hierarchy
+	/// </summary>
 	public interface IBindableWrapper : IInterceptor, INotifyPropertyChanged 
 	{
 		void Undo();
@@ -45,15 +48,15 @@ namespace Boxerp.Client
 		T BusinessObj { get; }
 	}
 
+	/// <summary>
+	/// Strongly typed verion of the IBindableWrapper
+	/// </summary>
+	/// <param name="T"></param>
+	/// <param name="Y"></param>
 	public interface IBindableWrapper<T, Y> : IBindableWrapper
 		where Y : ISimpleWrapper<T>
 	{
 		Type GetWrappedObjectType();
 		Y Data { get; }
 	}
-
-	/*public interface IBindableWrapper<X> : IBindableWrapper<X, ISimpleWrapper<X>>
-	{
-
-	}*/
 }

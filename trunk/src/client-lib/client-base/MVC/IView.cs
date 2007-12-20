@@ -32,14 +32,18 @@ using System.Text;
 namespace Boxerp.Client
 {
 	/// <summary>
-	/// All GUI controls should implement this interface (windows or custom controls)
-	/// 
+	/// All GUI controls should implement this interface (windows or custom controls).
+	/// You should not use this version but a strongly type one: IView<C,D> or IView<C> 
 	/// </summary>
- 
 	public interface IView
 	{
 	}
 
+	/// <summary>
+	/// Strongly typed version of the IView
+	/// </summary>
+	/// <param name="C">The Controller</param>
+	/// <param name="D">The SharedData Interface</param>
 	public interface IView<C, D> : IView<C>
 		where C : AbstractController
 		where D : IUIData
@@ -47,6 +51,10 @@ namespace Boxerp.Client
 		D SharedData { get; }
 	}
 
+	/// <summary>
+	/// Strongly typed version of the IView
+	/// </summary>
+	/// <param name="C">The Controller</param>
 	public interface IView<C> : IView
 		where C : AbstractController
 	{

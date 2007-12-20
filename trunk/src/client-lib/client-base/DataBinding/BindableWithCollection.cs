@@ -34,6 +34,14 @@ using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// The business object T becomes bindable. A collection of Y elements is made bindable as well and
+	/// such elements are also wrapper with a BindablwWrapper so they don't have to be bindable before.
+	/// Collection will be of type BindableCollection<BindableWrapper<Y>>
+	/// </summary>
+	/// <param name="T">The business object</param>
+	/// 
+	/// <param name="Y">The item type of the collection</param>
 	[Serializable]
 	public class BindableWithCollection<T, Y> : AbstractBindableWrapper<T, BindableWithCollection<T, Y>.WrapObject<T, Y>>
 	{
@@ -48,7 +56,7 @@ namespace Boxerp.Client
 
 		public virtual Type GetCollectionType()
 		{
-			return typeof(List<Y>);
+			return typeof(BindableCollection<BindableWrapper<Y>>);
 		}
 		
 		[Serializable]
@@ -57,9 +65,10 @@ namespace Boxerp.Client
 			[field: NonSerialized]
 			private ProxyGenerator _proxyGenerator = new ProxyGenerator();
 
-			private List<Z> _list;
+			private BindableCollection<BindableWrapper<Z>> _list
+				= new BindableCollection<BindableWrapper<Z>>();
 			
-			public virtual List<Z> Collection     // virtual to intercept the get and set
+			public virtual BindableCollection<BindableWrapper<Z>> Collection     // virtual to intercept the get and set
 			{
 				get 
 				{ 
@@ -72,11 +81,34 @@ namespace Boxerp.Client
 				}
 			}
 
+			/// <summary>
+			/// This constructor is needed by the base class
+			/// </summary>
+			/// <param name="interceptor"></param>
 			public WrapObject(IInterceptor interceptor)
 				: base(interceptor)
 			{
-				// to intercept changes in the list fields: add/remove items
-				_list = (List<Z>)_proxyGenerator.CreateClassProxy(typeof(List<Z>), interceptor);
+			}
+
+			public WrapObject(IInterceptor interceptor, List<Z> sourceList)
+				: base(interceptor)
+			{
+				_list.AddingNew += OnAddingItem;
+				foreach (Z item in sourceList)
+				{
+					Collection.Add(new BindableWrapper<Z>(item));
+				}
+			}
+
+			/// <summary>
+			/// Wrap the item to make it bindable before adding to the collection
+			/// </summary>
+			/// <param name="sender"></param>
+			/// <param name="args"></param>
+			private void OnAddingItem(Object sender, EventArgs args)
+			{
+				Z newItem = (Z)sender;
+				Collection.Add(new BindableWrapper<Z>(newItem));
 			}
 		}
 	}

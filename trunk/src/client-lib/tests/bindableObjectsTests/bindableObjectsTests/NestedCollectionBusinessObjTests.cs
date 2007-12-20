@@ -31,8 +31,9 @@ public class NestedCollectionBusinessObjTests
 				bindableWithCollection = new BindableWithCollection<SimpleBusinessObject,SimpleBusinessObject>
 					(new SimpleBusinessObject());
 			
-			bindableWithCollection.Data.Collection.Add(new SimpleBusinessObject());
-			bindableWithCollection.Data.Collection[0].Name = "whatever";
+			bindableWithCollection.Data.Collection.Add(
+				new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject()));
+			bindableWithCollection.Data.Collection[0].Data.BusinessObj.Name = "whatever";
 			bindableWithCollection.Data.BusinessObj.Name = "asdf";
 			Assert.AreEqual(bindableWithCollection.Data.BusinessObj.Name, "asdf");
 	}
@@ -44,19 +45,20 @@ public class NestedCollectionBusinessObjTests
 				bindableWithCollection = new BindableWithCollection<SimpleBusinessObject,SimpleBusinessObject>
 					(new SimpleBusinessObject());
 			
-			bindableWithCollection.Data.Collection.Add(new SimpleBusinessObject());
+			bindableWithCollection.Data.Collection.Add(
+				new BindableWrapper<SimpleBusinessObject>(new SimpleBusinessObject()));
 			
-			bindableWithCollection.Data.Collection[0].Name = "whatever";
+			bindableWithCollection.Data.Collection[0].Data.BusinessObj.Name = "whatever";
 			
-			bindableWithCollection.Data.Collection[0].Name = "somethingelse";
+			bindableWithCollection.Data.Collection[0].Data.BusinessObj.Name = "somethingelse";
 			
 			bindableWithCollection.Undo();
 			
-			Assert.AreEqual(bindableWithCollection.Data.Collection[0].Name, "somethingelse");
+			Assert.AreEqual(bindableWithCollection.Data.Collection[0].Data.BusinessObj.Name, "somethingelse");
 			
 			bindableWithCollection.Redo();
 			
-			Assert.AreEqual(bindableWithCollection.Data.Collection[0].Name, "somethingelse");
+			Assert.AreEqual(bindableWithCollection.Data.Collection[0].Data.BusinessObj.Name, "somethingelse");
 			
 			bindableWithCollection.Data.BusinessObj.Name = "asdf";
 			

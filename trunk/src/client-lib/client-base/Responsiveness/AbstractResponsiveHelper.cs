@@ -36,7 +36,8 @@ using System.Reflection;
 namespace Boxerp.Client
 {
 	/// <summary>
-	/// Description of AbstractResponsiveHelper.
+	/// Base class for all the implementations of the IResponsiveClient, all the Responsive Helpers.
+	/// This class manages the threads life cycles.
 	/// </summary>
 	public abstract class AbstractResponsiveHelper: IResponsiveClient
 	{
@@ -52,7 +53,9 @@ namespace Boxerp.Client
 		protected ConcurrencyMode _concurrencyMode;
 				
 
-		// Just to notify clients when the transfer is completed
+		/// <summary>
+		/// Just to notify clients when the transfer is completed
+		/// </summary>
 		protected ThreadEventHandler transferCompleteEventHandler;
 		public event ThreadEventHandler TransferCompleteEvent
       	{
@@ -105,6 +108,10 @@ namespace Boxerp.Client
 			}
 		}
 		
+		/// <summary>
+		/// Can the operation run in the background?
+		/// </summary>
+		/// <returns></returns>
 		private bool canGoAhead()
 		{
 			lock(_innerLock)
@@ -125,7 +132,8 @@ namespace Boxerp.Client
 		/// Create a new thread and put it in the queue 
 		/// (as long as there are no more running threads and the mode is not parallel)
 		/// </summary>
-		/// <param name="method"></param>
+		/// <param name="method">The meethod to run in the background</param>
+		/// <returns>The Thread instance</returns>
       	public virtual Thread StartAsyncCall(SimpleDelegate method)
 		{	
 			Thread methodThread = null;
@@ -153,10 +161,14 @@ namespace Boxerp.Client
 			return methodThread;
 		}
 
+		/// <summary>
+		/// Another version of StartAsyncCall 
+		/// </summary>
+		/// <param name="method">The method to run in the background</param>
+		/// <param name="showWaitControl">Wheter to show or not the wait control</param>
+		/// <returns>The Thread instance</returns>
 		public abstract Thread StartAsyncCall(SimpleDelegate method, bool showWaitControl);
 		
-
-
 		/// <summary>
 		/// Create a block of parallel threads and put it in a single slot in the queue
 		/// </summary>
@@ -213,7 +225,7 @@ namespace Boxerp.Client
 		/// Stops the current thread passing in information about the thread itself, and any outcome information
 		/// </summary>
 		/// <param name="threadId">You can use the CurrentThread Abstract Controller's property or System.Threading.Thread.CurrentThread.ManagedThreadId</param>
-		/// <param name="method">The method who is running. You can pass the method if its signature matches the SimpleDelegate</param>
+		/// <param name="method">The method which is running. You can pass the method if its signature matches the SimpleDelegate</param>
 		/// <param name="output">Any info you want to send. It could be a message, an exception or whatever you need</param>
 		public void StopAsyncMethod(int threadId, SimpleDelegate method, object output)
 		{
@@ -222,7 +234,7 @@ namespace Boxerp.Client
 		}
 
 		/// <summary>
-		/// Take the first block of threads in the queue and remove it from the queue. 
+		/// Take the first block of threads from the queue and remove it from the queue. 
 		/// The contents of the block are the threads created by StartAsyncCall or StartAsyncCallList
 		/// When all the threads from that block have finished invoke OnTransferCompleted to access the GUI
 		/// </summary>
@@ -276,7 +288,7 @@ namespace Boxerp.Client
 		}
 		
 		/// <summary>
-		///  
+		/// Invoked when the user clicks on cancel and confirms she wants to cancel
 		/// </summary>
 		protected void ForceAbort(int threadId)
 		{
@@ -366,8 +378,20 @@ namespace Boxerp.Client
 
 		public abstract void OnCancel(object sender, EventArgs e);
 		public abstract void OnTransferCompleted(object sender, ThreadEventArgs e);
+
+		/// <summary>
+		/// It allows to invoke an UI operation from the body of a method that is running in background.
+		/// Use anonymous delegates for it.
+		/// 
+		/// Usage sample: .doc/Examples/CallUIfromAsyncThread.cs
+		/// </summary>
+		/// <param name="anonymousMethod"></param>
 		public abstract void CallUIfromAsyncThread(SimpleDelegate anonymousMethod);
+
 		public abstract void UpdateWaitMessage(string msg);
 		#endregion
+
+		/** \example CallUIfromAsyncThread.cs
+		 */
 	}
 }

@@ -31,8 +31,9 @@ using System;
 
 namespace Boxerp.Client
 {
-	
-	
+	/// <summary>
+	/// Used by the Gtk data binding engine and the data binders.
+	/// </summary>
 	public class BindingMetadata
 	{
 		private string _widgetName;

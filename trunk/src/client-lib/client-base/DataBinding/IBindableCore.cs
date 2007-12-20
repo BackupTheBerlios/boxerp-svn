@@ -29,6 +29,9 @@ using System;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// All the Boxerp Gtk widgets have a WidgetCore that implement this interface
+	/// </summary>
 	public interface IBindableCore
 	{
 		void BindObject(IBindableWrapper bObject, object propertyOwner, 

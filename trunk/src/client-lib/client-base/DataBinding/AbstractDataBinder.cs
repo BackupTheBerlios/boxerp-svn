@@ -33,9 +33,20 @@ using System.Text;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// DataBinder binds all the widgets in the View to data.
+	/// </summary>
 	public abstract class AbstractDataBinder
 	{
+		/// <summary>
+		/// Data binding is performed using Reflection
+		/// </summary>
 		public abstract void Bind();
+
+		/// <summary>
+		/// Data binding is performed using XAML
+		/// </summary>
+		/// <param name="xaml"></param>
 		public abstract void Bind(string xaml);
 	}
 }

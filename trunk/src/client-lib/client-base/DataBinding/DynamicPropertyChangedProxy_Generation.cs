@@ -12,6 +12,9 @@ using System.Runtime.Serialization;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// Boxerp internal class
+	/// </summary>
 	public static partial class DynamicPropertyChangedProxy
 	{
 		/// <summary>

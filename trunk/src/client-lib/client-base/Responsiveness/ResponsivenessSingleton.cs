@@ -32,6 +32,11 @@ using System.Threading;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// Configure this class at the beginnin of the application to let Boxerp know which is 
+	/// the main thread:
+	/// ResponsivenessSingleton.GetInstance().Initialize();
+	/// </summary>
 	public class ResponsivenessSingleton
 	{
 		private int _mainThreadId = -1;
@@ -61,6 +66,9 @@ namespace Boxerp.Client
 			return false;
 		}
 
+		/// <summary>
+		/// The method to call at the beginning of the application.
+		/// </summary>
 		public void Initialize()
 		{
 			_mainThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
@@ -68,6 +76,10 @@ namespace Boxerp.Client
 
 		private ResponsivenessSingleton(){}
 
+		/// <summary>
+		/// As this class is a Singleton, this is the way to access it.
+		/// </summary>
+		/// <returns></returns>
 		public static ResponsivenessSingleton GetInstance()
 		{
 			if (_instance == null)

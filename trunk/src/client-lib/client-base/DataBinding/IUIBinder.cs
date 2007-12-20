@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	interface IUIBinder
 	{
 

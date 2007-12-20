@@ -35,7 +35,9 @@ using System.Threading;
 
 namespace Boxerp.Client
 {
-	
+	/// <summary>
+	/// Base interface for the ResponsiveHelper hierarchy
+	/// </summary>
 	public interface IResponsiveClient
 	{
 		/* Implemented in the abstract class */

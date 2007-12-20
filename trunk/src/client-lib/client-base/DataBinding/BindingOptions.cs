@@ -31,8 +31,9 @@ using System;
 
 namespace Boxerp.Client
 {
-	
-	
+	/// <summary>
+	/// Defines the type of data binding.
+	/// </summary>
 	public enum BindingOptions
 	{
 		OneWay,

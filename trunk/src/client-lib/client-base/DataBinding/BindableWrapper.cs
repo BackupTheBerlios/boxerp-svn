@@ -34,10 +34,10 @@ using Castle.Core.Interceptor;
 namespace Boxerp.Client
 {
 	/// <summary>
-	/// This structure forces the devoloper who extends BindableWrapper to write a private nested class 
-	/// which provide for the bindable fields
+	/// It is the most used wrapper among the Bindable Wrappers. It does not add any extra 
+	/// property to the business object but just wraps it and makes it bindable.
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
+	/// <param name="T"></param>
 	[Serializable]
 	public class BindableWrapper<T> : AbstractBindableWrapper<T, BindableWrapper<T>.WrapObject<T>>
 	{

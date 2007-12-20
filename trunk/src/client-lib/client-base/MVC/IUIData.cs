@@ -32,7 +32,9 @@ using System.Collections;
 
 namespace Boxerp.Client
 {
-	
+	/// <summary>
+	/// Base Interface for any SharedData hierarchy
+	/// </summary>
 	public interface IUIData
 	{
 		Hashtable PropertyBag { get; }

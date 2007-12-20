@@ -9,8 +9,9 @@ using Castle.Core.Interceptor;
 namespace Boxerp.Client
 {
 	/// <summary>
-	/// See this post to understand the need for this helper. This is the Boxerp version of the 
-	/// Castle.DynamicProxy2\Castle.DynamicProxy\Serialization\ProxyObjectReference class
+	/// This is the Boxerp version of the 
+	/// Castle.DynamicProxy2\Castle.DynamicProxy\Serialization\ProxyObjectReference class.
+	/// Is the class in charge of the bindable wrapper serialization/deserialization process
 	/// </summary>
 	[Serializable]
 	public class DynamicProxyHelper : IObjectReference, ISerializable, IDeserializationCallback

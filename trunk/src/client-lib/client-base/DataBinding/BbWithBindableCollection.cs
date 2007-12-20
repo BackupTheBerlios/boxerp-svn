@@ -34,6 +34,13 @@ using Castle.Core.Interceptor;
 
 namespace Boxerp.Client
 {
+	/// <summary>
+	/// The business object T becomes bindable and contains a collection of Y elements that becomes
+	/// bindable as well. The itmes of the collection have to be a Bindable Wrapper already.
+	/// </summary>
+	/// <param name="T">The business object</param>
+	/// 
+	/// <param name="Y">The type of the items in the collection</param>
 	[Serializable]
 	public class BdWithBindableCollection<T, Y> : AbstractBindableWrapper<T, BdWithBindableCollection<T, Y>.WrapObject<T, Y>>
 		where Y : IBindableWrapper

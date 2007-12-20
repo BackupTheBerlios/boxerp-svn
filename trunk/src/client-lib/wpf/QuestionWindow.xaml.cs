@@ -13,9 +13,9 @@ using System.Windows.Shapes;
 namespace Boxerp.Client.WPF
 {
 	/// <summary>
-	/// Interaction logic for QuestionWindow.xaml
+	/// Dialog with two buttons (Accept, Cancel). Although it would be possible to use a MessageBox,
+	/// the ResponsiveHelper hierarchy need an instance of an IQuestionWindow for a generic implementation
 	/// </summary>
-
 	public partial class QuestionWindow : System.Windows.Window, IQuestionWindow
 	{
 		private bool _yes = true;

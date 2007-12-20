@@ -34,7 +34,10 @@ using Boxerp.Client;
 
 namespace Boxerp.Client.WindowsForms
 {
-
+	/// <summary>
+	/// Windows.Forms Responsive Helper. Using this class the Winforms WaitDialog will be used by
+	/// default to let the user see the progress and cancel the operation
+	/// </summary>
 	public class WinFormsResponsiveHelper : WinFormsResponsiveHelper<WaitDialog>
 	{
 		public WinFormsResponsiveHelper(ConcurrencyMode mode)
@@ -43,9 +46,10 @@ namespace Boxerp.Client.WindowsForms
 		}
 	}
 
-    /// <summary>
-    /// This class helps to keep winform applications responsive 
-    /// </summary>
+	/// <summary>
+	/// Windows.Forms Responsive Helper. This class allows you to specify a custom IWinFormsWaitControl
+	/// so that you can use a status bar, or custom dialog.
+	/// </summary>
     public class WinFormsResponsiveHelper<T> : GenericResponsiveHelper<T, QuestionDialog>
 		where T : class, IWinFormsWaitControl, new()
     {

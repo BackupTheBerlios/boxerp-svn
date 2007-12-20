@@ -40,9 +40,9 @@ using System.Windows.Shapes;
 namespace Boxerp.Client.WPF
 {
 	/// <summary>
-	/// Interaction logic for WaitDialog.xaml
+	/// WPF implementation of the wait dialog. A dialog with a status label, a progress bar 
+	/// and a cancel button.
 	/// </summary>
-
 	public partial class WaitDialog : System.Windows.Window, IWpfWaitControl
 	{
 		private EventHandler _cancelEventHandler;

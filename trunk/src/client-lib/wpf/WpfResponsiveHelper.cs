@@ -44,7 +44,10 @@ using Boxerp.Client;
 
 namespace Boxerp.Client.WPF
 {
-
+	/// <summary>
+	/// WPF Responsive Helper. Using this class the WPF WaitDialog will be used by
+	/// default to let the user see the progress and cancel the operation
+	/// </summary>
 	public class WpfResponsiveHelper : WpfResponsiveHelper<WaitDialog> 
 	{
 		public WpfResponsiveHelper(ConcurrencyMode mode) : this(mode, true) { }
@@ -56,6 +59,10 @@ namespace Boxerp.Client.WPF
 		}
 	}
 
+	/// <summary>
+	/// WPF Responsive Helper. This class allows you to specify a custom IWpfWaitControl
+	/// so that you can use a status bar, or custom dialog.
+	/// </summary>
 	public class WpfResponsiveHelper<T> : GenericResponsiveHelper<T, QuestionWindow>
 		where T : class, IWpfWaitControl, new()
 	{

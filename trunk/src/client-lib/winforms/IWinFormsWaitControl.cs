@@ -7,6 +7,9 @@ using Boxerp.Client;
 
 namespace Boxerp.Client.WindowsForms
 {
+	/// <summary>
+	/// Defines the interface that every wait control has to have in a Windows.Forms environment
+	/// </summary>
 	public interface IWinFormsWaitControl : IWaitControl
 	{
 		object Invoke(Delegate method, params object[] args);

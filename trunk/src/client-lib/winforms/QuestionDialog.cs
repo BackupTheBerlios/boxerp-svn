@@ -44,6 +44,10 @@ namespace Boxerp.Client.WindowsForms
         Cancel
     }
 
+	/// <summary>
+	/// Dialog with two buttons (Accept, Cancel). Although it would be possible to use a MessageBox,
+	/// the ResponsiveHelper hierarchy need an instance of an IQuestionWindow for a generic implementation
+	/// </summary>
     public partial class QuestionDialog : Form, IQuestionWindow
     {
         protected readonly bool _isModal;

@@ -34,8 +34,7 @@ namespace Boxerp.Client.GtkSharp
 {
 	public class WaitControl : IWaitControl
 	{
-		private IWaitControl _innerWait;//Dialog _waitDialog;
-		//private WaitWindow _waitWindow;
+		private IWaitControl _innerWait;
 		private EventHandler cancelEventHandler;
 		private bool _isModal;
 		private int _assocThread;
@@ -72,6 +71,12 @@ namespace Boxerp.Client.GtkSharp
 			}
 			set 
 			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public bool IsBeingDisplayed {
+			get {
 				throw new NotImplementedException();
 			}
 		}
@@ -121,5 +126,8 @@ namespace Boxerp.Client.GtkSharp
 			if (cancelEventHandler != null)
 				cancelEventHandler(this, null);
         }
+
+		public virtual void UpdateStatus (string msg)
+		{}
 	}
 }

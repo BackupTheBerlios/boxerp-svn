@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<stetic-interface>
+  <configuration>
+    <images-root-path>..</images-root-path>
+    <target-gtk-version>2.10.2</target-gtk-version>
+  </configuration>
+  <import>
+    <widget-library name="../../../../../gtksharp/bin/Debug/Boxerp.Client.GtkSharp.dll" />
+    <widget-library name="../../../../../gtksharp/Controls/bin/Debug/Boxerp.Client.GtkSharp.Controls.dll" />
+  </import>
+  <widget class="Gtk.Window" id="gtkResponsivenessTest.MainWindow" design-size="400 85">
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">MainWindow</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <signal name="DeleteEvent" handler="OnDeleteEvent" />
+    <child>
+      <widget class="Gtk.Button" id="button1">
+        <property name="MemberName" />
+        <property name="CanFocus">True</property>
+        <property name="Type">TextOnly</property>
+        <property name="Label" translatable="yes">Start Test</property>
+        <property name="UseUnderline">True</property>
+        <signal name="Clicked" handler="OnClick" />
+      </widget>
+    </child>
+  </widget>
+</stetic-interface>

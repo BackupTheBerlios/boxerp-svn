@@ -35,6 +35,7 @@ namespace Boxerp.Client.GtkSharp
 	{
 		protected bool nonstop = true;
 		protected bool firstInstant = true;
+		protected bool _isBeingDisplayed;
 		private EventHandler cancelEventHandler;
 		private bool exitOnCancel = true;
 		private int _assocThread;
@@ -115,6 +116,14 @@ namespace Boxerp.Client.GtkSharp
 			}
 		}
 
+		public bool IsBeingDisplayed 
+		{
+			get 
+			{
+				return _isBeingDisplayed;
+			}
+		}
+
 
 		public void Stop()
 		{
@@ -187,6 +196,11 @@ namespace Boxerp.Client.GtkSharp
 		            OnCancel(o, null);
 		        }
 		    }
+		}
+
+		public void UpdateStatus (string msg)
+		{
+			labelMsg.Text = msg;
 		}
 
 	}

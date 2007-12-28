@@ -2,13 +2,13 @@
   <Files>
     <File name="Welcome" />
     <File name="administrator/Controllers/TestController.cs" line="79" column="5" />
-    <File name="administrator/Main.cs" line="16" column="46" />
+    <File name="administrator/Main.cs" line="7" column="1" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
-      <Node expanded="True">
-        <Node name="Admin" expanded="True" selected="True">
-          <Node name="GtkSharp" expanded="True" />
+      <Node expanded="True" selected="True">
+        <Node name="Admin" expanded="True">
+          <Node name="References" expanded="True" />
         </Node>
         <Node name="Admin.Controllers" expanded="True" />
       </Node>

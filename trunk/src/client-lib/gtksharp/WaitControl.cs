@@ -32,6 +32,10 @@ using Boxerp.Client;
 
 namespace Boxerp.Client.GtkSharp
 {
+	/// <summary>
+	/// Unifies the WaitDialog and WaitWindow and internally uses one of them
+	/// depending on the Modal property.
+	/// </summary>
 	public class WaitControl : IWaitControl
 	{
 		private IWaitControl _innerWait;
@@ -75,9 +79,18 @@ namespace Boxerp.Client.GtkSharp
 			}
 		}
 
-		public bool IsBeingDisplayed {
-			get {
-				throw new NotImplementedException();
+		public bool IsBeingDisplayed 
+		{
+			get 
+			{
+				if (_innerWait != null)
+				{
+					return _innerWait.IsBeingDisplayed;
+				}
+				else
+				{
+					return false;
+				}
 			}
 		}
 
@@ -128,6 +141,8 @@ namespace Boxerp.Client.GtkSharp
         }
 
 		public virtual void UpdateStatus (string msg)
-		{}
+		{
+			_innerWait.UpdateStatus(msg);
+		}
 	}
 }

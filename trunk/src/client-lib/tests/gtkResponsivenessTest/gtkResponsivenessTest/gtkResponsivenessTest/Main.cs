@@ -11,6 +11,8 @@ namespace gtkResponsivenessTest
 			Application.Init ();
 			MainWindow win = new MainWindow ();
 			win.Show ();
+			UpdateWaitMsgTest win2 = new UpdateWaitMsgTest();
+			win2.Show();
 			Application.Run ();
 		}
 	}

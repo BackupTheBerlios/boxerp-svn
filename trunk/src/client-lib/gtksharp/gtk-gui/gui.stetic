@@ -105,6 +105,8 @@
     <property name="Title" translatable="yes">Operation in Progress</property>
     <property name="WindowPosition">CenterOnParent</property>
     <signal name="DeleteEvent" handler="OnDeleteEvent" />
+    <signal name="Shown" handler="OnShown" />
+    <signal name="DefaultActivated" handler="OnShown" />
     <child>
       <widget class="Gtk.VBox" id="vbox">
         <property name="MemberName" />
@@ -325,6 +327,8 @@
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
     <property name="HasSeparator">False</property>
+    <signal name="Shown" handler="OnShown" />
+    <signal name="DefaultActivated" handler="OnShown" />
     <child internal-child="VBox">
       <widget class="Gtk.VBox" id="dialog1_VBox">
         <property name="MemberName" />

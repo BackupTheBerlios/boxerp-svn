@@ -94,6 +94,8 @@ namespace Boxerp.Client.GtkSharp {
             this.DefaultHeight = 119;
             this.Show();
             this.DeleteEvent += new Gtk.DeleteEventHandler(this.OnDeleteEvent);
+            this.Shown += new System.EventHandler(this.OnShown);
+            this.DefaultActivated += new System.EventHandler(this.OnShown);
             this.button.Clicked += new System.EventHandler(this.OnCancel);
         }
     }

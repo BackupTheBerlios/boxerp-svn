@@ -18,6 +18,21 @@
         <property name="MemberName" />
         <property name="CanFocus">True</property>
         <property name="Type">TextOnly</property>
+        <property name="Label" translatable="yes">Start Stress Test</property>
+        <property name="UseUnderline">True</property>
+        <signal name="Clicked" handler="OnClick" />
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Window" id="gtkResponsivenessTest.UpdateWaitMsgTest" design-size="400 85">
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">UpdateWaitMsgTest</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <child>
+      <widget class="Gtk.Button" id="button1">
+        <property name="MemberName" />
+        <property name="CanFocus">True</property>
+        <property name="Type">TextOnly</property>
         <property name="Label" translatable="yes">Start Test</property>
         <property name="UseUnderline">True</property>
         <signal name="Clicked" handler="OnClick" />

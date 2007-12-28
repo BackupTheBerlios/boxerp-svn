@@ -203,5 +203,10 @@ namespace Boxerp.Client.GtkSharp
 			labelMsg.Text = msg;
 		}
 
+		protected virtual void OnShown (object sender, System.EventArgs e)
+		{
+			this._isBeingDisplayed = true;
+		}
+
 	}
 }

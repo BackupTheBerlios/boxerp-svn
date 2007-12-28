@@ -92,7 +92,7 @@ namespace Boxerp.Client.GtkSharp
 			           (
 			                 delegate(object sender, EventArgs args)
 			                 {
-				                    anonymousMethod.Invoke();
+				                anonymousMethod.Invoke();
 			                 }
 			           ));
 		}

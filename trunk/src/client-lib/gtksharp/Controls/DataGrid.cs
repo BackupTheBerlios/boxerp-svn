@@ -41,16 +41,20 @@ using System.Data;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
+	/// <summary>
+	/// Same as ListView but allowing cells edition. As it uses EditableColumn,
+	/// you can specify the kind of widget you want in every column. So you can 
+	/// have a CheckBox, an IntegerTextBox, a ComboBox...
+	/// 
+	/// Extends TreeViewWrapper<T>
+	/// </summary>
 	public class DataGrid : TreeViewWrapper<EditableColumn>, IBindableWidget
 	{
 		// FIXME: It should be possible to get the column number when a renderer is edited without this dict
 		private Dictionary<object, int> _colNumbers = new Dictionary<object,int>();
 		
-		public DataGrid()
-		{
-		}
+		public DataGrid(){}
 			
-		
 		protected override void addTreeViewColumnOrRenderer(EditableColumn column, int colNumber)
 		{
 			Gtk.TreeViewColumn tvColumn = new Gtk.TreeViewColumn ();

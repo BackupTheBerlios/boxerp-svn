@@ -33,6 +33,11 @@ using System.Collections.Generic;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {	
+	/// <summary>
+	/// Extends the TreeModelWrapper<T> wrapping a TreeView. This is not for the 
+	/// ComboBox but for ListView, DataGrid and DataTableGrid, that is, the 
+	/// widgets that use an underlying Gtk.TreeView.
+	/// </summary>
 	public abstract class TreeViewWrapper<T> : TreeModelWrapper<T> 
 		where T : SimpleColumn, new ()
 	{
@@ -45,6 +50,9 @@ namespace Boxerp.Client.GtkSharp.Controls
 			this.Add(_treeview);
 		}
 
+		/// <value>
+		/// Returns a Gtk.TreeView. For strongly typed acess, use the TreeView property
+		/// </value>
 		public override Gtk.Widget InnerWidget
 		{
 			get
@@ -53,6 +61,10 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
+		/// <value>
+		/// Inner Gtk.TreeView. Access it when you need to change a property 
+		/// of the TreeView that is not wrapped in this hierarchy. 
+		/// </value>
 		protected Gtk.TreeView TreeView
 		{
 			get
@@ -73,6 +85,9 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
+		/// <value>
+		/// Multiple, Simple...
+		/// </value>
 		public virtual Gtk.SelectionMode SelectionMode
 		{
 			get

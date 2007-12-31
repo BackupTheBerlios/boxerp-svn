@@ -32,7 +32,10 @@ using System.ComponentModel;
 
 namespace Boxerp.Client.GtkSharp
 {
-		
+	/// <summary>
+	/// Every Boxerp widget implements this interface in Gtk#. It is the main 
+	/// contract to unify them all.
+	/// </summary>
 	public interface IBindableWidget : IBindableCore
 	{
 		// the BindableWidgetCore uses this function as the handler for the PropertyChanged event 

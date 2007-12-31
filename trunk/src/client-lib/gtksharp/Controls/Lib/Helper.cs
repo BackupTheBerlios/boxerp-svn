@@ -34,7 +34,6 @@ using Gdk;
 namespace Boxerp.Client.GtkSharp.Controls
 {
 	
-	
 	public class Helper
 	{
 		public static bool IsValidKey(Key key)

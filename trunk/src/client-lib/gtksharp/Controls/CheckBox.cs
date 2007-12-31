@@ -31,7 +31,9 @@ using System;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
-	
+	/// <summary>
+	/// Not implemented yet. It is going to be a checkbox that supports data binding
+	/// </summary>
 	public class CheckBox : Gtk.ToggleButton
 	{
 		public CheckBox()

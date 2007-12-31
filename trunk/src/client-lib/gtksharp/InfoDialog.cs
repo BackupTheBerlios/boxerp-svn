@@ -31,8 +31,11 @@ using System;
 
 namespace Boxerp.Client.GtkSharp
 {
-	
-	
+	/// <summary>
+	/// This is an alternative to the Windows.Forms MessageBox built-in dialog.
+	/// 
+	/// Usage: Create a new instance, populate the Message property and call Show().
+	/// </summary>
 	public partial class InfoDialog : Gtk.Dialog
 	{
 		
@@ -46,6 +49,9 @@ namespace Boxerp.Client.GtkSharp
 			this.Destroy();
 		}
 		
+		/// <value>
+		/// The message to display in the dialog
+		/// </value>
 		public string Message 
 		{
 			get { return label.Text; }

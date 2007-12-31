@@ -36,8 +36,10 @@ using Boxerp.Client;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
-	
-	
+	/// <summary>
+	/// TextBox that supports data binding and allow the user to enter 
+	/// integers only.
+	/// </summary>
 	public partial class IntegerTextBox : Gtk.Bin, IBindableWidget
 	{
 		private int _maxValue = Int32.MaxValue;

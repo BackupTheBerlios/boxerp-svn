@@ -36,6 +36,9 @@ using Gtk;
 
 namespace Boxerp.Client.GtkSharp
 {
+	/// <summary>
+	/// Gtk# Responsive Helper. Using this class the WaitControl will be used by default to let the user see the progress and cancel the operation.
+	/// </summary>
 	public class GtkResponsiveHelper : GtkResponsiveHelper<WaitControl>
 	{
 		public GtkResponsiveHelper(ConcurrencyMode mode) : this(mode, true) { }
@@ -44,6 +47,9 @@ namespace Boxerp.Client.GtkSharp
 			: base(mode, displayExceptions)	{}
 	}
 
+	/// <summary>
+	/// Gtk# Responsive Helper. This class allows you to specify a custom IGtkWaitControl so that you can use a status bar, or custom dialog.
+	/// </summary>
 	public class GtkResponsiveHelper<T> : GenericResponsiveHelper<T, QuestionDialog>
 		where T : class, IWaitControl, new()
 	{

@@ -31,8 +31,9 @@ using System;
 
 namespace Boxerp.Client.GtkSharp
 {
-	
-	
+	/// <summary>
+	/// Defines the interface that every wait control has to have in a Gtk# environment.
+	/// </summary>
 	public interface IGtkWaitControl : IWaitControl
 	{
 		void DestroyWidget();

@@ -33,8 +33,11 @@ using Boxerp.Client;
 
 namespace Boxerp.Client.GtkSharp
 {
-	
-	
+	/// <summary>
+	/// Alternative to Windows.Forms MessageBox with two buttons.
+	/// 
+	/// Usage: Create an instance, populate the Msg property and call Show().
+	/// </summary>
 	public partial class QuestionDialog : Gtk.Dialog, IQuestionWindow
 	{
 		private bool answer;

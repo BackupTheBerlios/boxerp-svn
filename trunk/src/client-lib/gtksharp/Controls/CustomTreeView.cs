@@ -32,6 +32,9 @@ using Gtk;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
+	/// <summary>
+	/// Experimental
+	/// </summary>
 	public class CustomTreeView : Gtk.TreeView, ITreeModel
 	{
 		public CustomTreeView()

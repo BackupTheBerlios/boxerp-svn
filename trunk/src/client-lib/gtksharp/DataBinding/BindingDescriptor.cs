@@ -32,6 +32,11 @@ using System.Collections.Generic;
 
 namespace Boxerp.Client.GtkSharp
 {	
+	/// <summary>
+	/// Defines the data binding information for ListViews and other tabled structures.
+	/// It is just a list of columns, where the type of the column can be 
+	/// SimpleColumn or EditableColumn
+	/// </summary>
 	public class BindingDescriptor<T>
 		where T : SimpleColumn
 	{		

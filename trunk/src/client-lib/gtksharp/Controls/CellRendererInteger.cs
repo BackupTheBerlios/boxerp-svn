@@ -32,6 +32,9 @@ using Gtk;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
+	/// <summary>
+	/// Internal class, visibilitiy will probably change
+	/// </summary>
 	public class CellRendererInteger : Gtk.CellRendererText
 	{
 		public CellRendererInteger()

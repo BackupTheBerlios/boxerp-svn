@@ -32,8 +32,9 @@ using Boxerp.Client.GtkSharp;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
-	
-	
+	/// <summary>
+	/// Just a TextBox (Gtk.Entry) that supports data binding
+	/// </summary>
 	public partial class TextBox : Gtk.Bin, IBindableWidget
 	{
 		private BindableWidgetCore _widgetCore;

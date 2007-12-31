@@ -34,8 +34,9 @@ using Gtk;
 
 namespace Boxerp.Client.GtkSharp
 {
-	
-	
+	/// <summary>
+	/// Use the WaitControl instead of this class.
+	/// </summary>
 	public partial class WaitDialog : Gtk.Dialog, IGtkWaitControl
 	{
 		protected bool nonstop = true;

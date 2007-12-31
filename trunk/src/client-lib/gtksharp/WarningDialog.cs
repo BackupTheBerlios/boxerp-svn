@@ -31,8 +31,10 @@ using System;
 
 namespace Boxerp.Client.GtkSharp
 {
-	
-	
+	/// <summary>
+	/// Similar to the InfoDialog but shows a warning icon and could finish 
+	/// the application if the user accepts.
+	/// </summary>
 	public partial class WarningDialog : Gtk.Dialog
 	{
 		protected bool quitOnOk = false;
@@ -60,6 +62,5 @@ namespace Boxerp.Client.GtkSharp
 			if (quitOnOk)
 				Gtk.Application.Quit();
 		}
-
 	}
 }

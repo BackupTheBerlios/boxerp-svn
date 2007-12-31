@@ -31,7 +31,9 @@ using System;
 
 namespace Boxerp.Client.GtkSharp
 {
-	
+	/// <summary>
+	/// Contains the parameters required for a column in a ListView or any other TreeView based widget 
+	/// </summary>
 	public class SimpleColumn
 	{
 		private string _name;
@@ -89,6 +91,11 @@ namespace Boxerp.Client.GtkSharp
 		}
 	}
 	
+	/// <summary>
+	/// Contains the parameters required for an editable column in a ListView or any other TreeView based widget.
+	/// It allows the user specify what widget should be used in the cell. So you may 
+	/// place a CheckBox, a ComboBox, or any other widget apart from the default Gtk.Entry 
+	/// </summary>
 	public class EditableColumn : SimpleColumn
 	{
 		private bool _editable;

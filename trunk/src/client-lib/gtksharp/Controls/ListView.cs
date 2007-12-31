@@ -38,12 +38,12 @@ using Boxerp.Collections;
 namespace Boxerp.Client.GtkSharp.Controls
 {
 
-	// TODO: strongly typed listview
 	/// <summary>
-	/// Use cases: 
-	///  1 - The user binds a collection: clean everything and initialize. If Items and BoundItems are used both, throw exception
-	///  2 - The user is using the Items properties. The items on it implement the INotifyPropertyChanged. What happen when an item changes? 
+	/// ListView displays a list of elements that support data binding. Cells are 
+	/// not editable. For an editable table use DataGrid, or DataTableGrid in case 
+	/// you are binding a DataTable.
 	/// 
+	/// Extends TreeViewWrapper<T>  
 	/// </summary>
 	public class ListView : TreeViewWrapper<SimpleColumn>, IBindableWidget
 	{

@@ -5,8 +5,8 @@
     <target-gtk-version>2.10.2</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../../BoxerpAssemblies/Boxerp.Client.GtkSharp.Controls.dll" />
-    <widget-library name="../../BoxerpAssemblies/Boxerp.Client.GtkSharp.dll" />
+    <widget-library name="../../../../../client-lib/gtksharp/bin/Debug/Boxerp.Client.GtkSharp.dll" />
+    <widget-library name="../../../../../client-lib/gtksharp/Controls/bin/Debug/Boxerp.Client.GtkSharp.Controls.dll" />
   </import>
   <widget class="Gtk.Window" id="MainWindow" design-size="444 196">
     <property name="MemberName" />

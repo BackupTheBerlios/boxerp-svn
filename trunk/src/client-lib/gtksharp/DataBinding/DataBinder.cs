@@ -35,8 +35,11 @@ using System.Reflection;
 
 namespace Boxerp.Client.GtkSharp
 {
-	
-	
+	/// <summary>
+	/// Gtk# data binder. Binds a whole form using XAML. 
+	/// This class is still experimental and supports only IntegerTextBox and few 
+	/// more widgets in the XAML. 
+	/// </summary>
 	public class DataBinder : AbstractDataBinder
 	{
 		private Gtk.Bin _container;

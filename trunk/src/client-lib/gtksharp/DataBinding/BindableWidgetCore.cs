@@ -36,6 +36,10 @@ using System.ComponentModel;
 
 namespace Boxerp.Client.GtkSharp
 {
+	/// <summary>
+	/// This class is only used by the framework and it could be internal in 
+	/// future releases.
+	/// </summary>
 	public class BindableWidgetCore : IBindableCore
 	{
 		private IBindableWrapper _bindableObject = null;

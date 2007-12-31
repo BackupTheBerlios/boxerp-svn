@@ -41,6 +41,11 @@ namespace Boxerp.Client.GtkSharp.Controls
 {
 	
 	/// <summary>
+	/// Gtk.TreeView and Gtk.ComboBox use a Model-View-Controller approach to separate 
+	/// concerns but that makes the API complex and it is not straightforward to 
+	/// deal with those widgets. This class is a wrapper around a Gtk.TreeModel that 
+	/// makes the API more simple. You can use the Boxerp ComboBox and the Boxerp 
+	/// ListView or DataGrid now in the same manner because of this hierarchy.
 	/// </summary>
 	public abstract class TreeModelWrapper<T> : Gtk.Bin, IBindableWidget
 		where T : SimpleColumn, new()		
@@ -95,9 +100,18 @@ namespace Boxerp.Client.GtkSharp.Controls
 			SetSizeRequest(args.Requisition.Width, args.Requisition.Height);
 		}
 		
+		/// <value>
+		/// To access the Gtk widget that is being wrapped, get this property 
+		/// and cast. It will allow you to change properties of the widget that 
+		/// are not wrapped in this class hierarchy.
+		/// </value>
 		public abstract Gtk.Widget InnerWidget { get; }
-		protected abstract Gtk.TreeModel Model { get; set; }
 		
+		protected abstract Gtk.TreeModel Model { get; set; }
+
+		/// <value>
+		/// To support the Boxerp data binding architecture
+		/// </value>
 		public BindableWidgetCore WidgetCore
 		{
 			get
@@ -118,6 +132,12 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
+		/// <value>
+		/// See ItemsDisplayMode enumeration. If you change the display mode once 
+		/// the widget is populated, you'll lose its content as the columns 
+		/// have to be dropped and created from scratch. Change this property 
+		/// just before adding items.
+		/// </value>
 		public virtual ItemsDisplayMode ItemsDisplayMode
 		{
 			get
@@ -144,8 +164,9 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		
-		
+		/// <value>
+		/// To descrive the way columns are created.
+		/// </value>		
 		public BindingDescriptor<T> BindingDescriptor
 		{
 			get
@@ -158,6 +179,9 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
+		/// <value>
+		/// Access the Items in the widget when they are not a bound collection
+		/// </value>
 		public InterceptedList<object> Items 
 		{
 			get 
@@ -167,6 +191,9 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
+		/// <value>
+		/// Access the items of a Bound collection.
+		/// </value>
 		public IBindingList BoundItems
 		{
 			get
@@ -214,17 +241,9 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
-		
-		
 		/// <summary>
 		/// Invoke when an item is added to the Items property
 		/// </summary>
-		/// <param name="sender">
-		/// A <see cref="System.Object"/>
-		/// </param>
-		/// <param name="args">
-		/// A <see cref="EventArgs"/>
-		/// </param>
 		private void OnItemAdded(System.Object sender, EventArgs args)
 		{
 			Logger.GetInstance().WriteLine("on item added");
@@ -269,7 +288,7 @@ namespace Boxerp.Client.GtkSharp.Controls
 		}
 		
 		// IBindableWidget
-	void IBindableWidget.OnBoundDataChanged(string property, object val)
+	    void IBindableWidget.OnBoundDataChanged(string property, object val)
 		{
 			Logger.GetInstance().WriteLine("updateValue:" + property);
 			if (property.Equals("BoundItems"))
@@ -352,6 +371,10 @@ namespace Boxerp.Client.GtkSharp.Controls
 			}
 		}
 		
+		/// <summary>
+		/// Anytime your a going to bind a collection, you should unbind the one 
+		/// that was bound before if any.
+		/// </summary>
 		public void Unbind()
 		{
 			BoundItems = null;

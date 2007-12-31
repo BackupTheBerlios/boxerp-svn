@@ -31,6 +31,9 @@ using System;
 
 namespace Boxerp.Client.GtkSharp
 {
+	/// <summary>
+	/// Use the WaitControl rather than this class
+	/// </summary>
 	public partial class WaitWindow : Gtk.Window, IGtkWaitControl
 	{
 		protected bool nonstop = true;

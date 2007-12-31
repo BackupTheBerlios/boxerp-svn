@@ -32,11 +32,11 @@ using Boxerp.Client.GtkSharp;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
-	
-	
+	/// <summary>
+	/// Not implemented 
+	/// </summary>
 	public partial class DateControl : Gtk.Bin
-	{
-		
+	{		
 		public DateControl()
 		{
 			this.Build();

@@ -31,8 +31,9 @@ using System;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
-	
-	
+	/// <summary>
+	/// In the ListView and DataGrid, you have this modes to display the data.
+	/// </summary>
 	public enum ItemsDisplayMode
 	{
 		ObjectToString,

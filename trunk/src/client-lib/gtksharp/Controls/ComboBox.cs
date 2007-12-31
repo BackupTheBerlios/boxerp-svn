@@ -39,6 +39,11 @@ using Boxerp.Client;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {
+	/// <summary>
+	/// Is a ComboBox that supports data binding and makes the API easier to understand.
+	/// 
+	/// Extends TreeModelWrapper<T>
+	/// </summary>
 	public class ComboBox : TreeModelWrapper<SimpleColumn>, 
 	      IBindableWidget, ITreeModel
 	{

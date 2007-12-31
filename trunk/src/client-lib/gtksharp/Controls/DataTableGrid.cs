@@ -41,6 +41,12 @@ using System.Data;
 
 namespace Boxerp.Client.GtkSharp.Controls
 {	
+	/// <summary>
+	/// Same as DataGrid, but explictly for DataTable objects. So it is a custom
+	/// DataGrid for System.Data.DataTable.
+	/// 
+	/// Extends TreeViewWrapper<T>
+	/// </summary>
 	public class DataTableGrid : DataGrid
 	{
 		private DataTable _dataTable = null;

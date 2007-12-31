@@ -34,7 +34,11 @@ namespace Boxerp.Client.GtkSharp
 {
 	/// <summary>
 	/// Unifies the WaitDialog and WaitWindow and internally uses one of them
-	/// depending on the Modal property.
+	/// depending on the Modal property. You should use this class rather than
+	/// WaitDialog or WaitWindow as it relays on them but this class keeps 
+	/// your code more homogeneus.
+	/// 
+	/// Usage: Create an instance, set the IsModal property and call ShowControl()
 	/// </summary>
 	public class WaitControl : IWaitControl
 	{

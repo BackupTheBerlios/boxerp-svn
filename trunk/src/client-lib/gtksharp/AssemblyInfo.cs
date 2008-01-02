@@ -36,7 +36,7 @@ using System.Runtime.CompilerServices;
 // change them to the information which is associated with the assembly
 // you compile.
 
-[assembly: AssemblyTitle("Boxerp.Client.WPF")]
+[assembly: AssemblyTitle("Boxerp.Client.GtkSharp")]
 [assembly: AssemblyDescription("Boxerp Framework")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Boxerp")]
@@ -59,5 +59,5 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
 
-[assembly: AssemblyVersion("0.2.0.0")]
-[assembly: AssemblyFileVersion("0.2.0.0")]
+[assembly: AssemblyVersion("0.2.2.0")]
+[assembly: AssemblyFileVersion("0.2.2.0")]

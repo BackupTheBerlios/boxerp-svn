@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvcSample1WinForms", "mvcSample1WinForms.csproj", "{35DAC67A-F200-4579-A2B1-C9A154B46ADC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "..\Tests\Tests.csproj", "{2F22C6B5-0FC4-473E-85A3-0DBEA6FA6B81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{35DAC67A-F200-4579-A2B1-C9A154B46ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35DAC67A-F200-4579-A2B1-C9A154B46ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35DAC67A-F200-4579-A2B1-C9A154B46ADC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F22C6B5-0FC4-473E-85A3-0DBEA6FA6B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F22C6B5-0FC4-473E-85A3-0DBEA6FA6B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F22C6B5-0FC4-473E-85A3-0DBEA6FA6B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F22C6B5-0FC4-473E-85A3-0DBEA6FA6B81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
